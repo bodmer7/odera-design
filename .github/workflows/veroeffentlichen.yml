@@ -1,0 +1,58 @@
+name: Veröffentlichen auf Infomaniak
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: veroeffentlichen
+  cancel-in-progress: false
+
+jobs:
+  hochladen:
+    runs-on: ubuntu-latest
+    env:
+      SFTP_HOST: ${{ secrets.INFOMANIAK_SFTP_HOST }}
+      SFTP_USER: ${{ secrets.INFOMANIAK_SFTP_USER }}
+      SFTP_PASSWORD: ${{ secrets.INFOMANIAK_SFTP_PASSWORD }}
+      SFTP_PATH: ${{ secrets.INFOMANIAK_SFTP_PATH }}
+    steps:
+      - name: Zugangsdaten prüfen
+        id: pruefen
+        run: |
+          if [ -z "$SFTP_HOST" ] || [ -z "$SFTP_USER" ] || [ -z "$SFTP_PASSWORD" ] || [ -z "$SFTP_PATH" ]; then
+            echo "::notice::Keine vollständigen Infomaniak-Zugangsdaten hinterlegt. Upload übersprungen."
+            echo "bereit=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "bereit=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Repository auschecken
+        if: steps.pruefen.outputs.bereit == 'true'
+        uses: actions/checkout@v4
+
+      - name: lftp installieren
+        if: steps.pruefen.outputs.bereit == 'true'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      # Lädt alle Dateien der Website hoch. Löscht auf dem Server nichts.
+      - name: Per SFTP hochladen
+        if: steps.pruefen.outputs.bereit == 'true'
+        env:
+          LFTP_PASSWORD: ${{ secrets.INFOMANIAK_SFTP_PASSWORD }}
+        run: |
+          lftp -e "
+            set sftp:auto-confirm yes;
+            set net:max-retries 2;
+            set net:timeout 30;
+            open --env-password -u \"$SFTP_USER\" sftp://$SFTP_HOST;
+            mirror --reverse --verbose \
+              --exclude-glob .git* \
+              --exclude-glob .github/ \
+              --exclude-glob .claude/ \
+              --exclude-glob .DS_Store \
+              --exclude README.md \
+              ./ \"$SFTP_PATH\";
+            bye
+          "
