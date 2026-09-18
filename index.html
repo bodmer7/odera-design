@@ -1620,7 +1620,7 @@ button,input,textarea{font-family:inherit}
           <p style="font-size:17px;line-height:1.7;margin:0">Die Musterprojekte zeigen frei erfundene Betriebe.</p>
         </div>
       </div>
-      <p class="mono" style="font-size:12px;color:#5B6270;margin:64px 0 0">Stand: {{ heuteKurz }}</p>
+      <p class="mono" style="font-size:12px;color:#5B6270;margin:64px 0 0">Stand: {{ standRechtstexte }}</p>
     </div>
   </section>
 </div>
@@ -1707,7 +1707,7 @@ button,input,textarea{font-family:inherit}
           <p style="font-size:17px;line-height:1.7;margin:0">Diese Erklärung kann angepasst werden, wenn sich die Technik oder die Abläufe ändern. Massgebend ist die jeweils auf dieser Seite veröffentlichte Fassung.</p>
         </div>
       </div>
-      <p class="mono" style="font-size:12px;color:#5B6270;margin:64px 0 0">Stand: {{ heuteKurz }}</p>
+      <p class="mono" style="font-size:12px;color:#5B6270;margin:64px 0 0">Stand: {{ standRechtstexte }}</p>
     </div>
   </section>
 </div>
@@ -1819,7 +1819,7 @@ button,input,textarea{font-family:inherit}
           <p style="font-size:17px;line-height:1.7;margin:0">Massgebend ist die bei Vertragsschluss geltende Fassung. Änderungen gelten nicht rückwirkend für laufende Projekte.</p>
         </div>
       </div>
-      <p class="mono" style="font-size:12px;color:#5B6270;margin:64px 0 0">Stand: {{ heuteKurz }}</p>
+      <p class="mono" style="font-size:12px;color:#5B6270;margin:64px 0 0">Stand: {{ standRechtstexte }}</p>
     </div>
   </section>
 </div>
@@ -2211,6 +2211,8 @@ button,input,textarea{font-family:inherit}
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;showStickyBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Verhalten&quot;},&quot;startPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;/&quot;,&quot;/angebot&quot;,&quot;/ablauf&quot;,&quot;/musterprojekte&quot;,&quot;/ueber-mich&quot;,&quot;/projekt-check&quot;],&quot;default&quot;:&quot;/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Verhalten&quot;}}">
 class Component extends DCLogic {
   EMAIL = 'kontakt@odera-design.ch';
+  // Stand unter Impressum, Datenschutz und AGB. Nur ändern, wenn die Rechtstexte geändert werden.
+  STAND_RECHTSTEXTE = '18.09.2026';
   PLAETZE_TOTAL = 2;
   PLAETZE_FREI = 1;
   PAGES = {
@@ -2911,7 +2913,7 @@ class Component extends DCLogic {
       isImpressum: page === 'impressum', isDatenschutz: page === 'datenschutz', isAgb: page === 'agb',
       isNf: page === 'nf',
       heute: new Date().toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' }),
-      heuteKurz: new Date().toLocaleDateString('de-CH', { day: '2-digit', month: '2-digit', year: 'numeric' }),
+      standRechtstexte: this.STAND_RECHTSTEXTE,
       jumpToSection: (e) => {
         const a = e.target.closest('a');
         if (!a) return;
@@ -2924,7 +2926,7 @@ class Component extends DCLogic {
           window.scrollTo({ top, behavior: this.reduce ? 'auto' : 'smooth' });
         }
       },
-      fontsPrivacyText: 'Die auf dieser Website verwendeten Schriften werden derzeit über Google Fonts geladen. Dabei wird beim Aufruf dieser Website eine Verbindung zu Servern von Google LLC hergestellt und Ihre IP-Adresse an diesen Dienst übermittelt.',
+      fontsPrivacyText: 'Alle verwendeten Schriften liegen lokal auf dem Webserver dieser Website. Beim Aufruf wird keine Verbindung zu Google oder einem anderen Schriftanbieter hergestellt.',
       showMobBar: s.barOn && !isCheck && !isLegal,
       showDeskBar: s.barOn && !isCheck && !isLegal,
       progDisplay: page === 'ablauf' ? 'block' : 'none',
