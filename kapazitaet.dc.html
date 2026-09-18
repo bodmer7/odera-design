@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.kap-tile{height:64px}
+.kap-num{font-size:15px}
+.kap-cap{font-size:12px}
+@media(max-width:430px){.kap-tile{height:56px}.kap-num{font-size:14px}.kap-cap{font-size:11px}}
+</style>
+</helmet>
+<div style="display:flex;flex-direction:column;gap:16px;width:100%">
+  <div style="display:flex;flex-direction:column;gap:20px;padding:24px;border-radius:24px;background:#FFFFFF;border:1px solid #E2DFD8;box-shadow:0 12px 32px rgba(17,19,26,0.10)">
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <span style="display:flex;align-items:center;gap:10px;flex:none">
+        <span aria-hidden="true" style="width:10px;height:10px;border-radius:999px;background:#D6F24B;flex:none"></span>
+        <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;color:#11131A">AUSLASTUNG</span>
+      </span>
+      <span style="flex:1;min-width:180px;font-size:20px;font-weight:700;color:#11131A">{{ mid }}</span>
+    </div>
+    <div style="display:flex;gap:12px;width:100%">
+      <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="2">
+        <span class="kap-tile" style="flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 16px;border-radius:14px;box-sizing:border-box;color:{{ t.fg }};background-color:{{ t.bg }};background-image:{{ t.hatch }};border:{{ t.border }}">
+          <span class="kap-num mono" style="font-family:'JetBrains Mono',ui-monospace,monospace;color:{{ t.fg }}">{{ t.num }}</span>
+          <span class="kap-cap mono" style="font-family:'JetBrains Mono',ui-monospace,monospace;letter-spacing:0.06em;text-transform:uppercase;color:{{ t.fg }}">{{ t.cap }}</span>
+        </span>
+      </sc-for>
+    </div>
+  </div>
+  <sc-if value="{{ notesOn }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <p style="font-size:15px;line-height:1.5;color:#5B6270;margin:0 0 8px;text-wrap:pretty">Ich arbeite an höchstens zwei Entwürfen gleichzeitig. Anfragen bearbeite ich in der Reihenfolge des Eingangs.{{ extra }}</p>
+    <p style="font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:12px;line-height:1.5;color:#5B6270;margin:0">Zwei Plätze, weil ich das nebenberuflich mache. Keine erfundene Knappheit.</p>
+  </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:720,&quot;height&quot;:200},&quot;total&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:2,&quot;min&quot;:1,&quot;max&quot;:6,&quot;tsType&quot;:&quot;number&quot;},&quot;frei&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:6,&quot;tsType&quot;:&quot;number&quot;},&quot;notes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const total = parseInt(this.props.total, 10) || 2;
+    const frei = this.props.frei === undefined ? 1 : (parseInt(this.props.frei, 10) || 0);
+    const hatch = 'repeating-linear-gradient(-45deg,rgba(246,245,241,0.22) 0 1px,rgba(246,245,241,0) 1px 5px)';
+    return {
+      notesOn: this.props.notes === '1' || this.props.notes === true,
+      mid: frei > 0 ? frei + ' von ' + total + ' Plätzen frei' : 'Derzeit ausgebucht',
+      extra: frei > 0 ? '' : ' Schreiben Sie mir trotzdem, ich melde mich, sobald ein Platz frei wird.',
+      tiles: Array.from({ length: total }, (x, i) => {
+        const taken = i < total - frei;
+        return {
+          bg: taken ? '#11131A' : '#D6F24B',
+          hatch: taken ? hatch : 'none',
+          fg: taken ? 'rgba(246,245,241,0.7)' : '#11131A',
+          border: taken ? '2px solid transparent' : '2px solid #11131A',
+          num: String(i + 1).padStart(2, '0'),
+          cap: taken ? 'belegt' : 'frei'
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

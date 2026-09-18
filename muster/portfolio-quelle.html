@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../assets/js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none}
+a:hover{text-decoration:underline;text-decoration-color:#FF5A1F;text-underline-offset:3px}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:0.35}}
+@keyframes mLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
+</style>
+</helmet>
+
+<div style="position:relative;background:{{ darkBg }};color:{{ darkTxt }}">
+
+<div style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:18px {{ gutter }};pointer-events:none">
+  <a href="#top" style="pointer-events:auto;color:#F4F1EA;font-family:Archivo,'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.03em">NB</a>
+  <button type="button" onClick="{{ openMenu }}" aria-haspopup="dialog" aria-expanded="{{ menuOpen }}" style="pointer-events:auto;background:transparent;border:0;padding:0;color:#F4F1EA;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;min-height:44px;cursor:pointer">Menü</button>
+</div>
+
+<sc-if value="{{ menuOpen }}">
+  <button type="button" aria-label="Menü schliessen" onClick="{{ closeMenu }}" style="position:fixed;inset:0;z-index:88;background:rgba(11,14,23,0.4);border:0;cursor:default"></button>
+  <div role="dialog" aria-modal="true" aria-label="Navigation" style="position:fixed;top:0;right:0;bottom:0;z-index:90;width:min(420px,82vw);background:{{ darkBg }};color:{{ darkTxt }};border-left:1px solid {{ darkLine }};display:flex;flex-direction:column;padding:18px clamp(20px,4vw,32px) 28px;overflow:auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+      <span style="font-family:Archivo,sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.03em">NB</span>
+      <button type="button" onClick="{{ closeMenu }}" style="min-width:44px;min-height:44px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:{{ darkTxt }};background:transparent;border:0;cursor:pointer">Schliessen</button>
+    </div>
+    <nav style="display:flex;flex-direction:column;margin-top:32px">
+      <sc-for list="{{ menuLinks }}" as="l" hint-placeholder-count="7">
+        <a href="{{ l.href }}" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid {{ darkLine }};font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(28px,7vw,40px);letter-spacing:-0.03em;text-transform:uppercase;color:{{ darkTxt }}"><span style="font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:11px;color:{{ darkTxt2 }}">{{ l.num }}</span>{{ l.label }}</a>
+      </sc-for>
+    </nav>
+    <a href="mailto:nico.bodmer@gmx.ch" style="margin-top:auto;padding-top:28px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#2B4CFF">nico.bodmer@gmx.ch</a>
+    <div style="padding-top:16px;display:flex;gap:8px">
+      <button type="button" onClick="{{ toggleTheme }}" style="flex:1;min-height:46px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }};background:transparent;border:1px solid {{ darkLine }};border-radius:999px;cursor:pointer">{{ themeLabel }}</button>
+      <button type="button" style="flex:1;min-height:46px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:{{ darkTxt2 }};background:transparent;border:1px solid {{ darkLine }};border-radius:999px;cursor:pointer">EN</button>
+    </div>
+  </div>
+</sc-if>
+
+<main id="top">
+
+  <section style="position:relative;overflow:hidden;min-height:{{ heroMinH }};display:flex;flex-direction:{{ heroDir }};align-items:flex-end;background:{{ darkBg }};color:{{ darkTxt }}">
+    <div style="position:{{ heroMediaPos }};top:0;right:0;bottom:0;left:{{ heroMediaLeft }};width:{{ heroMediaW }};height:{{ heroMediaH }};order:{{ heroMediaOrder }};overflow:hidden">
+      <img src="../assets/img/portfolio/hero-portrait.webp" width="1200" height="1226" alt="Porträt von Nico Bodmer" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%;filter:contrast(1.2) saturate(0.8) brightness(0.5) hue-rotate(-10deg);-webkit-mask-image:{{ heroMask }};mask-image:{{ heroMask }}">
+    </div>
+    <div aria-hidden="true" style="position:absolute;inset:0;z-index:4;opacity:0.04;pointer-events:none;background-image:repeating-linear-gradient(0deg,#fff 0 1px,transparent 1px 2px),repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 3px)"></div>
+    <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:{{ heroPadTop }} {{ gutter }} clamp(36px,5vw,64px)">
+      <h1 style="margin:0 0 22px;font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(60px,13vw,170px);line-height:0.82;letter-spacing:-0.045em;text-transform:uppercase;color:{{ darkTxt }};position:relative;z-index:2">
+        <span style="display:block">Nico</span>
+        <span style="display:block;color:#FF5A1F">Bodmer</span>
+      </h1>
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:{{ darkTxt2 }};margin:0 0 22px">Websites &amp; digitale Projekte — Zürich / Aargau</p>
+      <p style="font-size:17px;line-height:1.55;color:{{ darkTxt }};max-width:44ch;margin:0">Ich baue Websites und eigene Anwendungen. Hauptberuflich arbeite ich im Data-&amp;-AI-Umfeld und studiere Digital Business &amp; AI.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px">
+        <a href="#projekte" style="display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 26px;border-radius:999px;background:#2B4CFF;color:#F4F1EA;font-size:15px;font-weight:500">Arbeiten ansehen <span style="font-family:'IBM Plex Mono',monospace" aria-hidden="true">↓</span></a>
+        <a href="#kontakt" style="display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 26px;border-radius:999px;border:1px solid {{ darkTxt }};color:{{ darkTxt }};font-size:15px;font-weight:500">Kontakt <span style="font-family:'IBM Plex Mono',monospace" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top:1px solid {{ darkLine }};border-bottom:1px solid {{ darkLine }};background:{{ darkBg }};color:{{ darkTxt }}">
+    <div style="max-width:1280px;margin:0 auto;padding:0 {{ gutter }}">
+      <ul style="display:flex;flex-wrap:{{ metricsWrap }};margin:0;padding:0;list-style:none">
+        <li class="mono" style="flex:1 1 170px;padding:{{ metricsPad }};font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}">Seit <b style="color:#FF5A1F;font-weight:inherit">2021</b> in der IT</li>
+        <li class="mono" style="flex:1 1 170px;padding:{{ metricsPad }};padding-left:{{ metricsPadL }};border-left:{{ metricsBorderL }};font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}"><b style="color:#FF5A1F;font-weight:inherit">4</b> Stationen</li>
+        <li class="mono" style="flex:1 1 170px;padding:{{ metricsPad }};padding-left:{{ metricsPadL }};border-left:{{ metricsBorderL }};font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}">Platform Developer EFZ</li>
+        <li class="mono" style="flex:1 1 170px;padding:{{ metricsPad }};padding-left:{{ metricsPadL }};border-left:{{ metricsBorderL }};font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}">DE / EN / FR</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ueber" style="background:{{ sandBg }};color:{{ sandTxt }}">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,140px) {{ gutter }}">
+      <span class="mono" style="display:block;margin-bottom:40px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ sandTxt2 }}"><span style="color:{{ sandTxtMuted }}">01</span> Über mich</span>
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,72px);align-items:flex-start">
+        <div style="flex:0 1 360px;min-width:240px;aspect-ratio:3/4;overflow:hidden;background:{{ sandSurf }}">
+          <img src="../assets/img/portfolio/about-portrait.webp" width="1100" height="1957" alt="Nico Bodmer vor einem Bürogebäude" loading="lazy" style="width:100%;height:112%;object-fit:cover;object-position:50% 30%;filter:saturate(0.78)">
+        </div>
+        <div style="flex:1 1 320px;min-width:0">
+          <h2 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(32px,4.4vw,56px);line-height:1.04;letter-spacing:-0.02em;margin:0 0 28px;max-width:20ch">Support, Deployment, eigene Projekte</h2>
+          <p style="font-size:17px;line-height:1.55;color:{{ sandTxt2 }};max-width:56ch;margin:0 0 20px">Ich bin 2021 als Lernender in die IT eingestiegen: Level-1- und Level-2-Support, Geräte-Management, wöchentliche Kurzpräsentationen im Team. Danach Technical Support beim Kunden vor Ort, anschliessend Deployment interner Anwendungen mit Red Hat OpenShift und IBM Cloud sowie Web-Entwicklung mit React.</p>
+          <p style="font-size:17px;line-height:1.55;color:{{ sandTxt2 }};max-width:56ch;margin:0 0 20px">Heute arbeite ich im Data-&amp;-AI-Umfeld: Anforderungsanalyse, Angebote, technische Konzepte. Ab September 2026 kommt das berufsbegleitende Studium BSc Digital Business &amp; AI an der HWZ Zürich dazu.</p>
+          <p style="font-size:17px;line-height:1.55;color:{{ sandTxt2 }};max-width:56ch;margin:0">Daneben baue ich Websites und eigene Anwendungen mit aktuellem AI-Tooling. Wer Support gemacht hat, baut Seiten, die man auch in zwei Jahren noch pflegen kann.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="werdegang" style="background:{{ darkBg }};color:{{ darkTxt }}">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,140px) {{ gutter }}">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:28px">
+        <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}"><span style="color:{{ darkTxtMuted }}">02</span> Werdegang</span>
+        <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}">Zeile öffnen — Klick oder Enter</span>
+      </div>
+      <h2 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(32px,4.4vw,56px);line-height:1.04;letter-spacing:-0.02em;margin:0 0 40px;max-width:22ch">Beruflicher Werdegang</h2>
+      <div style="border-bottom:1px solid {{ darkLine }}">
+        <sc-for list="{{ jobs }}" as="j" hint-placeholder-count="4">
+          <div style="border-top:1px solid {{ darkLine }};background-color:{{ j.linkedBg }}">
+            <button type="button" aria-expanded="{{ j.open }}" onClick="{{ j.toggle }}" style="width:100%;display:flex;flex-wrap:wrap;gap:clamp(12px,3vw,40px);align-items:baseline;text-align:left;background:transparent;border:0;color:inherit;padding:26px 0;cursor:pointer;flex-direction:{{ rowDir }}">
+              <span class="mono" style="flex:{{ rowPeriodFlex }};font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}">{{ j.period }}</span>
+              <span style="flex:1 1 300px;min-width:0">
+                <span style="display:block;font-size:20px;font-weight:500;margin-bottom:4px">{{ j.role }}</span>
+                <span style="display:block;font-size:15px;color:{{ darkTxt2 }}">{{ j.org }}</span>
+              </span>
+              <span aria-hidden="true" style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#FF5A1F;transform:{{ j.arrowRot }};display:inline-block;transition:transform 200ms ease-out">↗</span>
+            </button>
+            <div style="max-height:{{ j.maxH }};opacity:{{ j.op }};overflow:hidden;transition:max-height 260ms ease-out,opacity 200ms ease-out">
+              <ul style="margin:0 0 20px;padding:0 0 0 {{ rowBulletPad }};list-style:none;display:grid;gap:9px;max-width:900px">
+                <sc-for list="{{ j.bullets }}" as="b" hint-placeholder-count="3">
+                  <li style="font-size:15px;line-height:1.55;color:{{ darkTxt2 }}"><span style="color:#FF5A1F;margin-right:8px">—</span>{{ b }}</li>
+                </sc-for>
+              </ul>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="projekte" style="background:{{ paperBg }};color:{{ paperTxt }}">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,140px) {{ gutter }}">
+      <span class="mono" style="display:block;margin-bottom:40px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxt2 }}"><span style="color:{{ paperTxtMuted }}">03</span> Projekte</span>
+      <h2 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(32px,4.4vw,56px);line-height:1.04;letter-spacing:-0.02em;margin:0 0 32px;max-width:22ch">Arbeiten</h2>
+
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px" role="group" aria-label="Projekte filtern">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+          <button type="button" onClick="{{ f.click }}" aria-pressed="{{ f.on }}" style="min-height:42px;padding:0 18px;border-radius:999px;border:1px solid {{ paperLine }};background:{{ f.bg }};color:{{ f.fg }};font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer">{{ f.label }}</button>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(16px,2vw,24px)">
+        <sc-if value="{{ showRelaunch }}" hint-placeholder-val="{{ true }}">
+        <article style="flex:1 1 100%;border:1px solid {{ paperLine }};background:{{ paperSurf }};padding:22px">
+          <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px)">
+            <div style="flex:1 1 340px;min-width:280px">
+              <div onPointerDown="{{ baDown }}" onPointerMove="{{ baMove }}" onPointerUp="{{ baUp }}" style="position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid {{ paperLine }};touch-action:none;cursor:ew-resize;background:#fff;container-type:inline-size">
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#F4F1EA;padding:clamp(10px,3.4cqw,22px) clamp(12px,4cqw,26px);gap:clamp(4px,1.5cqw,10px)">
+                  <div style="display:flex;align-items:center;justify-content:space-between">
+                    <span style="font-family:Archivo,sans-serif;font-weight:700;font-size:clamp(10px,2.3cqw,15px);color:#0B0E17">Muster AG</span>
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:clamp(7px,1.4cqw,9px);letter-spacing:0.08em;text-transform:uppercase;color:#0B0E17">Menü</span>
+                  </div>
+                  <h4 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(15px,4cqw,26px);line-height:1.15;margin:clamp(4px,1.2cqw,8px) 0 0;color:#0B0E17">Ihr Partner für Treuhand-Dienstleistungen</h4>
+                  <p style="font-size:clamp(9px,2cqw,13px);line-height:1.5;color:#4A4A46;margin:0;max-width:34ch">Wir bieten Buchhaltung, Steuerberatung und Revision für kleine und mittlere Unternehmen. Kontaktieren Sie uns für ein Erstgespräch.</p>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:clamp(7px,1.4cqw,9px);letter-spacing:0.08em;text-transform:uppercase;color:#0B0E17;text-decoration:underline">Kontakt aufnehmen »</span>
+                </div>
+                <span style="position:absolute;right:10px;bottom:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#1A0C05;background:#FF5A1F;border-radius:3px;padding:4px 7px">Nachher</span>
+                <div style="position:absolute;top:0;left:0;bottom:0;width:{{ baPctStr }};overflow:hidden">
+                  <div style="position:absolute;top:0;left:0;height:100%;width:200%;background:#E7E2D6;font-family:Georgia,'Times New Roman',serif;padding:clamp(9px,3.1cqw,20px) clamp(11px,3.7cqw,24px);display:flex;flex-direction:column;gap:clamp(3px,1.2cqw,8px)">
+                    <div style="font-weight:700;font-size:clamp(9px,2.2cqw,14px);color:#3A362E;text-decoration:underline">Muster AG - Willkommen</div>
+                    <div style="font-size:clamp(13px,3.4cqw,22px);font-weight:700;color:#3A362E;margin-top:clamp(3px,0.9cqw,6px);line-height:1.15">HERZLICH WILLKOMMEN AUF UNSERER WEBSEITE!!!</div>
+                    <p style="font-size:clamp(8px,1.9cqw,12px);line-height:1.6;color:#5A554A;margin:0">Seit 1998 sind wir für Sie da. Klicken Sie unten für mehr Infos zu unseren Dienstleistungen im Bereich Treuhand, Buchhaltung u.v.m.</p>
+                    <span style="font-size:clamp(8px,1.7cqw,11px);color:#1a4fa0;text-decoration:underline">» Hier klicken für mehr Informationen «</span>
+                  </div>
+                  <span style="position:absolute;left:10px;bottom:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#fff;background:rgba(11,14,23,0.82);border-radius:3px;padding:4px 7px">Vorher</span>
+                </div>
+                <div style="position:absolute;top:0;bottom:0;left:{{ baPctStr }};width:3px;background:#FF5A1F;transform:translateX(-1.5px)">
+                  <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;background:#FF5A1F;color:#1A0C05;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px">↔</span>
+                </div>
+              </div>
+              <p class="mono" style="margin:10px 0 0;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:{{ paperTxt2 }}">Regler ziehen — vorher / nachher (Beispiel-Layout)</p>
+            </div>
+            <div style="flex:1 1 340px;min-width:280px">
+              <h3 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:30px;line-height:1.1;letter-spacing:-0.01em;margin:0 0 20px">So könnte ein Relaunch aussehen</h3>
+              <div style="display:grid;gap:12px">
+                <div style="display:flex;flex-wrap:wrap;gap:12px"><span style="flex:0 0 108px;padding-top:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxtMuted }}">Ausgangslage</span><span style="flex:1 1 220px;font-size:16px;line-height:1.55;color:{{ paperTxt2 }}">Viele KMU-Websites wirken veraltet — überladen, kleine Schrift, unklare Struktur.</span></div>
+                <div style="display:flex;flex-wrap:wrap;gap:12px"><span style="flex:0 0 108px;padding-top:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxtMuted }}">Aufgabe</span><span style="flex:1 1 220px;font-size:16px;line-height:1.55;color:{{ paperTxt2 }}">Klare Hierarchie, ruhige Typografie, ein Weg zur Kontaktaufnahme.</span></div>
+                <div style="display:flex;flex-wrap:wrap;gap:12px"><span style="flex:0 0 108px;padding-top:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxtMuted }}">Ergebnis</span><span style="flex:1 1 220px;font-size:16px;line-height:1.55;color:{{ paperTxt2 }}">Beispielhafte Darstellung des Vorgehens — Screenshots eines echten Projekts folgen.</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+        </sc-if>
+
+        <sc-if value="{{ showApps }}" hint-placeholder-val="{{ true }}">
+        <article style="flex:1 1 340px;min-width:280px;border:1px solid {{ paperLine }};background:{{ paperSurf }};padding:22px">
+          <div style="overflow:hidden;margin-bottom:22px;border:1px solid {{ paperLine }}">
+            <div style="aspect-ratio:16/9;overflow:hidden;background:#1B2A22">
+              <img src="../assets/img/portfolio/geo-quiz.webp" width="1600" height="822" alt="Geo-Quiz — Luftbildkarte mit Frage" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 40%">
+            </div>
+          </div>
+          <h3 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:26px;line-height:1.1;margin:0 0 18px">Geo-Quiz — Orte auf der Karte schätzen</h3>
+          <div style="display:grid;gap:12px;margin-bottom:20px">
+            <div><p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxtMuted }};margin:0 0 3px">Ausgangslage</p><p style="font-size:16px;line-height:1.55;color:{{ paperTxt2 }};margin:0">Die eigene Region kennt man vom Velo und vom Zugfenster — auf einer leeren Karte findet man sie trotzdem nicht.</p></div>
+            <div><p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxtMuted }};margin:0 0 3px">Aufgabe</p><p style="font-size:16px;line-height:1.55;color:{{ paperTxt2 }};margin:0">Eine Quiz-App bauen, in der Orte auf einer unbeschrifteten Karte getippt werden. Bewertet wird nach Distanz zum richtigen Punkt.</p></div>
+            <div><p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxtMuted }};margin:0 0 3px">Ergebnis</p><p style="font-size:16px;line-height:1.55;color:{{ paperTxt2 }};margin:0">Live-Webapp mit acht Fragen pro Runde, Luftbild-Karte und eigenem Logo.</p></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px">
+            <sc-for list="{{ geoTags }}" as="t" hint-placeholder-count="6"><span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxt2 }};border:1px solid {{ paperLine }};border-radius:999px;padding:5px 11px">{{ t }}</span></sc-for>
+          </div>
+          <a href="https://bodmer7.github.io/segberike/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;padding:13px 16px;background:#2B4CFF;color:#F4F1EA;font-size:15px;font-weight:500">
+            <span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#F4F1EA;animation:pulseDot 1600ms ease-in-out infinite"></span>
+            <span style="flex:1;min-width:0">Live ausprobieren → bodmer7.github.io/segberike</span>
+          </a>
+        </article>
+        </sc-if>
+
+        <sc-if value="{{ showTools }}" hint-placeholder-val="{{ true }}">
+        <article style="flex:1 1 340px;min-width:280px;border:1px solid {{ paperLine }};background:{{ paperSurf }};padding:22px">
+          <div style="overflow:hidden;margin-bottom:22px;border:1px solid {{ paperLine }}">
+            <div style="aspect-ratio:16/9;overflow:hidden;background:#F0F2F5">
+              <img src="../assets/img/portfolio/health-dashboard.webp" width="1600" height="900" alt="Personal Health Dashboard" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top center">
+            </div>
+          </div>
+          <h3 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:26px;line-height:1.1;margin:0 0 18px">Health-Dashboard — Uhrendaten im eigenen Überblick</h3>
+          <div style="display:grid;gap:12px;margin-bottom:20px">
+            <div><p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxtMuted }};margin:0 0 3px">Ausgangslage</p><p style="font-size:16px;line-height:1.55;color:{{ paperTxt2 }};margin:0">Die Sportuhr sammelt täglich Gesundheitsdaten, die in der Hersteller-App liegen bleiben.</p></div>
+            <div><p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxtMuted }};margin:0 0 3px">Aufgabe</p><p style="font-size:16px;line-height:1.55;color:{{ paperTxt2 }};margin:0">Die Daten lokal und schreibgeschützt zugänglich machen und daraus ein Morgen-Dashboard bauen.</p></div>
+            <div><p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxtMuted }};margin:0 0 3px">Ergebnis</p><p style="font-size:16px;line-height:1.55;color:{{ paperTxt2 }};margin:0">Server mit 20 read-only Zugriffen plus ein automatisch aktualisiertes Dashboard mit Readiness, Schlaf, Erfolgen und Gewichtsziel.</p></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px">
+            <sc-for list="{{ healthTags }}" as="t" hint-placeholder-count="6"><span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxt2 }};border:1px solid {{ paperLine }};border-radius:999px;padding:5px 11px">{{ t }}</span></sc-for>
+          </div>
+        </article>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <section id="websites" style="background:{{ darkBg }};color:{{ darkTxt }}">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,140px) {{ gutter }}">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:44px">
+        <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}"><span style="color:{{ darkTxtMuted }}">04</span> Websites</span>
+        <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}">Arbeitsproben</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(16px,2vw,24px)">
+        <article style="border:1px solid {{ darkLine }};background:{{ darkSurf }};padding:18px">
+          <div style="border:1px solid {{ darkLine }};overflow:hidden;margin-bottom:18px">
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 10px;border-bottom:1px solid {{ darkLine }};background:{{ darkBg }}">
+              <div style="display:flex;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:#FF5A1F"></span><span style="width:7px;height:7px;border-radius:50%;background:{{ darkLine }}"></span><span style="width:7px;height:7px;border-radius:50%;background:{{ darkLine }}"></span></div>
+              <div style="flex:1;height:15px;border-radius:3px;background:{{ darkChipBg }};display:flex;align-items:center;padding:0 8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:{{ darkTxt2 }}">[domain.ch]</span></div>
+            </div>
+            <div style="position:relative;aspect-ratio:16/10;background-image:repeating-linear-gradient(0deg,{{ darkChipBg }} 0 1px,transparent 1px 16px),repeating-linear-gradient(90deg,{{ darkChipBg }} 0 1px,transparent 1px 16px);display:flex;align-items:center;justify-content:center">
+              <span style="position:absolute;top:0;right:0;display:flex;align-items:center;min-height:26px;padding:0 10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#0E1220;background:#FF5A1F">In Arbeit</span>
+              <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:{{ darkTxtMuted }}">Vorschau folgt</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:6px">
+            <h3 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:23px;margin:0">[Website 2 — Name]</h3>
+            <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:{{ darkTxtMuted }};white-space:nowrap">Redesign</span>
+          </div>
+          <p style="font-size:16px;line-height:1.55;color:{{ darkTxt2 }};margin:0 0 10px;max-width:48ch">Aktuell in Umsetzung — Livegang [Monat JJJJ]</p>
+          <p style="font-size:16px;line-height:1.55;color:{{ darkTxt2 }};margin:0;max-width:48ch">[Ein Satz zu Auftrag und Ergebnis.]</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" style="background:{{ sandBg }};color:{{ sandTxt }}">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,140px) {{ gutter }} clamp(48px,6vw,72px)">
+      <span class="mono" style="display:block;margin-bottom:36px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ sandTxt2 }}"><span style="color:{{ sandTxtMuted }}">05</span> Skills</span>
+      <h2 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(32px,4.4vw,56px);line-height:1.04;letter-spacing:-0.02em;margin:0 0 40px;max-width:22ch">Sechs Kernkompetenzen</h2>
+      <div style="border-bottom:1px solid {{ sandLine }}">
+        <sc-for list="{{ skills }}" as="s" hint-placeholder-count="6">
+          <div onMouseEnter="{{ s.on }}" onMouseLeave="{{ s.off }}" tabindex="0" style="position:relative;border-top:1px solid {{ sandLine }};padding:22px 0;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline">
+            <span style="flex:0 0 40px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:{{ sandTxtMuted }}">{{ s.num }}</span>
+            <p style="flex:1 1 260px;font-family:Archivo,sans-serif;font-weight:600;font-size:clamp(22px,2.6vw,32px);letter-spacing:-0.02em;margin:0">{{ s.name }}</p>
+            <span style="flex:1 1 300px;font-size:15px;line-height:1.5;display:{{ s.ctxDisplay }};color:{{ sandTxt2 }}">{{ s.ctx }}</span>
+            <span style="flex:1 1 300px;font-size:15px;line-height:1.5;display:{{ s.altDisplay }};color:{{ sandTxt }}">{{ s.alt }}</span>
+            <span aria-hidden="true" style="position:absolute;left:0;bottom:0;height:3px;width:{{ s.lineW }};background:#FF5A1F;transition:width 320ms ease-out"></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div aria-hidden="true" style="background:#FF5A1F;padding:22px 0;overflow:hidden">
+      <div style="display:flex;width:max-content;animation:mLeft 46s linear infinite">
+        <span style="font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(30px,5vw,58px);letter-spacing:-0.03em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.2px #1A0C05;white-space:nowrap;padding-right:34px">React · Tailwind · Supabase · GitHub · Docker · OpenShift ·&nbsp;</span>
+        <span style="font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(30px,5vw,58px);letter-spacing:-0.03em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.2px #1A0C05;white-space:nowrap;padding-right:34px">React · Tailwind · Supabase · GitHub · Docker · OpenShift ·&nbsp;</span>
+      </div>
+      <div style="display:flex;width:max-content;animation:mRight 52s linear infinite;margin-top:6px">
+        <span style="font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(30px,5vw,58px);letter-spacing:-0.03em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.2px #1A0C05;white-space:nowrap;padding-right:34px">IBM Cloud · Windows · macOS · Ticketing · Robotik ·&nbsp;</span>
+        <span style="font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(30px,5vw,58px);letter-spacing:-0.03em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.2px #1A0C05;white-space:nowrap;padding-right:34px">IBM Cloud · Windows · macOS · Ticketing · Robotik ·&nbsp;</span>
+      </div>
+    </div>
+    <div style="background:{{ sandBg }}">
+      <div style="max-width:1280px;margin:0 auto;padding:22px {{ gutter }} clamp(56px,7vw,88px)">
+        <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ sandTxt2 }}">Deutsch — Muttersprache · Englisch — fliessend · Französisch — gut</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="ausbildung" style="background:{{ darkBg }};color:{{ darkTxt }}">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,140px) {{ gutter }}">
+      <span class="mono" style="display:block;margin-bottom:44px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}"><span style="color:{{ darkTxtMuted }}">06</span> Ausbildung</span>
+      <div style="border-bottom:1px solid {{ darkLine }}">
+        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;padding:22px 0;border-top:1px solid {{ darkLine }}">
+          <div><p style="margin:0 0 4px;font-size:17px;font-weight:500">BSc Digital Business &amp; AI</p><p style="margin:0;font-size:15px;color:{{ darkTxt2 }}">HWZ Hochschule für Wirtschaft Zürich — berufsbegleitend</p></div>
+          <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxtMuted }}">Ab 09/2026</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;padding:22px 0;border-top:1px solid {{ darkLine }}">
+          <div><p style="margin:0 0 4px;font-size:17px;font-weight:500">Platform Developer EFZ</p><p style="margin:0;font-size:15px;color:{{ darkTxt2 }}">Technische Berufsschule Zürich</p></div>
+          <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}">2021 – 2025</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;padding:22px 0;border-top:1px solid {{ darkLine }}">
+          <div><p style="margin:0 0 4px;font-size:17px;font-weight:500">Berufsmaturität technischer Richtung</p><p style="margin:0;font-size:15px;color:{{ darkTxt2 }}">Berufsmaturitätsschule Zürich</p></div>
+          <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}">2021 – 2025</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" style="position:relative;overflow:hidden;background:#FF5A1F;color:#1A0C05">
+    <div style="position:{{ contactMediaPos }};left:0;top:0;bottom:0;width:{{ contactMediaW }};height:{{ contactMediaH }};overflow:hidden">
+      <img src="../assets/img/portfolio/contact-portrait.webp" width="1400" height="2491" alt="Nico Bodmer" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 18%;filter:grayscale(1) contrast(1.08);-webkit-mask-image:{{ contactMask }};mask-image:{{ contactMask }}">
+      <div aria-hidden="true" style="position:absolute;inset:0;background:#FF5A1F;mix-blend-mode:multiply;pointer-events:none"></div>
+      <div aria-hidden="true" style="position:absolute;inset:0;background:#0E1220;mix-blend-mode:lighten;pointer-events:none"></div>
+    </div>
+    <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,140px) {{ gutter }}">
+      <span class="mono" style="display:block;margin-bottom:36px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(26,12,5,0.72)">07 Kontakt</span>
+      <div style="margin-left:{{ contactBodyML }};max-width:{{ contactBodyMax }}">
+        <p class="mono" style="margin:0 0 16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(26,12,5,0.72)">Offen für Projekte und Gespräche</p>
+        <h2 style="font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(40px,7vw,96px);line-height:0.86;letter-spacing:-0.045em;text-transform:uppercase;margin:0 0 24px;color:#1A0C05">Schreiben<br>Sie mir</h2>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px">
+          <a href="mailto:nico.bodmer@gmx.ch" style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,3.4vw,42px);line-height:1.1;letter-spacing:-0.02em;color:#1A0C05;border-bottom:2px solid rgba(26,12,5,0.26);overflow-wrap:anywhere">nico.bodmer@gmx.ch</a>
+          <button type="button" onClick="{{ copyMail }}" aria-label="Adresse kopieren" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid rgba(26,12,5,0.26);border-radius:999px;background:transparent;color:#1A0C05;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer">
+            <span style="font-size:13px" aria-hidden="true">⧉</span><span>{{ copyLabel }}</span>
+          </button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:24px;margin-top:34px">
+          <a href="https://linkedin.com/in/nico-bodmer" target="_blank" rel="noopener" style="font-size:16px;color:#1A0C05;border-bottom:1px solid rgba(26,12,5,0.26);padding-bottom:3px">LinkedIn ↗</a>
+          <a href="https://github.com/bodmer7" target="_blank" rel="noopener" style="font-size:16px;color:#1A0C05;border-bottom:1px solid rgba(26,12,5,0.26);padding-bottom:3px">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="background:{{ darkBg }};color:{{ darkTxt }}">
+  <div style="max-width:1280px;margin:0 auto;padding:26px {{ gutter }};display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+    <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}">© 2026 Nico Bodmer — Raum Zürich</span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:{{ darkTxt2 }}">Taste T oder vom rechten Rand wischen</span>
+      <button type="button" onClick="{{ toggleTheme }}" style="min-height:38px;padding:0 14px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }};background:transparent;border:1px solid {{ darkLine }};border-radius:999px;cursor:pointer">{{ themeLabel }}</button>
+      <button type="button" style="min-height:38px;padding:0 14px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:{{ darkTxt2 }};background:transparent;border:1px solid {{ darkLine }};border-radius:999px;cursor:pointer">EN</button>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { theme: 'dark', menuOpen: false, filter: 'alle', openRows: {}, activeSkill: -1, baPct: 50, dragging: false, copied: false, w: 1440 };
+
+  JOBS = [
+    { period: 'Seit 07/2025', role: 'Tech Seller Data & AI', org: 'IBM Schweiz AG', bullets: ['Mitarbeit an RFPs, Angeboten und Vertriebsaktivitäten im Bereich Data & AI', 'Lösungsentwicklung von der Anforderungsanalyse bis zum technischen Konzept', 'Zusammenarbeit mit cross-funktionalen Teams', 'Mitwirkung an Events und Kundenanlässen (u. a. TechXchange)'] },
+    { period: '01/2024 – 07/2025', role: 'Web Development & Deployment', org: 'IBM Schweiz AG', bullets: ['Deployment interner Anwendungen mit Red Hat OpenShift und IBM Cloud', 'Web-Entwicklung mit HTML, CSS, JavaScript und React', 'Optimierung bestehender interner Anwendungen für bessere Bedienbarkeit'] },
+    { period: '11/2022 – 12/2023', role: 'Technical Support Lenovo', org: 'IBM Schweiz AG', bullets: ['Reparatur von Lenovo-Geräten vor Ort beim Kunden', 'Robotik-Projekte mit dem Roboter Pepper', 'IT- und Security-Schulungen an Oberstufenschulen'] },
+    { period: '08/2021 – 11/2022', role: 'IT Help Desk', org: 'IBM Forschungslabor Zürich', bullets: ['Level-1- und Level-2-Support für interne Mitarbeitende', 'Geräte-Management: Setup, Migration und Datenlöschung von Mac- und Windows-Notebooks', 'Wöchentliche Kurzpräsentationen im Team'] }
+  ];
+
+  SKILLS = [
+    { num: '01', name: 'Web-Entwicklung', ctx: 'HTML, CSS, JavaScript, React — eigene Projekte und interne Anwendungen', alt: 'Web Development & Deployment · Tech Seller Data & AI' },
+    { num: '02', name: 'Deployment & Cloud', ctx: 'Red Hat OpenShift, IBM Cloud, Docker', alt: 'Web Development & Deployment' },
+    { num: '03', name: 'Websites für Unternehmen', ctx: 'Konzept, Umsetzung, Live-Schaltung', alt: 'Eigene Aufträge · Web Development & Deployment' },
+    { num: '04', name: 'AI-Tooling', ctx: 'Aufbau eigener Anwendungen mit aktuellen KI-Werkzeugen', alt: 'Tech Seller Data & AI · eigene Projekte' },
+    { num: '05', name: 'Anforderungen & Konzepte', ctx: 'Vom Kundengespräch zur technischen Lösung', alt: 'Tech Seller Data & AI' },
+    { num: '06', name: 'IT-Support & Betrieb', ctx: 'Level 1 und 2, Geräte-Management, Ticketing', alt: 'IT Help Desk · Technical Support Lenovo' }
+  ];
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+
+  renderVals() {
+    const s = this.state;
+    const light = s.theme === 'light';
+    const darkBg = light ? '#E7E2D6' : '#0E1220', darkSurf = light ? '#F4F1EA' : '#191E2E', darkTxt = light ? '#0B0E17' : '#F4F1EA', darkTxt2 = light ? '#535863' : '#98A0B4', darkLine = light ? '#D0C9BA' : '#262C3E';
+    const sandBg = light ? '#FAF8F3' : '#F4F1EA', sandSurf = '#FFFFFF', sandTxt = '#0B0E17', sandTxt2 = '#565B66', sandLine = '#DCD6C8';
+    const paperBg = light ? '#EFEBE1' : '#E7E2D6', paperSurf = light ? '#FFFFFF' : '#F4F1EA', paperTxt = '#0B0E17', paperTxt2 = '#535863', paperLine = '#D0C9BA';
+    const narrow900 = s.w < 900, narrow700 = s.w < 700;
+
+    const filters = ['alle', 'websites', 'apps', 'tools'].map(f => ({
+      label: f === 'alle' ? 'Alle' : f === 'websites' ? 'Websites' : f === 'apps' ? 'Apps' : 'Tools',
+      on: s.filter === f, click: () => this.setState({ filter: f }),
+      bg: s.filter === f ? '#2B4CFF' : 'transparent', fg: s.filter === f ? '#F4F1EA' : paperTxt2
+    }));
+
+    return {
+      darkBg, darkSurf, darkTxt, darkTxt2, darkLine,
+      darkTxtMuted: light ? 'rgba(11,14,23,0.55)' : 'rgba(244,241,234,0.55)',
+      darkChipBg: light ? 'rgba(11,14,23,0.07)' : 'rgba(244,241,234,0.07)',
+      sandBg, sandSurf, sandTxt, sandTxt2, sandLine, sandTxtMuted: 'rgba(11,14,23,0.55)',
+      paperBg, paperSurf, paperTxt, paperTxt2, paperLine, paperTxtMuted: 'rgba(11,14,23,0.55)',
+      gutter: 'clamp(20px,4vw,40px)',
+      menuOpen: s.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuLinks: [
+        { num: '01', label: 'Über mich', href: '#ueber' }, { num: '02', label: 'Werdegang', href: '#werdegang' },
+        { num: '03', label: 'Projekte', href: '#projekte' }, { num: '04', label: 'Websites', href: '#websites' },
+        { num: '05', label: 'Skills', href: '#skills' }, { num: '06', label: 'Ausbildung', href: '#ausbildung' },
+        { num: '07', label: 'Kontakt', href: '#kontakt' }
+      ],
+      themeLabel: light ? 'Dark' : 'Light',
+      toggleTheme: () => this.setState({ theme: light ? 'dark' : 'light' }),
+
+      heroMinH: narrow900 ? '0' : 'min(94vh,940px)',
+      heroDir: narrow900 ? 'column' : 'row',
+      heroMediaPos: narrow900 ? 'relative' : 'absolute',
+      heroMediaLeft: narrow900 ? '0' : 'auto',
+      heroMediaW: narrow900 ? '100%' : '64%',
+      heroMediaH: narrow900 ? '50vh' : 'auto',
+      heroMediaOrder: narrow900 ? '-1' : '0',
+      heroMask: narrow900
+        ? 'linear-gradient(to top,transparent 0,#000 22%)'
+        : 'linear-gradient(to right,transparent 0,#000 52%),linear-gradient(to top,transparent 0,#000 25%)',
+      heroPadTop: narrow900 ? 'clamp(24px,6vw,48px)' : 'clamp(96px,12vw,150px)',
+
+      metricsWrap: 'wrap', metricsPad: narrow700 ? '12px 0' : '22px 0',
+      metricsPadL: narrow700 ? '0' : '24px', metricsBorderL: narrow700 ? '0' : `1px solid ${darkLine}`,
+
+      rowDir: narrow700 ? 'column' : 'row', rowBulletPad: narrow700 ? '0' : '130px',
+      jobs: this.JOBS.map((j, i) => {
+        const open = !!s.openRows[i];
+        return {
+          period: j.period, role: j.role, org: j.org, bullets: j.bullets, open,
+          maxH: open ? '600px' : '0', op: open ? '1' : '0', arrowRot: open ? 'rotate(45deg)' : 'none',
+          linkedBg: s.activeSkill >= 0 && this.stationsFor(s.activeSkill).includes(this.stationFor(i)) ? 'rgba(255,90,31,0.16)' : 'transparent',
+          toggle: () => this.setState(st => ({ openRows: { ...st.openRows, [i]: !st.openRows[i] } }))
+        };
+      }),
+
+      showRelaunch: s.filter === 'alle' || s.filter === 'websites',
+      showApps: s.filter === 'alle' || s.filter === 'apps',
+      showTools: s.filter === 'alle' || s.filter === 'tools',
+      filters,
+      geoTags: ['Vite', 'TypeScript', 'Leaflet', 'OpenStreetMap', 'swisstopo-Luftbilder', 'GitHub Actions & Pages'],
+      healthTags: ['MCP', 'Python', 'SQLite', 'Jinja2', 'Playwright', 'Scheduled Tasks'],
+
+      baPctStr: s.baPct + '%',
+      baDown: (e) => { this.setState({ dragging: true }); this._baRect = e.currentTarget.getBoundingClientRect(); this.setBaFromX(e.clientX); },
+      baMove: (e) => { if (this.state.dragging) this.setBaFromX(e.clientX); },
+      baUp: () => this.setState({ dragging: false }),
+
+      skills: this.SKILLS.map((sk, i) => ({
+        num: sk.num, name: sk.name, ctx: sk.ctx, alt: sk.alt,
+        ctxDisplay: s.activeSkill === i ? 'none' : 'block', altDisplay: s.activeSkill === i ? 'block' : 'none',
+        lineW: s.activeSkill === i ? '100%' : '0',
+        on: () => this.setState({ activeSkill: i }), off: () => this.setState({ activeSkill: -1 })
+      })),
+
+      contactMediaPos: narrow900 ? 'relative' : 'absolute',
+      contactMediaW: narrow900 ? '100%' : '46%',
+      contactMediaH: narrow900 ? '40vh' : 'auto',
+      contactMask: narrow900 ? 'linear-gradient(to bottom,#000 0,#000 72%,transparent 100%)' : 'linear-gradient(to left,transparent 0,#000 30%)',
+      contactBodyML: narrow900 ? '0' : 'calc(46% + 32px)',
+      contactBodyMax: narrow900 ? 'none' : '52ch',
+      copyLabel: s.copied ? 'Kopiert' : 'Kopieren',
+      copyMail: () => {
+        const done = () => { this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 1800); };
+        if (navigator.clipboard) navigator.clipboard.writeText('nico.bodmer@gmx.ch').then(done, done); else done();
+      }
+    };
+  }
+
+  stationFor(i) { return ['dev', 'web', 'support', 'support'][i]; }
+  stationsFor(skillIdx) { return [['web', 'dev'], ['web'], ['web'], ['dev'], ['dev'], ['support']][skillIdx] || []; }
+
+  setBaFromX(clientX) {
+    if (!this._baRect) return;
+    const pct = Math.min(96, Math.max(4, ((clientX - this._baRect.left) / this._baRect.width) * 100));
+    this.setState({ baPct: Math.round(pct) });
+  }
+}
+
+</script>
+</body>
+</html>

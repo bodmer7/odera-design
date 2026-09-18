@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<sc-if value="{{ isMark }}" hint-placeholder-val="{{ false }}">
+<span aria-hidden="true" style="position:relative;flex:none;display:flex;align-items:center;justify-content:center;width:{{ box }};height:{{ box }};background:{{ markBg }};font-family:'Bricolage Grotesque',sans-serif;font-weight:800;line-height:1;font-size:{{ markFs }};color:{{ markFg }}">
+  <span style="position:relative;display:inline-block">O<span style="position:absolute;left:-0.06em;top:0.40em;width:0.92em;height:0.105em;background:{{ markBg }};transform:rotate(-19deg)"></span></span>
+</span>
+</sc-if>
+<sc-if value="{{ isWord }}" hint-placeholder-val="{{ true }}">
+<span style="display:inline-flex;align-items:baseline;gap:0.22em;font-family:'Bricolage Grotesque',sans-serif;line-height:1;white-space:nowrap;font-size:{{ fs }};color:{{ fg }}">
+  <span style="font-weight:800;letter-spacing:-0.015em"><span style="position:relative;display:inline-block">O<span style="position:absolute;left:-0.06em;top:0.40em;width:0.92em;height:0.08em;background:{{ cut }};transform:rotate(-19deg)"></span></span>DERA</span>
+  <span style="font-weight:500;letter-spacing:-0.02em">Design</span>
+</span>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:140},&quot;kind&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;wort&quot;,&quot;zeichen&quot;],&quot;default&quot;:&quot;wort&quot;,&quot;tsType&quot;:&quot;'wort'|'zeichen'&quot;},&quot;h&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:32,&quot;min&quot;:16,&quot;max&quot;:120,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;},&quot;fs&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:28,&quot;min&quot;:10,&quot;max&quot;:120,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;},&quot;fg&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#11131A&quot;,&quot;options&quot;:[&quot;#11131A&quot;,&quot;#F6F5F1&quot;,&quot;#000000&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;cut&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#F6F5F1&quot;,&quot;options&quot;:[&quot;#F6F5F1&quot;,&quot;#11131A&quot;,&quot;#FFFFFF&quot;,&quot;#12141D&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;markBg&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#2D4CF0&quot;,&quot;options&quot;:[&quot;#2D4CF0&quot;,&quot;#F6F5F1&quot;,&quot;#11131A&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;markFg&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#F6F5F1&quot;,&quot;options&quot;:[&quot;#F6F5F1&quot;,&quot;#11131A&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const kind = p.kind || 'wort';
+    const h = parseFloat(p.h) || 32;
+    return {
+      isMark: kind === 'zeichen',
+      isWord: kind !== 'zeichen',
+      box: h + 'px',
+      markFs: Math.round(h * 0.66) + 'px',
+      fs: (p.fs ? parseFloat(p.fs) : Math.round(h * 0.88)) + 'px',
+      fg: p.fg || '#11131A',
+      cut: p.cut || '#F6F5F1',
+      markBg: p.markBg || '#2D4CF0',
+      markFg: p.markFg || '#F6F5F1'
+    };
+  }
+}
+</script>
+</body>
+</html>

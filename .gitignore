@@ -1,0 +1,25 @@
+# Systemdateien
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+# Temporäre Dateien
+*.tmp
+*.bak
+*.swp
+*~
+*.log
+
+# Lokale Ordner und Werkzeuge
+.claude/
+.vscode/
+.idea/
+node_modules/
+tmp/
+_lokal/
+
+# Originalexporte und Archive gehören nicht ins Repository
+*.zip

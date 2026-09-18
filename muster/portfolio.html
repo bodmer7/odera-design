@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../assets/js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#11131A}
+.pf-mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.pf-note{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pf-bar{flex:none;height:48px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:#11131A}
+.pf-bar a{color:#D6F24B;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.pf-back-lg{display:inline}
+.pf-back-sm{display:none}
+@media(max-width:560px){
+ .pf-bar{height:40px;padding:0 12px;gap:10px}
+ .pf-note{font-size:11px;line-height:1.15}
+ .pf-back-lg{display:none}
+ .pf-back-sm{display:inline}
+ .pf-links{font-size:12px}
+}
+</style>
+</helmet>
+
+<div style="height:100vh;display:flex;flex-direction:column;background:#11131A">
+  <div class="pf-bar" style="display:{{ barDisplay }}">
+    <span class="pf-mono pf-note" style="font-size:13px;color:#F6F5F1">Eigenes Projekt von ODERA Design. Persönliches Portfolio von Nico Bodmer.</span>
+    <span class="pf-mono pf-links" style="flex:none;display:flex;align-items:center;gap:8px;font-size:13px;color:#A8B0BD">
+      <a href="https://nico-bodmer.ch" target="_blank" rel="noopener">Zur Originalseite nico-bodmer.ch</a>
+      <span aria-hidden="true">·</span>
+      <a href="../" target="_top"><span class="pf-back-lg">Zurück zu ODERA Design</span><span class="pf-back-sm">← ODERA</span></a>
+      <span aria-hidden="true" class="pf-back-lg">·</span>
+      <a href="../#/impressum" target="_top" class="pf-back-lg">Impressum</a>
+      <span aria-hidden="true" class="pf-back-lg">·</span>
+      <a href="../#/datenschutz" target="_top" class="pf-back-lg">Datenschutz</a>
+      <span aria-hidden="true" class="pf-back-lg">·</span>
+      <a href="../#/agb" target="_top" class="pf-back-lg">AGB</a>
+    </span>
+  </div>
+  <iframe src="portfolio-quelle.html" title="Portfolio von Nico Bodmer" style="flex:1;width:100%;border:0;display:block;background:#0E1220"></iframe>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280}}">
+class Component extends DCLogic {
+  renderVals() {
+    const isPreview = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('preview') === '1';
+    return { barDisplay: isPreview ? 'none' : 'flex' };
+  }
+}
+</script>
+</body>
+</html>

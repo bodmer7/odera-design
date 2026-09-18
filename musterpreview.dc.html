@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="position:relative;width:100%;height:100%;overflow:hidden;background:{{ bg }}">
+  <sc-if value="{{ isDm }}" hint-placeholder-val="{{ true }}">
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <div style="width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:3% 5%;border-bottom:1px solid #DCD5C6">
+          <span style="font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:clamp(10px,2.2vw,18px);color:#1B1A17">Doppelmeter</span>
+          <div style="display:flex;gap:5%">
+            <span style="font-size:clamp(6px,1vw,10px);color:#1B1A17;opacity:0.65">Küchen</span>
+            <span style="font-size:clamp(6px,1vw,10px);color:#1B1A17;opacity:0.65">Schränke</span>
+            <span style="font-size:clamp(6px,1vw,10px);color:#1B1A17;opacity:0.65">Werkstatt</span>
+            <span style="font-size:clamp(6px,1vw,10px);color:#1B1A17;opacity:0.65">Kontakt</span>
+          </div>
+        </div>
+        <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:3%;padding:4% 5%;overflow:hidden">
+          <div style="display:flex;flex-direction:column;gap:6%;justify-content:center;min-height:0">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:clamp(6px,0.85vw,10px);letter-spacing:0.08em;text-transform:uppercase;color:#C2762F">SEIT 1961</span>
+            <p style="font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:clamp(11px,1.9vw,22px);line-height:1.08;color:#1B1A17;margin:0">Möbel, die Ihre Enkel noch benutzen.</p>
+            <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:clamp(6px,0.85vw,10px);line-height:1.4;color:rgba(20,19,15,0.62);margin:0">Massgefertigt in unserer eigenen Werkstatt, aus Holz, das wir selbst auswählen.</p>
+            <div style="display:flex;align-items:center;gap:4%;flex-wrap:wrap">
+              <span style="display:inline-flex;align-items:center;min-height:clamp(14px,2vw,22px);padding:0 4.5%;border-radius:999px;background:#2F4A3C;color:#FBFAF7;font-size:clamp(6px,0.85vw,10px);font-weight:600;white-space:nowrap">Jetzt anrufen</span>
+              <span style="display:inline-flex;align-items:center;gap:4px;font-size:clamp(6px,0.85vw,10px);font-weight:600;color:#2F4A3C;white-space:nowrap">Arbeiten ansehen →</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:clamp(5px,0.6vw,8px);color:rgba(20,19,15,0.55);flex-wrap:wrap">
+              <span style="white-space:nowrap">3. Generation</span><span aria-hidden="true">|</span><span style="white-space:nowrap">14 Mitarbeitende</span><span aria-hidden="true">|</span><span style="white-space:nowrap">Werkstatt in der Region</span>
+            </div>
+          </div>
+          <div style="position:relative;border-radius:8px;overflow:hidden;min-height:0">
+            <img src="assets/img/kueche-tile-merchant-ireland-unsplash.webp" alt="Moderne Küche mit Holzfronten" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center">
+          </div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:3% 6%;border-bottom:1px solid #DCD5C6;flex:none">
+          <span style="font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:clamp(11px,4vw,16px);color:#1B1A17">Doppelmeter</span>
+          <div style="display:flex;flex-direction:column;gap:3px"><span style="width:14px;height:2px;background:#1B1A17"></span><span style="width:14px;height:2px;background:#1B1A17"></span><span style="width:14px;height:2px;background:#1B1A17"></span></div>
+        </div>
+        <div style="position:relative;flex:1;min-height:0">
+          <img src="assets/img/kueche-tile-merchant-ireland-unsplash.webp" alt="Moderne Küche mit Holzfronten" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center">
+        </div>
+        <div style="flex:none;padding:6%">
+          <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:clamp(6px,1.8vw,9px);letter-spacing:0.06em;text-transform:uppercase;color:#C2762F;margin-bottom:4%">SEIT 1961</span>
+          <p style="font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:clamp(10px,3vw,14px);line-height:1.15;color:#1B1A17;margin:0 0 4%">Möbel, die Ihre Enkel noch benutzen.</p>
+          <span style="display:inline-flex;align-items:center;min-height:clamp(14px,3.4vw,20px);padding:0 5%;border-radius:999px;background:#2F4A3C;color:#FBFAF7;font-size:clamp(6px,1.6vw,9px);font-weight:600;white-space:nowrap">Jetzt anrufen</span>
+        </div>
+      </div>
+    </sc-if>
+  </sc-if>
+  <sc-if value="{{ isPf }}" hint-placeholder-val="{{ false }}">
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <div style="width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;background:#11131A">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:3% 5%">
+          <span style="font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(9px,2vw,15px);letter-spacing:-0.02em;color:#F4F1EA">NB</span>
+          <span style="display:flex;flex-direction:column;gap:3px"><span style="width:16px;height:2px;background:#F4F1EA"></span><span style="width:16px;height:2px;background:#F4F1EA"></span></span>
+        </div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;gap:4%;padding:5%">
+          <p style="font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(20px,7vw,52px);line-height:0.85;letter-spacing:-0.03em;text-transform:uppercase;color:#F4F1EA;margin:0">Nico<br><span style="color:#FF5A1F">Bodmer</span></p>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:clamp(6px,1.1vw,10px);letter-spacing:0.1em;text-transform:uppercase;color:#A8B0BD">Websites &amp; digitale Projekte</span>
+          <span style="display:inline-flex;align-items:center;min-height:clamp(14px,3vw,26px);padding:0 5%;border-radius:999px;background:#2B4CFF;color:#F4F1EA;font-size:clamp(7px,1.3vw,12px);font-weight:500;width:fit-content;white-space:nowrap">Arbeiten ansehen</span>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;background:#11131A">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:4% 6%">
+          <span style="font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(10px,3vw,14px);letter-spacing:-0.02em;color:#F4F1EA">NB</span>
+          <span style="display:flex;flex-direction:column;gap:3px"><span style="width:16px;height:2px;background:#F4F1EA"></span><span style="width:16px;height:2px;background:#F4F1EA"></span></span>
+        </div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;gap:5%;padding:6%">
+          <p style="font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(18px,9vw,32px);line-height:0.85;letter-spacing:-0.03em;text-transform:uppercase;color:#F4F1EA;margin:0">Nico<br><span style="color:#FF5A1F">Bodmer</span></p>
+          <span style="display:inline-flex;align-items:center;min-height:clamp(14px,4vw,20px);padding:0 6%;border-radius:999px;background:#2B4CFF;color:#F4F1EA;font-size:clamp(7px,2.2vw,10px);font-weight:500;width:fit-content;white-space:nowrap">Arbeiten ansehen</span>
+        </div>
+      </div>
+    </sc-if>
+  </sc-if>
+  <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:16%;background:linear-gradient(180deg,{{ fadeFrom }} 0%,{{ fadeTo }} 100%);pointer-events:none"></div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:320,&quot;height&quot;:200},&quot;project&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;doppelmeter&quot;,&quot;options&quot;:[&quot;doppelmeter&quot;,&quot;portfolio&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;device&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;desktop&quot;,&quot;options&quot;:[&quot;desktop&quot;,&quot;mobile&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props.project || 'doppelmeter';
+    const d = this.props.device || 'desktop';
+    const isDm = p === 'doppelmeter';
+    return {
+      isDm: isDm, isPf: !isDm,
+      isDesktop: d === 'desktop', isMobile: d === 'mobile',
+      bg: isDm ? '#F4F0E8' : '#11131A',
+      fadeFrom: isDm ? 'rgba(244,240,232,0)' : 'rgba(17,19,26,0)',
+      fadeTo: isDm ? '#F4F0E8' : '#11131A'
+    };
+  }
+}
+</script>
+</body>
+</html>
