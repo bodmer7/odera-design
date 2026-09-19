@@ -2413,8 +2413,8 @@ class Component extends DCLogic {
       if (!typing && (e.key === 'k' || e.key === 'K') && this.state.path !== '/projekt-check') {
         location.hash = '#/projekt-check'; return;
       }
-      if (this.state.path !== '/projekt-check' || this.state.result || typing) return;
-      if (this.state.mid) { if (e.key === 'Enter' && tag !== 'button') { this.midNext(); e.preventDefault(); } return; }
+      if (this.state.path !== '/projekt-check' || this.state.result || (typing && e.target.type !== 'range')) return;
+      if (this.state.mid) { if (e.key === 'Enter') { this.midNext(); e.preventDefault(); } return; }
       const opts = this.optsFor(this.state.step);
       if (/^[1-9]$/.test(e.key) && opts.length) {
         const o = opts[Number(e.key) - 1];
