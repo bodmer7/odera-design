@@ -92,7 +92,8 @@ Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse
 | `STAND_RECHTSTEXTE` | 18.09.2026, provisorisch | Vor dem Aufschalten auf das Datum setzen, an dem die Seite online geht. |
 | `PLAETZE_TOTAL`, `PLAETZE_FREI` | 2 und 1 | Auf den tatsächlichen Stand setzen. Die Werte sind **zweimal** definiert, beide Stellen ändern. |
 | `DURCHSCHNITT_SEKUNDEN` | 0 | Solange 0, bleibt die Vergleichsleiste der Ladezeitmessung ausgeblendet. Nur mit belegtem Wert eintragen und die Quelle in der Fussnote nennen. |
-| `EMAIL` und feste Texte | `kontakt@odera-design.ch`, `odera-design.ch` | Setzen die Domain odera-design.ch voraus. Bei einer anderen Domain müssen `EMAIL` und alle sichtbaren Nennungen angepasst werden. |
+| `EMAIL` und feste Texte | `kontakt@odera.ch`, `odera.ch` | Setzen die Domain odera.ch voraus, auch die Mailtexte aus dem Projekt-Check. Das Postfach `kontakt@odera.ch` muss existieren, bevor die Seite online geht. |
+| Platzhalter im Portfolio-Muster (`muster/portfolio-quelle.html`, Abschnitt „04 Websites“) | `[domain.ch]`, `[Website 2 — Name]`, `[Monat JJJJ]`, `[Ein Satz zu Auftrag und Ergebnis.]` | Sind für Besucher sichtbar, wenn sie das Portfolio-Muster öffnen. Ersetzen oder den Abschnitt entfernen. Ebenso der Satz „Screenshots eines echten Projekts folgen.“ |
 | Datenschutz „2. Besuch dieser Website“ | Infomaniak, Schweiz | Stimmt nur, solange die Seite bei Infomaniak liegt. |
 
 ## Veröffentlichung
