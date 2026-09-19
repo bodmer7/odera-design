@@ -47,7 +47,7 @@ button,input,textarea{font-family:inherit}
 @media(max-width:430px){.hdr-price{min-height:32vh}.hdr-flow{min-height:0}.hdr-decor{display:none}}
 @keyframes heroPop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes scrollBob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
-@media(max-width:430px){.hero-scrollhint{display:none}.hero-cta-row{flex-direction:column;align-items:stretch}.hero-ausl{flex-wrap:wrap}}
+@media(max-width:430px){.hero-scrollhint{display:none}.hero-cta-row{flex-direction:column;align-items:stretch}.hero-ausl>div{flex-wrap:wrap}}
 @keyframes dragWander{0%,65%{transform:translateX(0)}82%{transform:translateX(-6px)}100%{transform:translateX(0)}}
 .drag-hint-mobile{display:none}
 @media(max-width:834px){.mtc-valtext{font-size:24px!important}}
@@ -57,11 +57,13 @@ button,input,textarea{font-family:inherit}
  .mtc-row:first-child{border-top:none!important;padding-top:0!important}
  .mtc-headrow{flex-direction:row!important;align-items:baseline!important;justify-content:space-between!important;gap:12px!important}
  .mtc-valtext{font-size:22px!important}
+ .mtc-headrow>div{flex:none;width:72px}
+ .mtc-headrow>div>span{left:auto!important;right:0}
  .drag-hint-full{display:none!important}
  .drag-hint-mobile{display:flex!important}
 }
 .wrap{max-width:1440px;margin:0 auto;padding:0 120px}
-.sect{padding:120px 0}
+.sect{padding-top:120px;padding-bottom:120px}
 .inner{max-width:1200px;margin:0 auto}
 .txt{max-width:720px}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500}
@@ -71,7 +73,7 @@ button,input,textarea{font-family:inherit}
 @media(max-width:640px){.logo-lg{display:none}.logo-sm{display:inline-flex}}
 .brand{display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:32px;letter-spacing:-0.03em;line-height:1.05;white-space:nowrap}
 @media(max-width:1100px){.navbar{height:88px}.brand{font-size:28px}}
-@media(max-width:560px){.navbar{height:68px}.brand{font-size:24px}}
+@media(max-width:560px){.navbar{height:68px;gap:16px}.brand{font-size:24px}}
 .navcta{display:inline-flex;align-items:center;height:52px;padding:0 32px;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none;white-space:nowrap}
 .navcta-sm{display:none}
 .burger{display:none;align-items:center;gap:12px}
@@ -179,12 +181,15 @@ button,input,textarea{font-family:inherit}
 @media(max-width:834px){.mp-block2 .inner{padding-top:64px!important}.mp-tstrip{height:40px!important}}
 @media(max-width:390px){.mp-block2 .inner{padding-top:48px!important}.mp-tstrip{height:40px!important}}
 @media(max-width:390px){.mp-jump{height:76px}.mp-jump-name{font-size:20px}.mp-jump-sub{font-size:13px}.mp-jump-arrow{width:32px;height:32px}}
-@media(max-width:560px){
+@media(max-width:1023px){
  .mp-hero{min-height:60vh}
  .mp-green{clip-path:none;inset:0 0 50% 0}
  .mp-g3{inset:50% 0 0 0}
  .mp-head{grid-template-columns:1fr!important;grid-template-rows:1fr 1fr;gap:0!important;padding:0!important}
  .mp-head>div{display:flex;flex-direction:column;justify-content:center;padding:32px 20px;min-width:0;max-width:none!important}
+ .mp-head>div:first-child{max-width:none!important}
+}
+@media(max-width:560px){
  .mp-desk{display:none}
  .mp-card{display:block}
 }
@@ -226,7 +231,7 @@ button,input,textarea{font-family:inherit}
  .burger{display:flex}
 }
 @media(max-width:900px){
- .sect{padding:88px 0}
+ .sect{padding-top:88px;padding-bottom:88px}
  .g-hero,.g-abl,.g-proj,.g-about,.g-contact,.g-pkg{grid-template-columns:1fr}
  .g-proj>.dev,.g-proj.rev>.dev{order:2}
  .g-foot{grid-template-columns:repeat(2,1fr)}
@@ -238,7 +243,7 @@ button,input,textarea{font-family:inherit}
 }
 @media(max-width:560px){
  .wrap{padding:0 20px}
- .sect{padding:64px 0}
+ .sect{padding-top:64px;padding-bottom:64px}
  .g-prom{grid-template-columns:1fr;gap:0}
  .g-band{grid-template-columns:repeat(2,1fr);gap:32px 24px}
  .g-two,.g-foot,.g-ans,.g-excl{grid-template-columns:1fr}
@@ -619,7 +624,7 @@ button,input,textarea{font-family:inherit}
           <div style="border-radius:24px;overflow:hidden;border:1px solid #E2DFD8;background:#FFFFFF;aspect-ratio:16/10;display:flex;flex-direction:column;transition:opacity 240ms linear;opacity:{{ gOpacity }}">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2.4% 4%;border-bottom:1px solid #E2DFD8">
               <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(13px,1.3vw,18px);letter-spacing:-0.01em;color:#11131A;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:55%">{{ gName2 }}</span>
-              <div style="display:flex;gap:4%">
+              <div style="display:flex;font-size:clamp(10px,0.95vw,13px);gap:0.63em">
                 <span style="font-size:clamp(10px,0.95vw,13px);color:#5B6270">Leistungen</span>
                 <span style="font-size:clamp(10px,0.95vw,13px);color:#5B6270;white-space:nowrap">Über uns</span>
                 <span style="font-size:clamp(10px,0.95vw,13px);color:#5B6270">Bilder</span>
@@ -663,7 +668,7 @@ button,input,textarea{font-family:inherit}
             <p style="font-size:17px;line-height:1.65;margin:0 0 24px">Eine Seite, die alles Wichtige zeigt.</p>
             <a href="#/angebot" style="font-size:17px;font-weight:500">Details ansehen</a>
           </div>
-          <div class="card pk-std" style="background:#FFFFFF;border:2px solid #11131A;border-radius:20px;padding:32px;transform:scale(1.04);box-shadow:0 18px 48px rgba(17,19,26,0.16)">
+          <div class="card pk-std" style="background:#FFFFFF;border:2px solid #11131A;border-radius:20px;padding:32px;box-shadow:0 18px 48px rgba(17,19,26,0.16)">
             <span class="mono" style="display:inline-block;padding:6px 14px;border-radius:999px;background:#11131A;color:#F6F5F1;font-size:13px;letter-spacing:0.04em;margin-bottom:16px">AM HÄUFIGSTEN GEWÄHLT</span>
             <p style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 12px">Standard</p>
             <p class="mono" style="font-size:clamp(36px,4vw,56px);line-height:1.05;margin:0 0 6px;font-variant-numeric:tabular-nums">CHF 1'900</p>
@@ -875,7 +880,7 @@ button,input,textarea{font-family:inherit}
           <a href="#/projekt-check?paket=website" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:none;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Website anfragen</a>
         </div>
 
-        <div class="card pk-std" style="background:#FFFFFF;border:2px solid #11131A;border-radius:20px;padding:32px;display:flex;flex-direction:column;transform:scale(1.04);box-shadow:0 18px 48px rgba(17,19,26,0.16)">
+        <div class="card pk-std" style="background:#FFFFFF;border:2px solid #11131A;border-radius:20px;padding:32px;display:flex;flex-direction:column;box-shadow:0 18px 48px rgba(17,19,26,0.16)">
           <span class="mono" style="align-self:flex-start;padding:6px 14px;border-radius:999px;background:#11131A;color:#F6F5F1;font-size:13px;letter-spacing:0.04em;margin-bottom:16px">AM HÄUFIGSTEN GEWÄHLT</span>
           <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 12px">Standard</p>
           <p class="mono" style="font-size:clamp(36px,4vw,56px);line-height:1.05;margin:0 0 8px;font-variant-numeric:tabular-nums">CHF 1'900</p>
@@ -1086,7 +1091,7 @@ button,input,textarea{font-family:inherit}
           </div>
           <sc-for list="{{ steps }}" as="s" hint-placeholder-count="10">
             <div style="margin-bottom:16px;opacity:{{ s.op }};transition:opacity 200ms linear">
-              <div style="position:relative;display:flex;gap:20px;align-items:flex-start;background:{{ s.cardBg }};border:{{ s.cardBorder }};border-radius:16px;padding:24px 24px 24px 28px">
+              <div style="position:relative;display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;background:{{ s.cardBg }};border:{{ s.cardBorder }};border-radius:16px;padding:24px 24px 24px 28px">
                 <span aria-hidden="true" style="position:absolute;left:0;top:0;bottom:0;width:0;border-left:{{ s.barStyle }};border-radius:16px 0 0 16px"></span>
                 <span class="mono" style="flex:none;width:26px;padding-top:4px;font-size:13px;color:#5B6270;font-variant-numeric:tabular-nums">{{ s.n }}</span>
                 <div style="flex:1;min-width:200px">
@@ -1094,7 +1099,7 @@ button,input,textarea{font-family:inherit}
                   <p style="margin:8px 0 0;font-size:17px;line-height:1.65;color:#5B6270;max-width:620px">{{ s.text }}</p>
                   <p style="display:{{ s.altDisplay }};margin:8px 0 0;font-size:15px;line-height:1.6;color:#5B6270;max-width:620px">{{ s.altText }}</p>
                 </div>
-                <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:10px">
+                <div style="flex:none;margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:10px">
                   <button type="button" role="switch" aria-checked="{{ s.on }}" data-i="{{ s.i }}" onClick="{{ onStep }}" style="display:{{ s.swDisplay }};align-items:center;gap:10px;min-height:44px;padding:0;background:none;border:none;cursor:pointer">
                     <span style="font-size:15px;color:#5B6270;white-space:nowrap">mache ich selbst</span>
                     <span aria-hidden="true" style="position:relative;width:48px;height:28px;border-radius:999px;background:{{ s.track }};transition:background 180ms linear;flex:none">
@@ -1632,7 +1637,7 @@ button,input,textarea{font-family:inherit}
     <div class="wrap" style="padding-top:88px;padding-bottom:48px">
       <div class="inner txt" style="max-width:680px">
         <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:#5B6270;margin:0 0 24px">RECHTLICHES</p>
-        <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-0.03em;margin:0">Datenschutzerklärung</h1>
+        <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-0.03em;margin:0">Datenschutz&shy;erklärung</h1>
       </div>
     </div>
   </section>
@@ -1719,7 +1724,7 @@ button,input,textarea{font-family:inherit}
     <div class="wrap" style="padding-top:88px;padding-bottom:48px">
       <div class="inner txt" style="max-width:680px">
         <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:#5B6270;margin:0 0 24px">RECHTLICHES</p>
-        <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-0.03em;margin:0">Allgemeine Geschäftsbedingungen</h1>
+        <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-0.03em;margin:0">Allgemeine <span style="display:inline-block">Geschäfts&shy;bedingungen</span></h1>
       </div>
     </div>
   </section>
@@ -1997,7 +2002,7 @@ button,input,textarea{font-family:inherit}
           <div style="margin-bottom:24px">
             <div class="row" style="justify-content:space-between;gap:16px;margin-bottom:8px">
               <span style="font-size:16px;color:#FFFFFF">{{ c.label }}</span>
-              <span class="mono" style="font-size:16px;color:#FFFFFF;white-space:nowrap">{{ c.amount }}</span>
+              <span class="mono" style="font-size:16px;color:#FFFFFF">{{ c.amount }}</span>
             </div>
             <div style="height:16px;border-radius:999px;background:rgba(255,255,255,0.25);overflow:hidden">
               <div style="height:16px;border-radius:999px;background:#D6F24B;width:{{ c.w }};transition:width 600ms ease-out"></div>
@@ -2102,7 +2107,7 @@ button,input,textarea{font-family:inherit}
               <span class="mono" style="font-size:13px;color:#11131A">{{ mailSubject }}</span>
             </div>
             <div style="position:relative">
-              <pre class="mono" style="margin:0;padding:20px;background:#FFFFFF;color:#11131A;font-size:13px;line-height:1.6;max-height:340px;overflow:auto;white-space:pre-wrap">{{ mailText }}</pre>
+              <pre class="mono" style="margin:0;padding:20px;background:#FFFFFF;color:#11131A;font-size:13px;line-height:1.6;max-height:340px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere">{{ mailText }}</pre>
               <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:40px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#FFFFFF 100%);pointer-events:none"></div>
             </div>
             </div>
