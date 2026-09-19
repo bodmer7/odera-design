@@ -58,7 +58,7 @@ a:hover{text-decoration:underline;text-decoration-color:#FF5A1F;text-underline-o
       <img src="../assets/img/portfolio/hero-portrait.webp" width="1200" height="1226" alt="Porträt von Nico Bodmer" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%;filter:contrast(1.2) saturate(0.8) brightness(0.5) hue-rotate(-10deg);-webkit-mask-image:{{ heroMask }};mask-image:{{ heroMask }}">
     </div>
     <div aria-hidden="true" style="position:absolute;inset:0;z-index:4;opacity:0.04;pointer-events:none;background-image:repeating-linear-gradient(0deg,#fff 0 1px,transparent 1px 2px),repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 3px)"></div>
-    <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:{{ heroPadTop }} {{ gutter }} clamp(36px,5vw,64px)">
+    <div style="position:relative;box-sizing:border-box;width:100%;max-width:calc(1280px + 2 * {{ gutter }});margin:0 auto;padding:{{ heroPadTop }} {{ gutter }} clamp(36px,5vw,64px)">
       <h1 style="margin:0 0 22px;font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(60px,13vw,170px);line-height:0.82;letter-spacing:-0.045em;text-transform:uppercase;color:{{ darkTxt }};position:relative;z-index:2">
         <span style="display:block">Nico</span>
         <span style="display:block;color:#FF5A1F">Bodmer</span>
@@ -146,7 +146,7 @@ a:hover{text-decoration:underline;text-decoration-color:#FF5A1F;text-underline-o
         <sc-if value="{{ showRelaunch }}" hint-placeholder-val="{{ true }}">
         <article style="flex:1 1 100%;border:1px solid {{ paperLine }};background:{{ paperSurf }};padding:22px">
           <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px)">
-            <div style="flex:1 1 340px;min-width:280px">
+            <div style="flex:1 1 340px;min-width:min(280px,100%)">
               <div onPointerDown="{{ baDown }}" onPointerMove="{{ baMove }}" onPointerUp="{{ baUp }}" style="position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid {{ paperLine }};touch-action:none;cursor:ew-resize;background:#fff;container-type:inline-size">
                 <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#F4F1EA;padding:clamp(10px,3.4cqw,22px) clamp(12px,4cqw,26px);gap:clamp(4px,1.5cqw,10px)">
                   <div style="display:flex;align-items:center;justify-content:space-between">
@@ -173,7 +173,7 @@ a:hover{text-decoration:underline;text-decoration-color:#FF5A1F;text-underline-o
               </div>
               <p class="mono" style="margin:10px 0 0;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:{{ paperTxt2 }}">Regler ziehen — vorher / nachher (Beispiel-Layout)</p>
             </div>
-            <div style="flex:1 1 340px;min-width:280px">
+            <div style="flex:1 1 340px;min-width:min(280px,100%)">
               <h3 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:30px;line-height:1.1;letter-spacing:-0.01em;margin:0 0 20px">So könnte ein Relaunch aussehen</h3>
               <div style="display:grid;gap:12px">
                 <div style="display:flex;flex-wrap:wrap;gap:12px"><span style="flex:0 0 108px;padding-top:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ paperTxtMuted }}">Ausgangslage</span><span style="flex:1 1 220px;font-size:16px;line-height:1.55;color:{{ paperTxt2 }}">Viele KMU-Websites wirken veraltet — überladen, kleine Schrift, unklare Struktur.</span></div>
@@ -186,7 +186,7 @@ a:hover{text-decoration:underline;text-decoration-color:#FF5A1F;text-underline-o
         </sc-if>
 
         <sc-if value="{{ showApps }}" hint-placeholder-val="{{ true }}">
-        <article style="flex:1 1 340px;min-width:280px;border:1px solid {{ paperLine }};background:{{ paperSurf }};padding:22px">
+        <article style="flex:1 1 340px;min-width:min(280px,calc(100% - 46px));border:1px solid {{ paperLine }};background:{{ paperSurf }};padding:22px">
           <div style="overflow:hidden;margin-bottom:22px;border:1px solid {{ paperLine }}">
             <div style="aspect-ratio:16/9;overflow:hidden;background:#1B2A22">
               <img src="../assets/img/portfolio/geo-quiz.webp" width="1600" height="822" alt="Geo-Quiz — Luftbildkarte mit Frage" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 40%">
@@ -203,13 +203,13 @@ a:hover{text-decoration:underline;text-decoration-color:#FF5A1F;text-underline-o
           </div>
           <a href="https://bodmer7.github.io/segberike/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;padding:13px 16px;background:#2B4CFF;color:#F4F1EA;font-size:15px;font-weight:500">
             <span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#F4F1EA;animation:pulseDot 1600ms ease-in-out infinite"></span>
-            <span style="flex:1;min-width:0">Live ausprobieren → bodmer7.github.io/segberike</span>
+            <span style="flex:1;min-width:0;overflow-wrap:anywhere">Live ausprobieren → bodmer7.github.io/segberike</span>
           </a>
         </article>
         </sc-if>
 
         <sc-if value="{{ showTools }}" hint-placeholder-val="{{ true }}">
-        <article style="flex:1 1 340px;min-width:280px;border:1px solid {{ paperLine }};background:{{ paperSurf }};padding:22px">
+        <article style="flex:1 1 340px;min-width:min(280px,calc(100% - 46px));border:1px solid {{ paperLine }};background:{{ paperSurf }};padding:22px">
           <div style="overflow:hidden;margin-bottom:22px;border:1px solid {{ paperLine }}">
             <div style="aspect-ratio:16/9;overflow:hidden;background:#F0F2F5">
               <img src="../assets/img/portfolio/health-dashboard.webp" width="1600" height="900" alt="Personal Health Dashboard" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top center">
@@ -236,7 +236,7 @@ a:hover{text-decoration:underline;text-decoration-color:#FF5A1F;text-underline-o
         <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}"><span style="color:{{ darkTxtMuted }}">04</span> Websites</span>
         <span class="mono" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{ darkTxt2 }}">Arbeitsproben</span>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(16px,2vw,24px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:clamp(16px,2vw,24px)">
         <article style="border:1px solid {{ darkLine }};background:{{ darkSurf }};padding:18px">
           <div style="border:1px solid {{ darkLine }};overflow:hidden;margin-bottom:18px">
             <div style="display:flex;align-items:center;gap:10px;padding:9px 10px;border-bottom:1px solid {{ darkLine }};background:{{ darkBg }}">
@@ -375,6 +375,7 @@ class Component extends DCLogic {
   componentDidMount() {
     this._onResize = () => this.setState({ w: window.innerWidth });
     window.addEventListener('resize', this._onResize);
+    this._onResize();
   }
   componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
 

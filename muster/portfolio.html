@@ -17,9 +17,14 @@ html,body{margin:0;height:100%;background:#11131A}
 .pf-mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
 .pf-note{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pf-bar{flex:none;height:48px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:#11131A}
+.pf-links{flex:none}
 .pf-bar a{color:#D6F24B;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .pf-back-lg{display:inline}
 .pf-back-sm{display:none}
+@media(max-width:760px){
+ .pf-back-lg{display:none}
+ .pf-back-sm{display:inline}
+}
 @media(max-width:560px){
  .pf-bar{height:40px;padding:0 12px;gap:10px}
  .pf-note{font-size:11px;line-height:1.15}
@@ -27,13 +32,17 @@ html,body{margin:0;height:100%;background:#11131A}
  .pf-back-sm{display:inline}
  .pf-links{font-size:12px}
 }
+@media(max-width:360px){
+ .pf-bar{height:auto;min-height:40px;padding-top:6px;padding-bottom:6px}
+ .pf-links{flex:0 1 auto;flex-wrap:wrap;justify-content:flex-end;row-gap:2px}
+}
 </style>
 </helmet>
 
 <div style="height:100vh;display:flex;flex-direction:column;background:#11131A">
   <div class="pf-bar" style="display:{{ barDisplay }}">
     <span class="pf-mono pf-note" style="font-size:13px;color:#F6F5F1">Eigenes Projekt von ODERA Design. Persönliches Portfolio von Nico Bodmer.</span>
-    <span class="pf-mono pf-links" style="flex:none;display:flex;align-items:center;gap:8px;font-size:13px;color:#A8B0BD">
+    <span class="pf-mono pf-links" style="display:flex;align-items:center;gap:8px;font-size:13px;color:#A8B0BD">
       <a href="https://nico-bodmer.ch" target="_blank" rel="noopener">Zur Originalseite nico-bodmer.ch</a>
       <span aria-hidden="true">·</span>
       <a href="../" target="_top"><span class="pf-back-lg">Zurück zu ODERA Design</span><span class="pf-back-sm">← ODERA</span></a>
