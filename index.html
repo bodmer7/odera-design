@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- seo:start -->
+<!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/jetbrains-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -12,9 +14,10 @@
 <script src="assets/js/support.js"></script>
 </head>
 <body>
+<!-- seo-noscript:start -->
+<!-- seo-noscript:end -->
 <x-dc>
 <helmet>
-<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMkQ0Q0YwIi8+PHRleHQgeD0iMzIiIHk9IjQ3IiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssSGVsdmV0aWNhLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI4MDAiIGZvbnQtc2l6ZT0iNDYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGNkY1RjEiPk88L3RleHQ+PHJlY3QgeD0iMTEiIHk9IjI5LjUiIHdpZHRoPSI0MiIgaGVpZ2h0PSI1IiBmaWxsPSIjMkQ0Q0YwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTkgMzIgMzIpIi8+PC9zdmc+">
 <style>
 html{scroll-behavior:smooth}
 :root{--papier:#F6F5F1;--tinte:#11131A;--kobalt:#2D4CF0;--kobalt-deep:#1E34B8;--kobalt-mid:#3F3AE6;--limette:#D6F24B;--limette-soft:#BFEE7C;--linie:#E2DFD8;--grau:#5B6270;--grau-dunkel:#A8B0BD;--weiss:#FFFFFF;--koralle:#FF5A3C;--tinte-tief:#1B2340;--wash-1:color-mix(in oklch,var(--kobalt) 4%,var(--papier));--wash-2:color-mix(in oklch,var(--kobalt) 8%,var(--papier));--wash-3:color-mix(in oklch,var(--kobalt) 14%,var(--papier))}
@@ -293,7 +296,7 @@ button,input,textarea{font-family:inherit}
 <header style="position:sticky;top:0;z-index:50;background:#F6F5F1;border-bottom:1px solid {{ headLine }};box-shadow:{{ headShadow }};transition:box-shadow 150ms ease-out,border-color 150ms ease-out">
   <div id="thread" aria-hidden="true" style="height:4px;width:0%;background:linear-gradient(90deg,#2D4CF0 0%,#3F3AE6 34%,#D6F24B 70%,#FF5A3C 100%);transition:width 80ms linear"></div>
   <div class="wrap navbar">
-    <a href="#/" style="text-decoration:none;color:#11131A;display:flex;align-items:center;gap:12px">
+    <a href="/" style="text-decoration:none;color:#11131A;display:flex;align-items:center;gap:12px">
       <dc-import name="logo" kind="zeichen" h="32" hint-size="32px,32px"></dc-import>
       <span style="display:block">
         <span class="logo-lg"><dc-import name="logo" kind="wort" h="32" hint-size="152px,32px"></dc-import></span>
@@ -308,7 +311,7 @@ button,input,textarea{font-family:inherit}
       <span aria-hidden="true" style="position:absolute;bottom:-2px;height:3px;background:#2D4CF0;left:{{ uLeft }};width:{{ uWidth }};opacity:{{ uOpacity }};transition:left 220ms cubic-bezier(0.2,0,0,1),width 220ms cubic-bezier(0.2,0,0,1),opacity 150ms linear"></span>
     </nav>
     <div style="display:flex;align-items:center;gap:12px">
-      <a class="navcta" href="#/projekt-check"><span class="navcta-lg">Projekt-Check starten</span><span class="navcta-sm">Formular</span></a>
+      <a class="navcta" href="/projekt-check/"><span class="navcta-lg">Projekt-Check starten</span><span class="navcta-sm">Formular</span></a>
       <div class="burger">
         <button type="button" onClick="{{ toggleMenu }}" aria-label="Menü öffnen" aria-expanded="{{ menuOpen }}" style="width:48px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:#FFFFFF;border:1px solid #E2DFD8;border-radius:999px;cursor:pointer">
           <span style="display:block;width:20px;height:2px;background:#11131A"></span>
@@ -334,7 +337,7 @@ button,input,textarea{font-family:inherit}
   </div>
   <div style="height:1px;background:rgba(246,245,241,0.15);margin:32px 0"></div>
   <a href="{{ mailKontakt }}" style="font-size:20px;color:#D6F24B;text-decoration:none;display:inline-block;padding:12px 0">kontakt@odera.ch</a>
-  <a href="#/projekt-check" onClick="{{ closeMenu }}" style="margin-top:32px;display:flex;align-items:center;justify-content:center;min-height:64px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
+  <a href="/projekt-check/" onClick="{{ closeMenu }}" style="margin-top:32px;display:flex;align-items:center;justify-content:center;min-height:64px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
 </div>
 </sc-if>
 
@@ -351,10 +354,10 @@ button,input,textarea{font-family:inherit}
           <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,calc(25.8px + 2.1vw),56px);line-height:1.06;letter-spacing:-0.03em;margin:0 0 20px;text-wrap:balance;animation:{{ heroAnim1 }}">Sie sehen Ihre neue Website, bevor Sie einen Franken bezahlen.</h1>
           <p style="font-size:18px;line-height:1.52;color:#5B6270;margin:0 0 28px;max-width:480px;animation:{{ heroAnim2 }}">Sie füllen ein Formular aus, ich gestalte daraus eine fertige Seite. Gefällt sie Ihnen, machen wir weiter. Gefällt sie Ihnen nicht, zahlen Sie nichts.</p>
           <div class="row hero-cta-row" style="gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:16px;animation:{{ heroAnim3 }}">
-            <a href="#/projekt-check" class="g3" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 32px;border-radius:999px;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Formular ausfüllen, 15 Minuten</a>
-            <a href="#/angebot" style="font-size:15px">Was das kostet</a>
+            <a href="/projekt-check/" class="g3" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 32px;border-radius:999px;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Formular ausfüllen, 15 Minuten</a>
+            <a href="/angebot/" style="font-size:15px">Was das kostet</a>
           </div>
-          <p class="mono" style="display:{{ heroLoadDisplay }};align-items:center;gap:8px;font-size:13px;line-height:1.5;color:#11131A;margin:0 0 32px"><span style="width:8px;height:8px;border-radius:999px;background:#D6F24B;flex:none"></span><span>Diese Seite hat bei Ihnen <span data-count="{{ loadSec }}" data-dec="1" style="font-variant-numeric:tabular-nums">{{ loadSecLabel }}</span> Sekunden geladen. Ihre wird genauso schnell.</span></p>
+          <p data-nosnap="1" class="mono" style="display:{{ heroLoadDisplay }};align-items:center;gap:8px;font-size:13px;line-height:1.5;color:#11131A;margin:0 0 32px"><span style="width:8px;height:8px;border-radius:999px;background:#D6F24B;flex:none"></span><span>Diese Seite hat bei Ihnen <span data-count="{{ loadSec }}" data-dec="1" style="font-variant-numeric:tabular-nums">{{ loadSecLabel }}</span> Sekunden geladen. Ihre wird genauso schnell.</span></p>
           <div class="hero-ausl" style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
             <div style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,0.6);border:1px solid #E2DFD8;border-radius:999px;width:fit-content">
               <span aria-hidden="true" style="width:8px;height:8px;border-radius:999px;background:#D6F24B;flex:none"></span>
@@ -369,7 +372,7 @@ button,input,textarea{font-family:inherit}
           </div>
         </div>
         <div class="cmpcol" style="align-self:start;margin-bottom:0;animation:{{ heroAnim4 }}">
-          <div style="position:relative;aspect-ratio:16/11;border-radius:20px;overflow:hidden;background:#F6F5F1;border:1px solid #E2DFD8;box-shadow:0 24px 60px rgba(17,19,26,0.16)">
+          <div data-nosnap="1" style="position:relative;aspect-ratio:16/11;border-radius:20px;overflow:hidden;background:#F6F5F1;border:1px solid #E2DFD8;box-shadow:0 24px 60px rgba(17,19,26,0.16)">
             <div style="position:absolute;inset:0;overflow:hidden">
               <div style="width:100%;height:100%;background:#E9E9E6;display:flex;flex-direction:column;overflow:hidden">
                   <div style="padding:6px 8px;background-color:#1E34B8;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.14) 0 4px,rgba(0,0,0,0.12) 4px 8px);display:flex;align-items:baseline;justify-content:space-between;gap:8px">
@@ -619,9 +622,9 @@ button,input,textarea{font-family:inherit}
               </sc-for>
             </div>
             <p style="font-size:12px;line-height:1.5;color:#5B6270;margin:8px 0 0">Eine Skizze, kein Entwurf. Ihre echte Seite bauen wir zusammen.</p>
-            <a href="#/projekt-check" class="g3" data-magnet="1" onClick="{{ onGStart }}" style="align-self:flex-start;display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:18px 32px;border-radius:999px;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">So weitermachen: Projekt-Check starten</a>
+            <a href="/projekt-check/" class="g3" data-magnet="1" onClick="{{ onGStart }}" style="align-self:flex-start;display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:18px 32px;border-radius:999px;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">So weitermachen: Projekt-Check starten</a>
           </div>
-          <div style="border-radius:24px;overflow:hidden;border:1px solid #E2DFD8;background:#FFFFFF;aspect-ratio:16/10;display:flex;flex-direction:column;transition:opacity 240ms linear;opacity:{{ gOpacity }}">
+          <div data-nosnap="1" style="border-radius:24px;overflow:hidden;border:1px solid #E2DFD8;background:#FFFFFF;aspect-ratio:16/10;display:flex;flex-direction:column;transition:opacity 240ms linear;opacity:{{ gOpacity }}">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2.4% 4%;border-bottom:1px solid #E2DFD8">
               <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(13px,1.3vw,18px);letter-spacing:-0.01em;color:#11131A;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:55%">{{ gName2 }}</span>
               <div style="display:flex;font-size:clamp(10px,0.95vw,13px);gap:0.63em">
@@ -659,14 +662,14 @@ button,input,textarea{font-family:inherit}
       <div class="inner">
         <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3.4vw,48px);line-height:1.14;letter-spacing:-0.03em;margin:0 0 16px">Drei Pakete, drei Preise</h2>
         <p class="txt" style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:#5B6270;margin:0 0 16px">Alles Wichtige ist drin. Was nicht drin ist, steht ebenfalls da.</p>
-        <p style="font-size:15px;line-height:1.5;margin:0 0 48px"><a href="#/projekt-check?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
+        <p style="font-size:15px;line-height:1.5;margin:0 0 48px"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
         <div class="g-pkg" style="align-items:stretch">
           <div class="card pk-start" style="background:#FFFFFF;border:1px solid #E2DFD8;border-radius:20px;padding:32px">
             <p style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 12px">Website</p>
             <p class="mono" style="font-size:clamp(36px,4vw,56px);line-height:1.05;margin:0 0 6px;font-variant-numeric:tabular-nums">CHF 890</p>
             <p style="font-size:12px;letter-spacing:0.04em;color:#5B6270;margin:0 0 16px">einmalig</p>
             <p style="font-size:17px;line-height:1.65;margin:0 0 24px">Eine Seite, die alles Wichtige zeigt.</p>
-            <a href="#/angebot" style="font-size:17px;font-weight:500">Details ansehen</a>
+            <a href="/angebot/" style="font-size:17px;font-weight:500">Details ansehen</a>
           </div>
           <div class="card pk-std" style="background:#FFFFFF;border:2px solid #11131A;border-radius:20px;padding:32px;box-shadow:0 18px 48px rgba(17,19,26,0.16)">
             <span class="mono" style="display:inline-block;padding:6px 14px;border-radius:999px;background:#11131A;color:#F6F5F1;font-size:13px;letter-spacing:0.04em;margin-bottom:16px">AM HÄUFIGSTEN GEWÄHLT</span>
@@ -674,14 +677,14 @@ button,input,textarea{font-family:inherit}
             <p class="mono" style="font-size:clamp(36px,4vw,56px);line-height:1.05;margin:0 0 6px;font-variant-numeric:tabular-nums">CHF 1'900</p>
             <p style="font-size:12px;letter-spacing:0.04em;color:#5B6270;margin:0 0 16px">einmalig</p>
             <p style="font-size:17px;line-height:1.65;margin:0 0 24px">Die vollständige Website für Ihr Unternehmen.</p>
-            <a href="#/angebot" style="font-size:17px;font-weight:500">Details ansehen</a>
+            <a href="/angebot/" style="font-size:17px;font-weight:500">Details ansehen</a>
           </div>
           <div class="card pk-plus" style="background:#FFFFFF;border:1px solid #E2DFD8;border-radius:20px;padding:32px">
             <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 12px">Pro</p>
             <p class="mono" style="font-size:clamp(36px,4vw,56px);line-height:1.05;margin:0 0 6px;font-variant-numeric:tabular-nums">CHF 3'400</p>
             <p class="mono" style="font-size:12px;letter-spacing:0.04em;color:#5B6270;margin:0 0 16px">einmalig</p>
             <p style="font-size:17px;line-height:1.65;margin:0 0 24px">Wenn mehr dahintersteckt.</p>
-            <a href="#/angebot" style="font-size:17px;font-weight:500">Details ansehen</a>
+            <a href="/angebot/" style="font-size:17px;font-weight:500">Details ansehen</a>
           </div>
         </div>
         <p class="mono" style="text-align:center;font-size:13px;color:#5B6270;margin:32px 0 0">Alle Preise öffentlich. Keine Offerte nach Aufwand, keine Rabattverhandlung.</p>
@@ -708,7 +711,7 @@ button,input,textarea{font-family:inherit}
       <div class="g-two">
         <div>
           <p style="display:inline-flex;padding:5px 10px;border-radius:999px;background:#2F4A3C;color:var(--papier);font-size:12px;letter-spacing:0.06em;margin:0 0 12px">FIRMENSEITE</p>
-          <a href="#/musterprojekte" aria-label="Zu Doppelmeter" style="display:block;position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#F4F0E8;margin-bottom:24px">
+          <a href="/musterprojekte/" aria-label="Zu Doppelmeter" style="display:block;position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#F4F0E8;margin-bottom:24px">
             <dc-import name="musterpreview" project="doppelmeter" device="desktop" hint-size="100%,100%" style="position:absolute;inset:0"></dc-import>
           </a>
           <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2.1vw,30px);line-height:1.28;margin:0 0 12px">Doppelmeter</h3>
@@ -717,7 +720,7 @@ button,input,textarea{font-family:inherit}
         </div>
         <div>
           <p style="display:inline-flex;padding:5px 10px;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:12px;letter-spacing:0.06em;margin:0 0 12px">EIGENPROJEKT</p>
-          <a href="#/musterprojekte" aria-label="Zu Portfolio" style="display:block;position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#11131A;margin-bottom:24px">
+          <a href="/musterprojekte/" aria-label="Zu Portfolio" style="display:block;position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#11131A;margin-bottom:24px">
             <dc-import name="musterpreview" project="portfolio" device="desktop" hint-size="100%,100%" style="position:absolute;inset:0"></dc-import>
           </a>
           <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2.1vw,30px);line-height:1.28;margin:0 0 12px">Portfolio</h3>
@@ -725,7 +728,7 @@ button,input,textarea{font-family:inherit}
           <p class="mono" style="font-size:13px;color:#11131A;margin:0"><span style="white-space:nowrap">Ladezeit 0,9 s</span> · <span style="white-space:nowrap">Einzelseite</span> · <span style="white-space:nowrap">Eigenprojekt</span></p>
         </div>
       </div>
-      <p style="margin:48px 0 0"><a href="#/musterprojekte" style="font-size:17px;font-weight:500">Musterprojekte ansehen</a></p>
+      <p style="margin:48px 0 0"><a href="/musterprojekte/" style="font-size:17px;font-weight:500">Musterprojekte ansehen</a></p>
     </div>
     </div>
   </section>
@@ -735,10 +738,10 @@ button,input,textarea{font-family:inherit}
     <div class="wrap sect" style="padding-top:152px;padding-bottom:152px">
       <div class="inner txt">
         <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3.4vw,48px);line-height:1.14;letter-spacing:-0.03em;color:#FFFFFF;margin:0 0 24px;text-wrap:pretty">Schreiben Sie mir. Vier Minuten, dann weiss ich alles.</h2>
-        <p class="mono" style="display:flex;align-items:center;gap:12px;font-size:15px;color:#FFFFFF;margin:0 0 32px">
+        <p data-nosnap="1" class="mono" style="display:flex;align-items:center;gap:12px;font-size:15px;color:#FFFFFF;margin:0 0 32px">
           <span style="width:10px;height:10px;border-radius:999px;background:{{ availDot }};flex:none"></span>{{ availability }}
         </p>
-        <a href="#/projekt-check" class="g4" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:18px 32px;border-radius:999px;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
+        <a href="/projekt-check/" class="g4" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:18px 32px;border-radius:999px;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
         <p class="mono" style="font-size:16px;color:#FFFFFF;margin:24px 0 0">oder direkt: <a href="{{ mailKontakt }}" style="color:#FFFFFF">kontakt@odera.ch</a></p>
       </div>
     </div>
@@ -858,7 +861,7 @@ button,input,textarea{font-family:inherit}
     <div class="inner">
       <div style="text-align:center;margin-bottom:48px">
         <p class="mono" style="font-size:13px;color:#5B6270;margin:0 0 8px">Der Preis ändert sich nach der Offerte nicht. Auch dann nicht, wenn ich mich verschätzt habe.</p>
-        <p style="font-size:15px;line-height:1.5;margin:0 0 32px"><a href="#/projekt-check?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
+        <p style="font-size:15px;line-height:1.5;margin:0 0 32px"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
       </div>
 
       <div class="g-pkg" style="align-items:stretch">
@@ -877,7 +880,7 @@ button,input,textarea{font-family:inherit}
             <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 10 Arbeitstage nach Ihrer Freigabe</li>
           </ul>
           <p style="margin:0 0 24px;padding:16px;background:var(--wash-2);border-radius:12px;font-size:15px;line-height:1.5">Ihr Aufwand: ein Formular und eine Rückmeldung.</p>
-          <a href="#/projekt-check?paket=website" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:none;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Website anfragen</a>
+          <a href="/projekt-check/?paket=website" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:none;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Website anfragen</a>
         </div>
 
         <div class="card pk-std" style="background:#FFFFFF;border:2px solid #11131A;border-radius:20px;padding:32px;display:flex;flex-direction:column;box-shadow:0 18px 48px rgba(17,19,26,0.16)">
@@ -899,7 +902,7 @@ button,input,textarea{font-family:inherit}
             <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 15 Arbeitstage nach Ihrer Freigabe</li>
           </ul>
           <p style="margin:0 0 24px;padding:16px;background:var(--wash-2);border-radius:12px;font-size:15px;line-height:1.5">Ihr Aufwand: ein Formular, Ihre Bilder, zwei Rückmeldungen.</p>
-          <a href="#/projekt-check?paket=standard" data-magnet="1" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Standard anfragen</a>
+          <a href="/projekt-check/?paket=standard" data-magnet="1" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Standard anfragen</a>
         </div>
 
         <div class="card pk-plus" style="background:#FFFFFF;border:1px solid #E2DFD8;border-radius:20px;padding:32px;display:flex;flex-direction:column">
@@ -919,7 +922,7 @@ button,input,textarea{font-family:inherit}
             <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 25 Arbeitstage nach Ihrer Freigabe</li>
           </ul>
           <p style="margin:0 0 24px;padding:16px;background:var(--wash-2);border-radius:12px;font-size:15px;line-height:1.5">Ihr Aufwand: ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
-          <a href="#/projekt-check?paket=pro" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:none;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Pro anfragen</a>
+          <a href="/projekt-check/?paket=pro" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:none;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Pro anfragen</a>
         </div>
       </div>
       <p style="font-size:17px;line-height:1.7;color:#11131A;margin:48px auto 0;max-width:860px;text-align:center;text-wrap:pretty">Alle Preise sind einmalig. Es gibt kein Abonnement und keine monatliche Gebühr. Hosting und Domain laufen ab dem ersten Tag auf Ihren Namen bei einem Anbieter Ihrer Wahl und kosten dort üblicherweise CHF 120 bis 200 pro Jahr. Die Aufschaltung übernehme ich einmalig, sie ist im Preis enthalten.</p>
@@ -1166,7 +1169,7 @@ button,input,textarea{font-family:inherit}
     <div class="wrap sect" style="padding-top:152px;padding-bottom:152px">
       <div class="inner txt">
         <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3.4vw,48px);line-height:1.14;letter-spacing:-0.03em;margin:0 0 32px">Schritt 1 dauert vier Minuten.</h2>
-        <a href="#/projekt-check" class="g3" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:18px 32px;border-radius:999px;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
+        <a href="/projekt-check/" class="g3" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:18px 32px;border-radius:999px;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
       </div>
     </div>
   </section>
@@ -1345,7 +1348,7 @@ button,input,textarea{font-family:inherit}
     <div class="wrap sect" style="padding-top:152px;padding-bottom:152px">
       <div class="inner txt">
         <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3.4vw,48px);line-height:1.14;letter-spacing:-0.03em;color:#FFFFFF;margin:0 0 32px;text-wrap:pretty">Ihr Betrieb würde hier anders aussehen. Erzählen Sie mir davon.</h2>
-        <a href="#/projekt-check" class="g4" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:18px 32px;border-radius:999px;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
+        <a href="/projekt-check/" class="g4" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:18px 32px;border-radius:999px;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
       </div>
     </div>
   </section>
@@ -1534,7 +1537,7 @@ button,input,textarea{font-family:inherit}
   </section>
 
   <section class="wrap" style="padding-top:0;padding-bottom:24px">
-    <div class="inner"><p style="font-size:14px;color:#5B6270;margin:0"><a href="#/impressum" style="color:#5B6270">Rechtliche Angaben finden Sie im Impressum.</a></p></div>
+    <div class="inner"><p style="font-size:14px;color:#5B6270;margin:0"><a href="/impressum/" style="color:#5B6270">Rechtliche Angaben finden Sie im Impressum.</a></p></div>
   </section>
 
   <section id="abschluss" class="ink" style="background:linear-gradient(155deg,#11131A 0%,#171B2E 55%,#11131A 100%);margin-top:88px">
@@ -1545,10 +1548,10 @@ button,input,textarea{font-family:inherit}
         <p class="txt" style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;text-wrap:pretty;color:#A8B0BD;margin:0 0 48px">Am liebsten mit dem Projekt-Check. Dann habe ich alles, was ich brauche, und wir sparen uns zwei Rückfragen. Wenn Sie nur eine Frage haben, reicht auch eine Zeile.</p>
         <div class="g-contact">
           <div>
-            <p class="mono" style="display:flex;align-items:center;gap:12px;font-size:15px;color:#F6F5F1;margin:0 0 24px">
+            <p data-nosnap="1" class="mono" style="display:flex;align-items:center;gap:12px;font-size:15px;color:#F6F5F1;margin:0 0 24px">
               <span style="width:10px;height:10px;border-radius:999px;background:{{ availDot }};flex:none"></span>{{ availability }}
             </p>
-            <a href="#/projekt-check" data-magnet="1" onMouseEnter="{{ onMailHover }}" onMouseLeave="{{ onMailLeave }}" style="display:flex;align-items:center;gap:24px;min-height:88px;padding:20px 32px;border-radius:999px;background:#D6F24B;color:#11131A;text-decoration:none;box-shadow:{{ mailShadow }};transition:box-shadow 200ms ease-out">
+            <a href="/projekt-check/" data-magnet="1" onMouseEnter="{{ onMailHover }}" onMouseLeave="{{ onMailLeave }}" style="display:flex;align-items:center;gap:24px;min-height:88px;padding:20px 32px;border-radius:999px;background:#D6F24B;color:#11131A;text-decoration:none;box-shadow:{{ mailShadow }};transition:box-shadow 200ms ease-out">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#11131A" stroke-width="1.8" style="flex:none">
                 <rect x="2" y="6" width="24" height="16" rx="3"></rect>
                 <path d="M2 8l12 8 12-8" style="transform:{{ flapT }};transform-origin:14px 8px;transition:transform 200ms ease-out"></path>
@@ -1834,7 +1837,7 @@ button,input,textarea{font-family:inherit}
 <div style="min-height:100vh;background:{{ checkBg }};transition:background 200ms linear">
   <div class="wrap navbar">
     <dc-import name="logo" kind="wort" h="32" fg="{{ checkFg }}" cut="{{ checkCut }}" hint-size="152px,32px"></dc-import>
-    <a href="#/" style="font-size:17px;color:{{ checkFg }};min-height:48px;display:inline-flex;align-items:center">Abbrechen</a>
+    <a href="/" style="font-size:17px;color:{{ checkFg }};min-height:48px;display:inline-flex;align-items:center">Abbrechen</a>
   </div>
 
   <sc-if value="{{ inQuiz }}" hint-placeholder-val="{{ true }}">
@@ -1853,7 +1856,7 @@ button,input,textarea{font-family:inherit}
             <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,44px);line-height:1.1;letter-spacing:-0.03em;margin:0 0 16px;text-wrap:pretty">{{ qTitle }}</h2>
             <p style="font-size:15px;line-height:1.55;color:#5B6270;margin:0 0 12px;display:{{ helpDisplay }}">{{ qHelp }}</p>
             <div style="display:{{ firstNoteDisplay }};border:1px solid #E2DFD8;border-radius:14px;background:#F6F5F1;padding:20px;margin:0 0 16px">
-              <p style="font-size:15px;line-height:1.55;margin:0">Dieses Formular ist eine unverbindliche Projektanfrage. Sie kaufen hier nichts und gehen keine Verpflichtung ein. Ihre Antworten werden nicht gespeichert, sondern am Schluss in eine E-Mail eingesetzt, die Sie selbst absenden. Mehr dazu in der <a href="#/datenschutz" target="_blank">Datenschutzerklärung</a>.</p>
+              <p style="font-size:15px;line-height:1.55;margin:0">Dieses Formular ist eine unverbindliche Projektanfrage. Sie kaufen hier nichts und gehen keine Verpflichtung ein. Ihre Antworten werden nicht gespeichert, sondern am Schluss in eine E-Mail eingesetzt, die Sie selbst absenden. Mehr dazu in der <a href="/datenschutz/" target="_blank">Datenschutzerklärung</a>.</p>
             </div>
             <p class="mono" style="font-size:13px;color:#5B6270;margin:0 0 12px;display:{{ multiDisplay }}">Mehrfachauswahl möglich</p>
             <p class="mono" style="font-size:13px;color:#5B6270;margin:0 0 12px;display:{{ prefillDisplay }}">Ihre Angabe ist schon eingetragen</p>
@@ -1918,7 +1921,7 @@ button,input,textarea{font-family:inherit}
               <button type="button" onClick="{{ onBack }}" style="min-height:56px;padding:0 24px;background:none;border:1px solid #11131A;border-radius:999px;font-size:17px;font-weight:600;color:#11131A;cursor:pointer;visibility:{{ backVis }}">Zurück</button>
               <button type="button" onClick="{{ onNext }}" disabled="{{ nextDisabled }}" style="min-height:56px;padding:0 32px;border:none;border-radius:999px;background:{{ nextBg }};color:{{ nextFg }};font-size:17px;font-weight:600;cursor:{{ nextCursor }}">{{ nextLabel }}</button>
             </div>
-            <p class="mono" style="display:{{ quickLinkDisplay }};font-size:13px;line-height:1.5;margin:16px 0 0"><a href="#/projekt-check?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
+            <p class="mono" style="display:{{ quickLinkDisplay }};font-size:13px;line-height:1.5;margin:16px 0 0"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
           </div>
         </div>
       </div>
@@ -1960,7 +1963,7 @@ button,input,textarea{font-family:inherit}
       <p class="mono" style="display:{{ consentWarnDisplay }};font-size:14px;color:#FFFFFF;margin:0 0 12px">Bitte bestätigen Sie die Kenntnisnahme, dann können Sie die E-Mail öffnen.</p>
       <label style="display:flex;align-items:flex-start;gap:12px;margin:0 0 24px;max-width:600px">
         <input type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}" style="flex:none;width:24px;height:24px;border-radius:6px;margin:0;accent-color:#D6F24B">
-        <span style="font-size:15px;line-height:1.5;color:#FFFFFF">Ich habe die <a href="#/agb" target="_blank" style="color:#FFFFFF">AGB</a> und die <a href="#/datenschutz" target="_blank" style="color:#FFFFFF">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
+        <span style="font-size:15px;line-height:1.5;color:#FFFFFF">Ich habe die <a href="/agb/" target="_blank" style="color:#FFFFFF">AGB</a> und die <a href="/datenschutz/" target="_blank" style="color:#FFFFFF">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
       </label>
       <div class="row" style="gap:16px">
         <button type="button" class="g4" onClick="{{ quickToLong }}" style="min-height:60px;padding:0 32px;border:none;border-radius:999px;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">Alle 26 Fragen beantworten</button>
@@ -2016,7 +2019,7 @@ button,input,textarea{font-family:inherit}
         <p class="mono" style="display:{{ consentWarnDisplay }};font-size:14px;color:#FFFFFF;margin:0;text-align:center">Bitte bestätigen Sie die Kenntnisnahme, dann können Sie die E-Mail öffnen.</p>
         <label style="display:flex;align-items:flex-start;gap:12px;width:100%">
           <input type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}" style="flex:none;width:24px;height:24px;border-radius:6px;margin:0;accent-color:#D6F24B">
-          <span style="font-size:15px;line-height:1.5;color:#FFFFFF">Ich habe die <a href="#/agb" target="_blank" style="color:#FFFFFF">AGB</a> und die <a href="#/datenschutz" target="_blank" style="color:#FFFFFF">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
+          <span style="font-size:15px;line-height:1.5;color:#FFFFFF">Ich habe die <a href="/agb/" target="_blank" style="color:#FFFFFF">AGB</a> und die <a href="/datenschutz/" target="_blank" style="color:#FFFFFF">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
         </label>
         <a href="{{ mailHref }}" class="g4" data-magnet="1" aria-disabled="{{ sendDisabledAttr }}" onClick="{{ onSendClick }}" style="display:flex;align-items:center;justify-content:center;gap:16px;width:100%;min-height:72px;padding:20px 32px;border-radius:999px;color:{{ sendFg }};background:{{ sendBg }};font-size:20px;font-weight:600;text-decoration:none;box-sizing:border-box;cursor:{{ sendCursor }}">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="{{ sendFg }}" stroke-width="1.8" style="flex:none"><rect x="2" y="6" width="24" height="16" rx="3"></rect><path d="M2 8l12 8 12-8"></path></svg>
@@ -2129,8 +2132,8 @@ button,input,textarea{font-family:inherit}
         <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:1.08;letter-spacing:-0.03em;margin:0 0 24px;text-wrap:pretty">Diese Seite gibt es nicht. Ihre wird besser.</h1>
         <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:#5B6270;margin:0 0 40px;text-wrap:pretty">Sie haben sich vertippt oder ich habe etwas verschoben. Beides lässt sich beheben.</p>
         <div class="row" style="justify-content:center;gap:16px">
-          <a href="#/" class="g3" style="display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Zur Startseite</a>
-          <a href="#/projekt-check" style="display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:#FFFFFF;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
+          <a href="/" class="g3" style="display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Zur Startseite</a>
+          <a href="/projekt-check/" style="display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:#FFFFFF;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
         </div>
         <p class="mono" style="font-size:12px;line-height:1.6;color:#5B6270;margin:32px 0 0">Falls Sie über einen Link von mir hierher kamen, schreiben Sie mir kurz: kontakt@odera.ch</p>
       </div>
@@ -2175,15 +2178,15 @@ button,input,textarea{font-family:inherit}
           <p style="font-size:14px;color:#A8B0BD;margin:0">Antwort spätestens am nächsten Abend, ausser am Wochenende</p>
         </div>
         <div class="f-legal" style="display:flex;flex-direction:column;gap:12px">
-          <a href="#/impressum" style="font-size:16px;color:#F6F5F1;text-decoration:none">Impressum</a>
-          <a href="#/datenschutz" style="font-size:16px;color:#F6F5F1;text-decoration:none">Datenschutz</a>
-          <a href="#/agb" style="font-size:16px;color:#F6F5F1;text-decoration:none">AGB</a>
+          <a href="/impressum/" style="font-size:16px;color:#F6F5F1;text-decoration:none">Impressum</a>
+          <a href="/datenschutz/" style="font-size:16px;color:#F6F5F1;text-decoration:none">Datenschutz</a>
+          <a href="/agb/" style="font-size:16px;color:#F6F5F1;text-decoration:none">AGB</a>
         </div>
       </div>
       <div class="f-legal-row" style="display:none;gap:20px;flex-wrap:wrap;margin-top:32px">
-        <a href="#/impressum" style="font-size:15px;color:#A8B0BD">Impressum</a>
-        <a href="#/datenschutz" style="font-size:15px;color:#A8B0BD">Datenschutz</a>
-        <a href="#/agb" style="font-size:15px;color:#A8B0BD">AGB</a>
+        <a href="/impressum/" style="font-size:15px;color:#A8B0BD">Impressum</a>
+        <a href="/datenschutz/" style="font-size:15px;color:#A8B0BD">Datenschutz</a>
+        <a href="/agb/" style="font-size:15px;color:#A8B0BD">AGB</a>
       </div>
       <div class="row" style="justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid rgba(246,245,241,0.15);gap:16px">
         <p style="font-size:15px;color:#A8B0BD;margin:0">© 2026 ODERA Design · Nico Bodmer</p>
@@ -2201,14 +2204,14 @@ button,input,textarea{font-family:inherit}
 <div class="deskbar" style="position:fixed;left:0;right:0;bottom:0;z-index:55;height:56px;background:#11131A;animation:fade 200ms linear">
   <div class="wrap" style="height:56px;display:flex;align-items:center;justify-content:center;gap:24px">
     <span class="mono" style="font-size:13px;color:#A8B0BD">26 Fragen, 15 Minuten</span>
-    <a href="#/projekt-check" style="display:inline-flex;align-items:center;min-height:40px;padding:0 20px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
+    <a href="/projekt-check/" style="display:inline-flex;align-items:center;min-height:40px;padding:0 20px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
   </div>
 </div>
 </sc-if>
 
 <sc-if value="{{ showMobBar }}" hint-placeholder-val="{{ false }}">
 <div class="mobbar" style="position:fixed;left:0;right:0;bottom:0;z-index:55;height:64px;padding:8px 20px;background:#11131A">
-  <a href="#/projekt-check" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Formular ausfüllen</a>
+  <a href="/projekt-check/" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Formular ausfüllen</a>
 </div>
 </sc-if>
 
@@ -2216,21 +2219,28 @@ button,input,textarea{font-family:inherit}
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;showStickyBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Verhalten&quot;},&quot;startPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;/&quot;,&quot;/angebot&quot;,&quot;/ablauf&quot;,&quot;/musterprojekte&quot;,&quot;/ueber-mich&quot;,&quot;/projekt-check&quot;],&quot;default&quot;:&quot;/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Verhalten&quot;}}">
 class Component extends DCLogic {
   EMAIL = 'kontakt@odera.ch';
+  // Öffentliche Adresse der Website. Steht in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung tools/seo-build.mjs ausführen.
+  SITE = 'https://odera.ch';
   // Stand unter Impressum, Datenschutz und AGB. Nur ändern, wenn die Rechtstexte geändert werden.
   STAND_RECHTSTEXTE = '18.09.2026';
   PLAETZE_TOTAL = 2;
   PLAETZE_FREI = 1;
   PAGES = {
-    '/': { key: 'start', title: 'Webseiten für Schweizer Betriebe: Fixpreis, Entwurf in 5 Arbeitstagen | ODERA Design' },
-    '/404': { key: 'nf', title: 'Seite nicht gefunden | ODERA Design' },
-    '/angebot': { key: 'angebot', title: 'Preise und Pakete | ODERA Design' },
-    '/ablauf': { key: 'ablauf', title: 'So läuft ein Projekt ab | ODERA Design' },
-    '/musterprojekte': { key: 'muster', title: 'Musterprojekte | ODERA Design' },
-    '/ueber-mich': { key: 'ueber', title: 'Über mich und Kontakt | ODERA Design' },
-    '/projekt-check': { key: 'check', title: 'Projekt-Check: 26 Fragen | ODERA Design' },
-    '/impressum': { key: 'impressum', title: 'Impressum | ODERA Design' },
-    '/datenschutz': { key: 'datenschutz', title: 'Datenschutz | ODERA Design' },
-    '/agb': { key: 'agb', title: 'Allgemeine Geschäftsbedingungen | ODERA Design' }
+    '/': { key: 'start', title: 'Webseiten für Schweizer Betriebe: Fixpreis, Entwurf in 5 Arbeitstagen | ODERA Design',
+      desc: 'Sie sehen Ihre neue Website, bevor Sie einen Franken bezahlen. Fixpreis, kostenloser Entwurf in 5 Arbeitstagen, für Betriebe in der ganzen Schweiz.' },
+    '/404': { key: 'nf', title: 'Seite nicht gefunden | ODERA Design', noindex: true },
+    '/angebot': { key: 'angebot', title: 'Preise und Pakete | ODERA Design',
+      desc: 'Drei Pakete zum Fixpreis: Website CHF 890, Standard CHF 1\u2019900, Pro CHF 3\u2019400. Einmalig, ohne Abonnement, ohne Nachträge. Der Entwurf kommt vorab.' },
+    '/ablauf': { key: 'ablauf', title: 'So läuft ein Projekt ab | ODERA Design',
+      desc: 'Sie zahlen erst, wenn Ihnen der Entwurf gefällt. So läuft ein Projekt ab: Formular, kostenloser Entwurf, Rückmeldung, Umsetzung, Übergabe.' },
+    '/musterprojekte': { key: 'muster', title: 'Musterprojekte | ODERA Design',
+      desc: 'Zwei Musterprojekte: eine erfundene Schreinerei als Firmenseite und mein eigenes Portfolio. Ich liefere keine Vorlage in anderen Farben aus.' },
+    '/ueber-mich': { key: 'ueber', title: 'Über mich und Kontakt | ODERA Design',
+      desc: 'Nico Bodmer baut Webseiten für Betriebe in der ganzen Schweiz. Lehre als Platform Developer EFZ, seit 2021 in der IT. Erreichbarkeit und Kontakt.' },
+    '/projekt-check': { key: 'check', title: 'Projekt-Check: 26 Fragen | ODERA Design', noindex: true },
+    '/impressum': { key: 'impressum', title: 'Impressum | ODERA Design', noindex: true },
+    '/datenschutz': { key: 'datenschutz', title: 'Datenschutz | ODERA Design', noindex: true },
+    '/agb': { key: 'agb', title: 'Allgemeine Geschäftsbedingungen | ODERA Design', noindex: true }
   };
 
   PLAETZE_TOTAL = 2;
@@ -2265,11 +2275,11 @@ class Component extends DCLogic {
   PAKET = { start: 'Eine Seite reicht', standard: 'Etwa fünf Seiten', plus: 'Zehn Seiten oder mehr' };
 
   NAV = [
-    { label: 'Start', href: '#/', path: '/' },
-    { label: 'Angebot', href: '#/angebot', path: '/angebot' },
-    { label: 'Ablauf', href: '#/ablauf', path: '/ablauf' },
-    { label: 'Musterprojekte', href: '#/musterprojekte', path: '/musterprojekte' },
-    { label: 'Über mich', href: '#/ueber-mich', path: '/ueber-mich' }
+    { label: 'Start', href: '/', path: '/' },
+    { label: 'Angebot', href: '/angebot/', path: '/angebot' },
+    { label: 'Ablauf', href: '/ablauf/', path: '/ablauf' },
+    { label: 'Musterprojekte', href: '/musterprojekte/', path: '/musterprojekte' },
+    { label: 'Über mich', href: '/ueber-mich/', path: '/ueber-mich' }
   ];
 
   FAQ = [
@@ -2348,11 +2358,10 @@ class Component extends DCLogic {
     this.fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (this.reduce) { this.setState({ slider: 34 }); }
 
-    this.onHash = () => {
-      const raw = (location.hash || '#/').slice(1);
-      const path = raw.split('?')[0] || '/';
+    this.onRoute = () => {
+      const path = this.pathOf(location.pathname);
       const known = this.PAGES[path] ? path : '/404';
-      const query = raw.indexOf('?') >= 0 ? raw.slice(raw.indexOf('?') + 1) : '';
+      const query = location.search.replace(/^\?/, '');
       const paket = (query.split('&').map(p => p.split('=')).find(p => p[0] === 'paket') || [])[1];
       const kurz = /(^|&)kurz=1(&|$)/.test(query);
       const next = { path: known, menu: false, result: false, mid: false, warn: false, pageKey: this.state.pageKey + 1 };
@@ -2365,6 +2374,7 @@ class Component extends DCLogic {
       }
       this.setState(next);
       document.title = this.PAGES[known].title;
+      this.syncHead(known);
       window.scrollTo(0, 0);
       setTimeout(() => {
         this.measure();
@@ -2373,7 +2383,31 @@ class Component extends DCLogic {
         if (h) h.focus({ preventScroll: true });
       }, 60);
     };
-    window.addEventListener('hashchange', this.onHash);
+    window.addEventListener('popstate', this.onRoute);
+
+    // Interne Links wechseln die Seite ohne Neuladen. Echte href bleiben für Suchmaschinen, neue Tabs und Kopieren erhalten.
+    this.onLinkClick = (e) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+      const href = a.getAttribute('href');
+      if (href.charAt(0) === '#') {
+        // Sprungmarke auf der Seite. Wegen <base href="/"> würde der Browser sonst zur Startseite springen.
+        e.preventDefault();
+        const el = href.length > 1 ? document.getElementById(href.slice(1)) : null;
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 104, behavior: this.reduce ? 'auto' : 'smooth' });
+        return;
+      }
+      if (href.charAt(0) !== '/' || href.charAt(1) === '/') return;
+      const u = new URL(href, location.origin);
+      const p = this.pathOf(u.pathname);
+      if (!this.PAGES[p] || p === '/404') return;
+      e.preventDefault();
+      const target = this.urlOf(p, u.search.replace(/^\?/, ''));
+      if (target === location.pathname + location.search) return;
+      this.go(target);
+    };
+    document.addEventListener('click', this.onLinkClick);
 
     this.onVis = () => {
       const s = this.state;
@@ -2388,9 +2422,12 @@ class Component extends DCLogic {
       }
     };
     document.addEventListener('visibilitychange', this.onVis);
+    // Alte Adressen mit #/ (z. B. odera.ch/#/angebot) auf die echte Adresse umleiten.
+    const alt = location.hash.match(/^#(\/[^#]*)$/);
+    if (alt) { const teile = alt[1].split('?'); history.replaceState(null, '', this.urlOf(this.pathOf(teile[0]), teile[1] || '')); }
     const sp = this.props.startPage;
-    if (sp && sp !== '/' && !location.hash) location.hash = '#' + sp;
-    this.onHash();
+    if (sp && sp !== '/' && this.pathOf(location.pathname) === '/') history.replaceState(null, '', this.urlOf(sp, ''));
+    this.onRoute();
 
     this.onScroll = () => {
       const y = window.scrollY || 0;
@@ -2416,7 +2453,7 @@ class Component extends DCLogic {
       const typing = tag === 'input' || tag === 'textarea';
       if (e.key === 'Escape' && this.state.muster) { this.setState({ muster: null }); e.preventDefault(); return; }
       if (!typing && (e.key === 'k' || e.key === 'K') && this.state.path !== '/projekt-check') {
-        location.hash = '#/projekt-check'; return;
+        this.go('/projekt-check/'); return;
       }
       if (this.state.path !== '/projekt-check' || this.state.result || (typing && e.target.type !== 'range')) return;
       if (this.state.mid) { if (e.key === 'Enter') { this.midNext(); e.preventDefault(); } return; }
@@ -2470,7 +2507,8 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('hashchange', this.onHash);
+    window.removeEventListener('popstate', this.onRoute);
+    document.removeEventListener('click', this.onLinkClick);
     document.removeEventListener('visibilitychange', this.onVis);
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onResize);
@@ -2850,6 +2888,33 @@ class Component extends DCLogic {
       clearTimeout(this._glowT);
       this._glowT = setTimeout(() => this.setState({ flipGlow: false }), 400);
     }
+  }
+
+  pathOf(p) {
+    p = (p || '/').replace(/\/index\.html$/, '/').replace(/\/+$/, '');
+    return p || '/';
+  }
+
+  urlOf(path, query) {
+    return (path === '/' ? '/' : path + '/') + (query ? '?' + query : '');
+  }
+
+  go(url) {
+    history.pushState(null, '', url);
+    this.onRoute();
+  }
+
+  // Hält Beschreibung, canonical, robots und Vorschau-Angaben beim Seitenwechsel aktuell.
+  syncHead(path) {
+    const pg = this.PAGES[path];
+    const url = this.SITE + (path === '/' ? '/' : path + '/');
+    const put = (sel, attr, val) => { const el = document.head.querySelector(sel); if (el) el.setAttribute(attr, val); };
+    put('link[rel="canonical"]', 'href', url);
+    put('meta[name="description"]', 'content', pg.desc || '');
+    put('meta[name="robots"]', 'content', pg.noindex ? 'noindex,follow' : 'index,follow');
+    put('meta[property="og:title"]', 'content', pg.title);
+    put('meta[property="og:description"]', 'content', pg.desc || '');
+    put('meta[property="og:url"]', 'content', url);
   }
 
   availability() {
