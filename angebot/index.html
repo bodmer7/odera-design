@@ -98,7 +98,7 @@
 </ul>
 <p>Ihr Aufwand: ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
 <p><a href="/projekt-check/?paket=pro">Pro anfragen</a></p>
-<p>Alle Preise sind einmalig. Es gibt kein Abonnement und keine monatliche Gebühr. Hosting und Domain laufen ab dem ersten Tag auf Ihren Namen bei einem Anbieter Ihrer Wahl und kosten dort üblicherweise CHF 120 bis 200 pro Jahr. Die Aufschaltung übernehme ich einmalig, sie ist im Preis enthalten.</p>
+<p>Alle Paketpreise sind einmalig. Es gibt kein Abonnement und keine monatliche Gebühr. Hosting ist in keinem Paket enthalten, kann aber nach dem Livegang optional bei mir bezogen werden. Die Aufschaltung übernehme ich einmalig, sie ist im Preis enthalten.</p>
 <details open><p>Zusatzleistungen</p>
 <ul><li><p>Weitere Korrekturrunde</p>
 <p>CHF 120</p>
@@ -111,6 +111,39 @@
 </li>
 </ul>
 </details>
+<p>OPTIONAL, NACH DEM LIVEGANG</p>
+<h2>Wer betreibt Ihre Website danach?</h2>
+<p>Nach der Übergabe gehört die Website Ihnen. Sie können sie selbst betreiben oder den Betrieb mir überlassen. Beides ist möglich, Sie entscheiden erst am Schluss.</p>
+<h3>Sie hosten selbst</h3>
+<p>CHF 0</p>
+<p>Serverstandort nach Ihrer Wahl</p>
+<ul><li>Sie erhalten alle Dateien, den Quellcode und eine schriftliche Anleitung</li>
+<li>Sie wählen Ihren Anbieter frei</li>
+<li>Hosting und Domain zahlen Sie dort direkt, üblicherweise CHF 120 bis 200 pro Jahr</li>
+<li>SSL, Backups und Erneuerungen liegen bei Ihnen</li>
+</ul>
+<h3>Betrieb bei mir</h3>
+<p>CHF 240 pro Jahr</p>
+<p>Server in der EU oder den USA</p>
+<ul><li>Hosting, SSL und dessen Erneuerung</li>
+<li>Tägliche Sicherungen</li>
+<li>Erreichbarkeitsprüfung</li>
+<li>Ich bin Ihre Ansprechperson bei Störungen</li>
+<li>Antwort innert 2 Werktagen</li>
+</ul>
+<h3>Betrieb bei mir, Schweiz</h3>
+<p>CHF 480 pro Jahr</p>
+<p>Server in der Schweiz</p>
+<ul><li>Hosting, SSL und dessen Erneuerung</li>
+<li>Tägliche Sicherungen</li>
+<li>Erreichbarkeitsprüfung</li>
+<li>Ich bin Ihre Ansprechperson bei Störungen</li>
+<li>Antwort innert 2 Werktagen</li>
+<li>Ihre Website und alle Formulardaten bleiben in der Schweiz</li>
+<li>Geeignet, wenn Sie mit vertraulichen Kundendaten arbeiten</li>
+</ul>
+<p>Die Einrichtung ist in beiden Betriebsvarianten im Projektpreis enthalten. Abgerechnet wird einmal jährlich im Voraus, kündbar mit 30 Tagen auf Monatsende.</p>
+<p>Nicht enthalten: Textänderungen, neue Seiten, neue Bilder, Suchmaschinenoptimierung und Domainkosten. Änderungen nach Aufwand zu CHF 120 pro Stunde.</p>
 <h2>Gefällt Ihnen der erste Entwurf nicht, zahlen Sie nichts.</h2>
 <p>Keine Anzahlung, keine Bedingungen. Die Rechnung kommt erst, wenn die Seite online geht. Ich trage das Risiko, dass mein Entwurf nicht trifft, nicht Sie.</p>
 <p>Paket Standard kostet CHF 1'900. Dahinter stecken rund 31 Stunden. Hier sind sie, Posten für Posten.</p>
@@ -257,6 +290,10 @@ button,input,textarea{font-family:inherit}
 .g-prom{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
 .g-band{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:end}
 .g-pkg{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+.g-host{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+.host-card{display:flex;flex-direction:column;min-width:0;padding:32px;border-radius:20px;background:rgba(246,245,241,0.06);border:1px solid rgba(246,245,241,0.22);color:#F6F5F1}
+.host-li{display:flex;gap:14px;font-size:16px;line-height:1.6;color:#F6F5F1}
+.host-dot{flex:none;width:8px;height:8px;border-radius:999px;background:#D6F24B;margin-top:9px}
 .pk-start,.pk-plus{box-shadow:0 2px 10px rgba(17,19,26,0.05);transition:transform 160ms ease-out,box-shadow 160ms ease-out}
 .pk-std{position:relative;z-index:2;transform:scale(1.04);box-shadow:0 24px 60px rgba(17,19,26,0.16)}
 .chk{color:#5B6270}
@@ -407,7 +444,7 @@ button,input,textarea{font-family:inherit}
 }
 @media(max-width:900px){
  .sect{padding-top:88px;padding-bottom:88px}
- .g-hero,.g-abl,.g-proj,.g-about,.g-contact,.g-pkg{grid-template-columns:1fr}
+ .g-hero,.g-abl,.g-proj,.g-about,.g-contact,.g-pkg,.g-host{grid-template-columns:1fr}
  .g-proj>.dev,.g-proj.rev>.dev{order:2}
  .g-foot{grid-template-columns:repeat(2,1fr)}
  .pk-start{order:2}
@@ -427,6 +464,7 @@ button,input,textarea{font-family:inherit}
  .deskbar{display:none}
  .footpad{padding-bottom:88px}
  .card{padding:20px!important}
+ .host-card{padding:24px}
  .g-band{grid-template-columns:1fr;gap:20px}
  .g-band>div{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 16px;align-items:baseline}
  .g-band>div>p:first-child{font-size:29px!important;margin:0!important}
@@ -676,7 +714,7 @@ button,input,textarea{font-family:inherit}
         <div style="border-top:1px solid #11131A;border-top-color:rgba(17,19,26,0.25);padding-top:16px">
           <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:#2D4CF0;margin:0 0 12px">01</p>
           <p style="font-size:20px;font-weight:600;color:#11131A;margin:0 0 8px">Formular</p>
-          <p style="font-size:15px;line-height:1.55;color:rgba(17,19,26,0.65);margin:0;text-wrap:pretty">26 Fragen, 15 Minuten, ohne Registrierung.</p>
+          <p style="font-size:15px;line-height:1.55;color:rgba(17,19,26,0.65);margin:0;text-wrap:pretty">27 Fragen, 15 Minuten, ohne Registrierung.</p>
         </div>
         <div style="border-top:1px solid rgba(17,19,26,0.25);padding-top:16px">
           <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:#2D4CF0;margin:0 0 12px">02</p>
@@ -978,7 +1016,7 @@ button,input,textarea{font-family:inherit}
           <li>Texterstellung: CHF 150 pro Seite</li>
           <li>Fotograf auf Wunsch organisiert, Kosten nach Aufwand</li>
         </ul>
-        <p class="pr-s">Alle Preise sind einmalig. Kein Abonnement, keine monatliche Gebühr. Hosting und Domain laufen auf Ihren Namen bei einem Anbieter Ihrer Wahl, üblicherweise CHF 120 bis 200 pro Jahr. Die Aufschaltung ist im Preis enthalten.</p>
+        <p class="pr-s">Alle Paketpreise sind einmalig. Kein Abonnement, keine monatliche Gebühr. Hosting ist in keinem Paket enthalten, kann aber nach dem Livegang optional bei mir bezogen werden. Die Aufschaltung ist im Preis enthalten.</p>
       </div>
   <div class="pr-blk">
     <p class="pr-h">Was nicht im Preis ist</p>
@@ -1097,7 +1135,7 @@ button,input,textarea{font-family:inherit}
           <a href="/projekt-check/?paket=pro" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:none;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Pro anfragen</a>
         </div>
       </div>
-      <p style="font-size:17px;line-height:1.7;color:#11131A;margin:48px auto 0;max-width:860px;text-align:center;text-wrap:pretty">Alle Preise sind einmalig. Es gibt kein Abonnement und keine monatliche Gebühr. Hosting und Domain laufen ab dem ersten Tag auf Ihren Namen bei einem Anbieter Ihrer Wahl und kosten dort üblicherweise CHF 120 bis 200 pro Jahr. Die Aufschaltung übernehme ich einmalig, sie ist im Preis enthalten.</p>
+      <p style="font-size:17px;line-height:1.7;color:#11131A;margin:48px auto 0;max-width:860px;text-align:center;text-wrap:pretty">Alle Paketpreise sind einmalig. Es gibt kein Abonnement und keine monatliche Gebühr. Hosting ist in keinem Paket enthalten, kann aber nach dem Livegang optional bei mir bezogen werden. Die Aufschaltung übernehme ich einmalig, sie ist im Preis enthalten.</p>
       <details class="mdet" open="{{ true }}" style="max-width:860px;margin:48px auto 0;border-top:1px solid #E2DFD8">
         <summary class="msum">Zusatzleistungen</summary>
         <p class="mono mhide" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:24px 0 16px">Zusatzleistungen</p>
@@ -1107,6 +1145,60 @@ button,input,textarea{font-family:inherit}
           <li style="display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid #E2DFD8;font-size:17px;line-height:1.65"><span>Fotograf auf Wunsch organisiert</span><span class="mono">Kosten nach Aufwand</span></li>
         </ul>
       </details>
+    </div>
+  </section>
+
+  <section class="ink" style="background:linear-gradient(155deg,#11131A 0%,#171B2E 55%,#11131A 100%)">
+    <div class="wrap sect" style="padding-top:112px;padding-bottom:112px">
+      <div class="inner">
+        <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:#D6F24B;margin:0 0 20px">OPTIONAL, NACH DEM LIVEGANG</p>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3.4vw,48px);line-height:1.14;letter-spacing:-0.03em;color:#F6F5F1;margin:0 0 20px;text-wrap:balance">Wer betreibt Ihre Website danach?</h2>
+        <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:#A8B0BD;margin:0 0 48px;max-width:760px;text-wrap:pretty">Nach der Übergabe gehört die Website Ihnen. Sie können sie selbst betreiben oder den Betrieb mir überlassen. Beides ist möglich, Sie entscheiden erst am Schluss.</p>
+        <div class="g-host">
+        <div class="host-card">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.2;letter-spacing:-0.02em;color:#F6F5F1;margin:0 0 20px">Sie hosten selbst</h3>
+          <p class="mono" style="font-size:clamp(30px,3.2vw,42px);line-height:1.05;color:#FFFFFF;margin:0 0 8px;font-variant-numeric:tabular-nums">CHF 0</p>
+          <p class="mono" style="font-size:12px;letter-spacing:0.04em;color:#A8B0BD;margin:0 0 24px">Serverstandort nach Ihrer Wahl</p>
+          <div aria-hidden="true" style="height:1px;background:rgba(246,245,241,0.18);margin:0 0 24px"></div>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px">
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Sie erhalten alle Dateien, den Quellcode und eine schriftliche Anleitung</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Sie wählen Ihren Anbieter frei</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Hosting und Domain zahlen Sie dort direkt, üblicherweise CHF 120 bis 200 pro Jahr</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>SSL, Backups und Erneuerungen liegen bei Ihnen</span></li>
+          </ul>
+        </div>
+        <div class="host-card">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.2;letter-spacing:-0.02em;color:#F6F5F1;margin:0 0 20px">Betrieb bei mir</h3>
+          <p class="mono" style="font-size:clamp(30px,3.2vw,42px);line-height:1.05;color:#FFFFFF;margin:0 0 8px;font-variant-numeric:tabular-nums">{{ hostAuslandChf }} <span style="font-size:0.42em;letter-spacing:0.02em;color:#A8B0BD">pro Jahr</span></p>
+          <p class="mono" style="font-size:12px;letter-spacing:0.04em;color:#A8B0BD;margin:0 0 24px">Server in der EU oder den USA</p>
+          <div aria-hidden="true" style="height:1px;background:rgba(246,245,241,0.18);margin:0 0 24px"></div>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px">
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Hosting, SSL und dessen Erneuerung</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Tägliche Sicherungen</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Erreichbarkeitsprüfung</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Ich bin Ihre Ansprechperson bei Störungen</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Antwort innert 2 Werktagen</span></li>
+          </ul>
+        </div>
+        <div class="host-card">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.2;letter-spacing:-0.02em;color:#F6F5F1;margin:0 0 20px">Betrieb bei mir, Schweiz</h3>
+          <p class="mono" style="font-size:clamp(30px,3.2vw,42px);line-height:1.05;color:#FFFFFF;margin:0 0 8px;font-variant-numeric:tabular-nums">{{ hostSchweizChf }} <span style="font-size:0.42em;letter-spacing:0.02em;color:#A8B0BD">pro Jahr</span></p>
+          <p class="mono" style="font-size:12px;letter-spacing:0.04em;color:#A8B0BD;margin:0 0 24px">Server in der Schweiz</p>
+          <div aria-hidden="true" style="height:1px;background:rgba(246,245,241,0.18);margin:0 0 24px"></div>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px">
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Hosting, SSL und dessen Erneuerung</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Tägliche Sicherungen</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Erreichbarkeitsprüfung</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Ich bin Ihre Ansprechperson bei Störungen</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Antwort innert 2 Werktagen</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Ihre Website und alle Formulardaten bleiben in der Schweiz</span></li>
+            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Geeignet, wenn Sie mit vertraulichen Kundendaten arbeiten</span></li>
+          </ul>
+        </div>
+        </div>
+        <p style="font-size:15px;line-height:1.65;color:#F6F5F1;margin:40px 0 12px;max-width:760px;text-wrap:pretty">Die Einrichtung ist in beiden Betriebsvarianten im Projektpreis enthalten. Abgerechnet wird einmal jährlich im Voraus, kündbar mit 30 Tagen auf Monatsende.</p>
+        <p class="mono" style="font-size:12px;line-height:1.7;color:#A8B0BD;margin:0;max-width:760px">Nicht enthalten: Textänderungen, neue Seiten, neue Bilder, Suchmaschinenoptimierung und Domainkosten. Änderungen nach Aufwand zu {{ stundensatzTxt }}.</p>
+      </div>
     </div>
   </section>
 
@@ -1311,6 +1403,14 @@ button,input,textarea{font-family:inherit}
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="wrap" style="padding-top:0;padding-bottom:96px">
+    <div class="inner"><div class="txt">
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3.4vw,48px);line-height:1.14;letter-spacing:-0.03em;margin:0 0 24px;text-wrap:balance">Danach</h2>
+      <p style="font-size:17px;line-height:1.7;margin:0 0 16px;max-width:680px;text-wrap:pretty">Nach der Übergabe betreiben Sie die Website selbst oder überlassen den Betrieb mir. Selbst betreiben kostet Sie nichts Zusätzliches, Betrieb bei mir {{ hostAuslandTxt }}, mit Servern in der Schweiz {{ hostSchweizTxt }}. Sie entscheiden das nach dem Livegang, nicht vorher.</p>
+      <p style="font-size:16px;line-height:1.6;margin:0"><a href="/agb/">Die Einzelheiten stehen in den AGB.</a></p>
+    </div></div>
   </section>
 
   <section class="ink" style="background:linear-gradient(155deg,#11131A 0%,#171B2E 55%,#11131A 100%)">
@@ -1730,7 +1830,7 @@ button,input,textarea{font-family:inherit}
               </svg>
               <span>
                 <span style="display:block;font-size:20px;font-weight:600;line-height:1.3">Projekt-Check machen und Mail schicken</span>
-                <span style="display:block;font-size:15px;line-height:1.5;margin-top:4px">26 Fragen, 15 Minuten. Ich schreibe die Mail für Sie.</span>
+                <span style="display:block;font-size:15px;line-height:1.5;margin-top:4px">27 Fragen, 15 Minuten. Ich schreibe die Mail für Sie.</span>
               </span>
             </a>
             <p style="height:24px;margin:12px 0 0;font-size:15px;color:#A8B0BD;opacity:{{ mailHintOp }};transition:opacity 160ms linear">meist antworte ich innert vier Stunden</p>
@@ -1915,7 +2015,7 @@ button,input,textarea{font-family:inherit}
           <li><a href="#agb-4" style="font-size:16px">4. Preise und Zahlung</a></li>
           <li><a href="#agb-5" style="font-size:16px">5. Hosting und Domain während der Entwicklung</a></li>
           <li><a href="#agb-6" style="font-size:16px">6. Übergabe</a></li>
-          <li><a href="#agb-7" style="font-size:16px">7. Nach der Übergabe</a></li>
+          <li><a href="#agb-7" style="font-size:16px">7. Betrieb nach der Übergabe</a></li>
           <li><a href="#agb-8" style="font-size:16px">8. Backups</a></li>
           <li><a href="#agb-9" style="font-size:16px">9. Gewährleistung</a></li>
           <li><a href="#agb-10" style="font-size:16px">10. Haftung</a></li>
@@ -1947,19 +2047,23 @@ button,input,textarea{font-family:inherit}
         </div>
         <div id="agb-5" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">5. Hosting und Domain während der Entwicklung</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Während der Entwicklung läuft die Seite auf einer Vorschauadresse bei einem von mir gewählten Anbieter. Dieses Hosting ist Teil der Entwicklung, kein eigenständiger Hostingvertrag, und endet mit der Übergabe. Die Domain wird nach Möglichkeit von Anfang an auf den Namen des Kunden registriert. Domain- und Hostingkosten trägt der Kunde und zahlt sie direkt beim jeweiligen Anbieter.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Während der Entwicklung läuft die Seite auf einer Vorschauadresse bei einem von mir gewählten Anbieter. Dieses Hosting ist Teil der Entwicklung, kein eigenständiger Hostingvertrag, und endet mit der Übergabe. Die Domain wird nach Möglichkeit von Anfang an auf den Namen des Kunden registriert. Domain- und Hostingkosten trägt der Kunde und zahlt sie direkt beim jeweiligen Anbieter. Wird der Betrieb bei mir bezogen, gilt Paragraf 7.</p>
         </div>
         <div id="agb-6" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">6. Übergabe</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Die Übergabe erfolgt nach schriftlicher Freigabe und vollständiger Zahlung. Übergeben werden sämtliche Dateien und der Quellcode der Website, die Zugangsdaten, eine schriftliche Betriebsanleitung sowie Unterstützung bei der Umstellung von Domain und Hosting auf den Kunden. Mit der Übergabe geht die Verantwortung für Betrieb, Aktualisierung und Inhalte auf den Kunden über. Vor vollständiger Zahlung erfolgt keine Übergabe von Dateien oder Zugangsdaten.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Die Übergabe erfolgt nach schriftlicher Freigabe und vollständiger Zahlung. Übergeben werden sämtliche Dateien und der Quellcode der Website, die Zugangsdaten, eine schriftliche Betriebsanleitung sowie Unterstützung bei der Umstellung von Domain und Hosting auf den Kunden. Mit der Übergabe geht die Verantwortung für Betrieb, Aktualisierung und Inhalte auf den Kunden über. Wird der Betrieb bei mir bezogen, gilt für Hosting und Betrieb Paragraf 7. Vor vollständiger Zahlung erfolgt keine Übergabe von Dateien oder Zugangsdaten.</p>
         </div>
         <div id="agb-7" style="margin-top:48px">
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">7. Nach der Übergabe</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Ich schulde nach der Übergabe keinen Betrieb, kein Hosting und keine Wartung. Hosting und Wartung können auf Wunsch gesondert vereinbart werden, es besteht darauf jedoch kein Anspruch und sie sind im Website-Preis nicht enthalten. Eine solche Vereinbarung ist ein eigener Vertrag. Sie kann von beiden Seiten mit einer Frist von 30 Tagen auf Ende eines Kalendermonats gekündigt werden.</p>
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">7. Betrieb nach der Übergabe</h2>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Der Betrieb der Website ist nicht Bestandteil des Projektpreises. Nach der Übergabe betreibt der Kunde die Website selbst oder beauftragt mich gesondert damit.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Wird der Betrieb bei mir bezogen, gilt: {{ hostAuslandTxt }} bei Serverstandort im Ausland, {{ hostSchweizTxt }} bei Serverstandort Schweiz. Enthalten sind Hosting, SSL und dessen Erneuerung, regelmässige Sicherungen, Erreichbarkeitsprüfung sowie meine Erreichbarkeit als Ansprechperson bei technischen Störungen mit einer Antwort innert zwei Werktagen.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Nicht enthalten sind Inhaltsänderungen jeder Art, neue Seiten, neue Bilder, Suchmaschinenoptimierung sowie Domainkosten. Solche Arbeiten werden nach Aufwand zu {{ stundensatzTxt }} verrechnet.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Die Vereinbarung über den Betrieb ist ein eigener Vertrag mit eigener Laufzeit von einem Jahr, wird einmal jährlich im Voraus in Rechnung gestellt und kann von beiden Seiten mit einer Frist von 30 Tagen auf Ende eines Kalendermonats gekündigt werden. Bei Kündigung übergebe ich dem Kunden sämtliche Dateien, den Quellcode und die Zugangsdaten und unterstütze ihn bei der Umstellung auf einen Anbieter seiner Wahl.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Eine ununterbrochene Verfügbarkeit ist auch im Betrieb bei mir nicht geschuldet, da sie vom jeweiligen Rechenzentrum abhängt. Es gelten die Haftungsregeln nach Paragraf 10.</p>
         </div>
         <div id="agb-8" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">8. Backups</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Während der Entwicklung erstelle ich Sicherungskopien für meine eigene Arbeit. Ein Anspruch darauf besteht nicht. Nach der Übergabe liegt die Sicherung beim Kunden, ausser es wurde ausdrücklich etwas anderes vereinbart. Sicherungen aus der Entwicklungsphase lösche ich 90 Tage nach der Übergabe.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Während der Entwicklung erstelle ich Sicherungskopien für meine eigene Arbeit. Ein Anspruch darauf besteht nicht. Nach der Übergabe liegt die Sicherung beim Kunden, ausser der Betrieb wird bei mir bezogen (Paragraf 7) oder es wurde ausdrücklich etwas anderes vereinbart. Sicherungen aus der Entwicklungsphase lösche ich 90 Tage nach der Übergabe.</p>
         </div>
         <div id="agb-9" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">9. Gewährleistung</h2>
@@ -2131,14 +2235,14 @@ button,input,textarea{font-family:inherit}
         <span class="mono" style="padding:6px 14px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px">Richtwert, kein verbindliches Angebot</span>
       </div>
       <p class="mono" style="font-size:clamp(36px,4.5vw,56px);line-height:1;color:#FFFFFF;margin:0 0 24px;font-variant-numeric:tabular-nums">{{ recPrice }}</p>
-      <p style="font-size:17px;line-height:1.65;color:#FFFFFF;margin:0 0 32px;max-width:600px">Das ist die Schätzung aus drei Angaben. Mit allen 26 Fragen wird sie genauer, und ich muss danach nichts mehr nachfragen.</p>
+      <p style="font-size:17px;line-height:1.65;color:#FFFFFF;margin:0 0 32px;max-width:600px">Das ist die Schätzung aus drei Angaben. Mit allen 27 Fragen wird sie genauer, und ich muss danach nichts mehr nachfragen.</p>
       <p class="mono" style="display:{{ consentWarnDisplay }};font-size:14px;color:#FFFFFF;margin:0 0 12px">Bitte bestätigen Sie die Kenntnisnahme, dann können Sie die E-Mail öffnen.</p>
       <label style="display:flex;align-items:flex-start;gap:12px;margin:0 0 24px;max-width:600px">
         <input type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}" style="flex:none;width:24px;height:24px;border-radius:6px;margin:0;accent-color:#D6F24B">
         <span style="font-size:15px;line-height:1.5;color:#FFFFFF">Ich habe die <a href="/agb/" target="_blank" style="color:#FFFFFF">AGB</a> und die <a href="/datenschutz/" target="_blank" style="color:#FFFFFF">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
       </label>
       <div class="row" style="gap:16px">
-        <button type="button" class="g4" onClick="{{ quickToLong }}" style="min-height:60px;padding:0 32px;border:none;border-radius:999px;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">Alle 26 Fragen beantworten</button>
+        <button type="button" class="g4" onClick="{{ quickToLong }}" style="min-height:60px;padding:0 32px;border:none;border-radius:999px;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">Alle 27 Fragen beantworten</button>
         <a href="{{ quickMailHref }}" aria-disabled="{{ sendDisabledAttr }}" onClick="{{ onSendClick }}" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 32px;border:1px solid #FFFFFF;border-radius:999px;background:{{ quickSendBg }};color:{{ sendFg }};font-size:17px;font-weight:600;text-decoration:none;cursor:{{ sendCursor }}">Mir reicht das, E-Mail schreiben</a>
       </div>
     </div>
@@ -2170,6 +2274,16 @@ button,input,textarea{font-family:inherit}
       </div>
       <div style="display:{{ refSlimDisplay }};max-width:560px;margin:0 0 48px;padding:20px 24px;border-radius:20px;background:linear-gradient(100deg,#D6F24B 0%,#BFEE7C 100%)">
         <p style="font-size:17px;line-height:1.65;color:#11131A;margin:0">Auch ohne Namensnennung lässt sich etwas machen. Sprechen wir darüber.</p>
+      </div>
+
+      <p style="display:{{ hostSelfDisplay }};font-size:15px;line-height:1.6;color:#FFFFFF;margin:0 0 48px;max-width:560px">Sie hosten selbst. Nach der Übergabe erhalten Sie alle Dateien, den Quellcode und eine Anleitung.</p>
+      <div style="display:{{ hostCardDisplay }};max-width:560px;margin:0 0 48px">
+        <div style="padding:20px 24px;border-radius:20px;border:1px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.08)">
+          <p class="mono" style="font-size:12px;letter-spacing:0.06em;color:#D6F24B;margin:0 0 8px">{{ hostLabel }}</p>
+          <p class="mono" style="font-size:clamp(22px,2.6vw,28px);line-height:1.1;color:#FFFFFF;margin:0 0 12px;font-variant-numeric:tabular-nums">{{ hostTitle }}</p>
+          <p style="font-size:15px;line-height:1.6;color:#FFFFFF;margin:0">{{ hostText }}</p>
+        </div>
+        <p class="mono" style="font-size:12px;line-height:1.6;color:#FFFFFF;margin:12px 0 0">Kommt zum einmaligen Projektpreis dazu, ist aber nicht Voraussetzung für den Auftrag.</p>
       </div>
 
       <div style="max-width:720px;margin-bottom:48px">
@@ -2375,7 +2489,7 @@ button,input,textarea{font-family:inherit}
 <sc-if value="{{ showDeskBar }}" hint-placeholder-val="{{ false }}">
 <div class="deskbar" style="position:fixed;left:0;right:0;bottom:0;z-index:55;height:56px;background:#11131A;animation:fade 200ms linear">
   <div class="wrap" style="height:56px;display:flex;align-items:center;justify-content:center;gap:24px">
-    <span class="mono" style="font-size:13px;color:#A8B0BD">26 Fragen, 15 Minuten</span>
+    <span class="mono" style="font-size:13px;color:#A8B0BD">27 Fragen, 15 Minuten</span>
     <a href="/projekt-check/" style="display:inline-flex;align-items:center;min-height:40px;padding:0 20px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
   </div>
 </div>
@@ -2409,7 +2523,7 @@ class Component extends DCLogic {
       desc: 'Zwei Musterprojekte: eine erfundene Schreinerei als Firmenseite und mein eigenes Portfolio. Ich liefere keine Vorlage in anderen Farben aus.' },
     '/ueber-mich': { key: 'ueber', title: 'Über mich und Kontakt | ODERA Design',
       desc: 'Nico Bodmer baut Webseiten für Betriebe in der ganzen Schweiz. Lehre als Platform Developer EFZ, seit 2021 in der IT. Erreichbarkeit und Kontakt.' },
-    '/projekt-check': { key: 'check', title: 'Projekt-Check: 26 Fragen | ODERA Design', noindex: true },
+    '/projekt-check': { key: 'check', title: 'Projekt-Check: 27 Fragen | ODERA Design', noindex: true },
     '/impressum': { key: 'impressum', title: 'Impressum | ODERA Design', noindex: true },
     '/datenschutz': { key: 'datenschutz', title: 'Datenschutz | ODERA Design', noindex: true },
     '/agb': { key: 'agb', title: 'Allgemeine Geschäftsbedingungen | ODERA Design', noindex: true }
@@ -2463,7 +2577,7 @@ class Component extends DCLogic {
   ];
 
   STEPS = [
-    ['Formular ausfüllen', '26 Fragen zu Ihrem Betrieb, Ihrem Ziel und Ihrem Geschmack. Daraus entsteht Ihre Mail an mich.', 15, true],
+    ['Formular ausfüllen', '27 Fragen zu Ihrem Betrieb, Ihrem Ziel und Ihrem Geschmack. Daraus entsteht Ihre Mail an mich.', 15, true],
     ['Ich melde mich', 'Sie hören von mir, sobald ich die Mail gelesen habe.', 0, true],
     ['Kurzes Gespräch', 'Wenn etwas unklar ist, telefonieren wir kurz.', 20, false, 0, 'Ist alles klar, gestalte ich direkt los.'],
     ['Ich gestalte Ihren Entwurf', 'Eine fertige Seite mit Ihren Inhalten, innert fünf Arbeitstagen. Kostenlos und unverbindlich.', 0, true],
@@ -2483,6 +2597,14 @@ class Component extends DCLogic {
 
   TIMING = ['So schnell wie möglich', 'In einem Monat', 'In zwei bis drei Monaten', 'Kein festes Datum'];
 
+  // Hosting als optionales Zusatzangebot. Einzige Quelle für Beträge und Antworten.
+  HOSTING_AUSLAND_CHF = 240;
+  HOSTING_SCHWEIZ_CHF = 480;
+  STUNDENSATZ_CHF = 120;
+  HOSTING_SELBST = 'Ich kümmere mich selbst darum';
+  HOSTING_EGAL = 'Sie sollen das übernehmen, Standort egal';
+  HOSTING_CH = 'Sie sollen das übernehmen, Server in der Schweiz';
+
   Q = [
     { key: 'BRANCHE', n: 'Branche', t: 'Was macht Ihr Betrieb?', o: ['Handwerk oder Bau', 'Praxis oder Gesundheit', 'Beratung, Treuhand oder Büro', 'Gastronomie oder Verkauf', 'Verein', 'Etwas anderes'] },
     { key: 'FIRMA', n: 'Firma und Ort', t: 'Wie heisst Ihr Betrieb, und wo sind Sie?', fields: [['firma', 'Firmenname'], ['ort', 'Ort']] },
@@ -2494,6 +2616,7 @@ class Component extends DCLogic {
     { key: 'FOTOS', n: 'Fotos', t: 'Haben Sie Fotos von Ihrem Betrieb?', o: ['Viele eigene', 'Ein paar ältere', 'Gar keine'] },
     { key: 'TEXTE', n: 'Texte', t: 'Und Texte?', o: ['Fertig', 'Stichworte', 'Gar nichts'] },
     { key: 'DOMAIN', n: 'Domain', t: 'Haben Sie schon eine Internetadresse?', o: ['Ich habe bereits eine', 'Ich brauche eine neue', 'Weiss ich nicht'] },
+    { key: 'HOSTING', n: 'Hosting', t: 'Wo soll Ihre Website später laufen?', help: 'Sie können das später noch ändern, diese Angabe hilft mir nur bei der Einschätzung.', o: [this.HOSTING_SELBST, this.HOSTING_EGAL, this.HOSTING_CH] },
     { key: 'TERMIN', n: 'Termin', t: 'Wann soll die Seite online sein?', slider: true },
     { key: 'KONTAKT', n: 'Kontakt', t: 'Wie erreiche ich Sie?', help: 'Name und E-Mail brauche ich, das Übrige ist freiwillig.', fields: [['name', 'Name'], ['email', 'E-Mail'], ['betrieb', 'Betrieb, optional'], ['tel', 'Telefon, optional']] },
     { key: 'BESCHREIBUNG', n: 'Beschreibung', t: 'Was macht Ihr Betrieb genau?', area: ['beschreibung', 'Ihre Antwort', 'In drei Sätzen, so wie Sie es einem Nachbarn erzählen würden.'] },
@@ -2831,7 +2954,7 @@ class Component extends DCLogic {
       return 'Notiert.';
     }
     if (i === 8 && v === 'Gar nichts, da brauche ich Hilfe') return 'Kein Problem, das machen wir zusammen.';
-    if (i === 12 && v === 'Sagen Sie es mir') return 'Ehrliche Antwort. Danke.';
+    if (i === 13 && v === 'Sagen Sie es mir') return 'Ehrliche Antwort. Danke.';
     if (i === 7 && v === 'Nein, gar keine') return 'Notiert.';
     return 'Notiert.';
   }
@@ -2861,12 +2984,12 @@ class Component extends DCLogic {
     const q = this.Q[i];
     const a = this.state.ans[i];
     const t = this.state.txt;
-    if (i >= 12) return true;
+    if (i >= 13) return true;
     if (q.multi) return Array.isArray(a) && a.length > 0;
     if (q.from !== undefined) return !!a;
     if (q.slider) return true;
     if (i === 1) return !!(t.firma && t.ort);
-    if (i === 11) return !!(t.name && t.email);
+    if (i === 12) return !!(t.name && t.email);
     return !!a;
   }
 
@@ -2913,13 +3036,13 @@ class Component extends DCLogic {
       this.focusHead();
       return;
     }
-    if (i === 11) {
+    if (i === 12) {
       this.setState({ mid: true, warn: false, ring: 0 });
-      this.animate(0, 53, 600, (v) => this.setState({ ring: v }));
+      this.animate(0, 51, 600, (v) => this.setState({ ring: v }));
       this.focusHead();
       return;
     }
-    if (i >= 25) {
+    if (i >= 26) {
       this.setState({ result: true, warn: false, cmpGrow: false });
       setTimeout(() => this.setState({ cmpGrow: true }), 60);
       this.focusHead();
@@ -2932,15 +3055,23 @@ class Component extends DCLogic {
   midNext = () => {
     clearTimeout(this.midTimer);
     if (!this.state.mid) return;
-    this.setState({ mid: false, step: 12, tick: this.state.tick + 1 });
+    this.setState({ mid: false, step: 13, tick: this.state.tick + 1 });
     this.focusHead();
   };
 
   back = () => {
-    if (this.state.result) { this.setState({ result: false, step: this.state.quick ? 2 : 25 }); return; }
-    if (this.state.mid) { this.setState({ mid: false, step: 11 }); return; }
+    if (this.state.result) { this.setState({ result: false, step: this.state.quick ? 2 : 26 }); return; }
+    if (this.state.mid) { this.setState({ mid: false, step: 12 }); return; }
     if (this.state.step > 0) this.setState({ step: this.state.step - 1, dir: 'back', warn: false, tick: this.state.tick + 1 });
   };
+
+  hostingWahl() {
+    const h = this.state.ans[10];
+    return h === this.HOSTING_SELBST ? 'selbst' : h === this.HOSTING_EGAL ? 'egal' : h === this.HOSTING_CH ? 'schweiz' : '';
+  }
+
+  hostingAuslandTxt() { return 'CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr'; }
+  hostingSchweizTxt() { return 'CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF) + ' pro Jahr'; }
 
   rec() {
     const a = this.state.ans;
@@ -2959,8 +3090,8 @@ class Component extends DCLogic {
     reasons.push(pageTxt + (fnTxt.length ? ', dazu ' + fnList : '') + '. Das ist Paket ' + name + '.');
     if (a[8] === 'Gar nichts') reasons.push('Für die Texte rechne ich CHF 150 pro Seite dazu.');
     if (a[7] === 'Gar keine') reasons.push('Fotos müssen wir organisieren, das bespreche ich mit Ihnen.');
-    if (a[20] === 'Nein, ich habe keines') reasons.push('Ohne Logo gestalte ich den Schriftzug typografisch. Ein Logo ist nicht im Preis enthalten.');
-    const refAns = a[23];
+    if (a[21] === 'Nein, ich habe keines') reasons.push('Ohne Logo gestalte ich den Schriftzug typografisch. Ein Logo ist nicht im Preis enthalten.');
+    const refAns = a[24];
     const refFull = refAns === 'Ja, gerne mit Name, Logo und zwei Sätzen';
     const refSlim = refAns === 'Ja, aber ohne meinen Namen';
     const refMap = { Website: 590, Standard: 1290, Pro: 2400 };
@@ -2988,6 +3119,9 @@ class Component extends DCLogic {
     put('FOTOS', a[7]);
     put('TEXTE', a[8]);
     put('DOMAIN', a[9] === 'Ich habe bereits eine' && t.domain ? 'Ich habe bereits eine: ' + t.domain : a[9]);
+    const hs = this.hostingWahl();
+    put('HOSTING', hs === 'selbst' ? 'selbst' : hs === 'egal' ? 'bei ODERA, Standort egal' : hs === 'schweiz' ? 'bei ODERA, Schweiz' : '');
+    put('HOSTING_PREIS', hs === 'egal' ? this.hostingAuslandTxt() : hs === 'schweiz' ? this.hostingSchweizTxt() : '');
     put('TERMIN', this.TIMING[this.state.timing]);
     put('KONTAKT_NAME', t.name);
     put('KONTAKT_MAIL', t.email);
@@ -2995,15 +3129,15 @@ class Component extends DCLogic {
     put('BESCHREIBUNG', t.beschreibung);
     put('LEISTUNGEN', t.leistungen);
     put('USP', t.usp);
-    put('ZIELGRUPPE', (multi(15) + (Array.isArray(a[15]) && a[15].indexOf('Andere') >= 0 && t.zielgruppe ? ' (' + t.zielgruppe + ')' : '')).trim());
-    put('ANREDE', a[16]);
+    put('ZIELGRUPPE', (multi(16) + (Array.isArray(a[16]) && a[16].indexOf('Andere') >= 0 && t.zielgruppe ? ' (' + t.zielgruppe + ')' : '')).trim());
+    put('ANREDE', a[17]);
     put('DREI_WOERTER', [t.w1, t.w2, t.w3].filter(Boolean).join(', '));
-    put('STIL', a[18]);
-    put('FARBEN', a[19] === 'Wir haben Firmenfarben' && t.farben ? 'Wir haben Firmenfarben: ' + t.farben : a[19]);
-    put('LOGO', a[20]);
+    put('STIL', a[19]);
+    put('FARBEN', a[20] === 'Wir haben Firmenfarben' && t.farben ? 'Wir haben Firmenfarben: ' + t.farben : a[20]);
+    put('LOGO', a[21]);
     put('VORBILDER', t.vorbilder);
     put('TABU', t.tabu);
-    put('REFERENZ', a[23]);
+    put('REFERENZ', a[24]);
     put('IMPRESSUM_FIRMA', t.imFirma);
     put('IMPRESSUM_ADRESSE', t.imAdresse);
     put('IMPRESSUM_PERSON', t.imPerson);
@@ -3103,11 +3237,12 @@ class Component extends DCLogic {
     const isCheck = page === 'check';
     const isLegal = page === 'impressum' || page === 'datenschutz' || page === 'agb';
     const ai = s.quick ? this.QUICK[s.step] : s.step;
-    const total = s.quick ? 3 : (s.step < 12 ? 12 : 26);
+    const total = s.quick ? 3 : (s.step < 13 ? 13 : 27);
     const q = this.Q[ai] || this.Q[0];
     const opts = this.optsFor(ai);
     const picked = s.ans[ai];
     const r = this.rec();
+    const hostWahl = this.hostingWahl();
     const k = 1 - s.slider / 100;
     const allOff = this.STEPS.every((st, i) => st[3] || s.off[i]);
 
@@ -3134,8 +3269,8 @@ class Component extends DCLogic {
     if (ai === 0 && picked === 'Etwas anderes') fields.push({ k: 'branche', label: 'Was macht Ihr Betrieb?', type: 'text', value: s.txt.branche || '' });
     if (ai === 2 && (picked === 'Ja, aber veraltet' || picked === 'Ja, soll nur aufgefrischt werden')) fields.push({ k: 'url', label: 'Adresse Ihrer Website', type: 'text', value: s.txt.url || '' });
     if (ai === 9 && picked === 'Ich habe bereits eine') fields.push({ k: 'domain', label: 'Welche Adresse?', type: 'text', value: s.txt.domain || '' });
-    if (ai === 15 && Array.isArray(picked) && picked.indexOf('Andere') >= 0) fields.push({ k: 'zielgruppe', label: 'Wer noch?', type: 'text', value: s.txt.zielgruppe || '' });
-    if (ai === 19 && picked === 'Wir haben Firmenfarben') fields.push({ k: 'farben', label: 'Welche Farben?', type: 'text', value: s.txt.farben || '' });
+    if (ai === 16 && Array.isArray(picked) && picked.indexOf('Andere') >= 0) fields.push({ k: 'zielgruppe', label: 'Wer noch?', type: 'text', value: s.txt.zielgruppe || '' });
+    if (ai === 20 && picked === 'Wir haben Firmenfarben') fields.push({ k: 'farben', label: 'Welche Farben?', type: 'text', value: s.txt.farben || '' });
 
     const complete = this.complete(ai);
     const remainMin = Math.max(1, Math.ceil((total - (s.step + 1)) * 30 / 60));
@@ -3360,15 +3495,15 @@ class Component extends DCLogic {
       qTotal: total,
       remaining: remainMin + ' Minuten',
       hint: (!s.quick && s.step >= 5) ? 'Sieht nach Paket ' + r.name + ' aus' : '',
-      partLabel: s.quick ? 'KURZSCHÄTZUNG' : (s.step < 12 ? 'TEIL 1 · IHR PROJEKT' : 'TEIL 2 · GESTALTUNG UND INHALT'),
+      partLabel: s.quick ? 'KURZSCHÄTZUNG' : (s.step < 13 ? 'TEIL 1 · IHR PROJEKT' : 'TEIL 2 · GESTALTUNG UND INHALT'),
       fieldsDir: q.short ? 'row' : 'column',
       styleDisplay: q.styles ? 'grid' : 'none',
       styleCards: this.STILE.map(c => ({ v: c[0], label: c[0], prev: c[1], sel: picked === c[0], bg: picked === c[0] ? '#2D4CF0' : 'rgba(255,255,255,0.7)', bd: picked === c[0] ? '#2D4CF0' : '#E2DFD8', fg: picked === c[0] ? '#FFFFFF' : '#11131A' })),
       qAnim: this.reduce ? 'none' : (s.dir === 'back' ? 'qBack 260ms ease-out' : 'qFwd 260ms ease-out'),
       qNumPad: String(s.step + 1).padStart(2, '0'),
-      blobColor: s.step < 12 ? '#2D4CF0' : s.step < 19 ? '#4FA79B' : '#8A7BD8',
-      blobLeft: s.step < 12 ? '-180px' : s.step < 19 ? '30%' : '55%',
-      blobTop: s.step < 12 ? '10%' : s.step < 19 ? '-220px' : '25%',
+      blobColor: s.step < 13 ? '#2D4CF0' : s.step < 20 ? '#4FA79B' : '#8A7BD8',
+      blobLeft: s.step < 13 ? '-180px' : s.step < 20 ? '30%' : '55%',
+      blobTop: s.step < 13 ? '10%' : s.step < 20 ? '-220px' : '25%',
       answered: this.answeredPills(),
       onJump: (e) => this.jumpTo(Number(e.currentTarget.dataset.s)),
       onFieldKey: (e) => { if (e.key === 'Enter' && e.currentTarget.tagName === 'INPUT') { e.preventDefault(); this.next(); } },
@@ -3412,7 +3547,7 @@ class Component extends DCLogic {
       warnText: q.multi ? 'Bitte wählen Sie mindestens eine Antwort' : 'Bitte wählen Sie eine Antwort',
       backVis: s.step > 0 ? 'visible' : 'hidden',
       onBack: this.back, onNext: this.next,
-      nextLabel: (s.quick ? s.step >= 2 : s.step >= 25) ? 'Ergebnis ansehen' : 'Weiter',
+      nextLabel: (s.quick ? s.step >= 2 : s.step >= 26) ? 'Ergebnis ansehen' : 'Weiter',
       nextDisabled: !complete,
       nextBg: complete ? '#2D4CF0' : '#E2DFD8',
       nextFg: complete ? '#FFFFFF' : '#5B6270',
@@ -3423,6 +3558,14 @@ class Component extends DCLogic {
       refFullDisplay: r.refFull ? 'block' : 'none',
       refSlimDisplay: r.refSlim ? 'block' : 'none',
       refPrice: r.refPrice, refSaving: r.refSaving,
+      hostSelfDisplay: hostWahl === 'selbst' ? 'block' : 'none',
+      hostCardDisplay: (hostWahl === 'egal' || hostWahl === 'schweiz') ? 'block' : 'none',
+      hostLabel: hostWahl === 'schweiz' ? 'BETRIEB BEI MIR, SCHWEIZ' : 'BETRIEB BEI MIR',
+      hostTitle: hostWahl === 'schweiz' ? this.hostingSchweizTxt() : this.hostingAuslandTxt(),
+      hostText: 'Hosting, SSL, Backups und Überwachung. Ich bin Ihre Ansprechperson bei Störungen, Antwort innert zwei Werktagen. Abgerechnet einmal jährlich, kündbar mit 30 Tagen.' + (hostWahl === 'schweiz' ? ' Ihre Website und alle Formulardaten bleiben in der Schweiz.' : ''),
+      hostAuslandTxt: this.hostingAuslandTxt(), hostSchweizTxt: this.hostingSchweizTxt(),
+      hostAuslandChf: 'CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF), hostSchweizChf: 'CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF),
+      stundensatzTxt: 'CHF ' + this.fmt(this.STUNDENSATZ_CHF) + ' pro Stunde',
       reasons: r.reasons.map((t, i) => ({ t: t, i: i })),
       compare: compare,
       mailText: this.mailBody(),
