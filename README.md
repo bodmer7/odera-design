@@ -5,6 +5,9 @@ Webseiten für Schweizer Betriebe zum Fixpreis. Das Design wurde in Claude
 Design erstellt und als Export übernommen. Für dieses Repository wurde es nur
 geordnet und technisch bereinigt, am Inhalt ist nichts geändert.
 
+Wie die Seite automatisch bei jedem Push online geht, steht im Abschnitt
+„Veröffentlichung“ (Pipeline mit GitHub Actions und Infomaniak).
+
 ## Wie die Seite funktioniert
 
 - Die Seite selbst braucht keinen Build. Die Dateien werden so, wie sie sind,
@@ -58,25 +61,25 @@ favicon.svg                 Seitensymbol
 robots.txt, sitemap.xml     Erzeugt, für Suchmaschinen
 .htaccess                   Einstellungen für den Apache-Webserver (Fehlerseite, Kompression, Zwischenspeicher)
 tools/seo-build.mjs         Erzeugt die Dateien oben
+tools/portfolio-sync.mjs    Holt das aktuelle Portfolio als Musterprojekt (muster/portfolio/)
 logo.dc.html                Komponente: Logo (Zeichen und Wortmarke)
 kapazitaet.dc.html          Komponente: Auslastungsanzeige
 musterpreview.dc.html       Komponente: Vorschau der Musterprojekte
 muster/
   doppelmeter.html          Musterprojekt Schreinerei (öffnet im Overlay)
   portfolio.html            Rahmen für das Musterprojekt Portfolio
-  portfolio-quelle.html     Inhalt des Musterprojekts Portfolio
+  portfolio/                Kopie des echten Portfolios (erzeugt, siehe „Portfolio-Muster“)
 assets/
   js/support.js             Claude-Design-Laufzeit (unverändert aus dem Export)
   js/vendor/                React 18.3.1 und ReactDOM, Produktionsfassungen
   fonts/                    Schriften als WOFF2, pro Seite eine CSS-Datei
   fonts/lizenzen/           Lizenztexte der Schriften (SIL Open Font License)
-  img/                      Küchenfoto (Unsplash) und Porträt
-  img/portfolio/            Bilder des Portfolio-Musterprojekts
+  img/                      Küchenfoto (Unsplash), Porträt, Vorschaubild für die Portfolio-Kachel
 .github/workflows/          Automatischer Upload zu Infomaniak
 ```
 
 Jede Seite lädt ihre eigene Schrift-CSS (`assets/fonts/index.css`,
-`doppelmeter.css`, `portfolio.css`, `portfolio-quelle.css`). Sie enthält
+`doppelmeter.css`, `portfolio.css`, `portfolio-muster.css`). Sie enthält
 genau die Schnitte, die diese Seite darstellt, in den Zeichensätzen latin und
 latin-ext. Wenn neue Schriftschnitte dazukommen, muss die passende CSS-Datei
 ergänzt werden, sonst ersetzt der Browser den Schnitt durch den nächstliegenden.
@@ -138,6 +141,31 @@ Besucher. Einrichten, sobald die Domain online ist:
 3. Unter „Sitemaps“ `sitemap.xml` einreichen.
 4. Unter „URL-Prüfung“ die Startseite prüfen und „Indexierung beantragen“.
 
+## Portfolio-Muster
+
+Das zweite Musterprojekt ist eine Kopie deines echten Portfolios
+(`github.com/bodmer7/nicobodmer`, live unter nico-bodmer.ch). Sie liegt in
+`muster/portfolio/`, der Rahmen `muster/portfolio.html` zeigt sie im Overlay.
+Die Kopie wird nicht von Hand bearbeitet. Nach jeder Änderung am Portfolio:
+
+```bash
+node tools/portfolio-sync.mjs
+node tools/seo-build.mjs
+```
+
+Danach die Änderungen einchecken. Das Skript braucht die GitHub-Anmeldung
+(`gh auth status`), weil das Portfolio-Repository privat ist. Gegenüber dem
+Original ändert es nur vier Dinge, damit die Kopie zu den Zusagen dieser
+Website passt: Die Schriften kommen von diesem Server statt von Google Fonts,
+das Portfolio merkt sich Farbschema und Sprache nicht im Browser, die Kopie ist
+`noindex` und hat kein `canonical`, und ein Kommentar nennt Quelle und Stand.
+Findet das Skript eine der Stellen nicht mehr, weil sich das Portfolio
+verändert hat, bricht es mit einer Meldung ab.
+
+Die kleine Vorschau der Kachel auf der Musterprojekte-Seite ist von Hand
+nachgezeichnet (`musterpreview.dc.html`, Bild `assets/img/portfolio-vorschau.webp`).
+Ändert sich der Hero des Portfolios, muss sie mit angepasst werden.
+
 ## Rechtliche Seiten
 
 Alle drei stehen in `index.html`:
@@ -169,36 +197,100 @@ Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse
 | `DURCHSCHNITT_SEKUNDEN` | 0 | Solange 0, bleibt die Vergleichsleiste der Ladezeitmessung ausgeblendet. Nur mit belegtem Wert eintragen und die Quelle in der Fussnote nennen. |
 | `SITE` | `https://odera.ch` | Adresse der Website in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `EMAIL` und feste Texte | `kontakt@odera.ch`, `odera.ch` | Setzen die Domain odera.ch voraus, auch die Mailtexte aus dem Projekt-Check. Das Postfach `kontakt@odera.ch` muss existieren, bevor die Seite online geht. |
-| Platzhalter im Portfolio-Muster (`muster/portfolio-quelle.html`, Abschnitt „04 Websites“) | `[domain.ch]`, `[Website 2 — Name]`, `[Monat JJJJ]`, `[Ein Satz zu Auftrag und Ergebnis.]` | Sind für Besucher sichtbar, wenn sie das Portfolio-Muster öffnen. Ersetzen oder den Abschnitt entfernen. Ebenso der Satz „Screenshots eines echten Projekts folgen.“ |
+| Portfolio-Muster (`muster/portfolio/`) | Stand vom 21.09.2026 (Design v8) | Ändert sich das Portfolio, `node tools/portfolio-sync.mjs` ausführen. Siehe „Portfolio-Muster“. |
 | Datenschutz „2. Besuch dieser Website“ | Infomaniak, Schweiz | Stimmt nur, solange die Seite bei Infomaniak liegt. |
 
 ## Veröffentlichung
 
-Ziel ist das Webhosting bei Infomaniak. Hochgeladen wird alles ausser
-`README.md`, `.gitignore`, `.github/` und lokalen Ordnern.
+Ziel ist ein Web Hosting bei Infomaniak. Bei jedem Push auf `main` lädt eine
+Pipeline (GitHub Actions) die Seite hoch. Sie ist danach sofort live, weil auf
+dem Server nichts gebaut wird. Die Dateien werden so bereitgestellt, wie sie im
+Repository liegen.
 
-### Automatisch bei jedem Push
+### Welches Angebot
 
-Der Workflow `.github/workflows/veroeffentlichen.yml` lädt bei jedem Push auf
-`main` per SFTP hoch. Solange die Zugangsdaten nicht hinterlegt sind,
-überspringt er den Upload und meldet das im Protokoll.
+Es braucht das **Web Hosting** (Apache/PHP), nicht den Starter. Der Starter
+erlaubt nur FTP auf Port 21 ohne Verschlüsselung. Damit würde die Pipeline das
+Passwort im Klartext senden. Web Hosting unterstützt SFTP (Port 22), FTPS und
+SSH. Quellen: Infomaniak-Hilfe „Understanding Web Transfer Protocols“ und
+„Manage FTP / SSH accounts“.
 
-Einmalig einrichten:
+### Einmalig einrichten
 
-1. Im Infomaniak Manager beim Webhosting einen FTP/SSH-Benutzer anlegen.
-   Dort stehen auch der Servername und der Ordner der Website.
-2. Auf GitHub im Repository unter Settings → Secrets and variables → Actions
-   vier Repository Secrets anlegen:
-   - `INFOMANIAK_SFTP_HOST`: Servername, z. B. `xxxx.ftp.infomaniak.com`
-   - `INFOMANIAK_SFTP_USER`: Benutzername
-   - `INFOMANIAK_SFTP_PASSWORD`: Passwort
-   - `INFOMANIAK_SFTP_PATH`: Zielordner der Website auf dem Server
-3. Unter Actions den Workflow „Veröffentlichen auf Infomaniak“ einmal von Hand
-   starten (Run workflow) und das Protokoll prüfen.
+1. **Bestellen.** Im Infomaniak Manager ein Web Hosting bestellen und die Domain
+   `odera.ch` registrieren oder verbinden. Die Domain gehört bei Infomaniak
+   nicht zum Web Hosting und wird separat bezahlt.
+2. **Postfach.** `kontakt@odera.ch` anlegen (im Web Hosting ist eine Adresse
+   inbegriffen). Die Seite und ihre Mails verweisen darauf.
+3. **FTP/SSH-Konto.** Im Manager das Hosting anklicken, links „FTP / SSH“ öffnen.
+   Bei einer neuen Website legt Infomaniak dort ein Konto automatisch an. Sonst
+   „Hinzufügen“ und den Typ „FTP + SSH“ wählen und ein starkes Passwort setzen.
+   Oben auf dieser Seite steht der Servername (Form `xxxx.ftp.infomaniak.com`).
+   Der Benutzername hat die Form `xxxx_name`.
+4. **Ordner der Website.** Im Manager dort „Web FTP“ öffnen und nachsehen, in
+   welchem Ordner die Startseite der Domain liegt. Er heisst meist
+   `/sites/odera.ch`. Massgebend ist, was der Manager als Stammverzeichnis der
+   Website nennt.
+5. **Verbindung testen** (Terminal, Passwort eingeben, dann `ls` und `exit`):
+
+   ```bash
+   sftp BENUTZER@SERVERNAME
+   ```
+
+6. **Secrets auf GitHub.** Im Repository unter Settings → Secrets and variables
+   → Actions → Secrets vier Repository Secrets anlegen:
+   - `INFOMANIAK_SFTP_HOST`: der Servername
+   - `INFOMANIAK_SFTP_USER`: der Benutzername
+   - `INFOMANIAK_SFTP_PASSWORD`: das Passwort
+   - `INFOMANIAK_SFTP_PATH`: der Ordner aus Schritt 4
+7. **Erster Lauf.** Unter Actions den Workflow „Veröffentlichen auf Infomaniak“
+   wählen, „Run workflow“ klicken und das Protokoll lesen.
+8. **Optional: Live-Test.** Unter Settings → Secrets and variables → Actions →
+   Variables die Variable `SITE_URL` mit `https://odera.ch` anlegen. Dann prüft
+   der Workflow nach jedem Upload, ob die wichtigen Adressen antworten (200),
+   die Startseite den richtigen Titel hat und eine unbekannte Adresse 404 liefert.
+9. **Im Manager** „HTTPS erzwingen“ einschalten und `www.odera.ch` auf
+   `odera.ch` weiterleiten. Beides gehört nicht in die `.htaccess`, weil eine
+   doppelte Weiterleitung Schleifen erzeugen kann.
+
+Solange die Secrets fehlen, überspringt der Workflow den Upload und meldet das
+im Protokoll.
+
+### Was bei jedem Push passiert
+
+1. Prüfung: Fehlen erzeugte Dateien (Unterseiten, Sitemap, `.htaccess`), bricht
+   der Workflow ab, bevor etwas hochgeladen wird.
+2. Upload aller Dateien per SFTP. Ausgenommen sind `README.md`, `tools/`,
+   `.github/`, `.gitignore` und lokale Ordner.
+3. Live-Test, falls `SITE_URL` gesetzt ist.
 
 Der Upload überschreibt geänderte Dateien, löscht auf dem Server aber nichts.
-Umbenannte oder entfernte Dateien bleiben dort liegen, bis du sie von Hand
-löschst.
+Umbenannte oder entfernte Dateien bleiben dort liegen, bis du sie im Web FTP
+von Hand löschst. Soll eine Änderung zurück, den Commit mit `git revert`
+zurücknehmen und pushen. Danach stehen die alten Inhalte wieder auf dem Server.
+
+### Wenn etwas nicht klappt
+
+| Meldung im Protokoll | Ursache |
+|---|---|
+| „Upload übersprungen“ | Mindestens eines der vier Secrets fehlt oder ist leer. |
+| „Login failed“ oder „Access failed: Login incorrect“ | Benutzername oder Passwort falsch, oder das Konto ist ein reines FTP-Konto ohne SSH. |
+| „Fatal error: Host name lookup failure“ | Servername falsch geschrieben. |
+| „No such file or directory“ | `INFOMANIAK_SFTP_PATH` zeigt auf einen Ordner, den es nicht gibt. |
+| Upload grün, Seite zeigt alte oder fremde Inhalte | Falscher Ordner, oder die Domain zeigt noch nicht auf das Hosting. |
+| „Datei fehlt: …“ | Erzeugte Dateien fehlen. `node tools/seo-build.mjs` ausführen und einchecken. |
+| Live-Test meldet 404 oder 403 | Ordner falsch oder `.htaccess` wird nicht ausgewertet. |
+
+### Später
+
+- **SSH-Schlüssel statt Passwort.** Infomaniak erlaubt ihn beim Web Hosting. Er
+  muss vom Typ `ed25519` sein, ein RSA-Schlüssel wird abgelehnt. Das ist sicherer
+  als ein Passwort in den Secrets.
+- **Konto nur für einen Ordner.** Ein „FTP+SSH“-Konto sieht das ganze Hosting.
+  Sobald dort auch Kundenprojekte liegen, ein reines FTP-Konto verwenden, das
+  auf den Ordner von `odera.ch` beschränkt ist (dann über FTPS statt SFTP).
+- Der Workflow vertraut dem Server beim ersten Kontakt automatisch
+  (`sftp:auto-confirm`). Den Fingerabdruck fest zu hinterlegen wäre strenger.
 
 ### Von Hand per SFTP
 
@@ -212,7 +304,3 @@ lokalen Ordnern, also `index.html`, die Ordner der Unterseiten (`angebot/`,
 `musterpreview.dc.html`, `muster/` und `assets/`. Die Datei `.htaccess`
 beginnt mit einem Punkt und ist im Finder unsichtbar, im SFTP-Programm ist sie
 über „Versteckte Dateien anzeigen“ sichtbar.
-
-Im Infomaniak Manager ausserdem einstellen: HTTPS erzwingen, und
-`www.odera.ch` auf `odera.ch` weiterleiten. Beides gehört nicht in die
-`.htaccess`, weil eine doppelte Weiterleitung Schleifen erzeugen kann.

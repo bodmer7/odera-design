@@ -32,6 +32,16 @@ jobs:
         if: steps.pruefen.outputs.bereit == 'true'
         uses: actions/checkout@v4
 
+      # Bricht ab, bevor etwas hochgeladen wird, wenn erzeugte Dateien fehlen (z. B. tools/seo-build.mjs nicht ausgeführt).
+      - name: Vollständigkeit prüfen
+        if: steps.pruefen.outputs.bereit == 'true'
+        run: |
+          fehlt=0
+          for d in index.html 404.html favicon.svg robots.txt sitemap.xml .htaccess angebot/index.html ablauf/index.html musterprojekte/index.html ueber-mich/index.html projekt-check/index.html impressum/index.html datenschutz/index.html agb/index.html muster/portfolio/index.html assets/js/support.js; do
+            [ -f "$d" ] || { echo "::error::Datei fehlt: $d"; fehlt=1; }
+          done
+          [ "$fehlt" = 0 ] || exit 1
+
       - name: lftp installieren
         if: steps.pruefen.outputs.bereit == 'true'
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
@@ -57,3 +67,20 @@ jobs:
               ./ \"$SFTP_PATH\";
             bye
           "
+
+      # Optional. Läuft nur, wenn unter Settings > Secrets and variables > Actions > Variables
+      # die Variable SITE_URL gesetzt ist, z. B. https://odera.ch (ohne Schrägstrich am Ende).
+      - name: Live-Test
+        if: steps.pruefen.outputs.bereit == 'true' && vars.SITE_URL != ''
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          sleep 5
+          for pfad in / /angebot/ /ablauf/ /musterprojekte/ /ueber-mich/ /impressum/ /sitemap.xml /robots.txt; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE_URL$pfad")
+            echo "$pfad -> $code"
+            [ "$code" = 200 ] || { echo "::error::$SITE_URL$pfad antwortet mit $code"; exit 1; }
+          done
+          curl -fsS "$SITE_URL/" | grep -q '<title>Webseiten für Schweizer Betriebe' || { echo "::error::Startseite hat nicht den erwarteten Titel"; exit 1; }
+          [ "$(curl -s -o /dev/null -w '%{http_code}' "$SITE_URL/gibtsnicht/")" = 404 ] || { echo "::error::Unbekannte Adresse liefert nicht 404"; exit 1; }
+          echo "Live-Test bestanden."
