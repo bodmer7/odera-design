@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<!-- Kopie von github.com/bodmer7/nicobodmer, Stand e072531 2026-09-21 Design v8 übernehmen: neuer Hero, ODERA statt Websites-Sektion. Erzeugt mit tools/portfolio-sync.mjs. Nicht von Hand ändern. -->
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<script>
+  /* Kopie für die Muster-Seite: nichts im Browser speichern (Farbschema und Sprache gelten nur für diesen Besuch). */
+  (function () {
+    var speicher = {};
+    try {
+      Object.defineProperty(window, "localStorage", { configurable: true, value: {
+        getItem: function (k) { return Object.prototype.hasOwnProperty.call(speicher, k) ? speicher[k] : null; },
+        setItem: function (k, v) { speicher[k] = String(v); },
+        removeItem: function (k) { delete speicher[k]; }
+      } });
+    } catch (e) {}
+  })();
+</script>
+<title>Nico Bodmer — Websites und digitale Projekte</title>
+<meta name="description" content="Nico Bodmer baut Websites und eigene Anwendungen. Hauptberuflich im Data-&amp;-AI-Umfeld bei IBM Schweiz, Studium Digital Business &amp; AI an der HWZ Zürich.">
+<meta name="author" content="Nico Bodmer">
+<meta name="theme-color" content="#0E1220">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nico Bodmer — Websites und digitale Projekte">
+<meta property="og:description" content="Websites und eigene Anwendungen — Zürich / Aargau.">
+<meta property="og:image" content="assets/img/hero-portrait.webp">
+<meta property="og:locale" content="de_CH">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts/portfolio-muster.css">
+<link rel="stylesheet" href="assets/css/style.css?v=9">
+
+<script>
+  /* Theme vor dem ersten Paint setzen — verhindert Aufblitzen */
+  (function () {
+    try {
+      var t = localStorage.getItem("nb-theme");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      var l = localStorage.getItem("nb-lang");
+      if (l === "en") document.documentElement.setAttribute("lang", "en");
+    } catch (e) {}
+  })();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Nico Bodmer",
+  "jobTitle": "Tech Seller Data & AI",
+  "worksFor": { "@type": "Organization", "name": "IBM Schweiz AG" },
+  "email": "mailto:nico.bodmer@gmx.ch",
+  "address": { "@type": "PostalAddress", "addressRegion": "Zürich", "addressCountry": "CH" },
+  "sameAs": ["https://linkedin.com/in/nico-bodmer", "https://github.com/bodmer7"]
+}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#top" data-i18n="skip">Zum Inhalt</a>
+
+<div class="progress" data-progress></div>
+<div class="swipe-line" data-swipe-line></div>
+<div class="wipe" data-wipe></div>
+
+<header class="topbar">
+  <a class="mark mark--logo" href="#top" data-mark>NB</a>
+  <button class="mark mark--menu" type="button" data-mark data-menu-open aria-haspopup="dialog" aria-expanded="false" aria-controls="site-menu" data-i18n="nav.menu">Menü</button>
+</header>
+
+<nav class="pill" data-pill aria-label="Abschnitte">
+  <a href="#ueber"      data-nav="ueber"      data-i18n="nav.about">Über</a>
+  <a href="#werdegang"  data-nav="werdegang"  data-i18n="nav.career">Werdegang</a>
+  <a href="#projekte"   data-nav="projekte"   data-i18n="nav.projects">Projekte</a>
+  <a href="#skills"     data-nav="skills"     data-i18n="nav.skills">Skills</a>
+  <a href="#ausbildung" data-nav="ausbildung" data-i18n="nav.education">Ausbildung</a>
+  <a href="#kontakt"    data-nav="kontakt"    data-i18n="nav.contact">Kontakt</a>
+</nav>
+
+<div class="menu-scrim" data-menu-close hidden></div>
+<div class="menu" id="site-menu" role="dialog" aria-modal="true" aria-label="Navigation" data-menu hidden>
+  <div class="menu__top">
+    <span class="menu__logo">NB</span>
+    <button class="menu__close" type="button" data-menu-close data-i18n="nav.close">Schliessen</button>
+  </div>
+  <nav class="menu__nav">
+    <a class="menu__link" href="#ueber" style="animation-delay:0ms"><span class="menu__num">01</span><span data-i18n="menu.about">Über mich</span></a>
+    <a class="menu__link" href="#werdegang" style="animation-delay:40ms"><span class="menu__num">02</span><span data-i18n="menu.career">Werdegang</span></a>
+    <a class="menu__link" href="#projekte" style="animation-delay:80ms"><span class="menu__num">03</span><span data-i18n="menu.projects">Projekte</span></a>
+    <a class="menu__link" href="#skills" style="animation-delay:120ms"><span class="menu__num">04</span><span data-i18n="menu.skills">Skills</span></a>
+    <a class="menu__link" href="#ausbildung" style="animation-delay:160ms"><span class="menu__num">05</span><span data-i18n="menu.education">Ausbildung</span></a>
+    <a class="menu__link" href="#kontakt" style="animation-delay:200ms"><span class="menu__num">06</span><span data-i18n="menu.contact">Kontakt</span></a>
+  </nav>
+  <a class="menu__mail" href="mailto:nico.bodmer@gmx.ch">nico.bodmer@gmx.ch</a>
+  <div class="menu__actions">
+    <button class="chip" type="button" data-theme-toggle>Light</button>
+    <button class="chip" type="button" data-lang-toggle>EN</button>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- Hero ------------------------------------------------------------- -->
+  <section class="section sec--dark hero" data-section="hero" data-hero>
+    <div class="wrap hero__row">
+      <div class="hero__text-col">
+        <h1 class="hero__name">
+          <span>Nico</span>
+          <span class="hero__last">Bodmer<span class="hero__underline" data-underline aria-hidden="true"></span></span>
+        </h1>
+        <p class="mono hero__kicker" data-i18n="hero.kicker">Websites &amp; digitale Projekte — Zürich / Aargau</p>
+        <p class="hero__text" data-i18n="hero.text1">Ich baue Websites und eigene Anwendungen.</p>
+        <p class="hero__text" data-i18n="hero.text2">Hauptberuflich arbeite ich im Data-&amp;-AI-Umfeld und studiere Digital Business &amp; AI.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#projekte" data-magnet><span data-i18n="hero.cta1">Arbeiten ansehen</span> <span class="mono" aria-hidden="true">↓</span></a>
+          <a class="btn btn--ghost" href="#kontakt" data-magnet><span data-i18n="hero.cta2">Kontakt</span> <span class="mono" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div class="hero__photo-col" data-hero-img-wrap>
+        <div class="hero__frame">
+          <span class="hero__frame-block" aria-hidden="true"></span>
+          <div class="hero__photo-box">
+            <img class="hero__photo" src="assets/img/hero-portrait.webp" width="1024" height="1046" alt="Nico Bodmer, Porträt" fetchpriority="high" decoding="async">
+            <span class="hero__grain" aria-hidden="true"></span>
+          </div>
+        </div>
+        <p class="mono hero__caption">Zürich / Aargau — 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kennzahlen ------------------------------------------------------- -->
+  <section class="section sec--dark metrics" data-section="metrics">
+    <div class="wrap" style="padding-top:0;padding-bottom:0">
+      <ul class="metrics__list">
+        <li class="metrics__item mono"><span data-i18n="metrics.since1">Seit</span> <b data-count="2021">2021</b> <span data-i18n="metrics.since2">in der IT</span></li>
+        <li class="metrics__item mono"><b>4</b> <span data-i18n="metrics.stations">Stationen</span></li>
+        <li class="metrics__item mono" data-i18n="metrics.efz">Platform Developer EFZ</li>
+        <li class="metrics__item mono">DE / EN / FR</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Über mich -------------------------------------------------------- -->
+  <section class="section sec--sand" id="ueber" data-section="ueber">
+    <div class="wrap">
+      <span class="mono eyebrow"><span class="eyebrow__num">01</span> <span data-i18n="nav.about">Über mich</span></span>
+      <div class="about">
+        <div class="about__media">
+          <img src="assets/img/about-portrait.webp" width="1100" height="1957" alt="Nico Bodmer vor einem Bürogebäude" loading="lazy" data-parallax>
+        </div>
+        <div class="about__body">
+          <h2 class="h2" data-reveal data-i18n="about.title">Support, Deployment, eigene Projekte</h2>
+          <p class="lead" data-i18n="about.p1">Ich bin 2021 als Lernender in die IT eingestiegen: Level-1- und Level-2-Support, Geräte-Management, wöchentliche Kurzpräsentationen im Team. Danach Technical Support beim Kunden vor Ort, anschliessend Deployment interner Anwendungen mit Red Hat OpenShift und IBM Cloud sowie Web-Entwicklung mit React.</p>
+          <p class="lead" data-i18n="about.p2">Heute arbeite ich im Data-&amp;-AI-Umfeld: Anforderungsanalyse, Angebote, technische Konzepte. Ab September 2026 kommt das berufsbegleitende Studium BSc Digital Business &amp; AI an der HWZ Zürich dazu.</p>
+          <p class="lead" data-i18n="about.p3">Daneben baue ich Websites und eigene Anwendungen mit aktuellem AI-Tooling. Wer Support gemacht hat, baut Seiten, die man auch in zwei Jahren noch pflegen kann.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Werdegang -------------------------------------------------------- -->
+  <section class="section sec--dark" id="werdegang" data-section="werdegang">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="mono"><span class="eyebrow__num">02</span> <span data-i18n="nav.career">Werdegang</span></span>
+        <span class="mono" data-i18n="career.hint">Zeile öffnen — Klick oder Enter</span>
+      </div>
+      <h2 class="h2" data-reveal data-i18n="career.title">Beruflicher Werdegang</h2>
+
+      <div class="rows" data-dimgroup>
+        <div class="row" data-row data-station="dev">
+          <button class="row__head" type="button" aria-expanded="false" aria-controls="job-1">
+            <span class="mono row__period">Seit 07/2025</span>
+            <span class="row__title">
+              <span class="row__role">Tech Seller Data &amp; AI</span>
+              <span class="row__org">IBM Schweiz AG</span>
+            </span>
+            <span class="row__arrow" aria-hidden="true">↗</span>
+          </button>
+          <div class="row__detail" id="job-1">
+            <ul class="row__bullets">
+              <li data-i18n="job1.b1">Mitarbeit an RFPs, Angeboten und Vertriebsaktivitäten im Bereich Data &amp; AI</li>
+              <li data-i18n="job1.b2">Lösungsentwicklung von der Anforderungsanalyse bis zum technischen Konzept</li>
+              <li data-i18n="job1.b3">Zusammenarbeit mit cross-funktionalen Teams</li>
+              <li data-i18n="job1.b4">Mitwirkung an Events und Kundenanlässen (u. a. TechXchange)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row" data-row data-station="web">
+          <button class="row__head" type="button" aria-expanded="false" aria-controls="job-2">
+            <span class="mono row__period">01/2024 – 07/2025</span>
+            <span class="row__title">
+              <span class="row__role">Web Development &amp; Deployment</span>
+              <span class="row__org">IBM Schweiz AG</span>
+            </span>
+            <span class="row__arrow" aria-hidden="true">↗</span>
+          </button>
+          <div class="row__detail" id="job-2">
+            <ul class="row__bullets">
+              <li data-i18n="job2.b1">Deployment interner Anwendungen mit Red Hat OpenShift und IBM Cloud</li>
+              <li data-i18n="job2.b2">Web-Entwicklung mit HTML, CSS, JavaScript und React</li>
+              <li data-i18n="job2.b3">Optimierung bestehender interner Anwendungen für bessere Bedienbarkeit</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row" data-row data-station="support">
+          <button class="row__head" type="button" aria-expanded="false" aria-controls="job-3">
+            <span class="mono row__period">11/2022 – 12/2023</span>
+            <span class="row__title">
+              <span class="row__role">Technical Support Lenovo</span>
+              <span class="row__org">IBM Schweiz AG</span>
+            </span>
+            <span class="row__arrow" aria-hidden="true">↗</span>
+          </button>
+          <div class="row__detail" id="job-3">
+            <ul class="row__bullets">
+              <li data-i18n="job3.b1">Reparatur von Lenovo-Geräten vor Ort beim Kunden</li>
+              <li data-i18n="job3.b2">Robotik-Projekte mit dem Roboter Pepper</li>
+              <li data-i18n="job3.b3">IT- und Security-Schulungen an Oberstufenschulen</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row" data-row data-station="support">
+          <button class="row__head" type="button" aria-expanded="false" aria-controls="job-4">
+            <span class="mono row__period">08/2021 – 11/2022</span>
+            <span class="row__title">
+              <span class="row__role">IT Help Desk</span>
+              <span class="row__org">IBM Forschungslabor Zürich</span>
+            </span>
+            <span class="row__arrow" aria-hidden="true">↗</span>
+          </button>
+          <div class="row__detail" id="job-4">
+            <ul class="row__bullets">
+              <li data-i18n="job4.b1">Level-1- und Level-2-Support für interne Mitarbeitende</li>
+              <li data-i18n="job4.b2">Geräte-Management: Setup, Migration und Datenlöschung von Mac- und Windows-Notebooks</li>
+              <li data-i18n="job4.b3">Wöchentliche Kurzpräsentationen im Team</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projekte --------------------------------------------------------- -->
+  <section class="section sec--paper" id="projekte" data-section="projekte">
+    <div class="wrap">
+      <span class="mono eyebrow"><span class="eyebrow__num">03</span> <span data-i18n="projects.eyebrow">Arbeiten</span></span>
+      <h2 class="h2" data-reveal style="margin-bottom:32px" data-i18n="projects.title">Arbeiten</h2>
+
+      <div class="filters" role="group" aria-label="Projekte filtern">
+        <button class="filter" type="button" data-filter="alle" aria-pressed="true" data-i18n="filter.all">Alle</button>
+        <button class="filter" type="button" data-filter="websites" aria-pressed="false" data-i18n="filter.websites">Websites</button>
+        <button class="filter" type="button" data-filter="apps" aria-pressed="false" data-i18n="filter.apps">Apps</button>
+        <button class="filter" type="button" data-filter="tools" aria-pressed="false" data-i18n="filter.tools">Tools</button>
+      </div>
+
+      <div class="cards">
+        <!-- ODERA: links das typische alte KMU-Layout (gebaut, kein Kundenprojekt),
+             rechts der heutige Stand von odera.ch -->
+        <article class="card card--wide" data-card data-cat="websites">
+          <div class="card__frame">
+            <div class="site__bar">
+              <div class="site__dots"><span></span><span></span><span></span></div>
+              <div class="site__url">odera.ch</div>
+            </div>
+
+            <div class="ba" id="ba">
+              <div class="ba__after">
+                <img src="assets/img/odera.webp" width="1600" height="864" alt="odera.ch heute" loading="lazy" decoding="async">
+              </div>
+
+              <div class="ba__before">
+                <div class="retro" id="baScale">
+                  <div class="retro__desktop">
+                    <div class="retro__page">
+                      <div class="retro__header">
+                        <span class="retro__logo">Musterfirma</span>
+                        <span class="retro__phone">Tel. 044 000 00 00</span>
+                      </div>
+                      <div class="retro__nav">
+                        <span data-i18n="retro.nav1">Startseite</span>
+                        <span data-i18n="retro.nav2">Leistungen</span>
+                        <span data-i18n="retro.nav3">Vorgehen</span>
+                        <span data-i18n="retro.nav4">Kontakt</span>
+                        <span class="retro__badge"><span class="retro__neu" data-neu data-i18n="retro.new">NEU</span></span>
+                      </div>
+                      <div class="retro__cols">
+                        <div class="retro__side">
+                          <span data-i18n="retro.link1">»&nbsp;Über uns</span>
+                          <span data-i18n="retro.link2">»&nbsp;Leistungen</span>
+                          <span class="is-visited" data-i18n="retro.link3">»&nbsp;Referenzen</span>
+                          <span data-i18n="retro.link4">»&nbsp;Vorgehen</span>
+                          <span data-i18n="retro.link5">»&nbsp;Kontakt</span>
+                        </div>
+                        <div class="retro__main">
+                          <h4 class="retro__h" data-i18n="retro.head">Herzlich Willkommen</h4>
+                          <span class="retro__img retro__img--r" data-i18n="retro.img">Bild</span>
+                          <p class="retro__p" data-i18n="retro.p1">Willkommen auf unserer Internetseite. Seit vielen Jahren bieten wir unseren Kunden in der Region zuverlässige Dienstleistungen an. Auf den folgenden Seiten erfahren Sie mehr über unser Angebot und unser Vorgehen.</p>
+                          <span class="retro__img retro__img--l" data-i18n="retro.img">Bild</span>
+                          <p class="retro__p" data-i18n="retro.p2">Kontaktieren Sie uns für ein unverbindliches Gespräch. Wir freuen uns, von Ihnen zu hören und gemeinsam die passende Lösung zu finden.</p>
+                          <span class="retro__img retro__img--s" data-i18n="retro.img">Bild</span>
+                        </div>
+                      </div>
+                      <div class="retro__foot">
+                        <span data-i18n="retro.updated">Letzte Aktualisierung: 12.03.2011</span>
+                        <span class="retro__counter">003417</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <span class="ba__line" aria-hidden="true"></span>
+              <button class="ba__knob" type="button" id="baHandle" role="slider" aria-label="Vorher-Nachher-Vergleich" data-i18n-aria="ba.aria" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">↔</button>
+              <span class="ba__badge ba__badge--before" data-i18n="ba.before">Vorher — Beispiel</span>
+              <span class="ba__badge ba__badge--after" data-i18n="ba.after">Nachher — odera.ch</span>
+            </div>
+          </div>
+
+          <h3 class="card__title" data-i18n="odera.title">ODERA — Websites für kleine Unternehmen</h3>
+          <a class="site__link" href="https://odera.ch" target="_blank" rel="noopener noreferrer">odera.ch ↗</a>
+          <p class="fact__value card__lead" data-i18n="odera.text">Mein eigenes Angebot für Websites — Konzept, Umsetzung und Betrieb aus einer Hand.</p>
+          <p class="card__note" data-i18n="odera.note">Regler oben: illustrative Darstellung zum Vergleich, kein Kundenprojekt.</p>
+          <div class="tags">
+            <span class="tag" data-i18n="odera.tag1">Konzept</span><span class="tag" data-i18n="odera.tag2">Design</span><span class="tag" data-i18n="odera.tag3">Umsetzung</span>
+          </div>
+        </article>
+
+        <!-- Geo-Quiz -->
+        <article class="card card--wide" data-card data-cat="apps">
+          <div class="card__frame">
+            <div class="card__zoom" data-zoom style="background:#1B2A22">
+              <img src="assets/img/geo-quiz.webp" width="1600" height="822" alt="Geo-Quiz — Luftbildkarte mit Frage" loading="lazy" style="object-position:50% 40%">
+            </div>
+          </div>
+          <h3 class="card__title" data-i18n="geo.title">Geo-Quiz — Orte auf der Karte schätzen</h3>
+          <div class="facts">
+            <div class="fact"><p class="fact__label" data-i18n="fact.start">Ausgangslage</p><p class="fact__value" data-i18n="geo.start">Die eigene Region kennt man vom Velo und vom Zugfenster — auf einer leeren Karte findet man sie trotzdem nicht.</p></div>
+            <div class="fact"><p class="fact__label" data-i18n="fact.task">Aufgabe</p><p class="fact__value" data-i18n="geo.task">Eine Quiz-App bauen, in der Orte auf einer unbeschrifteten Karte getippt werden. Bewertet wird nach Distanz zum richtigen Punkt.</p></div>
+            <div class="fact"><p class="fact__label" data-i18n="fact.result">Ergebnis</p><p class="fact__value" data-i18n="geo.result">Live-Webapp mit acht Fragen pro Runde, Luftbild-Karte und eigenem Logo.</p></div>
+          </div>
+          <div class="tags" style="margin-bottom:20px">
+            <span class="tag">Vite</span><span class="tag">TypeScript</span><span class="tag">Leaflet</span><span class="tag">OpenStreetMap</span><span class="tag">swisstopo-Luftbilder</span><span class="tag">GitHub Actions &amp; Pages</span>
+          </div>
+          <a class="live-link" href="https://bodmer7.github.io/segberike/" target="_blank" rel="noopener">
+            <span class="live-link__dot" aria-hidden="true"></span>
+            <span style="flex:1;min-width:0"><span data-i18n="geo.live">Live ausprobieren</span> → bodmer7.github.io/segberike</span>
+          </a>
+        </article>
+
+        <!-- Health-Dashboard -->
+        <article class="card card--half" data-card data-cat="tools">
+          <div class="card__frame">
+            <div class="card__zoom" data-zoom style="background:#F0F2F5">
+              <img src="assets/img/health-dashboard.webp" width="1600" height="900" alt="Personal Health Dashboard" loading="lazy" style="object-position:top center">
+            </div>
+          </div>
+          <h3 class="card__title" data-i18n="health.title">Health-Dashboard — Uhrendaten im eigenen Überblick</h3>
+          <div class="facts">
+            <div class="fact"><p class="fact__label" data-i18n="fact.start">Ausgangslage</p><p class="fact__value" data-i18n="health.start">Die Sportuhr sammelt täglich Gesundheitsdaten, die in der Hersteller-App liegen bleiben.</p></div>
+            <div class="fact"><p class="fact__label" data-i18n="fact.task">Aufgabe</p><p class="fact__value" data-i18n="health.task">Die Daten lokal und schreibgeschützt zugänglich machen und daraus ein Morgen-Dashboard bauen.</p></div>
+            <div class="fact"><p class="fact__label" data-i18n="fact.result">Ergebnis</p><p class="fact__value" data-i18n="health.result">Server mit 20 read-only Zugriffen plus ein automatisch aktualisiertes Dashboard mit Readiness, Schlaf, Erfolgen und Gewichtsziel.</p></div>
+          </div>
+          <div class="tags">
+            <span class="tag">MCP</span><span class="tag">Python</span><span class="tag">SQLite</span><span class="tag">Jinja2</span><span class="tag">Playwright</span><span class="tag">Scheduled Tasks</span>
+          </div>
+        </article>
+
+        <!-- Prognose-App: noch ohne Vorschau -->
+        <article class="card card--half" data-card data-cat="apps">
+          <div class="card__frame card__frame--empty">
+            <div class="site__placeholder">
+              <span class="mono" data-i18n="websites.soon">Vorschau folgt</span>
+            </div>
+            <span class="site__flag" data-i18n="websites.wip">In Arbeit</span>
+          </div>
+          <h3 class="card__title" data-i18n="prognose.title">Prognose-App</h3>
+          <p class="fact__value" data-i18n="prognose.text">Aktuell in Entwicklung.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills ----------------------------------------------------------- -->
+  <section class="section sec--sand" id="skills" data-section="skills">
+    <div class="wrap" style="padding-bottom:clamp(48px,6vw,72px)">
+      <span class="mono eyebrow" style="margin-bottom:36px"><span class="eyebrow__num">04</span> <span data-i18n="nav.skills">Skills</span></span>
+      <h2 class="h2" data-reveal data-i18n="skills.title">Sechs Kernkompetenzen</h2>
+      <div class="skills">
+        <div class="skill" data-skill data-stations="web,dev">
+          <span class="skill__num">01</span>
+          <p class="skill__name" data-i18n="skill1.name">Web-Entwicklung</p>
+          <span class="skill__ctx" data-i18n="skill1.ctx">HTML, CSS, JavaScript, React — eigene Projekte und interne Anwendungen</span>
+          <span class="skill__alt">Web Development &amp; Deployment · Tech Seller Data &amp; AI</span>
+          <span class="skill__line" aria-hidden="true"></span>
+        </div>
+        <div class="skill" data-skill data-stations="web">
+          <span class="skill__num">02</span>
+          <p class="skill__name" data-i18n="skill2.name">Deployment &amp; Cloud</p>
+          <span class="skill__ctx">Red Hat OpenShift, IBM Cloud, Docker</span>
+          <span class="skill__alt">Web Development &amp; Deployment</span>
+          <span class="skill__line" aria-hidden="true"></span>
+        </div>
+        <div class="skill" data-skill data-stations="web">
+          <span class="skill__num">03</span>
+          <p class="skill__name" data-i18n="skill3.name">Websites für Unternehmen</p>
+          <span class="skill__ctx" data-i18n="skill3.ctx">Konzept, Umsetzung, Live-Schaltung</span>
+          <span class="skill__alt" data-i18n="skill3.alt">Eigene Aufträge · Web Development &amp; Deployment</span>
+          <span class="skill__line" aria-hidden="true"></span>
+        </div>
+        <div class="skill" data-skill data-stations="dev">
+          <span class="skill__num">04</span>
+          <p class="skill__name">AI-Tooling</p>
+          <span class="skill__ctx" data-i18n="skill4.ctx">Aufbau eigener Anwendungen mit aktuellen KI-Werkzeugen</span>
+          <span class="skill__alt" data-i18n="skill4.alt">Tech Seller Data &amp; AI · eigene Projekte</span>
+          <span class="skill__line" aria-hidden="true"></span>
+        </div>
+        <div class="skill" data-skill data-stations="dev">
+          <span class="skill__num">05</span>
+          <p class="skill__name" data-i18n="skill5.name">Anforderungen &amp; Konzepte</p>
+          <span class="skill__ctx" data-i18n="skill5.ctx">Vom Kundengespräch zur technischen Lösung</span>
+          <span class="skill__alt">Tech Seller Data &amp; AI</span>
+          <span class="skill__line" aria-hidden="true"></span>
+        </div>
+        <div class="skill" data-skill data-stations="support">
+          <span class="skill__num">06</span>
+          <p class="skill__name" data-i18n="skill6.name">IT-Support &amp; Betrieb</p>
+          <span class="skill__ctx" data-i18n="skill6.ctx">Level 1 und 2, Geräte-Management, Ticketing</span>
+          <span class="skill__alt">IT Help Desk · Technical Support Lenovo</span>
+          <span class="skill__line" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track marquee__track--l" data-track>
+        <span>React · Tailwind · Supabase · GitHub · Docker · OpenShift ·&nbsp;</span>
+        <span>React · Tailwind · Supabase · GitHub · Docker · OpenShift ·&nbsp;</span>
+      </div>
+      <div class="marquee__track marquee__track--r" data-track>
+        <span>IBM Cloud · Windows · macOS · Ticketing · Robotik ·&nbsp;</span>
+        <span>IBM Cloud · Windows · macOS · Ticketing · Robotik ·&nbsp;</span>
+      </div>
+    </div>
+
+    <div class="langs">
+      <div class="wrap">
+        <span class="mono" data-i18n="skills.langs">Deutsch — Muttersprache · Englisch — fliessend · Französisch — gut</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ausbildung ------------------------------------------------------- -->
+  <section class="section sec--dark" id="ausbildung" data-section="ausbildung">
+    <div class="wrap">
+      <span class="mono eyebrow" style="margin-bottom:44px"><span class="eyebrow__num">05</span> <span data-i18n="nav.education">Ausbildung</span></span>
+      <div class="edu">
+        <div class="edu__item">
+          <div><p class="edu__title">BSc Digital Business &amp; AI</p><p class="edu__org" data-i18n="edu.hwz">HWZ Hochschule für Wirtschaft Zürich — berufsbegleitend</p></div>
+          <span class="mono" data-i18n="edu.from">Ab 09/2026</span>
+        </div>
+        <div class="edu__item">
+          <div><p class="edu__title">Platform Developer EFZ</p><p class="edu__org" data-i18n="edu.tbz">Technische Berufsschule Zürich</p></div>
+          <span class="mono">2021 – 2025</span>
+        </div>
+        <div class="edu__item">
+          <div><p class="edu__title" data-i18n="edu.bm">Berufsmaturität technischer Richtung</p><p class="edu__org" data-i18n="edu.bms">Berufsmaturitätsschule Zürich</p></div>
+          <span class="mono">2021 – 2025</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt ---------------------------------------------------------- -->
+  <section class="section sec--accent contact" id="kontakt" data-section="kontakt">
+    <div class="contact__media">
+      <img class="contact__photo" src="assets/img/contact-portrait.webp" width="1400" height="2491" alt="Nico Bodmer" loading="lazy">
+      <div class="contact__tint" aria-hidden="true"></div>
+      <div class="contact__tint contact__tint--lighten" aria-hidden="true"></div>
+    </div>
+    <div class="wrap">
+      <span class="mono eyebrow" style="margin-bottom:36px">06 <span data-i18n="nav.contact">Kontakt</span></span>
+      <div class="contact__body">
+        <p class="mono" style="margin:0 0 16px" data-i18n="contact.kicker">Offen für Projekte und Gespräche</p>
+        <h2 class="contact__title" data-i18n-html="contact.title">Schreiben<br>Sie mir</h2>
+        <div class="contact__mailrow">
+          <a class="contact__mail" href="mailto:nico.bodmer@gmx.ch">nico.bodmer@gmx.ch</a>
+          <button class="copy-btn" type="button" data-copy="nico.bodmer@gmx.ch" data-i18n-aria="contact.copyAria" aria-label="Adresse kopieren">
+            <span class="mono" style="font-size:13px" aria-hidden="true">⧉</span><span data-copy-label data-i18n="contact.copy">Kopieren</span>
+          </button>
+        </div>
+        <div class="contact__links">
+          <a href="https://www.linkedin.com/in/nico-bodmer/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://github.com/bodmer7" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <!-- TODO: PDF unter assets/Lebenslauf-Nico-Bodmer.pdf ablegen, dann einkommentieren
+          <a href="assets/Lebenslauf-Nico-Bodmer.pdf" target="_blank" rel="noopener" data-i18n="contact.cv">Lebenslauf (PDF) ↗</a>
+          -->
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer sec--dark">
+  <div class="wrap">
+    <span class="mono">© <span data-year>2026</span> Nico Bodmer — <span data-i18n="footer.region">Raum Zürich</span></span>
+    <div class="footer__actions">
+      <span class="mono" data-i18n="footer.hint">Taste T oder vom rechten Rand wischen</span>
+      <button class="chip" type="button" data-theme-toggle>Light</button>
+      <button class="chip" type="button" data-lang-toggle>EN</button>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/i18n.js?v=9"></script>
+<script src="assets/js/main.js?v=9"></script>
+</body>
+</html>
