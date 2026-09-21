@@ -1,0 +1,22 @@
+# Einstellungen für den Apache-Webserver bei Infomaniak.
+# HTTPS und die Weiterleitung von www stellst du im Infomaniak Manager ein, nicht hier.
+
+# Eigene Fehlerseite, der Server liefert sie mit Status 404 aus
+ErrorDocument 404 /404.html
+
+# Kleinere Übertragung
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json application/xml image/svg+xml text/plain
+</IfModule>
+
+# Zwischenspeicher im Browser. Seiten immer frisch, Bilder und Schriften länger.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 0 seconds"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType text/javascript "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+</IfModule>

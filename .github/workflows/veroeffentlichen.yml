@@ -51,6 +51,7 @@ jobs:
               --exclude-glob .git* \
               --exclude-glob .github/ \
               --exclude-glob .claude/ \
+              --exclude-glob tools/ \
               --exclude-glob .DS_Store \
               --exclude README.md \
               ./ \"$SFTP_PATH\";
