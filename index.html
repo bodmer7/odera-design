@@ -79,7 +79,7 @@
 <p>04</p>
 <p>Online</p>
 <p>Ich schalte auf und übergebe Ihnen alles.</p>
-<p>Bezahlt wird erst nach Schritt 03.</p>
+<p>Bezahlt wird erst, wenn Ihnen der Entwurf aus Schritt 02 gefällt. Einmal, ohne Anzahlung.</p>
 <p>5 Tage</p>
 <p>bis der erste Entwurf fertig ist</p>
 <p>CHF 1'900</p>
@@ -121,7 +121,7 @@
 <p><a href="/angebot/">Details ansehen</a></p>
 <p>Alle Preise öffentlich. Keine Offerte nach Aufwand, keine Rabattverhandlung.</p>
 <h2>Gefällt Ihnen der erste Entwurf nicht, zahlen Sie nichts.</h2>
-<p>Keine Anzahlung, keine Bedingungen. Die Rechnung kommt erst, wenn die Seite online geht. Ich trage das Risiko, dass mein Entwurf nicht trifft, nicht Sie.</p>
+<p>Keine Anzahlung, keine Bedingungen. Sie zahlen einmal, und erst wenn Sie den Entwurf angenommen haben. Ich trage das Risiko, dass mein Entwurf nicht trifft, nicht Sie.</p>
 <h2>Zwei Seiten, zwei Welten</h2>
 <p>Die erste Seite ist ein erfundener Betrieb, die zweite mein eigenes Portfolio.</p>
 <p>FIRMENSEITE</p>
@@ -230,6 +230,49 @@ button,input,textarea{font-family:inherit}
 .pk-start,.pk-plus{box-shadow:0 2px 10px rgba(17,19,26,0.05);transition:transform 160ms ease-out,box-shadow 160ms ease-out}
 .pk-std{position:relative;z-index:2;transform:scale(1.04);box-shadow:0 24px 60px rgba(17,19,26,0.16)}
 .chk{color:#5B6270}
+.ph-sect{background:#F6F5F1}
+.ph-tint{background:color-mix(in oklch,var(--limette) 16%,var(--papier))}
+.ph-wrap{position:relative}
+.ph-track{position:absolute;left:24px;right:calc((100% - 96px) / 4 - 25px);top:23px;height:4px;border-radius:999px;background:color-mix(in oklch,var(--limette) 35%,var(--papier))}
+.ph-fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:var(--limette)}
+.ph-fill-v{display:none}
+.ph-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;position:relative}
+.ph{min-width:0}
+.ph-num{display:flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:999px;background:var(--limette);border:2px solid #11131A;color:#11131A;font-size:18px;margin:0 0 24px;position:relative}
+.ph-t{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.2;letter-spacing:-0.02em;margin:0 0 16px}
+.ph-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ph-line{font-size:16px;line-height:1.6;margin:0 0 10px;color:#11131A}
+.ph-who{font-weight:600}
+.ph-meta{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin:16px 0 0}
+.ph-cost{display:inline-flex;padding:5px 12px;border-radius:999px;font-size:13px;letter-spacing:0.02em;color:#11131A;border:1px solid #11131A}
+.ph-cost.frei{background:var(--limette);border-color:var(--limette)}
+.ph-dur{font-size:13px;line-height:1.5;color:#5B6270}
+@media(max-width:900px){
+ .ph-list{grid-template-columns:1fr;gap:40px;padding-left:72px}
+ .ph-track{left:23px;right:auto;top:24px;bottom:24px;width:4px;height:auto}
+ .ph-fill-h{display:none}
+ .ph-fill-v{display:block;right:0;bottom:auto}
+ .ph-num{position:absolute;left:-72px;top:0;margin:0}
+ .ph{position:relative;min-height:50px}
+}
+.st-list{display:flex;flex-direction:column;gap:12px;max-width:900px}
+.st-group{display:flex;align-items:center;gap:12px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;margin:28px 0 8px;color:#11131A}
+.st-list>div:first-child .st-group{margin-top:0}
+.st-group-n{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:999px;background:var(--limette);border:1px solid #11131A;font-size:13px}
+.st-card{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;background:#FFFFFF;border-radius:14px;padding:16px 20px;transition:opacity 200ms linear}
+.st-n{flex:none;width:24px;font-size:13px;color:#5B6270}
+.st-body{flex:1;min-width:200px}
+.st-title{font-size:17px;font-weight:600;margin:0}
+.st-tag{font-size:11px;font-weight:500;letter-spacing:0.04em;color:#5B6270;margin-left:6px;text-transform:uppercase}
+.st-text{font-size:15px;line-height:1.55;color:#5B6270;margin:4px 0 0;max-width:620px}
+.st-side{flex:none;margin-left:auto;display:flex;align-items:center;gap:16px}
+.st-min{font-size:17px;color:#11131A;white-space:nowrap;font-variant-numeric:tabular-nums}
+.zeit-card{background:#FFFFFF;border:1px solid #E2DFD8;border-radius:20px;padding:28px 32px}
+.zeit-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:10px 0;border-bottom:1px solid #E2DFD8}
+.zeit-tot{border-bottom:none}
+.zeit-l{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270}
+.zeit-dot{width:12px;height:12px;border-radius:999px;display:inline-block}
+.zeit-v{font-size:24px;color:#11131A;font-variant-numeric:tabular-nums}
 .logo-add{margin-top:48px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px 48px;padding:32px;border-radius:20px;background:var(--wash-1);border:1px dashed #A8B0BD}
 .logo-add-head{display:flex;flex-direction:column}
 @media(max-width:900px){.logo-add{grid-template-columns:1fr}}
@@ -383,7 +426,6 @@ button,input,textarea{font-family:inherit}
 .ink{position:relative;overflow:hidden}
 .ink>*{position:relative}
 .glow{position:absolute;top:0;left:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:999px;background:#2D4CF0;opacity:0.06;filter:blur(110px);pointer-events:none;transition:transform 300ms ease-out;z-index:0}
-.ablbar{display:none}
 @media(max-width:1100px){
  .wrap{padding:0 48px}
  .g-hero{grid-template-columns:1fr}
@@ -410,8 +452,6 @@ button,input,textarea{font-family:inherit}
  .pk-start{order:2}
  .pk-std{order:1;margin-top:0;transform:none}
  .pk-plus{order:3}
- .ablcount{display:none}
- .ablbar{display:block}
 }
 @media(max-width:560px){
  .wrap{padding:0 20px}
@@ -435,7 +475,6 @@ button,input,textarea{font-family:inherit}
  .g-four>div>p:nth-child(2){margin:0!important;font-size:18px!important}
  .g-four>div>p:nth-child(3){font-size:15px!important;margin:4px 0 0!important}
  .g-prom{gap:0}
- .ablbar{position:static!important;top:auto!important}
  .glow,.blob{display:none!important}
  .f-legal,.f-tip{display:none!important}
  .f-legal-row{display:flex!important}
@@ -693,7 +732,7 @@ button,input,textarea{font-family:inherit}
           <p style="font-size:15px;line-height:1.55;color:rgba(17,19,26,0.65);margin:0;text-wrap:pretty">Ich schalte auf und übergebe Ihnen alles.</p>
         </div>
       </div>
-      <p style="text-align:center;font-size:13px;color:rgba(17,19,26,0.65);margin:48px 0 0">Bezahlt wird erst nach Schritt 03.</p>
+      <p style="text-align:center;font-size:13px;color:rgba(17,19,26,0.65);margin:48px 0 0">Bezahlt wird erst, wenn Ihnen der Entwurf aus Schritt 02 gefällt. Einmal, ohne Anzahlung.</p>
     </div>
     </div>
   </section>
@@ -868,7 +907,7 @@ button,input,textarea{font-family:inherit}
     <div class="wrap" style="padding-top:96px;padding-bottom:56px">
       <div style="max-width:720px;margin:0 auto;text-align:center">
         <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3vw,38px);line-height:1.15;letter-spacing:-0.03em;color:#11131A;margin:0 0 16px;text-wrap:pretty">Gefällt Ihnen der erste Entwurf nicht, zahlen Sie nichts.</h2>
-        <p style="font-size:17px;line-height:1.65;color:#11131A;margin:0">Keine Anzahlung, keine Bedingungen. Die Rechnung kommt erst, wenn die Seite online geht. Ich trage das Risiko, dass mein Entwurf nicht trifft, nicht Sie.</p>
+        <p style="font-size:17px;line-height:1.65;color:#11131A;margin:0">Keine Anzahlung, keine Bedingungen. Sie zahlen einmal, und erst wenn Sie den Entwurf angenommen haben. Ich trage das Risiko, dass mein Entwurf nicht trifft, nicht Sie.</p>
       </div>
     </div>
   </section>
@@ -1205,7 +1244,7 @@ button,input,textarea{font-family:inherit}
     <div class="wrap" style="padding-top:96px;padding-bottom:56px">
       <div style="max-width:720px;margin:0 auto;text-align:center">
         <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3vw,38px);line-height:1.15;letter-spacing:-0.03em;color:#11131A;margin:0 0 16px;text-wrap:pretty">Gefällt Ihnen der erste Entwurf nicht, zahlen Sie nichts.</h2>
-        <p style="font-size:17px;line-height:1.65;color:#11131A;margin:0">Keine Anzahlung, keine Bedingungen. Die Rechnung kommt erst, wenn die Seite online geht. Ich trage das Risiko, dass mein Entwurf nicht trifft, nicht Sie.</p>
+        <p style="font-size:17px;line-height:1.65;color:#11131A;margin:0">Keine Anzahlung, keine Bedingungen. Sie zahlen einmal, und erst wenn Sie den Entwurf angenommen haben. Ich trage das Risiko, dass mein Entwurf nicht trifft, nicht Sie.</p>
       </div>
     </div>
   </section>
@@ -1327,89 +1366,91 @@ button,input,textarea{font-family:inherit}
     </div>
   </section>
 
-  <section class="wrap sect">
-    <div class="inner">
-      <div class="ablbar" style="position:sticky;top:79px;z-index:20;margin-bottom:32px;padding:12px 20px;background:#FFFFFF;border:1px solid #E2DFD8;border-radius:20px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px">
-        <div>
-          <p class="mono" style="font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 2px">Erforderlich</p>
-          <p class="mono" style="font-size:22px;line-height:1;color:#1E34B8;margin:0;font-variant-numeric:tabular-nums">{{ reqMin }}</p>
-        </div>
-        <div>
-          <p class="mono" style="font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 2px">Optional</p>
-          <p class="mono" style="font-size:22px;line-height:1;color:#5B6270;margin:0;font-variant-numeric:tabular-nums">{{ optMin }}</p>
-        </div>
-        <div style="text-align:right">
-          <p class="mono" style="font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 2px">Total</p>
-          <p class="mono" style="font-size:28px;line-height:1;color:#11131A;margin:0;font-variant-numeric:tabular-nums">{{ totMin }}</p>
+  <section class="ph-sect">
+    <div class="wrap sect">
+      <div class="inner">
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3.4vw,48px);line-height:1.14;letter-spacing:-0.03em;margin:0 0 48px">In vier Phasen</h2>
+        <div class="ph-wrap" id="phline">
+          <span class="ph-track" aria-hidden="true"><span class="ph-fill ph-fill-h" style="width:{{ phFillPct }}"></span><span class="ph-fill ph-fill-v" style="height:{{ phFillPct }}"></span></span>
+          <ol class="ph-list">
+            <sc-for list="{{ phases }}" as="p" hint-placeholder-count="4">
+              <li class="ph">
+                <span class="mono ph-num" aria-hidden="true">{{ p.n }}</span>
+                <h3 class="ph-t"><span class="ph-sr">Phase {{ p.n }}: </span>{{ p.t }}</h3>
+                <p class="ph-line"><span class="ph-who">Sie:</span> {{ p.sie }}</p>
+                <p class="ph-line"><span class="ph-who">Ich:</span> {{ p.ich }}</p>
+                <p class="ph-meta"><span class="mono ph-cost {{ p.costCls }}">{{ p.kosten }}</span><span class="mono ph-dur">{{ p.dauer }}</span></p>
+              </li>
+            </sc-for>
+          </ol>
         </div>
       </div>
-      <div class="g-abl">
-        <div>
-          <div class="row" style="gap:24px;flex-wrap:wrap;margin-bottom:24px">
-            <div style="flex:1;min-width:240px;display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid #E2DFD8">
-              <span aria-hidden="true" style="flex:none;width:0;align-self:stretch;border-left:4px solid #1E34B8"></span>
-              <span style="font-size:15px;line-height:1.5;color:#11131A">Erforderlich. Diese Schritte brauchen Ihre Zeit.</span>
-            </div>
-            <div style="flex:1;min-width:240px;display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid #E2DFD8">
-              <span aria-hidden="true" style="flex:none;width:0;align-self:stretch;border-left:4px dashed #5B6270"></span>
-              <span style="font-size:15px;line-height:1.5;color:#5B6270">Optional. Diese Schritte können Sie abwählen.</span>
-            </div>
-          </div>
+    </div>
+  </section>
+
+  <section class="ph-tint">
+    <div class="wrap sect">
+      <div class="inner">
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3.4vw,48px);line-height:1.14;letter-spacing:-0.03em;margin:0 0 16px">Die Schritte im Einzelnen</h2>
+        <p style="font-size:17px;line-height:1.65;color:#5B6270;margin:0 0 40px;max-width:680px">Optionale Schritte können Sie abwählen. Die Minuten rechnen sich unten zusammen.</p>
+        <div class="st-list">
           <sc-for list="{{ steps }}" as="s" hint-placeholder-count="10">
-            <div style="margin-bottom:16px;opacity:{{ s.op }};transition:opacity 200ms linear">
-              <div style="position:relative;display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;background:{{ s.cardBg }};border:{{ s.cardBorder }};border-radius:16px;padding:24px 24px 24px 28px">
-                <span aria-hidden="true" style="position:absolute;left:0;top:0;bottom:0;width:0;border-left:{{ s.barStyle }};border-radius:16px 0 0 16px"></span>
-                <span class="mono" style="flex:none;width:26px;padding-top:4px;font-size:13px;color:#5B6270;font-variant-numeric:tabular-nums">{{ s.n }}</span>
-                <div style="flex:1;min-width:200px">
-                  <span style="font-size:20px;font-weight:600;color:#11131A">{{ s.title }}</span>
-                  <p style="margin:8px 0 0;font-size:17px;line-height:1.65;color:#5B6270;max-width:620px">{{ s.text }}</p>
-                  <p style="display:{{ s.altDisplay }};margin:8px 0 0;font-size:15px;line-height:1.6;color:#5B6270;max-width:620px">{{ s.altText }}</p>
+            <div>
+              <h3 class="st-group" style="display:{{ s.headDisplay }}"><span class="mono st-group-n" aria-hidden="true">{{ s.phaseN }}</span>{{ s.phaseT }}</h3>
+              <div class="st-card" style="border:{{ s.cardBorder }};opacity:{{ s.op }}">
+                <span class="mono st-n">{{ s.n }}</span>
+                <div class="st-body">
+                  <p class="st-title">{{ s.title }} <span class="mono st-tag">{{ s.tag }}</span></p>
+                  <p class="st-text">{{ s.text }}</p>
+                  <p class="st-text" style="display:{{ s.altDisplay }}">{{ s.altText }}</p>
                 </div>
-                <div style="flex:none;margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:10px">
+                <div class="st-side">
                   <button type="button" role="switch" aria-checked="{{ s.on }}" data-i="{{ s.i }}" onClick="{{ onStep }}" style="display:{{ s.swDisplay }};align-items:center;gap:10px;min-height:44px;padding:0;background:none;border:none;cursor:pointer">
-                    <span style="font-size:15px;color:#5B6270;white-space:nowrap">mache ich selbst</span>
-                    <span aria-hidden="true" style="position:relative;width:48px;height:28px;border-radius:999px;background:{{ s.track }};transition:background 180ms linear;flex:none">
-                      <span style="position:absolute;top:3px;left:{{ s.knob }};width:22px;height:22px;border-radius:999px;background:#FFFFFF;transition:left 180ms ease-in-out"></span>
+                    <span style="font-size:14px;color:#5B6270;white-space:nowrap">mache ich selbst</span>
+                    <span aria-hidden="true" style="position:relative;width:48px;height:28px;border-radius:999px;border:1px solid #11131A;background:{{ s.track }};transition:background 180ms linear;flex:none;box-sizing:border-box">
+                      <span style="position:absolute;top:2px;left:{{ s.knob }};width:22px;height:22px;border-radius:999px;background:{{ s.knobBg }};transition:left 180ms ease-in-out"></span>
                     </span>
                   </button>
-                  <span class="mono" style="font-size:22px;line-height:1;color:{{ s.minColor }};text-decoration:{{ s.strike }};font-variant-numeric:tabular-nums;white-space:nowrap">{{ s.minLabel }}</span>
-                  <span class="mono" style="display:{{ s.altDisplay }};font-size:22px;line-height:1;color:#5B6270;font-variant-numeric:tabular-nums;white-space:nowrap">{{ s.altLabel }}</span>
+                  <span class="mono st-min" style="text-decoration:{{ s.strike }}">{{ s.minLabel }}</span>
+                  <span class="mono st-min" style="display:{{ s.altDisplay }}">{{ s.altLabel }}</span>
                 </div>
               </div>
             </div>
           </sc-for>
         </div>
-        <div class="ablcount">
-          <div style="position:sticky;top:111px;background:#FFFFFF;border:1px solid #E2DFD8;border-radius:20px;padding:32px">
-            <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 4px">Erforderlich</p>
-            <p class="mono" style="font-size:48px;line-height:1;color:#1E34B8;margin:0;font-variant-numeric:tabular-nums">{{ reqMin }}</p>
-            <p style="font-size:15px;color:#5B6270;margin:4px 0 24px">Minuten</p>
-            <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 4px">Optional</p>
-            <p class="mono" style="font-size:48px;line-height:1;color:#5B6270;margin:0;font-variant-numeric:tabular-nums">{{ optMin }}</p>
-            <p style="font-size:15px;color:#5B6270;margin:4px 0 24px">Minuten</p>
-            <div style="height:1px;background:#E2DFD8;margin:0 0 24px"></div>
-            <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 4px">Total</p>
-            <p class="mono" style="font-size:64px;line-height:1;color:#11131A;margin:0;font-variant-numeric:tabular-nums">{{ totMin }}</p>
-            <p style="font-size:15px;color:#5B6270;margin:4px 0 16px">Minuten</p>
-            <div style="display:flex;height:12px;border-radius:999px;overflow:hidden;background:#E2DFD8;margin:0 0 16px">
-              <span style="width:{{ barReq }};background:#1E34B8;transition:width 300ms ease-in-out"></span>
-              <span style="width:{{ barOpt }};background:#5B6270;transition:width 300ms ease-in-out"></span>
-              <span style="width:{{ barOff }};background:#E2DFD8;transition:width 300ms ease-in-out"></span>
-            </div>
-            <p style="font-size:15px;line-height:1.5;color:#5B6270;margin:0">{{ totNote }}</p>
-            <p class="mono" style="font-size:13px;line-height:1.5;color:#11131A;margin:16px 0 0;display:{{ allOffDisplay }}">{{ allOffNote }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-sect">
+    <div class="wrap sect">
+      <div class="inner g-abl" style="align-items:center">
+        <div>
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3.4vw,48px);line-height:1.14;letter-spacing:-0.03em;margin:0 0 16px">Wie viel Zeit brauchen Sie?</h2>
+          <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:#11131A;margin:0 0 12px;max-width:560px">{{ totNote }}</p>
+          <p class="mono" style="font-size:13px;line-height:1.5;color:#11131A;margin:0;display:{{ allOffDisplay }}">{{ allOffNote }}</p>
+        </div>
+        <div class="zeit-card" aria-live="polite">
+          <div class="zeit-row"><span class="mono zeit-l"><span class="zeit-dot" style="background:#11131A"></span>Erforderlich</span><span class="mono zeit-v">{{ reqMin }} Min</span></div>
+          <div class="zeit-row"><span class="mono zeit-l"><span class="zeit-dot" style="background:#D6F24B;border:1px solid #11131A"></span>Optional</span><span class="mono zeit-v">{{ optMin }} Min</span></div>
+          <div class="zeit-row zeit-tot"><span class="mono zeit-l">Total</span><span class="mono zeit-v" style="font-size:40px">{{ totMin }} Min</span></div>
+          <div style="display:flex;height:14px;border-radius:999px;overflow:hidden;background:#FFFFFF;border:1px solid #11131A;margin-top:20px">
+            <span style="width:{{ barReq }};background:#11131A;transition:width 300ms ease-in-out"></span>
+            <span style="width:{{ barOpt }};background:#D6F24B;transition:width 300ms ease-in-out"></span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="wrap" style="padding-top:0;padding-bottom:96px">
-    <div class="inner"><div class="txt">
-      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3.4vw,48px);line-height:1.14;letter-spacing:-0.03em;margin:0 0 24px;text-wrap:balance">Danach</h2>
-      <p style="font-size:17px;line-height:1.7;margin:0 0 16px;max-width:680px;text-wrap:pretty">Nach der Übergabe betreiben Sie die Website selbst oder überlassen den Betrieb mir. Selbst betreiben kostet Sie nichts Zusätzliches, Betrieb bei mir {{ hostAuslandTxt }}, mit Servern in der Schweiz {{ hostSchweizTxt }}. Sie entscheiden das nach dem Livegang, nicht vorher.</p>
-      <p style="font-size:16px;line-height:1.6;margin:0"><a href="/agb/">Die Einzelheiten stehen in den AGB.</a></p>
-    </div></div>
+  <section class="ph-tint">
+    <div class="wrap" style="padding-top:88px;padding-bottom:96px">
+      <div class="inner"><div class="txt">
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(29px,3.4vw,48px);line-height:1.14;letter-spacing:-0.03em;margin:0 0 16px">Danach</h2>
+        <p style="font-size:17px;line-height:1.7;margin:0 0 16px;max-width:680px;text-wrap:pretty">Nach der Übergabe betreiben Sie die Website selbst oder überlassen den Betrieb mir. Das entscheiden Sie nach dem Livegang.</p>
+        <p style="font-size:16px;line-height:1.6;margin:0"><a href="/angebot/">Preise für den Betrieb auf der Angebotsseite</a></p>
+      </div></div>
+    </div>
   </section>
 
   <section class="ink" style="background:linear-gradient(155deg,#11131A 0%,#171B2E 55%,#11131A 100%)">
@@ -1449,7 +1490,7 @@ button,input,textarea{font-family:inherit}
     <div class="wrap sect" style="padding-top:120px;padding-bottom:120px">
       <div class="inner">
         <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:#D6F24B;margin:0 0 20px">IHR RISIKO</p>
-        <p style="font-size:22px;line-height:1.55;color:#F6F5F1;margin:0;max-width:760px;text-wrap:pretty">Keines. Der Entwurf kostet Sie nichts, und solange Sie nicht freigegeben haben, gibt es keine Rechnung. Ich trage das Risiko, dass mein Entwurf nicht trifft.</p>
+        <p style="font-size:22px;line-height:1.55;color:#F6F5F1;margin:0;max-width:760px;text-wrap:pretty">Keines. Der Entwurf kostet Sie nichts, und solange Sie ihn nicht angenommen haben, gibt es keine Rechnung. Ich trage das Risiko, dass mein Entwurf nicht trifft.</p>
       </div>
     </div>
   </section>
@@ -2004,7 +2045,7 @@ button,input,textarea{font-family:inherit}
   </section>
   <section class="wrap sect">
     <div class="inner txt" style="max-width:680px">
-      <p style="font-size:17px;line-height:1.7;margin:0 0 32px">Diese Bedingungen gelten für Aufträge zur Gestaltung und Umsetzung von Websites durch Nico Robin Bodmer, ODERA Design. Sie werden Bestandteil des Vertrags, sobald ein Angebot angenommen wird.</p>
+      <p style="font-size:17px;line-height:1.7;margin:0 0 32px">Diese Bedingungen gelten für Aufträge zur Gestaltung und Umsetzung von Websites und Logos durch Nico Robin Bodmer, ODERA Design. Sie werden Bestandteil des Vertrags, sobald ein Angebot angenommen wird.</p>
       <nav aria-label="Abschnitte" style="margin:0 0 48px;padding:20px;border:1px solid #E2DFD8;border-radius:14px">
         <p class="mono" style="font-size:12px;letter-spacing:0.04em;color:#5B6270;margin:0 0 12px">INHALT</p>
         <ul onClick="{{ jumpToSection }}" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px">
@@ -2033,7 +2074,7 @@ button,input,textarea{font-family:inherit}
         </div>
         <div id="agb-2" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">2. Ablauf des Projekts</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Anfrage über das Formular, Prüfung durch mich, individuelles Angebot, Annahme in Textform, kostenloser erster Entwurf, Rückmeldung, Anzahlung, Umsetzung, enthaltene Korrekturrunden gemäss Angebot, Freigabe in Textform, Schlussrechnung, Aufschaltung und Übergabe.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Anfrage über das Formular, Prüfung durch mich, individuelles Angebot, Annahme in Textform, kostenloser erster Entwurf, Rückmeldung, Annahme des Entwurfs in Textform, Rechnung über den Fixpreis, Umsetzung, enthaltene Korrekturrunden gemäss Angebot, Freigabe in Textform, Aufschaltung und Übergabe.</p>
           <p style="font-size:17px;line-height:1.7;margin:0">Der erste Entwurf ist kostenlos und unverbindlich. Wird er abgelehnt, entstehen keine Kosten und der Vertrag endet ohne weitere Folgen.</p>
         </div>
         <div id="agb-3" style="margin-top:48px">
@@ -2042,7 +2083,7 @@ button,input,textarea{font-family:inherit}
         </div>
         <div id="agb-4" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">4. Preise und Zahlung</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Fixpreis gemäss Angebot. Zahlungsplan: 40 Prozent nach Annahme des Entwurfs und vor Beginn der Umsetzung, 60 Prozent bei Übergabe. Zahlungsfrist 14 Tage ab Rechnungsdatum. Bei Verzug Mahnung und Verzugszins nach Gesetz. Zusatzleistungen ausserhalb des Angebots werden nach Aufwand zum Ansatz gemäss Angebot verrechnet.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Fixpreis gemäss Angebot. Es gibt keine Anzahlung. Der Fixpreis wird in einer einzigen Zahlung in Rechnung gestellt, sobald der Kunde den Entwurf für die Website oder das Logo angenommen hat. Zahlungsfrist 14 Tage ab Rechnungsdatum. Bei Verzug Mahnung und Verzugszins nach Gesetz. Zusatzleistungen ausserhalb des Angebots werden nach Aufwand zum Ansatz gemäss Angebot verrechnet.</p>
         </div>
         <div id="agb-5" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">5. Hosting und Domain während der Entwicklung</h2>
@@ -2551,7 +2592,7 @@ class Component extends DCLogic {
   // Öffentliche Adresse der Website. Steht in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung tools/seo-build.mjs ausführen.
   SITE = 'https://odera.ch';
   // Stand unter Impressum, Datenschutz und AGB. Nur ändern, wenn die Rechtstexte geändert werden.
-  STAND_RECHTSTEXTE = '18.09.2026';
+  STAND_RECHTSTEXTE = '24.09.2026';
   PLAETZE_TOTAL = 2;
   PLAETZE_FREI = 1;
   PAGES = {
@@ -2625,10 +2666,10 @@ class Component extends DCLogic {
     ['Kurzes Gespräch', 'Wenn etwas unklar ist, telefonieren wir kurz.', 20, false, 0, 'Ist alles klar, gestalte ich direkt los.'],
     ['Ich gestalte Ihren Entwurf', 'Eine fertige Seite mit Ihren Inhalten, innert fünf Arbeitstagen. Kostenlos und unverbindlich.', 0, true],
     ['Entwurf ansehen', 'Sie sehen die fertige Seite, bevor Sie irgendetwas bezahlt haben.', 20, true],
-    ['Rückmeldung geben', 'Sie sagen, was anders soll. Gefällt Ihnen gar nichts, endet es hier und kostet Sie nichts.', 20, true],
+    ['Rückmeldung geben', 'Sie sagen, was anders soll. Nehmen Sie den Entwurf an, kommt die Rechnung, einmal und ohne Anzahlung. Gefällt Ihnen gar nichts, endet es hier und kostet Sie nichts.', 20, true],
     ['Ich setze um', 'Ihre Änderungen, im Preis enthalten.', 0, true],
     ['Zweite Rückmeldung', 'Nicht jeder braucht sie.', 15, false, 0, 'Passt alles nach der ersten Runde, geht es direkt weiter.'],
-    ['Freigabe und Rechnung', 'Sie geben schriftlich frei, dann stelle ich Rechnung.', 5, true],
+    ['Freigabe', 'Sie geben die fertige Seite schriftlich frei.', 5, true],
     ['Aufschaltung und Übergabe', 'Ich stelle die Seite online und übergebe Ihnen Domain, Zugänge und Quellcode. Danach gehört alles Ihnen.', 30, true]
   ];
   STILE = [
@@ -2636,6 +2677,14 @@ class Component extends DCLogic {
     ['Warm und handwerklich', 'linear-gradient(#B4532A,#B4532A) 12px 12px/40px 40px no-repeat, linear-gradient(#11131A,#11131A) 62px 14px/56px 6px no-repeat, linear-gradient(#5B6270,#5B6270) 62px 30px/44px 3px no-repeat, var(--wash-3)'],
     ['Klar und technisch', 'repeating-linear-gradient(90deg,#D7DAE3 0 1px,transparent 1px 16px) 0 0/100% 100% no-repeat, linear-gradient(#2D4CF0,#2D4CF0) 12px 16px/72px 6px no-repeat, #FFFFFF'],
     ['Hochwertig und reduziert', 'linear-gradient(#11131A,#11131A) 12px 46px/120px 1px no-repeat, linear-gradient(#11131A,#11131A) 12px 18px/48px 8px no-repeat, #F6F5F1']
+  ];
+
+  // Die vier Phasen auf der Ablaufseite. Muss zu den AGB passen (Paragrafen 2 und 4). steps: Indizes in STEPS.
+  PHASES = [
+    { t: 'Anfrage und Angebot', sie: 'Sie füllen das Formular aus, rund 15 Minuten, und nehmen das Angebot an, wenn es passt.', ich: 'Ich melde mich und schicke Ihnen ein Angebot zum Fixpreis.', kosten: 'gratis', frei: true, dauer: 'Antwort spätestens am nächsten Abend, ausser am Wochenende', steps: [0, 1, 2] },
+    { t: 'Entwurf', sie: 'Sie sehen den Entwurf an und geben Rückmeldung. Gefällt er Ihnen nicht, endet es hier.', ich: 'Ich gestalte Ihre Seite als fertigen Entwurf.', kosten: 'gratis', frei: true, dauer: 'innert fünf Arbeitstagen', steps: [3, 4, 5] },
+    { t: 'Umsetzung', sie: 'Sie nehmen den Entwurf an. Dann kommt die Rechnung über den Fixpreis, einmal und ohne Anzahlung.', ich: 'Ich setze Ihre Änderungen um, mit den Korrekturrunden aus Ihrem Paket.', kosten: 'Fixpreis, einmal', frei: false, dauer: 'je nach Paket, steht im Angebot', steps: [6, 7] },
+    { t: 'Übergabe', sie: 'Sie geben die fertige Seite schriftlich frei.', ich: 'Ich schalte sie auf und übergebe Ihnen Domain, Zugänge und Quellcode.', kosten: 'keine weiteren Kosten', frei: false, dauer: 'rund 35 Minuten Ihrer Zeit', steps: [8, 9] }
   ];
 
   TIMING = ['So schnell wie möglich', 'In einem Monat', 'In zwei bis drei Monaten', 'Kein festes Datum'];
@@ -2692,7 +2741,7 @@ class Component extends DCLogic {
     gName: '', gBranch: 'Handwerk', gFilled: false,
     consent: false,
     step: 0, dir: 'fwd', ans: {}, txt: {}, timing: 1, mid: false, result: false, warn: false, quick: false,
-    review: false, editing: false, editNote: '', reached: 0,
+    review: false, editing: false, editNote: '', reached: 0, phFill: 0,
     copied: false, toast: '', mailOpen: false, ring: 0, cmpGrow: false,
     duelA: 0, duelB: 0, duelNote: false, duelALabel: '6,4 s', duelBLabel: '0,9 s',
     uLeft: '0px', uWidth: '0px', tick: 0, loadSec: 0, loadGrow: false
@@ -2724,6 +2773,7 @@ class Component extends DCLogic {
       setTimeout(() => {
         this.measure();
         this.countUp();
+        if (this.onScroll) this.onScroll();
         const h = document.querySelector('main h1[tabindex="-1"]');
         if (h) h.focus({ preventScroll: true });
       }, 60);
@@ -2788,6 +2838,13 @@ class Component extends DCLogic {
       const thread = document.getElementById('thread');
       if (thread) thread.style.width = (p * 100) + '%';
       if (!this.reduce) document.body.style.background = this.hauch(p);
+      // Linie der vier Phasen füllt sich beim Scrollen. Bei reduzierter Bewegung steht sie voll.
+      const ph = document.getElementById('phline');
+      if (ph) {
+        const r = ph.getBoundingClientRect();
+        const f = this.reduce ? 100 : Math.round(Math.min(1, Math.max(0, (window.innerHeight * 0.8 - r.top) / Math.max(1, r.height))) * 100);
+        if (f !== this.state.phFill) this.setState({ phFill: f });
+      }
     };
     window.addEventListener('scroll', this.onScroll, { passive: true });
     this.onResize = () => this.measure();
@@ -3515,13 +3572,19 @@ class Component extends DCLogic {
       togglePrice: () => this.setState({ priceOpen: !s.priceOpen }),
       onFaq: (e) => { const i = Number(e.currentTarget.dataset.i); this.setState({ faq: s.faq === i ? -1 : i }); },
 
+      phases: this.PHASES.map((ph, i) => ({ n: String(i + 1), t: ph.t, sie: ph.sie, ich: ph.ich, kosten: ph.kosten, costCls: ph.frei ? 'frei' : '', dauer: ph.dauer })),
+      phFillPct: s.phFill + '%',
       steps: this.STEPS.map((st, i) => {
         const opt = !st[3];
         const on = opt ? !s.off[i] : true;
+        const pi = this.PHASES.findIndex(ph => ph.steps.indexOf(i) >= 0);
+        const ph = this.PHASES[pi];
         return {
           i: i, n: String(i + 1).padStart(2, '0'), title: st[0], text: st[1],
+          headDisplay: ph && ph.steps[0] === i ? 'flex' : 'none', phaseN: String(pi + 1), phaseT: ph ? ph.t : '',
+          tag: opt ? 'optional' : 'erforderlich', knobBg: on ? '#11131A' : '#FFFFFF',
           cardBg: opt ? '#F6F5F1' : '#FFFFFF',
-          cardBorder: opt ? '1px dashed #5B6270' : '1px solid #E2DFD8',
+          cardBorder: opt ? '1px dashed #A8B0BD' : '1px solid #E2DFD8',
           barStyle: opt ? '4px dashed #5B6270' : '4px solid #1E34B8',
           minColor: opt ? '#5B6270' : '#1E34B8',
           minLabel: st[2] + ' Min',
@@ -3531,8 +3594,8 @@ class Component extends DCLogic {
           altDisplay: (opt && !on) ? 'block' : 'none',
           swDisplay: opt ? 'flex' : 'none',
           on: on,
-          track: on ? '#2D4CF0' : '#E2DFD8',
-          knob: on ? '23px' : '3px',
+          track: on ? '#D6F24B' : '#FFFFFF',
+          knob: on ? '22px' : '2px',
           op: on ? 1 : 0.5
         };
       }),
