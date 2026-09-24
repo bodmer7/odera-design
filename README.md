@@ -192,7 +192,7 @@ Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse
 
 | Stelle | Heutiger Wert | Was zu tun ist |
 |---|---|---|
-| `STAND_RECHTSTEXTE` | 18.09.2026, provisorisch | Vor dem Aufschalten auf das Datum setzen, an dem die Seite online geht. |
+| `STAND_RECHTSTEXTE` | 24.09.2026 | Bei jeder Änderung an Impressum, Datenschutz oder AGB auf das Datum der Änderung setzen. |
 | `PLAETZE_TOTAL`, `PLAETZE_FREI` | 2 und 1 | Auf den tatsächlichen Stand setzen. Die Werte sind **zweimal** definiert, beide Stellen ändern. |
 | `DURCHSCHNITT_SEKUNDEN` | 0 | Solange 0, bleibt die Vergleichsleiste der Ladezeitmessung ausgeblendet. Nur mit belegtem Wert eintragen und die Quelle in der Fussnote nennen. |
 | `HOSTING_AUSLAND_CHF`, `HOSTING_SCHWEIZ_CHF`, `STUNDENSATZ_CHF` | 240, 480 und 120 | Einzige Quelle für die Hostingpreise und den Stundensatz. Sie erscheinen auf der Angebotsseite, der Ablaufseite, in den AGB (Paragraf 7), im Ergebnis des Projekt-Checks und im Mailtext. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
@@ -201,11 +201,20 @@ Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse
 | `SITE` | `https://odera.ch` | Adresse der Website in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `EMAIL` und feste Texte | `kontakt@odera.ch`, `odera.ch` | Setzen die Domain odera.ch voraus, auch die Mailtexte aus dem Projekt-Check. Das Postfach `kontakt@odera.ch` muss existieren, bevor die Seite online geht. |
 | Portfolio-Muster (`muster/portfolio/`) | Stand vom 21.09.2026 (Design v8) | Ändert sich das Portfolio, `node tools/portfolio-sync.mjs` ausführen. Siehe „Portfolio-Muster“. |
-| Datenschutz „2. Besuch dieser Website“ | Infomaniak, Schweiz | Stimmt nur, solange die Seite bei Infomaniak liegt. |
+| Datenschutz „2. Besuch dieser Website“ | GitHub Pages, USA | Stimmt nur, solange die Seite auf GitHub Pages liegt. Bei einem Umzug (z. B. zu Infomaniak) den Absatz anpassen und `STAND_RECHTSTEXTE` nachführen. Das Postfach (Abschnitt 7) liegt bei Infomaniak. |
 
 ## Veröffentlichung
 
-Ziel ist ein Web Hosting bei Infomaniak. Bei jedem Push auf `main` lädt eine
+**Heute läuft odera.ch auf GitHub Pages** (Einstellungen des Repositorys unter
+Pages: Quelle `main`, Ordner `/`, Datei `CNAME` mit `odera.ch`, HTTPS erzwungen).
+Jeder Push auf `main` ist nach ein bis zwei Minuten live. Vorher immer
+`node tools/seo-build.mjs` ausführen und das Ergebnis mit einchecken. Die Datei
+`.htaccess` wird auf GitHub Pages nicht ausgewertet, `404.html` schon. Der
+Infomaniak-Workflow unten läuft ohne hinterlegte Zugangsdaten nicht und schadet
+nicht.
+
+Der Rest dieses Abschnitts beschreibt einen möglichen Umzug zu Infomaniak.
+Ziel wäre dort ein Web Hosting bei Infomaniak. Bei jedem Push auf `main` lädt eine
 Pipeline (GitHub Actions) die Seite hoch. Sie ist danach sofort live, weil auf
 dem Server nichts gebaut wird. Die Dateien werden so bereitgestellt, wie sie im
 Repository liegen.
