@@ -153,6 +153,8 @@ button,input,textarea{font-family:inherit}
 @media(max-width:430px){.hero-scrollhint{display:none}.hero-cta-row{flex-direction:column;align-items:stretch}.hero-ausl>div{flex-wrap:wrap}}
 @keyframes dragWander{0%,65%{transform:translateX(0)}82%{transform:translateX(-6px)}100%{transform:translateX(0)}}
 .drag-hint-mobile{display:none}
+.wrap.hero-pad{padding-top:96px}
+@media(max-width:560px){.wrap.hero-pad{padding-top:56px}}
 @media(max-width:834px){.mtc-valtext{font-size:24px!important}}
 @media(max-width:390px){
  .hero-metrics{grid-template-columns:1fr!important}
@@ -170,8 +172,10 @@ button,input,textarea{font-family:inherit}
 .inner{max-width:1200px;margin:0 auto}
 .txt{max-width:720px}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500}
-.navmid{display:flex;align-items:center;gap:32px;position:relative}
-.navbar{height:88px;display:flex;align-items:center;justify-content:space-between;gap:64px}
+.navmid{display:flex;align-items:center;gap:38px;position:relative}
+.navbar{height:96px;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.navbar>a:first-child{margin-right:32px}
+.tagline{display:block;font-size:11px;line-height:1.3;color:#5B6270;margin-top:3px;font-family:Inter,sans-serif;letter-spacing:normal;white-space:nowrap}
 .logo-sm{display:none}
 @media(max-width:640px){.logo-lg{display:none}.logo-sm{display:inline-flex}}
 .brand{display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:32px;letter-spacing:-0.03em;line-height:1.05;white-space:nowrap}
@@ -192,6 +196,9 @@ button,input,textarea{font-family:inherit}
 .pk-start,.pk-plus{box-shadow:0 2px 10px rgba(17,19,26,0.05);transition:transform 160ms ease-out,box-shadow 160ms ease-out}
 .pk-std{position:relative;z-index:2;transform:scale(1.04);box-shadow:0 24px 60px rgba(17,19,26,0.16)}
 .chk{color:#5B6270}
+.logo-add{margin-top:48px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px 48px;padding:32px;border-radius:20px;background:var(--wash-1);border:1px dashed #A8B0BD}
+.logo-add-head{display:flex;flex-direction:column}
+@media(max-width:900px){.logo-add{grid-template-columns:1fr}}
 @media(min-width:1024px) and (hover:hover){
  .g-pkg{gap:48px}
  .pk-start:hover,.pk-plus:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(17,19,26,0.10)}
@@ -261,6 +268,28 @@ button,input,textarea{font-family:inherit}
 .apill{display:inline-flex;align-items:center;padding:6px 12px;border:1px solid #E2DFD8;border-radius:999px;background:#FFFFFF;font-size:12px;line-height:1.3;cursor:pointer;text-align:left;max-width:100%;color:#11131A}
 .apill:hover{border-color:#11131A}
 @media(max-width:560px){.apills{display:none}}
+.editbar{position:sticky;top:0;z-index:5;background:#FFFFFF;border-bottom:1px solid #E2DFD8}
+.editbar-in{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px}
+.editbar-btn{background:none;border:none;padding:0;min-height:44px;color:#1E34B8;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
+.rv-wrap{padding-bottom:120px}
+.rv-back{min-height:52px;padding:0 28px;border:none;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:17px;font-weight:600;cursor:pointer}
+.rv-list{list-style:none;margin:0;padding:0;border-top:1px solid #E2DFD8}
+.rv-row{display:flex;align-items:center;gap:24px;padding:16px 0;border-bottom:1px solid #E2DFD8}
+.rv-txt{flex:1;min-width:0}
+.rv-edit{flex:none;background:none;border:none;padding:0 4px;min-height:44px;color:#1E34B8;font-size:16px;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.rv-foot{margin-top:32px;display:flex;justify-content:flex-end}
+@media(max-width:560px){
+ .rv-wrap{padding-bottom:112px}
+ .rv-wrap .row .rv-back{display:none}
+ .rv-foot{position:fixed;left:0;right:0;bottom:0;z-index:5;margin:0;padding:12px 20px;background:#FFFFFF;border-top:1px solid #E2DFD8}
+ .rv-foot .rv-back{width:100%}
+}
+.kosten{max-width:560px;margin:0 0 48px;border-top:1px solid rgba(255,255,255,0.35)}
+.kosten-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.35);color:#FFFFFF}
+.kosten-l{font-size:14px;letter-spacing:0.02em}
+.kosten-v{font-size:20px;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.kosten-n{grid-column:1 / -1;font-size:15px;line-height:1.55}
+.kosten-s{grid-column:1 / -1;font-size:12px;line-height:1.6}
 .mp-green{clip-path:polygon(0 0,calc(52% + 60px) 0,52% 100%,0 100%)}
 .mp-jump{display:flex;align-items:center;gap:16px;height:88px;padding:0 20px 0 28px;border-radius:999px;border:1px solid rgba(255,255,255,0.35);background:rgba(255,255,255,0.08);color:#FFFFFF;text-decoration:none;transition:background 160ms linear,border-color 160ms linear,transform 160ms ease-out;width:100%;box-sizing:border-box}
 .mp-jump-num{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:13px;color:rgba(255,255,255,0.6);flex:none}
@@ -325,14 +354,16 @@ button,input,textarea{font-family:inherit}
  .wrap{padding:0 48px}
  .g-hero{grid-template-columns:1fr}
 }
-@media(max-width:1200px){
+/* Kopfzeile, gemessen: Logo 188 px (die Unterzeile ist gleich breit und kostet keinen Platz), Navigation 347 px, Button 245 px (kurz 137 px).
+   Wird es eng, zuerst die Abstände in der Navigation auf 24 px, dann der kurze Buttontext, zuletzt das Menü. */
+@media(max-width:1327px){
  .navmid{gap:24px}
 }
-@media(max-width:1080px){
+@media(max-width:1271px){
  .navcta-lg{display:none}
  .navcta-sm{display:inline}
 }
-@media(max-width:960px){
+@media(max-width:1167px){
  .navmid{display:none}
  .navcta{display:none}
  .burger{display:flex}
@@ -357,6 +388,7 @@ button,input,textarea{font-family:inherit}
  .g-excl{gap:0}
  .mobbar{display:block}
  .deskbar{display:none}
+ .tagline{display:none}
  .footpad{padding-bottom:88px}
  .card{padding:20px!important}
  .host-card{padding:24px}
@@ -406,7 +438,7 @@ button,input,textarea{font-family:inherit}
       <span style="display:block">
         <span class="logo-lg"><dc-import name="logo" kind="wort" h="32" hint-size="152px,32px"></dc-import></span>
         <span class="logo-sm"><dc-import name="logo" kind="wort" h="26" hint-size="124px,26px"></dc-import></span>
-        <span class="deskbar" style="display:block;font-size:11px;color:#5B6270;margin-top:2px;font-family:Inter,sans-serif;letter-spacing:normal;max-width:70%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Webseiten für Schweizer Betriebe</span>
+        <span class="tagline">Webseiten für Schweizer Betriebe</span>
       </span>
     </a>
     <nav class="navmid" aria-label="Hauptnavigation">
@@ -452,7 +484,7 @@ button,input,textarea{font-family:inherit}
 <div>
 <section style="position:relative;overflow:hidden;background:linear-gradient(160deg,var(--wash-1) 0%,#F6F5F1 55%,var(--wash-3) 100%);display:flex;align-items:center;min-height:78vh">
     <div aria-hidden="true" style="position:absolute;right:-300px;top:50%;transform:translateY(-50%);width:900px;height:900px;border-radius:999px;background:#2D4CF0;opacity:0.1;filter:blur(90px);z-index:0;pointer-events:none"></div>
-    <div class="wrap" style="position:relative;z-index:1;padding-top:56px;padding-bottom:56px;width:100%">
+    <div class="wrap hero-pad" style="position:relative;z-index:1;padding-bottom:56px;width:100%">
       <div class="inner g-hero" style="align-items:start">
         <div>
           <span class="mono" style="display:inline-flex;margin-bottom:32px;padding:8px 16px;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:13px;letter-spacing:0.08em;animation:{{ heroAnim0 }}">KOSTENLOSER ENTWURF</span>
@@ -905,6 +937,20 @@ button,input,textarea{font-family:inherit}
         <p class="pr-s">Ihr Aufwand: ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
       </div>
       <div class="pr-blk">
+        <p class="pr-h">Zusatz Logo: {{ logoAlleinChf }}</p>
+        <p class="pr-s">{{ logoMitChf }} zusammen mit einer Website. Ein eigenständiges Zeichen für Ihren Betrieb.</p>
+        <ul class="pr-ul">
+          <li>3 Richtungen zur Auswahl</li>
+          <li>2 Korrekturrunden</li>
+          <li>Entwurf innert 5 Arbeitstagen</li>
+          <li>Fertige Dateien für Web und Druck, in Farbe, Schwarz und Weiss</li>
+          <li>Fassung für Browserfenster und Profilbilder</li>
+          <li>Farbwerte und Schrift auf einem Übersichtsblatt</li>
+          <li>Nutzungsrecht nach vollständiger Bezahlung</li>
+        </ul>
+        <p class="pr-s">Nicht enthalten: Markenrecherche, Markenanmeldung, Visitenkarten und weitere Drucksachen.</p>
+      </div>
+      <div class="pr-blk">
         <p class="pr-h">Zusatzleistungen</p>
         <ul class="pr-ul">
           <li>Weitere Korrekturrunde: CHF 120</li>
@@ -917,7 +963,8 @@ button,input,textarea{font-family:inherit}
     <p class="pr-h">Was nicht im Preis ist</p>
     <ul class="pr-ul">
       <li>Fotografie und Bildbeschaffung</li>
-      <li>Logo und Firmenauftritt</li>
+      <li>Logo, als Zusatz buchbar</li>
+      <li>Firmenauftritt über das Logo hinaus</li>
       <li>Onlineshop und Zahlungsabwicklung</li>
       <li>Laufende Suchmaschinenoptimierung</li>
       <li>Werbeanzeigen</li>
@@ -1028,6 +1075,28 @@ button,input,textarea{font-family:inherit}
           </ul>
           <p style="margin:0 0 24px;padding:16px;background:var(--wash-2);border-radius:12px;font-size:15px;line-height:1.5">Ihr Aufwand: ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
           <a href="/projekt-check/?paket=pro" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:none;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Pro anfragen</a>
+        </div>
+      </div>
+
+      <div class="card logo-add">
+        <div class="logo-add-head">
+          <span class="mono" style="align-self:flex-start;padding:6px 14px;border-radius:999px;border:1px solid #5B6270;color:#5B6270;font-size:13px;letter-spacing:0.04em;margin-bottom:16px">ZUSATZ</span>
+          <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 12px">Logo</p>
+          <p class="mono" style="font-size:clamp(30px,3vw,42px);line-height:1.05;margin:0 0 8px;font-variant-numeric:tabular-nums">{{ logoAlleinChf }}</p>
+          <p class="mono" style="font-size:13px;letter-spacing:0.02em;color:#5B6270;margin:0 0 20px">{{ logoMitChf }} zusammen mit einer Website</p>
+          <p style="font-size:17px;line-height:1.65;margin:0">Ein eigenständiges Zeichen für Ihren Betrieb.</p>
+        </div>
+        <div class="logo-add-body">
+          <ul style="list-style:none;margin:0 0 20px;padding:0;display:flex;flex-direction:column;gap:12px">
+            <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>3 Richtungen zur Auswahl</li>
+            <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>2 Korrekturrunden</li>
+            <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert 5 Arbeitstagen</li>
+            <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Fertige Dateien für Web und Druck, in Farbe, Schwarz und Weiss</li>
+            <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Fassung für Browserfenster und Profilbilder</li>
+            <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Farbwerte und Schrift auf einem Übersichtsblatt</li>
+            <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Nutzungsrecht nach vollständiger Bezahlung</li>
+          </ul>
+          <p class="mono" style="font-size:12px;line-height:1.7;color:#5B6270;margin:0">Nicht enthalten: Markenrecherche, Markenanmeldung, Visitenkarten und weitere Drucksachen.</p>
         </div>
       </div>
       <p style="font-size:17px;line-height:1.7;color:#11131A;margin:48px auto 0;max-width:860px;text-align:center;text-wrap:pretty">Alle Paketpreise sind einmalig. Es gibt kein Abonnement und keine monatliche Gebühr. Hosting ist in keinem Paket enthalten, kann aber nach dem Livegang optional bei mir bezogen werden. Die Aufschaltung übernehme ich einmalig, sie ist im Preis enthalten.</p>
@@ -1157,7 +1226,8 @@ button,input,textarea{font-family:inherit}
       <div class="g-excl" style="max-width:1000px">
         <ul style="list-style:none;margin:0;padding:0">
           <li style="padding:16px 0;border-bottom:1px solid #E2DFD8;font-size:17px;line-height:1.65">Fotografie und Bildbeschaffung</li>
-          <li style="padding:16px 0;border-bottom:1px solid #E2DFD8;font-size:17px;line-height:1.65">Logo und Firmenauftritt</li>
+          <li style="padding:16px 0;border-bottom:1px solid #E2DFD8;font-size:17px;line-height:1.65">Logo, als Zusatz buchbar</li>
+          <li style="padding:16px 0;border-bottom:1px solid #E2DFD8;font-size:17px;line-height:1.65">Firmenauftritt über das Logo hinaus</li>
           <li style="padding:16px 0;border-bottom:1px solid #E2DFD8;font-size:17px;line-height:1.65">Onlineshop und Zahlungsabwicklung</li>
           <li style="padding:16px 0;border-bottom:1px solid #E2DFD8;font-size:17px;line-height:1.65">Laufende Suchmaschinenoptimierung</li>
           <li style="padding:16px 0;border-bottom:1px solid #E2DFD8;font-size:17px;line-height:1.65">Werbeanzeigen</li>
@@ -2014,6 +2084,12 @@ button,input,textarea{font-family:inherit}
   <sc-if value="{{ inQuiz }}" hint-placeholder-val="{{ true }}">
   <div>
     <div aria-hidden="true" class="blob" style="background:{{ blobColor }};left:{{ blobLeft }};top:{{ blobTop }};transition:background 800ms linear,left 800ms ease-in-out,top 800ms ease-in-out"></div>
+    <div class="editbar" style="display:{{ editDisplay }}">
+      <div class="wrap editbar-in">
+        <span class="mono" style="font-size:13px;color:#11131A">Sie prüfen Ihre Antworten</span>
+        <button type="button" class="editbar-btn" data-own-enter="1" onClick="{{ onEditToResult }}">Zurück zum Ergebnis</button>
+      </div>
+    </div>
     <div style="position:relative;z-index:1">
       <div role="progressbar" aria-valuenow="{{ qNum }}" aria-valuemin="1" aria-valuemax="{{ qTotal }}" aria-label="Fortschritt" style="height:2px;background:rgba(17,19,26,0.10)">
         <div style="height:2px;background:#2D4CF0;width:{{ progress }};transition:width 300ms ease-in-out"></div>
@@ -2022,6 +2098,7 @@ button,input,textarea{font-family:inherit}
         <p class="mono" style="text-align:right;font-size:13px;color:#5B6270;margin:0 0 40px">Frage {{ qNum }} von {{ qTotal }} · noch etwa {{ remaining }}</p>
         <div class="qgrid">
           <div class="qleft">
+            <p role="status" style="display:{{ editNoteDisplay }};font-size:15px;line-height:1.5;color:#11131A;background:#FFFFFF;border:1px solid #2D4CF0;border-radius:12px;padding:12px 16px;margin:0 0 20px">{{ editNote }}</p>
             <p class="mono" style="font-size:12px;letter-spacing:0.08em;color:#2D4CF0;margin:0 0 8px">{{ partLabel }}</p>
             <p class="mono qnum" aria-hidden="true">{{ qNumPad }}</p>
             <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,44px);line-height:1.1;letter-spacing:-0.03em;margin:0 0 16px;text-wrap:pretty">{{ qTitle }}</h2>
@@ -2092,6 +2169,7 @@ button,input,textarea{font-family:inherit}
               <button type="button" onClick="{{ onBack }}" style="min-height:56px;padding:0 24px;background:none;border:1px solid #11131A;border-radius:999px;font-size:17px;font-weight:600;color:#11131A;cursor:pointer;visibility:{{ backVis }}">Zurück</button>
               <button type="button" onClick="{{ onNext }}" disabled="{{ nextDisabled }}" style="min-height:56px;padding:0 32px;border:none;border-radius:999px;background:{{ nextBg }};color:{{ nextFg }};font-size:17px;font-weight:600;cursor:{{ nextCursor }}">{{ nextLabel }}</button>
             </div>
+            <p style="display:{{ editDisplay }};margin:16px 0 0;text-align:right"><button type="button" data-own-enter="1" onClick="{{ onEditToReview }}" style="background:none;border:none;padding:0;min-height:44px;color:#11131A;font-size:16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer">Zurück zur Übersicht</button></p>
             <p class="mono" style="display:{{ quickLinkDisplay }};font-size:13px;line-height:1.5;margin:16px 0 0"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
           </div>
         </div>
@@ -2121,6 +2199,31 @@ button,input,textarea{font-family:inherit}
   </div>
   </sc-if>
 
+  <sc-if value="{{ inReview }}" hint-placeholder-val="{{ false }}">
+  <div class="wrap rv-wrap">
+    <div style="max-width:880px;margin:0 auto;animation:fade 200ms linear;padding-top:16px">
+      <div class="row" style="justify-content:space-between;gap:16px;margin-bottom:24px">
+        <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,44px);line-height:1.1;letter-spacing:-0.03em;margin:0">Ihre Antworten</h2>
+        <button type="button" class="rv-back" onClick="{{ onReviewDone }}">Zurück zum Ergebnis</button>
+      </div>
+      <ul class="rv-list">
+        <sc-for list="{{ reviewRows }}" as="r" hint-placeholder-count="4">
+          <li class="rv-row">
+            <div class="rv-txt">
+              <p class="mono" style="font-size:12px;letter-spacing:0.06em;color:#5B6270;margin:0 0 4px">{{ r.n }}</p>
+              <p style="font-size:17px;line-height:1.5;margin:0;color:{{ r.fg }};overflow-wrap:anywhere">{{ r.a }}</p>
+            </div>
+            <button type="button" class="rv-edit" data-s="{{ r.step }}" onClick="{{ onReviewEdit }}" aria-label="{{ r.aria }}">Ändern</button>
+          </li>
+        </sc-for>
+      </ul>
+      <div class="rv-foot">
+        <button type="button" class="rv-back" onClick="{{ onReviewDone }}">Zurück zum Ergebnis</button>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
   <sc-if value="{{ inQuick }}" hint-placeholder-val="{{ false }}">
   <div class="wrap" style="padding-bottom:120px">
     <div style="max-width:720px;margin:0 auto;animation:fade 200ms linear;padding-top:32px">
@@ -2130,7 +2233,8 @@ button,input,textarea{font-family:inherit}
         <span class="mono" style="padding:6px 14px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px">Richtwert, kein verbindliches Angebot</span>
       </div>
       <p class="mono" style="font-size:clamp(36px,4.5vw,56px);line-height:1;color:#FFFFFF;margin:0 0 24px;font-variant-numeric:tabular-nums">{{ recPrice }}</p>
-      <p style="font-size:17px;line-height:1.65;color:#FFFFFF;margin:0 0 32px;max-width:600px">Das ist die Schätzung aus drei Angaben. Mit allen 27 Fragen wird sie genauer, und ich muss danach nichts mehr nachfragen.</p>
+      <p style="font-size:17px;line-height:1.65;color:#FFFFFF;margin:0 0 16px;max-width:600px">Das ist die Schätzung aus drei Angaben. Mit allen 27 Fragen wird sie genauer, und ich muss danach nichts mehr nachfragen.</p>
+      <p style="font-size:15px;line-height:1.6;color:#FFFFFF;margin:0 0 32px;max-width:600px">{{ quickHostLine }}</p>
       <p class="mono" style="display:{{ consentWarnDisplay }};font-size:14px;color:#FFFFFF;margin:0 0 12px">Bitte bestätigen Sie die Kenntnisnahme, dann können Sie die E-Mail öffnen.</p>
       <label style="display:flex;align-items:flex-start;gap:12px;margin:0 0 24px;max-width:600px">
         <input type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}" style="flex:none;width:24px;height:24px;border-radius:6px;margin:0;accent-color:#D6F24B">
@@ -2159,6 +2263,25 @@ button,input,textarea{font-family:inherit}
         </sc-for>
       </ul>
 
+      <div class="kosten" aria-label="Kostenübersicht">
+        <div class="kosten-row">
+          <span class="mono kosten-l">Einmalig, Website</span>
+          <span class="mono kosten-v">{{ costWebsite }}</span>
+        </div>
+        <div class="kosten-row" style="display:{{ costLogoDisplay }}">
+          <span class="mono kosten-l">Einmalig, Logo</span>
+          <span class="mono kosten-v">{{ costLogo }}</span>
+          <span class="kosten-n">Optional, zusammen mit Ihrer Website</span>
+        </div>
+        <div class="kosten-row" style="display:{{ costHostDisplay }}">
+          <span class="mono kosten-l">Danach pro Jahr</span>
+          <span class="mono kosten-v">{{ costHost }}</span>
+          <span class="kosten-n">{{ costHostNote }}</span>
+          <span class="kosten-n" style="display:{{ costHostMoreDisplay }}">Hosting, SSL, Sicherungen, Überwachung, ich als Ansprechperson bei Störungen, Antwort innert zwei Werktagen</span>
+          <span class="mono kosten-s" style="display:{{ costHostMoreDisplay }}">Optional. Kündbar mit 30 Tagen auf Monatsende. Nicht Voraussetzung für den Auftrag.</span>
+        </div>
+      </div>
+
       <div style="display:{{ refFullDisplay }};max-width:720px;margin:0 0 48px;padding:32px;border-radius:20px;background:linear-gradient(100deg,#D6F24B 0%,#BFEE7C 100%)">
         <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:#11131A;margin:0 0 16px">REFERENZPREIS</p>
         <div class="row" style="gap:16px;align-items:baseline;margin-bottom:16px">
@@ -2171,15 +2294,6 @@ button,input,textarea{font-family:inherit}
         <p style="font-size:17px;line-height:1.65;color:#11131A;margin:0">Auch ohne Namensnennung lässt sich etwas machen. Sprechen wir darüber.</p>
       </div>
 
-      <p style="display:{{ hostSelfDisplay }};font-size:15px;line-height:1.6;color:#FFFFFF;margin:0 0 48px;max-width:560px">Sie hosten selbst. Nach der Übergabe erhalten Sie alle Dateien, den Quellcode und eine Anleitung.</p>
-      <div style="display:{{ hostCardDisplay }};max-width:560px;margin:0 0 48px">
-        <div style="padding:20px 24px;border-radius:20px;border:1px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.08)">
-          <p class="mono" style="font-size:12px;letter-spacing:0.06em;color:#D6F24B;margin:0 0 8px">{{ hostLabel }}</p>
-          <p class="mono" style="font-size:clamp(22px,2.6vw,28px);line-height:1.1;color:#FFFFFF;margin:0 0 12px;font-variant-numeric:tabular-nums">{{ hostTitle }}</p>
-          <p style="font-size:15px;line-height:1.6;color:#FFFFFF;margin:0">{{ hostText }}</p>
-        </div>
-        <p class="mono" style="font-size:12px;line-height:1.6;color:#FFFFFF;margin:12px 0 0">Kommt zum einmaligen Projektpreis dazu, ist aber nicht Voraussetzung für den Auftrag.</p>
-      </div>
 
       <div style="max-width:720px;margin-bottom:48px">
         <sc-for list="{{ compare }}" as="c" hint-placeholder-count="3">
@@ -2500,6 +2614,12 @@ class Component extends DCLogic {
   HOSTING_EGAL = 'Sie sollen das übernehmen, Standort egal';
   HOSTING_CH = 'Sie sollen das übernehmen, Server in der Schweiz';
 
+  // Logo als Zusatz. Einzige Quelle für die Beträge.
+  LOGO_ALLEIN_CHF = 490;
+  LOGO_MIT_WEBSITE_CHF = 390;
+  LOGO_KEINES = 'Nein, ich habe keines';
+  LOGO_NEU = 'Ja, aber ich möchte ein neues';
+
   Q = [
     { key: 'BRANCHE', n: 'Branche', t: 'Was macht Ihr Betrieb?', o: ['Handwerk oder Bau', 'Praxis oder Gesundheit', 'Beratung, Treuhand oder Büro', 'Gastronomie oder Verkauf', 'Verein', 'Etwas anderes'] },
     { key: 'FIRMA', n: 'Firma und Ort', t: 'Wie heisst Ihr Betrieb, und wo sind Sie?', fields: [['firma', 'Firmenname'], ['ort', 'Ort']] },
@@ -2511,7 +2631,7 @@ class Component extends DCLogic {
     { key: 'FOTOS', n: 'Fotos', t: 'Haben Sie Fotos von Ihrem Betrieb?', o: ['Viele eigene', 'Ein paar ältere', 'Gar keine'] },
     { key: 'TEXTE', n: 'Texte', t: 'Und Texte?', o: ['Fertig', 'Stichworte', 'Gar nichts'] },
     { key: 'DOMAIN', n: 'Domain', t: 'Haben Sie schon eine Internetadresse?', o: ['Ich habe bereits eine', 'Ich brauche eine neue', 'Weiss ich nicht'] },
-    { key: 'HOSTING', n: 'Hosting', t: 'Wo soll Ihre Website später laufen?', help: 'Sie können das später noch ändern, diese Angabe hilft mir nur bei der Einschätzung.', o: [this.HOSTING_SELBST, this.HOSTING_EGAL, this.HOSTING_CH] },
+    { key: 'HOSTING', n: 'Hosting', t: 'Wo soll Ihre Website später laufen?', help: 'Sie können das später noch ändern. Diese Angabe hilft mir nur bei der Einschätzung.', o: [this.HOSTING_SELBST, this.HOSTING_EGAL, this.HOSTING_CH] },
     { key: 'TERMIN', n: 'Termin', t: 'Wann soll die Seite online sein?', slider: true },
     { key: 'KONTAKT', n: 'Kontakt', t: 'Wie erreiche ich Sie?', help: 'Name und E-Mail brauche ich, das Übrige ist freiwillig.', fields: [['name', 'Name'], ['email', 'E-Mail'], ['betrieb', 'Betrieb, optional'], ['tel', 'Telefon, optional']] },
     { key: 'BESCHREIBUNG', n: 'Beschreibung', t: 'Was macht Ihr Betrieb genau?', area: ['beschreibung', 'Ihre Antwort', 'In drei Sätzen, so wie Sie es einem Nachbarn erzählen würden.'] },
@@ -2522,7 +2642,7 @@ class Component extends DCLogic {
     { key: 'DREI_WOERTER', n: 'Drei Wörter', t: 'Drei Wörter, die Ihr Betrieb ausstrahlen soll', short: true, fields: [['w1', 'Wort 1'], ['w2', 'Wort 2'], ['w3', 'Wort 3']] },
     { key: 'STIL', n: 'Stil', t: 'Welche Stilrichtung passt zu Ihnen?', styles: true },
     { key: 'FARBEN', n: 'Farben', t: 'Farben', o: ['Wir haben Firmenfarben', 'Eher hell und freundlich', 'Eher dunkel und kräftig', 'Schlagen Sie mir etwas vor'] },
-    { key: 'LOGO', n: 'Logo', t: 'Logo', o: ['Ja, als Vektordatei', 'Ja, nur als Bild', 'Nein, ich habe keines'] },
+    { key: 'LOGO', n: 'Logo', t: 'Logo', o: ['Ja, als Vektordatei', 'Ja, nur als Bild', this.LOGO_KEINES, this.LOGO_NEU] },
     { key: 'VORBILDER', n: 'Vorbilder', t: 'Zwei Websites, die Ihnen gefallen', area: ['vorbilder', 'Ihre Antwort', 'Adresse und ein Wort, warum. Branche egal.'] },
     { key: 'TABU', n: 'Tabu', t: 'Was soll auf keinen Fall vorkommen?', area: ['tabu', 'Ihre Antwort', 'Farben, Bilder, Formulierungen.'] },
     { key: 'REFERENZ', n: 'Referenz', t: 'Dürfte ich Ihre fertige Website später als Beispiel zeigen?', o: ['Ja, gerne mit Name, Logo und zwei Sätzen', 'Ja, aber ohne meinen Namen', 'Nein, lieber nicht', 'Entscheide ich später'] },
@@ -2538,6 +2658,7 @@ class Component extends DCLogic {
     gName: '', gBranch: 'Handwerk', gFilled: false,
     consent: false,
     step: 0, dir: 'fwd', ans: {}, txt: {}, timing: 1, mid: false, result: false, warn: false, quick: false,
+    review: false, editing: false, editNote: '', reached: 0,
     copied: false, toast: '', mailOpen: false, ring: 0, cmpGrow: false,
     duelA: 0, duelB: 0, duelNote: false, duelALabel: '6,4 s', duelBLabel: '0,9 s',
     uLeft: '0px', uWidth: '0px', tick: 0, loadSec: 0, loadGrow: false
@@ -2554,7 +2675,7 @@ class Component extends DCLogic {
       const query = location.search.replace(/^\?/, '');
       const paket = (query.split('&').map(p => p.split('=')).find(p => p[0] === 'paket') || [])[1];
       const kurz = /(^|&)kurz=1(&|$)/.test(query);
-      const next = { path: known, menu: false, result: false, mid: false, warn: false, pageKey: this.state.pageKey + 1 };
+      const next = { path: known, menu: false, result: false, mid: false, warn: false, review: false, editing: false, editNote: '', pageKey: this.state.pageKey + 1 };
       if (known === '/projekt-check') { next.quick = kurz; if (kurz) next.step = 0; }
       if (known === '/projekt-check' && paket && this.PAKET[paket]) {
         const ans = Object.assign({}, this.state.ans);
@@ -2646,6 +2767,8 @@ class Component extends DCLogic {
         this.go('/projekt-check/'); return;
       }
       if (this.state.path !== '/projekt-check' || this.state.result || (typing && e.target.type !== 'range')) return;
+      // Links und Schaltflächen im Prüfmodus reagieren selbst auf Enter.
+      if (e.key === 'Enter' && e.target.closest && e.target.closest('[data-own-enter]')) return;
       if (this.state.mid) { if (e.key === 'Enter') { this.midNext(); e.preventDefault(); } return; }
       const opts = this.optsFor(this.state.step);
       if (/^[1-9]$/.test(e.key) && opts.length) {
@@ -2863,7 +2986,7 @@ class Component extends DCLogic {
       const at = cur.indexOf(v);
       if (at >= 0) cur.splice(at, 1); else cur.push(v);
       ans[i] = cur;
-      if (i === 3) delete ans[4];
+      if (i === 3 && cur.indexOf(ans[4]) < 0) delete ans[4];
     } else {
       ans[i] = v;
     }
@@ -2904,6 +3027,31 @@ class Component extends DCLogic {
     return last.map((p, n) => ({ step: p.step, label: p.label.length > 46 ? p.label.slice(0, 44) + '…' : p.label, op: n === 0 && last.length === 6 ? 0.45 : 1 }));
   }
 
+  // Antwort einer Frage als Text für die Übersicht. Zusatzfelder (z. B. «Etwas anderes: …») gehören dazu.
+  answerText(i) {
+    const s = this.state, q = this.Q[i], t = s.txt;
+    if (!q) return '';
+    const parts = [];
+    let v = s.ans[i];
+    if (Array.isArray(v)) v = v.join(', ');
+    if (q.slider) v = this.TIMING[s.timing];
+    if (v) parts.push(String(v));
+    if (q.fields) q.fields.forEach(f => { if (t[f[0]]) parts.push(t[f[0]]); });
+    if (q.area && t[q.area[0]]) parts.push(this.oneLine(t[q.area[0]]));
+    const extra = { 0: 'branche', 2: 'url', 9: 'domain', 16: 'zielgruppe', 20: 'farben' }[i];
+    if (extra && t[extra]) parts.push(t[extra]);
+    return parts.join(', ');
+  }
+
+  reviewRows() {
+    const last = Math.min(this.state.reached, 26), out = [];
+    for (let i = 0; i <= last; i++) {
+      const q = this.Q[i], a = this.answerText(i);
+      out.push({ step: i, n: String(i + 1).padStart(2, '0') + ' · ' + q.n, a: a || 'Keine Angabe', fg: a ? '#11131A' : '#5B6270', aria: q.n + ' ändern' });
+    }
+    return out;
+  }
+
   jumpTo = (st) => { this.setState({ step: st, dir: 'back', warn: false, tick: this.state.tick + 1 }); this.focusHead(); };
 
   focusFirstField() {
@@ -2921,10 +3069,43 @@ class Component extends DCLogic {
     }, 60);
   }
 
+  // Prüfmodus: Aus der Übersicht wird eine einzelne Antwort geändert und danach zurückgekehrt.
+  // Hängt eine andere Frage von der geänderten ab (Ziel und wichtigstes Ziel), führt der Weg zuerst dorthin.
+  DEPENDS = { 3: [4, 'Ihre Ziele haben sich geändert. Wählen Sie bitte noch einmal das wichtigste davon.'] };
+
+  showResult() {
+    this.setState({ result: true, review: false, editing: false, editNote: '', warn: false, cmpGrow: false });
+    setTimeout(() => this.setState({ cmpGrow: true }), 60);
+    this.focusHead();
+  }
+
+  showReview() {
+    this.setState({ result: true, review: true, editing: false, editNote: '', warn: false });
+    this.focusHead();
+  }
+
+  editStep = (st) => {
+    this.setState({ result: false, review: false, mid: false, editing: true, editNote: '', step: st, dir: 'fwd', warn: false, tick: this.state.tick + 1 });
+    this.focusHead();
+  };
+
+  leaveEdit(target) {
+    const i = this.ai(this.state.step);
+    if (!this.complete(i)) { this.setState({ warn: true }); return; }
+    const dep = this.DEPENDS[i];
+    if (dep && !this.complete(dep[0])) {
+      this.setState({ step: dep[0], editNote: dep[1], dir: 'fwd', warn: false, tick: this.state.tick + 1 });
+      this.focusHead();
+      return;
+    }
+    if (target === 'review') this.showReview(); else this.showResult();
+  }
+
   next = () => {
     const step = this.state.step;
     const i = this.ai(step);
     if (!this.complete(i)) { this.setState({ warn: true }); return; }
+    if (this.state.editing) { this.leaveEdit('result'); return; }
     if (this.state.quick) {
       if (step >= 2) { this.setState({ result: true, warn: false, cmpGrow: false }); this.focusHead(); return; }
       this.setState({ step: step + 1, dir: 'fwd', warn: false, tick: this.state.tick + 1 });
@@ -2938,7 +3119,7 @@ class Component extends DCLogic {
       return;
     }
     if (i >= 26) {
-      this.setState({ result: true, warn: false, cmpGrow: false });
+      this.setState({ result: true, warn: false, cmpGrow: false, reached: 26 });
       setTimeout(() => this.setState({ cmpGrow: true }), 60);
       this.focusHead();
       return;
@@ -2955,6 +3136,7 @@ class Component extends DCLogic {
   };
 
   back = () => {
+    if (this.state.editing) { this.leaveEdit('review'); return; }
     if (this.state.result) { this.setState({ result: false, step: this.state.quick ? 2 : 26 }); return; }
     if (this.state.mid) { this.setState({ mid: false, step: 12 }); return; }
     if (this.state.step > 0) this.setState({ step: this.state.step - 1, dir: 'back', warn: false, tick: this.state.tick + 1 });
@@ -2964,6 +3146,9 @@ class Component extends DCLogic {
     const h = this.state.ans[10];
     return h === this.HOSTING_SELBST ? 'selbst' : h === this.HOSTING_EGAL ? 'egal' : h === this.HOSTING_CH ? 'schweiz' : '';
   }
+
+  logoWunsch() { const l = this.state.ans[21]; return l === this.LOGO_KEINES || l === this.LOGO_NEU; }
+  logoMitWebsiteChf() { return 'CHF ' + this.fmt(this.LOGO_MIT_WEBSITE_CHF); }
 
   hostingAuslandTxt() { return 'CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr'; }
   hostingSchweizTxt() { return 'CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF) + ' pro Jahr'; }
@@ -2985,7 +3170,7 @@ class Component extends DCLogic {
     reasons.push(pageTxt + (fnTxt.length ? ', dazu ' + fnList : '') + '. Das ist Paket ' + name + '.');
     if (a[8] === 'Gar nichts') reasons.push('Für die Texte rechne ich CHF 150 pro Seite dazu.');
     if (a[7] === 'Gar keine') reasons.push('Fotos müssen wir organisieren, das bespreche ich mit Ihnen.');
-    if (a[21] === 'Nein, ich habe keines') reasons.push('Ohne Logo gestalte ich den Schriftzug typografisch. Ein Logo ist nicht im Preis enthalten.');
+    if (a[21] === this.LOGO_KEINES || a[21] === this.LOGO_NEU) reasons.push('Kein Logo vorhanden? Ich gestalte Ihnen auf Wunsch eines für ' + this.logoMitWebsiteChf() + '. Sonst setze ich Ihren Namen typografisch.');
     const refAns = a[24];
     const refFull = refAns === 'Ja, gerne mit Name, Logo und zwei Sätzen';
     const refSlim = refAns === 'Ja, aber ohne meinen Namen';
@@ -3030,6 +3215,7 @@ class Component extends DCLogic {
     put('STIL', a[19]);
     put('FARBEN', a[20] === 'Wir haben Firmenfarben' && t.farben ? 'Wir haben Firmenfarben: ' + t.farben : a[20]);
     put('LOGO', a[21]);
+    put('LOGO_PREIS', this.logoWunsch() ? this.logoMitWebsiteChf() : '');
     put('VORBILDER', t.vorbilder);
     put('TABU', t.tabu);
     put('REFERENZ', a[24]);
@@ -3369,15 +3555,15 @@ class Component extends DCLogic {
       flapT: s.mailHover ? 'rotateX(180deg)' : 'none',
       mailHintOp: s.mailHover ? 1 : 0,
 
-      checkBg: s.result ? 'linear-gradient(140deg,#2D4CF0 0%,#1E34B8 55%,#11131A 100%)' : s.mid ? 'linear-gradient(120deg,#1E34B8 0%,#2D4CF0 45%,#0E4A2B 100%)' : 'linear-gradient(160deg,#EDEFFF 0%,#F6F5F1 55%,#FBF1E8 100%)',
-      checkFg: (s.result || s.mid) ? '#FFFFFF' : '#11131A',
-      checkCut: (s.result || s.mid) ? '#2439B9' : '#EFF1FE',
+      checkBg: (s.result && !s.review) ?'linear-gradient(140deg,#2D4CF0 0%,#1E34B8 55%,#11131A 100%)' : s.mid ? 'linear-gradient(120deg,#1E34B8 0%,#2D4CF0 45%,#0E4A2B 100%)' : 'linear-gradient(160deg,#EDEFFF 0%,#F6F5F1 55%,#FBF1E8 100%)',
+      checkFg: ((s.result && !s.review) || s.mid) ? '#FFFFFF' : '#11131A',
+      checkCut: ((s.result && !s.review) || s.mid) ? '#2439B9' : '#EFF1FE',
       inQuiz: isCheck && !s.result && !s.mid,
       inMid: isCheck && s.mid,
-      inResult: isCheck && s.result && !s.quick,
+      inResult: isCheck && s.result && !s.quick && !s.review,
       inQuick: isCheck && s.result && s.quick,
       quickMode: s.quick,
-      quickLinkDisplay: s.quick ? 'none' : 'block',
+      quickLinkDisplay: (s.quick || s.editing) ? 'none' : 'block',
       qNum: s.step + 1,
       qTitle: q.t,
       qHelp: q.help || '',
@@ -3404,7 +3590,15 @@ class Component extends DCLogic {
       onFieldKey: (e) => { if (e.key === 'Enter' && e.currentTarget.tagName === 'INPUT') { e.preventDefault(); this.next(); } },
       ringOffset: 483.8 - 483.8 * (s.ring / 100),
       onMidNext: this.midNext,
-      onMidSend: () => { this.setState({ mid: false, result: true, warn: false, cmpGrow: false }); setTimeout(() => this.setState({ cmpGrow: true }), 60); },
+      onMidSend: () => { this.setState({ mid: false, result: true, warn: false, cmpGrow: false, reached: Math.max(s.reached, 12) }); setTimeout(() => this.setState({ cmpGrow: true }), 60); },
+      inReview: isCheck && s.result && s.review,
+      reviewRows: s.review ? this.reviewRows() : [],
+      onReviewEdit: (e) => this.editStep(Number(e.currentTarget.dataset.s)),
+      onReviewDone: () => this.showResult(),
+      editDisplay: s.editing ? 'block' : 'none',
+      editNote: s.editNote, editNoteDisplay: (s.editing && s.editNote) ? 'block' : 'none',
+      onEditToResult: () => this.leaveEdit('result'),
+      onEditToReview: () => this.leaveEdit('review'),
       options: opts.map((o, i) => {
         const sel = q.multi ? (Array.isArray(picked) && picked.indexOf(o) >= 0) : picked === o;
         return {
@@ -3440,9 +3634,9 @@ class Component extends DCLogic {
       },
       warnDisplay: s.warn ? 'block' : 'none',
       warnText: q.multi ? 'Bitte wählen Sie mindestens eine Antwort' : 'Bitte wählen Sie eine Antwort',
-      backVis: s.step > 0 ? 'visible' : 'hidden',
+      backVis: (s.step > 0 && !s.editing) ? 'visible' : 'hidden',
       onBack: this.back, onNext: this.next,
-      nextLabel: (s.quick ? s.step >= 2 : s.step >= 26) ? 'Ergebnis ansehen' : 'Weiter',
+      nextLabel: s.editing ? 'Übernehmen und zurück zum Ergebnis' : (s.quick ? s.step >= 2 : s.step >= 26) ? 'Ergebnis ansehen' : 'Weiter',
       nextDisabled: !complete,
       nextBg: complete ? '#2D4CF0' : '#E2DFD8',
       nextFg: complete ? '#FFFFFF' : '#5B6270',
@@ -3453,11 +3647,16 @@ class Component extends DCLogic {
       refFullDisplay: r.refFull ? 'block' : 'none',
       refSlimDisplay: r.refSlim ? 'block' : 'none',
       refPrice: r.refPrice, refSaving: r.refSaving,
-      hostSelfDisplay: hostWahl === 'selbst' ? 'block' : 'none',
-      hostCardDisplay: (hostWahl === 'egal' || hostWahl === 'schweiz') ? 'block' : 'none',
-      hostLabel: hostWahl === 'schweiz' ? 'BETRIEB BEI MIR, SCHWEIZ' : 'BETRIEB BEI MIR',
-      hostTitle: hostWahl === 'schweiz' ? this.hostingSchweizTxt() : this.hostingAuslandTxt(),
-      hostText: 'Hosting, SSL, Backups und Überwachung. Ich bin Ihre Ansprechperson bei Störungen, Antwort innert zwei Werktagen. Abgerechnet einmal jährlich, kündbar mit 30 Tagen.' + (hostWahl === 'schweiz' ? ' Ihre Website und alle Formulardaten bleiben in der Schweiz.' : ''),
+      // Kostenübersicht im Ergebnis. Der Referenzrabatt gilt nur für die Website.
+      costWebsite: r.refFull ? r.refPrice : r.price,
+      costLogoDisplay: this.logoWunsch() ? 'grid' : 'none',
+      costLogo: this.logoMitWebsiteChf(),
+      costHostDisplay: hostWahl ? 'grid' : 'none',
+      costHost: 'CHF ' + this.fmt(hostWahl === 'schweiz' ? this.HOSTING_SCHWEIZ_CHF : hostWahl === 'egal' ? this.HOSTING_AUSLAND_CHF : 0),
+      costHostNote: hostWahl === 'schweiz' ? 'Betrieb bei mir, Server in der Schweiz' : hostWahl === 'egal' ? 'Betrieb bei mir, Server in der EU oder den USA' : 'Sie hosten selbst',
+      costHostMoreDisplay: (hostWahl === 'egal' || hostWahl === 'schweiz') ? 'block' : 'none',
+      logoAlleinChf: 'CHF ' + this.fmt(this.LOGO_ALLEIN_CHF), logoMitChf: 'CHF ' + this.fmt(this.LOGO_MIT_WEBSITE_CHF),
+      quickHostLine:'Betrieb auf Wunsch ab CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr, mit Servern in der Schweiz CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF) + '. Sie entscheiden nach dem Livegang.',
       hostAuslandTxt: this.hostingAuslandTxt(), hostSchweizTxt: this.hostingSchweizTxt(),
       hostAuslandChf: 'CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF), hostSchweizChf: 'CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF),
       stundensatzTxt: 'CHF ' + this.fmt(this.STUNDENSATZ_CHF) + ' pro Stunde',
@@ -3496,7 +3695,7 @@ class Component extends DCLogic {
         if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done); else done();
       },
       copiedOp: s.copied ? 1 : 0,
-      onReview: () => this.setState({ result: false, step: 0 }),
+      onReview: () => this.showReview(),
       quickToLong: () => this.setState({ quick: false, result: false, mid: false, step: 1, warn: false }),
       quickMailHref: s.consent ? ('mailto:' + this.EMAIL + '?subject=' + encodeURIComponent('Kurzanfrage: ' + (s.ans[0] || 'Anfrage')) + '&body=' + encodeURIComponent(this.quickBody())) : '#',
       quickSendBg: s.consent ? '#FFFFFF' : '#E2DFD8'
