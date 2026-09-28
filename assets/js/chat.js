@@ -2,13 +2,18 @@
 // Kein Cookie, kein localStorage: Der Verlauf lebt nur in dieser Variablen, also im Arbeitsspeicher des Tabs.
 // Antworten kommen im Format Server-Sent Events vom Proxy (chat-proxy/), der ein Sprachmodell über Cloudflare Workers AI fragt.
 
-const VORSCHLAEGE = ['Was kostet eine Website?', 'Wie läuft ein Projekt ab?', 'Was ist nicht inbegriffen?', 'Muss ich etwas anzahlen?'];
+import { VORLAGEN } from './chat-vorlagen.js';
+
+// Vorschläge mit fester Antwort (assets/js/chat-vorlagen.js): kosten keine Anfrage an das Sprachmodell
+const VORSCHLAEGE = Object.keys(VORLAGEN);
+// Fragen zu Preis, Ablauf oder Start: danach den Projekt-Check anbieten
+const CHECK_THEMA = /preis|kost|chf|franken|teuer|günstig|budget|ablauf|wie läuft|vorgehen|start|anfangen|beginnen|offerte|angebot|anfrage|entwurf/i;
 const MAX_VERLAUF = 6;
 const MAIL = 'kontakt@odera.ch';
 
 let verlauf = [];           // [{ role: 'user' | 'assistant', content }]
 let root = null, log = null, eingabe = null, senden = null, intro = null;
-let ausloeser = null, endpoint = '', laufend = null, offen = false;
+let ausloeser = null, endpoint = '', laufend = null, offen = false, starten = null;
 let scrollVorher = '';
 
 // ---------- Darstellung ----------
@@ -46,6 +51,8 @@ const STIL = `
 .oc-fuss{padding:0 12px 12px;background:#FFFFFF}
 .oc-cta{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:15px;font-weight:600;text-decoration:none}
 .oc-cta:hover{background:#BFEE7C}
+.oc-start{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:none;border-radius:999px;background:#D6F24B;color:#11131A;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.oc-start:hover{background:#BFEE7C}
 .oc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .oc-root :focus-visible{outline:3px solid #11131A;outline-offset:2px}
 @media(max-width:560px){.oc-root{inset:0;width:auto;height:auto;border:none;border-radius:0;box-shadow:none}.oc-kopf{padding-left:16px}.oc-log{padding:16px}}
@@ -140,6 +147,23 @@ function blase(art, inhalt) {
   return b;
 }
 
+function checkAnbieten(text) {
+  if (!starten || !CHECK_THEMA.test(text) || location.pathname.startsWith('/projekt-check')) return;
+  const k = el('button', { type: 'button', class: 'oc-start', text: 'Projekt-Check hier starten', onclick: () => { schliessen(false); starten(); } });
+  log.appendChild(k); zuUnterst();
+}
+
+// Feste Antwort auf einen Vorschlag, ohne Anfrage an das Sprachmodell
+function vorlage(text) {
+  if (laufend) return;
+  if (intro) { const warImIntro = intro.contains(document.activeElement); intro.remove(); intro = null; if (warImIntro) eingabe.focus(); }
+  blase('oc-ich', text);
+  blase('oc-ki', VORLAGEN[text]);
+  verlauf.push({ role: 'user', content: text }, { role: 'assistant', content: VORLAGEN[text] });
+  while (verlauf.length > MAX_VERLAUF) verlauf.splice(0, 2);
+  checkAnbieten(text);
+}
+
 function fehlermeldung(text) {
   const b = el('div', { class: 'oc-msg oc-fehler', role: 'alert' });
   markdown(text, b); log.appendChild(b); zuUnterst();
@@ -214,6 +238,7 @@ async function frage(text) {
   const sauber = ohneStriche(roh.trim());
   verlauf.push({ role: 'user', content: text }, { role: 'assistant', content: sauber });
   while (verlauf.length > MAX_VERLAUF) verlauf.splice(0, 2);
+  checkAnbieten(text);
 }
 
 // ---------- Aufbau ----------
@@ -223,7 +248,7 @@ function introBauen() {
   hinweis.appendChild(el('a', { href: '/datenschutz/#ds-8', text: 'Datenschutzerklärung', onclick: () => { if (window.innerWidth <= 560) schliessen(); } }));
   hinweis.appendChild(document.createTextNode('.'));
   const chips = el('div', { class: 'oc-chips', role: 'group', 'aria-label': 'Vorschläge' });
-  for (const v of VORSCHLAEGE) chips.appendChild(el('button', { type: 'button', class: 'oc-chip', text: v, onclick: () => frage(v) }));
+  for (const v of VORSCHLAEGE) chips.appendChild(el('button', { type: 'button', class: 'oc-chip', text: v, onclick: () => vorlage(v) }));
   intro.append(hinweis, chips);
   log.appendChild(intro);
 }
@@ -271,7 +296,7 @@ function bauen() {
   senden = el('button', { type: 'submit', class: 'oc-senden', text: 'Senden' });
   const form = el('form', { class: 'oc-form', onsubmit: (e) => { e.preventDefault(); frage(eingabe.value); } },
     [el('label', { class: 'oc-sr', for: 'oc-eingabe', text: 'Ihre Frage an den Assistenten' }), eingabe, senden]);
-  const fuss = el('div', { class: 'oc-fuss' }, [el('a', { href: '/projekt-check/', class: 'oc-cta', text: 'Projekt-Check starten', onclick: () => schliessen(false) })]);
+  const fuss = el('div', { class: 'oc-fuss' }, [el('a', { href: '/projekt-check/', class: 'oc-cta', text: 'Projekt-Check starten', onclick: (e) => { schliessen(false); if (starten && !e.metaKey && !e.ctrlKey) { e.preventDefault(); starten(); } } })]);
   root.append(kopf, log, form, fuss);
   introBauen();
 }
@@ -283,6 +308,7 @@ function beiNavigation() { if (offen && location.pathname.startsWith('/projekt-c
 
 export function oeffnen(opts = {}) {
   endpoint = opts.endpoint || endpoint;
+  starten = opts.starten || starten;
   ausloeser = opts.ausloeser || document.activeElement;
   if (!root) bauen();
   if (!offen) {

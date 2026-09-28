@@ -214,6 +214,43 @@ kontakt@odera.ch. Danach folgt ein Dankesbildschirm mit Referenz (zum Beispiel O
   «Text kopieren» an.
 - Einrichtung und Grenzen: `anfrage-proxy/README.md`.
 
+## Einstiege in den Projekt-Check
+
+Der Check beginnt dort, wo jemand Lust darauf bekommt, meist mit einer einzigen Frage. Schon gegebene
+Antworten werden übernommen und nicht nochmals gefragt (`EINSTIEGE` und `checkStarten()` in `index.html`).
+Jeder Einstieg gibt eine Quelle mit. Sie steht nur in der E-Mail an dich (Kurzübersicht «Einstieg»),
+ohne Tracking und ohne Cookies.
+
+| Quelle | Ort | Vorbelegt |
+|---|---|---|
+| `hero` | Startseite, erste Frage als Chips | Ziel |
+| `rechner` | Angebot, Preis-Rechner | Funktionen, auf Wunsch Logo und Texte |
+| `paket-website`, `paket-standard`, `paket-pro` | Angebot, Knopf auf der Paketkarte | Seitenzahl |
+| `doppelmeter` | Musterprojekte, «So etwas für meinen Betrieb» | Branche Handwerk, Ziel Anrufen, bis 5 Seiten |
+| `slider` | Startseite, unter dem Ladezeit-Vergleich | bestehende Website, «wirkt veraltet, lädt langsam» |
+| `ablauf` | Ablauf, bei Schritt 1 | nichts |
+| `faq` | Angebot, am Ende der häufigen Fragen | nichts |
+| `chat` | Chat-Assistent, nach Fragen zu Preis, Ablauf oder Start | nichts (keine Chat-Inhalte) |
+| `ueber` | Über mich, Karte am Ende | nichts |
+| `leiste` | Leiste unten (Handy und Desktop) | nichts |
+| `brief` | Brief-Link `/start/?firma=...&branche=...` | Firma, Branche |
+
+Der Fortschritt bleibt im `sessionStorage` des Tabs (kein Cookie) und ist nach dem Senden gelöscht.
+Die Paket-Logik steht einmal in `paketAus()`; Projekt-Check und Preis-Rechner nutzen sie beide.
+
+### Brief-Links und QR-Codes
+
+```bash
+cd tools/brief
+npm install
+node brief-links.mjs firmen.csv
+```
+
+`firmen.csv` hat pro Zeile `Firma;Branche` (Kopfzeile erlaubt). Branche ist `handwerk`, `gastro`,
+`gesundheit`, `beratung`, `beauty`, `laden` oder leer. Ergebnis in `_lokal/brief/`: `links.csv` und je
+Firma ein QR-Code als SVG. Ungültige Zeilen werden gemeldet und übersprungen. Die Website zeigt dann
+«Guten Tag, {Firma}.» über der ersten Frage und entfernt die Angaben aus der Adresszeile.
+
 ## Stellen, die du pflegen musst
 
 Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse

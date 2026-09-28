@@ -111,6 +111,43 @@ button,input,textarea{font-family:inherit}
 @keyframes heroPop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes scrollBob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
 @media(max-width:430px){.hero-scrollhint{display:none}.hero-cta-row{flex-direction:column;align-items:stretch}.hero-ausl>div{flex-wrap:wrap}}
+.hero-frage{max-width:520px;margin:0 0 16px}
+.einstieg{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:600;color:#1E34B8}
+.einstieg span{transition:transform 140ms ease-out}.einstieg:hover span{transform:translateX(3px)}
+.einstieg-zeile{margin:6px 0 0;text-align:center;font-size:15px}
+.rechner{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:32px;margin:0 0 48px;padding:32px;border-radius:20px;background:#FFFFFF;border:1px solid #E2DFD8}
+.rechner-t{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(24px,2.4vw,32px);line-height:1.15;letter-spacing:-0.02em;margin:0 0 8px}
+.rechner-u{font-size:15px;line-height:1.5;color:#5B6270;margin:0 0 20px}
+.rechner-fn{display:flex;flex-wrap:wrap;gap:8px}
+.rfn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1px solid #A8B0BD;border-radius:999px;background:#FFFFFF;color:#11131A;font:inherit;font-size:15px;line-height:1.3;text-align:left;cursor:pointer;transition:background 140ms ease-out,border-color 140ms ease-out}
+.rfn svg{flex:none;color:#2D4CF0}
+.rfn[aria-checked="true"]{background:#2D4CF0;border-color:#2D4CF0;color:#FFFFFF}.rfn[aria-checked="true"] svg{color:#FFFFFF}
+.rfn[aria-disabled="true"]{background:#1E34B8;border-color:#1E34B8;cursor:default}
+.rfn:focus-visible{outline:3px solid #11131A;outline-offset:2px}
+.rechner-zt{margin:20px 0 8px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#5B6270}
+.rechner-erg{display:flex;flex-direction:column;padding:24px;border-radius:16px;background:linear-gradient(140deg,#2D4CF0 0%,#1E34B8 100%);color:#FFFFFF}
+.rechner-l{margin:0 0 6px;font-size:12px;letter-spacing:0.06em}
+.rechner-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.rechner-paket{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(24px,2.4vw,32px);line-height:1.15}
+.rechner-preis{margin:8px 0 10px;font-size:clamp(34px,3.6vw,48px);line-height:1;font-variant-numeric:tabular-nums}
+.rechner-badge{align-self:flex-start;margin:0 0 14px;padding:4px 10px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:12px}
+.rechner-zeilen{margin:0 0 18px;padding:0}
+.rechner-zeilen div{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid rgba(255,255,255,0.3);font-size:14px}
+.rechner-zeilen dt,.rechner-zeilen dd{margin:0}.rechner-zeilen dd{text-align:right;font-size:13px}
+.rechner-los{margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 20px;border-radius:999px;background:#D6F24B!important;color:#11131A;font-size:16px;font-weight:700;text-align:center;text-decoration:none}
+.card[data-passt="1"]{outline:3px solid #2D4CF0;outline-offset:4px;transition:outline-color 200ms ease-out}
+@media(max-width:900px){.rechner{grid-template-columns:1fr;padding:20px}}
+.hero-gruss{margin:0 0 6px;font-size:16px;font-weight:600;color:#1E34B8}
+.hero-frage-t{margin:0 0 12px;font-size:17px;font-weight:700;color:#11131A}
+.hero-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,56px);gap:10px}
+.hero-chip{min-height:56px;padding:0 18px;border:1px solid #2D4CF0;border-radius:999px;background:#FFFFFF;color:#11131A;font:inherit;font-size:17px;font-weight:600;text-align:left;cursor:pointer;transition:background 140ms ease-out,color 140ms ease-out}
+.hero-chip:hover{background:#2D4CF0;color:#FFFFFF}
+.hero-chip:focus-visible{outline:3px solid #11131A;outline-offset:2px}
+.hero-frage-n{margin:12px 0 0;font-size:14px;line-height:1.5;color:#5B6270}
+.hero-frage-l{display:flex;flex-wrap:wrap;gap:8px 24px;margin:10px 0 0;font-size:15px}
+.hero-frage-l a{display:inline-flex;align-items:center;min-height:44px}
+::view-transition-old(einstieg),::view-transition-new(einstieg){animation-duration:360ms}
+@media(max-width:430px){.hero-chip{font-size:16px;padding:0 12px;text-align:center}.hero-frage-l{gap:0 24px}}
 @keyframes dragWander{0%,65%{transform:translateX(0)}82%{transform:translateX(-6px)}100%{transform:translateX(0)}}
 .drag-hint-mobile{display:none}
 .wrap.hero-pad{padding-top:96px}
@@ -145,6 +182,11 @@ button,input,textarea{font-family:inherit}
 .navcta-sm{display:none}
 .burger{display:none;align-items:center;gap:12px}
 .mobbar{display:none}
+.mobbar{position:fixed;left:0;right:0;bottom:0;z-index:55;align-items:center;gap:10px;padding:8px 12px 8px 16px;padding-bottom:calc(8px + env(safe-area-inset-bottom));background:#11131A}
+.mobbar-t{flex:1;min-width:0;margin:0;font-size:14px;line-height:1.3;font-weight:600;color:#F6F5F1}
+.mobbar-go{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px;font-weight:700;text-decoration:none}
+.mobbar-chat{display:inline-flex;align-items:center;justify-content:center;flex:none;width:48px;height:48px;border:none;border-radius:999px;background:#2D4CF0;color:#FFFFFF;cursor:pointer}
+.mobbar a:focus-visible,.mobbar button:focus-visible{outline:3px solid #D6F24B;outline-offset:2px}
 .deskbar{display:block}
 .g-prom{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
 .g-band{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:end}
@@ -271,11 +313,13 @@ button,input,textarea{font-family:inherit}
 .apill{display:inline-flex;align-items:center;padding:6px 12px;border:1px solid #E2DFD8;border-radius:999px;background:#FFFFFF;font-size:12px;line-height:1.3;cursor:pointer;text-align:left;max-width:100%;color:#11131A}
 .apill:hover{border-color:#11131A}
 @media(max-width:560px){.apills{display:none}}
-.chat-btn{position:fixed;right:24px;bottom:24px;z-index:56;align-items:center;gap:10px;min-height:52px;padding:0 20px 0 16px;border:1px solid #11131A;border-radius:999px;background:#FFFFFF;color:#11131A;font-size:16px;font-weight:600;box-shadow:0 10px 30px rgba(17,19,26,0.14);cursor:pointer;transition:bottom 200ms ease-out,background 120ms linear}
-.chat-btn:hover{background:#EDEFFF}
+.chat-btn{position:fixed;right:24px;bottom:24px;z-index:56;align-items:center;gap:12px;min-height:64px;padding:0 28px 0 22px;border:none;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:18px;font-weight:700;box-shadow:0 14px 34px rgba(45,76,240,0.38);cursor:pointer;transition:bottom 200ms ease-out,background 120ms linear}
+.chat-btn svg{width:28px;height:28px}
+.chat-btn:hover{background:#1E34B8}
+.chat-btn:focus-visible{outline:3px solid #11131A;outline-offset:3px}
 .chat-btn[data-bar="1"]{bottom:72px}
 @keyframes chatIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@media(max-width:560px){.chat-btn{right:16px;bottom:16px;width:52px;padding:0;justify-content:center}.chat-btn-l{display:none}.chat-btn[data-bar="1"]{bottom:80px}}
+@media(max-width:560px){.chat-btn{right:16px;bottom:16px;width:60px;min-height:60px;padding:0;justify-content:center}.chat-btn-l{display:none}.chat-btn[data-bar="1"]{display:none!important}}
 @media print{.chat-btn{display:none!important}}
 .mf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .mf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -383,7 +427,7 @@ button,input,textarea{font-family:inherit}
  .g-band{grid-template-columns:repeat(2,1fr);gap:32px 24px}
  .g-two,.g-foot,.g-ans,.g-excl{grid-template-columns:1fr}
  .g-excl{gap:0}
- .mobbar{display:block}
+ .mobbar{display:flex}
  .deskbar{display:none}
  .tagline{display:none}
  .footpad{padding-bottom:88px}
@@ -486,9 +530,16 @@ button,input,textarea{font-family:inherit}
           <span class="mono" style="display:inline-flex;margin-bottom:32px;padding:8px 16px;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:13px;letter-spacing:0.08em;animation:{{ heroAnim0 }}">WEBDESIGN FÜR SCHWEIZER BETRIEBE</span>
           <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,calc(25.8px + 2.1vw),56px);line-height:1.06;letter-spacing:-0.03em;margin:0 0 20px;text-wrap:balance;animation:{{ heroAnim1 }}">Sie sehen Ihre neue Website, bevor Sie einen Franken bezahlen.</h1>
           <p style="font-size:18px;line-height:1.52;color:#5B6270;margin:0 0 28px;max-width:480px;animation:{{ heroAnim2 }}">Sie füllen ein Formular aus, ich gestalte daraus eine fertige Seite. Gefällt sie Ihnen, machen wir weiter. Gefällt sie Ihnen nicht, zahlen Sie nichts.</p>
-          <div class="row hero-cta-row" style="gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:16px;animation:{{ heroAnim3 }}">
-            <a href="/projekt-check/" class="g3" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 32px;border-radius:999px;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Formular ausfüllen, rund 6 Minuten</a>
-            <a href="/angebot/" style="font-size:15px">Was das kostet</a>
+          <div class="hero-frage" style="animation:{{ heroAnim3 }}">
+            <p class="hero-gruss" style="display:{{ grussDisplay }}">{{ grussText }}</p>
+            <p class="hero-frage-t" id="hero-frage-t">Was sollen Besucher auf Ihrer neuen Website tun?</p>
+            <div class="hero-chips" role="group" aria-labelledby="hero-frage-t">
+              <sc-for list="{{ heroChips }}" as="c" hint-placeholder-count="4">
+                <button type="button" class="hero-chip" data-v="{{ c.v }}" onClick="{{ onHeroChip }}" aria-describedby="hero-frage-n">{{ c.label }}</button>
+              </sc-for>
+            </div>
+            <p class="hero-frage-n" id="hero-frage-n">Ein Klick startet den Projekt-Check. Kostenloser Entwurf innert 5 Arbeitstagen, bezahlt wird erst, wenn er Ihnen gefällt.</p>
+            <p class="hero-frage-l"><a href="/projekt-check/" data-quelle="hero" onClick="{{ onEinstieg }}">Mit allen Fragen von vorne beginnen</a><a href="/angebot/">Was das kostet</a></p>
           </div>
         </div>
         <div class="cmpcol" style="align-self:start;margin-bottom:0;animation:{{ heroAnim4 }}">
@@ -577,6 +628,7 @@ button,input,textarea{font-family:inherit}
             <span>Ziehen Sie den Regler</span>
           </p>
           <p class="drag-hint-mobile" style="align-items:center;justify-content:center;font-size:12px;color:#5B6270;margin:14px 0 0;opacity:{{ dragHintOp }}">Regler ziehen</p>
+          <p class="einstieg-zeile"><a href="/projekt-check/" class="einstieg" data-quelle="slider" onClick="{{ onEinstieg }}">Meine Seite ist auch zu langsam<span aria-hidden="true">→</span></a></p>
 
             <div class="mono" style="display:flex;align-items:center;gap:8px;font-size:12px;color:#5B6270;margin-bottom:14px">
               <span>DIESE WERTE GELTEN FÜR</span>
@@ -871,8 +923,40 @@ button,input,textarea{font-family:inherit}
         <p style="font-size:15px;line-height:1.5;margin:0 0 32px"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
       </div>
 
+      <div class="rechner" id="rechner">
+        <div class="rechner-links">
+          <h2 id="rechner-t" class="rechner-t">Was soll Ihre Seite können?</h2>
+          <p class="rechner-u">Tippen Sie an, was Sie brauchen. Das passende Paket wird darunter hervorgehoben.</p>
+          <div class="rechner-fn" role="group" aria-labelledby="rechner-t">
+            <sc-for list="{{ rechnerKarten }}" as="c" hint-placeholder-count="8">
+              <button type="button" class="rfn" role="switch" aria-checked="{{ c.an }}" aria-disabled="{{ c.fix }}" data-v="{{ c.v }}" onClick="{{ onRechnerFn }}">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ c.icon }}"></path></svg>
+                <span>{{ c.label }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <p class="mono rechner-zt" id="rechner-zt">Zusätze, optional</p>
+          <div class="rechner-fn rechner-fn-z" role="group" aria-labelledby="rechner-zt">
+            <button type="button" class="rfn" role="switch" aria-checked="{{ rechnerLogoAn }}" onClick="{{ onRechnerLogo }}"><span>Logo dazu, {{ logoMitChf }}</span></button>
+            <button type="button" class="rfn" role="switch" aria-checked="{{ rechnerTexteAn }}" onClick="{{ onRechnerTexte }}"><span>Texte von mir, CHF 150 pro Seite</span></button>
+          </div>
+        </div>
+        <div class="rechner-erg">
+          <p class="mono rechner-l">PASST AM BESTEN</p>
+          <p class="rechner-paket" aria-live="polite">Paket {{ rechnerPaket }}<span class="rechner-sr">, Richtwert {{ rechnerPreisZiel }}</span></p>
+          <p class="mono rechner-preis" aria-hidden="true">{{ rechnerPreisTxt }}</p>
+          <p class="mono rechner-badge">Richtwert, kein verbindliches Angebot</p>
+          <dl class="rechner-zeilen">
+            <sc-for list="{{ rechnerZeilen }}" as="z" hint-placeholder-count="1">
+              <div><dt>{{ z.l }}</dt><dd class="mono">{{ z.v }}</dd></div>
+            </sc-for>
+          </dl>
+          <a href="/projekt-check/" class="rechner-los" onClick="{{ onRechnerLos }}">Mit dieser Auswahl kostenlosen Entwurf anfragen</a>
+        </div>
+      </div>
+
       <div class="g-pkg" style="align-items:stretch">
-        <div class="card pk-start" style="background:#FFFFFF;border:1px solid #E2DFD8;border-radius:20px;padding:32px;display:flex;flex-direction:column">
+        <div class="card pk-start" data-passt="{{ passtWebsite }}" style="background:#FFFFFF;border:1px solid #E2DFD8;border-radius:20px;padding:32px;display:flex;flex-direction:column">
           <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 12px">Website</p>
           <p class="mono" style="font-size:clamp(36px,4vw,56px);line-height:1.05;margin:0 0 8px;font-variant-numeric:tabular-nums">CHF 890</p>
           <p class="mono" style="font-size:12px;letter-spacing:0.04em;color:#5B6270;margin:0 0 20px">einmalig</p>
@@ -887,10 +971,10 @@ button,input,textarea{font-family:inherit}
             <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 10 Arbeitstage nach Ihrer Freigabe</li>
           </ul>
           <p style="margin:0 0 24px;padding:16px;background:var(--wash-2);border-radius:12px;font-size:15px;line-height:1.5">Ihr Aufwand: ein Formular und eine Rückmeldung.</p>
-          <a href="/projekt-check/?paket=website" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:none;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Website anfragen</a>
+          <a href="/projekt-check/?paket=website" data-quelle="paket-website" onClick="{{ onEinstieg }}" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:none;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Mit Paket Website starten</a>
         </div>
 
-        <div class="card pk-std" style="background:#FFFFFF;border:2px solid #11131A;border-radius:20px;padding:32px;display:flex;flex-direction:column;box-shadow:0 18px 48px rgba(17,19,26,0.16)">
+        <div class="card pk-std" data-passt="{{ passtStandard }}" style="background:#FFFFFF;border:2px solid #11131A;border-radius:20px;padding:32px;display:flex;flex-direction:column;box-shadow:0 18px 48px rgba(17,19,26,0.16)">
           <span class="mono" style="align-self:flex-start;padding:6px 14px;border-radius:999px;background:#11131A;color:#F6F5F1;font-size:13px;letter-spacing:0.04em;margin-bottom:16px">AM HÄUFIGSTEN GEWÄHLT</span>
           <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 12px">Standard</p>
           <p class="mono" style="font-size:clamp(36px,4vw,56px);line-height:1.05;margin:0 0 8px;font-variant-numeric:tabular-nums">CHF 1'900</p>
@@ -909,10 +993,10 @@ button,input,textarea{font-family:inherit}
             <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 15 Arbeitstage nach Ihrer Freigabe</li>
           </ul>
           <p style="margin:0 0 24px;padding:16px;background:var(--wash-2);border-radius:12px;font-size:15px;line-height:1.5">Ihr Aufwand: ein Formular, Ihre Bilder, zwei Rückmeldungen.</p>
-          <a href="/projekt-check/?paket=standard" data-magnet="1" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Standard anfragen</a>
+          <a href="/projekt-check/?paket=standard" data-quelle="paket-standard" onClick="{{ onEinstieg }}" data-magnet="1" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Mit Paket Standard starten</a>
         </div>
 
-        <div class="card pk-plus" style="background:#FFFFFF;border:1px solid #E2DFD8;border-radius:20px;padding:32px;display:flex;flex-direction:column">
+        <div class="card pk-plus" data-passt="{{ passtPro }}" style="background:#FFFFFF;border:1px solid #E2DFD8;border-radius:20px;padding:32px;display:flex;flex-direction:column">
           <p style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6270;margin:0 0 12px">Pro</p>
           <p class="mono" style="font-size:clamp(36px,4vw,56px);line-height:1.05;margin:0 0 8px;font-variant-numeric:tabular-nums">CHF 3'400</p>
           <p style="font-size:12px;letter-spacing:0.04em;color:#5B6270;margin:0 0 20px">einmalig</p>
@@ -929,7 +1013,7 @@ button,input,textarea{font-family:inherit}
             <li style="display:flex;gap:12px;font-size:17px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 25 Arbeitstage nach Ihrer Freigabe</li>
           </ul>
           <p style="margin:0 0 24px;padding:16px;background:var(--wash-2);border-radius:12px;font-size:15px;line-height:1.5">Ihr Aufwand: ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
-          <a href="/projekt-check/?paket=pro" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:none;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Pro anfragen</a>
+          <a href="/projekt-check/?paket=pro" data-quelle="paket-pro" onClick="{{ onEinstieg }}" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;border-radius:999px;background:none;border:1px solid #11131A;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Mit Paket Pro starten</a>
         </div>
       </div>
 
@@ -1117,6 +1201,7 @@ button,input,textarea{font-family:inherit}
           </sc-for>
         </div>
         <div class="row" style="margin-top:48px;gap:24px">
+          <p style="font-size:17px;line-height:1.65;margin:0;flex-basis:100%">Noch unsicher? Starten Sie mit einer einzigen Frage. <a href="/projekt-check/" class="einstieg" data-quelle="faq" onClick="{{ onEinstieg }}">Zum Projekt-Check<span aria-hidden="true">→</span></a></p>
           <p style="font-size:17px;line-height:1.65;margin:0">Noch eine Frage offen? Schreiben Sie mir zwei Zeilen.</p>
           <a href="{{ mailKontakt }}" style="display:inline-flex;align-items:center;min-height:56px;padding:0 32px;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">kontakt@odera.ch</a>
           <button type="button" onClick="{{ openChat }}" aria-haspopup="dialog" style="display:{{ chatFaqDisplay }};align-items:center;min-height:56px;padding:0 28px;border-radius:999px;border:1px solid #11131A;background:#FFFFFF;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">Assistent fragen</button>
@@ -1186,6 +1271,7 @@ button,input,textarea{font-family:inherit}
                   <p class="st-title">{{ s.title }} <span class="mono st-tag">{{ s.tag }}</span></p>
                   <p class="st-text">{{ s.text }}</p>
                   <p class="st-text" style="display:{{ s.altDisplay }}">{{ s.altText }}</p>
+                  <p class="st-text" style="display:{{ s.startDisplay }}"><a href="/projekt-check/" class="einstieg" data-quelle="ablauf" onClick="{{ onEinstieg }}">Schritt 1 jetzt starten<span aria-hidden="true">→</span></a></p>
                 </div>
                 <div class="st-side">
                   <button type="button" role="switch" aria-checked="{{ s.on }}" data-i="{{ s.i }}" onClick="{{ onStep }}" style="display:{{ s.swDisplay }};align-items:center;gap:10px;min-height:44px;padding:0;background:none;border:none;cursor:pointer">
@@ -1325,6 +1411,7 @@ button,input,textarea{font-family:inherit}
             <p style="font-size:17px;line-height:1.65;color:#5B6270;margin:0 0 24px;max-width:680px;text-wrap:pretty">Ausgangslage: Betrieb ohne Website, Anfragen nur über Empfehlung. Ziel: Der Besucher soll anrufen. Entscheidung: Die Telefonnummer steht in jedem Bildschirm sichtbar, alles andere ordnet sich darunter.</p>
             <p class="mono" style="font-size:13px;line-height:1.6;color:#11131A;margin:0 0 24px"><span style="white-space:nowrap">Ladezeit 0,9 s</span> · <span style="white-space:nowrap">5 Seiten</span> · <span style="white-space:nowrap">Paket Standard</span></p>
             <button type="button" data-src="muster/doppelmeter.html" data-title="Doppelmeter" onClick="{{ openMuster }}" style="display:inline-flex;align-items:center;width:fit-content;min-height:56px;padding:0 26px;border:none;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:17px;font-weight:600;cursor:pointer">Ganze Seite ansehen</button>
+            <a href="/projekt-check/" class="einstieg" data-quelle="doppelmeter" onClick="{{ onEinstieg }}">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
           </div>
           <div class="dev">
             <div role="radiogroup" aria-label="Ansicht Doppelmeter" class="mp-switch" style="position:relative;display:inline-flex;padding:4px;border:1px solid #E2DFD8;border-radius:999px;background:#FFFFFF;margin-bottom:24px">
@@ -1351,6 +1438,7 @@ button,input,textarea{font-family:inherit}
           <p style="font-size:16px;line-height:1.6;color:#5B6270;margin:0 0 16px;text-wrap:pretty">Ausgangslage: Betrieb ohne Website, Anfragen nur über Empfehlung. Ziel: Der Besucher soll anrufen. Entscheidung: Die Telefonnummer steht in jedem Bildschirm sichtbar, alles andere ordnet sich darunter.</p>
           <p class="mono" style="font-size:14px;line-height:1.7;color:#11131A;margin:0 0 20px"><span style="white-space:nowrap">Ladezeit 0,9 s</span> · <span style="white-space:nowrap">5 Seiten</span> · <span style="white-space:nowrap">Paket Standard</span></p>
           <button type="button" data-src="muster/doppelmeter.html" data-title="Doppelmeter" onClick="{{ openMuster }}" style="display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;border:none;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:17px;font-weight:600;cursor:pointer">Ganze Seite ansehen</button>
+            <a href="/projekt-check/" class="einstieg" data-quelle="doppelmeter" onClick="{{ onEinstieg }}">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -1718,7 +1806,7 @@ button,input,textarea{font-family:inherit}
             <p data-nosnap="1" class="mono" style="display:flex;align-items:center;gap:12px;font-size:15px;color:#F6F5F1;margin:0 0 24px">
               <span style="width:10px;height:10px;border-radius:999px;background:{{ availDot }};flex:none"></span>{{ availability }}
             </p>
-            <a href="/projekt-check/" data-magnet="1" onMouseEnter="{{ onMailHover }}" onMouseLeave="{{ onMailLeave }}" style="display:flex;align-items:center;gap:24px;min-height:88px;padding:20px 32px;border-radius:999px;background:#D6F24B;color:#11131A;text-decoration:none;box-shadow:{{ mailShadow }};transition:box-shadow 200ms ease-out">
+            <a href="/projekt-check/" data-quelle="ueber" onClick="{{ onEinstieg }}" data-magnet="1" onMouseEnter="{{ onMailHover }}" onMouseLeave="{{ onMailLeave }}" style="display:flex;align-items:center;gap:24px;min-height:88px;padding:20px 32px;border-radius:999px;background:#D6F24B;color:#11131A;text-decoration:none;box-shadow:{{ mailShadow }};transition:box-shadow 200ms ease-out">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#11131A" stroke-width="1.8" style="flex:none">
                 <rect x="2" y="6" width="24" height="16" rx="3"></rect>
                 <path d="M2 8l12 8 12-8" style="transform:{{ flapT }};transform-origin:14px 8px;transition:transform 200ms ease-out"></path>
@@ -1842,7 +1930,7 @@ button,input,textarea{font-family:inherit}
         </div>
         <div id="ds-3" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">3. Keine Cookies, keine Statistik</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Diese Website setzt keine Cookies. Es findet keine Reichweitenmessung, keine Statistik und kein Tracking statt. Es sind keine Analysedienste, Werbenetzwerke oder Social-Media-Plugins eingebunden. Die auf der Startseite angezeigte Ladezeit wird ausschliesslich im Browser des Besuchers gemessen und nirgendwohin übermittelt. Auch der Chat-Assistent setzt keine Cookies und speichert nichts in Ihrem Browser. Was er übermittelt, wenn Sie ihn nutzen, steht in Abschnitt 8.{{ ds3Zusatz }}</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Diese Website setzt keine Cookies. Es findet keine Reichweitenmessung, keine Statistik und kein Tracking statt. Es sind keine Analysedienste, Werbenetzwerke oder Social-Media-Plugins eingebunden. Die auf der Startseite angezeigte Ladezeit wird ausschliesslich im Browser des Besuchers gemessen und nirgendwohin übermittelt. Auch der Chat-Assistent setzt keine Cookies und speichert nichts in Ihrem Browser. Was er übermittelt, wenn Sie ihn nutzen, steht in Abschnitt 8.{{ ds3Zusatz }} Wenn Sie den Projekt-Check beginnen, merkt sich Ihr Browser Ihre Antworten im Sitzungsspeicher (sessionStorage) dieses Tabs, damit Sie nach einem Neuladen weitermachen können. Das ist kein Cookie: Die Angaben bleiben auf Ihrem Gerät und werden gelöscht, wenn Sie den Tab schliessen oder die Anfrage senden. Aus welchem Bereich der Website Sie den Projekt-Check gestartet haben, zum Beispiel über den Preis-Rechner, steht nur in der Anfrage an mich und wird nirgends sonst gespeichert.</p>
         </div>
         <div id="ds-4" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">4. Schriften</h2>
@@ -1902,7 +1990,7 @@ button,input,textarea{font-family:inherit}
         </sc-if>
         <div id="ds-8" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">8. Chat-Assistent</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Auf dieser Website können Sie einem Chat-Assistenten Fragen zu meinem Angebot stellen. Die Antworten erzeugt ein KI-Programm. Sie sind unverbindlich und ersetzen keine Offerte. Der Assistent wird erst geladen, wenn Sie ihn öffnen, und Daten werden nur übermittelt, wenn Sie eine Nachricht absenden. Die Nutzung ist freiwillig. Sie erreichen mich jederzeit auch per E-Mail oder über den Projekt-Check.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Auf dieser Website können Sie einem Chat-Assistenten Fragen zu meinem Angebot stellen. Die Antworten erzeugt ein KI-Programm. Sie sind unverbindlich und ersetzen keine Offerte. Der Assistent wird erst geladen, wenn Sie ihn öffnen, und Daten werden nur übermittelt, wenn Sie eine Nachricht absenden. Die vier vorgeschlagenen Fragen beantwortet die Website selbst, dabei wird nichts übermittelt. Die Nutzung ist freiwillig. Sie erreichen mich jederzeit auch per E-Mail oder über den Projekt-Check.</p>
           <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Bearbeitet werden Ihre Nachricht, der bisherige Verlauf des Gesprächs (höchstens die letzten sechs Nachrichten) und Ihre IP-Adresse. Den Verlauf hält nur Ihr Browser im Arbeitsspeicher des geöffneten Tabs. Er verschwindet, wenn Sie den Tab schliessen, die Seite neu laden oder «Neu starten» wählen. Es werden keine Cookies gesetzt und nichts in Ihrem Browser gespeichert. Bitte geben Sie im Chat keine persönlichen Daten ein.</p>
           <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Empfängerin ist Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA. Bei Cloudflare laufen sowohl die Vermittlungsstelle, die Ihre Anfrage prüft, als auch das Sprachmodell, das die Antwort erzeugt (Cloudflare Workers AI). Das Modell läuft auf Servern von Cloudflare. Die Verarbeitung findet im weltweiten Netz von Rechenzentren von Cloudflare statt, also möglicherweise ausserhalb der Schweiz, zum Beispiel in den USA.</p>
           <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Cloudflare ist nach dem Swiss-U.S. Data Privacy Framework zertifiziert. Im Register des US-Handelsministeriums steht am 28. September 2026 der Status «Active, Re-certification under Review». Zusätzlich enthält der Datenverarbeitungsvertrag von Cloudflare Standardvertragsklauseln, die für Daten aus der Schweiz an das Schweizer Recht angepasst sind.</p>
@@ -2071,15 +2159,21 @@ button,input,textarea{font-family:inherit}
       </div>
       <div class="wrap" style="padding-top:16px;padding-bottom:120px">
         <p class="mono" style="text-align:right;font-size:13px;color:#5B6270;margin:0 0 40px">{{ fortschritt }}</p>
+        <div class="q-weiter" role="region" aria-label="Fortsetzen" style="display:{{ fortsetzenDisplay }}">
+          <p>Sie haben den Projekt-Check in diesem Tab schon angefangen. Weiter, wo Sie aufgehört haben?</p>
+          <button type="button" class="q-weiter-ja" data-own-enter="1" onClick="{{ onFortsetzen }}">Weiter</button>
+          <button type="button" class="q-weiter-nein" data-own-enter="1" onClick="{{ onNeuBeginnen }}">Neu beginnen</button>
+        </div>
         <div class="qgrid">
           <div class="qleft">
             <p role="status" style="display:{{ editNoteDisplay }};font-size:15px;line-height:1.5;color:#11131A;background:#FFFFFF;border:1px solid #2D4CF0;border-radius:12px;padding:12px 16px;margin:0 0 20px">{{ editNote }}</p>
             <p class="mono" style="font-size:12px;letter-spacing:0.08em;color:#2D4CF0;margin:0 0 8px">{{ partLabel }}</p>
             <p class="mono qnum" aria-hidden="true">{{ qNumPad }}</p>
-            <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,44px);line-height:1.1;letter-spacing:-0.03em;margin:0 0 16px;text-wrap:pretty">{{ qTitle }}</h2>
+            <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,44px);line-height:1.1;letter-spacing:-0.03em;margin:0 0 16px;text-wrap:pretty;view-transition-name:{{ vtName }}">{{ qTitle }}</h2>
             <p class="mono q-wichtig" style="display:{{ wichtigDisplay }}">Die wichtigste Frage für Ihren Entwurf</p>
             <p style="font-size:15px;line-height:1.55;color:#5B6270;margin:0 0 12px;display:{{ helpDisplay }}">{{ qHelp }}</p>
             <details class="q-was" style="display:{{ wasDisplay }}"><summary>Was heisst das?</summary><p>{{ qWas }}</p></details>
+            <button type="button" class="q-ki" data-own-enter="1" onClick="{{ openChat }}" aria-haspopup="dialog" style="display:{{ kiDisplay }}">Frage unklar? Den KI-Assistenten fragen</button>
             <div style="display:{{ firstNoteDisplay }};border:1px solid #E2DFD8;border-radius:14px;background:#F6F5F1;padding:20px;margin:0 0 16px">
               <p style="font-size:15px;line-height:1.55;margin:0">Dieses Formular ist eine unverbindliche Projektanfrage. Sie kaufen hier nichts und gehen keine Verpflichtung ein. {{ hinweisErsterSchritt }} Mehr dazu in der <a href="/datenschutz/" target="_blank">Datenschutzerklärung</a>.</p>
             </div>
@@ -2376,14 +2470,18 @@ button,input,textarea{font-family:inherit}
 <div class="deskbar" style="position:fixed;left:0;right:0;bottom:0;z-index:55;height:56px;background:#11131A;animation:fade 200ms linear">
   <div class="wrap" style="height:56px;display:flex;align-items:center;justify-content:center;gap:24px">
     <span class="mono" style="font-size:13px;color:#A8B0BD">{{ checkUmfang }}</span>
-    <a href="/projekt-check/" style="display:inline-flex;align-items:center;min-height:40px;padding:0 20px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
+    <a href="/projekt-check/" data-quelle="leiste" onClick="{{ onEinstieg }}" style="display:inline-flex;align-items:center;min-height:40px;padding:0 20px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
   </div>
 </div>
 </sc-if>
 
 <sc-if value="{{ showMobBar }}" hint-placeholder-val="{{ false }}">
-<div class="mobbar" style="position:fixed;left:0;right:0;bottom:0;z-index:55;height:64px;padding:8px 20px;background:#11131A">
-  <a href="/projekt-check/" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:17px;font-weight:600;text-decoration:none">Formular ausfüllen</a>
+<div class="mobbar" role="region" aria-label="Projekt-Check starten">
+  <p class="mobbar-t">Kostenloser Entwurf in 5 Tagen</p>
+  <a href="/projekt-check/" class="mobbar-go" data-quelle="leiste" onClick="{{ onEinstieg }}">Starten</a>
+  <button type="button" class="mobbar-chat" onClick="{{ openChat }}" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten" style="display:{{ chatDisplay }}">
+    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"></path><path d="M8.5 9.5h7M8.5 12.5h4"></path></svg>
+  </button>
 </div>
 </sc-if>
 
@@ -2419,7 +2517,7 @@ class Component extends DCLogic {
       ['DOMAIN', 'Domain', 'Technik und Zeitplan', 220], ['HOSTING', 'Betrieb danach', 'Technik und Zeitplan', 100], ['TERMIN', 'Online bis', 'Technik und Zeitplan', 60],
       ['KONTAKT_NAME', 'Name', 'Kontakt', 120], ['KONTAKT_MAIL', 'E-Mail', 'Kontakt', 200], ['KONTAKT_TEL', 'Telefon', 'Kontakt', 40],
       ['KONTAKTWEG', 'Kontakt am liebsten per', 'Kontakt', 20], ['REFERENZ', 'Referenz', 'Kontakt', 80], ['SONSTIGES', 'Sonstiges', 'Kontakt', 2000],
-      ['PAKET', 'Paket', 'Empfehlung', 40], ['PREIS', 'Richtpreis', 'Empfehlung', 60], ['ZUSAETZE', 'Zusätze', 'Empfehlung', 400], ['HINWEIS', 'Hinweis', 'Empfehlung', 300],
+      ['PAKET', 'Paket', 'Empfehlung', 40], ['PREIS', 'Richtpreis', 'Empfehlung', 60], ['ZUSAETZE', 'Zusätze', 'Empfehlung', 400], ['HINWEIS', 'Hinweis', 'Empfehlung', 300], ['EINSTIEG', 'Einstieg', 'Empfehlung', 60],
     ],
     pflicht: { voll: ['FIRMA', 'BRANCHE', 'ANGEBOT', 'ZIEL', 'KONTAKT_NAME', 'KONTAKT_MAIL'], kurz: ['ANGEBOT', 'KONTAKT_MAIL'] },
     // Mindestzeit in Sekunden vom Öffnen des Projekt-Checks bis zum Senden (Schutz vor Bots)
@@ -2447,6 +2545,8 @@ class Component extends DCLogic {
     '/': { key: 'start', title: 'Webseiten für Schweizer Betriebe: Fixpreis, Entwurf in 5 Arbeitstagen | ODERA Design',
       desc: 'Sie sehen Ihre neue Website, bevor Sie einen Franken bezahlen. Fixpreis, kostenloser Entwurf in 5 Arbeitstagen, für Betriebe in der ganzen Schweiz.' },
     '/404': { key: 'nf', title: 'Seite nicht gefunden | ODERA Design', noindex: true },
+    // Einstieg aus Briefen und QR-Codes (?firma=...&branche=...), zeigt die Startseite
+    '/start': { key: 'start', title: 'Willkommen | ODERA Design', noindex: true },
     '/angebot': { key: 'angebot', title: 'Preise und Pakete | ODERA Design',
       desc: 'Drei Pakete zum Fixpreis: Website CHF 890, Standard CHF 1\u2019900, Pro CHF 3\u2019400. Einmalig, ohne Abonnement, ohne Nachträge. Der Entwurf kommt vorab.' },
     '/ablauf': { key: 'ablauf', title: 'So läuft ein Projekt ab | ODERA Design',
@@ -2492,7 +2592,29 @@ class Component extends DCLogic {
   QUICK = ['ANGEBOT', 'FUNKTIONEN', 'MAIL'];
 
   // Vorbelegung der Seitenzahl aus den Links der Angebotsseite (?paket=...)
-  PAKET = { start: 'Eine Seite reicht', standard: 'Bis 5 Seiten', plus: 'Bis 10 Seiten' };
+  PAKET = { website: 'Eine Seite reicht', standard: 'Bis 5 Seiten', pro: 'Bis 10 Seiten' };
+
+  // Einstiege in den Projekt-Check. Die Quelle steht nur in der E-Mail an mich (Kurzübersicht «Einstieg»),
+  // sie wird nirgends gespeichert. ans/txt: Vorbelegung, skip: Fragen, die dadurch schon beantwortet sind.
+  EINSTIEGE = {
+    hero: { label: 'Startseite, erste Frage' },
+    rechner: { label: 'Preis-Rechner' },
+    'paket-website': { label: 'Paketkarte Website', ans: { SEITENZAHL: 'Eine Seite reicht' }, skip: ['SEITENZAHL'] },
+    'paket-standard': { label: 'Paketkarte Standard', ans: { SEITENZAHL: 'Bis 5 Seiten' }, skip: ['SEITENZAHL'] },
+    'paket-pro': { label: 'Paketkarte Pro', ans: { SEITENZAHL: 'Bis 10 Seiten' }, skip: ['SEITENZAHL'] },
+    doppelmeter: { label: 'Musterprojekt Doppelmeter', ans: { BRANCHE: 'Handwerk und Bau', SEITENZAHL: 'Bis 5 Seiten', ZIEL: 'Anrufen' }, skip: ['BRANCHE', 'SEITENZAHL', 'ZIEL'] },
+    slider: { label: 'Ladezeit-Vergleich', ans: { WEBSITE_HEUTE: 'Ja', WEBSITE_PROBLEME: ['Wirkt veraltet', 'Anderes'] }, txt: { stoerung: 'Lädt langsam' }, skip: ['WEBSITE_PROBLEME'] },
+    ablauf: { label: 'Ablauf, Schritt 1' },
+    faq: { label: 'Häufige Fragen' },
+    chat: { label: 'Chat-Assistent' },
+    ueber: { label: 'Über mich' },
+    brief: { label: 'Brief oder QR-Code' },
+    leiste: { label: 'Leiste unten' },
+    kontakt: { label: 'Kontaktbereich' },
+  };
+  // Branchen in Brief-Links (?branche=...)
+  BRIEF_BRANCHEN = { handwerk: 'Handwerk und Bau', gastro: 'Gastronomie und Hotellerie', gesundheit: 'Gesundheit und Therapie',
+    beratung: 'Beratung und Treuhand', beauty: 'Beauty und Coiffeur', laden: 'Laden und Handel' };
 
   NAV = [
     { label: 'Start', href: '/', path: '/' },
@@ -2634,6 +2756,7 @@ class Component extends DCLogic {
     step: 0, dir: 'fwd', ans: {}, txt: {}, timing: 1, mid: false, result: false, warn: false, quick: false,
     review: false, editing: false, editNote: '', reached: 0, phFill: 0,
     senden: 'bereit', sendFehler: '', gesendet: null, kopieWunsch: false, offline: false, hp: '', fensterWeg: false, vglOffen: false,
+    ueberspringen: [], quelle: '', fortsetzen: null, vtAktiv: false, brief: this.briefAusUrl(), rechnerFn: [], rechnerLogo: false, rechnerTexte: false, rechnerAn: false, rechnerPreis: 0,
     copied: false, toast: '', mailOpen: false, ring: 0, cmpGrow: false,
     duelA: 0, duelB: 0, duelNote: false, duelALabel: '6,4 s', duelBLabel: '0,9 s',
     uLeft: '0px', uWidth: '0px', tick: 0, loadSec: 0, loadGrow: false, chatIntro: false
@@ -2651,17 +2774,35 @@ class Component extends DCLogic {
       const paket = (query.split('&').map(p => p.split('=')).find(p => p[0] === 'paket') || [])[1];
       const kurz = /(^|&)kurz=1(&|$)/.test(query);
       const next = { path: known, menu: false, result: false, mid: false, warn: false, review: false, editing: false, editNote: '', pageKey: this.state.pageKey + 1 };
+      if (known === '/start') {
+        const b = this.briefAusUrl() || this.state.brief;
+        if (b) {
+          next.brief = b;
+          next.txt = Object.assign({}, this.state.txt, b.firma ? { firma: b.firma } : {});
+          next.ans = Object.assign({}, this.state.ans, b.branche ? { BRANCHE: b.branche } : {});
+          next.ueberspringen = Array.from(new Set((this.state.ueberspringen || []).concat(b.firma ? ['FIRMA'] : [], b.branche ? ['BRANCHE'] : [])));
+          next.quelle = 'brief';
+        }
+        history.replaceState(null, '', '/');
+        next.path = '/';
+      }
       if (known === '/projekt-check') { next.quick = kurz; if (kurz) next.step = 0; if (this.chatModul) this.chatModul.schliessen(false); if (!this.startZeit) this.startZeit = Date.now(); this.anfrageVorladen(); }
       next.gesendet = null; next.senden = 'bereit'; next.sendFehler = '';
       if (known === '/projekt-check' && paket && this.PAKET[paket]) {
-        const ans = Object.assign({}, this.state.ans);
-        ans.SEITENZAHL = this.PAKET[paket];
-        next.ans = ans;
+        const e = this.EINSTIEGE['paket-' + paket];
+        next.ans = Object.assign({}, this.state.ans, e.ans);
+        next.ueberspringen = Array.from(new Set((this.state.ueberspringen || []).concat(e.skip)));
+        next.quelle = this.state.quelle || 'paket-' + paket;
         next.step = 0;
       }
+      // Neu geladen und im selben Tab schon angefangen: anbieten, dort weiterzumachen
+      if (known === '/projekt-check' && !kurz && !Object.keys(this.state.ans).length && !this.state.gesendet) {
+        const alt = this.gemerkt();
+        if (alt && Object.keys(alt.ans || {}).length) next.fortsetzen = alt;
+      }
       this.setState(next);
-      document.title = this.PAGES[known].title;
-      this.syncHead(known);
+      document.title = this.PAGES[next.path].title;
+      this.syncHead(next.path);
       window.scrollTo(0, 0);
       setTimeout(() => {
         this.measure();
@@ -2723,10 +2864,11 @@ class Component extends DCLogic {
     this.onScroll = () => {
       const y = window.scrollY || 0;
       const stop = document.getElementById('abschluss') || document.getElementById('garantie');
-      const near = stop ? stop.getBoundingClientRect().top < window.innerHeight : false;
+      const fuss = document.querySelector('footer.footpad');
+      const near = (stop ? stop.getBoundingClientRect().top < window.innerHeight : false) || (fuss ? fuss.getBoundingClientRect().top < window.innerHeight : false);
       const isCheck = this.state.path === '/projekt-check';
       const small = window.innerWidth <= 560;
-      const threshold = small ? 400 : 1400;
+      const threshold = small ? Math.round(window.innerHeight * 0.9) : 1400;
       const barOn = this.props.showStickyBar === false ? false : (y > threshold && !near && !isCheck);
       if (barOn !== this.state.barOn || (y > 40) !== this.state.scrolled) this.setState({ barOn: barOn, scrolled: y > 40 });
       const max = document.body.scrollHeight - window.innerHeight;
@@ -2834,7 +2976,7 @@ class Component extends DCLogic {
   chatOeffnen = (e) => {
     const ausloeser = (e && e.currentTarget) || document.querySelector('.chat-btn');
     import('/assets/js/chat.js')
-      .then((m) => { this.chatModul = m; m.oeffnen({ endpoint: this.CHAT_ENDPOINT, ausloeser: ausloeser }); })
+      .then((m) => { this.chatModul = m; m.oeffnen({ endpoint: this.CHAT_ENDPOINT, ausloeser: ausloeser, starten: () => this.checkStarten('chat') }); })
       .catch(() => this.go('/projekt-check/'));
   };
 
@@ -2988,6 +3130,15 @@ class Component extends DCLogic {
 
   fmt(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u2019'); }
 
+  rechnerSetzen(teil) {
+    const vorher = this.state.rechnerPreis || this.paketAus(this.state.rechnerFn).price;
+    this.setState(Object.assign({ rechnerAn: true }, teil), () => {
+      const ziel = this.paketAus(this.state.rechnerFn).price;
+      if (ziel === vorher || this.reduce) { this.setState({ rechnerPreis: ziel }); return; }
+      this.animate(vorher, ziel, 420, (v) => this.setState({ rechnerPreis: Math.round(v / 10) * 10 }));
+    });
+  }
+
   animate(from, to, ms, apply) {
     if (this.reduce) { apply(to); return; }
     const t0 = performance.now();
@@ -3040,8 +3191,64 @@ class Component extends DCLogic {
   // Sichtbare Fragen in der Reihenfolge des Formulars. Folgefragen erscheinen nur, wenn sie zutreffen.
   fragen(s = this.state) {
     if (s.quick) return this.QUICK.map((k) => this.Q.find((q) => q.key === k));
-    return this.Q.filter((q) => !q.nurKurz && (!q.wenn || q.wenn(s)));
+    const skip = s.editing ? [] : (s.ueberspringen || []);
+    return this.Q.filter((q) => !q.nurKurz && (!q.wenn || q.wenn(s)) && skip.indexOf(q.key) < 0);
   }
+  // Alle Fragen inklusive der schon beantworteten (für die Übersicht)
+  fragenAlle(s = this.state) { return this.fragen(Object.assign({}, s, { editing: true })); }
+
+  // Startet den Projekt-Check mit Vorbelegung. Schon gegebene Antworten bleiben erhalten, nichts wird doppelt gefragt.
+  checkStarten(quelle, extra = {}, ausloeser = null) {
+    const e = this.EINSTIEGE[quelle] || {};
+    const s = this.state;
+    const ans = Object.assign({}, s.ans, e.ans || {}, extra.ans || {});
+    const txt = Object.assign({}, s.txt, e.txt || {}, extra.txt || {});
+    const skip = Array.from(new Set([].concat(s.ueberspringen || [], e.skip || [], extra.skip || [])));
+    const next = { ans, txt, ueberspringen: skip, quelle: s.quelle || quelle, quick: false, result: false, review: false, editing: false, mid: false, step: 0, warn: false, fortsetzen: null };
+    const los = () => new Promise((fertig) => {
+      this.setState(next, () => { this.go('/projekt-check/'); this.merken(); setTimeout(fertig, 40); });
+    });
+    if (ausloeser && !this.reduce && document.startViewTransition) {
+      ausloeser.style.viewTransitionName = 'einstieg';
+      this.setState({ vtAktiv: true });
+      const t = document.startViewTransition(los);
+      t.ready.catch(() => {}); // abgebrochener Übergang (zum Beispiel Fenstergrösse geändert): einfach ohne Animation weiter
+      t.finished.catch(() => {}).finally(() => { ausloeser.style.viewTransitionName = ''; this.setState({ vtAktiv: false }); });
+    } else los();
+  }
+
+  // Link mit data-quelle: startet den Check mit der passenden Vorbelegung (Strg/Cmd-Klick öffnet normal)
+  onEinstieg = (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return;
+    e.preventDefault();
+    this.checkStarten(e.currentTarget.dataset.quelle, {}, e.currentTarget);
+  };
+
+  // Fortschritt nur im sessionStorage dieses Tabs (kein Cookie). Gelöscht beim Schliessen des Tabs und nach dem Senden.
+  merken() {
+    setTimeout(() => {
+      const s = this.state;
+      try {
+        if (!Object.keys(s.ans).length && !Object.keys(s.txt).filter((k) => s.txt[k]).length) return;
+        sessionStorage.setItem('odera-check', JSON.stringify({ ans: s.ans, txt: s.txt, step: s.step, quick: s.quick, quelle: s.quelle, ueberspringen: s.ueberspringen || [], result: s.result }));
+      } catch (err) { /* Speicher nicht verfügbar: dann eben ohne */ }
+    }, 0);
+  }
+  // Brief-Link lesen: nur bekannte Parameter, Länge begrenzt, nur erlaubte Zeichen. Wird als Text gezeigt, nie als HTML.
+  briefAusUrl() {
+    try {
+      if (this.pathOf(location.pathname) !== '/start') return null;
+      const q = new URLSearchParams(location.search);
+      let firma = (q.get('firma') || '').normalize('NFC').replace(/\s+/g, ' ').trim();
+      if (firma.length > 80 || !/^[\p{L}\p{N} &.,'’\-\/()+]+$/u.test(firma)) firma = '';
+      const bk = (q.get('branche') || '').toLowerCase();
+      const branche = Object.prototype.hasOwnProperty.call(this.BRIEF_BRANCHEN, bk) ? this.BRIEF_BRANCHEN[bk] : '';
+      return firma || branche ? { firma, branche } : null;
+    } catch (err) { return null; }
+  }
+
+  vergessen() { try { sessionStorage.removeItem('odera-check'); } catch (err) { /* nichts */ } }
+  gemerkt() { try { return JSON.parse(sessionStorage.getItem('odera-check') || 'null'); } catch (err) { return null; } }
   frage(step = this.state.step) { const f = this.fragen(); return f[Math.min(step, f.length - 1)]; }
   // Zahl der Fragen ohne Folgefragen, für die Texte auf der Seite
   fragenZahl() { return this.Q.filter((q) => !q.nurKurz && !q.wenn).length; }
@@ -3067,6 +3274,7 @@ class Component extends DCLogic {
       ans[q.key] = ans[q.key] === v && q.key === 'KONTAKT' ? undefined : v;
     }
     this.setState({ ans: ans, warn: false }, () => {
+      this.merken();
       this.setState({ toast: 'Notiert.' });
       clearTimeout(this.toastTimer);
       this.toastTimer = setTimeout(() => this.setState({ toast: '' }), 900);
@@ -3113,7 +3321,7 @@ class Component extends DCLogic {
   }
 
   reviewRows() {
-    return this.fragen().map((q, i) => {
+    return this.fragenAlle().map((q, i) => {
       const a = this.answerText(q);
       return { step: i, n: String(i + 1).padStart(2, '0') + ' · ' + q.n, a: a || 'Keine Angabe', fg: a ? '#11131A' : '#5B6270', aria: q.n + ' ändern' };
     });
@@ -3170,8 +3378,9 @@ class Component extends DCLogic {
     const q = this.frage();
     if (!this.complete(q)) { this.setState({ warn: true }); return; }
     if (this.state.editing) { this.leaveEdit('result'); return; }
-    if (step >= this.fragen().length - 1) { this.showResult(); return; }
+    if (step >= this.fragen().length - 1) { this.showResult(); this.merken(); return; }
     this.setState({ step: step + 1, dir: 'fwd', warn: false, tick: this.state.tick + 1 });
+    this.merken();
     this.focusHead();
   };
 
@@ -3195,16 +3404,21 @@ class Component extends DCLogic {
   // Paket-Empfehlung aus Funktionen und Seitenzahl (Paketinhalte wie auf der Angebotsseite):
   // Pro-Funktionen oder mehr als 5 Seiten: Pro. Standard-Funktionen oder bis 5 Seiten: Standard. Sonst Website.
   // Mehr als 10 Seiten oder Onlineshop: Hinweis «Individuell prüfen».
+  // Einzige Stelle der Paket-Logik. Nutzen der Projekt-Check (rec) und der Preis-Rechner auf der Angebotsseite.
+  paketAus(fn, seiten) {
+    const paketVon = (n) => (this.FUNKTIONEN.find((f) => f[0] === n) || [])[2];
+    const pro = fn.some((n) => paketVon(n) === 'Pro') || seiten === 'Bis 10 Seiten' || seiten === 'Mehr als 10 Seiten';
+    const standard = fn.some((n) => paketVon(n) === 'Standard') || seiten === 'Bis 5 Seiten';
+    const i = pro ? 2 : standard ? 1 : 0;
+    return { name: ['Website', 'Standard', 'Pro'][i], price: this.PAKET_PREIS[i], shop: fn.some((n) => paketVon(n) === 'shop'), gross: seiten === 'Mehr als 10 Seiten' };
+  }
+
   rec() {
     const a = this.state.ans;
     const fn = Array.isArray(a.FUNKTIONEN) ? a.FUNKTIONEN : [];
     const paketVon = (n) => (this.FUNKTIONEN.find((f) => f[0] === n) || [])[2];
     const seiten = a.SEITENZAHL;
-    const pro = fn.some((n) => paketVon(n) === 'Pro') || seiten === 'Bis 10 Seiten' || seiten === 'Mehr als 10 Seiten';
-    const standard = fn.some((n) => paketVon(n) === 'Standard') || seiten === 'Bis 5 Seiten';
-    const [name, price] = pro ? ['Pro', this.PAKET_PREIS[2]] : standard ? ['Standard', this.PAKET_PREIS[1]] : ['Website', this.PAKET_PREIS[0]];
-    const shop = fn.some((n) => paketVon(n) === 'shop');
-    const gross = seiten === 'Mehr als 10 Seiten';
+    const { name, price, shop, gross } = this.paketAus(fn, seiten);
     const hinweis = gross && shop ? 'Mehr als 10 Seiten und ein Onlineshop gehen über die Pakete hinaus. Ich prüfe Ihre Anfrage individuell. Einen Onlineshop biete ich nicht an.'
       : gross ? 'Mehr als 10 Seiten gehen über das Paket Pro hinaus. Ich prüfe Ihre Anfrage individuell und nenne Ihnen einen festen Preis.'
       : shop ? 'Einen Onlineshop biete ich nicht an. Ich prüfe Ihre Anfrage individuell und sage Ihnen ehrlich, was möglich ist.' : '';
@@ -3280,6 +3494,7 @@ class Component extends DCLogic {
     put('PREIS', (r.individuell && a.SEITENZAHL === 'Mehr als 10 Seiten' ? 'ab ' : '') + 'CHF ' + this.fmt(r.refFull ? r.priceNum : r.regularNum) + (r.refFull ? ' mit Referenzrabatt' : ''));
     put('ZUSAETZE', this.zusaetze().map((z) => z[0] + ': ' + z[1]).join('; '));
     put('HINWEIS', r.hinweis);
+    put('EINSTIEG', (this.EINSTIEGE[this.state.quelle] || {}).label || 'Direkt aufgerufen');
     return out;
   }
 
@@ -3535,6 +3750,7 @@ class Component extends DCLogic {
         const pi = this.PHASES.findIndex(ph => ph.steps.indexOf(i) >= 0);
         const ph = this.PHASES[pi];
         return {
+          startDisplay: i === 0 ? 'block' : 'none',
           i: i, n: String(i + 1).padStart(2, '0'), title: st[0], text: st[1],
           headDisplay: ph && ph.steps[0] === i ? 'flex' : 'none', phaseN: String(pi + 1), phaseT: ph ? ph.t : '',
           tag: opt ? 'optional' : 'erforderlich', knobBg: on ? '#11131A' : '#FFFFFF',
@@ -3611,10 +3827,44 @@ class Component extends DCLogic {
       checkFg: ((s.result && !s.review) || s.mid) ? '#FFFFFF' : '#11131A',
       checkCut: ((s.result && !s.review) || s.mid) ? '#2439B9' : '#EFF1FE',
       inQuiz: isCheck && !s.result && !s.mid && !s.gesendet,
+      fortsetzenDisplay: isCheck && s.fortsetzen && !s.result ? 'flex' : 'none',
+      onFortsetzen: () => { const a = s.fortsetzen || {}; this.setState({ ans: Object.assign({}, a.ans, s.ans), txt: Object.assign({}, a.txt, s.txt), step: a.step || 0, quick: !!a.quick,
+        quelle: s.quelle || a.quelle || '', ueberspringen: Array.from(new Set((a.ueberspringen || []).concat(s.ueberspringen || []))), fortsetzen: null, result: !!a.result }, () => { if (a.result) this.showResult(); else this.focusHead(); }); },
+      onNeuBeginnen: () => { this.vergessen(); this.setState({ fortsetzen: null }); this.focusHead(); },
       quickMode: s.quick,
       quickLinkDisplay: (s.quick || s.editing) ? 'none' : 'block',
       qNum: s.step + 1,
       qTitle: q.t,
+      heroChips: [['Anrufen', 'Anrufen'], ['Offerte anfragen', 'Eine Anfrage oder Offerte schicken'], ['Termin buchen', 'Einen Termin buchen'], ['Vorbeikommen', 'Vorbeikommen']].map((c) => ({ label: c[0], v: c[1] })),
+      onHeroChip: (e) => this.checkStarten('hero', { ans: { ZIEL: e.currentTarget.dataset.v }, skip: ['ZIEL'] }, e.currentTarget),
+      grussDisplay: s.brief && s.brief.firma ? 'block' : 'none', grussText: s.brief && s.brief.firma ? 'Guten Tag, ' + s.brief.firma + (/[.!?]$/.test(s.brief.firma) ? '' : '.') : '',
+      onEinstieg: this.onEinstieg,
+      // Preis-Rechner (Angebotsseite), gleiche Paket-Logik wie der Projekt-Check
+      rechnerKarten: this.FUNKTIONEN.filter((f) => f[2] !== 'shop').map((f) => ({ v: f[0], label: f[0], icon: f[3], fix: f[2] === 'alle' ? 'true' : 'false',
+        an: f[2] === 'alle' || s.rechnerFn.indexOf(f[0]) >= 0 ? 'true' : 'false' })),
+      onRechnerFn: (e) => { const v = e.currentTarget.dataset.v; if ((this.FUNKTIONEN.find((f) => f[0] === v) || [])[2] === 'alle') return;
+        const fn = s.rechnerFn.indexOf(v) >= 0 ? s.rechnerFn.filter((x) => x !== v) : s.rechnerFn.concat([v]); this.rechnerSetzen({ rechnerFn: fn }); },
+      rechnerLogoAn: s.rechnerLogo ? 'true' : 'false', rechnerTexteAn: s.rechnerTexte ? 'true' : 'false',
+      onRechnerLogo: () => this.rechnerSetzen({ rechnerLogo: !s.rechnerLogo }),
+      onRechnerTexte: () => this.rechnerSetzen({ rechnerTexte: !s.rechnerTexte }),
+      rechnerPaket: this.paketAus(s.rechnerFn).name,
+      rechnerPreisZiel: 'CHF ' + this.fmt(this.paketAus(s.rechnerFn).price),
+      rechnerPreisTxt: 'CHF ' + this.fmt(s.rechnerPreis || this.paketAus(s.rechnerFn).price),
+      rechnerZeilen: [s.rechnerLogo ? ['Logo', this.logoMitWebsiteChf() + ' einmalig'] : null, s.rechnerTexte ? ['Texte', 'CHF ' + this.TEXT_PRO_SEITE_CHF + ' pro Seite'] : null,
+        ['Betrieb danach', 'optional, ab ' + this.hostingAuslandTxt()]].filter(Boolean).map((z) => ({ l: z[0], v: z[1] })),
+      passtWebsite: s.rechnerAn && this.paketAus(s.rechnerFn).name === 'Website' ? '1' : '0',
+      passtStandard: s.rechnerAn && this.paketAus(s.rechnerFn).name === 'Standard' ? '1' : '0',
+      passtPro: s.rechnerAn && this.paketAus(s.rechnerFn).name === 'Pro' ? '1' : '0',
+      onRechnerLos: (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+        e.preventDefault();
+        const ans = { FUNKTIONEN: s.rechnerFn.slice() }, skip = ['FUNKTIONEN'];
+        if (s.rechnerLogo) { ans.LOGO = this.LOGO_NEU; skip.push('LOGO'); }
+        if (s.rechnerTexte) { ans.TEXTE = 'Ich brauche Hilfe'; skip.push('TEXTE'); }
+        this.checkStarten('rechner', { ans, skip }, e.currentTarget);
+      },
+      vtName: s.vtAktiv ? 'einstieg' : 'none',
+      kiDisplay: this.CHAT_ENDPOINT ? 'inline-flex' : 'none',
       qHelp: q.help || '',
       helpDisplay: q.help ? 'block' : 'none',
       firstNoteDisplay: (s.step === 0 && !s.quick) ? 'block' : 'none',
@@ -3688,6 +3938,7 @@ class Component extends DCLogic {
         txt[kk] = e.currentTarget.value;
         const hinweisWeg = s.senden === 'fehler' && s.sendFehler === 'kontakt';
         this.setState({ txt: txt, warn: false, ...(hinweisWeg ? { senden: 'bereit', sendFehler: '' } : {}) });
+        this.merken();
       },
       warnDisplay: s.warn ? 'block' : 'none',
       warnText: q.felder && q.felder.some((f) => f[4] === 'email' && s.txt[f[0]] && !this.gueltigeMail(s.txt[f[0]])) ? 'Bitte prüfen Sie die E-Mail-Adresse'
@@ -3720,7 +3971,7 @@ class Component extends DCLogic {
       dsMail: !this.direkt(),
       dsDirekt: this.direkt(),
       ds3Zusatz: this.direkt() ? ' Auf der letzten Seite des Projekt-Checks wird eine Sicherheitsprüfung von Cloudflare geladen. Was sie bearbeitet, steht in Abschnitt 5.' : '',
-      kontaktCheckTitel: this.direkt() ? 'Projekt-Check machen und direkt senden' : 'Projekt-Check machen und Mail schicken',
+      kontaktCheckTitel: 'Lernen wir uns kennen: Projekt-Check starten',
       kontaktCheckText: this.checkUmfang() + '. ' + (this.direkt() ? 'Am Schluss senden Sie mit einem Klick.' : 'Ich schreibe die Mail für Sie.'),
       checkUmfang: this.checkUmfang(),
       hinweisErsterSchritt: this.direkt()

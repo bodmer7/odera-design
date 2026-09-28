@@ -196,6 +196,12 @@ export const ANFRAGE = {
    "Hinweis",
    "Empfehlung",
    300
+  ],
+  [
+   "EINSTIEG",
+   "Einstieg",
+   "Empfehlung",
+   60
   ]
  ],
  "pflicht": {

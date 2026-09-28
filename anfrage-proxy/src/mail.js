@@ -60,6 +60,7 @@ export function mailAnNico({ art, felder }, referenz, jetzt = new Date()) {
     ['Firma', f.FIRMA], ['Branche', f.BRANCHE], ['Besucher sollen', f.ZIEL],
     ['Paket', [f.PAKET, f.PREIS].filter(Boolean).join(', ')], ['Zusätze', f.ZUSAETZE], ['Hinweis', f.HINWEIS], ['Online bis', f.TERMIN],
     ['Name', f.KONTAKT_NAME], ['E-Mail', f.KONTAKT_MAIL], ['Telefon', f.KONTAKT_TEL], ['Kontakt am liebsten per', f.KONTAKTWEG],
+    ['Einstieg', f.EINSTIEG],
   ].filter(([, v]) => v);
   const abschnitte = abschnitteVon(f);
 
@@ -82,7 +83,8 @@ export function mailAnNico({ art, felder }, referenz, jetzt = new Date()) {
 
 /** Kopie an die anfragende Person. Gibt { betreff, html, text }. */
 export function mailKopie({ art, felder }, referenz, jetzt = new Date()) {
-  const f = felder;
+  const f = Object.assign({}, felder);
+  delete f.EINSTIEG; // Die Quelle des Einstiegs geht nur an mich
   const vorname = f.KONTAKT_NAME ? einzeilig(f.KONTAKT_NAME).split(' ')[0] : '';
   const betreff = `Ihre Anfrage bei ODERA Design · ${referenz}`;
   const abschnitte = abschnitteVon(f);

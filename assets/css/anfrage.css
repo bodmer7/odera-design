@@ -37,6 +37,7 @@
 .q-was summary{display:inline-flex;align-items:center;min-height:44px;color:var(--kobalt-deep);text-decoration:underline;text-underline-offset:3px;cursor:pointer;list-style:none}
 .q-was summary::-webkit-details-marker{display:none}
 .q-was p{margin:0 0 4px;padding:12px 14px;border-radius:12px;background:var(--weiss);border:1px solid var(--linie)}
+.q-ki{align-items:center;min-height:44px;margin:0 0 12px;padding:0;border:none;background:none;color:#1E34B8;font:inherit;font-size:15px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .q-optlabel{margin:0 0 10px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grau)}
 .q-hinweis{margin:14px 0 0;padding:12px 14px;border-radius:12px;background:var(--weiss);border:1px solid var(--kobalt);font-size:15px;line-height:1.5;color:var(--tinte)}
 .qright .fline input::placeholder,.qright .fline textarea::placeholder{color:#8A8F9A}
@@ -52,6 +53,11 @@
 .kcard[aria-disabled="true"]{cursor:default;background:var(--kobalt-deep);border-color:var(--kobalt-deep)}
 .kcard:focus-visible{outline:3px solid var(--kobalt);outline-offset:2px}
 @media(max-width:700px){.g-karten{grid-template-columns:1fr}.kcard{min-height:0}}
+
+.q-weiter{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:-16px 0 32px;padding:16px 20px;border-radius:16px;background:var(--weiss);border:1px solid var(--kobalt)}
+.q-weiter p{flex:1 1 280px;margin:0;font-size:16px;line-height:1.5}
+.q-weiter-ja{min-height:48px;padding:0 24px;border:none;border-radius:999px;background:var(--kobalt);color:var(--weiss);font:inherit;font-size:16px;font-weight:600;cursor:pointer}
+.q-weiter-nein{min-height:48px;padding:0 16px;border:none;background:none;color:var(--tinte);font:inherit;font-size:16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 
 /* Mail-Fenster */
 .mf{background:var(--weiss);color:var(--tinte);border-radius:16px;box-shadow:0 2px 0 rgba(17,19,26,0.04),0 30px 80px rgba(9,14,60,0.45);transform-origin:50% 100%}

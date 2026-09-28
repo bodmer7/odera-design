@@ -77,7 +77,9 @@ export async function senden(c) {
       gesendet: { referenz: antwort.referenz, vorname, mail, kopie: !!antwort.kopie },
       senden: 'bereit', sendFehler: '', fensterWeg: false,
       ans: {}, txt: {}, step: 0, timing: 1, consent: false, reached: 0, result: false, review: false, editing: false, quick: false, mid: false, kopieWunsch: false, hp: '',
+      ueberspringen: [], quelle: '', fortsetzen: null,
     });
+    c.vergessen(); // gemerkter Fortschritt im Tab ist nach dem Senden weg
     c.focusHead();
   };
   c.setState({ fensterWeg: true });

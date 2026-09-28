@@ -1,0 +1,8 @@
+{
+  "name": "odera-brief-links",
+  "private": true,
+  "type": "module",
+  "description": "Persönliche Einstiegslinks und QR-Codes für Briefe (siehe brief-links.mjs)",
+  "scripts": { "links": "node brief-links.mjs" },
+  "dependencies": { "qrcode": "^1.5.4" }
+}

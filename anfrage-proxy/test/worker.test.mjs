@@ -10,7 +10,7 @@ const VOLL = {
   FIRMA: 'Bäckerei Müller', ORT: 'Zürich', BRANCHE: 'Gastronomie und Hotellerie', ANGEBOT: 'Wir backen seit 1990.\nFrisch jeden Tag.',
   ZIEL: 'Vorbeikommen', SEITENZAHL: 'Bis 5 Seiten', FUNKTIONEN: 'Kontaktformular, Bildergalerie oder Referenzen', TERMIN: 'In einem Monat',
   KONTAKT_NAME: 'Anna Muster', KONTAKT_MAIL: 'anna@beispiel.ch', KONTAKT_TEL: '079 000 00 00', KONTAKTWEG: 'Telefon',
-  PAKET: 'Standard', PREIS: "CHF 1'900", ZUSAETZE: 'Logo: CHF 390 einmalig',
+  PAKET: 'Standard', PREIS: "CHF 1'900", ZUSAETZE: 'Logo: CHF 390 einmalig', EINSTIEG: 'Preis-Rechner',
 };
 const idem = () => 'test-' + Math.random().toString(36).slice(2) + Date.now();
 const koerper = (x = {}) => ({ art: 'voll', felder: { ...VOLL }, kopie: false, token: 'gut', website: '', dauerSek: 120, idem: idem(), ...x });
@@ -54,6 +54,7 @@ test('Erfolg: Mail an Nico mit Reply-To, Referenz, kein Versand der Kopie ohne W
   assert.match(m.html, /Bäckerei Müller/); assert.match(m.text, /Angebot: Wir backen seit 1990\.\nFrisch jeden Tag\./);
   assert.match(m.text, /KURZÜBERSICHT\nFirma: Bäckerei Müller\nBranche: Gastronomie und Hotellerie\nBesucher sollen: Vorbeikommen\nPaket: Standard, CHF 1'900\nZusätze: Logo: CHF 390 einmalig\nOnline bis: In einem Monat/);
   assert.match(m.text, /Kontakt am liebsten per: Telefon/);
+  assert.match(m.text, /Einstieg: Preis-Rechner/);
 });
 
 test('Kopie an die Kundin: Absender anfrage@, Reply-To kontakt@', async () => {
@@ -64,6 +65,7 @@ test('Kopie an die Kundin: Absender anfrage@, Reply-To kontakt@', async () => {
   assert.match(mails[1].subject, /^Ihre Anfrage bei ODERA Design · ODR-/);
   assert.match(mails[1].text, /Antwort spätestens am nächsten Abend, ausser am Wochenende/);
   assert.doesNotMatch(mails[1].html + mails[1].text, /newsletter|angebot des monats/i);
+  assert.doesNotMatch(mails[1].html + mails[1].text, /Einstieg|Preis-Rechner/, 'Quelle nur in der Mail an Nico');
 });
 
 test('Domain nicht verifiziert: Fehler «versand», keine Kopie', async () => {

@@ -172,3 +172,39 @@ writeFileSync(ZIEL, `// Erzeugt mit tools/wissen-build.mjs aus index.html. Nicht
 const kernZeichen = TEILE.filter((t) => t.immer).reduce((s, t) => s + t.text.length, 0);
 console.log(`chat-proxy/src/wissen.js: Kern ${kernZeichen} Zeichen, dazu je nach Frage ` +
   TEILE.filter((t) => !t.immer).map((t) => `${t.titel} ${t.text.length}`).join(', '));
+
+// ---------- Feste Antworten für die vier Vorschläge im Chat ----------
+// Kosten keine Anfrage an das Sprachmodell. Beträge und Texte kommen aus index.html, damit nichts veraltet.
+{
+  const liste = (name) => new Function('return ' + (quelle.match(new RegExp(' {2}' + name + ' = (\\[[\\s\\S]*?\\n {2}\\]);')) || [])[1])();
+  const chf = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '’');
+  const preise = wert('PAKET_PREIS');
+  const phasen = liste('PHASES');
+  const nichtDrin = [...(quelle.match(/<p class="pr-h">Was nicht im Preis ist<\/p>\s*<ul class="pr-ul">([\s\S]*?)<\/ul>/) || ['', ''])[1].matchAll(/<li>([^<]+)<\/li>/g)].map((m) => m[1]);
+  if (!/ohne Anzahlung/.test((phasen || [])[2] && phasen[2].sie)) throw new Error('Ablauf sagt nicht mehr «ohne Anzahlung»: feste Chat-Antwort prüfen.');
+  if (!phasen || phasen.length !== 4 || nichtDrin.length < 5) throw new Error('Angaben für die festen Chat-Antworten nicht gefunden.');
+  const vorlagen = {
+    'Was kostet eine Website?': [
+      'Es gibt drei Pakete mit Fixpreis, einmalig und ohne Abonnement:',
+      `- **Website** ${chf(preise[0])}: eine Seite mit allen Abschnitten und Kontaktformular`,
+      `- **Standard** ${chf(preise[1])}: bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil`,
+      `- **Pro** ${chf(preise[2])}: bis 10 Seiten, Online-Terminbuchung, zweite Sprache, Texte selbst bearbeiten`,
+      '',
+      `Dazu optional: ein Logo für ${chf(wert('LOGO_MIT_WEBSITE_CHF'))} zusammen mit der Website, Texte von Nico für ${chf(wert('TEXT_PRO_SEITE_CHF'))} pro Seite. Den Betrieb danach übernehmen Sie selbst oder Nico ab ${chf(wert('HOSTING_AUSLAND_CHF'))} pro Jahr.`,
+      '',
+      'Welches Paket zu Ihnen passt, zeigt der [Preis-Rechner](/angebot/#rechner).',
+    ].join('\n'),
+    'Wie läuft ein Projekt ab?': [
+      'In vier Phasen:',
+      ...phasen.map((p, i) => `${i + 1}. **${p.t}** (${p.dauer}): ${p.sie}`),
+      '',
+      'Der Entwurf ist kostenlos. Bezahlt wird erst, wenn er Ihnen gefällt. Mehr dazu auf der Seite [Ablauf](/ablauf/).',
+    ].join('\n'),
+    'Was ist nicht inbegriffen?': ['Nicht im Preis sind:', ...nichtDrin.map((x) => '- ' + x), '', 'Alles Übrige steht im [Angebot](/angebot/).'].join('\n'),
+    'Muss ich etwas anzahlen?': 'Nein. Der Entwurf ist kostenlos und unverbindlich. Die Rechnung über den Fixpreis kommt erst, wenn Sie den Entwurf annehmen, einmal und ohne Anzahlung.',
+  };
+  const ZIEL_V = join(ROOT, 'assets', 'js', 'chat-vorlagen.js');
+  writeFileSync(ZIEL_V, '// Erzeugt mit tools/wissen-build.mjs aus index.html. Nicht von Hand ändern.\n// Feste Antworten auf die Vorschläge im Chat, ohne Anfrage an das Sprachmodell.\n' +
+    `export const VORLAGEN = ${JSON.stringify(vorlagen, null, 1)};\n`);
+  console.log(`assets/js/chat-vorlagen.js: ${Object.keys(vorlagen).length} feste Antworten`);
+}
