@@ -1,0 +1,5 @@
+# GitHub Pages baut diese Website mit Jekyll (Modus «legacy»). Die Dateien werden unverändert übernommen.
+# Diese Ordner gehören nicht auf die Website:
+exclude:
+  - chat-proxy
+  - node_modules

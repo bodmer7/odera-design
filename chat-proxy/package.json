@@ -1,0 +1,14 @@
+{
+  "name": "odera-chat-proxy",
+  "private": true,
+  "type": "module",
+  "description": "Proxy zwischen odera.ch und Cloudflare Workers AI für den Chat-Assistenten",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.142.0"
+  }
+}

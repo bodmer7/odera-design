@@ -252,6 +252,12 @@ button,input,textarea{font-family:inherit}
 .apill{display:inline-flex;align-items:center;padding:6px 12px;border:1px solid #E2DFD8;border-radius:999px;background:#FFFFFF;font-size:12px;line-height:1.3;cursor:pointer;text-align:left;max-width:100%;color:#11131A}
 .apill:hover{border-color:#11131A}
 @media(max-width:560px){.apills{display:none}}
+.chat-btn{position:fixed;right:24px;bottom:24px;z-index:56;align-items:center;gap:10px;min-height:52px;padding:0 20px 0 16px;border:1px solid #11131A;border-radius:999px;background:#FFFFFF;color:#11131A;font-size:16px;font-weight:600;box-shadow:0 10px 30px rgba(17,19,26,0.14);cursor:pointer;transition:bottom 200ms ease-out,background 120ms linear}
+.chat-btn:hover{background:#EDEFFF}
+.chat-btn[data-bar="1"]{bottom:72px}
+@keyframes chatIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:560px){.chat-btn{right:16px;bottom:16px;width:52px;padding:0;justify-content:center}.chat-btn-l{display:none}.chat-btn[data-bar="1"]{bottom:80px}}
+@media print{.chat-btn{display:none!important}}
 .editbar{position:sticky;top:0;z-index:5;background:#FFFFFF;border-bottom:1px solid #E2DFD8}
 .editbar-in{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px}
 .editbar-btn{background:none;border:none;padding:0;min-height:44px;color:#1E34B8;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
@@ -1103,6 +1109,7 @@ button,input,textarea{font-family:inherit}
         <div class="row" style="margin-top:48px;gap:24px">
           <p style="font-size:17px;line-height:1.65;margin:0">Noch eine Frage offen? Schreiben Sie mir zwei Zeilen.</p>
           <a href="{{ mailKontakt }}" style="display:inline-flex;align-items:center;min-height:56px;padding:0 32px;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">kontakt@odera.ch</a>
+          <button type="button" onClick="{{ openChat }}" aria-haspopup="dialog" style="display:{{ chatFaqDisplay }};align-items:center;min-height:56px;padding:0 28px;border-radius:999px;border:1px solid #11131A;background:#FFFFFF;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">Assistent fragen</button>
         </div>
       </div>
     </div>
@@ -1796,7 +1803,7 @@ button,input,textarea{font-family:inherit}
   </section>
   <section class="wrap sect">
     <div class="inner txt" style="max-width:680px">
-      <p style="font-size:17px;line-height:1.7;margin:0 0 32px">Diese Erklärung beschreibt, welche Personendaten beim Besuch dieser Website und bei einer Projektanfrage bearbeitet werden. Sie richtet sich nach dem Schweizer Datenschutzgesetz.</p>
+      <p style="font-size:17px;line-height:1.7;margin:0 0 32px">Diese Erklärung beschreibt, welche Personendaten beim Besuch dieser Website, bei einer Projektanfrage und bei der Nutzung des Chat-Assistenten bearbeitet werden. Sie richtet sich nach dem Schweizer Datenschutzgesetz.</p>
       <nav aria-label="Abschnitte" style="margin:0 0 48px;padding:20px;border:1px solid #E2DFD8;border-radius:14px">
         <p class="mono" style="font-size:12px;letter-spacing:0.04em;color:#5B6270;margin:0 0 12px">INHALT</p>
         <ul onClick="{{ jumpToSection }}" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px">
@@ -1807,10 +1814,11 @@ button,input,textarea{font-family:inherit}
           <li><a href="#ds-5" style="font-size:16px">5. Projektanfrage über das Formular</a></li>
           <li><a href="#ds-6" style="font-size:16px">6. Welche Angaben Sie mir übermitteln</a></li>
           <li><a href="#ds-7" style="font-size:16px">7. Bearbeitung Ihrer Anfrage</a></li>
-          <li><a href="#ds-8" style="font-size:16px">8. Aufbewahrung und Löschung</a></li>
-          <li><a href="#ds-9" style="font-size:16px">9. Externe Links</a></li>
-          <li><a href="#ds-10" style="font-size:16px">10. Ihre Rechte</a></li>
-          <li><a href="#ds-11" style="font-size:16px">11. Änderungen</a></li>
+          <li><a href="#ds-8" style="font-size:16px">8. Chat-Assistent</a></li>
+          <li><a href="#ds-9" style="font-size:16px">9. Aufbewahrung und Löschung</a></li>
+          <li><a href="#ds-10" style="font-size:16px">10. Externe Links</a></li>
+          <li><a href="#ds-11" style="font-size:16px">11. Ihre Rechte</a></li>
+          <li><a href="#ds-12" style="font-size:16px">12. Änderungen</a></li>
         </ul>
       </nav>
       <div style="display:flex;flex-direction:column">
@@ -1824,7 +1832,7 @@ button,input,textarea{font-family:inherit}
         </div>
         <div id="ds-3" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">3. Keine Cookies, keine Statistik</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Diese Website setzt keine Cookies. Es findet keine Reichweitenmessung, keine Statistik und kein Tracking statt. Es sind keine Analysedienste, Werbenetzwerke oder Social-Media-Plugins eingebunden. Die auf der Startseite angezeigte Ladezeit wird ausschliesslich im Browser des Besuchers gemessen und nirgendwohin übermittelt.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Diese Website setzt keine Cookies. Es findet keine Reichweitenmessung, keine Statistik und kein Tracking statt. Es sind keine Analysedienste, Werbenetzwerke oder Social-Media-Plugins eingebunden. Die auf der Startseite angezeigte Ladezeit wird ausschliesslich im Browser des Besuchers gemessen und nirgendwohin übermittelt. Auch der Chat-Assistent setzt keine Cookies und speichert nichts in Ihrem Browser. Was er übermittelt, wenn Sie ihn nutzen, steht in Abschnitt 8.</p>
         </div>
         <div id="ds-4" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">4. Schriften</h2>
@@ -1849,19 +1857,29 @@ button,input,textarea{font-family:inherit}
           <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Ihre E-Mail geht in mein Postfach bei Infomaniak Network SA mit Serverstandort in der Schweiz. Ich verwende Ihre Angaben ausschliesslich, um Ihre Anfrage zu beantworten, ein Angebot zu erstellen und ein allfälliges Projekt abzuwickeln. Es erfolgt keine Weitergabe an Dritte, keine Werbung und kein Newsletter.</p>
         </div>
         <div id="ds-8" style="margin-top:48px">
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">8. Aufbewahrung und Löschung</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Anfragen, aus denen kein Auftrag entsteht, lösche ich spätestens drei Monate nach dem letzten Kontakt. Entsteht ein Auftrag, bewahre ich die Projektunterlagen so lange auf, wie es für die Abwicklung und die gesetzlichen Aufbewahrungspflichten nötig ist. Sie können jederzeit die vorzeitige Löschung verlangen, soweit keine gesetzliche Pflicht dagegensteht.</p>
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">8. Chat-Assistent</h2>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Auf dieser Website können Sie einem Chat-Assistenten Fragen zu meinem Angebot stellen. Die Antworten erzeugt ein KI-Programm. Sie sind unverbindlich und ersetzen keine Offerte. Der Assistent wird erst geladen, wenn Sie ihn öffnen, und Daten werden nur übermittelt, wenn Sie eine Nachricht absenden. Die Nutzung ist freiwillig. Sie erreichen mich jederzeit auch per E-Mail oder über den Projekt-Check.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Bearbeitet werden Ihre Nachricht, der bisherige Verlauf des Gesprächs (höchstens die letzten sechs Nachrichten) und Ihre IP-Adresse. Den Verlauf hält nur Ihr Browser im Arbeitsspeicher des geöffneten Tabs. Er verschwindet, wenn Sie den Tab schliessen, die Seite neu laden oder «Neu starten» wählen. Es werden keine Cookies gesetzt und nichts in Ihrem Browser gespeichert. Bitte geben Sie im Chat keine persönlichen Daten ein.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Empfängerin ist Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA. Bei Cloudflare laufen sowohl die Vermittlungsstelle, die Ihre Anfrage prüft, als auch das Sprachmodell, das die Antwort erzeugt (Cloudflare Workers AI). Das Modell läuft auf Servern von Cloudflare. Die Verarbeitung findet im weltweiten Netz von Rechenzentren von Cloudflare statt, also möglicherweise ausserhalb der Schweiz, zum Beispiel in den USA.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Cloudflare ist nach dem Swiss-U.S. Data Privacy Framework zertifiziert. Im Register des US-Handelsministeriums steht am 28. September 2026 der Status «Active, Re-certification under Review». Zusätzlich enthält der Datenverarbeitungsvertrag von Cloudflare Standardvertragsklauseln, die für Daten aus der Schweiz an das Schweizer Recht angepasst sind.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Nach eigenen Angaben verwendet Cloudflare die Eingaben und Antworten von Workers AI weder zum Training von KI-Modellen noch zur Verbesserung eigener oder fremder Dienste und macht sie keinem anderen Kunden zugänglich. Gespeichert werden sie nur, wenn der Betreiber dafür einen Speicherdienst von Cloudflare nutzt. Das tue ich nicht. Quelle: <a href="https://developers.cloudflare.com/workers-ai/platform/data-usage/" target="_blank" rel="noopener">Cloudflare, Workers AI, Data usage</a>.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Um Missbrauch zu begrenzen, sind pro IP-Adresse höchstens 8 Nachrichten in 10 Minuten und 20 Nachrichten pro Tag möglich. Dafür wird Ihre IP-Adresse zusammen mit einem zufälligen Wert, der jeden Tag wechselt, in eine Zeichenfolge umgewandelt (Hash). Die IP-Adresse selbst wird nicht gespeichert. Bei Cloudflare gespeichert werden nur diese Zeichenfolge, die Zeitpunkte Ihrer Nachrichten und ein Zähler aller Nachrichten des Tages. 24 Stunden nach der letzten Nachricht wird alles gelöscht.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0">Ich selbst speichere keine Chat-Inhalte und sehe sie nicht ein. Dauerhafte Protokolle sind ausgeschaltet. Die Vermittlungsstelle meldet nur die Art allfälliger Fehler und die Zahl der verarbeiteten Tokens, ohne Inhalt und ohne IP-Adresse.</p>
         </div>
         <div id="ds-9" style="margin-top:48px">
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">9. Externe Links</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Diese Website verlinkt auf nico-bodmer.ch sowie auf einzelne externe Seiten. Für deren Inhalte und Datenbearbeitung ist die jeweilige Betreiberin oder der jeweilige Betreiber verantwortlich.</p>
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">9. Aufbewahrung und Löschung</h2>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Anfragen, aus denen kein Auftrag entsteht, lösche ich spätestens drei Monate nach dem letzten Kontakt. Entsteht ein Auftrag, bewahre ich die Projektunterlagen so lange auf, wie es für die Abwicklung und die gesetzlichen Aufbewahrungspflichten nötig ist. Sie können jederzeit die vorzeitige Löschung verlangen, soweit keine gesetzliche Pflicht dagegensteht.</p>
         </div>
         <div id="ds-10" style="margin-top:48px">
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">10. Ihre Rechte</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Datenherausgabe. Für alle diese Anliegen genügt eine E-Mail an <a href="{{ mailKontakt }}">kontakt@odera.ch</a>. Ich melde mich innert der gesetzlichen Frist. Sie haben zudem das Recht, sich beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten zu melden.</p>
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">10. Externe Links</h2>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Diese Website verlinkt auf nico-bodmer.ch sowie auf einzelne externe Seiten. Für deren Inhalte und Datenbearbeitung ist die jeweilige Betreiberin oder der jeweilige Betreiber verantwortlich.</p>
         </div>
         <div id="ds-11" style="margin-top:48px">
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">11. Änderungen</h2>
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">11. Ihre Rechte</h2>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Datenherausgabe. Für alle diese Anliegen genügt eine E-Mail an <a href="{{ mailKontakt }}">kontakt@odera.ch</a>. Ich melde mich innert der gesetzlichen Frist. Sie haben zudem das Recht, sich beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten zu melden.</p>
+        </div>
+        <div id="ds-12" style="margin-top:48px">
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">12. Änderungen</h2>
           <p style="font-size:17px;line-height:1.7;margin:0">Diese Erklärung kann angepasst werden, wenn sich die Technik oder die Abläufe ändern. Massgebend ist die jeweils auf dieser Seite veröffentlichte Fassung.</p>
         </div>
       </div>
@@ -1908,7 +1926,7 @@ button,input,textarea{font-family:inherit}
       <div style="display:flex;flex-direction:column">
         <div id="agb-1" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">1. Geltungsbereich und Vertragsschluss</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Die Website enthält kein bindendes Angebot. Eine Anfrage über das Formular ist unverbindlich und begründet keinen Vertrag. Ein Vertrag entsteht erst, wenn ich ein individuelles Angebot stelle und die Kundin oder der Kunde dieses in Textform annimmt. Preise auf der Website sind Richtpreise, massgebend ist das individuelle Angebot. Es wird keine Mehrwertsteuer ausgewiesen.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Die Website enthält kein bindendes Angebot. Eine Anfrage über das Formular ist unverbindlich und begründet keinen Vertrag. Ein Vertrag entsteht erst, wenn ich ein individuelles Angebot stelle und die Kundin oder der Kunde dieses in Textform annimmt. Preise auf der Website sind Richtpreise, massgebend ist das individuelle Angebot. Auskünfte des Chat-Assistenten auf der Website erzeugt ein KI-Programm. Sie sind unverbindlich und ersetzen keine Offerte. Massgebend sind das individuelle Angebot und diese AGB. Es wird keine Mehrwertsteuer ausgewiesen.</p>
         </div>
         <div id="agb-2" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">2. Ablauf des Projekts</h2>
@@ -2423,14 +2441,21 @@ button,input,textarea{font-family:inherit}
 </div>
 </sc-if>
 
+<button type="button" class="chat-btn" onClick="{{ openChat }}" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten, Taste f" title="Fragen an den KI-Assistenten (Taste f)" data-bar="{{ chatBar }}" style="display:{{ chatDisplay }};animation:{{ chatAnim }}">
+  <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"></path><path d="M8.5 9.5h7M8.5 12.5h4"></path></svg>
+  <span class="chat-btn-l">Fragen?</span>
+</button>
+
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;showStickyBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Verhalten&quot;},&quot;startPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;/&quot;,&quot;/angebot&quot;,&quot;/ablauf&quot;,&quot;/musterprojekte&quot;,&quot;/ueber-mich&quot;,&quot;/projekt-check&quot;],&quot;default&quot;:&quot;/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Verhalten&quot;}}">
 class Component extends DCLogic {
   EMAIL = 'kontakt@odera.ch';
+  // Adresse des Chat-Proxys (chat-proxy/, Cloudflare Worker). Leer lassen, solange er nicht läuft: Dann ist der Assistent ausgeblendet.
+  CHAT_ENDPOINT = 'https://odera-chat.odera-chat-proxy.workers.dev/';
   // Öffentliche Adresse der Website. Steht in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung tools/seo-build.mjs ausführen.
   SITE = 'https://odera.ch';
   // Stand unter Impressum, Datenschutz und AGB. Nur ändern, wenn die Rechtstexte geändert werden.
-  STAND_RECHTSTEXTE = '24.09.2026';
+  STAND_RECHTSTEXTE = '28.09.2026';
   PLAETZE_TOTAL = 2;
   PLAETZE_FREI = 1;
   PAGES = {
@@ -2582,7 +2607,7 @@ class Component extends DCLogic {
     review: false, editing: false, editNote: '', reached: 0, phFill: 0,
     copied: false, toast: '', mailOpen: false, ring: 0, cmpGrow: false,
     duelA: 0, duelB: 0, duelNote: false, duelALabel: '6,4 s', duelBLabel: '0,9 s',
-    uLeft: '0px', uWidth: '0px', tick: 0, loadSec: 0, loadGrow: false
+    uLeft: '0px', uWidth: '0px', tick: 0, loadSec: 0, loadGrow: false, chatIntro: false
   };
 
   componentDidMount() {
@@ -2597,7 +2622,7 @@ class Component extends DCLogic {
       const paket = (query.split('&').map(p => p.split('=')).find(p => p[0] === 'paket') || [])[1];
       const kurz = /(^|&)kurz=1(&|$)/.test(query);
       const next = { path: known, menu: false, result: false, mid: false, warn: false, review: false, editing: false, editNote: '', pageKey: this.state.pageKey + 1 };
-      if (known === '/projekt-check') { next.quick = kurz; if (kurz) next.step = 0; }
+      if (known === '/projekt-check') { next.quick = kurz; if (kurz) next.step = 0; if (this.chatModul) this.chatModul.schliessen(false); }
       if (known === '/projekt-check' && paket && this.PAKET[paket]) {
         const ans = Object.assign({}, this.state.ans);
         ans[5] = this.PAKET[paket];
@@ -2614,6 +2639,9 @@ class Component extends DCLogic {
         if (this.onScroll) this.onScroll();
         const h = document.querySelector('main h1[tabindex="-1"]');
         if (h) h.focus({ preventScroll: true });
+        // Sprungmarke in der Adresse, z. B. /datenschutz/#ds-8
+        const marke = location.hash.length > 1 ? document.getElementById(location.hash.slice(1)) : null;
+        if (marke) window.scrollTo(0, marke.getBoundingClientRect().top + window.pageYOffset - 104);
       }, 60);
     };
     window.addEventListener('popstate', this.onRoute);
@@ -2636,8 +2664,8 @@ class Component extends DCLogic {
       const p = this.pathOf(u.pathname);
       if (!this.PAGES[p] || p === '/404') return;
       e.preventDefault();
-      const target = this.urlOf(p, u.search.replace(/^\?/, ''));
-      if (target === location.pathname + location.search) return;
+      const target = this.urlOf(p, u.search.replace(/^\?/, '')) + u.hash;
+      if (target === location.pathname + location.search + location.hash) return;
       this.go(target);
     };
     document.addEventListener('click', this.onLinkClick);
@@ -2692,6 +2720,10 @@ class Component extends DCLogic {
       const tag = (e.target.tagName || '').toLowerCase();
       const typing = tag === 'input' || tag === 'textarea';
       if (e.key === 'Escape' && this.state.muster) { this.setState({ muster: null }); e.preventDefault(); return; }
+      if (!typing && (e.key === 'f' || e.key === 'F') && !e.metaKey && !e.ctrlKey && !e.altKey && this.CHAT_ENDPOINT
+        && this.state.path !== '/projekt-check' && !this.state.muster && !this.state.menu) {
+        this.chatOeffnen(); e.preventDefault(); return;
+      }
       if (!typing && (e.key === 'k' || e.key === 'K') && this.state.path !== '/projekt-check') {
         this.go('/projekt-check/'); return;
       }
@@ -2745,6 +2777,7 @@ class Component extends DCLogic {
     }
 
     this.slideIntro();
+    setTimeout(() => this.setState({ chatIntro: true }), 3600);
     setTimeout(() => { this.measure(); this.countUp(); }, 140);
   }
 
@@ -2757,6 +2790,14 @@ class Component extends DCLogic {
     window.removeEventListener('keydown', this.onKey);
     if (this.onMove) window.removeEventListener('mousemove', this.onMove);
   }
+
+  // Lädt das Chat-Modul erst beim ersten Öffnen (dynamischer Import), damit die Ladezeit gleich bleibt.
+  chatOeffnen = (e) => {
+    const ausloeser = (e && e.currentTarget) || document.querySelector('.chat-btn');
+    import('/assets/js/chat.js')
+      .then((m) => { this.chatModul = m; m.oeffnen({ endpoint: this.CHAT_ENDPOINT, ausloeser: ausloeser }); })
+      .catch(() => this.go('/projekt-check/'));
+  };
 
   measure = () => {
     const nav = document.querySelector('nav[aria-label="Hauptnavigation"]');
@@ -3315,6 +3356,11 @@ class Component extends DCLogic {
       },
       fontsPrivacyText: 'Alle verwendeten Schriften liegen lokal auf dem Webserver dieser Website. Beim Aufruf wird keine Verbindung zu Google oder einem anderen Schriftanbieter hergestellt.',
       showMobBar: s.barOn && !isCheck && !isLegal,
+      chatDisplay: (this.CHAT_ENDPOINT && !isCheck) ? 'inline-flex' : 'none',
+      chatBar: (s.barOn && !isCheck && !isLegal) ? '1' : '0',
+      chatAnim: (this.reduce || s.chatIntro) ? 'none' : 'chatIn 400ms ease-out 2500ms both',
+      openChat: this.chatOeffnen,
+      chatFaqDisplay: this.CHAT_ENDPOINT ? 'inline-flex' : 'none',
       showDeskBar: s.barOn && !isCheck && !isLegal,
       progDisplay: page === 'ablauf' ? 'block' : 'none',
       pageAnim: this.reduce ? 'none' : 'pageIn 220ms ease-out',

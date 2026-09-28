@@ -185,6 +185,21 @@ Rechtstexte tatsächlich änderst.
 
 Die Musterseiten verlinken auf dieselben drei Seiten (`/impressum/` usw.).
 
+## Chat-Assistent
+
+Unten rechts auf jeder Seite (ausser im Projekt-Check) öffnet «Fragen?» einen KI-Assistenten, der
+Fragen zum Angebot beantwortet. Der Knopf ist reines HTML/CSS. Das eigentliche Chat-Programm
+(`assets/js/chat.js`) wird erst beim Klick geladen, die Ladezeit der Seite bleibt gleich.
+
+- Der Assistent antwortet nur aus einer Wissensbasis, die `tools/seo-build.mjs` am Schluss aus den
+  gerenderten Seiten erzeugt (`chat-proxy/src/wissen.js`, Skript `tools/wissen-build.mjs`).
+- Die Antworten erzeugt ein Sprachmodell von Cloudflare Workers AI über einen eigenen Proxy (Cloudflare
+  Worker, Ordner `chat-proxy/`). Alles im Gratis-Plan, ohne Zahlungsmittel und ohne API-Schlüssel.
+  Einrichtung, Tageslimit und Betrieb stehen in `chat-proxy/README.md`. Der Ordner wird wegen
+  `_config.yml` nicht auf GitHub Pages veröffentlicht.
+- Solange `CHAT_ENDPOINT` in `index.html` leer ist, ist der Assistent unsichtbar.
+- Taste f öffnet den Assistenten, Esc schliesst ihn. Der Verlauf lebt nur im offenen Tab.
+
 ## Stellen, die du pflegen musst
 
 Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse
@@ -192,12 +207,13 @@ Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse
 
 | Stelle | Heutiger Wert | Was zu tun ist |
 |---|---|---|
-| `STAND_RECHTSTEXTE` | 24.09.2026 | Bei jeder Änderung an Impressum, Datenschutz oder AGB auf das Datum der Änderung setzen. |
+| `STAND_RECHTSTEXTE` | 28.09.2026 | Bei jeder Änderung an Impressum, Datenschutz oder AGB auf das Datum der Änderung setzen. |
 | `PLAETZE_TOTAL`, `PLAETZE_FREI` | 2 und 1 | Auf den tatsächlichen Stand setzen. Die Werte sind **zweimal** definiert, beide Stellen ändern. |
 | `DURCHSCHNITT_SEKUNDEN` | 0 | Solange 0, bleibt die Vergleichsleiste der Ladezeitmessung ausgeblendet. Nur mit belegtem Wert eintragen und die Quelle in der Fussnote nennen. |
 | `HOSTING_AUSLAND_CHF`, `HOSTING_SCHWEIZ_CHF`, `STUNDENSATZ_CHF` | 240, 480 und 120 | Einzige Quelle für die Hostingpreise und den Stundensatz. Sie erscheinen auf der Angebotsseite, der Ablaufseite, in den AGB (Paragraf 7), im Ergebnis des Projekt-Checks und im Mailtext. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `LOGO_ALLEIN_CHF`, `LOGO_MIT_WEBSITE_CHF` | 490 und 390 | Einzige Quelle für den Logo-Zusatz. Erscheint auf der Angebotsseite (Karte und Druckansicht), im Ergebnis des Projekt-Checks und im Mailtext (`LOGO_PREIS`). Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | Fragenzahl des Projekt-Checks | 13 in Teil 1, 27 insgesamt | Die Zahl 27 steht als Text auf der Startseite, der Ablaufseite, der Seite „Über mich“, im Seitentitel, in der klebenden Leiste und im Kurz-Ergebnis. Die Zähler im Formular rechnen selbst. Ändert sich die Zahl der Fragen, alle Stellen mit `grep -n "Fragen" index.html` prüfen. Die Fragen werden im Code über ihre Reihenfolge angesprochen (Feld `Q`), eine Frage in der Mitte verschiebt die folgenden. |
+| `CHAT_ENDPOINT` | leer | Adresse des Chat-Proxys (`chat-proxy/`). Leer heisst: Assistent ausgeblendet. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `SITE` | `https://odera.ch` | Adresse der Website in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `EMAIL` und feste Texte | `kontakt@odera.ch`, `odera.ch` | Setzen die Domain odera.ch voraus, auch die Mailtexte aus dem Projekt-Check. Das Postfach `kontakt@odera.ch` muss existieren, bevor die Seite online geht. |
 | Portfolio-Muster (`muster/portfolio/`) | Stand vom 21.09.2026 (Design v8) | Ändert sich das Portfolio, `node tools/portfolio-sync.mjs` ausführen. Siehe „Portfolio-Muster“. |

@@ -1,0 +1,27 @@
+# Cloudflare Worker für den Chat-Assistenten auf odera.ch. Läuft im Gratis-Plan, ohne Zahlungsmittel.
+name = "odera-chat"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# Keine dauerhaften Protokolle. Live mitlesen geht mit: npx wrangler tail
+[observability]
+enabled = false
+
+# Sprachmodell über Workers AI, ohne API-Schlüssel
+[ai]
+binding = "AI"
+
+[vars]
+ERLAUBTE_URSPRUENGE = "https://odera.ch,https://www.odera.ch"
+MODELL = "@cf/mistralai/mistral-small-3.1-24b-instruct"
+# Nachrichten pro Tag über alle Besucher, damit das Gratis-Kontingent (10'000 Neurons) reicht. Herleitung: README.md
+TAGESLIMIT_GESAMT = "35"
+
+# Rate Limit und Tageszähler: SQLite Durable Object (im Gratis-Plan enthalten)
+[[durable_objects.bindings]]
+name = "LIMITER"
+class_name = "Limiter"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Limiter"]

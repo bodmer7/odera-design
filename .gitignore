@@ -23,3 +23,7 @@ _lokal/
 
 # Originalexporte und Archive gehören nicht ins Repository
 *.zip
+
+# Chat-Proxy: lokale Geheimnisse und Cloudflare-Zwischenstände
+.dev.vars
+.wrangler/
