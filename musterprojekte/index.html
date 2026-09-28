@@ -1882,7 +1882,7 @@ button,input,textarea{font-family:inherit}
         <sc-if value="{{ dsDirekt }}" hint-placeholder-val="{{ false }}">
         <div id="ds-5" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">5. Projektanfrage über den Projekt-Check</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Ihre Antworten im Projekt-Check bleiben in Ihrem Browser, bis Sie auf «Anfrage senden» klicken. Schliessen Sie das Formular vorher, erfahre ich nichts davon. Erst mit dem Senden werden Ihre Angaben verschlüsselt (HTTPS) an mich übermittelt und mir als E-Mail zugestellt. Sie werden dabei in keiner Datenbank gespeichert. Zweck ist die Beantwortung Ihrer Anfrage, die Erstellung einer Offerte und die Vorbereitung eines allfälligen Vertrags.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Ihre Antworten im Projekt-Check bleiben in Ihrem Browser, bis Sie auf «Senden» klicken. Schliessen Sie das Formular vorher, erfahre ich nichts davon. Erst mit dem Senden werden Ihre Angaben verschlüsselt (HTTPS) an mich übermittelt und mir als E-Mail zugestellt. Sie werden dabei in keiner Datenbank gespeichert. Zweck ist die Beantwortung Ihrer Anfrage, die Erstellung einer Offerte und die Vorbereitung eines allfälligen Vertrags.</p>
           <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Die Übermittlung läuft in drei Schritten:</p>
           <ul style="font-size:17px;line-height:1.7;margin:0 0 16px;padding-left:20px">
             <li>Eine Vermittlungsstelle bei Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA (Cloudflare Workers), nimmt die Anfrage entgegen, prüft sie und leitet sie weiter. Sie speichert die Inhalte nicht. Dauerhafte Protokolle sind ausgeschaltet.</li>
@@ -2424,8 +2424,8 @@ class Component extends DCLogic {
   CHAT_ENDPOINT = 'https://odera-chat.odera-chat-proxy.workers.dev/';
   // Projekt-Check direkt absenden (Worker anfrage-proxy/). Schalter: Sind beide Werte gesetzt, sendet der
   // Projekt-Check direkt. Ist einer leer, gilt der bisherige Ablauf mit dem eigenen E-Mail-Programm.
-  ANFRAGE_ENDPOINT = '';
-  TURNSTILE_SITEKEY = '';
+  ANFRAGE_ENDPOINT = 'https://odera-anfrage.odera-chat-proxy.workers.dev/';
+  TURNSTILE_SITEKEY = '0x4AAAAAAFG5UB1RNyRsDksT';
   // Einzige Definition der Felder einer Anfrage. tools/anfrage-schema.mjs kopiert sie in den Worker,
   // damit Formular und Worker dieselben Regeln haben. felder: [Schlüssel, Beschriftung, Abschnitt, Maximallänge]
   ANFRAGE = {
