@@ -276,12 +276,6 @@ button,input,textarea{font-family:inherit}
  .rv-foot{position:fixed;left:0;right:0;bottom:0;z-index:5;margin:0;padding:12px 20px;background:#FFFFFF;border-top:1px solid #E2DFD8}
  .rv-foot .rv-back{width:100%}
 }
-.kosten{max-width:560px;margin:0 0 48px;border-top:1px solid rgba(255,255,255,0.35)}
-.kosten-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.35);color:#FFFFFF}
-.kosten-l{font-size:14px;letter-spacing:0.02em}
-.kosten-v{font-size:20px;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
-.kosten-n{grid-column:1 / -1;font-size:15px;line-height:1.55}
-.kosten-s{grid-column:1 / -1;font-size:12px;line-height:1.6}
 .mp-green{clip-path:polygon(0 0,calc(52% + 60px) 0,52% 100%,0 100%)}
 .mp-jump{display:flex;align-items:center;gap:16px;height:88px;padding:0 20px 0 28px;border-radius:999px;border:1px solid rgba(255,255,255,0.35);background:rgba(255,255,255,0.08);color:#FFFFFF;text-decoration:none;transition:background 160ms linear,border-color 160ms linear,transform 160ms ease-out;width:100%;box-sizing:border-box}
 .mp-jump-num{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:13px;color:rgba(255,255,255,0.6);flex:none}
@@ -330,11 +324,6 @@ button,input,textarea{font-family:inherit}
  .mdet[open]>summary::after{content:"\2013"}
  .mhide{display:none}
 }
-.nb-plain{display:none}
-@media(max-width:430px){.nb-device{display:none}.nb-plain{display:block}}
-@media(prefers-reduced-motion:reduce){.nb-lid{transform:rotateX(0deg) !important;transition:none !important}.nb-screen{opacity:1 !important;transition:none !important}.nb-close-dot{animation:none !important;opacity:1 !important}}
-@keyframes pulseRedDot{0%,100%{opacity:1}15.9%{opacity:0.4}31.8%{opacity:1}}
-.nb-close-dot{animation:pulseRedDot 2.2s ease-in-out infinite}
 .blob{position:fixed;width:720px;height:720px;border-radius:999px;opacity:0.12;filter:blur(120px);pointer-events:none;z-index:0;transition:background 800ms linear,left 800ms ease-in-out,top 800ms ease-in-out}
 .printonly{display:none}
 .row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
@@ -2191,262 +2180,88 @@ button,input,textarea{font-family:inherit}
   </div>
   </sc-if>
 
-  <sc-if value="{{ inQuick }}" hint-placeholder-val="{{ false }}">
-  <div class="wrap" style="padding-bottom:{{ ergebnisUnten }}">
-    <div style="max-width:720px;margin:0 auto;animation:fade 200ms linear;padding-top:32px">
-      <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:#FFFFFF;margin:0 0 24px">KURZSCHÄTZUNG</p>
-      <div class="row" style="gap:24px;margin-bottom:24px">
-        <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-0.03em;color:#FFFFFF;margin:0">Paket {{ recName }}</h2>
-        <span class="mono" style="padding:6px 14px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px">Richtwert, kein verbindliches Angebot</span>
-      </div>
-      <p class="mono" style="font-size:clamp(36px,4.5vw,56px);line-height:1;color:#FFFFFF;margin:0 0 24px;font-variant-numeric:tabular-nums">{{ recPrice }}</p>
-      <p style="font-size:17px;line-height:1.65;color:#FFFFFF;margin:0 0 16px;max-width:600px">Das ist die Schätzung aus drei Angaben. Mit allen 27 Fragen wird sie genauer, und ich muss danach nichts mehr nachfragen.</p>
-      <p style="font-size:15px;line-height:1.6;color:#FFFFFF;margin:0 0 32px;max-width:600px">{{ quickHostLine }}</p>
-      <div style="display:{{ mailtoDisplay }}">
-      <p class="mono" style="display:{{ consentWarnDisplay }};font-size:14px;color:#FFFFFF;margin:0 0 12px">Bitte bestätigen Sie die Kenntnisnahme, dann können Sie die E-Mail öffnen.</p>
-      <label style="display:flex;align-items:flex-start;gap:12px;margin:0 0 24px;max-width:600px">
-        <input type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}" style="flex:none;width:24px;height:24px;border-radius:6px;margin:0;accent-color:#D6F24B">
-        <span style="font-size:15px;line-height:1.5;color:#FFFFFF">Ich habe die <a href="/agb/" target="_blank" style="color:#FFFFFF">AGB</a> und die <a href="/datenschutz/" target="_blank" style="color:#FFFFFF">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
-      </label>
-      </div>
-      <div class="row" style="gap:16px">
-        <button type="button" class="g4" onClick="{{ quickToLong }}" style="min-height:60px;padding:0 32px;border:none;border-radius:999px;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">Alle 27 Fragen beantworten</button>
-        <a href="{{ quickMailHref }}" aria-disabled="{{ sendDisabledAttr }}" onClick="{{ onSendClick }}" style="display:{{ mailtoInline }};align-items:center;justify-content:center;min-height:60px;padding:0 32px;border:1px solid #FFFFFF;border-radius:999px;background:{{ quickSendBg }};color:{{ sendFg }};font-size:17px;font-weight:600;text-decoration:none;cursor:{{ sendCursor }}">Mir reicht das, E-Mail schreiben</a>
-      </div>
-    </div>
-  </div>
-  </sc-if>
-
-  <sc-if value="{{ inResult }}" hint-placeholder-val="{{ false }}">
-  <div class="wrap" style="padding-bottom:{{ ergebnisUnten }}">
-    <div style="max-width:880px;margin:0 auto;animation:fade 200ms linear">
-      <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:#FFFFFF;margin:0 0 24px">IHR ERGEBNIS</p>
-      <div class="row" style="gap:24px;margin-bottom:32px">
-        <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-0.03em;color:#FFFFFF;margin:0">Paket {{ recName }}</h2>
-        <span class="mono" style="padding:6px 14px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px">Richtwert, kein verbindliches Angebot</span>
-      </div>
-      <p class="mono" style="font-size:clamp(36px,4.5vw,56px);line-height:1;color:#FFFFFF;margin:0 0 48px;font-variant-numeric:tabular-nums">{{ recPrice }}</p>
-      <ul style="list-style:none;margin:0 0 48px;padding:0;display:flex;flex-direction:column;gap:16px;max-width:720px">
-        <sc-for list="{{ reasons }}" as="r" hint-placeholder-count="3">
-          <li style="font-size:17px;line-height:1.65;color:#FFFFFF;padding-left:24px;position:relative"><span style="position:absolute;left:0;top:10px;width:8px;height:8px;border-radius:999px;background:#D6F24B"></span>{{ r.t }}</li>
-        </sc-for>
-      </ul>
-
-      <div class="kosten" aria-label="Kostenübersicht">
-        <div class="kosten-row">
-          <span class="mono kosten-l">Einmalig, Website</span>
-          <span class="mono kosten-v">{{ costWebsite }}</span>
-        </div>
-        <div class="kosten-row" style="display:{{ costLogoDisplay }}">
-          <span class="mono kosten-l">Einmalig, Logo</span>
-          <span class="mono kosten-v">{{ costLogo }}</span>
-          <span class="kosten-n">Optional, zusammen mit Ihrer Website</span>
-        </div>
-        <div class="kosten-row" style="display:{{ costHostDisplay }}">
-          <span class="mono kosten-l">Danach pro Jahr</span>
-          <span class="mono kosten-v">{{ costHost }}</span>
-          <span class="kosten-n">{{ costHostNote }}</span>
-          <span class="kosten-n" style="display:{{ costHostMoreDisplay }}">Hosting, SSL, Sicherungen, Überwachung, ich als Ansprechperson bei Störungen, Antwort innert zwei Werktagen</span>
-          <span class="mono kosten-s" style="display:{{ costHostMoreDisplay }}">Optional. Kündbar mit 30 Tagen auf Monatsende. Nicht Voraussetzung für den Auftrag.</span>
-        </div>
-      </div>
-
-      <div style="display:{{ refFullDisplay }};max-width:720px;margin:0 0 48px;padding:32px;border-radius:20px;background:linear-gradient(100deg,#D6F24B 0%,#BFEE7C 100%)">
-        <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:#11131A;margin:0 0 16px">REFERENZPREIS</p>
-        <div class="row" style="gap:16px;align-items:baseline;margin-bottom:16px">
-          <span class="mono" style="font-size:clamp(32px,4vw,48px);line-height:1;color:#11131A;font-variant-numeric:tabular-nums">{{ refPrice }}</span>
-          <span class="mono" style="font-size:20px;color:#5B6270;text-decoration:line-through">{{ recPrice }}</span>
-        </div>
-        <p style="font-size:17px;line-height:1.65;color:#11131A;margin:0;max-width:600px">Ich suche zwei Betriebe, deren Website ich zeigen darf. Dafür bekommen Sie {{ refSaving }} Rabatt. Was ich brauche: Ihren Namen, Ihr Logo und zwei Sätze nach dem Livegang. Gilt für die nächsten zwei Projekte.</p>
-      </div>
-      <div style="display:{{ refSlimDisplay }};max-width:560px;margin:0 0 48px;padding:20px 24px;border-radius:20px;background:linear-gradient(100deg,#D6F24B 0%,#BFEE7C 100%)">
-        <p style="font-size:17px;line-height:1.65;color:#11131A;margin:0">Auch ohne Namensnennung lässt sich etwas machen. Sprechen wir darüber.</p>
-      </div>
-
-
-      <div style="max-width:720px;margin-bottom:48px">
-        <sc-for list="{{ compare }}" as="c" hint-placeholder-count="3">
-          <div style="margin-bottom:24px">
-            <div class="row" style="justify-content:space-between;gap:16px;margin-bottom:8px">
-              <span style="font-size:16px;color:#FFFFFF">{{ c.label }}</span>
-              <span class="mono" style="font-size:16px;color:#FFFFFF">{{ c.amount }}</span>
-            </div>
-            <div style="height:16px;border-radius:999px;background:rgba(255,255,255,0.25);overflow:hidden">
-              <div style="height:16px;border-radius:999px;background:#D6F24B;width:{{ c.w }};transition:width 600ms ease-out"></div>
-            </div>
-          </div>
-        </sc-for>
-        <p class="mono" style="font-size:12px;color:#FFFFFF;margin:0">Agenturpreise sind veröffentlichte Marktspannen, keine Offerten.</p>
-      </div>
-
-      <div style="display:{{ mailtoDisplay }}">
-      <div style="max-width:560px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px">
-        <p class="mono" style="display:{{ consentWarnDisplay }};font-size:14px;color:#FFFFFF;margin:0;text-align:center">Bitte bestätigen Sie die Kenntnisnahme, dann können Sie die E-Mail öffnen.</p>
-        <label style="display:flex;align-items:flex-start;gap:12px;width:100%">
-          <input type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}" style="flex:none;width:24px;height:24px;border-radius:6px;margin:0;accent-color:#D6F24B">
-          <span style="font-size:15px;line-height:1.5;color:#FFFFFF">Ich habe die <a href="/agb/" target="_blank" style="color:#FFFFFF">AGB</a> und die <a href="/datenschutz/" target="_blank" style="color:#FFFFFF">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
-        </label>
-        <a href="{{ mailHref }}" class="g4" data-magnet="1" aria-disabled="{{ sendDisabledAttr }}" onClick="{{ onSendClick }}" style="display:flex;align-items:center;justify-content:center;gap:16px;width:100%;min-height:72px;padding:20px 32px;border-radius:999px;color:{{ sendFg }};background:{{ sendBg }};font-size:20px;font-weight:600;text-decoration:none;box-sizing:border-box;cursor:{{ sendCursor }}">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="{{ sendFg }}" stroke-width="1.8" style="flex:none"><rect x="2" y="6" width="24" height="16" rx="3"></rect><path d="M2 8l12 8 12-8"></path></svg>
-          Anfrage per E-Mail senden
-        </a>
-        <p style="font-size:14px;line-height:1.5;color:#FFFFFF;margin:0;text-align:center;opacity:0.85">Es öffnet sich Ihr E-Mail-Programm mit der fertigen Nachricht. Abgeschickt wird sie erst, wenn Sie das selbst tun.</p>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-          <button type="button" onClick="{{ onCopy }}" style="background:none;border:none;padding:0;color:#FFFFFF;font-size:16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer">Antworten in die Zwischenablage kopieren</button>
-          <span class="mono" style="font-size:16px;color:#FFFFFF;opacity:{{ copiedOp }};transition:opacity 200ms linear">Kopiert</span>
-        </div>
-        <button type="button" onClick="{{ toggleMail }}" aria-expanded="{{ mailOpen }}" style="width:100%;display:flex;align-items:center;gap:14px;min-height:52px;padding:12px 24px;border:none;border-radius:999px;background:rgba(255,255,255,0.15);color:#FFFFFF;font-size:17px;font-weight:600;cursor:pointer;text-align:left;box-sizing:border-box">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" style="flex:none"><rect x="2" y="5" width="20" height="14" rx="2.5"></rect><path d="M2 7l10 6.5L22 7"></path></svg>
-          <span style="flex:1">Zeigen Sie mir, was rausgeht</span>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" style="flex:none;transform:{{ mailRot }};transition:transform 180ms ease-in-out"><path d="M6 9.5l6 6 6-6"></path></svg>
-        </button>
-        <p class="mono" style="font-size:16px;line-height:1.6;color:#FFFFFF;margin:0;text-align:center">Nichts wird gespeichert und nichts verschickt, solange Sie die Mail nicht selbst abschicken.</p>
-        <button type="button" onClick="{{ onReview }}" style="background:none;border:none;padding:0;color:#FFFFFF;font-size:16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer">Antworten noch einmal durchsehen</button>
-      </div>
-
-      <div style="display:grid;grid-template-rows:{{ mailRows }};transition:grid-template-rows 400ms ease-in-out">
-        <div style="overflow:hidden">
-          <div class="nb-device" style="max-width:760px;margin:48px auto 0">
-            <div style="perspective:1600px">
-              <div class="nb-lid" style="transform-origin:bottom center;transform:{{ lidRot }};transition:transform {{ lidDur }} cubic-bezier(0.2,0,0,1)">
-                <div style="background:#D2D4D9;border-radius:18px 18px 0 0;padding:12px;box-shadow:inset 0 1px 0 #EDEEF1,inset 0 -1px 0 #A9ADB6">
-                  <div style="position:relative;background:#0C0C0F;border-radius:6px;padding:14px 10px 10px">
-                    <span aria-hidden="true" style="position:absolute;left:50%;margin-left:-45px;top:12px;width:90px;height:10px;background:#0C0C0F;border-radius:0 0 5px 5px;z-index:2"></span>
-                    <div class="nb-screen" style="background:#FFFFFF;border-radius:3px;overflow:hidden;opacity:{{ screenOp }};transition:opacity 200ms linear {{ screenDelay }}">
-              <div style="position:relative;height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#FFFFFF;border-bottom:1px solid #E2DFD8">
-                <button type="button" aria-label="Mail schliessen" onClick="{{ toggleDesk }}" onMouseEnter="{{ onCloseDotEnter }}" onMouseLeave="{{ onCloseDotLeave }}" style="width:10px;height:10px;padding:0;border:none;border-radius:999px;background:#FF5A3C;cursor:pointer" class="nb-close-dot"></button>
-                <span style="width:10px;height:10px;border-radius:999px;background:#E2DFD8"></span>
-                <span style="width:10px;height:10px;border-radius:999px;background:#E2DFD8"></span>
-                <span aria-hidden="true" style="position:absolute;left:14px;top:100%;margin-top:4px;padding:3px 8px;border-radius:6px;background:#11131A;color:#FFFFFF;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;white-space:nowrap;opacity:{{ closeHoverOp }};transition:opacity 120ms linear;pointer-events:none">Schliessen</span>
-              </div>
-              <sc-if value="{{ true }}" hint-placeholder-val="{{ true }}">
-              <div style="position:relative;min-height:346px">
-              <div style="position:absolute;inset:0;opacity:{{ deskOp }};transition:opacity 220ms linear;pointer-events:{{ deskPtr }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(100deg,#2D4CF0 0%,#3F3AE6 100%)">
-                <div style="width:40%"><dc-import name="logo" kind="wort" h="36" fg="#FFFFFF" cut="#3F3AE6" hint-size="180px,36px"></dc-import></div>
-                <p class="mono" style="font-size:12px;color:rgba(255,255,255,0.7);margin:0">Mail geschlossen</p>
-                <button type="button" aria-label="Mail wieder öffnen" onClick="{{ toggleDesk }}" style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.9);border:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer">
-                  <svg width="18" height="14" viewBox="0 0 24 18" fill="none" stroke="#11131A" stroke-width="1.8"><rect x="1" y="1" width="22" height="16" rx="2"></rect><path d="M2 2l10 9 10-9"></path></svg>
-                  <span class="mono" style="font-size:10px;color:#11131A">Mail</span>
-                </button>
-              </div>
-              <div style="position:absolute;inset:0;opacity:{{ mailOp }};transition:opacity 220ms linear;pointer-events:{{ mailPtr }}">
-              <div style="display:flex;gap:12px;padding:8px 20px;border-bottom:1px solid #E2DFD8">
-                <span class="mono" style="flex:none;width:56px;font-size:13px;color:#5B6270">An</span>
-                <span class="mono" style="font-size:13px;color:#11131A">kontakt@odera.ch</span>
-              </div>
-              <div style="display:flex;gap:12px;padding:8px 20px;border-bottom:1px solid #E2DFD8">
-                <span class="mono" style="flex:none;width:56px;font-size:13px;color:#5B6270">Betreff</span>
-                <span class="mono" style="font-size:13px;color:#11131A">{{ mailSubject }}</span>
-              </div>
-              <div style="position:relative">
-                <pre class="mono" style="margin:0;padding:20px;background:#FFFFFF;color:#11131A;font-size:13px;line-height:1.6;max-height:380px;overflow:auto;white-space:pre-wrap">{{ mailText }}</pre>
-                <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:40px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#FFFFFF 100%);pointer-events:none"></div>
-              </div>
-              </div>
-              </div>
-              </sc-if>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div style="position:relative;background:#D2D4D9;border-radius:0 0 18px 18px;padding:0 20px;box-shadow:inset 0 1px 0 #EDEEF1,inset 0 -1px 0 #A9ADB6,{{ nbShadow }};transition:box-shadow 550ms cubic-bezier(0.2,0,0,1)">
-                <div style="height:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">
-                  <div style="height:8px;width:60%;border-radius:2px;background:#C6C9D0"></div>
-                  <div style="height:7px;width:15%;border-radius:2px;background:#CDD0D7;border:1px solid #A9ADB6;box-sizing:border-box"></div>
-                </div>
-                <span aria-hidden="true" style="position:absolute;left:50%;margin-left:-40px;bottom:0;width:80px;height:6px;border-radius:3px 3px 0 0;background:#A9ADB6"></span>
-              </div>
-            </div>
-            <p class="mono" style="font-size:12px;color:#FFFFFF;margin:16px 0 0;text-align:center">Genau so kommt sie bei mir an. Nichts wird vorher gesendet.</p>
-          </div>
-          <div class="nb-plain">
-            <div style="margin:20px 0 0;background:#FFFFFF;border-radius:12px;overflow:hidden">
-            <div style="height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#FFFFFF;border-bottom:1px solid #E2DFD8">
-              <span style="width:10px;height:10px;border-radius:999px;background:#E2DFD8"></span>
-              <span style="width:10px;height:10px;border-radius:999px;background:#E2DFD8"></span>
-              <span style="width:10px;height:10px;border-radius:999px;background:#E2DFD8"></span>
-            </div>
-            <div style="display:flex;gap:12px;padding:8px 16px;border-bottom:1px solid #E2DFD8">
-              <span class="mono" style="flex:none;width:56px;font-size:13px;color:#5B6270">An</span>
-              <span class="mono" style="font-size:13px;color:#11131A">kontakt@odera.ch</span>
-            </div>
-            <div style="display:flex;gap:12px;padding:8px 16px;border-bottom:1px solid #E2DFD8">
-              <span class="mono" style="flex:none;width:56px;font-size:13px;color:#5B6270">Betreff</span>
-              <span class="mono" style="font-size:13px;color:#11131A">{{ mailSubject }}</span>
-            </div>
-            <div style="position:relative">
-              <pre class="mono" style="margin:0;padding:20px;background:#FFFFFF;color:#11131A;font-size:13px;line-height:1.6;max-height:340px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere">{{ mailText }}</pre>
-              <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:40px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#FFFFFF 100%);pointer-events:none"></div>
-            </div>
-            </div>
-            <p class="mono" style="font-size:12px;color:#FFFFFF;margin:12px 0 0">Genau so kommt sie bei mir an. Nichts wird vorher gesendet.</p>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
-  </sc-if>
-
   <sc-if value="{{ fensterAktiv }}" hint-placeholder-val="{{ false }}">
-  <div class="wrap" style="padding-bottom:120px">
-    <section class="mf" aria-labelledby="mf-titel" style="animation:{{ mfAnim }}" onKeyDown="{{ onFensterTaste }}">
+  <div class="wrap eg-wrap">
+    <div class="eg">
+      <div class="eg-links" style="animation:{{ egAnim }}">
+        <p class="mono eg-label">{{ egLabel }}</p>
+        <h2 tabindex="-1" class="eg-paket">Paket {{ recName }}</h2>
+        <p class="mono eg-badge">Richtwert, kein verbindliches Angebot</p>
+        <p class="mono eg-preis">{{ egPreis }}<s style="display:{{ egAltDisplay }}">{{ recPrice }}</s></p>
+        <p class="eg-host">{{ egHost }}</p>
+        <p class="eg-satz">{{ egSatz }}</p>
+        <p class="eg-extra" style="display:{{ egExtraDisplay }}">{{ egExtra }}</p>
+        <p class="eg-ref" style="display:{{ egRefDisplay }}">{{ egRef }}</p>
+        <div class="eg-lang" style="display:{{ egLangDisplay }}">
+          <button type="button" class="g4" onClick="{{ quickToLong }}">Alle 27 Fragen beantworten</button>
+        </div>
+        <div class="eg-vgl" data-offen="{{ vglOffen }}">
+          <button type="button" class="eg-vgl-knopf" aria-expanded="{{ vglOffenAria }}" aria-controls="eg-vgl-inhalt" onClick="{{ onVgl }}">Vergleich mit Baukasten und Agentur</button>
+          <div id="eg-vgl-inhalt" class="eg-vgl-inhalt">
+            <sc-for list="{{ vergleich }}" as="c" hint-placeholder-count="3">
+              <div class="eg-vgl-z">
+                <p class="eg-vgl-k"><span>{{ c.label }}</span><span class="mono">{{ c.amount }}</span></p>
+                <div class="eg-bar"><i style="width:{{ c.w }}"></i></div>
+              </div>
+            </sc-for>
+            <p class="mono eg-fn">Agentur und Baukasten: Marktspannen, keine Offerten.</p>
+          </div>
+        </div>
+        <button type="button" class="eg-review" onClick="{{ onReview }}" style="display:{{ egReviewDisplay }}">Antworten noch einmal durchsehen</button>
+      </div>
+      <div class="eg-rechts">
+    <section class="mf" aria-labelledby="mf-titel" style="animation:{{ mfAnim }}">
       <div class="mf-leiste">
         <span class="mf-punkte" aria-hidden="true"><i></i><i></i><i></i></span>
-        <h3 id="mf-titel" class="mono mf-titel">Neue Anfrage</h3>
-        <button type="button" class="mf-flieger" onClick="{{ onAnfrageSenden }}" disabled="{{ sendenGesperrt }}" aria-label="Anfrage senden" title="Anfrage senden ({{ tasteSenden }})">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true" style="animation:{{ fliegerAnim }}"><path d="M3 11.2 21 3l-7.6 18-3.1-6.9z"></path><path d="M10.3 14.1 21 3"></path></svg>
-        </button>
+        <h3 id="mf-titel" class="mf-titel">Neue Anfrage</h3>
+        <span class="mf-punkte-platz" aria-hidden="true"></span>
       </div>
       <div class="mf-kopf">
-        <div class="mf-zeile"><span class="mono mf-l">An</span><span class="mono mf-w">kontakt@odera.ch</span></div>
-        <div class="mf-zeile"><span class="mono mf-l">Von</span>
-          <span class="mono mf-w" style="display:{{ vonTextDisplay }}">{{ vonText }}</span>
+        <div class="mf-zeile"><span class="mf-l">An</span><span class="mf-w">kontakt@odera.ch</span></div>
+        <div class="mf-zeile"><span class="mf-l">Von</span>
+          <span class="mf-w" style="display:{{ vonTextDisplay }}">{{ vonText }}</span>
           <span class="mf-von" style="display:{{ vonEingabeDisplay }}">
             <label class="mf-eingabe"><span class="mf-sr">Ihr Name</span><input type="text" autocomplete="name" placeholder="Ihr Name" maxlength="120" value="{{ vonName }}" data-k="name" onChange="{{ onField }}"></label>
             <label class="mf-eingabe"><span class="mf-sr">Ihre E-Mail-Adresse</span><input type="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse" maxlength="200" value="{{ vonMail }}" data-k="email" onChange="{{ onField }}"></label>
             <label class="mf-eingabe"><span class="mf-sr">Betrieb, optional</span><input type="text" autocomplete="organization" placeholder="Betrieb, optional" maxlength="120" value="{{ vonFirma }}" data-k="firma" onChange="{{ onField }}"></label>
           </span>
         </div>
-        <div class="mf-zeile"><span class="mono mf-l">Betreff</span><span class="mono mf-w">{{ fensterBetreff }}</span></div>
+        <div class="mf-zeile"><span class="mf-l">Betreff</span><span class="mf-w mf-betreff">{{ fensterBetreff }}</span></div>
       </div>
-      <pre class="mono mf-text" tabindex="0" aria-label="Inhalt der Anfrage">{{ fensterText }}</pre>
+      <div class="mf-text" tabindex="0" role="region" aria-label="Inhalt der Anfrage">
+        <sc-for list="{{ fensterZeilen }}" as="z" hint-placeholder-count="6">
+          <p class="mf-z" data-art="{{ z.art }}"><span class="mf-zl">{{ z.l }}</span><span class="mf-zv">{{ z.v }}</span></p>
+        </sc-for>
+      </div>
       <div class="mf-fuss">
         <div class="mf-hp" aria-hidden="true"><label>Website<input type="text" tabindex="-1" autocomplete="off" value="{{ hpWert }}" onChange="{{ onHp }}"></label></div>
-        <label class="mf-check">
-          <input type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}">
-          <span>Ich habe die <a href="/agb/" target="_blank">AGB</a> und die <a href="/datenschutz/" target="_blank">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
-        </label>
-        <label class="mf-check">
-          <input type="checkbox" checked="{{ kopieWunsch }}" onChange="{{ onKopie }}">
-          <span>Kopie an mich senden</span>
-        </label>
         <div id="ts-box" class="mf-ts"></div>
-        <p class="mf-offline" role="status" style="display:{{ offlineDisplay }}">Sie sind gerade offline. Sobald die Verbindung zurück ist, können Sie senden. Oder Sie senden mit Ihrem E-Mail-Programm.</p>
+        <p class="mf-offline" role="status" style="display:{{ offlineDisplay }}">Sie sind offline. Sobald die Verbindung zurück ist, können Sie senden.</p>
         <div class="mf-fehler" role="alert" style="display:{{ fehlerDisplay }}">
           <p class="mf-fehler-t">{{ fehlerTitel }}</p>
           <p class="mf-fehler-s">{{ fehlerText }}</p>
-          <div class="mf-fehler-knopf">
+          <div class="mf-fehler-knopf" style="display:{{ fehlerKnopfDisplay }}">
             <button type="button" class="mf-zweit" onClick="{{ onAnfrageSenden }}" style="display:{{ nochmalsDisplay }}">Nochmals versuchen</button>
             <a class="mf-zweit" href="{{ mailtoFallback }}">Stattdessen mit Ihrem E-Mail-Programm senden</a>
             <button type="button" class="mf-zweit" onClick="{{ onCopy }}">{{ kopierenLabel }}</button>
           </div>
         </div>
-        <div class="mf-senden">
-          <p class="mf-hinweis">Mit dem Senden wird Ihre Anfrage an kontakt@odera.ch übermittelt. <a href="/datenschutz/#ds-5">Datenschutzerklärung</a></p>
-          <p class="mono mf-status" role="status" aria-live="polite">{{ sendStatus }}</p>
-          <button type="button" class="mf-haupt" onClick="{{ onAnfrageSenden }}" disabled="{{ sendenGesperrt }}" aria-describedby="mf-taste">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.2 21 3l-7.6 18-3.1-6.9z"></path><path d="M10.3 14.1 21 3"></path></svg>
-            <span>{{ sendenLabel }}</span>
-          </button>
-          <p id="mf-taste" class="mono mf-taste">{{ tasteSenden }}</p>
-        </div>
-        <p class="mf-links">
-          <button type="button" class="mf-link" onClick="{{ onZurueckAendern }}">Zurück und ändern</button>
-          <button type="button" class="mf-link" onClick="{{ onCopy }}">{{ kopierenLabel }}</button>
-        </p>
+        <p class="mf-hinweis">{{ sendenHinweis }} <a href="/datenschutz/#ds-5">Datenschutz</a></p>
       </div>
+        <div class="mf-unten">
+          <div class="mf-checks">
+            <label class="mf-check"><input type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}"><span>Ich habe die <a href="/agb/" target="_blank">AGB</a> und die <a href="/datenschutz/" target="_blank">Datenschutzerklärung</a> zur Kenntnis genommen.</span></label>
+            <label class="mf-check" style="display:{{ kopieDisplay }}"><input type="checkbox" checked="{{ kopieWunsch }}" onChange="{{ onKopie }}"><span>Kopie an mich senden</span></label>
+          </div>
+          <button type="button" class="mf-haupt" onClick="{{ onAnfrageSenden }}" aria-disabled="{{ sendenGesperrtAttr }}" data-tip="{{ sendenTip }}" aria-describedby="mf-tip">
+            <svg class="mf-plane" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true" style="animation:{{ fliegerAnim }}"><path d="M3 11.2 21 3l-7.6 18-3.1-6.9z"></path><path d="M10.3 14.1 21 3"></path></svg><span>{{ sendenLabel }}</span>
+          </button>
+          <span id="mf-tip" class="mf-sr">{{ sendenTip }}</span>
+        </div>
+        <p class="mf-sr" role="status" aria-live="polite">{{ sendStatus }}</p>
     </section>
+      </div>
+    </div>
   </div>
   </sc-if>
 
@@ -2620,6 +2435,8 @@ class Component extends DCLogic {
   };
   // Öffentliche Adresse der Website. Steht in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung tools/seo-build.mjs ausführen.
   SITE = 'https://odera.ch';
+  // Erklärung zum Referenzpreis im Ergebnis des Projekt-Checks. Liest auch tools/wissen-build.mjs.
+  REFERENZ_SATZ = 'Ich suche zwei Betriebe, deren Website ich zeigen darf. Dafür bekommen Sie {betrag} Rabatt. Was ich brauche: Ihren Namen, Ihr Logo und zwei Sätze nach dem Livegang. Gilt für die nächsten zwei Projekte.';
   // Stand unter Impressum, Datenschutz und AGB. Nur ändern, wenn die Rechtstexte geändert werden.
   STAND_RECHTSTEXTE = '28.09.2026';
   PLAETZE_TOTAL = 2;
@@ -2771,7 +2588,7 @@ class Component extends DCLogic {
     consent: false,
     step: 0, dir: 'fwd', ans: {}, txt: {}, timing: 1, mid: false, result: false, warn: false, quick: false,
     review: false, editing: false, editNote: '', reached: 0, phFill: 0,
-    senden: 'bereit', sendFehler: '', gesendet: null, kopieWunsch: false, offline: false, hp: '', fensterWeg: false,
+    senden: 'bereit', sendFehler: '', gesendet: null, kopieWunsch: false, offline: false, hp: '', fensterWeg: false, vglOffen: false,
     copied: false, toast: '', mailOpen: false, ring: 0, cmpGrow: false,
     duelA: 0, duelB: 0, duelNote: false, duelALabel: '6,4 s', duelBLabel: '0,9 s',
     uLeft: '0px', uWidth: '0px', tick: 0, loadSec: 0, loadGrow: false, chatIntro: false
@@ -2896,7 +2713,7 @@ class Component extends DCLogic {
         this.go('/projekt-check/'); return;
       }
       // Senden mit Cmd+Enter oder Ctrl+Enter im Mail-Fenster
-      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey) && this.direkt() && this.state.path === '/projekt-check' && this.state.result && !this.state.review && !this.state.gesendet) {
+      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey) && this.state.path === '/projekt-check' && this.state.result && !this.state.review && !this.state.gesendet) {
         e.preventDefault(); this.anfrageSenden(); return;
       }
       if (this.state.path !== '/projekt-check' || this.state.result || (typing && e.target.type !== 'range')) return;
@@ -3005,21 +2822,49 @@ class Component extends DCLogic {
 
   fensterText() { return this.state.quick ? this.kurzText() : this.mailBody(); }
 
+  // Inhalt des Mail-Fensters: dieselben Abschnitte und Beschriftungen wie in der E-Mail, die bei mir ankommt
+  fensterZeilen() {
+    const f = this.state.quick ? this.felderKurz() : this.felderVoll();
+    const zeilen = [];
+    for (const ab of this.ANFRAGE.abschnitte) {
+      const drin = this.ANFRAGE.felder.filter((x) => x[2] === ab && f[x[0]] && x[0] !== 'KONTAKT_NAME' && x[0] !== 'KONTAKT_MAIL');
+      if (!drin.length) continue;
+      zeilen.push({ art: 'h', l: '', v: ab });
+      for (const x of drin) zeilen.push({ art: 'z', l: x[1], v: f[x[0]] });
+    }
+    return zeilen;
+  }
+
+  // Zusätze mit Preisfolge, nur wenn sie zutreffen
+  egExtra(r) {
+    const a = this.state.ans, teile = [];
+    if (a[8] === 'Gar nichts') teile.push('Texte: CHF 150 pro Seite dazu');
+    if (this.logoWunsch()) teile.push('Logo auf Wunsch: ' + this.logoMitWebsiteChf());
+    return teile.join(' · ');
+  }
+
+  mailtoLink() {
+    const s = this.state;
+    return 'mailto:' + this.EMAIL + '?subject=' + encodeURIComponent(s.quick ? 'Kurzanfrage: ' + (s.ans[0] || 'Anfrage') : this.mailSubject()) + '&body=' + encodeURIComponent(s.quick ? this.kurzText() : this.mailBody());
+  }
+
+  tasteKurz() { return (typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)) ? '⌘ Enter' : 'Ctrl+Enter'; }
+
   fensterBetreff() {
     const t = this.state.txt, r = this.rec();
     const wer = (t.firma || t.name || 'Ihre Anfrage').trim();
-    return 'Projekt-Check: ' + wer + ' (' + (this.state.quick ? 'Kurzversion' : r.name) + ')';
+    return 'Projekt-Check: ' + wer;
   }
 
   // Mail-Fenster: Stil und Sende-Logik (assets/css/anfrage.css, assets/js/anfrage.js) erst im Projekt-Check laden,
   // damit die übrigen Seiten gleich schnell bleiben. Turnstile lädt erst auf der letzten Seite.
   anfrageVorladen() {
-    if (!this.direkt()) return null;
     if (!document.getElementById('anfrage-css')) {
       const l = document.createElement('link');
       l.id = 'anfrage-css'; l.rel = 'stylesheet'; l.href = '/assets/css/anfrage.css';
       document.head.appendChild(l);
     }
+    if (!this.direkt()) return null;
     if (!this.anfrageM) this.anfrageM = import('/assets/js/anfrage.js').catch((e) => { this.anfrageM = null; throw e; });
     return this.anfrageM;
   }
@@ -3031,7 +2876,13 @@ class Component extends DCLogic {
 
   anfrageSenden = async () => {
     const s = this.state;
-    if (this.sendetGerade || s.senden === 'laeuft' || s.gesendet || !this.direkt()) return;
+    if (!this.direkt()) {
+      // Solange der Direktversand aus ist: E-Mail-Programm mit der fertigen Nachricht öffnen
+      if (!s.consent) this.setState({ senden: 'fehler', sendFehler: 'einwilligung' });
+      else window.location.href = this.mailtoLink();
+      return;
+    }
+    if (this.sendetGerade || s.senden === 'laeuft' || s.gesendet) return;
     this.sendetGerade = true;
     try {
       const m = await this.anfrageVorladen();
@@ -3321,7 +3172,7 @@ class Component extends DCLogic {
     if (!this.complete(i)) { this.setState({ warn: true }); return; }
     if (this.state.editing) { this.leaveEdit('result'); return; }
     if (this.state.quick) {
-      if (step >= 2) { this.setState({ result: true, warn: false, cmpGrow: false }); this.focusHead(); this.tsSicher(); return; }
+      if (step >= 2) { this.setState({ result: true, warn: false, cmpGrow: false }); this.focusHead(); this.tsSicher(); setTimeout(() => this.setState({ cmpGrow: true }), 60); return; }
       this.setState({ step: step + 1, dir: 'fwd', warn: false, tick: this.state.tick + 1 });
       this.focusHead();
       return;
@@ -3450,15 +3301,6 @@ class Component extends DCLogic {
     return 'Projektanfrage: ' + (t.firma || t.betrieb || 'Anfrage') + (t.ort ? ', ' + t.ort : '');
   }
 
-  quickBody() {
-    const a = this.state.ans;
-    const r = this.rec();
-    const fn = Array.isArray(a[6]) ? a[6].join(', ') : '';
-    return ['Guten Tag Nico', '', 'Ich habe die Kurzschätzung auf odera.ch gemacht.',
-      'Branche: ' + (a[0] || '-'), 'Umfang: ' + (a[5] || '-'), 'Funktionen: ' + (fn || '-'),
-      'Schätzung: ' + r.name + ', ' + r.price, '', 'Bitte melden Sie sich für die Details.', '', 'Freundliche Grüsse'].join('\n');
-  }
-
   mailBody() {
     const r = this.rec(), t = this.state.txt;
     const line = '='.repeat(40);
@@ -3571,12 +3413,6 @@ class Component extends DCLogic {
 
     const complete = this.complete(ai);
     const remainMin = Math.max(1, Math.ceil((total - (s.step + 1)) * 30 / 60));
-    const cmpMax = 12000;
-    const compare = [
-      { label: 'Baukasten, selbst gebaut', amount: 'CHF 300 im Jahr plus rund 30 Stunden Ihrer Zeit', w: s.cmpGrow ? (1500 / cmpMax * 100) + '%' : '0%' },
-      { label: 'Bei mir', amount: (r.refFull ? r.refPrice : r.price) + ' einmalig', w: s.cmpGrow ? (r.priceNum / cmpMax * 100) + '%' : '0%' },
-      { label: 'Agentur, vergleichbarer Umfang', amount: 'CHF 5\u2019000 bis 12\u2019000', w: s.cmpGrow ? '100%' : '0%' }
-    ];
 
     return {
       mailKontakt: mailKontakt,
@@ -3787,8 +3623,6 @@ class Component extends DCLogic {
       checkCut: ((s.result && !s.review) || s.mid) ? '#2439B9' : '#EFF1FE',
       inQuiz: isCheck && !s.result && !s.mid && !s.gesendet,
       inMid: isCheck && s.mid,
-      inResult: isCheck && s.result && !s.quick && !s.review,
-      inQuick: isCheck && s.result && s.quick,
       quickMode: s.quick,
       quickLinkDisplay: (s.quick || s.editing) ? 'none' : 'block',
       qNum: s.step + 1,
@@ -3873,61 +3707,20 @@ class Component extends DCLogic {
       toast: s.toast, toastOp: s.toast ? 1 : 0,
 
       recName: r.name, recPrice: r.price,
-      refFullDisplay: r.refFull ? 'block' : 'none',
-      refSlimDisplay: r.refSlim ? 'block' : 'none',
-      refPrice: r.refPrice, refSaving: r.refSaving,
-      // Kostenübersicht im Ergebnis. Der Referenzrabatt gilt nur für die Website.
-      costWebsite: r.refFull ? r.refPrice : r.price,
-      costLogoDisplay: this.logoWunsch() ? 'grid' : 'none',
-      costLogo: this.logoMitWebsiteChf(),
-      costHostDisplay: hostWahl ? 'grid' : 'none',
-      costHost: 'CHF ' + this.fmt(hostWahl === 'schweiz' ? this.HOSTING_SCHWEIZ_CHF : hostWahl === 'egal' ? this.HOSTING_AUSLAND_CHF : 0),
-      costHostNote: hostWahl === 'schweiz' ? 'Betrieb bei mir, Server in der Schweiz' : hostWahl === 'egal' ? 'Betrieb bei mir, Server in der EU oder den USA' : 'Sie hosten selbst',
-      costHostMoreDisplay: (hostWahl === 'egal' || hostWahl === 'schweiz') ? 'block' : 'none',
       logoAlleinChf: 'CHF ' + this.fmt(this.LOGO_ALLEIN_CHF), logoMitChf: 'CHF ' + this.fmt(this.LOGO_MIT_WEBSITE_CHF),
-      quickHostLine:'Betrieb auf Wunsch ab CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr, mit Servern in der Schweiz CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF) + '. Sie entscheiden nach dem Livegang.',
       hostAuslandTxt: this.hostingAuslandTxt(), hostSchweizTxt: this.hostingSchweizTxt(),
       hostAuslandChf: 'CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF), hostSchweizChf: 'CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF),
       stundensatzTxt: 'CHF ' + this.fmt(this.STUNDENSATZ_CHF) + ' pro Stunde',
-      reasons: r.reasons.map((t, i) => ({ t: t, i: i })),
-      compare: compare,
-      mailText: this.mailBody(),
-      mailSubject: this.mailSubject(),
-      mailOpen: s.mailOpen,
-      mailRows: s.mailOpen ? '1fr' : '0fr',
-      mailRot: s.mailOpen ? 'rotate(180deg)' : 'none',
-      lidRot: s.mailOpen ? 'rotateX(0deg)' : 'rotateX(-82deg)',
-      nbShadow: s.mailOpen ? '0 18px 40px rgba(17,19,26,0.16)' : '0 6px 14px rgba(17,19,26,0.08)',
-      lidDur: s.mailOpen ? '550ms' : '400ms',
-      screenOp: s.mailOpen ? 1 : 0,
-      screenDelay: s.mailOpen ? '330ms' : '0ms',
       deskView: s.deskView,
-      deskOp: s.deskView ? 1 : 0, deskPtr: s.deskView ? 'auto' : 'none',
-      mailOp: s.deskView ? 0 : 1, mailPtr: s.deskView ? 'none' : 'auto',
-      toggleDesk: () => this.setState(st => ({ deskView: !st.deskView })),
-      closeHoverOp: s.closeHover ? 1 : 0,
-      onCloseDotEnter: () => this.setState({ closeHover: true }),
-      onCloseDotLeave: () => this.setState({ closeHover: false }),
-      toggleMail: () => this.setState(st => ({ mailOpen: !st.mailOpen })),
-      mailHref: s.consent ? ('mailto:' + this.EMAIL + '?subject=' + encodeURIComponent(this.mailSubject()) + '&body=' + encodeURIComponent(this.mailBody())) : '#',
       consent: s.consent,
       onConsent: () => this.setState(st => ({ consent: !st.consent, ...(st.sendFehler === 'einwilligung' ? { senden: 'bereit', sendFehler: '' } : {}) })),
-      consentWarnDisplay: s.consent ? 'none' : 'block',
-      sendDisabledAttr: s.consent ? 'false' : 'true',
-      sendFg: s.consent ? '#11131A' : '#5B6270',
-      sendBg: s.consent ? '' : '#E2DFD8',
-      sendCursor: s.consent ? 'pointer' : 'not-allowed',
-      onSendClick: (e) => { if (!s.consent) e.preventDefault(); },
       onCopy: () => {
-        const txt = this.direkt() ? this.fensterText() : (s.quick ? this.quickBody() : this.mailBody());
+        const txt = this.fensterText();
         const done = () => { this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 2000); };
         if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done); else done();
       },
-      copiedOp: s.copied ? 1 : 0,
       onReview: () => this.showReview(),
       quickToLong: () => this.setState({ quick: false, result: false, mid: false, step: 1, warn: false }),
-      quickMailHref: s.consent ? ('mailto:' + this.EMAIL + '?subject=' + encodeURIComponent('Kurzanfrage: ' + (s.ans[0] || 'Anfrage')) + '&body=' + encodeURIComponent(this.quickBody())) : '#',
-      quickSendBg: s.consent ? '#FFFFFF' : '#E2DFD8',
       // Projekt-Check direkt senden
       dsMail: !this.direkt(),
       dsDirekt: this.direkt(),
@@ -3938,26 +3731,47 @@ class Component extends DCLogic {
       hinweisErsterSchritt: this.direkt()
         ? 'Ihre Antworten bleiben in Ihrem Browser, bis Sie am Schluss auf Senden klicken. Dann werden sie verschlüsselt an mich übermittelt und nicht in einer Datenbank gespeichert.'
         : 'Ihre Antworten werden nicht gespeichert, sondern am Schluss in eine E-Mail eingesetzt, die Sie selbst absenden.',
-      mailtoDisplay: this.direkt() ? 'none' : 'block',
-      mailtoInline: this.direkt() ? 'none' : 'inline-flex',
-      ergebnisUnten: this.direkt() ? '40px' : '120px',
-      fensterAktiv: isCheck && this.direkt() && s.result && !s.review && !s.gesendet,
-      mfAnim: s.fensterWeg ? (this.reduce ? 'mfWeg 200ms linear both' : 'mfZu 450ms cubic-bezier(0.4,0,1,1) 180ms both') : (this.reduce ? 'none' : 'fade 240ms ease-out'),
-      fliegerAnim: s.fensterWeg && !this.reduce ? 'mfFlug 600ms cubic-bezier(0.4,0,0.2,1) both' : 'none',
-      onFensterTaste: () => {},
+      fensterAktiv: isCheck && s.result && !s.review && !s.gesendet,
+      mfAnim: s.fensterWeg ? (this.reduce ? 'mfWeg 200ms linear both' : 'mfZu 300ms cubic-bezier(0.4,0,1,1) 300ms both') : (this.reduce ? 'none' : 'mfRein 400ms cubic-bezier(0.2,0,0,1) 120ms both'),
+      egAnim: s.fensterWeg ? (this.reduce ? 'mfWeg 200ms linear both' : 'mfWeg 350ms ease-in 150ms both') : (this.reduce ? 'none' : 'fade 300ms ease-out both'),
+      fliegerAnim: s.fensterWeg && !this.reduce ? 'mfFlug 520ms cubic-bezier(0.4,0,0.2,1) both' : 'none',
       vonTextDisplay: s.quick ? 'none' : 'inline',
       vonEingabeDisplay: s.quick ? 'flex' : 'none',
       vonText: [s.txt.name, s.txt.email ? '<' + s.txt.email + '>' : ''].filter(Boolean).join(' '),
       vonName: s.txt.name || '', vonMail: s.txt.email || '', vonFirma: s.txt.firma || '',
       fensterBetreff: this.fensterBetreff(),
-      fensterText: isCheck && this.direkt() && s.result ? this.fensterText() : '',
       hpWert: s.hp, onHp: (e) => this.setState({ hp: e.currentTarget.value }),
       kopieWunsch: s.kopieWunsch, onKopie: () => this.setState((st) => ({ kopieWunsch: !st.kopieWunsch })),
       offlineDisplay: s.offline ? 'block' : 'none',
-      sendenGesperrt: s.senden === 'laeuft' || s.offline || !!s.fensterWeg,
-      sendenLabel: s.senden === 'laeuft' ? 'Wird gesendet …' : 'Anfrage senden',
+      sendenGesperrtAttr: (s.senden === 'laeuft' || s.offline || !!s.fensterWeg || !s.consent) ? 'true' : 'false',
+      sendenTip: s.senden === 'laeuft' ? '' : s.offline ? 'Sie sind offline.' : !s.consent ? 'Bitte zuerst AGB und Datenschutzerklärung bestätigen.' : (this.direkt() ? 'Senden (' : 'Im E-Mail-Programm öffnen (') + this.tasteKurz() + ')',
+      sendenHinweis: this.direkt() ? 'Wird direkt an kontakt@odera.ch gesendet.' : 'Öffnet Ihr E-Mail-Programm mit dieser Nachricht an kontakt@odera.ch.',
+      kopieDisplay: this.direkt() ? 'flex' : 'none',
+      sendenLabel: s.senden === 'laeuft' ? 'Sendet …' : 'Senden',
       sendStatus: s.senden === 'laeuft' ? 'Ihre Anfrage wird gesendet.' : '',
-      tasteSenden: (typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)) ? '⌘ Enter zum Senden' : 'Ctrl+Enter zum Senden',
+      fehlerKnopfDisplay: (s.sendFehler === 'einwilligung' || s.sendFehler === 'kontakt') ? 'none' : 'flex',
+      fensterZeilen: isCheck && s.result ? this.fensterZeilen() : [],
+      egLabel: s.quick ? 'KURZSCHÄTZUNG' : 'IHR ERGEBNIS',
+      egPreis: r.refFull ? r.refPrice : r.price,
+      egAltDisplay: r.refFull ? 'inline' : 'none',
+      egHost: hostWahl === 'schweiz' ? 'Danach: CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF) + ' pro Jahr, Betrieb bei mir, Server in der Schweiz'
+        : hostWahl === 'egal' ? 'Danach: CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr, Betrieb bei mir'
+        : hostWahl === 'selbst' ? 'Danach: CHF 0 pro Jahr, Sie hosten selbst'
+        : 'Danach: Betrieb auf Wunsch ab CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr',
+      egSatz: (r.reasons[0] || '').replace(/ Das ist Paket \S+\.$/, ''),
+      egExtra: this.egExtra(r),
+      egExtraDisplay: this.egExtra(r) ? 'block' : 'none',
+      egRef: r.refFull ? this.REFERENZ_SATZ.replace('{betrag}', r.refSaving) : r.refSlim ? 'Auch ohne Namensnennung lässt sich etwas machen. Sprechen wir darüber.' : '',
+      egRefDisplay: (r.refFull || r.refSlim) ? 'block' : 'none',
+      egLangDisplay: s.quick ? 'block' : 'none',
+      egReviewDisplay: s.quick ? 'none' : 'inline-block',
+      vglOffen: s.vglOffen ? '1' : '0', vglOffenAria: s.vglOffen ? 'true' : 'false',
+      onVgl: () => this.setState((st) => ({ vglOffen: !st.vglOffen })),
+      vergleich: [
+        { label: 'Baukasten', amount: 'CHF 300 pro Jahr und rund 30 Stunden', w: s.cmpGrow ? (1500 / 12000 * 100) + '%' : '0%' },
+        { label: 'Bei mir', amount: (r.refFull ? r.refPrice : r.price) + ' einmalig', w: s.cmpGrow ? (r.priceNum / 12000 * 100) + '%' : '0%' },
+        { label: 'Agentur', amount: 'CHF 5\u2019000 bis 12\u2019000', w: s.cmpGrow ? '100%' : '0%' },
+      ],
       fehlerDisplay: s.senden === 'fehler' ? 'block' : 'none',
       fehlerTitel: ({ einwilligung: 'Bitte bestätigen Sie zuerst die Kenntnisnahme.', kontakt: 'Name und E-Mail-Adresse fehlen.', limit: 'Im Moment kommen sehr viele Anfragen an.' })[s.sendFehler] || 'Das Senden hat nicht geklappt.',
       fehlerText: ({
@@ -3969,9 +3783,8 @@ class Component extends DCLogic {
       })[s.sendFehler] || 'Ihre Antworten sind noch da. Versuchen Sie es nochmals, oder senden Sie mit Ihrem E-Mail-Programm.',
       nochmalsDisplay: (s.sendFehler === 'limit') ? 'none' : 'inline-flex',
       kopierenLabel: s.copied ? 'Kopiert' : 'Text kopieren',
-      mailtoFallback: 'mailto:' + this.EMAIL + '?subject=' + encodeURIComponent(s.quick ? 'Kurzanfrage: ' + (s.ans[0] || 'Anfrage') : this.mailSubject()) + '&body=' + encodeURIComponent(isCheck && s.result ? (s.quick ? (this.direkt() ? this.kurzText() : this.quickBody()) : this.mailBody()) : ''),
+      mailtoFallback: isCheck && s.result ? this.mailtoLink() : '',
       onAnfrageSenden: this.anfrageSenden,
-      onZurueckAendern: () => { this.idem = null; if (s.quick) this.setState({ result: false, step: 2, senden: 'bereit', sendFehler: '' }); else { this.setState({ senden: 'bereit', sendFehler: '' }); this.showReview(); } },
       inDanke: isCheck && !!s.gesendet,
       abbrechenDisplay: s.gesendet ? 'none' : 'inline-flex',
       dankeVorname: s.gesendet ? s.gesendet.vorname : '',
