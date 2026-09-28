@@ -50,7 +50,7 @@ export async function senden(c) {
   const art = s.quick ? 'kurz' : 'voll';
   const felder = art === 'kurz' ? c.felderKurz() : c.felderVoll();
   const mail = felder.KONTAKT_MAIL || '';
-  if (!felder.KONTAKT_NAME || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) { c.setState({ senden: 'fehler', sendFehler: 'kontakt' }); return; }
+  if ((art === 'voll' && !felder.KONTAKT_NAME) || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) { c.setState({ senden: 'fehler', sendFehler: 'kontakt' }); return; }
   c.setState({ senden: 'laeuft', sendFehler: '' });
   if (!c.idem) c.idem = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2));
   const token = await tokenHolen(c);

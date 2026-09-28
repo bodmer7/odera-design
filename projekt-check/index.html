@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- seo:start -->
 <base href="/">
-<title>Projekt-Check: 27 Fragen | ODERA Design</title>
+<title>Projekt-Check: Ihre Anfrage in 6 Minuten | ODERA Design</title>
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://odera.ch/projekt-check/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ODERA Design">
 <meta property="og:locale" content="de_CH">
-<meta property="og:title" content="Projekt-Check: 27 Fragen | ODERA Design">
+<meta property="og:title" content="Projekt-Check: Ihre Anfrage in 6 Minuten | ODERA Design">
 <meta property="og:description" content="">
 <meta property="og:url" content="https://odera.ch/projekt-check/">
 <meta name="twitter:card" content="summary">
@@ -454,7 +454,7 @@ button,input,textarea{font-family:inherit}
           <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,calc(25.8px + 2.1vw),56px);line-height:1.06;letter-spacing:-0.03em;margin:0 0 20px;text-wrap:balance;animation:{{ heroAnim1 }}">Sie sehen Ihre neue Website, bevor Sie einen Franken bezahlen.</h1>
           <p style="font-size:18px;line-height:1.52;color:#5B6270;margin:0 0 28px;max-width:480px;animation:{{ heroAnim2 }}">Sie füllen ein Formular aus, ich gestalte daraus eine fertige Seite. Gefällt sie Ihnen, machen wir weiter. Gefällt sie Ihnen nicht, zahlen Sie nichts.</p>
           <div class="row hero-cta-row" style="gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:16px;animation:{{ heroAnim3 }}">
-            <a href="/projekt-check/" class="g3" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 32px;border-radius:999px;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Formular ausfüllen, 15 Minuten</a>
+            <a href="/projekt-check/" class="g3" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 32px;border-radius:999px;color:#FFFFFF;font-size:17px;font-weight:600;text-decoration:none">Formular ausfüllen, rund 6 Minuten</a>
             <a href="/angebot/" style="font-size:15px">Was das kostet</a>
           </div>
         </div>
@@ -592,7 +592,7 @@ button,input,textarea{font-family:inherit}
         <div style="border-top:1px solid #11131A;border-top-color:rgba(17,19,26,0.25);padding-top:16px">
           <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:#2D4CF0;margin:0 0 12px">01</p>
           <p style="font-size:20px;font-weight:600;color:#11131A;margin:0 0 8px">Formular</p>
-          <p style="font-size:15px;line-height:1.55;color:rgba(17,19,26,0.65);margin:0;text-wrap:pretty">27 Fragen, 15 Minuten, ohne Registrierung.</p>
+          <p style="font-size:15px;line-height:1.55;color:rgba(17,19,26,0.65);margin:0;text-wrap:pretty">{{ checkUmfang }}, ohne Registrierung.</p>
         </div>
         <div style="border-top:1px solid rgba(17,19,26,0.25);padding-top:16px">
           <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:#2D4CF0;margin:0 0 12px">02</p>
@@ -1856,9 +1856,9 @@ button,input,textarea{font-family:inherit}
             <li>Name</li>
             <li>E-Mail-Adresse</li>
             <li>Telefonnummer, optional</li>
-            <li>Angaben zu Ihrem Betrieb und Ihrem Projekt, zum Beispiel Branche, Umfang, Wunschtermin, Gestaltung und Angaben fürs Impressum</li>
+            <li>Angaben zu Ihrem Betrieb und Ihrem Projekt, zum Beispiel Branche, Ziel der Website, Funktionen, Umfang, Stil und Wunschtermin</li>
           </ul>
-          <p style="font-size:17px;line-height:1.7;margin:0">Pflicht sind Name und E-Mail-Adresse sowie wenige Angaben zum Betrieb, damit ich Ihre Anfrage einschätzen kann. Alle weiteren Angaben sind freiwillig.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0">Pflicht sind Ihre E-Mail-Adresse und wenige Angaben zum Betrieb, im vollständigen Projekt-Check auch Ihr Name. So kann ich Ihre Anfrage einschätzen und Ihnen antworten. Alle weiteren Angaben sind freiwillig.</p>
         </div>
         <div id="ds-7" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">7. Bearbeitung Ihrer Anfrage und Bekanntgabe ins Ausland</h2>
@@ -2037,19 +2037,20 @@ button,input,textarea{font-family:inherit}
         <div style="height:2px;background:#2D4CF0;width:{{ progress }};transition:width 300ms ease-in-out"></div>
       </div>
       <div class="wrap" style="padding-top:16px;padding-bottom:120px">
-        <p class="mono" style="text-align:right;font-size:13px;color:#5B6270;margin:0 0 40px">Frage {{ qNum }} von {{ qTotal }} · noch etwa {{ remaining }}</p>
+        <p class="mono" style="text-align:right;font-size:13px;color:#5B6270;margin:0 0 40px">{{ fortschritt }}</p>
         <div class="qgrid">
           <div class="qleft">
             <p role="status" style="display:{{ editNoteDisplay }};font-size:15px;line-height:1.5;color:#11131A;background:#FFFFFF;border:1px solid #2D4CF0;border-radius:12px;padding:12px 16px;margin:0 0 20px">{{ editNote }}</p>
             <p class="mono" style="font-size:12px;letter-spacing:0.08em;color:#2D4CF0;margin:0 0 8px">{{ partLabel }}</p>
             <p class="mono qnum" aria-hidden="true">{{ qNumPad }}</p>
             <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,44px);line-height:1.1;letter-spacing:-0.03em;margin:0 0 16px;text-wrap:pretty">{{ qTitle }}</h2>
+            <p class="mono q-wichtig" style="display:{{ wichtigDisplay }}">Die wichtigste Frage für Ihren Entwurf</p>
             <p style="font-size:15px;line-height:1.55;color:#5B6270;margin:0 0 12px;display:{{ helpDisplay }}">{{ qHelp }}</p>
+            <details class="q-was" style="display:{{ wasDisplay }}"><summary>Was heisst das?</summary><p>{{ qWas }}</p></details>
             <div style="display:{{ firstNoteDisplay }};border:1px solid #E2DFD8;border-radius:14px;background:#F6F5F1;padding:20px;margin:0 0 16px">
               <p style="font-size:15px;line-height:1.55;margin:0">Dieses Formular ist eine unverbindliche Projektanfrage. Sie kaufen hier nichts und gehen keine Verpflichtung ein. {{ hinweisErsterSchritt }} Mehr dazu in der <a href="/datenschutz/" target="_blank">Datenschutzerklärung</a>.</p>
             </div>
             <p class="mono" style="font-size:13px;color:#5B6270;margin:0 0 12px;display:{{ multiDisplay }}">Mehrfachauswahl möglich</p>
-            <p class="mono" style="font-size:13px;color:#5B6270;margin:0 0 12px;display:{{ prefillDisplay }}">Ihre Angabe ist schon eingetragen</p>
             <div class="apills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:24px">
               <sc-for list="{{ answered }}" as="p" hint-placeholder-count="0">
                 <button type="button" class="mono apill" data-s="{{ p.step }}" onClick="{{ onJump }}" style="opacity:{{ p.op }}">{{ p.label }}</button>
@@ -2059,12 +2060,26 @@ button,input,textarea{font-family:inherit}
             <p class="mono" aria-live="polite" style="font-size:12px;color:#5B6270;margin:4px 0 0;min-height:18px">{{ hint }}</p>
           </div>
 
-          <div class="qright" style="animation:{{ qAnim }}">
-            <div class="g-ans" style="display:{{ optDisplay }};grid-auto-rows:1fr">
+          <div class="qright" style="animation:{{ qAnim }};display:flex;flex-direction:column">
+            <p class="mono q-optlabel" style="display:{{ optLabelDisplay }};order:{{ optOrder }};margin-top:{{ optTop }}">{{ optLabel }}</p>
+            <div class="g-ans" style="display:{{ optDisplay }};grid-auto-rows:1fr;order:{{ optOrder }}">
               <sc-for list="{{ options }}" as="o" hint-placeholder-count="4">
                 <button type="button" class="acard" data-v="{{ o.v }}" onClick="{{ onPick }}" aria-pressed="{{ o.sel }}" style="border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }}">
                   <span class="mono" style="flex:none;width:28px;height:28px;border-radius:{{ o.keyRadius }};border:2px solid {{ o.keyBd }};background:{{ o.keyBg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ o.keyFg }}">{{ o.key }}</span>
                   <span style="flex:1">{{ o.label }}</span>
+                </button>
+              </sc-for>
+            </div>
+
+            <p class="q-hinweis" role="status" style="display:{{ optHinweisDisplay }};order:{{ optOrder }}">{{ optHinweis }}</p>
+
+            <div class="g-karten" style="display:{{ kartenDisplay }}">
+              <sc-for list="{{ karten }}" as="c" hint-placeholder-count="4">
+                <button type="button" class="kcard" data-v="{{ c.v }}" onClick="{{ onPick }}" aria-pressed="{{ c.sel }}" aria-disabled="{{ c.fix }}" data-an="{{ c.an }}">
+                  <svg class="kcard-i" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ c.icon }}"></path></svg>
+                  <span class="kcard-t">{{ c.label }}</span>
+                  <span class="kcard-d">{{ c.desc }}</span>
+                  <span class="mono kcard-p">{{ c.tag }}</span>
                 </button>
               </sc-for>
             </div>
@@ -2078,22 +2093,11 @@ button,input,textarea{font-family:inherit}
               </sc-for>
             </div>
 
-            <div style="display:{{ sliderDisplay }}">
-              <input type="range" min="0" max="3" step="1" value="{{ timingVal }}" onChange="{{ onTiming }}" aria-label="Wunschtermin" style="width:100%;height:48px;accent-color:#2D4CF0">
-              <div class="mono" style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#5B6270">
-                <span>So schnell wie möglich</span>
-                <span>In einem Monat</span>
-                <span>Zwei bis drei Monate</span>
-                <span>Kein festes Datum</span>
-              </div>
-              <p style="font-size:22px;font-weight:600;margin:24px 0 0">{{ timingLabel }}</p>
-            </div>
-
-            <div style="display:{{ fieldsDisplay }};flex-direction:{{ fieldsDir }};flex-wrap:wrap;gap:28px;margin-top:{{ fieldsTop }}">
+            <div style="display:{{ fieldsDisplay }};flex-direction:{{ fieldsDir }};flex-wrap:wrap;gap:28px;margin-top:{{ fieldsTop }};order:{{ fieldsOrder }}">
               <sc-for list="{{ fields }}" as="f" hint-placeholder-count="2">
                 <label class="fline">
                   <span class="mono" style="display:block;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5B6270">{{ f.label }}</span>
-                  <input type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" onChange="{{ onField }}" onKeyDown="{{ onFieldKey }}">
+                  <input type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" onChange="{{ onField }}" onKeyDown="{{ onFieldKey }}">
                   <span class="ulx" aria-hidden="true"></span>
                 </label>
               </sc-for>
@@ -2106,34 +2110,13 @@ button,input,textarea{font-family:inherit}
               </sc-if>
             </div>
 
-            <p class="mono" style="font-size:13px;color:#5B6270;margin:24px 0 0;display:{{ warnDisplay }}">{{ warnText }}</p>
-            <div class="row" style="justify-content:space-between;margin-top:32px;gap:16px">
+            <p class="mono" style="font-size:13px;color:#5B6270;margin:24px 0 0;display:{{ warnDisplay }};order:5">{{ warnText }}</p>
+            <div class="row" style="justify-content:space-between;margin-top:32px;gap:16px;order:6">
               <button type="button" onClick="{{ onBack }}" style="min-height:56px;padding:0 24px;background:none;border:1px solid #11131A;border-radius:999px;font-size:17px;font-weight:600;color:#11131A;cursor:pointer;visibility:{{ backVis }}">Zurück</button>
               <button type="button" onClick="{{ onNext }}" disabled="{{ nextDisabled }}" style="min-height:56px;padding:0 32px;border:none;border-radius:999px;background:{{ nextBg }};color:{{ nextFg }};font-size:17px;font-weight:600;cursor:{{ nextCursor }}">{{ nextLabel }}</button>
             </div>
-            <p style="display:{{ editDisplay }};margin:16px 0 0;text-align:right"><button type="button" data-own-enter="1" onClick="{{ onEditToReview }}" style="background:none;border:none;padding:0;min-height:44px;color:#11131A;font-size:16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer">Zurück zur Übersicht</button></p>
-            <p class="mono" style="display:{{ quickLinkDisplay }};font-size:13px;line-height:1.5;margin:16px 0 0"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </sc-if>
-
-  <sc-if value="{{ inMid }}" hint-placeholder-val="{{ false }}">
-  <div class="wrap" style="padding-bottom:120px">
-    <div style="max-width:880px;margin:0 auto;animation:fade 200ms linear;padding-top:64px">
-      <div class="row" style="gap:48px;align-items:center">
-        <svg width="160" height="160" viewBox="0 0 160 160" style="flex:none">
-          <circle cx="80" cy="80" r="77" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="6"></circle>
-          <circle cx="80" cy="80" r="77" fill="none" stroke="#D6F24B" stroke-width="6" stroke-linecap="round" stroke-dasharray="483.8" stroke-dashoffset="{{ ringOffset }}" transform="rotate(-90 80 80)"></circle>
-        </svg>
-        <div>
-          <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-0.03em;color:#FFFFFF;margin:0 0 16px">Das reicht für eine Anfrage.</h2>
-          <p style="font-size:20px;line-height:1.5;color:#FFFFFF;margin:0 0 32px;max-width:600px;text-wrap:pretty">Wenn Sie jetzt noch 14 Fragen zu Gestaltung und Inhalt beantworten, kann ich Ihren Entwurf ohne Rückfragen bauen. Das spart uns beiden ein Gespräch und Sie sehen das Ergebnis schneller.</p>
-          <div class="row" style="gap:16px">
-            <button type="button" class="g4" onClick="{{ onMidNext }}" style="min-height:56px;padding:0 32px;border:none;border-radius:999px;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">Weiter, ich nehme mir die Zeit</button>
-            <button type="button" onClick="{{ onMidSend }}" style="min-height:56px;padding:0 32px;border:1px solid #FFFFFF;border-radius:999px;background:#FFFFFF;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">{{ mitteSendenLabel }}</button>
+            <p style="display:{{ editDisplay }};margin:16px 0 0;text-align:right;order:7"><button type="button" data-own-enter="1" onClick="{{ onEditToReview }}" style="background:none;border:none;padding:0;min-height:44px;color:#11131A;font-size:16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer">Zurück zur Übersicht</button></p>
+            <p class="mono" style="display:{{ quickLinkDisplay }};font-size:13px;line-height:1.5;margin:16px 0 0;order:8"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
           </div>
         </div>
       </div>
@@ -2174,12 +2157,16 @@ button,input,textarea{font-family:inherit}
         <h2 tabindex="-1" class="eg-paket">Paket {{ recName }}</h2>
         <p class="mono eg-badge">Richtwert, kein verbindliches Angebot</p>
         <p class="mono eg-preis">{{ egPreis }}<s style="display:{{ egAltDisplay }}">{{ recPrice }}</s></p>
-        <p class="eg-host">{{ egHost }}</p>
         <p class="eg-satz">{{ egSatz }}</p>
-        <p class="eg-extra" style="display:{{ egExtraDisplay }}">{{ egExtra }}</p>
+        <p class="eg-indiv" style="display:{{ egIndivDisplay }}"><strong>Individuell prüfen.</strong> {{ egIndiv }}</p>
+        <dl class="eg-zusatz">
+          <sc-for list="{{ egZusaetze }}" as="z" hint-placeholder-count="2">
+            <div><dt>{{ z.l }}</dt><dd class="mono">{{ z.v }}</dd></div>
+          </sc-for>
+        </dl>
         <p class="eg-ref" style="display:{{ egRefDisplay }}">{{ egRef }}</p>
         <div class="eg-lang" style="display:{{ egLangDisplay }}">
-          <button type="button" class="g4" onClick="{{ quickToLong }}">Alle 27 Fragen beantworten</button>
+          <button type="button" class="g4" onClick="{{ quickToLong }}">Alle Fragen beantworten</button>
         </div>
         <div class="eg-vgl" data-offen="{{ vglOffen }}">
           <button type="button" class="eg-vgl-knopf" aria-expanded="{{ vglOffenAria }}" aria-controls="eg-vgl-inhalt" onClick="{{ onVgl }}">Vergleich mit Baukasten und Agentur</button>
@@ -2258,7 +2245,7 @@ button,input,textarea{font-family:inherit}
         <svg class="dk-ring" viewBox="0 0 120 120" width="120" height="120"><circle cx="60" cy="60" r="56" fill="none" stroke="#2D4CF0" stroke-width="3" stroke-linecap="round" pathLength="100"></circle></svg>
         <div class="dk-zeichen"><dc-import name="logo" kind="zeichen" h="72" hint-size="72px,72px"></dc-import></div>
       </div>
-      <h2 tabindex="-1" class="dk-titel">Danke, {{ dankeVorname }}. Ihre Anfrage ist angekommen.</h2>
+      <h2 tabindex="-1" class="dk-titel">{{ dankeTitel }}</h2>
       <p class="mono dk-ref">Referenz <span>{{ dankeReferenz }}</span></p>
       <p class="dk-kopie" style="display:{{ dankeKopieDisplay }}">Eine Kopie ist unterwegs an {{ dankeMail }}.</p>
       <ol class="dk-zeit">
@@ -2355,7 +2342,7 @@ button,input,textarea{font-family:inherit}
 <sc-if value="{{ showDeskBar }}" hint-placeholder-val="{{ false }}">
 <div class="deskbar" style="position:fixed;left:0;right:0;bottom:0;z-index:55;height:56px;background:#11131A;animation:fade 200ms linear">
   <div class="wrap" style="height:56px;display:flex;align-items:center;justify-content:center;gap:24px">
-    <span class="mono" style="font-size:13px;color:#A8B0BD">27 Fragen, 15 Minuten</span>
+    <span class="mono" style="font-size:13px;color:#A8B0BD">{{ checkUmfang }}</span>
     <a href="/projekt-check/" style="display:inline-flex;align-items:center;min-height:40px;padding:0 20px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
   </div>
 </div>
@@ -2386,25 +2373,22 @@ class Component extends DCLogic {
   // damit Formular und Worker dieselben Regeln haben. felder: [Schlüssel, Beschriftung, Abschnitt, Maximallänge]
   ANFRAGE = {
     gesamtMax: 20000,
-    abschnitte: ['Kontakt', 'Ihr Projekt', 'Gestaltung und Inhalt', 'Angaben fürs Impressum', 'Empfehlung'],
+    abschnitte: ['Ihr Betrieb', 'Das Ziel der Website', 'Was die Seite können soll', 'Inhalte und Stil', 'Technik und Zeitplan', 'Kontakt', 'Empfehlung'],
     felder: [
+      ['FIRMA', 'Betrieb', 'Ihr Betrieb', 120], ['ORT', 'Ort', 'Ihr Betrieb', 80], ['BRANCHE', 'Branche', 'Ihr Betrieb', 140],
+      ['ANGEBOT', 'Angebot', 'Ihr Betrieb', 300], ['REGION', 'Kunden aus', 'Ihr Betrieb', 60],
+      ['ZIEL', 'Besucher sollen', 'Das Ziel der Website', 60], ['KUNDEN', 'Typische Kunden', 'Das Ziel der Website', 40],
+      ['WEBSITE_HEUTE', 'Website heute', 'Das Ziel der Website', 10], ['WEBSITE_URL', 'Adresse heute', 'Das Ziel der Website', 300],
+      ['WEBSITE_PROBLEME', 'Was stört', 'Das Ziel der Website', 400],
+      ['FUNKTIONEN', 'Funktionen', 'Was die Seite können soll', 500], ['SEITENZAHL', 'Seitenzahl', 'Was die Seite können soll', 40],
+      ['LOGO', 'Logo', 'Inhalte und Stil', 40], ['TEXTE', 'Texte', 'Inhalte und Stil', 40], ['FOTOS', 'Fotos', 'Inhalte und Stil', 40],
+      ['STIL', 'Stil', 'Inhalte und Stil', 60], ['VORBILDER', 'Vorbilder', 'Inhalte und Stil', 500], ['FARBEN', 'Firmenfarben', 'Inhalte und Stil', 200],
+      ['DOMAIN', 'Domain', 'Technik und Zeitplan', 220], ['HOSTING', 'Betrieb danach', 'Technik und Zeitplan', 100], ['TERMIN', 'Online bis', 'Technik und Zeitplan', 60],
       ['KONTAKT_NAME', 'Name', 'Kontakt', 120], ['KONTAKT_MAIL', 'E-Mail', 'Kontakt', 200], ['KONTAKT_TEL', 'Telefon', 'Kontakt', 40],
-      ['FIRMA', 'Firma', 'Kontakt', 120], ['ORT', 'Ort', 'Kontakt', 80],
-      ['BRANCHE', 'Branche', 'Ihr Projekt', 160], ['WEBSITE_HEUTE', 'Website heute', 'Ihr Projekt', 80], ['WEBSITE_URL', 'Adresse der Website', 'Ihr Projekt', 300],
-      ['ZIEL', 'Ziel', 'Ihr Projekt', 400], ['ZIEL_HAUPT', 'Wichtigstes Ziel', 'Ihr Projekt', 120], ['SEITENZAHL', 'Seitenzahl', 'Ihr Projekt', 80],
-      ['FUNKTIONEN', 'Funktionen', 'Ihr Projekt', 400], ['FOTOS', 'Fotos', 'Ihr Projekt', 80], ['TEXTE', 'Texte', 'Ihr Projekt', 80],
-      ['DOMAIN', 'Domain', 'Ihr Projekt', 260], ['HOSTING', 'Hosting', 'Ihr Projekt', 80], ['HOSTING_PREIS', 'Hosting-Preis', 'Ihr Projekt', 60],
-      ['TERMIN', 'Termin', 'Ihr Projekt', 80],
-      ['BESCHREIBUNG', 'Beschreibung', 'Gestaltung und Inhalt', 2000], ['LEISTUNGEN', 'Leistungen', 'Gestaltung und Inhalt', 2000], ['USP', 'Stärke', 'Gestaltung und Inhalt', 1000],
-      ['ZIELGRUPPE', 'Zielgruppe', 'Gestaltung und Inhalt', 400], ['ANREDE', 'Anrede', 'Gestaltung und Inhalt', 80], ['DREI_WOERTER', 'Drei Wörter', 'Gestaltung und Inhalt', 140],
-      ['STIL', 'Stil', 'Gestaltung und Inhalt', 80], ['FARBEN', 'Farben', 'Gestaltung und Inhalt', 260], ['LOGO', 'Logo', 'Gestaltung und Inhalt', 80],
-      ['LOGO_PREIS', 'Logo-Preis', 'Gestaltung und Inhalt', 60], ['VORBILDER', 'Vorbilder', 'Gestaltung und Inhalt', 1000], ['TABU', 'Tabu', 'Gestaltung und Inhalt', 1000],
-      ['REFERENZ', 'Referenz', 'Gestaltung und Inhalt', 120], ['SONSTIGES', 'Sonstiges', 'Gestaltung und Inhalt', 2000],
-      ['IMPRESSUM_FIRMA', 'Firma mit Rechtsform', 'Angaben fürs Impressum', 200], ['IMPRESSUM_ADRESSE', 'Adresse', 'Angaben fürs Impressum', 300],
-      ['IMPRESSUM_PERSON', 'Verantwortliche Person', 'Angaben fürs Impressum', 120], ['IMPRESSUM_UID', 'UID oder MWST-Nummer', 'Angaben fürs Impressum', 40],
-      ['PAKET', 'Paket', 'Empfehlung', 40], ['PREIS', 'Richtpreis', 'Empfehlung', 40],
+      ['KONTAKTWEG', 'Kontakt am liebsten per', 'Kontakt', 20], ['REFERENZ', 'Referenz', 'Kontakt', 80], ['SONSTIGES', 'Sonstiges', 'Kontakt', 2000],
+      ['PAKET', 'Paket', 'Empfehlung', 40], ['PREIS', 'Richtpreis', 'Empfehlung', 60], ['ZUSAETZE', 'Zusätze', 'Empfehlung', 400], ['HINWEIS', 'Hinweis', 'Empfehlung', 300],
     ],
-    pflicht: { voll: ['KONTAKT_NAME', 'KONTAKT_MAIL', 'FIRMA', 'ORT', 'BRANCHE'], kurz: ['KONTAKT_NAME', 'KONTAKT_MAIL', 'BRANCHE', 'SEITENZAHL'] },
+    pflicht: { voll: ['FIRMA', 'BRANCHE', 'ANGEBOT', 'ZIEL', 'KONTAKT_NAME', 'KONTAKT_MAIL'], kurz: ['ANGEBOT', 'KONTAKT_MAIL'] },
     // Mindestzeit in Sekunden vom Öffnen des Projekt-Checks bis zum Senden (Schutz vor Bots)
     mindestSek: { voll: 20, kurz: 6 },
     // Nächste Schritte nach dem Senden (Dankesbildschirm und Kopie). Die Sätze stehen wörtlich auch auf der Seite,
@@ -2415,9 +2399,8 @@ class Component extends DCLogic {
       ['Zahlung', 'Sie zahlen erst, wenn Ihnen der Entwurf gefällt.'],
     ],
     // Maximallängen der Eingabefelder im Formular
-    eingabeMax: { firma: 120, ort: 80, name: 120, email: 200, betrieb: 120, tel: 40, url: 300, domain: 200, branche: 120, zielgruppe: 200,
-      farben: 200, w1: 40, w2: 40, w3: 40, beschreibung: 2000, leistungen: 2000, usp: 1000, vorbilder: 1000, tabu: 1000,
-      imFirma: 200, imAdresse: 300, imPerson: 120, imUid: 40, sonstiges: 2000 },
+    eingabeMax: { firma: 120, ort: 80, branche: 120, angebot: 300, url: 300, stoerung: 200, sprache: 60, vorbilder: 500, farben: 200,
+      domain: 200, name: 120, email: 200, tel: 40, sonstiges: 2000 },
   };
   // Öffentliche Adresse der Website. Steht in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung tools/seo-build.mjs ausführen.
   SITE = 'https://odera.ch';
@@ -2439,7 +2422,7 @@ class Component extends DCLogic {
       desc: 'Zwei Musterprojekte: eine erfundene Schreinerei als Firmenseite und mein eigenes Portfolio. Ich liefere keine Vorlage in anderen Farben aus.' },
     '/ueber-mich': { key: 'ueber', title: 'Über mich und Kontakt | ODERA Design',
       desc: 'Nico Bodmer baut Webseiten für Betriebe in der ganzen Schweiz. Lehre als Platform Developer EFZ, seit 2021 in der IT. Erreichbarkeit und Kontakt.' },
-    '/projekt-check': { key: 'check', title: 'Projekt-Check: 27 Fragen | ODERA Design', noindex: true },
+    '/projekt-check': { key: 'check', title: 'Projekt-Check: Ihre Anfrage in 6 Minuten | ODERA Design', noindex: true },
     '/impressum': { key: 'impressum', title: 'Impressum | ODERA Design', noindex: true },
     '/datenschutz': { key: 'datenschutz', title: 'Datenschutz | ODERA Design', noindex: true },
     '/agb': { key: 'agb', title: 'Allgemeine Geschäftsbedingungen | ODERA Design', noindex: true }
@@ -2450,31 +2433,33 @@ class Component extends DCLogic {
   DURCHSCHNITT_SEKUNDEN = 0;
 
   BRANCHEN = [
-    ['Handwerk', 'Handwerk oder Bau', ', seit Jahren in Ihrer Region.', 'Jetzt anrufen', '#2D4CF0', '#FFFFFF',
+    ['Handwerk', 'Handwerk und Bau', ', seit Jahren in Ihrer Region.', 'Jetzt anrufen', '#2D4CF0', '#FFFFFF',
       'repeating-linear-gradient(93deg,#EDEFFF 0 7px,#DDE2FA 7px 11px,#F3F5FF 11px 19px,#D5DBF7 19px 23px)',
       [['Beratung', 'Wir schauen es bei Ihnen an.'], ['Ausführung', 'Termingerecht und sauber.'], ['Reparaturen', 'Auch kleine Aufträge.']]],
-    ['Praxis', 'Praxis oder Gesundheit', 'Termine bei NAME, auch am Abend.', 'Termin buchen', '#DCEFE4', '#11131A',
+    ['Praxis', 'Gesundheit und Therapie', 'Termine bei NAME, auch am Abend.', 'Termin buchen', '#DCEFE4', '#11131A',
       'repeating-linear-gradient(93deg,#E9F5EE 0 7px,#D7EBE0 7px 11px,#F1FAF5 11px 19px,#CFE6D8 19px 23px)',
       [['Behandlung', 'Einzeltermine nach Vereinbarung.'], ['Team', 'Wer Sie behandelt, steht da.'], ['Anfahrt', 'Parkplätze vor dem Haus.']]],
-    ['Beratung', 'Beratung, Treuhand oder Büro', '. Klare Antworten, keine Fachbegriffe.', 'Erstgespräch vereinbaren', '#E6E2F7', '#11131A',
+    ['Beratung', 'Beratung und Treuhand', '. Klare Antworten, keine Fachbegriffe.', 'Erstgespräch vereinbaren', '#E6E2F7', '#11131A',
       'repeating-linear-gradient(93deg,#F0ECFB 0 7px,#E1DAF3 7px 11px,#F6F3FD 11px 19px,#D8CFEF 19px 23px)',
       [['Mandate', 'Laufende Betreuung im Jahr.'], ['Abschlüsse', 'Fristen im Blick behalten.'], ['Beratung', 'Einmalig oder begleitend.']]],
-    ['Gastronomie', 'Gastronomie oder Verkauf', 'Heute bei NAME.', 'Tisch reservieren', '#FF5A3C', '#FFFFFF',
+    ['Gastronomie', 'Gastronomie und Hotellerie', 'Heute bei NAME.', 'Tisch reservieren', '#FF5A3C', '#FFFFFF',
       'repeating-linear-gradient(93deg,#FBF1E8 0 7px,#F3DCC9 7px 11px,#FFF7EE 11px 19px,#EFD2B9 19px 23px)',
       [['Küche', 'Was heute auf der Karte steht.'], ['Öffnungszeiten', 'Auch am Sonntagabend.'], ['Anlässe', 'Räume für Gesellschaften.']]],
-    ['Verkauf', 'Gastronomie oder Verkauf', ', alles vor Ort, alles geprüft.', 'Öffnungszeiten ansehen', '#2D4CF0', '#FFFFFF',
+    ['Verkauf', 'Laden und Handel', ', alles vor Ort, alles geprüft.', 'Öffnungszeiten ansehen', '#2D4CF0', '#FFFFFF',
       'repeating-linear-gradient(93deg,#EDEFFF 0 7px,#DDE2FA 7px 11px,#F3F5FF 11px 19px,#D5DBF7 19px 23px)',
       [['Sortiment', 'Was im Laden bereitsteht.'], ['Beratung', 'Wir nehmen uns Zeit.'], ['Service', 'Reparatur und Umtausch.']]],
-    ['Verein', 'Verein', 'Willkommen beim NAME.', 'Mitglied werden', '#F2EADF', '#11131A',
+    ['Verein', 'Andere', 'Willkommen beim NAME.', 'Mitglied werden', '#F2EADF', '#11131A',
       'repeating-linear-gradient(93deg,#FBF1E8 0 7px,#EEE0CE 7px 11px,#FFF8EF 11px 19px,#E7D6C0 19px 23px)',
       [['Vorstand', 'Wer den Verein führt.'], ['Termine', 'Anlässe und Versammlungen.'], ['Mitmachen', 'So werden Sie Mitglied.']]]
   ];
 
   MONATE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 
-  QUICK = [0, 5, 6];
+  // Kurzversion: nur diese Fragen (Schlüssel aus Q)
+  QUICK = ['ANGEBOT', 'FUNKTIONEN', 'MAIL'];
 
-  PAKET = { start: 'Eine Seite reicht', standard: 'Etwa fünf Seiten', plus: 'Zehn Seiten oder mehr' };
+  // Vorbelegung der Seitenzahl aus den Links der Angebotsseite (?paket=...)
+  PAKET = { start: 'Eine Seite reicht', standard: 'Bis 5 Seiten', plus: 'Bis 10 Seiten' };
 
   NAV = [
     { label: 'Start', href: '/', path: '/' },
@@ -2486,14 +2471,14 @@ class Component extends DCLogic {
 
   FAQ = [
     ['Das ist mir zu teuer.', 'Standard kostet CHF 1\u2019900, einmalig. Danach zahlen Sie nur noch Hosting und Domain bei Ihrem Anbieter, üblicherweise CHF 120 bis 200 pro Jahr. Und Sie sehen den Entwurf, bevor Sie sich entscheiden.'],
-    ['Ich habe keine Zeit dafür.', 'Ein Formular von 15 Minuten und Ihre Rückmeldungen. Erforderlich sind 90 Minuten, verteilt auf drei Wochen. Alles Übrige entscheiden Sie.'],
+    ['Ich habe keine Zeit dafür.', 'Ein Formular von rund 6 Minuten und Ihre Rückmeldungen. Erforderlich sind 81 Minuten, verteilt auf drei Wochen. Alles Übrige entscheiden Sie.'],
     ['Ich bin nicht technisch.', 'Sie brauchen nichts zu können. Ich gestalte, ich schalte auf, ich übergebe. Im Paket Pro können Sie Texte danach selbst bearbeiten, wenn Sie wollen.'],
     ['Sie sind allein: was, wenn Sie ausfallen?', 'Ich verwende gängige Technik ohne Abhängigkeiten. Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag. Jede andere Fachperson kann übernehmen, ohne von vorne zu beginnen.'],
     ['Bringt mir eine Website überhaupt Kunden?', 'Ehrliche Antwort: Sie ersetzt keine Empfehlung. Sie entscheidet aber, ob der Empfohlene anruft oder weiterklickt. Deshalb richte ich auch Ihr Google-Unternehmensprofil ein. Bei lokalen Betrieben bringt das oft mehr als die Seite selbst.']
   ];
 
   STEPS = [
-    ['Formular ausfüllen', '27 Fragen zu Ihrem Betrieb, Ihrem Ziel und Ihrem Geschmack. Daraus entsteht Ihre Anfrage an mich.', 15, true],
+    ['Formular ausfüllen', '18 kurze Fragen zu Ihrem Betrieb, Ihrem Ziel und Ihrem Stil, fast alles per Klick. Daraus entsteht Ihre Anfrage an mich.', 6, true],
     ['Ich melde mich', 'Sie hören von mir, sobald ich die Mail gelesen habe.', 0, true],
     ['Kurzes Gespräch', 'Wenn etwas unklar ist, telefonieren wir kurz.', 20, false, 0, 'Ist alles klar, gestalte ich direkt los.'],
     ['Ich gestalte Ihren Entwurf', 'Eine fertige Seite mit Ihren Inhalten, innert fünf Arbeitstagen. Kostenlos und unverbindlich.', 0, true],
@@ -2504,16 +2489,16 @@ class Component extends DCLogic {
     ['Freigabe', 'Sie geben die fertige Seite schriftlich frei.', 5, true],
     ['Aufschaltung und Übergabe', 'Ich stelle die Seite online und übergebe Ihnen Domain, Zugänge und Quellcode. Danach gehört alles Ihnen.', 30, true]
   ];
+  // Stilrichtungen im Projekt-Check: Name und kleines Vorschaubild (CSS-Hintergrund)
   STILE = [
-    ['Ruhig und sachlich', 'linear-gradient(#11131A,#11131A) 12px 14px/64px 6px no-repeat, linear-gradient(#5B6270,#5B6270) 12px 30px/104px 3px no-repeat, linear-gradient(#5B6270,#5B6270) 12px 40px/88px 3px no-repeat, #FFFFFF'],
-    ['Warm und handwerklich', 'linear-gradient(#B4532A,#B4532A) 12px 12px/40px 40px no-repeat, linear-gradient(#11131A,#11131A) 62px 14px/56px 6px no-repeat, linear-gradient(#5B6270,#5B6270) 62px 30px/44px 3px no-repeat, var(--wash-3)'],
-    ['Klar und technisch', 'repeating-linear-gradient(90deg,#D7DAE3 0 1px,transparent 1px 16px) 0 0/100% 100% no-repeat, linear-gradient(#2D4CF0,#2D4CF0) 12px 16px/72px 6px no-repeat, #FFFFFF'],
-    ['Hochwertig und reduziert', 'linear-gradient(#11131A,#11131A) 12px 46px/120px 1px no-repeat, linear-gradient(#11131A,#11131A) 12px 18px/48px 8px no-repeat, #F6F5F1']
+    ['Klassisch und seriös', 'linear-gradient(#11131A,#11131A) 12px 14px/64px 6px no-repeat, linear-gradient(#5B6270,#5B6270) 12px 30px/104px 3px no-repeat, linear-gradient(#5B6270,#5B6270) 12px 40px/88px 3px no-repeat, #FFFFFF'],
+    ['Modern und klar', 'repeating-linear-gradient(90deg,#D7DAE3 0 1px,transparent 1px 16px) 0 0/100% 100% no-repeat, linear-gradient(#2D4CF0,#2D4CF0) 12px 16px/72px 6px no-repeat, #FFFFFF'],
+    ['Warm und persönlich', 'linear-gradient(#B4532A,#B4532A) 12px 12px/40px 40px no-repeat, linear-gradient(#11131A,#11131A) 62px 14px/56px 6px no-repeat, linear-gradient(#5B6270,#5B6270) 62px 30px/44px 3px no-repeat, var(--wash-3)']
   ];
 
   // Die vier Phasen auf der Ablaufseite. Muss zu den AGB passen (Paragrafen 2 und 4). steps: Indizes in STEPS.
   PHASES = [
-    { t: 'Anfrage und Angebot', sie: 'Sie füllen das Formular aus, rund 15 Minuten, und nehmen das Angebot an, wenn es passt.', ich: 'Ich melde mich und schicke Ihnen ein Angebot zum Fixpreis.', kosten: 'gratis', frei: true, dauer: 'Antwort spätestens am nächsten Abend, ausser am Wochenende', steps: [0, 1, 2] },
+    { t: 'Anfrage und Angebot', sie: 'Sie füllen das Formular aus, rund 6 Minuten, und nehmen das Angebot an, wenn es passt.', ich: 'Ich melde mich und schicke Ihnen ein Angebot zum Fixpreis.', kosten: 'gratis', frei: true, dauer: 'Antwort spätestens am nächsten Abend, ausser am Wochenende', steps: [0, 1, 2] },
     { t: 'Entwurf', sie: 'Sie sehen den Entwurf an und geben Rückmeldung. Gefällt er Ihnen nicht, endet es hier.', ich: 'Ich gestalte Ihre Seite als fertigen Entwurf.', kosten: 'gratis', frei: true, dauer: 'innert fünf Arbeitstagen', steps: [3, 4, 5] },
     { t: 'Umsetzung', sie: 'Sie nehmen den Entwurf an. Dann kommt die Rechnung über den Fixpreis, einmal und ohne Anzahlung.', ich: 'Ich setze Ihre Änderungen um, mit den Korrekturrunden aus Ihrem Paket.', kosten: 'Fixpreis, einmal', frei: false, dauer: 'je nach Paket, steht im Angebot', steps: [6, 7] },
     { t: 'Übergabe', sie: 'Sie geben die fertige Seite schriftlich frei.', ich: 'Ich schalte sie auf und übergebe Ihnen Domain, Zugänge und Quellcode.', kosten: 'keine weiteren Kosten', frei: false, dauer: 'rund 35 Minuten Ihrer Zeit', steps: [8, 9] }
@@ -2525,44 +2510,85 @@ class Component extends DCLogic {
   HOSTING_AUSLAND_CHF = 240;
   HOSTING_SCHWEIZ_CHF = 480;
   STUNDENSATZ_CHF = 120;
-  HOSTING_SELBST = 'Ich kümmere mich selbst darum';
-  HOSTING_EGAL = 'Sie sollen das übernehmen, Standort egal';
-  HOSTING_CH = 'Sie sollen das übernehmen, Server in der Schweiz';
+  HOSTING_SELBST = 'Ich selbst, CHF 0';
+  HOSTING_EGAL = 'ODERA, Server in der EU oder den USA, CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr';
+  HOSTING_CH = 'ODERA, Server in der Schweiz, CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF) + ' pro Jahr';
+  HOSTING_OFFEN = 'Weiss ich noch nicht';
 
   // Logo als Zusatz. Einzige Quelle für die Beträge.
   LOGO_ALLEIN_CHF = 490;
   LOGO_MIT_WEBSITE_CHF = 390;
-  LOGO_KEINES = 'Nein, ich habe keines';
-  LOGO_NEU = 'Ja, aber ich möchte ein neues';
+  LOGO_NEU = 'Nein, ich brauche eins';
+  // Texterstellung pro Seite (steht so auf der Angebotsseite)
+  TEXT_PRO_SEITE_CHF = 150;
+
+  // Projekt-Check: sechs Abschnitte. Jede Frage beeinflusst Paket und Preis, den Entwurf oder die Kontaktaufnahme.
+  ABSCHNITTE = ['Ihr Betrieb', 'Das Ziel der Website', 'Was die Seite können soll', 'Inhalte und Stil', 'Technik und Zeitplan', 'Kontakt'];
+  CHECK_MINUTEN = 6;
+
+  // Funktionen als Karten: Name, Erklärung, Paket (alle, Standard, Pro, shop), Symbol (SVG-Pfad, 24er Raster)
+  FUNKTIONEN = [
+    ['Kontaktformular', 'Anfragen kommen direkt in Ihr Postfach.', 'alle', 'M3 6h18v12H3z M3 7l9 6 9-6'],
+    ['Eigene Unterseiten für Ihre Leistungen', 'Jede Leistung bekommt eine eigene Seite.', 'Standard', 'M6 3h9l3 3v15H6z M9 10h6 M9 14h6'],
+    ['Bildergalerie oder Referenzen', 'Zeigen Sie Ihre Arbeiten mit Bildern.', 'Standard', 'M3 5h18v14H3z M3 16l5-5 4 4 3-3 6 6'],
+    ['Google-Unternehmensprofil einrichten', 'Damit man Sie auf Google Maps findet.', 'Standard', 'M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z M12 7a3 3 0 1 0 0 6a3 3 0 1 0 0-6z'],
+    ['Online-Terminbuchung', 'Kunden buchen selbst einen freien Termin.', 'Pro', 'M4 6h16v14H4z M4 10h16 M8 3v5 M16 3v5'],
+    ['Texte später selbst ändern', 'Ohne Technikkenntnisse, direkt im Browser.', 'Pro', 'M4 20h4L19 9l-4-4L4 16z M14 6l4 4'],
+    ['Zweite Sprache', 'Die ganze Seite auch in einer anderen Sprache.', 'Pro', 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z M3 12h18 M12 3c3 3 3 15 0 18 M12 3c-3 3-3 15 0 18'],
+    ['Offene Stellen ausschreiben', 'Ein eigener Bereich für Stelleninserate.', 'Pro', 'M4 8h16v11H4z M9 8V5h6v3'],
+    ['Online verkaufen oder bezahlen', 'Produkte verkaufen und Zahlungen annehmen.', 'shop', 'M3 4h3l2 11h11l2-8H7 M9 20h.01 M18 20h.01']
+  ];
 
   Q = [
-    { key: 'BRANCHE', n: 'Branche', t: 'Was macht Ihr Betrieb?', o: ['Handwerk oder Bau', 'Praxis oder Gesundheit', 'Beratung, Treuhand oder Büro', 'Gastronomie oder Verkauf', 'Verein', 'Etwas anderes'] },
-    { key: 'FIRMA', n: 'Firma und Ort', t: 'Wie heisst Ihr Betrieb, und wo sind Sie?', fields: [['firma', 'Firmenname'], ['ort', 'Ort']] },
-    { key: 'WEBSITE_HEUTE', n: 'Website heute', t: 'Haben Sie heute eine Website?', o: ['Nein, noch keine', 'Ja, aber veraltet', 'Ja, soll nur aufgefrischt werden'] },
-    { key: 'ZIEL', n: 'Ziel', t: 'Was soll die Website bewirken?', multi: true, o: ['Man soll anrufen', 'Man soll ein Formular ausfüllen', 'Man soll einen Termin buchen', 'Leute sollen sich bewerben', 'Seriös und auffindbar sein'] },
-    { key: 'ZIEL_HAUPT', n: 'Wichtigstes Ziel', t: 'Und was davon ist das Wichtigste?', help: 'Nur eines. Danach richtet sich der Aufbau der Seite.', from: 3 },
-    { key: 'SEITENZAHL', n: 'Seitenzahl', t: 'Wie viele Seiten brauchen Sie?', o: ['Eine Seite reicht', 'Etwa fünf Seiten', 'Zehn Seiten oder mehr', 'Das sollen Sie mir sagen'] },
-    { key: 'FUNKTIONEN', n: 'Funktionen', t: 'Was soll die Seite können?', multi: true, o: ['Kontaktformular', 'Terminbuchung', 'Karte mit Anfahrt', 'Dateien zum Herunterladen', 'Bereich für offene Stellen', 'Zweite Sprache', 'Texte selbst bearbeiten', 'Nichts davon'] },
-    { key: 'FOTOS', n: 'Fotos', t: 'Haben Sie Fotos von Ihrem Betrieb?', o: ['Viele eigene', 'Ein paar ältere', 'Gar keine'] },
-    { key: 'TEXTE', n: 'Texte', t: 'Und Texte?', o: ['Fertig', 'Stichworte', 'Gar nichts'] },
-    { key: 'DOMAIN', n: 'Domain', t: 'Haben Sie schon eine Internetadresse?', o: ['Ich habe bereits eine', 'Ich brauche eine neue', 'Weiss ich nicht'] },
-    { key: 'HOSTING', n: 'Hosting', t: 'Wo soll Ihre Website später laufen?', help: 'Sie können das später noch ändern. Diese Angabe hilft mir nur bei der Einschätzung.', o: [this.HOSTING_SELBST, this.HOSTING_EGAL, this.HOSTING_CH] },
-    { key: 'TERMIN', n: 'Termin', t: 'Wann soll die Seite online sein?', slider: true },
-    { key: 'KONTAKT', n: 'Kontakt', t: 'Wie erreiche ich Sie?', help: 'Name und E-Mail brauche ich, das Übrige ist freiwillig.', fields: [['name', 'Name'], ['email', 'E-Mail'], ['betrieb', 'Betrieb, optional'], ['tel', 'Telefon, optional']] },
-    { key: 'BESCHREIBUNG', n: 'Beschreibung', t: 'Was macht Ihr Betrieb genau?', area: ['beschreibung', 'Ihre Antwort', 'In drei Sätzen, so wie Sie es einem Nachbarn erzählen würden.'] },
-    { key: 'LEISTUNGEN', n: 'Leistungen', t: 'Ihre wichtigsten Leistungen', area: ['leistungen', 'Ihre Antwort', 'Eine pro Zeile, die wichtigste zuerst.'] },
-    { key: 'USP', n: 'Stärke', t: 'Was können Sie besser als Ihre Mitbewerber?', area: ['usp', 'Ihre Antwort', 'Ein bis zwei Sätze reichen.'] },
-    { key: 'ZIELGRUPPE', n: 'Zielgruppe', t: 'Wer ruft bei Ihnen an?', multi: true, o: ['Privatkunden', 'Firmen', 'Verwaltungen', 'Architekten und Planer', 'Versicherungen', 'Andere'] },
-    { key: 'ANREDE', n: 'Anrede', t: 'Duzen oder siezen wir Ihre Besucher?', o: ['Siezen', 'Duzen', 'Ohne Anrede formulieren'] },
-    { key: 'DREI_WOERTER', n: 'Drei Wörter', t: 'Drei Wörter, die Ihr Betrieb ausstrahlen soll', short: true, fields: [['w1', 'Wort 1'], ['w2', 'Wort 2'], ['w3', 'Wort 3']] },
-    { key: 'STIL', n: 'Stil', t: 'Welche Stilrichtung passt zu Ihnen?', styles: true },
-    { key: 'FARBEN', n: 'Farben', t: 'Farben', o: ['Wir haben Firmenfarben', 'Eher hell und freundlich', 'Eher dunkel und kräftig', 'Schlagen Sie mir etwas vor'] },
-    { key: 'LOGO', n: 'Logo', t: 'Logo', o: ['Ja, als Vektordatei', 'Ja, nur als Bild', this.LOGO_KEINES, this.LOGO_NEU] },
-    { key: 'VORBILDER', n: 'Vorbilder', t: 'Zwei Websites, die Ihnen gefallen', area: ['vorbilder', 'Ihre Antwort', 'Adresse und ein Wort, warum. Branche egal.'] },
-    { key: 'TABU', n: 'Tabu', t: 'Was soll auf keinen Fall vorkommen?', area: ['tabu', 'Ihre Antwort', 'Farben, Bilder, Formulierungen.'] },
-    { key: 'REFERENZ', n: 'Referenz', t: 'Dürfte ich Ihre fertige Website später als Beispiel zeigen?', o: ['Ja, gerne mit Name, Logo und zwei Sätzen', 'Ja, aber ohne meinen Namen', 'Nein, lieber nicht', 'Entscheide ich später'] },
-    { key: 'IMPRESSUM', n: 'Impressum', t: 'Angaben fürs Impressum', fields: [['imFirma', 'Firma mit Rechtsform'], ['imAdresse', 'Adresse'], ['imPerson', 'Verantwortliche Person'], ['imUid', 'UID oder MWST-Nummer, optional']] },
-    { key: 'SONSTIGES', n: 'Sonstiges', t: 'Was sollte ich sonst noch wissen?', area: ['sonstiges', 'Ihre Antwort', 'Optional.'] }
+    { key: 'FIRMA', ab: 1, n: 'Betrieb', t: 'Wie heisst Ihr Betrieb?', typ: 'felder',
+      felder: [['firma', 'Name des Betriebs', 'Schreinerei Muster GmbH', true], ['ort', 'Ort, optional', 'Wohlen AG', false]] },
+    { key: 'BRANCHE', ab: 1, n: 'Branche', t: 'In welcher Branche sind Sie tätig?', typ: 'wahl',
+      o: ['Handwerk und Bau', 'Gastronomie und Hotellerie', 'Gesundheit und Therapie', 'Beratung und Treuhand', 'Beauty und Coiffeur', 'Laden und Handel', 'Andere'],
+      extra: { 'Andere': ['branche', 'Welche Branche?', 'Fahrschule'] } },
+    { key: 'ANGEBOT', ab: 1, n: 'Angebot', t: 'Was bieten Sie an, in einem Satz?', typ: 'felder',
+      felder: [['angebot', 'Ihr Angebot', 'Schreinerei für Küchen und Innenausbau in der Region Wohlen.', true]] },
+    { key: 'REGION', ab: 1, n: 'Kunden aus', t: 'Wo sind Ihre Kunden?', typ: 'wahl',
+      o: ['In meiner Gemeinde oder Region', 'Im ganzen Kanton', 'In der ganzen Schweiz', 'Auch im Ausland'] },
+    { key: 'ZIEL', ab: 2, n: 'Ziel', t: 'Was soll ein Besucher am Ende tun?', typ: 'wahl', hervor: true,
+      help: 'Danach richte ich die ganze Seite aus, vom ersten Bildschirm bis zum letzten Knopf.',
+      o: ['Anrufen', 'Eine Anfrage oder Offerte schicken', 'Einen Termin buchen', 'Vorbeikommen', 'Sich informieren und Vertrauen fassen'] },
+    { key: 'KUNDEN', ab: 2, n: 'Kunden', t: 'Wer sind Ihre typischen Kunden?', typ: 'wahl', o: ['Privatpersonen', 'Firmen', 'Beides'] },
+    { key: 'WEBSITE_HEUTE', ab: 2, n: 'Website heute', t: 'Haben Sie schon eine Website?', typ: 'wahl', o: ['Nein', 'Ja'],
+      extra: { 'Ja': ['url', 'Adresse Ihrer Website', 'www.ihrbetrieb.ch'] } },
+    { key: 'WEBSITE_PROBLEME', ab: 2, n: 'Was stört', t: 'Was stört Sie an Ihrer heutigen Website?', typ: 'multi', optional: true,
+      wenn: (s) => s.ans.WEBSITE_HEUTE === 'Ja',
+      o: ['Wirkt veraltet', 'Am Handy schlecht', 'Wird bei Google nicht gefunden', 'Bringt keine Anfragen', 'Ich kann sie nicht selbst ändern', 'Anderes'],
+      extra: { 'Anderes': ['stoerung', 'Was noch?', 'Lädt sehr langsam'] } },
+    { key: 'FUNKTIONEN', ab: 3, n: 'Funktionen', t: 'Was soll die Seite können?', typ: 'karten', optional: true,
+      help: 'Wählen Sie alles, was Sie brauchen. Das Kontaktformular ist immer dabei.',
+      extra: { 'Zweite Sprache': ['sprache', 'Welche Sprache?', 'Französisch'] } },
+    { key: 'SEITENZAHL', ab: 3, n: 'Seitenzahl', t: 'Wie viele Seiten stellen Sie sich ungefähr vor?', typ: 'wahl',
+      was: 'Eine Seite ist ein eigener Bildschirm mit eigener Adresse, zum Beispiel «Leistungen», «Über uns» oder «Kontakt».',
+      o: ['Eine Seite reicht', 'Bis 5 Seiten', 'Bis 10 Seiten', 'Mehr als 10 Seiten', 'Weiss ich nicht'] },
+    { key: 'LOGO', ab: 4, n: 'Logo', t: 'Haben Sie ein Logo?', typ: 'wahl', o: ['Ja', this.LOGO_NEU, 'Unsicher'],
+      hinweis: { [this.LOGO_NEU]: 'Ein Logo ist als Zusatz buchbar: CHF ' + this.fmt(this.LOGO_MIT_WEBSITE_CHF) + ' zusammen mit der Website.' } },
+    { key: 'TEXTE', ab: 4, n: 'Texte', t: 'Wer schreibt die Texte?', typ: 'wahl', o: ['Ich habe Texte', 'Ich brauche Hilfe'],
+      hinweis: { 'Ich brauche Hilfe': 'Texterstellung kostet CHF ' + this.TEXT_PRO_SEITE_CHF + ' pro Seite.' } },
+    { key: 'FOTOS', ab: 4, n: 'Fotos', t: 'Haben Sie eigene Fotos?', typ: 'wahl', o: ['Ja, gute', 'Nur wenige', 'Keine'],
+      hinweis: { 'Nur wenige': 'Einen Fotografen kann ich organisieren, Kosten nach Aufwand.', 'Keine': 'Einen Fotografen kann ich organisieren, Kosten nach Aufwand.' } },
+    { key: 'STIL', ab: 4, n: 'Stil', t: 'Welcher Stil passt zu Ihnen?', typ: 'stil',
+      felder: [['vorbilder', 'Websites, die Ihnen gefallen, optional', 'www.beispiel.ch, www.vorbild.ch', false], ['farben', 'Feste Firmenfarben, optional', 'Dunkelgrün und Beige', false]] },
+    { key: 'DOMAIN', ab: 5, n: 'Domain', t: 'Haben Sie schon eine Domain?', typ: 'wahl',
+      was: 'Die Domain ist die Adresse Ihrer Website, zum Beispiel ihrbetrieb.ch.',
+      o: ['Ja', 'Nein', 'Weiss ich nicht'], extra: { 'Ja': ['domain', 'Welche?', 'ihrbetrieb.ch'] } },
+    { key: 'HOSTING', ab: 5, n: 'Betrieb', t: 'Wer soll die Website nach dem Livegang betreiben?', typ: 'wahl',
+      was: 'Die Website muss auf einem Server liegen, erreichbar bleiben und gesichert werden. Das können Sie selbst organisieren oder mir überlassen. Entscheiden müssen Sie erst nach dem Entwurf.',
+      o: [this.HOSTING_SELBST, this.HOSTING_EGAL, this.HOSTING_CH, this.HOSTING_OFFEN] },
+    { key: 'TERMIN', ab: 5, n: 'Termin', t: 'Bis wann soll die Website online sein?', typ: 'wahl', o: this.TIMING },
+    { key: 'REFERENZ', ab: 6, n: 'Referenz', t: 'Dürfte ich Ihre fertige Website später als Beispiel zeigen?', typ: 'wahl',
+      help: 'Für die nächsten zwei Betriebe gibt es dafür einen Rabatt.',
+      o: ['Ja, gerne mit Name, Logo und zwei Sätzen', 'Ja, aber ohne meinen Namen', 'Nein, lieber nicht', 'Entscheide ich später'] },
+    { key: 'KONTAKT', ab: 6, n: 'Kontakt', t: 'Wie erreiche ich Sie?', typ: 'felder',
+      felder: [['name', 'Vorname und Name', 'Anna Muster', true], ['email', 'E-Mail', 'anna@ihrbetrieb.ch', true, 'email'], ['tel', 'Telefon, optional', '079 123 45 67', false, 'tel']],
+      area: ['sonstiges', 'Sonst noch etwas? Optional', 'Zum Beispiel: Im Frühling eröffnen wir einen zweiten Standort.'],
+      optLabel: 'Am liebsten erreichen Sie mich per', o: ['E-Mail', 'Telefon'] },
+    { key: 'MAIL', ab: 6, n: 'E-Mail', t: 'Wohin darf ich Ihnen antworten?', typ: 'felder', nurKurz: true,
+      felder: [['email', 'E-Mail', 'anna@ihrbetrieb.ch', true, 'email']] }
   ];
 
   state = {
@@ -2596,7 +2622,7 @@ class Component extends DCLogic {
       next.gesendet = null; next.senden = 'bereit'; next.sendFehler = '';
       if (known === '/projekt-check' && paket && this.PAKET[paket]) {
         const ans = Object.assign({}, this.state.ans);
-        ans[5] = this.PAKET[paket];
+        ans.SEITENZAHL = this.PAKET[paket];
         next.ans = ans;
         next.step = 0;
       }
@@ -2705,8 +2731,7 @@ class Component extends DCLogic {
       if (this.state.path !== '/projekt-check' || this.state.result || (typing && e.target.type !== 'range')) return;
       // Links und Schaltflächen im Prüfmodus reagieren selbst auf Enter.
       if (e.key === 'Enter' && e.target.closest && e.target.closest('[data-own-enter]')) return;
-      if (this.state.mid) { if (e.key === 'Enter') { this.midNext(); e.preventDefault(); } return; }
-      const opts = this.optsFor(this.state.step);
+      const opts = this.optsFor(this.frage());
       if (/^[1-9]$/.test(e.key) && opts.length) {
         const o = opts[Number(e.key) - 1];
         if (o) { this.choose(o); e.preventDefault(); }
@@ -2789,28 +2814,14 @@ class Component extends DCLogic {
     return f;
   }
 
-  felderKurz() {
-    const a = this.state.ans, t = this.state.txt, r = this.rec();
-    const f = { BRANCHE: a[0], SEITENZAHL: a[5], FUNKTIONEN: Array.isArray(a[6]) ? a[6].join(', ') : '', PAKET: r.name, PREIS: r.price,
-      KONTAKT_NAME: (t.name || '').trim(), KONTAKT_MAIL: (t.email || '').trim(), FIRMA: (t.firma || '').trim() };
-    Object.keys(f).forEach((k) => { if (!f[k]) delete f[k]; });
-    return f;
-  }
+  // Kurzversion: dieselben Felder, nur weniger davon ausgefüllt
+  felderKurz() { return this.felderVoll(); }
 
-  kurzText() {
-    const a = this.state.ans, t = this.state.txt, r = this.rec();
-    const fn = Array.isArray(a[6]) ? a[6].join(', ') : '';
-    return ['Guten Tag Nico', '', 'Ich habe die Kurzschätzung auf odera.ch gemacht.',
-      'Branche: ' + (a[0] || '-'), 'Umfang: ' + (a[5] || '-'), 'Funktionen: ' + (fn || '-'),
-      'Schätzung: ' + r.name + ', ' + r.price, '', 'Bitte melden Sie sich für die Details.', '', 'Freundliche Grüsse', '',
-      [t.name, t.firma].filter(Boolean).join(', ')].join('\n').trim();
-  }
-
-  fensterText() { return this.state.quick ? this.kurzText() : this.mailBody(); }
+  fensterText() { return this.mailBody(); }
 
   // Inhalt des Mail-Fensters: dieselben Abschnitte und Beschriftungen wie in der E-Mail, die bei mir ankommt
   fensterZeilen() {
-    const f = this.state.quick ? this.felderKurz() : this.felderVoll();
+    const f = this.felderVoll();
     const zeilen = [];
     for (const ab of this.ANFRAGE.abschnitte) {
       const drin = this.ANFRAGE.felder.filter((x) => x[2] === ab && f[x[0]] && x[0] !== 'KONTAKT_NAME' && x[0] !== 'KONTAKT_MAIL');
@@ -2821,23 +2832,14 @@ class Component extends DCLogic {
     return zeilen;
   }
 
-  // Zusätze mit Preisfolge, nur wenn sie zutreffen
-  egExtra(r) {
-    const a = this.state.ans, teile = [];
-    if (a[8] === 'Gar nichts') teile.push('Texte: CHF 150 pro Seite dazu');
-    if (this.logoWunsch()) teile.push('Logo auf Wunsch: ' + this.logoMitWebsiteChf());
-    return teile.join(' · ');
-  }
-
   mailtoLink() {
-    const s = this.state;
-    return 'mailto:' + this.EMAIL + '?subject=' + encodeURIComponent(s.quick ? 'Kurzanfrage: ' + (s.ans[0] || 'Anfrage') : this.mailSubject()) + '&body=' + encodeURIComponent(s.quick ? this.kurzText() : this.mailBody());
+    return 'mailto:' + this.EMAIL + '?subject=' + encodeURIComponent(this.mailSubject()) + '&body=' + encodeURIComponent(this.mailBody());
   }
 
   tasteKurz() { return (typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)) ? '⌘ Enter' : 'Ctrl+Enter'; }
 
   fensterBetreff() {
-    const t = this.state.txt, r = this.rec();
+    const t = this.state.txt;
     const wer = (t.firma || t.name || 'Ihre Anfrage').trim();
     return 'Projekt-Check: ' + wer;
   }
@@ -3002,103 +3004,86 @@ class Component extends DCLogic {
     requestAnimationFrame(run);
   };
 
-  ai(step) { return this.state.quick ? this.QUICK[step] : step; }
+  // Sichtbare Fragen in der Reihenfolge des Formulars. Folgefragen erscheinen nur, wenn sie zutreffen.
+  fragen(s = this.state) {
+    if (s.quick) return this.QUICK.map((k) => this.Q.find((q) => q.key === k));
+    return this.Q.filter((q) => !q.nurKurz && (!q.wenn || q.wenn(s)));
+  }
+  frage(step = this.state.step) { const f = this.fragen(); return f[Math.min(step, f.length - 1)]; }
+  // Zahl der Fragen ohne Folgefragen, für die Texte auf der Seite
+  fragenZahl() { return this.Q.filter((q) => !q.nurKurz && !q.wenn).length; }
+  checkUmfang() { return this.fragenZahl() + ' Fragen, rund ' + this.CHECK_MINUTEN + ' Minuten'; }
 
-  optsFor(i) {
-    const q = this.Q[i];
+  optsFor(q) {
     if (!q) return [];
-    if (q.from !== undefined) {
-      const picked = this.state.ans[q.from];
-      return Array.isArray(picked) ? picked : [];
-    }
+    if (q.typ === 'karten') return this.FUNKTIONEN.filter((f) => f[2] !== 'alle').map((f) => f[0]);
+    if (q.typ === 'stil') return this.STILE.map((x) => x[0]);
     return q.o || [];
   }
 
-  toastFor(i, v) {
-    if (i === 3) {
-      const a = this.state.ans[3];
-      if (Array.isArray(a) && a.length >= 3) return 'Viel vor. Gut.';
-      return 'Notiert.';
-    }
-    if (i === 8 && v === 'Gar nichts, da brauche ich Hilfe') return 'Kein Problem, das machen wir zusammen.';
-    if (i === 13 && v === 'Sagen Sie es mir') return 'Ehrliche Antwort. Danke.';
-    if (i === 7 && v === 'Nein, gar keine') return 'Notiert.';
-    return 'Notiert.';
-  }
-
   choose(v) {
-    const i = this.ai(this.state.step);
-    const q = this.Q[i];
+    const q = this.frage();
+    if (q.typ === 'karten' && (this.FUNKTIONEN.find((f) => f[0] === v) || [])[2] === 'alle') return; // immer dabei
     const ans = Object.assign({}, this.state.ans);
-    if (q.multi) {
-      const cur = Array.isArray(ans[i]) ? ans[i].slice() : [];
+    if (q.typ === 'multi' || q.typ === 'karten') {
+      const cur = Array.isArray(ans[q.key]) ? ans[q.key].slice() : [];
       const at = cur.indexOf(v);
       if (at >= 0) cur.splice(at, 1); else cur.push(v);
-      ans[i] = cur;
-      if (i === 3 && cur.indexOf(ans[4]) < 0) delete ans[4];
+      ans[q.key] = cur;
     } else {
-      ans[i] = v;
+      ans[q.key] = ans[q.key] === v && q.key === 'KONTAKT' ? undefined : v;
     }
     this.setState({ ans: ans, warn: false }, () => {
-      const msg = this.toastFor(i, v);
-      this.setState({ toast: msg });
+      this.setState({ toast: 'Notiert.' });
       clearTimeout(this.toastTimer);
       this.toastTimer = setTimeout(() => this.setState({ toast: '' }), 900);
     });
   }
 
-  complete(i) {
-    const q = this.Q[i];
-    const a = this.state.ans[i];
-    const t = this.state.txt;
-    if (i >= 13) return true;
-    if (q.multi) return Array.isArray(a) && a.length > 0;
-    if (q.from !== undefined) return !!a;
-    if (q.slider) return true;
-    if (i === 1) return !!(t.firma && t.ort);
-    if (i === 12) return !!(t.name && t.email);
+  gueltigeMail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v || '').trim()); }
+
+  complete(q) {
+    if (!q) return true;
+    const a = this.state.ans[q.key], t = this.state.txt;
+    if (q.felder) for (const f of q.felder) {
+      if (f[3] && !String(t[f[0]] || '').trim()) return false;
+      if (f[4] === 'email' && (f[3] || t[f[0]]) && !this.gueltigeMail(t[f[0]])) return false;
+    }
+    if (q.optional || q.typ === 'felder') return true;
+    if (q.typ === 'multi') return Array.isArray(a) && a.length > 0;
     return !!a;
   }
 
   answeredPills() {
-    const s = this.state, out = [];
-    for (let st = 0; st < s.step; st++) {
-      const i = this.ai(st), q = this.Q[i];
-      if (!q) continue;
-      let v = s.ans[i];
-      if (Array.isArray(v)) v = v.join(', ');
-      if (!v && q.fields) v = q.fields.map(f => s.txt[f[0]]).filter(Boolean).join(', ');
-      if (!v && q.slider) v = this.TIMING[s.timing];
-      if (!v) continue;
-      out.push({ step: st, label: q.n + ': ' + String(v) });
+    const s = this.state, out = [], f = this.fragen();
+    for (let st = 0; st < s.step && st < f.length; st++) {
+      const v = this.answerText(f[st]);
+      if (v) out.push({ step: st, label: f[st].n + ': ' + v });
     }
     const last = out.slice(-6);
     return last.map((p, n) => ({ step: p.step, label: p.label.length > 46 ? p.label.slice(0, 44) + '…' : p.label, op: n === 0 && last.length === 6 ? 0.45 : 1 }));
   }
 
-  // Antwort einer Frage als Text für die Übersicht. Zusatzfelder (z. B. «Etwas anderes: …») gehören dazu.
-  answerText(i) {
-    const s = this.state, q = this.Q[i], t = s.txt;
+  // Antwort einer Frage als Text, mit Zusatzfeldern (zum Beispiel «Andere: Fahrschule»)
+  answerText(q) {
+    const s = this.state, t = s.txt;
     if (!q) return '';
     const parts = [];
-    let v = s.ans[i];
+    let v = s.ans[q.key];
+    if (q.typ === 'karten') v = ['Kontaktformular'].concat(Array.isArray(v) ? v : []);
     if (Array.isArray(v)) v = v.join(', ');
-    if (q.slider) v = this.TIMING[s.timing];
     if (v) parts.push(String(v));
-    if (q.fields) q.fields.forEach(f => { if (t[f[0]]) parts.push(t[f[0]]); });
+    if (q.extra) Object.keys(q.extra).forEach((o) => { const k = q.extra[o][0]; const gew = s.ans[q.key]; if (t[k] && (gew === o || (Array.isArray(gew) && gew.indexOf(o) >= 0))) parts.push(t[k]); });
+    if (q.felder) q.felder.forEach((f) => { if (t[f[0]]) parts.push(t[f[0]]); });
     if (q.area && t[q.area[0]]) parts.push(this.oneLine(t[q.area[0]]));
-    const extra = { 0: 'branche', 2: 'url', 9: 'domain', 16: 'zielgruppe', 20: 'farben' }[i];
-    if (extra && t[extra]) parts.push(t[extra]);
     return parts.join(', ');
   }
 
   reviewRows() {
-    const last = Math.min(this.state.reached, 26), out = [];
-    for (let i = 0; i <= last; i++) {
-      const q = this.Q[i], a = this.answerText(i);
-      out.push({ step: i, n: String(i + 1).padStart(2, '0') + ' · ' + q.n, a: a || 'Keine Angabe', fg: a ? '#11131A' : '#5B6270', aria: q.n + ' ändern' });
-    }
-    return out;
+    return this.fragen().map((q, i) => {
+      const a = this.answerText(q);
+      return { step: i, n: String(i + 1).padStart(2, '0') + ' · ' + q.n, a: a || 'Keine Angabe', fg: a ? '#11131A' : '#5B6270', aria: q.n + ' ändern' };
+    });
   }
 
   jumpTo = (st) => { this.setState({ step: st, dir: 'back', warn: false, tick: this.state.tick + 1 }); this.focusHead(); };
@@ -3117,10 +3102,6 @@ class Component extends DCLogic {
       this.focusFirstField();
     }, 60);
   }
-
-  // Prüfmodus: Aus der Übersicht wird eine einzelne Antwort geändert und danach zurückgekehrt.
-  // Hängt eine andere Frage von der geänderten ab (Ziel und wichtigstes Ziel), führt der Weg zuerst dorthin.
-  DEPENDS = { 3: [4, 'Ihre Ziele haben sich geändert. Wählen Sie bitte noch einmal das wichtigste davon.'] };
 
   showResult() {
     this.setState({ result: true, review: false, editing: false, editNote: '', warn: false, cmpGrow: false });
@@ -3141,160 +3122,147 @@ class Component extends DCLogic {
   };
 
   leaveEdit(target) {
-    const i = this.ai(this.state.step);
-    if (!this.complete(i)) { this.setState({ warn: true }); return; }
-    const dep = this.DEPENDS[i];
-    if (dep && !this.complete(dep[0])) {
-      this.setState({ step: dep[0], editNote: dep[1], dir: 'fwd', warn: false, tick: this.state.tick + 1 });
-      this.focusHead();
-      return;
+    const q = this.frage();
+    if (!this.complete(q)) { this.setState({ warn: true }); return; }
+    // Wird eine Folgefrage neu sichtbar (bestehende Website), führt der Weg zuerst dorthin
+    if (q.key === 'WEBSITE_HEUTE' && this.state.ans.WEBSITE_HEUTE === 'Ja' && !this.state.ans.WEBSITE_PROBLEME) {
+      const st = this.fragen().findIndex((x) => x.key === 'WEBSITE_PROBLEME');
+      if (st >= 0) { this.setState({ step: st, editNote: 'Was stört Sie an Ihrer heutigen Website? Diese Frage ist freiwillig.', dir: 'fwd', warn: false, tick: this.state.tick + 1 }); this.focusHead(); return; }
     }
     if (target === 'review') this.showReview(); else this.showResult();
   }
 
   next = () => {
     const step = this.state.step;
-    const i = this.ai(step);
-    if (!this.complete(i)) { this.setState({ warn: true }); return; }
+    const q = this.frage();
+    if (!this.complete(q)) { this.setState({ warn: true }); return; }
     if (this.state.editing) { this.leaveEdit('result'); return; }
-    if (this.state.quick) {
-      if (step >= 2) { this.setState({ result: true, warn: false, cmpGrow: false }); this.focusHead(); this.tsSicher(); setTimeout(() => this.setState({ cmpGrow: true }), 60); return; }
-      this.setState({ step: step + 1, dir: 'fwd', warn: false, tick: this.state.tick + 1 });
-      this.focusHead();
-      return;
-    }
-    if (i === 12) {
-      this.setState({ mid: true, warn: false, ring: 0 });
-      this.animate(0, 51, 600, (v) => this.setState({ ring: v }));
-      this.focusHead();
-      return;
-    }
-    if (i >= 26) {
-      this.setState({ result: true, warn: false, cmpGrow: false, reached: 26 });
-      this.tsSicher();
-      setTimeout(() => this.setState({ cmpGrow: true }), 60);
-      this.focusHead();
-      return;
-    }
-    this.setState({ step: i + 1, dir: 'fwd', warn: false, tick: this.state.tick + 1 });
-    this.focusHead();
-  };
-
-  midNext = () => {
-    clearTimeout(this.midTimer);
-    if (!this.state.mid) return;
-    this.setState({ mid: false, step: 13, tick: this.state.tick + 1 });
+    if (step >= this.fragen().length - 1) { this.showResult(); return; }
+    this.setState({ step: step + 1, dir: 'fwd', warn: false, tick: this.state.tick + 1 });
     this.focusHead();
   };
 
   back = () => {
     if (this.state.editing) { this.leaveEdit('review'); return; }
-    if (this.state.result) { this.setState({ result: false, step: this.state.quick ? 2 : 26 }); return; }
-    if (this.state.mid) { this.setState({ mid: false, step: 12 }); return; }
+    if (this.state.result) { this.setState({ result: false, step: this.fragen().length - 1 }); return; }
     if (this.state.step > 0) this.setState({ step: this.state.step - 1, dir: 'back', warn: false, tick: this.state.tick + 1 });
   };
 
   hostingWahl() {
-    const h = this.state.ans[10];
+    const h = this.state.ans.HOSTING;
     return h === this.HOSTING_SELBST ? 'selbst' : h === this.HOSTING_EGAL ? 'egal' : h === this.HOSTING_CH ? 'schweiz' : '';
   }
 
-  logoWunsch() { const l = this.state.ans[21]; return l === this.LOGO_KEINES || l === this.LOGO_NEU; }
+  logoWunsch() { return this.state.ans.LOGO === this.LOGO_NEU; }
   logoMitWebsiteChf() { return 'CHF ' + this.fmt(this.LOGO_MIT_WEBSITE_CHF); }
 
   hostingAuslandTxt() { return 'CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr'; }
   hostingSchweizTxt() { return 'CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF) + ' pro Jahr'; }
 
+  // Paket-Empfehlung aus Funktionen und Seitenzahl (Paketinhalte wie auf der Angebotsseite):
+  // Pro-Funktionen oder mehr als 5 Seiten: Pro. Standard-Funktionen oder bis 5 Seiten: Standard. Sonst Website.
+  // Mehr als 10 Seiten oder Onlineshop: Hinweis «Individuell prüfen».
   rec() {
     const a = this.state.ans;
-    const fn = Array.isArray(a[6]) ? a[6] : [];
-    const pages = a[5];
-    const pro = fn.indexOf('Terminbuchung') >= 0 || fn.indexOf('Zweite Sprache') >= 0 || fn.indexOf('Texte selbst bearbeiten') >= 0 || fn.indexOf('Bereich für offene Stellen') >= 0 || pages === 'Zehn Seiten oder mehr';
-    const klein = pages === 'Eine Seite reicht' && fn.every(f => f === 'Kontaktformular' || f === 'Karte mit Anfahrt' || f === 'Nichts davon');
-    let name = 'Standard', price = 1900;
-    if (pro) { name = 'Pro'; price = 3400; }
-    else if (klein) { name = 'Website'; price = 890; }
+    const fn = Array.isArray(a.FUNKTIONEN) ? a.FUNKTIONEN : [];
+    const paketVon = (n) => (this.FUNKTIONEN.find((f) => f[0] === n) || [])[2];
+    const seiten = a.SEITENZAHL;
+    const pro = fn.some((n) => paketVon(n) === 'Pro') || seiten === 'Bis 10 Seiten' || seiten === 'Mehr als 10 Seiten';
+    const standard = fn.some((n) => paketVon(n) === 'Standard') || seiten === 'Bis 5 Seiten';
+    const [name, price] = pro ? ['Pro', this.PAKET_PREIS[2]] : standard ? ['Standard', this.PAKET_PREIS[1]] : ['Website', this.PAKET_PREIS[0]];
+    const shop = fn.some((n) => paketVon(n) === 'shop');
+    const gross = seiten === 'Mehr als 10 Seiten';
+    const hinweis = gross && shop ? 'Mehr als 10 Seiten und ein Onlineshop gehen über die Pakete hinaus. Ich prüfe Ihre Anfrage individuell. Einen Onlineshop biete ich nicht an.'
+      : gross ? 'Mehr als 10 Seiten gehen über das Paket Pro hinaus. Ich prüfe Ihre Anfrage individuell und nenne Ihnen einen festen Preis.'
+      : shop ? 'Einen Onlineshop biete ich nicht an. Ich prüfe Ihre Anfrage individuell und sage Ihnen ehrlich, was möglich ist.' : '';
 
-    const reasons = [];
-    const pageTxt = pages === 'Eine Seite reicht' ? 'Eine Seite' : pages === 'Etwa fünf Seiten' ? 'Bis fünf Seiten' : pages === 'Zehn Seiten oder mehr' ? 'Bis zehn Seiten' : 'Der Umfang ist noch offen';
-    const fnTxt = fn.filter(f => f !== 'Nichts davon');
-    const fnList = fnTxt.length > 1 ? fnTxt.slice(0, -1).join(', ') + ' und ' + fnTxt[fnTxt.length - 1] : fnTxt[0];
-    reasons.push(pageTxt + (fnTxt.length ? ', dazu ' + fnList : '') + '. Das ist Paket ' + name + '.');
-    if (a[8] === 'Gar nichts') reasons.push('Für die Texte rechne ich CHF 150 pro Seite dazu.');
-    if (a[7] === 'Gar keine') reasons.push('Fotos müssen wir organisieren, das bespreche ich mit Ihnen.');
-    if (a[21] === this.LOGO_KEINES || a[21] === this.LOGO_NEU) reasons.push('Kein Logo vorhanden? Ich gestalte Ihnen auf Wunsch eines für ' + this.logoMitWebsiteChf() + '. Sonst setze ich Ihren Namen typografisch.');
-    const refAns = a[24];
+    const seitenTxt = seiten === 'Eine Seite reicht' ? 'Eine Seite' : seiten === 'Bis 5 Seiten' ? 'Bis fünf Seiten' : seiten === 'Bis 10 Seiten' ? 'Bis zehn Seiten'
+      : seiten === 'Mehr als 10 Seiten' ? 'Mehr als zehn Seiten' : 'Umfang geschätzt aus den Funktionen';
+    const fnTxt = ['Kontaktformular'].concat(fn.filter((n) => paketVon(n) !== 'shop'));
+    const liste = fnTxt.length > 1 ? fnTxt.slice(0, -1).join(', ') + ' und ' + fnTxt[fnTxt.length - 1] : fnTxt[0];
+    const umfang = seitenTxt + ', dazu ' + liste + '.';
+
+    const refAns = a.REFERENZ;
     const refFull = refAns === 'Ja, gerne mit Name, Logo und zwei Sätzen';
     const refSlim = refAns === 'Ja, aber ohne meinen Namen';
     const refMap = { Website: 590, Standard: 1290, Pro: 2400 };
     const refNum = refMap[name];
-    return { name: name, priceNum: refFull ? refNum : price, regularNum: price, price: 'CHF ' + this.fmt(price), refFull: refFull, refSlim: refSlim, refPrice: 'CHF ' + this.fmt(refNum), refSaving: 'CHF ' + this.fmt(price - refNum), reasons: reasons };
+    return { name: name, priceNum: refFull ? refNum : price, regularNum: price, price: (gross ? 'ab ' : '') + 'CHF ' + this.fmt(price), refFull: refFull, refSlim: refSlim,
+      refPrice: 'CHF ' + this.fmt(refNum), refSaving: 'CHF ' + this.fmt(price - refNum), umfang: umfang, hinweis: hinweis, individuell: !!hinweis, reasons: [umfang] };
+  }
+
+  // Zusätze neben dem Paket, je eine Zeile: [Bezeichnung, Betrag]
+  zusaetze() {
+    const a = this.state.ans, out = [], hs = this.hostingWahl();
+    if (this.logoWunsch()) out.push(['Logo', this.logoMitWebsiteChf() + ' einmalig']);
+    if (a.TEXTE === 'Ich brauche Hilfe') out.push(['Texte', 'CHF ' + this.TEXT_PRO_SEITE_CHF + ' pro Seite']);
+    if (a.FOTOS === 'Keine' || a.FOTOS === 'Nur wenige') out.push(['Fotograf', 'auf Wunsch, nach Aufwand']);
+    if (hs === 'schweiz') out.push(['Betrieb pro Jahr', this.hostingSchweizTxt().replace(' pro Jahr', '') + ', Server in der Schweiz']);
+    else if (hs === 'egal') out.push(['Betrieb pro Jahr', this.hostingAuslandTxt().replace(' pro Jahr', '') + ', Server in der EU oder den USA']);
+    else if (hs === 'selbst') out.push(['Betrieb pro Jahr', 'CHF 0, Sie hosten selbst']);
+    else out.push(['Betrieb pro Jahr', 'auf Wunsch ab ' + this.hostingAuslandTxt().replace(' pro Jahr', '')]);
+    return out;
   }
 
   oneLine(v) {
     return String(v || '').split('\n').map(x => x.trim()).filter(Boolean).join('; ');
   }
 
+  // Alle Angaben als KEY: Wert, in der Reihenfolge von ANFRAGE.felder. Grundlage für Mail-Vorschau, Direktversand und mailto.
   briefing() {
     const a = this.state.ans, t = this.state.txt, out = [];
     const put = (k, v) => { const x = this.oneLine(v); if (x) out.push(k + ': ' + x); };
-    const multi = (i) => Array.isArray(a[i]) ? a[i].join(', ') : '';
-    put('BRANCHE', a[0] === 'Etwas anderes' ? (t.branche ? 'Etwas anderes: ' + t.branche : '') : a[0]);
+    const mit = (wert, extra) => [wert, extra].filter(Boolean).join(': ');
     put('FIRMA', t.firma);
     put('ORT', t.ort);
-    put('WEBSITE_HEUTE', a[2]);
-    put('WEBSITE_URL', t.url);
-    put('ZIEL', multi(3));
-    put('ZIEL_HAUPT', a[4]);
-    put('SEITENZAHL', a[5]);
-    put('FUNKTIONEN', multi(6));
-    put('FOTOS', a[7]);
-    put('TEXTE', a[8]);
-    put('DOMAIN', a[9] === 'Ich habe bereits eine' && t.domain ? 'Ich habe bereits eine: ' + t.domain : a[9]);
-    const hs = this.hostingWahl();
-    put('HOSTING', hs === 'selbst' ? 'selbst' : hs === 'egal' ? 'bei ODERA, Standort egal' : hs === 'schweiz' ? 'bei ODERA, Schweiz' : '');
-    put('HOSTING_PREIS', hs === 'egal' ? this.hostingAuslandTxt() : hs === 'schweiz' ? this.hostingSchweizTxt() : '');
-    put('TERMIN', this.TIMING[this.state.timing]);
+    put('BRANCHE', a.BRANCHE === 'Andere' ? mit('Andere', t.branche) : a.BRANCHE);
+    put('ANGEBOT', t.angebot);
+    put('REGION', a.REGION);
+    put('ZIEL', a.ZIEL);
+    put('KUNDEN', a.KUNDEN);
+    put('WEBSITE_HEUTE', a.WEBSITE_HEUTE);
+    put('WEBSITE_URL', a.WEBSITE_HEUTE === 'Ja' ? t.url : '');
+    const probleme = a.WEBSITE_HEUTE === 'Ja' && Array.isArray(a.WEBSITE_PROBLEME) ? a.WEBSITE_PROBLEME.map((x) => x === 'Anderes' && t.stoerung ? 'Anderes: ' + t.stoerung : x) : [];
+    put('WEBSITE_PROBLEME', probleme.join(', '));
+    const fn = Array.isArray(a.FUNKTIONEN) ? a.FUNKTIONEN : [];
+    put('FUNKTIONEN', ['Kontaktformular'].concat(fn.map((x) => x === 'Zweite Sprache' && t.sprache ? 'Zweite Sprache (' + t.sprache + ')' : x)).join(', '));
+    put('SEITENZAHL', a.SEITENZAHL);
+    put('LOGO', a.LOGO);
+    put('TEXTE', a.TEXTE);
+    put('FOTOS', a.FOTOS);
+    put('STIL', a.STIL);
+    put('VORBILDER', t.vorbilder);
+    put('FARBEN', t.farben);
+    put('DOMAIN', a.DOMAIN === 'Ja' ? mit('Ja', t.domain) : a.DOMAIN);
+    put('HOSTING', a.HOSTING);
+    put('TERMIN', a.TERMIN);
     put('KONTAKT_NAME', t.name);
     put('KONTAKT_MAIL', t.email);
     put('KONTAKT_TEL', t.tel);
-    put('BESCHREIBUNG', t.beschreibung);
-    put('LEISTUNGEN', t.leistungen);
-    put('USP', t.usp);
-    put('ZIELGRUPPE', (multi(16) + (Array.isArray(a[16]) && a[16].indexOf('Andere') >= 0 && t.zielgruppe ? ' (' + t.zielgruppe + ')' : '')).trim());
-    put('ANREDE', a[17]);
-    put('DREI_WOERTER', [t.w1, t.w2, t.w3].filter(Boolean).join(', '));
-    put('STIL', a[19]);
-    put('FARBEN', a[20] === 'Wir haben Firmenfarben' && t.farben ? 'Wir haben Firmenfarben: ' + t.farben : a[20]);
-    put('LOGO', a[21]);
-    put('LOGO_PREIS', this.logoWunsch() ? this.logoMitWebsiteChf() : '');
-    put('VORBILDER', t.vorbilder);
-    put('TABU', t.tabu);
-    put('REFERENZ', a[24]);
-    put('IMPRESSUM_FIRMA', t.imFirma);
-    put('IMPRESSUM_ADRESSE', t.imAdresse);
-    put('IMPRESSUM_PERSON', t.imPerson);
-    put('IMPRESSUM_UID', t.imUid);
+    put('KONTAKTWEG', a.KONTAKT);
+    put('REFERENZ', a.REFERENZ);
     put('SONSTIGES', t.sonstiges);
     const r = this.rec();
     put('PAKET', r.name);
-    put('PREIS', 'CHF ' + this.fmt(r.refFull ? r.priceNum : r.regularNum));
+    put('PREIS', (r.individuell && a.SEITENZAHL === 'Mehr als 10 Seiten' ? 'ab ' : '') + 'CHF ' + this.fmt(r.refFull ? r.priceNum : r.regularNum) + (r.refFull ? ' mit Referenzrabatt' : ''));
+    put('ZUSAETZE', this.zusaetze().map((z) => z[0] + ': ' + z[1]).join('; '));
+    put('HINWEIS', r.hinweis);
     return out;
   }
 
   mailSubject() {
     const t = this.state.txt;
-    return 'Projektanfrage: ' + (t.firma || t.betrieb || 'Anfrage') + (t.ort ? ', ' + t.ort : '');
+    return 'Projekt-Check: ' + (t.firma || t.name || 'Anfrage') + (this.state.quick ? ' (Kurzversion)' : t.ort ? ', ' + t.ort : '');
   }
 
   mailBody() {
     const r = this.rec(), t = this.state.txt;
     const line = '='.repeat(40);
-    const block1 = ['Guten Tag', '', 'Ich habe das Formular auf odera.ch ausgefüllt. Unten stehen alle meine Angaben.', '',
-      'Empfehlung aus dem Formular: ' + r.name + ', CHF ' + this.fmt(r.refFull ? r.priceNum : r.regularNum), '',
-      'Freundliche Grüsse', '', [t.name, t.firma || t.betrieb].filter(Boolean).join(', ')];
-    const block2 = [line, 'BRIEFING', ''].concat(this.briefing());
-    const block3 = [line, '', 'Erstellt mit dem Formular auf odera.ch am ' + new Date().toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' }) + '.'];
+    const block1 = ['Guten Tag', '', 'Ich habe den Projekt-Check auf odera.ch ausgefüllt. Unten stehen alle meine Angaben.', '',
+      'Empfehlung: Paket ' + r.name + ', ' + (r.refFull ? r.refPrice : r.price), '',
+      'Freundliche Grüsse', '', [t.name, t.firma].filter(Boolean).join(', ')];
+    const block2 = [line, 'ANGABEN', ''].concat(this.briefing());
+    const block3 = [line, '', 'Erstellt mit dem Projekt-Check auf odera.ch am ' + new Date().toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' }) + '.'];
     return block1.concat([''], block2, [''], block3).join('\n');
   }
 
@@ -3360,13 +3328,16 @@ class Component extends DCLogic {
     const page = this.PAGES[s.path].key;
     const isCheck = page === 'check';
     const isLegal = page === 'impressum' || page === 'datenschutz' || page === 'agb';
-    const ai = s.quick ? this.QUICK[s.step] : s.step;
-    const total = s.quick ? 3 : (s.step < 13 ? 13 : 27);
-    const q = this.Q[ai] || this.Q[0];
-    const opts = this.optsFor(ai);
-    const picked = s.ans[ai];
+    const fr = this.fragen();
+    const total = fr.length;
+    const q = fr[Math.min(s.step, total - 1)] || this.Q[0];
+    const opts = (q.typ === 'wahl' || q.typ === 'multi' || (q.o && q.typ === 'felder')) ? this.optsFor(q) : [];
+    const picked = s.ans[q.key];
+    const isMulti = q.typ === 'multi' || q.typ === 'karten';
+    const shopGewaehlt = q.typ === 'karten' && Array.isArray(picked) && picked.some((n) => (this.FUNKTIONEN.find((f) => f[0] === n) || [])[2] === 'shop');
+    const hinweisOpt = shopGewaehlt ? 'Einen Onlineshop biete ich nicht an. Schicken Sie die Anfrage trotzdem ab, ich sage Ihnen ehrlich, was möglich ist.'
+      : q.hinweis && typeof picked === 'string' ? (q.hinweis[picked] || '') : '';
     const r = this.rec();
-    const hostWahl = this.hostingWahl();
     const k = 1 - s.slider / 100;
     const allOff = this.STEPS.every((st, i) => st[3] || s.off[i]);
 
@@ -3389,16 +3360,14 @@ class Component extends DCLogic {
     }));
 
     const fields = [];
-    if (q.fields) q.fields.forEach(f => fields.push({ k: f[0], label: f[1], type: f[0] === 'email' ? 'email' : f[0] === 'tel' ? 'tel' : 'text', value: s.txt[f[0]] || '' }));
     const eMax = this.ANFRAGE.eingabeMax;
-    if (ai === 0 && picked === 'Etwas anderes') fields.push({ k: 'branche', label: 'Was macht Ihr Betrieb?', type: 'text', value: s.txt.branche || '' });
-    if (ai === 2 && (picked === 'Ja, aber veraltet' || picked === 'Ja, soll nur aufgefrischt werden')) fields.push({ k: 'url', label: 'Adresse Ihrer Website', type: 'text', value: s.txt.url || '' });
-    if (ai === 9 && picked === 'Ich habe bereits eine') fields.push({ k: 'domain', label: 'Welche Adresse?', type: 'text', value: s.txt.domain || '' });
-    if (ai === 16 && Array.isArray(picked) && picked.indexOf('Andere') >= 0) fields.push({ k: 'zielgruppe', label: 'Wer noch?', type: 'text', value: s.txt.zielgruppe || '' });
-    if (ai === 20 && picked === 'Wir haben Firmenfarben') fields.push({ k: 'farben', label: 'Welche Farben?', type: 'text', value: s.txt.farben || '' });
+    const feld = (f) => fields.push({ k: f[0], label: f[1], ph: f[2] || '', type: f[4] || 'text', value: s.txt[f[0]] || '' });
+    if (q.felder) q.felder.forEach(feld);
+    if (q.extra) Object.keys(q.extra).forEach((o) => { if (picked === o || (Array.isArray(picked) && picked.indexOf(o) >= 0)) feld(q.extra[o]); });
 
-    const complete = this.complete(ai);
-    const remainMin = Math.max(1, Math.ceil((total - (s.step + 1)) * 30 / 60));
+    const complete = this.complete(q);
+    const remainMin = Math.max(1, Math.ceil((total - (s.step + 1)) * 20 / 60));
+    const felderZuerst = q.typ === 'felder';
 
     return {
       mailKontakt: mailKontakt,
@@ -3511,10 +3480,11 @@ class Component extends DCLogic {
         const ans = Object.assign({}, s.ans);
         const name = s.gName.trim();
         if (name) txt.firma = name;
-        ans[0] = this.gBr()[1];
+        ans.BRANCHE = this.gBr()[1];
+        if (ans.BRANCHE === 'Andere') txt.branche = this.gBr()[0];
         this.setState({ txt: txt, ans: ans, gFilled: true, step: 0, quick: false, result: false, mid: false });
       },
-      gPrefillDisplay: (s.gFilled && ai === 0) ? 'block' : 'none',
+      gPrefillDisplay: (s.gFilled && q.key === 'FIRMA') ? 'block' : 'none',
 
       price1: 'CHF ' + this.fmt(this.PAKET_PREIS[0]), price2: 'CHF ' + this.fmt(this.PAKET_PREIS[1]), price3: 'CHF ' + this.fmt(this.PAKET_PREIS[2]),
       faqs: this.FAQ.map((f, i) => ({ i: i, q: f[0], a: f[1], open: s.faq === i, rows: s.faq === i ? '1fr' : '0fr', rot: s.faq === i ? 'rotate(180deg)' : 'none' })),
@@ -3608,7 +3578,6 @@ class Component extends DCLogic {
       checkFg: ((s.result && !s.review) || s.mid) ? '#FFFFFF' : '#11131A',
       checkCut: ((s.result && !s.review) || s.mid) ? '#2439B9' : '#EFF1FE',
       inQuiz: isCheck && !s.result && !s.mid && !s.gesendet,
-      inMid: isCheck && s.mid,
       quickMode: s.quick,
       quickLinkDisplay: (s.quick || s.editing) ? 'none' : 'block',
       qNum: s.step + 1,
@@ -3616,28 +3585,37 @@ class Component extends DCLogic {
       qHelp: q.help || '',
       helpDisplay: q.help ? 'block' : 'none',
       firstNoteDisplay: (s.step === 0 && !s.quick) ? 'block' : 'none',
-      multiDisplay: q.multi ? 'block' : 'none',
-      prefillDisplay: (ai === 2 && s.txt.url) ? 'block' : 'none',
+      multiDisplay: isMulti ? 'block' : 'none',
       optDisplay: opts.length ? 'grid' : 'none',
       progress: Math.round(((s.step + 1) / total) * 100) + '%',
       qTotal: total,
       remaining: remainMin + ' Minuten',
-      hint: (!s.quick && s.step >= 5) ? 'Sieht nach Paket ' + r.name + ' aus' : '',
-      partLabel: s.quick ? 'KURZSCHÄTZUNG' : (s.step < 13 ? 'TEIL 1 · IHR PROJEKT' : 'TEIL 2 · GESTALTUNG UND INHALT'),
-      fieldsDir: q.short ? 'row' : 'column',
-      styleDisplay: q.styles ? 'grid' : 'none',
+      hint: (!s.quick && q.ab >= 4) ? 'Sieht nach Paket ' + r.name + ' aus' : '',
+      partLabel: s.quick ? 'KURZSCHÄTZUNG' : 'ABSCHNITT ' + q.ab + ' VON ' + this.ABSCHNITTE.length + ' · ' + this.ABSCHNITTE[q.ab - 1].toUpperCase(),
+      fortschritt: s.quick ? 'Frage ' + (s.step + 1) + ' von ' + total : 'Abschnitt ' + q.ab + ' von ' + this.ABSCHNITTE.length + ' · noch etwa ' + remainMin + (remainMin === 1 ? ' Minute' : ' Minuten'),
+      fieldsDir: 'column',
+      styleDisplay: q.typ === 'stil' ? 'grid' : 'none',
+      wichtigDisplay: q.hervor ? 'inline-block' : 'none',
+      wasDisplay: q.was ? 'block' : 'none', qWas: q.was || '',
+      optHinweis: hinweisOpt, optHinweisDisplay: hinweisOpt ? 'block' : 'none',
+      optLabel: q.optLabel || '', optLabelDisplay: q.optLabel ? 'block' : 'none',
+      optOrder: felderZuerst ? 3 : 1, fieldsOrder: felderZuerst ? 1 : 3,
+      kartenDisplay: q.typ === 'karten' ? 'grid' : 'none',
+      karten: this.FUNKTIONEN.map((f) => {
+        const fix = f[2] === 'alle';
+        const sel = fix || (Array.isArray(picked) && picked.indexOf(f[0]) >= 0);
+        return { v: f[0], label: f[0], desc: f[1], icon: f[3], sel: sel, fix: fix ? 'true' : 'false', an: sel ? '1' : '0',
+          tag: fix ? 'In jedem Paket' : f[2] === 'shop' ? 'Nicht im Angebot' : 'Paket ' + f[2] };
+      }),
       styleCards: this.STILE.map(c => ({ v: c[0], label: c[0], prev: c[1], sel: picked === c[0], bg: picked === c[0] ? '#2D4CF0' : 'rgba(255,255,255,0.7)', bd: picked === c[0] ? '#2D4CF0' : '#E2DFD8', fg: picked === c[0] ? '#FFFFFF' : '#11131A' })),
       qAnim: this.reduce ? 'none' : (s.dir === 'back' ? 'qBack 260ms ease-out' : 'qFwd 260ms ease-out'),
       qNumPad: String(s.step + 1).padStart(2, '0'),
-      blobColor: s.step < 13 ? '#2D4CF0' : s.step < 20 ? '#4FA79B' : '#8A7BD8',
-      blobLeft: s.step < 13 ? '-180px' : s.step < 20 ? '30%' : '55%',
-      blobTop: s.step < 13 ? '10%' : s.step < 20 ? '-220px' : '25%',
+      blobColor: q.ab <= 2 ? '#2D4CF0' : q.ab <= 4 ? '#4FA79B' : '#8A7BD8',
+      blobLeft: q.ab <= 2 ? '-180px' : q.ab <= 4 ? '30%' : '55%',
+      blobTop: q.ab <= 2 ? '10%' : q.ab <= 4 ? '-220px' : '25%',
       answered: this.answeredPills(),
       onJump: (e) => this.jumpTo(Number(e.currentTarget.dataset.s)),
       onFieldKey: (e) => { if (e.key === 'Enter' && e.currentTarget.tagName === 'INPUT') { e.preventDefault(); this.next(); } },
-      ringOffset: 483.8 - 483.8 * (s.ring / 100),
-      onMidNext: this.midNext,
-      onMidSend: () => { this.setState({ mid: false, result: true, warn: false, cmpGrow: false, reached: Math.max(s.reached, 12) }); this.tsSicher(); setTimeout(() => this.setState({ cmpGrow: true }), 60); },
       inReview: isCheck && s.result && s.review,
       reviewRows: s.review ? this.reviewRows() : [],
       onReviewEdit: (e) => this.editStep(Number(e.currentTarget.dataset.s)),
@@ -3647,11 +3625,11 @@ class Component extends DCLogic {
       onEditToResult: () => this.leaveEdit('result'),
       onEditToReview: () => this.leaveEdit('review'),
       options: opts.map((o, i) => {
-        const sel = q.multi ? (Array.isArray(picked) && picked.indexOf(o) >= 0) : picked === o;
+        const sel = isMulti ? (Array.isArray(picked) && picked.indexOf(o) >= 0) : picked === o;
         return {
           v: o, label: o, sel: sel,
-          key: q.multi ? (sel ? '✓' : '') : String(i + 1),
-          keyRadius: q.multi ? '8px' : '999px',
+          key: isMulti ? (sel ? '✓' : '') : String(i + 1),
+          keyRadius: isMulti ? '8px' : '999px',
           keyBd: sel ? '#FFFFFF' : '#E2DFD8',
           keyFg: sel ? '#2D4CF0' : '#5B6270',
           keyBg: sel ? '#FFFFFF' : 'rgba(255,255,255,0.7)',
@@ -3661,13 +3639,10 @@ class Component extends DCLogic {
         };
       }),
       onPick: (e) => this.choose(e.currentTarget.dataset.v),
-      sliderDisplay: q.slider ? 'block' : 'none',
-      timingVal: s.timing,
-      timingLabel: this.TIMING[s.timing],
-      onTiming: (e) => this.setState({ timing: Number(e.target.value) }),
       fields: fields.map((f) => ({ ...f, max: eMax[f.k] || 200 })),
       fieldsDisplay: (fields.length || q.area) ? 'flex' : 'none',
-      fieldsTop: opts.length ? '24px' : '0px',
+      fieldsTop: (opts.length || q.typ === 'stil' || q.typ === 'karten') && !felderZuerst ? '24px' : '0px',
+      optTop: felderZuerst && opts.length ? '28px' : '0px',
       hasArea: !!q.area,
       areaLabel: q.area ? q.area[1] : '',
       areaKey: q.area ? q.area[0] : '',
@@ -3682,10 +3657,11 @@ class Component extends DCLogic {
         this.setState({ txt: txt, warn: false, ...(hinweisWeg ? { senden: 'bereit', sendFehler: '' } : {}) });
       },
       warnDisplay: s.warn ? 'block' : 'none',
-      warnText: q.multi ? 'Bitte wählen Sie mindestens eine Antwort' : 'Bitte wählen Sie eine Antwort',
+      warnText: q.felder && q.felder.some((f) => f[4] === 'email' && s.txt[f[0]] && !this.gueltigeMail(s.txt[f[0]])) ? 'Bitte prüfen Sie die E-Mail-Adresse'
+        : q.felder ? 'Bitte füllen Sie die Felder ohne «optional» aus' : isMulti ? 'Bitte wählen Sie mindestens eine Antwort' : 'Bitte wählen Sie eine Antwort',
       backVis: (s.step > 0 && !s.editing) ? 'visible' : 'hidden',
       onBack: this.back, onNext: this.next,
-      nextLabel: s.editing ? 'Übernehmen und zurück zum Ergebnis' : (s.quick ? s.step >= 2 : s.step >= 26) ? 'Ergebnis ansehen' : 'Weiter',
+      nextLabel: s.editing ? 'Übernehmen und zurück zum Ergebnis' : s.step >= total - 1 ? 'Ergebnis ansehen' : 'Weiter',
       nextDisabled: !complete,
       nextBg: complete ? '#2D4CF0' : '#E2DFD8',
       nextFg: complete ? '#FFFFFF' : '#5B6270',
@@ -3706,14 +3682,14 @@ class Component extends DCLogic {
         if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done); else done();
       },
       onReview: () => this.showReview(),
-      quickToLong: () => this.setState({ quick: false, result: false, mid: false, step: 1, warn: false }),
+      quickToLong: () => this.setState({ quick: false, result: false, mid: false, step: 0, warn: false }),
       // Projekt-Check direkt senden
       dsMail: !this.direkt(),
       dsDirekt: this.direkt(),
       ds3Zusatz: this.direkt() ? ' Auf der letzten Seite des Projekt-Checks wird eine Sicherheitsprüfung von Cloudflare geladen. Was sie bearbeitet, steht in Abschnitt 5.' : '',
       kontaktCheckTitel: this.direkt() ? 'Projekt-Check machen und direkt senden' : 'Projekt-Check machen und Mail schicken',
-      kontaktCheckText: this.direkt() ? '27 Fragen, 15 Minuten. Am Schluss senden Sie mit einem Klick.' : '27 Fragen, 15 Minuten. Ich schreibe die Mail für Sie.',
-      mitteSendenLabel: this.direkt() ? 'Reicht mir, Anfrage jetzt senden' : 'Reicht mir, Mail jetzt schicken',
+      kontaktCheckText: this.checkUmfang() + '. ' + (this.direkt() ? 'Am Schluss senden Sie mit einem Klick.' : 'Ich schreibe die Mail für Sie.'),
+      checkUmfang: this.checkUmfang(),
       hinweisErsterSchritt: this.direkt()
         ? 'Ihre Antworten bleiben in Ihrem Browser, bis Sie am Schluss auf Senden klicken. Dann werden sie verschlüsselt an mich übermittelt und nicht in einer Datenbank gespeichert.'
         : 'Ihre Antworten werden nicht gespeichert, sondern am Schluss in eine E-Mail eingesetzt, die Sie selbst absenden.',
@@ -3740,13 +3716,9 @@ class Component extends DCLogic {
       egLabel: s.quick ? 'KURZSCHÄTZUNG' : 'IHR ERGEBNIS',
       egPreis: r.refFull ? r.refPrice : r.price,
       egAltDisplay: r.refFull ? 'inline' : 'none',
-      egHost: hostWahl === 'schweiz' ? 'Danach: CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF) + ' pro Jahr, Betrieb bei mir, Server in der Schweiz'
-        : hostWahl === 'egal' ? 'Danach: CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr, Betrieb bei mir'
-        : hostWahl === 'selbst' ? 'Danach: CHF 0 pro Jahr, Sie hosten selbst'
-        : 'Danach: Betrieb auf Wunsch ab CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr',
-      egSatz: (r.reasons[0] || '').replace(/ Das ist Paket \S+\.$/, ''),
-      egExtra: this.egExtra(r),
-      egExtraDisplay: this.egExtra(r) ? 'block' : 'none',
+      egSatz: r.umfang,
+      egIndiv: r.hinweis, egIndivDisplay: r.hinweis ? 'block' : 'none',
+      egZusaetze: this.zusaetze().map((z) => ({ l: z[0], v: z[1] })),
       egRef: r.refFull ? this.REFERENZ_SATZ.replace('{betrag}', r.refSaving) : r.refSlim ? 'Auch ohne Namensnennung lässt sich etwas machen. Sprechen wir darüber.' : '',
       egRefDisplay: (r.refFull || r.refSlim) ? 'block' : 'none',
       egLangDisplay: s.quick ? 'block' : 'none',
@@ -3759,10 +3731,10 @@ class Component extends DCLogic {
         { label: 'Agentur', amount: 'CHF 5\u2019000 bis 12\u2019000', w: s.cmpGrow ? '100%' : '0%' },
       ],
       fehlerDisplay: s.senden === 'fehler' ? 'block' : 'none',
-      fehlerTitel: ({ einwilligung: 'Bitte bestätigen Sie zuerst die Kenntnisnahme.', kontakt: 'Name und E-Mail-Adresse fehlen.', limit: 'Im Moment kommen sehr viele Anfragen an.' })[s.sendFehler] || 'Das Senden hat nicht geklappt.',
+      fehlerTitel: ({ einwilligung: 'Bitte bestätigen Sie zuerst die Kenntnisnahme.', kontakt: s.quick ? 'Ihre E-Mail-Adresse fehlt noch.' : 'Name und E-Mail-Adresse fehlen.', limit: 'Im Moment kommen sehr viele Anfragen an.' })[s.sendFehler] || 'Das Senden hat nicht geklappt.',
       fehlerText: ({
         einwilligung: 'Setzen Sie das Häkchen bei AGB und Datenschutzerklärung, dann können Sie senden.',
-        kontakt: 'Tragen Sie bei «Von» Ihren Namen und eine gültige E-Mail-Adresse ein, damit ich Ihnen antworten kann.',
+        kontakt: s.quick ? 'Tragen Sie bei «Von» eine gültige E-Mail-Adresse ein, damit ich Ihnen antworten kann.' : 'Tragen Sie bei «Von» Ihren Namen und eine gültige E-Mail-Adresse ein, damit ich Ihnen antworten kann.',
         limit: 'Bitte versuchen Sie es in einer Stunde wieder. Oder senden Sie Ihre Anfrage gleich mit Ihrem E-Mail-Programm.',
         pruefung: 'Die Sicherheitsprüfung hat nicht geklappt. Versuchen Sie es nochmals, oder senden Sie mit Ihrem E-Mail-Programm.',
         netz: 'Die Verbindung ist unterbrochen. Versuchen Sie es nochmals, oder senden Sie mit Ihrem E-Mail-Programm.',
@@ -3773,7 +3745,7 @@ class Component extends DCLogic {
       onAnfrageSenden: this.anfrageSenden,
       inDanke: isCheck && !!s.gesendet,
       abbrechenDisplay: s.gesendet ? 'none' : 'inline-flex',
-      dankeVorname: s.gesendet ? s.gesendet.vorname : '',
+      dankeTitel: (s.gesendet && s.gesendet.vorname ? 'Danke, ' + s.gesendet.vorname + '.' : 'Danke.') + ' Ihre Anfrage ist angekommen.',
       dankeReferenz: s.gesendet ? s.gesendet.referenz : '',
       dankeMail: s.gesendet ? s.gesendet.mail : '',
       dankeKopieDisplay: s.gesendet && s.gesendet.kopie ? 'block' : 'none',

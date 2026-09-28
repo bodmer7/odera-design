@@ -7,9 +7,10 @@ import { pruefeAnfrage, referenzAus, einzeilig, istEmail } from '../src/regeln.j
 import { mailAnNico, mailKopie, maskiere } from '../src/mail.js';
 
 const VOLL = {
-  KONTAKT_NAME: 'Anna Muster', KONTAKT_MAIL: 'anna@beispiel.ch', KONTAKT_TEL: '079 000 00 00', FIRMA: 'Bäckerei Müller', ORT: 'Zürich',
-  BRANCHE: 'Gastronomie oder Verkauf', SEITENZAHL: 'Etwa fünf Seiten', TERMIN: 'In einem Monat', BESCHREIBUNG: 'Wir backen seit 1990.\nFrisch jeden Tag.',
-  PAKET: 'Standard', PREIS: "CHF 1'900",
+  FIRMA: 'Bäckerei Müller', ORT: 'Zürich', BRANCHE: 'Gastronomie und Hotellerie', ANGEBOT: 'Wir backen seit 1990.\nFrisch jeden Tag.',
+  ZIEL: 'Vorbeikommen', SEITENZAHL: 'Bis 5 Seiten', FUNKTIONEN: 'Kontaktformular, Bildergalerie oder Referenzen', TERMIN: 'In einem Monat',
+  KONTAKT_NAME: 'Anna Muster', KONTAKT_MAIL: 'anna@beispiel.ch', KONTAKT_TEL: '079 000 00 00', KONTAKTWEG: 'Telefon',
+  PAKET: 'Standard', PREIS: "CHF 1'900", ZUSAETZE: 'Logo: CHF 390 einmalig',
 };
 const idem = () => 'test-' + Math.random().toString(36).slice(2) + Date.now();
 const koerper = (x = {}) => ({ art: 'voll', felder: { ...VOLL }, kopie: false, token: 'gut', website: '', dauerSek: 120, idem: idem(), ...x });
@@ -50,7 +51,9 @@ test('Erfolg: Mail an Nico mit Reply-To, Referenz, kein Versand der Kopie ohne W
   const m = mails[0];
   assert.equal(m.from, 'ODERA Design <anfrage@odera.ch>'); assert.deepEqual(m.to, ['kontakt@odera.ch']); assert.equal(m.reply_to, 'anna@beispiel.ch');
   assert.equal(m.subject, `Projekt-Check: Bäckerei Müller (Standard) · ${d.referenz}`);
-  assert.match(m.html, /Bäckerei Müller/); assert.match(m.text, /Beschreibung: Wir backen seit 1990\.\nFrisch jeden Tag\./);
+  assert.match(m.html, /Bäckerei Müller/); assert.match(m.text, /Angebot: Wir backen seit 1990\.\nFrisch jeden Tag\./);
+  assert.match(m.text, /KURZÜBERSICHT\nFirma: Bäckerei Müller\nBranche: Gastronomie und Hotellerie\nBesucher sollen: Vorbeikommen\nPaket: Standard, CHF 1'900\nZusätze: Logo: CHF 390 einmalig\nOnline bis: In einem Monat/);
+  assert.match(m.text, /Kontakt am liebsten per: Telefon/);
 });
 
 test('Kopie an die Kundin: Absender anfrage@, Reply-To kontakt@', async () => {
@@ -97,11 +100,16 @@ test('Validierung: Pflicht, E-Mail, Länge, unbekannte Felder verworfen', () => 
   assert.equal(ok({ felder: { ...VOLL, KONTAKT_MAIL: 'keine-mail' } }), false);
   assert.equal(ok({ felder: { ...VOLL, KONTAKT_MAIL: 'a@b.ch\r\nBcc: x@y.ch' } }), false);
   assert.equal(ok({ felder: { ...VOLL, FIRMA: '' } }), false);
-  assert.equal(ok({ felder: { ...VOLL, BESCHREIBUNG: 'x'.repeat(2001) } }), false);
-  assert.equal(ok({ felder: { ...VOLL, BESCHREIBUNG: 42 } }), false);
+  assert.equal(ok({ felder: { ...VOLL, ANGEBOT: 'x'.repeat(301) } }), false);
+  assert.equal(ok({ felder: { ...VOLL, ZIEL: '' } }), false);
+  assert.equal(ok({ felder: { ...VOLL, ANGEBOT: 42 } }), false);
   const r = pruefeAnfrage(koerper({ felder: { ...VOLL, UNBEKANNT: 'weg', __proto__x: 1 } }));
   assert.equal(r.ok, true); assert.equal(r.daten.felder.UNBEKANNT, undefined);
-  assert.equal(pruefeAnfrage(koerper({ art: 'kurz', felder: { KONTAKT_NAME: 'A', KONTAKT_MAIL: 'a@b.ch', BRANCHE: 'Verein', SEITENZAHL: 'Eine Seite reicht' }, dauerSek: 30 })).ok, true);
+  const kurz = pruefeAnfrage(koerper({ art: 'kurz', felder: { ANGEBOT: 'Fahrschule in Bern', FUNKTIONEN: 'Kontaktformular', KONTAKT_MAIL: 'a@b.ch' }, dauerSek: 30 }));
+  assert.equal(kurz.ok, true); assert.equal(kurz.daten.felder.KONTAKT_NAME, undefined);
+  const km = mailAnNico(kurz.daten, 'ODR-TEST'); assert.equal(km.betreff, 'Projekt-Check: a@b.ch (Kurzversion) · ODR-TEST');
+  const kk = mailKopie(kurz.daten, 'ODR-TEST'); assert.match(kk.text, /^Guten Tag\n/); assert.match(kk.html, /Danke\. Ihre Anfrage ist angekommen/);
+  assert.equal(pruefeAnfrage(koerper({ art: 'kurz', felder: { ANGEBOT: 'x', KONTAKT_MAIL: 'keine' }, dauerSek: 30 })).ok, false);
   assert.equal(istEmail('anna.muster+test@sub.beispiel.ch'), true);
 });
 

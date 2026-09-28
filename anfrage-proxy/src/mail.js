@@ -53,11 +53,13 @@ function abschnittHtml(titel, zeilenInhalt) {
 /** E-Mail an Nico. Gibt { betreff, html, text }. */
 export function mailAnNico({ art, felder }, referenz, jetzt = new Date()) {
   const f = felder;
-  const wer = f.FIRMA || f.KONTAKT_NAME;
+  const wer = f.FIRMA || f.KONTAKT_NAME || f.KONTAKT_MAIL;
   const betreff = einzeilig(`Projekt-Check: ${wer} (${art === 'kurz' ? 'Kurzversion' : (f.PAKET || 'ohne Paket')}) · ${referenz}`).slice(0, 180);
+  // Kurzübersicht oben: das Wichtigste für die Offerte und die Kontaktaufnahme
   const uebersicht = [
-    ['Name', f.KONTAKT_NAME], ['Firma', f.FIRMA], ['E-Mail', f.KONTAKT_MAIL], ['Telefon', f.KONTAKT_TEL],
-    ['Paket', [f.PAKET, f.PREIS].filter(Boolean).join(', ')], ['Wunschtermin', f.TERMIN],
+    ['Firma', f.FIRMA], ['Branche', f.BRANCHE], ['Besucher sollen', f.ZIEL],
+    ['Paket', [f.PAKET, f.PREIS].filter(Boolean).join(', ')], ['Zusätze', f.ZUSAETZE], ['Hinweis', f.HINWEIS], ['Online bis', f.TERMIN],
+    ['Name', f.KONTAKT_NAME], ['E-Mail', f.KONTAKT_MAIL], ['Telefon', f.KONTAKT_TEL], ['Kontakt am liebsten per', f.KONTAKTWEG],
   ].filter(([, v]) => v);
   const abschnitte = abschnitteVon(f);
 
@@ -81,24 +83,24 @@ export function mailAnNico({ art, felder }, referenz, jetzt = new Date()) {
 /** Kopie an die anfragende Person. Gibt { betreff, html, text }. */
 export function mailKopie({ art, felder }, referenz, jetzt = new Date()) {
   const f = felder;
-  const vorname = einzeilig(f.KONTAKT_NAME).split(' ')[0];
+  const vorname = f.KONTAKT_NAME ? einzeilig(f.KONTAKT_NAME).split(' ')[0] : '';
   const betreff = `Ihre Anfrage bei ODERA Design · ${referenz}`;
   const abschnitte = abschnitteVon(f);
   const schritte = ANFRAGE.naechsteSchritte;
 
   const kopf = `<div style="font-size:13px;letter-spacing:0.06em;text-transform:uppercase;opacity:0.85">ODERA Design</div>` +
-    `<div style="font-size:22px;font-weight:700;margin-top:6px">Danke, ${maskiere(vorname)}. Ihre Anfrage ist angekommen.</div>` +
+    `<div style="font-size:22px;font-weight:700;margin-top:6px">${vorname ? 'Danke, ' + maskiere(vorname) + '.' : 'Danke.'} Ihre Anfrage ist angekommen.</div>` +
     `<div style="font-size:14px;margin-top:6px">Referenz <span style="background:${FARBE.limette};color:${FARBE.tinte};padding:2px 8px;border-radius:999px;font-weight:600">${referenz}</span></div>`;
   const schritteHtml = `<ol style="margin:8px 0 0;padding-left:20px;color:${FARBE.tinte};font-size:15px;line-height:1.6">` +
     schritte.map(([t, s]) => `<li style="margin:0 0 6px"><strong>${maskiere(t)}:</strong> ${maskiere(s)}</li>`).join('') + '</ol>';
-  const inhalt = `<p style="margin:20px 0 0;font-size:15px;line-height:1.6;color:${FARBE.tinte}">Guten Tag ${maskiere(f.KONTAKT_NAME)}<br><br>` +
+  const inhalt = `<p style="margin:20px 0 0;font-size:15px;line-height:1.6;color:${FARBE.tinte}">Guten Tag${f.KONTAKT_NAME ? ' ' + maskiere(f.KONTAKT_NAME) : ''}<br><br>` +
     `Danke für Ihre Anfrage über den Projekt-Check. Hier ist eine Kopie Ihrer Angaben.</p>` +
     abschnittHtml('So geht es weiter', `<tr><td>${schritteHtml}</td></tr>`) +
     abschnitte.map((a) => abschnittHtml(a.titel, zeilenHtml(a.zeilen))).join('');
   const fuss = `Sie erhalten diese E-Mail, weil Sie im Projekt-Check eine Kopie gewünscht haben (${maskiere(datum(jetzt))}). ` +
     `Fragen oder Ergänzungen? Antworten Sie einfach auf diese E-Mail.<br>ODERA Design · Nico Robin Bodmer · kontakt@odera.ch`;
   const text = [
-    `Guten Tag ${f.KONTAKT_NAME}`, '', 'Danke für Ihre Anfrage über den Projekt-Check. Hier ist eine Kopie Ihrer Angaben.', `Referenz: ${referenz}`, '',
+    `Guten Tag${f.KONTAKT_NAME ? ' ' + f.KONTAKT_NAME : ''}`, '', 'Danke für Ihre Anfrage über den Projekt-Check. Hier ist eine Kopie Ihrer Angaben.', `Referenz: ${referenz}`, '',
     'SO GEHT ES WEITER', ...schritte.map(([t, s]) => `${t}: ${s}`), '',
     ...abschnitte.flatMap((a) => [a.titel.toUpperCase(), ...a.zeilen.map(([l, v]) => `${l}: ${v}`), '']),
     'Fragen oder Ergänzungen? Antworten Sie einfach auf diese E-Mail.', 'ODERA Design, Nico Robin Bodmer, kontakt@odera.ch',

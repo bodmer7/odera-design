@@ -40,7 +40,7 @@ export function pruefeAnfrage(body) {
     felder[k] = wert;
   }
   for (const k of ANFRAGE.pflicht[art]) if (!felder[k]) return { ok: false, fehler: 'ungueltig', grund: 'pflicht ' + k };
-  felder.KONTAKT_NAME = einzeilig(felder.KONTAKT_NAME);
+  if (felder.KONTAKT_NAME) felder.KONTAKT_NAME = einzeilig(felder.KONTAKT_NAME);
   felder.KONTAKT_MAIL = einzeilig(felder.KONTAKT_MAIL);
   if (!istEmail(felder.KONTAKT_MAIL)) return { ok: false, fehler: 'ungueltig', grund: 'email' };
   return { ok: true, daten: { art, felder, kopie: body.kopie === true, idem: body.idem } };

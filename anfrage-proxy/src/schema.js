@@ -2,13 +2,141 @@
 export const ANFRAGE = {
  "gesamtMax": 20000,
  "abschnitte": [
+  "Ihr Betrieb",
+  "Das Ziel der Website",
+  "Was die Seite können soll",
+  "Inhalte und Stil",
+  "Technik und Zeitplan",
   "Kontakt",
-  "Ihr Projekt",
-  "Gestaltung und Inhalt",
-  "Angaben fürs Impressum",
   "Empfehlung"
  ],
  "felder": [
+  [
+   "FIRMA",
+   "Betrieb",
+   "Ihr Betrieb",
+   120
+  ],
+  [
+   "ORT",
+   "Ort",
+   "Ihr Betrieb",
+   80
+  ],
+  [
+   "BRANCHE",
+   "Branche",
+   "Ihr Betrieb",
+   140
+  ],
+  [
+   "ANGEBOT",
+   "Angebot",
+   "Ihr Betrieb",
+   300
+  ],
+  [
+   "REGION",
+   "Kunden aus",
+   "Ihr Betrieb",
+   60
+  ],
+  [
+   "ZIEL",
+   "Besucher sollen",
+   "Das Ziel der Website",
+   60
+  ],
+  [
+   "KUNDEN",
+   "Typische Kunden",
+   "Das Ziel der Website",
+   40
+  ],
+  [
+   "WEBSITE_HEUTE",
+   "Website heute",
+   "Das Ziel der Website",
+   10
+  ],
+  [
+   "WEBSITE_URL",
+   "Adresse heute",
+   "Das Ziel der Website",
+   300
+  ],
+  [
+   "WEBSITE_PROBLEME",
+   "Was stört",
+   "Das Ziel der Website",
+   400
+  ],
+  [
+   "FUNKTIONEN",
+   "Funktionen",
+   "Was die Seite können soll",
+   500
+  ],
+  [
+   "SEITENZAHL",
+   "Seitenzahl",
+   "Was die Seite können soll",
+   40
+  ],
+  [
+   "LOGO",
+   "Logo",
+   "Inhalte und Stil",
+   40
+  ],
+  [
+   "TEXTE",
+   "Texte",
+   "Inhalte und Stil",
+   40
+  ],
+  [
+   "FOTOS",
+   "Fotos",
+   "Inhalte und Stil",
+   40
+  ],
+  [
+   "STIL",
+   "Stil",
+   "Inhalte und Stil",
+   60
+  ],
+  [
+   "VORBILDER",
+   "Vorbilder",
+   "Inhalte und Stil",
+   500
+  ],
+  [
+   "FARBEN",
+   "Firmenfarben",
+   "Inhalte und Stil",
+   200
+  ],
+  [
+   "DOMAIN",
+   "Domain",
+   "Technik und Zeitplan",
+   220
+  ],
+  [
+   "HOSTING",
+   "Betrieb danach",
+   "Technik und Zeitplan",
+   100
+  ],
+  [
+   "TERMIN",
+   "Online bis",
+   "Technik und Zeitplan",
+   60
+  ],
   [
    "KONTAKT_NAME",
    "Name",
@@ -28,202 +156,22 @@ export const ANFRAGE = {
    40
   ],
   [
-   "FIRMA",
-   "Firma",
+   "KONTAKTWEG",
+   "Kontakt am liebsten per",
    "Kontakt",
-   120
-  ],
-  [
-   "ORT",
-   "Ort",
-   "Kontakt",
-   80
-  ],
-  [
-   "BRANCHE",
-   "Branche",
-   "Ihr Projekt",
-   160
-  ],
-  [
-   "WEBSITE_HEUTE",
-   "Website heute",
-   "Ihr Projekt",
-   80
-  ],
-  [
-   "WEBSITE_URL",
-   "Adresse der Website",
-   "Ihr Projekt",
-   300
-  ],
-  [
-   "ZIEL",
-   "Ziel",
-   "Ihr Projekt",
-   400
-  ],
-  [
-   "ZIEL_HAUPT",
-   "Wichtigstes Ziel",
-   "Ihr Projekt",
-   120
-  ],
-  [
-   "SEITENZAHL",
-   "Seitenzahl",
-   "Ihr Projekt",
-   80
-  ],
-  [
-   "FUNKTIONEN",
-   "Funktionen",
-   "Ihr Projekt",
-   400
-  ],
-  [
-   "FOTOS",
-   "Fotos",
-   "Ihr Projekt",
-   80
-  ],
-  [
-   "TEXTE",
-   "Texte",
-   "Ihr Projekt",
-   80
-  ],
-  [
-   "DOMAIN",
-   "Domain",
-   "Ihr Projekt",
-   260
-  ],
-  [
-   "HOSTING",
-   "Hosting",
-   "Ihr Projekt",
-   80
-  ],
-  [
-   "HOSTING_PREIS",
-   "Hosting-Preis",
-   "Ihr Projekt",
-   60
-  ],
-  [
-   "TERMIN",
-   "Termin",
-   "Ihr Projekt",
-   80
-  ],
-  [
-   "BESCHREIBUNG",
-   "Beschreibung",
-   "Gestaltung und Inhalt",
-   2000
-  ],
-  [
-   "LEISTUNGEN",
-   "Leistungen",
-   "Gestaltung und Inhalt",
-   2000
-  ],
-  [
-   "USP",
-   "Stärke",
-   "Gestaltung und Inhalt",
-   1000
-  ],
-  [
-   "ZIELGRUPPE",
-   "Zielgruppe",
-   "Gestaltung und Inhalt",
-   400
-  ],
-  [
-   "ANREDE",
-   "Anrede",
-   "Gestaltung und Inhalt",
-   80
-  ],
-  [
-   "DREI_WOERTER",
-   "Drei Wörter",
-   "Gestaltung und Inhalt",
-   140
-  ],
-  [
-   "STIL",
-   "Stil",
-   "Gestaltung und Inhalt",
-   80
-  ],
-  [
-   "FARBEN",
-   "Farben",
-   "Gestaltung und Inhalt",
-   260
-  ],
-  [
-   "LOGO",
-   "Logo",
-   "Gestaltung und Inhalt",
-   80
-  ],
-  [
-   "LOGO_PREIS",
-   "Logo-Preis",
-   "Gestaltung und Inhalt",
-   60
-  ],
-  [
-   "VORBILDER",
-   "Vorbilder",
-   "Gestaltung und Inhalt",
-   1000
-  ],
-  [
-   "TABU",
-   "Tabu",
-   "Gestaltung und Inhalt",
-   1000
+   20
   ],
   [
    "REFERENZ",
    "Referenz",
-   "Gestaltung und Inhalt",
-   120
+   "Kontakt",
+   80
   ],
   [
    "SONSTIGES",
    "Sonstiges",
-   "Gestaltung und Inhalt",
+   "Kontakt",
    2000
-  ],
-  [
-   "IMPRESSUM_FIRMA",
-   "Firma mit Rechtsform",
-   "Angaben fürs Impressum",
-   200
-  ],
-  [
-   "IMPRESSUM_ADRESSE",
-   "Adresse",
-   "Angaben fürs Impressum",
-   300
-  ],
-  [
-   "IMPRESSUM_PERSON",
-   "Verantwortliche Person",
-   "Angaben fürs Impressum",
-   120
-  ],
-  [
-   "IMPRESSUM_UID",
-   "UID oder MWST-Nummer",
-   "Angaben fürs Impressum",
-   40
   ],
   [
    "PAKET",
@@ -235,22 +183,33 @@ export const ANFRAGE = {
    "PREIS",
    "Richtpreis",
    "Empfehlung",
-   40
+   60
+  ],
+  [
+   "ZUSAETZE",
+   "Zusätze",
+   "Empfehlung",
+   400
+  ],
+  [
+   "HINWEIS",
+   "Hinweis",
+   "Empfehlung",
+   300
   ]
  ],
  "pflicht": {
   "voll": [
-   "KONTAKT_NAME",
-   "KONTAKT_MAIL",
    "FIRMA",
-   "ORT",
-   "BRANCHE"
+   "BRANCHE",
+   "ANGEBOT",
+   "ZIEL",
+   "KONTAKT_NAME",
+   "KONTAKT_MAIL"
   ],
   "kurz": [
-   "KONTAKT_NAME",
-   "KONTAKT_MAIL",
-   "BRANCHE",
-   "SEITENZAHL"
+   "ANGEBOT",
+   "KONTAKT_MAIL"
   ]
  },
  "mindestSek": {
@@ -274,27 +233,17 @@ export const ANFRAGE = {
  "eingabeMax": {
   "firma": 120,
   "ort": 80,
+  "branche": 120,
+  "angebot": 300,
+  "url": 300,
+  "stoerung": 200,
+  "sprache": 60,
+  "vorbilder": 500,
+  "farben": 200,
+  "domain": 200,
   "name": 120,
   "email": 200,
-  "betrieb": 120,
   "tel": 40,
-  "url": 300,
-  "domain": 200,
-  "branche": 120,
-  "zielgruppe": 200,
-  "farben": 200,
-  "w1": 40,
-  "w2": 40,
-  "w3": 40,
-  "beschreibung": 2000,
-  "leistungen": 2000,
-  "usp": 1000,
-  "vorbilder": 1000,
-  "tabu": 1000,
-  "imFirma": 200,
-  "imAdresse": 300,
-  "imPerson": 120,
-  "imUid": 40,
   "sonstiges": 2000
  }
 };

@@ -30,6 +30,11 @@ for (const [, satz] of ANFRAGE.naechsteSchritte) {
   if (quelle.split(satz).length - 1 < 2) throw new Error('Satz steht nicht (mehr) auf der Seite: ' + satz);
 }
 
+// Die Fragenzahl im Ablauf-Text muss zur Fragen-Definition passen (ohne Folgefragen und ohne Kurzversions-Frage)
+const fragen = (quelle.match(/ {2}Q = \[([\s\S]*?)\n {2}\];/) || [])[1] || '';
+const anzahl = fragen.split(/\n    \{ key: '/).slice(1).filter((f) => !/nurKurz: true|wenn: /.test(f)).length;
+for (const [, n] of quelle.matchAll(/'(\d+) kurze Fragen/g)) if (Number(n) !== anzahl) throw new Error(`Text nennt ${n} Fragen, es sind ${anzahl}.`);
+
 const ZIEL = join(ROOT, 'anfrage-proxy', 'src', 'schema.js');
 mkdirSync(dirname(ZIEL), { recursive: true });
 writeFileSync(ZIEL, '// Erzeugt mit tools/anfrage-schema.mjs aus index.html (Konstante ANFRAGE). Nicht von Hand ändern.\n' +

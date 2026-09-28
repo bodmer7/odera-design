@@ -111,7 +111,10 @@ function projektCheck() {
   const hinweis = quelle.match(/<p [^>]*>(Dieses Formular ist eine unverbindliche Projektanfrage\.[^<]*)</);
   const fragen = (quelle.match(/ {2}Q = \[([\s\S]*?)\n {2}\];/) || [])[1];
   if (!hinweis || !fragen) throw new Error('Angaben zum Projekt-Check nicht gefunden.');
-  const anzahl = (fragen.match(/\{ key: '/g) || []).length;
+  // Fragen ohne Folgefragen (wenn:) und ohne die E-Mail-Frage der Kurzversion (nurKurz)
+  const anzahl = fragen.split(/\n    \{ key: '/).slice(1).filter((f) => !/nurKurz: true|wenn: /.test(f)).length;
+  const minuten = (quelle.match(/ {2}CHECK_MINUTEN = (\d+);/) || [])[1];
+  if (!minuten) throw new Error('CHECK_MINUTEN nicht gefunden.');
   // Schalter «direkt senden»: beide Konstanten gesetzt
   const konst = (n) => (quelle.match(new RegExp(' {2}' + n + " = '([^']*)';")) || [])[1] || '';
   const direkt = !!(konst('ANFRAGE_ENDPOINT') && konst('TURNSTILE_SITEKEY'));
@@ -120,9 +123,9 @@ function projektCheck() {
   const hinweisText = hinweis[1].replace('{{ hinweisErsterSchritt }}', direkt ? varianten[1] : varianten[2]);
   return [
     `Adresse: ${SITE}/projekt-check/`,
-    `Der Projekt-Check hat ${anzahl} Fragen. Nach 13 Fragen kann man die Anfrage bereits abschicken. Eine Kurzschätzung mit drei Fragen gibt es unter ${SITE}/projekt-check/?kurz=1.`,
+    `Der Projekt-Check hat ${anzahl} Fragen in sechs Abschnitten und dauert rund ${minuten} Minuten, fast alles per Klick. Eine Kurzschätzung mit drei Fragen gibt es unter ${SITE}/projekt-check/?kurz=1.`,
     direkt
-      ? 'Am Schluss zeigt der Projekt-Check eine Paketempfehlung mit Richtpreis und die fertige Anfrage. Mit einem Klick auf «Anfrage senden» geht sie direkt an Nico. Auf Wunsch kommt eine Kopie an die eigene E-Mail-Adresse. Danach erscheint eine Referenznummer.'
+      ? 'Am Schluss zeigt der Projekt-Check eine Paketempfehlung mit Richtpreis und die fertige Anfrage. Mit einem Klick auf «Senden» geht sie direkt an Nico. Auf Wunsch kommt eine Kopie an die eigene E-Mail-Adresse. Danach erscheint eine Referenznummer.'
       : 'Am Schluss zeigt der Projekt-Check eine Paketempfehlung mit Richtpreis und öffnet eine vorbereitete E-Mail, die man selbst absendet.',
     hinweisText.replace(/\s*Mehr dazu in der\s*$/, ''),
   ].join('\n');

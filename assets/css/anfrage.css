@@ -1,4 +1,4 @@
-/* Projekt-Check direkt senden: Ergebnis mit Mail-Fenster und Dankesbildschirm.
+/* Projekt-Check: Funktionskarten und Hinweise im Fragebogen, Ergebnis mit Mail-Fenster, Dankesbildschirm.
    Wird erst im Projekt-Check geladen (index.html, anfrageVorladen). Farben aus den Design-Tokens in index.html. */
 
 /* Ergebnis: links das Angebot, rechts das Mail-Fenster */
@@ -10,8 +10,11 @@
 .eg-badge{display:inline-block;margin:0 0 24px;padding:5px 12px;border-radius:999px;background:var(--limette);color:var(--tinte);font-size:13px}
 .eg-preis{display:flex;align-items:baseline;flex-wrap:wrap;gap:16px;margin:0 0 12px;font-size:clamp(40px,4.4vw,60px);line-height:1;font-variant-numeric:tabular-nums;color:var(--weiss)}
 .eg-preis s{font-size:20px;color:var(--weiss);opacity:0.8}
-.eg-host{margin:0 0 20px;font-size:16px;line-height:1.5;color:var(--weiss)}
-.eg-satz,.eg-extra{margin:0 0 8px;font-size:15px;line-height:1.55;color:var(--weiss)}
+.eg-satz{margin:0 0 16px;font-size:16px;line-height:1.55;color:var(--weiss)}
+.eg-indiv{margin:0 0 16px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.35);font-size:14px;line-height:1.5;color:var(--weiss)}
+.eg-zusatz{margin:0;padding:0}
+.eg-zusatz div{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid rgba(255,255,255,0.25);font-size:14px;color:var(--weiss)}
+.eg-zusatz dt{margin:0}.eg-zusatz dd{margin:0;text-align:right;font-size:13px}
 .eg-ref{margin:16px 0 0;padding:14px 16px;border-radius:14px;background:var(--limette);color:var(--tinte);font-size:14px;line-height:1.5}
 .eg-lang{margin:20px 0 0}
 .eg-lang button{min-height:52px;padding:0 24px;border:none;border-radius:999px;color:var(--tinte);font:inherit;font-size:16px;font-weight:600;cursor:pointer}
@@ -26,6 +29,29 @@
 .eg-bar i{display:block;height:6px;border-radius:999px;background:var(--limette);transition:width 600ms ease-out}
 .eg-fn{margin:6px 0 0;font-size:12px;line-height:1.5;color:var(--weiss)}
 .eg-review{margin:28px 0 0;min-height:44px;padding:0;border:none;background:none;color:var(--weiss);font:inherit;font-size:15px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
+
+/* Fragebogen */
+.q-wichtig{margin:0 0 14px;padding:5px 12px;border-radius:999px;background:var(--limette);color:var(--tinte);font-size:12px;letter-spacing:0.02em}
+.q-was{margin:0 0 12px;font-size:15px;line-height:1.55;color:var(--tinte)}
+.q-was summary{display:inline-flex;align-items:center;min-height:44px;color:var(--kobalt-deep);text-decoration:underline;text-underline-offset:3px;cursor:pointer;list-style:none}
+.q-was summary::-webkit-details-marker{display:none}
+.q-was p{margin:0 0 4px;padding:12px 14px;border-radius:12px;background:var(--weiss);border:1px solid var(--linie)}
+.q-optlabel{margin:0 0 10px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grau)}
+.q-hinweis{margin:14px 0 0;padding:12px 14px;border-radius:12px;background:var(--weiss);border:1px solid var(--kobalt);font-size:15px;line-height:1.5;color:var(--tinte)}
+.qright .fline input::placeholder,.qright .fline textarea::placeholder{color:#8A8F9A}
+.g-karten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.kcard{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto auto;align-content:start;column-gap:14px;row-gap:2px;align-items:start;text-align:left;width:100%;min-height:96px;padding:16px;border:1px solid var(--linie);border-radius:16px;background:rgba(255,255,255,0.75);color:var(--tinte);font:inherit;cursor:pointer;transition:border-color 140ms ease-out,background 140ms ease-out}
+.kcard-i{grid-row:1 / span 3;margin-top:2px;color:var(--kobalt)}
+.kcard-t{font-size:16px;font-weight:600;line-height:1.35}
+.kcard-d{font-size:14px;line-height:1.45;color:var(--grau)}
+.kcard-p{margin-top:6px;font-size:11px;letter-spacing:0.04em;color:var(--grau)}
+.kcard:hover{border-color:var(--tinte)}
+.kcard[data-an="1"]{background:var(--kobalt);border-color:var(--kobalt);color:var(--weiss)}
+.kcard[data-an="1"] .kcard-i,.kcard[data-an="1"] .kcard-d,.kcard[data-an="1"] .kcard-p{color:var(--weiss)}
+.kcard[aria-disabled="true"]{cursor:default;background:var(--kobalt-deep);border-color:var(--kobalt-deep)}
+.kcard:focus-visible{outline:3px solid var(--kobalt);outline-offset:2px}
+@media(max-width:700px){.g-karten{grid-template-columns:1fr}.kcard{min-height:0}}
 
 /* Mail-Fenster */
 .mf{background:var(--weiss);color:var(--tinte);border-radius:16px;box-shadow:0 2px 0 rgba(17,19,26,0.04),0 30px 80px rgba(9,14,60,0.45);transform-origin:50% 100%}
