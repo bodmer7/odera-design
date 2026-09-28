@@ -2,4 +2,5 @@
 # Diese Ordner gehören nicht auf die Website:
 exclude:
   - chat-proxy
+  - anfrage-proxy
   - node_modules

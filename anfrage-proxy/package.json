@@ -1,0 +1,13 @@
+{
+  "name": "odera-anfrage-proxy",
+  "private": true,
+  "type": "module",
+  "description": "Worker für den Projekt-Check auf odera.ch: Anfrage prüfen und per E-Mail zustellen",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.142.0"
+  }
+}

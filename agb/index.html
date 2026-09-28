@@ -317,6 +317,8 @@ button,input,textarea{font-family:inherit}
 @keyframes chatIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media(max-width:560px){.chat-btn{right:16px;bottom:16px;width:52px;padding:0;justify-content:center}.chat-btn-l{display:none}.chat-btn[data-bar="1"]{bottom:80px}}
 @media print{.chat-btn{display:none!important}}
+.mf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .editbar{position:sticky;top:0;z-index:5;background:#FFFFFF;border-bottom:1px solid #E2DFD8}
 .editbar-in{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px}
 .editbar-btn{background:none;border:none;padding:0;min-height:44px;color:#1E34B8;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
@@ -1773,8 +1775,8 @@ button,input,textarea{font-family:inherit}
                 <path d="M2 8l12 8 12-8" style="transform:{{ flapT }};transform-origin:14px 8px;transition:transform 200ms ease-out"></path>
               </svg>
               <span>
-                <span style="display:block;font-size:20px;font-weight:600;line-height:1.3">Projekt-Check machen und Mail schicken</span>
-                <span style="display:block;font-size:15px;line-height:1.5;margin-top:4px">27 Fragen, 15 Minuten. Ich schreibe die Mail für Sie.</span>
+                <span style="display:block;font-size:20px;font-weight:600;line-height:1.3">{{ kontaktCheckTitel }}</span>
+                <span style="display:block;font-size:15px;line-height:1.5;margin-top:4px">{{ kontaktCheckText }}</span>
               </span>
             </a>
             <p style="height:24px;margin:12px 0 0;font-size:15px;color:#A8B0BD;opacity:{{ mailHintOp }};transition:opacity 160ms linear">meist antworte ich innert vier Stunden</p>
@@ -1891,12 +1893,13 @@ button,input,textarea{font-family:inherit}
         </div>
         <div id="ds-3" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">3. Keine Cookies, keine Statistik</h2>
-          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Diese Website setzt keine Cookies. Es findet keine Reichweitenmessung, keine Statistik und kein Tracking statt. Es sind keine Analysedienste, Werbenetzwerke oder Social-Media-Plugins eingebunden. Die auf der Startseite angezeigte Ladezeit wird ausschliesslich im Browser des Besuchers gemessen und nirgendwohin übermittelt. Auch der Chat-Assistent setzt keine Cookies und speichert nichts in Ihrem Browser. Was er übermittelt, wenn Sie ihn nutzen, steht in Abschnitt 8.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Diese Website setzt keine Cookies. Es findet keine Reichweitenmessung, keine Statistik und kein Tracking statt. Es sind keine Analysedienste, Werbenetzwerke oder Social-Media-Plugins eingebunden. Die auf der Startseite angezeigte Ladezeit wird ausschliesslich im Browser des Besuchers gemessen und nirgendwohin übermittelt. Auch der Chat-Assistent setzt keine Cookies und speichert nichts in Ihrem Browser. Was er übermittelt, wenn Sie ihn nutzen, steht in Abschnitt 8.{{ ds3Zusatz }}</p>
         </div>
         <div id="ds-4" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">4. Schriften</h2>
           <p style="font-size:17px;line-height:1.7;margin:0 0 16px">{{ fontsPrivacyText }}</p>
         </div>
+        <sc-if value="{{ dsMail }}" hint-placeholder-val="{{ true }}">
         <div id="ds-5" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">5. Projektanfrage über das Formular</h2>
           <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Das Anfrageformular auf dieser Website speichert nichts. Ihre Antworten bleiben ausschliesslich in Ihrem Browser, solange das Formular geöffnet ist. Es gibt keine Datenbank und keine Übermittlung an diese Website. Am Ende erzeugt das Formular eine vorbereitete E-Mail, die sich in Ihrem eigenen E-Mail-Programm öffnet. Erst wenn Sie diese E-Mail selbst absenden, erhalte ich Ihre Angaben. Der Versand läuft über Ihren eigenen E-Mail-Anbieter, auf den ich keinen Einfluss habe. Alternativ können Sie Ihre Antworten in die Zwischenablage kopieren und selbst entscheiden, was Sie mir schicken. Schliessen Sie das Formular, ohne die E-Mail abzusenden, erfahre ich nichts davon.</p>
@@ -1915,6 +1918,39 @@ button,input,textarea{font-family:inherit}
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">7. Bearbeitung Ihrer Anfrage</h2>
           <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Ihre E-Mail geht in mein Postfach bei Infomaniak Network SA mit Serverstandort in der Schweiz. Ich verwende Ihre Angaben ausschliesslich, um Ihre Anfrage zu beantworten, ein Angebot zu erstellen und ein allfälliges Projekt abzuwickeln. Es erfolgt keine Weitergabe an Dritte, keine Werbung und kein Newsletter.</p>
         </div>
+        </sc-if>
+        <sc-if value="{{ dsDirekt }}" hint-placeholder-val="{{ false }}">
+        <div id="ds-5" style="margin-top:48px">
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">5. Projektanfrage über den Projekt-Check</h2>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Ihre Antworten im Projekt-Check bleiben in Ihrem Browser, bis Sie auf «Anfrage senden» klicken. Schliessen Sie das Formular vorher, erfahre ich nichts davon. Erst mit dem Senden werden Ihre Angaben verschlüsselt (HTTPS) an mich übermittelt und mir als E-Mail zugestellt. Sie werden dabei in keiner Datenbank gespeichert. Zweck ist die Beantwortung Ihrer Anfrage, die Erstellung einer Offerte und die Vorbereitung eines allfälligen Vertrags.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Die Übermittlung läuft in drei Schritten:</p>
+          <ul style="font-size:17px;line-height:1.7;margin:0 0 16px;padding-left:20px">
+            <li>Eine Vermittlungsstelle bei Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA (Cloudflare Workers), nimmt die Anfrage entgegen, prüft sie und leitet sie weiter. Sie speichert die Inhalte nicht. Dauerhafte Protokolle sind ausgeschaltet.</li>
+            <li>Der Versanddienst Resend (Plus Five Five, Inc., USA) stellt die E-Mail zu. Ich nutze bei Resend die Region Irland (EU). Nach Angaben von Resend werden versendete E-Mails 30 Tage lang gespeichert und danach gelöscht. Quelle: <a href="https://resend.com/security/gdpr" target="_blank" rel="noopener">Resend, GDPR</a>.</li>
+            <li>Die E-Mail geht in mein Postfach bei Infomaniak Network SA mit Serverstandort in der Schweiz.</li>
+          </ul>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Zum Schutz vor automatisierten Anfragen lädt die letzte Seite des Projekt-Checks die Sicherheitsprüfung Cloudflare Turnstile. Dabei bearbeitet Cloudflare Ihre IP-Adresse und technische Merkmale Ihres Browsers und Geräts, um Menschen von Programmen zu unterscheiden. Meistens bemerken Sie davon nichts. Nur in Zweifelsfällen erscheint ein Feld zum Anklicken. Die Zusatzfunktion «Pre-Clearance», bei der Cloudflare ein Cookie für die ganze Website setzt, nutze ich nicht. Welche technisch notwendigen Daten Turnstile im Einzelnen bearbeitet, beschreibt Cloudflare im <a href="https://www.cloudflare.com/turnstile-privacy-policy/" target="_blank" rel="noopener">Turnstile Privacy Addendum</a>.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Wenn Sie «Kopie an mich senden» wählen, schickt Resend zusätzlich eine Kopie Ihrer Angaben an die von Ihnen genannte E-Mail-Adresse. Ohne diese Wahl erhalten Sie keine E-Mail.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Um Missbrauch zu begrenzen, sind pro IP-Adresse höchstens 3 Anfragen pro Stunde möglich. Dafür wird Ihre IP-Adresse zusammen mit einem zufälligen Wert, der jeden Tag wechselt, in eine Zeichenfolge umgewandelt (Hash). Bei Cloudflare gespeichert werden nur diese Zeichenfolge, die Zeitpunkte der Anfragen und ein Zähler aller Anfragen des Tages. 24 Stunden später wird alles gelöscht.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Möchten Sie diese Dienste nicht nutzen, können Sie Ihre Antworten am Schluss auch kopieren oder mit Ihrem eigenen E-Mail-Programm an <a href="{{ mailKontakt }}">kontakt@odera.ch</a> senden.</p>
+        </div>
+        <div id="ds-6" style="margin-top:48px">
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">6. Welche Angaben Sie mir übermitteln</h2>
+          <ul style="font-size:17px;line-height:1.7;margin:0 0 16px;padding-left:20px">
+            <li>Name</li>
+            <li>E-Mail-Adresse</li>
+            <li>Telefonnummer, optional</li>
+            <li>Angaben zu Ihrem Betrieb und Ihrem Projekt, zum Beispiel Branche, Umfang, Wunschtermin, Gestaltung und Angaben fürs Impressum</li>
+          </ul>
+          <p style="font-size:17px;line-height:1.7;margin:0">Pflicht sind Name und E-Mail-Adresse sowie wenige Angaben zum Betrieb, damit ich Ihre Anfrage einschätzen kann. Alle weiteren Angaben sind freiwillig.</p>
+        </div>
+        <div id="ds-7" style="margin-top:48px">
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">7. Bearbeitung Ihrer Anfrage und Bekanntgabe ins Ausland</h2>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Ich verwende Ihre Angaben ausschliesslich, um Ihre Anfrage zu beantworten, ein Angebot zu erstellen und ein allfälliges Projekt abzuwickeln. Es erfolgt keine Weitergabe an weitere Dritte, keine Werbung und kein Newsletter.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Cloudflare und Resend können Daten auch in den USA bearbeiten. Cloudflare ist nach dem Swiss-U.S. Data Privacy Framework zertifiziert. Im Register des US-Handelsministeriums steht am 28. September 2026 der Status «Active, Re-certification under Review». Zusätzlich enthält der Datenverarbeitungsvertrag von Cloudflare Standardvertragsklauseln, die für Daten aus der Schweiz an das Schweizer Recht angepasst sind.</p>
+          <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Resend ist gemäss demselben Register nur nach dem EU-U.S. Data Privacy Framework und der Erweiterung für das Vereinigte Königreich zertifiziert, nicht nach dem Swiss-U.S. Data Privacy Framework. Für Daten aus der Schweiz stützt sich die Bekanntgabe darum auf die Standardvertragsklauseln der EU-Kommission im Datenverarbeitungsvertrag von Resend, die für die Schweiz nach dem Datenschutzgesetz angepasst sind (Art. 16 Abs. 2 lit. d DSG).</p>
+        </div>
+        </sc-if>
         <div id="ds-8" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;margin:0 0 16px">8. Chat-Assistent</h2>
           <p style="font-size:17px;line-height:1.7;margin:0 0 16px">Auf dieser Website können Sie einem Chat-Assistenten Fragen zu meinem Angebot stellen. Die Antworten erzeugt ein KI-Programm. Sie sind unverbindlich und ersetzen keine Offerte. Der Assistent wird erst geladen, wenn Sie ihn öffnen, und Daten werden nur übermittelt, wenn Sie eine Nachricht absenden. Die Nutzung ist freiwillig. Sie erreichen mich jederzeit auch per E-Mail oder über den Projekt-Check.</p>
@@ -2068,7 +2104,7 @@ button,input,textarea{font-family:inherit}
 <div style="min-height:100vh;background:{{ checkBg }};transition:background 200ms linear">
   <div class="wrap navbar">
     <dc-import name="logo" kind="wort" h="32" fg="{{ checkFg }}" cut="{{ checkCut }}" hint-size="152px,32px"></dc-import>
-    <a href="/" style="font-size:17px;color:{{ checkFg }};min-height:48px;display:inline-flex;align-items:center">Abbrechen</a>
+    <a href="/" style="font-size:17px;color:{{ checkFg }};min-height:48px;display:{{ abbrechenDisplay }};align-items:center">Abbrechen</a>
   </div>
 
   <sc-if value="{{ inQuiz }}" hint-placeholder-val="{{ true }}">
@@ -2094,7 +2130,7 @@ button,input,textarea{font-family:inherit}
             <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,44px);line-height:1.1;letter-spacing:-0.03em;margin:0 0 16px;text-wrap:pretty">{{ qTitle }}</h2>
             <p style="font-size:15px;line-height:1.55;color:#5B6270;margin:0 0 12px;display:{{ helpDisplay }}">{{ qHelp }}</p>
             <div style="display:{{ firstNoteDisplay }};border:1px solid #E2DFD8;border-radius:14px;background:#F6F5F1;padding:20px;margin:0 0 16px">
-              <p style="font-size:15px;line-height:1.55;margin:0">Dieses Formular ist eine unverbindliche Projektanfrage. Sie kaufen hier nichts und gehen keine Verpflichtung ein. Ihre Antworten werden nicht gespeichert, sondern am Schluss in eine E-Mail eingesetzt, die Sie selbst absenden. Mehr dazu in der <a href="/datenschutz/" target="_blank">Datenschutzerklärung</a>.</p>
+              <p style="font-size:15px;line-height:1.55;margin:0">Dieses Formular ist eine unverbindliche Projektanfrage. Sie kaufen hier nichts und gehen keine Verpflichtung ein. {{ hinweisErsterSchritt }} Mehr dazu in der <a href="/datenschutz/" target="_blank">Datenschutzerklärung</a>.</p>
             </div>
             <p class="mono" style="font-size:13px;color:#5B6270;margin:0 0 12px;display:{{ multiDisplay }}">Mehrfachauswahl möglich</p>
             <p class="mono" style="font-size:13px;color:#5B6270;margin:0 0 12px;display:{{ prefillDisplay }}">Ihre Angabe ist schon eingetragen</p>
@@ -2141,14 +2177,14 @@ button,input,textarea{font-family:inherit}
               <sc-for list="{{ fields }}" as="f" hint-placeholder-count="2">
                 <label class="fline">
                   <span class="mono" style="display:block;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5B6270">{{ f.label }}</span>
-                  <input type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" onChange="{{ onField }}" onKeyDown="{{ onFieldKey }}">
+                  <input type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" onChange="{{ onField }}" onKeyDown="{{ onFieldKey }}">
                   <span class="ulx" aria-hidden="true"></span>
                 </label>
               </sc-for>
               <sc-if value="{{ hasArea }}" hint-placeholder-val="{{ false }}">
                 <label class="fline">
                   <span class="mono" style="display:block;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5B6270">{{ areaLabel }}</span>
-                  <textarea rows="3" value="{{ areaValue }}" data-k="{{ areaKey }}" onChange="{{ onField }}" placeholder="{{ areaPh }}"></textarea>
+                  <textarea rows="3" value="{{ areaValue }}" data-k="{{ areaKey }}" maxlength="{{ areaMax }}" onChange="{{ onField }}" placeholder="{{ areaPh }}"></textarea>
                   <span class="ulx" aria-hidden="true"></span>
                 </label>
               </sc-if>
@@ -2181,7 +2217,7 @@ button,input,textarea{font-family:inherit}
           <p style="font-size:20px;line-height:1.5;color:#FFFFFF;margin:0 0 32px;max-width:600px;text-wrap:pretty">Wenn Sie jetzt noch 14 Fragen zu Gestaltung und Inhalt beantworten, kann ich Ihren Entwurf ohne Rückfragen bauen. Das spart uns beiden ein Gespräch und Sie sehen das Ergebnis schneller.</p>
           <div class="row" style="gap:16px">
             <button type="button" class="g4" onClick="{{ onMidNext }}" style="min-height:56px;padding:0 32px;border:none;border-radius:999px;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">Weiter, ich nehme mir die Zeit</button>
-            <button type="button" onClick="{{ onMidSend }}" style="min-height:56px;padding:0 32px;border:1px solid #FFFFFF;border-radius:999px;background:#FFFFFF;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">Reicht mir, Mail jetzt schicken</button>
+            <button type="button" onClick="{{ onMidSend }}" style="min-height:56px;padding:0 32px;border:1px solid #FFFFFF;border-radius:999px;background:#FFFFFF;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">{{ mitteSendenLabel }}</button>
           </div>
         </div>
       </div>
@@ -2215,7 +2251,7 @@ button,input,textarea{font-family:inherit}
   </sc-if>
 
   <sc-if value="{{ inQuick }}" hint-placeholder-val="{{ false }}">
-  <div class="wrap" style="padding-bottom:120px">
+  <div class="wrap" style="padding-bottom:{{ ergebnisUnten }}">
     <div style="max-width:720px;margin:0 auto;animation:fade 200ms linear;padding-top:32px">
       <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:#FFFFFF;margin:0 0 24px">KURZSCHÄTZUNG</p>
       <div class="row" style="gap:24px;margin-bottom:24px">
@@ -2225,21 +2261,23 @@ button,input,textarea{font-family:inherit}
       <p class="mono" style="font-size:clamp(36px,4.5vw,56px);line-height:1;color:#FFFFFF;margin:0 0 24px;font-variant-numeric:tabular-nums">{{ recPrice }}</p>
       <p style="font-size:17px;line-height:1.65;color:#FFFFFF;margin:0 0 16px;max-width:600px">Das ist die Schätzung aus drei Angaben. Mit allen 27 Fragen wird sie genauer, und ich muss danach nichts mehr nachfragen.</p>
       <p style="font-size:15px;line-height:1.6;color:#FFFFFF;margin:0 0 32px;max-width:600px">{{ quickHostLine }}</p>
+      <div style="display:{{ mailtoDisplay }}">
       <p class="mono" style="display:{{ consentWarnDisplay }};font-size:14px;color:#FFFFFF;margin:0 0 12px">Bitte bestätigen Sie die Kenntnisnahme, dann können Sie die E-Mail öffnen.</p>
       <label style="display:flex;align-items:flex-start;gap:12px;margin:0 0 24px;max-width:600px">
         <input type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}" style="flex:none;width:24px;height:24px;border-radius:6px;margin:0;accent-color:#D6F24B">
         <span style="font-size:15px;line-height:1.5;color:#FFFFFF">Ich habe die <a href="/agb/" target="_blank" style="color:#FFFFFF">AGB</a> und die <a href="/datenschutz/" target="_blank" style="color:#FFFFFF">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
       </label>
+      </div>
       <div class="row" style="gap:16px">
         <button type="button" class="g4" onClick="{{ quickToLong }}" style="min-height:60px;padding:0 32px;border:none;border-radius:999px;color:#11131A;font-size:17px;font-weight:600;cursor:pointer">Alle 27 Fragen beantworten</button>
-        <a href="{{ quickMailHref }}" aria-disabled="{{ sendDisabledAttr }}" onClick="{{ onSendClick }}" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 32px;border:1px solid #FFFFFF;border-radius:999px;background:{{ quickSendBg }};color:{{ sendFg }};font-size:17px;font-weight:600;text-decoration:none;cursor:{{ sendCursor }}">Mir reicht das, E-Mail schreiben</a>
+        <a href="{{ quickMailHref }}" aria-disabled="{{ sendDisabledAttr }}" onClick="{{ onSendClick }}" style="display:{{ mailtoInline }};align-items:center;justify-content:center;min-height:60px;padding:0 32px;border:1px solid #FFFFFF;border-radius:999px;background:{{ quickSendBg }};color:{{ sendFg }};font-size:17px;font-weight:600;text-decoration:none;cursor:{{ sendCursor }}">Mir reicht das, E-Mail schreiben</a>
       </div>
     </div>
   </div>
   </sc-if>
 
   <sc-if value="{{ inResult }}" hint-placeholder-val="{{ false }}">
-  <div class="wrap" style="padding-bottom:120px">
+  <div class="wrap" style="padding-bottom:{{ ergebnisUnten }}">
     <div style="max-width:880px;margin:0 auto;animation:fade 200ms linear">
       <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:#FFFFFF;margin:0 0 24px">IHR ERGEBNIS</p>
       <div class="row" style="gap:24px;margin-bottom:32px">
@@ -2300,6 +2338,7 @@ button,input,textarea{font-family:inherit}
         <p class="mono" style="font-size:12px;color:#FFFFFF;margin:0">Agenturpreise sind veröffentlichte Marktspannen, keine Offerten.</p>
       </div>
 
+      <div style="display:{{ mailtoDisplay }}">
       <div style="max-width:560px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px">
         <p class="mono" style="display:{{ consentWarnDisplay }};font-size:14px;color:#FFFFFF;margin:0;text-align:center">Bitte bestätigen Sie die Kenntnisnahme, dann können Sie die E-Mail öffnen.</p>
         <label style="display:flex;align-items:flex-start;gap:12px;width:100%">
@@ -2402,6 +2441,92 @@ button,input,textarea{font-family:inherit}
             <p class="mono" style="font-size:12px;color:#FFFFFF;margin:12px 0 0">Genau so kommt sie bei mir an. Nichts wird vorher gesendet.</p>
           </div>
         </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ fensterAktiv }}" hint-placeholder-val="{{ false }}">
+  <div class="wrap" style="padding-bottom:120px">
+    <section class="mf" aria-labelledby="mf-titel" style="animation:{{ mfAnim }}" onKeyDown="{{ onFensterTaste }}">
+      <div class="mf-leiste">
+        <span class="mf-punkte" aria-hidden="true"><i></i><i></i><i></i></span>
+        <h3 id="mf-titel" class="mono mf-titel">Neue Anfrage</h3>
+        <button type="button" class="mf-flieger" onClick="{{ onAnfrageSenden }}" disabled="{{ sendenGesperrt }}" aria-label="Anfrage senden" title="Anfrage senden ({{ tasteSenden }})">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true" style="animation:{{ fliegerAnim }}"><path d="M3 11.2 21 3l-7.6 18-3.1-6.9z"></path><path d="M10.3 14.1 21 3"></path></svg>
+        </button>
+      </div>
+      <div class="mf-kopf">
+        <div class="mf-zeile"><span class="mono mf-l">An</span><span class="mono mf-w">kontakt@odera.ch</span></div>
+        <div class="mf-zeile"><span class="mono mf-l">Von</span>
+          <span class="mono mf-w" style="display:{{ vonTextDisplay }}">{{ vonText }}</span>
+          <span class="mf-von" style="display:{{ vonEingabeDisplay }}">
+            <label class="mf-eingabe"><span class="mf-sr">Ihr Name</span><input type="text" autocomplete="name" placeholder="Ihr Name" maxlength="120" value="{{ vonName }}" data-k="name" onChange="{{ onField }}"></label>
+            <label class="mf-eingabe"><span class="mf-sr">Ihre E-Mail-Adresse</span><input type="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse" maxlength="200" value="{{ vonMail }}" data-k="email" onChange="{{ onField }}"></label>
+            <label class="mf-eingabe"><span class="mf-sr">Betrieb, optional</span><input type="text" autocomplete="organization" placeholder="Betrieb, optional" maxlength="120" value="{{ vonFirma }}" data-k="firma" onChange="{{ onField }}"></label>
+          </span>
+        </div>
+        <div class="mf-zeile"><span class="mono mf-l">Betreff</span><span class="mono mf-w">{{ fensterBetreff }}</span></div>
+      </div>
+      <pre class="mono mf-text" tabindex="0" aria-label="Inhalt der Anfrage">{{ fensterText }}</pre>
+      <div class="mf-fuss">
+        <div class="mf-hp" aria-hidden="true"><label>Website<input type="text" tabindex="-1" autocomplete="off" value="{{ hpWert }}" onChange="{{ onHp }}"></label></div>
+        <label class="mf-check">
+          <input type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}">
+          <span>Ich habe die <a href="/agb/" target="_blank">AGB</a> und die <a href="/datenschutz/" target="_blank">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
+        </label>
+        <label class="mf-check">
+          <input type="checkbox" checked="{{ kopieWunsch }}" onChange="{{ onKopie }}">
+          <span>Kopie an mich senden</span>
+        </label>
+        <div id="ts-box" class="mf-ts"></div>
+        <p class="mf-offline" role="status" style="display:{{ offlineDisplay }}">Sie sind gerade offline. Sobald die Verbindung zurück ist, können Sie senden. Oder Sie senden mit Ihrem E-Mail-Programm.</p>
+        <div class="mf-fehler" role="alert" style="display:{{ fehlerDisplay }}">
+          <p class="mf-fehler-t">{{ fehlerTitel }}</p>
+          <p class="mf-fehler-s">{{ fehlerText }}</p>
+          <div class="mf-fehler-knopf">
+            <button type="button" class="mf-zweit" onClick="{{ onAnfrageSenden }}" style="display:{{ nochmalsDisplay }}">Nochmals versuchen</button>
+            <a class="mf-zweit" href="{{ mailtoFallback }}">Stattdessen mit Ihrem E-Mail-Programm senden</a>
+            <button type="button" class="mf-zweit" onClick="{{ onCopy }}">{{ kopierenLabel }}</button>
+          </div>
+        </div>
+        <div class="mf-senden">
+          <p class="mf-hinweis">Mit dem Senden wird Ihre Anfrage an kontakt@odera.ch übermittelt. <a href="/datenschutz/#ds-5">Datenschutzerklärung</a></p>
+          <p class="mono mf-status" role="status" aria-live="polite">{{ sendStatus }}</p>
+          <button type="button" class="mf-haupt" onClick="{{ onAnfrageSenden }}" disabled="{{ sendenGesperrt }}" aria-describedby="mf-taste">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.2 21 3l-7.6 18-3.1-6.9z"></path><path d="M10.3 14.1 21 3"></path></svg>
+            <span>{{ sendenLabel }}</span>
+          </button>
+          <p id="mf-taste" class="mono mf-taste">{{ tasteSenden }}</p>
+        </div>
+        <p class="mf-links">
+          <button type="button" class="mf-link" onClick="{{ onZurueckAendern }}">Zurück und ändern</button>
+          <button type="button" class="mf-link" onClick="{{ onCopy }}">{{ kopierenLabel }}</button>
+        </p>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ inDanke }}" hint-placeholder-val="{{ false }}">
+  <div class="wrap" style="padding-bottom:120px">
+    <div class="dk">
+      <div class="dk-logo" aria-hidden="true">
+        <svg class="dk-ring" viewBox="0 0 120 120" width="120" height="120"><circle cx="60" cy="60" r="56" fill="none" stroke="#2D4CF0" stroke-width="3" stroke-linecap="round" pathLength="100"></circle></svg>
+        <div class="dk-zeichen"><dc-import name="logo" kind="zeichen" h="72" hint-size="72px,72px"></dc-import></div>
+      </div>
+      <h2 tabindex="-1" class="dk-titel">Danke, {{ dankeVorname }}. Ihre Anfrage ist angekommen.</h2>
+      <p class="mono dk-ref">Referenz <span>{{ dankeReferenz }}</span></p>
+      <p class="dk-kopie" style="display:{{ dankeKopieDisplay }}">Eine Kopie ist unterwegs an {{ dankeMail }}.</p>
+      <ol class="dk-zeit">
+        <sc-for list="{{ naechsteSchritte }}" as="z" hint-placeholder-count="3">
+          <li><span class="mono dk-n" aria-hidden="true">{{ z.n }}</span><div><p class="dk-zt">{{ z.titel }}</p><p class="dk-zs">{{ z.satz }}</p></div></li>
+        </sc-for>
+      </ol>
+      <div class="row dk-knopf">
+        <a href="/" class="g3">Zur Startseite</a>
+        <a href="/musterprojekte/" class="dk-zweit">Musterprojekte ansehen</a>
       </div>
     </div>
   </div>
@@ -2511,6 +2636,47 @@ class Component extends DCLogic {
   EMAIL = 'kontakt@odera.ch';
   // Adresse des Chat-Proxys (chat-proxy/, Cloudflare Worker). Leer lassen, solange er nicht läuft: Dann ist der Assistent ausgeblendet.
   CHAT_ENDPOINT = 'https://odera-chat.odera-chat-proxy.workers.dev/';
+  // Projekt-Check direkt absenden (Worker anfrage-proxy/). Schalter: Sind beide Werte gesetzt, sendet der
+  // Projekt-Check direkt. Ist einer leer, gilt der bisherige Ablauf mit dem eigenen E-Mail-Programm.
+  ANFRAGE_ENDPOINT = '';
+  TURNSTILE_SITEKEY = '';
+  // Einzige Definition der Felder einer Anfrage. tools/anfrage-schema.mjs kopiert sie in den Worker,
+  // damit Formular und Worker dieselben Regeln haben. felder: [Schlüssel, Beschriftung, Abschnitt, Maximallänge]
+  ANFRAGE = {
+    gesamtMax: 20000,
+    abschnitte: ['Kontakt', 'Ihr Projekt', 'Gestaltung und Inhalt', 'Angaben fürs Impressum', 'Empfehlung'],
+    felder: [
+      ['KONTAKT_NAME', 'Name', 'Kontakt', 120], ['KONTAKT_MAIL', 'E-Mail', 'Kontakt', 200], ['KONTAKT_TEL', 'Telefon', 'Kontakt', 40],
+      ['FIRMA', 'Firma', 'Kontakt', 120], ['ORT', 'Ort', 'Kontakt', 80],
+      ['BRANCHE', 'Branche', 'Ihr Projekt', 160], ['WEBSITE_HEUTE', 'Website heute', 'Ihr Projekt', 80], ['WEBSITE_URL', 'Adresse der Website', 'Ihr Projekt', 300],
+      ['ZIEL', 'Ziel', 'Ihr Projekt', 400], ['ZIEL_HAUPT', 'Wichtigstes Ziel', 'Ihr Projekt', 120], ['SEITENZAHL', 'Seitenzahl', 'Ihr Projekt', 80],
+      ['FUNKTIONEN', 'Funktionen', 'Ihr Projekt', 400], ['FOTOS', 'Fotos', 'Ihr Projekt', 80], ['TEXTE', 'Texte', 'Ihr Projekt', 80],
+      ['DOMAIN', 'Domain', 'Ihr Projekt', 260], ['HOSTING', 'Hosting', 'Ihr Projekt', 80], ['HOSTING_PREIS', 'Hosting-Preis', 'Ihr Projekt', 60],
+      ['TERMIN', 'Termin', 'Ihr Projekt', 80],
+      ['BESCHREIBUNG', 'Beschreibung', 'Gestaltung und Inhalt', 2000], ['LEISTUNGEN', 'Leistungen', 'Gestaltung und Inhalt', 2000], ['USP', 'Stärke', 'Gestaltung und Inhalt', 1000],
+      ['ZIELGRUPPE', 'Zielgruppe', 'Gestaltung und Inhalt', 400], ['ANREDE', 'Anrede', 'Gestaltung und Inhalt', 80], ['DREI_WOERTER', 'Drei Wörter', 'Gestaltung und Inhalt', 140],
+      ['STIL', 'Stil', 'Gestaltung und Inhalt', 80], ['FARBEN', 'Farben', 'Gestaltung und Inhalt', 260], ['LOGO', 'Logo', 'Gestaltung und Inhalt', 80],
+      ['LOGO_PREIS', 'Logo-Preis', 'Gestaltung und Inhalt', 60], ['VORBILDER', 'Vorbilder', 'Gestaltung und Inhalt', 1000], ['TABU', 'Tabu', 'Gestaltung und Inhalt', 1000],
+      ['REFERENZ', 'Referenz', 'Gestaltung und Inhalt', 120], ['SONSTIGES', 'Sonstiges', 'Gestaltung und Inhalt', 2000],
+      ['IMPRESSUM_FIRMA', 'Firma mit Rechtsform', 'Angaben fürs Impressum', 200], ['IMPRESSUM_ADRESSE', 'Adresse', 'Angaben fürs Impressum', 300],
+      ['IMPRESSUM_PERSON', 'Verantwortliche Person', 'Angaben fürs Impressum', 120], ['IMPRESSUM_UID', 'UID oder MWST-Nummer', 'Angaben fürs Impressum', 40],
+      ['PAKET', 'Paket', 'Empfehlung', 40], ['PREIS', 'Richtpreis', 'Empfehlung', 40],
+    ],
+    pflicht: { voll: ['KONTAKT_NAME', 'KONTAKT_MAIL', 'FIRMA', 'ORT', 'BRANCHE'], kurz: ['KONTAKT_NAME', 'KONTAKT_MAIL', 'BRANCHE', 'SEITENZAHL'] },
+    // Mindestzeit in Sekunden vom Öffnen des Projekt-Checks bis zum Senden (Schutz vor Bots)
+    mindestSek: { voll: 20, kurz: 6 },
+    // Nächste Schritte nach dem Senden (Dankesbildschirm und Kopie). Die Sätze stehen wörtlich auch auf der Seite,
+    // tools/anfrage-schema.mjs prüft das. [Titel, Satz]
+    naechsteSchritte: [
+      ['Ich melde mich', 'Antwort spätestens am nächsten Abend, ausser am Wochenende'],
+      ['Kostenloser Entwurf', 'Innert fünf Arbeitstagen sehen Sie Ihre fertige Seite.'],
+      ['Zahlung', 'Sie zahlen erst, wenn Ihnen der Entwurf gefällt.'],
+    ],
+    // Maximallängen der Eingabefelder im Formular
+    eingabeMax: { firma: 120, ort: 80, name: 120, email: 200, betrieb: 120, tel: 40, url: 300, domain: 200, branche: 120, zielgruppe: 200,
+      farben: 200, w1: 40, w2: 40, w3: 40, beschreibung: 2000, leistungen: 2000, usp: 1000, vorbilder: 1000, tabu: 1000,
+      imFirma: 200, imAdresse: 300, imPerson: 120, imUid: 40, sonstiges: 2000 },
+  };
   // Öffentliche Adresse der Website. Steht in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung tools/seo-build.mjs ausführen.
   SITE = 'https://odera.ch';
   // Stand unter Impressum, Datenschutz und AGB. Nur ändern, wenn die Rechtstexte geändert werden.
@@ -2583,7 +2749,7 @@ class Component extends DCLogic {
   ];
 
   STEPS = [
-    ['Formular ausfüllen', '27 Fragen zu Ihrem Betrieb, Ihrem Ziel und Ihrem Geschmack. Daraus entsteht Ihre Mail an mich.', 15, true],
+    ['Formular ausfüllen', '27 Fragen zu Ihrem Betrieb, Ihrem Ziel und Ihrem Geschmack. Daraus entsteht Ihre Anfrage an mich.', 15, true],
     ['Ich melde mich', 'Sie hören von mir, sobald ich die Mail gelesen habe.', 0, true],
     ['Kurzes Gespräch', 'Wenn etwas unklar ist, telefonieren wir kurz.', 20, false, 0, 'Ist alles klar, gestalte ich direkt los.'],
     ['Ich gestalte Ihren Entwurf', 'Eine fertige Seite mit Ihren Inhalten, innert fünf Arbeitstagen. Kostenlos und unverbindlich.', 0, true],
@@ -2664,6 +2830,7 @@ class Component extends DCLogic {
     consent: false,
     step: 0, dir: 'fwd', ans: {}, txt: {}, timing: 1, mid: false, result: false, warn: false, quick: false,
     review: false, editing: false, editNote: '', reached: 0, phFill: 0,
+    senden: 'bereit', sendFehler: '', gesendet: null, kopieWunsch: false, offline: false, hp: '', fensterWeg: false,
     copied: false, toast: '', mailOpen: false, ring: 0, cmpGrow: false,
     duelA: 0, duelB: 0, duelNote: false, duelALabel: '6,4 s', duelBLabel: '0,9 s',
     uLeft: '0px', uWidth: '0px', tick: 0, loadSec: 0, loadGrow: false, chatIntro: false
@@ -2681,7 +2848,8 @@ class Component extends DCLogic {
       const paket = (query.split('&').map(p => p.split('=')).find(p => p[0] === 'paket') || [])[1];
       const kurz = /(^|&)kurz=1(&|$)/.test(query);
       const next = { path: known, menu: false, result: false, mid: false, warn: false, review: false, editing: false, editNote: '', pageKey: this.state.pageKey + 1 };
-      if (known === '/projekt-check') { next.quick = kurz; if (kurz) next.step = 0; if (this.chatModul) this.chatModul.schliessen(false); }
+      if (known === '/projekt-check') { next.quick = kurz; if (kurz) next.step = 0; if (this.chatModul) this.chatModul.schliessen(false); if (!this.startZeit) this.startZeit = Date.now(); this.anfrageVorladen(); }
+      next.gesendet = null; next.senden = 'bereit'; next.sendFehler = '';
       if (known === '/projekt-check' && paket && this.PAKET[paket]) {
         const ans = Object.assign({}, this.state.ans);
         ans[5] = this.PAKET[paket];
@@ -2786,6 +2954,10 @@ class Component extends DCLogic {
       if (!typing && (e.key === 'k' || e.key === 'K') && this.state.path !== '/projekt-check') {
         this.go('/projekt-check/'); return;
       }
+      // Senden mit Cmd+Enter oder Ctrl+Enter im Mail-Fenster
+      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey) && this.direkt() && this.state.path === '/projekt-check' && this.state.result && !this.state.review && !this.state.gesendet) {
+        e.preventDefault(); this.anfrageSenden(); return;
+      }
       if (this.state.path !== '/projekt-check' || this.state.result || (typing && e.target.type !== 'range')) return;
       // Links und Schaltflächen im Prüfmodus reagieren selbst auf Enter.
       if (e.key === 'Enter' && e.target.closest && e.target.closest('[data-own-enter]')) return;
@@ -2798,6 +2970,10 @@ class Component extends DCLogic {
       else if (e.key === 'Backspace') { this.back(); e.preventDefault(); }
     };
     window.addEventListener('keydown', this.onKey);
+    this.onNetz = () => this.setState({ offline: navigator.onLine === false });
+    window.addEventListener('online', this.onNetz);
+    window.addEventListener('offline', this.onNetz);
+    this.onNetz();
 
     if (window.innerWidth <= 560) { document.querySelectorAll('details.mdet').forEach(d => { d.open = false; }); }
     if (this.fine && !this.reduce && window.innerWidth > 560) {
@@ -2847,6 +3023,8 @@ class Component extends DCLogic {
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onResize);
     window.removeEventListener('keydown', this.onKey);
+    window.removeEventListener('online', this.onNetz);
+    window.removeEventListener('offline', this.onNetz);
     if (this.onMove) window.removeEventListener('mousemove', this.onMove);
   }
 
@@ -2856,6 +3034,70 @@ class Component extends DCLogic {
     import('/assets/js/chat.js')
       .then((m) => { this.chatModul = m; m.oeffnen({ endpoint: this.CHAT_ENDPOINT, ausloeser: ausloeser }); })
       .catch(() => this.go('/projekt-check/'));
+  };
+
+  // ---------- Projekt-Check direkt senden ----------
+  direkt() { return !!(this.ANFRAGE_ENDPOINT && this.TURNSTILE_SITEKEY); }
+
+  felderVoll() {
+    const f = {};
+    for (const zeile of this.briefing()) { const i = zeile.indexOf(': '); f[zeile.slice(0, i)] = zeile.slice(i + 2); }
+    return f;
+  }
+
+  felderKurz() {
+    const a = this.state.ans, t = this.state.txt, r = this.rec();
+    const f = { BRANCHE: a[0], SEITENZAHL: a[5], FUNKTIONEN: Array.isArray(a[6]) ? a[6].join(', ') : '', PAKET: r.name, PREIS: r.price,
+      KONTAKT_NAME: (t.name || '').trim(), KONTAKT_MAIL: (t.email || '').trim(), FIRMA: (t.firma || '').trim() };
+    Object.keys(f).forEach((k) => { if (!f[k]) delete f[k]; });
+    return f;
+  }
+
+  kurzText() {
+    const a = this.state.ans, t = this.state.txt, r = this.rec();
+    const fn = Array.isArray(a[6]) ? a[6].join(', ') : '';
+    return ['Guten Tag Nico', '', 'Ich habe die Kurzschätzung auf odera.ch gemacht.',
+      'Branche: ' + (a[0] || '-'), 'Umfang: ' + (a[5] || '-'), 'Funktionen: ' + (fn || '-'),
+      'Schätzung: ' + r.name + ', ' + r.price, '', 'Bitte melden Sie sich für die Details.', '', 'Freundliche Grüsse', '',
+      [t.name, t.firma].filter(Boolean).join(', ')].join('\n').trim();
+  }
+
+  fensterText() { return this.state.quick ? this.kurzText() : this.mailBody(); }
+
+  fensterBetreff() {
+    const t = this.state.txt, r = this.rec();
+    const wer = (t.firma || t.name || 'Ihre Anfrage').trim();
+    return 'Projekt-Check: ' + wer + ' (' + (this.state.quick ? 'Kurzversion' : r.name) + ')';
+  }
+
+  // Mail-Fenster: Stil und Sende-Logik (assets/css/anfrage.css, assets/js/anfrage.js) erst im Projekt-Check laden,
+  // damit die übrigen Seiten gleich schnell bleiben. Turnstile lädt erst auf der letzten Seite.
+  anfrageVorladen() {
+    if (!this.direkt()) return null;
+    if (!document.getElementById('anfrage-css')) {
+      const l = document.createElement('link');
+      l.id = 'anfrage-css'; l.rel = 'stylesheet'; l.href = '/assets/css/anfrage.css';
+      document.head.appendChild(l);
+    }
+    if (!this.anfrageM) this.anfrageM = import('/assets/js/anfrage.js').catch((e) => { this.anfrageM = null; throw e; });
+    return this.anfrageM;
+  }
+
+  tsSicher() {
+    const m = this.anfrageVorladen();
+    if (m) m.then((x) => x.tsSicher(this)).catch(() => {});
+  }
+
+  anfrageSenden = async () => {
+    const s = this.state;
+    if (this.sendetGerade || s.senden === 'laeuft' || s.gesendet || !this.direkt()) return;
+    this.sendetGerade = true;
+    try {
+      const m = await this.anfrageVorladen();
+      await m.senden(this);
+    } catch (e) {
+      if (!this.state.gesendet) this.setState({ senden: 'fehler', sendFehler: 'netz' });
+    } finally { this.sendetGerade = false; }
   };
 
   measure = () => {
@@ -3106,9 +3348,11 @@ class Component extends DCLogic {
     this.setState({ result: true, review: false, editing: false, editNote: '', warn: false, cmpGrow: false });
     setTimeout(() => this.setState({ cmpGrow: true }), 60);
     this.focusHead();
+    this.tsSicher();
   }
 
   showReview() {
+    this.idem = null; // Antworten können sich ändern: neuer Sendevorgang
     this.setState({ result: true, review: true, editing: false, editNote: '', warn: false });
     this.focusHead();
   }
@@ -3136,7 +3380,7 @@ class Component extends DCLogic {
     if (!this.complete(i)) { this.setState({ warn: true }); return; }
     if (this.state.editing) { this.leaveEdit('result'); return; }
     if (this.state.quick) {
-      if (step >= 2) { this.setState({ result: true, warn: false, cmpGrow: false }); this.focusHead(); return; }
+      if (step >= 2) { this.setState({ result: true, warn: false, cmpGrow: false }); this.focusHead(); this.tsSicher(); return; }
       this.setState({ step: step + 1, dir: 'fwd', warn: false, tick: this.state.tick + 1 });
       this.focusHead();
       return;
@@ -3149,6 +3393,7 @@ class Component extends DCLogic {
     }
     if (i >= 26) {
       this.setState({ result: true, warn: false, cmpGrow: false, reached: 26 });
+      this.tsSicher();
       setTimeout(() => this.setState({ cmpGrow: true }), 60);
       this.focusHead();
       return;
@@ -3376,6 +3621,7 @@ class Component extends DCLogic {
 
     const fields = [];
     if (q.fields) q.fields.forEach(f => fields.push({ k: f[0], label: f[1], type: f[0] === 'email' ? 'email' : f[0] === 'tel' ? 'tel' : 'text', value: s.txt[f[0]] || '' }));
+    const eMax = this.ANFRAGE.eingabeMax;
     if (ai === 0 && picked === 'Etwas anderes') fields.push({ k: 'branche', label: 'Was macht Ihr Betrieb?', type: 'text', value: s.txt.branche || '' });
     if (ai === 2 && (picked === 'Ja, aber veraltet' || picked === 'Ja, soll nur aufgefrischt werden')) fields.push({ k: 'url', label: 'Adresse Ihrer Website', type: 'text', value: s.txt.url || '' });
     if (ai === 9 && picked === 'Ich habe bereits eine') fields.push({ k: 'domain', label: 'Welche Adresse?', type: 'text', value: s.txt.domain || '' });
@@ -3595,10 +3841,10 @@ class Component extends DCLogic {
       flapT: s.mailHover ? 'rotateX(180deg)' : 'none',
       mailHintOp: s.mailHover ? 1 : 0,
 
-      checkBg: (s.result && !s.review) ?'linear-gradient(140deg,#2D4CF0 0%,#1E34B8 55%,#11131A 100%)' : s.mid ? 'linear-gradient(120deg,#1E34B8 0%,#2D4CF0 45%,#0E4A2B 100%)' : 'linear-gradient(160deg,#EDEFFF 0%,#F6F5F1 55%,#FBF1E8 100%)',
+      checkBg: (s.result && !s.review && !s.gesendet) ?'linear-gradient(140deg,#2D4CF0 0%,#1E34B8 55%,#11131A 100%)' : s.mid ? 'linear-gradient(120deg,#1E34B8 0%,#2D4CF0 45%,#0E4A2B 100%)' : 'linear-gradient(160deg,#EDEFFF 0%,#F6F5F1 55%,#FBF1E8 100%)',
       checkFg: ((s.result && !s.review) || s.mid) ? '#FFFFFF' : '#11131A',
       checkCut: ((s.result && !s.review) || s.mid) ? '#2439B9' : '#EFF1FE',
-      inQuiz: isCheck && !s.result && !s.mid,
+      inQuiz: isCheck && !s.result && !s.mid && !s.gesendet,
       inMid: isCheck && s.mid,
       inResult: isCheck && s.result && !s.quick && !s.review,
       inQuick: isCheck && s.result && s.quick,
@@ -3630,7 +3876,7 @@ class Component extends DCLogic {
       onFieldKey: (e) => { if (e.key === 'Enter' && e.currentTarget.tagName === 'INPUT') { e.preventDefault(); this.next(); } },
       ringOffset: 483.8 - 483.8 * (s.ring / 100),
       onMidNext: this.midNext,
-      onMidSend: () => { this.setState({ mid: false, result: true, warn: false, cmpGrow: false, reached: Math.max(s.reached, 12) }); setTimeout(() => this.setState({ cmpGrow: true }), 60); },
+      onMidSend: () => { this.setState({ mid: false, result: true, warn: false, cmpGrow: false, reached: Math.max(s.reached, 12) }); this.tsSicher(); setTimeout(() => this.setState({ cmpGrow: true }), 60); },
       inReview: isCheck && s.result && s.review,
       reviewRows: s.review ? this.reviewRows() : [],
       onReviewEdit: (e) => this.editStep(Number(e.currentTarget.dataset.s)),
@@ -3658,7 +3904,7 @@ class Component extends DCLogic {
       timingVal: s.timing,
       timingLabel: this.TIMING[s.timing],
       onTiming: (e) => this.setState({ timing: Number(e.target.value) }),
-      fields: fields,
+      fields: fields.map((f) => ({ ...f, max: eMax[f.k] || 200 })),
       fieldsDisplay: (fields.length || q.area) ? 'flex' : 'none',
       fieldsTop: opts.length ? '24px' : '0px',
       hasArea: !!q.area,
@@ -3666,11 +3912,13 @@ class Component extends DCLogic {
       areaKey: q.area ? q.area[0] : '',
       areaPh: q.area ? q.area[2] : '',
       areaValue: q.area ? (s.txt[q.area[0]] || '') : '',
+      areaMax: q.area ? (eMax[q.area[0]] || 2000) : 2000,
       onField: (e) => {
         const kk = e.currentTarget.dataset.k;
         const txt = Object.assign({}, s.txt);
         txt[kk] = e.currentTarget.value;
-        this.setState({ txt: txt, warn: false });
+        const hinweisWeg = s.senden === 'fehler' && s.sendFehler === 'kontakt';
+        this.setState({ txt: txt, warn: false, ...(hinweisWeg ? { senden: 'bereit', sendFehler: '' } : {}) });
       },
       warnDisplay: s.warn ? 'block' : 'none',
       warnText: q.multi ? 'Bitte wählen Sie mindestens eine Antwort' : 'Bitte wählen Sie eine Antwort',
@@ -3722,7 +3970,7 @@ class Component extends DCLogic {
       toggleMail: () => this.setState(st => ({ mailOpen: !st.mailOpen })),
       mailHref: s.consent ? ('mailto:' + this.EMAIL + '?subject=' + encodeURIComponent(this.mailSubject()) + '&body=' + encodeURIComponent(this.mailBody())) : '#',
       consent: s.consent,
-      onConsent: () => this.setState(st => ({ consent: !st.consent })),
+      onConsent: () => this.setState(st => ({ consent: !st.consent, ...(st.sendFehler === 'einwilligung' ? { senden: 'bereit', sendFehler: '' } : {}) })),
       consentWarnDisplay: s.consent ? 'none' : 'block',
       sendDisabledAttr: s.consent ? 'false' : 'true',
       sendFg: s.consent ? '#11131A' : '#5B6270',
@@ -3730,7 +3978,7 @@ class Component extends DCLogic {
       sendCursor: s.consent ? 'pointer' : 'not-allowed',
       onSendClick: (e) => { if (!s.consent) e.preventDefault(); },
       onCopy: () => {
-        const txt = this.mailBody();
+        const txt = this.direkt() ? this.fensterText() : (s.quick ? this.quickBody() : this.mailBody());
         const done = () => { this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 2000); };
         if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done); else done();
       },
@@ -3738,7 +3986,58 @@ class Component extends DCLogic {
       onReview: () => this.showReview(),
       quickToLong: () => this.setState({ quick: false, result: false, mid: false, step: 1, warn: false }),
       quickMailHref: s.consent ? ('mailto:' + this.EMAIL + '?subject=' + encodeURIComponent('Kurzanfrage: ' + (s.ans[0] || 'Anfrage')) + '&body=' + encodeURIComponent(this.quickBody())) : '#',
-      quickSendBg: s.consent ? '#FFFFFF' : '#E2DFD8'
+      quickSendBg: s.consent ? '#FFFFFF' : '#E2DFD8',
+      // Projekt-Check direkt senden
+      dsMail: !this.direkt(),
+      dsDirekt: this.direkt(),
+      ds3Zusatz: this.direkt() ? ' Auf der letzten Seite des Projekt-Checks wird eine Sicherheitsprüfung von Cloudflare geladen. Was sie bearbeitet, steht in Abschnitt 5.' : '',
+      kontaktCheckTitel: this.direkt() ? 'Projekt-Check machen und direkt senden' : 'Projekt-Check machen und Mail schicken',
+      kontaktCheckText: this.direkt() ? '27 Fragen, 15 Minuten. Am Schluss senden Sie mit einem Klick.' : '27 Fragen, 15 Minuten. Ich schreibe die Mail für Sie.',
+      mitteSendenLabel: this.direkt() ? 'Reicht mir, Anfrage jetzt senden' : 'Reicht mir, Mail jetzt schicken',
+      hinweisErsterSchritt: this.direkt()
+        ? 'Ihre Antworten bleiben in Ihrem Browser, bis Sie am Schluss auf Senden klicken. Dann werden sie verschlüsselt an mich übermittelt und nicht in einer Datenbank gespeichert.'
+        : 'Ihre Antworten werden nicht gespeichert, sondern am Schluss in eine E-Mail eingesetzt, die Sie selbst absenden.',
+      mailtoDisplay: this.direkt() ? 'none' : 'block',
+      mailtoInline: this.direkt() ? 'none' : 'inline-flex',
+      ergebnisUnten: this.direkt() ? '40px' : '120px',
+      fensterAktiv: isCheck && this.direkt() && s.result && !s.review && !s.gesendet,
+      mfAnim: s.fensterWeg ? (this.reduce ? 'mfWeg 200ms linear both' : 'mfZu 450ms cubic-bezier(0.4,0,1,1) 180ms both') : (this.reduce ? 'none' : 'fade 240ms ease-out'),
+      fliegerAnim: s.fensterWeg && !this.reduce ? 'mfFlug 600ms cubic-bezier(0.4,0,0.2,1) both' : 'none',
+      onFensterTaste: () => {},
+      vonTextDisplay: s.quick ? 'none' : 'inline',
+      vonEingabeDisplay: s.quick ? 'flex' : 'none',
+      vonText: [s.txt.name, s.txt.email ? '<' + s.txt.email + '>' : ''].filter(Boolean).join(' '),
+      vonName: s.txt.name || '', vonMail: s.txt.email || '', vonFirma: s.txt.firma || '',
+      fensterBetreff: this.fensterBetreff(),
+      fensterText: isCheck && this.direkt() && s.result ? this.fensterText() : '',
+      hpWert: s.hp, onHp: (e) => this.setState({ hp: e.currentTarget.value }),
+      kopieWunsch: s.kopieWunsch, onKopie: () => this.setState((st) => ({ kopieWunsch: !st.kopieWunsch })),
+      offlineDisplay: s.offline ? 'block' : 'none',
+      sendenGesperrt: s.senden === 'laeuft' || s.offline || !!s.fensterWeg,
+      sendenLabel: s.senden === 'laeuft' ? 'Wird gesendet …' : 'Anfrage senden',
+      sendStatus: s.senden === 'laeuft' ? 'Ihre Anfrage wird gesendet.' : '',
+      tasteSenden: (typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)) ? '⌘ Enter zum Senden' : 'Ctrl+Enter zum Senden',
+      fehlerDisplay: s.senden === 'fehler' ? 'block' : 'none',
+      fehlerTitel: ({ einwilligung: 'Bitte bestätigen Sie zuerst die Kenntnisnahme.', kontakt: 'Name und E-Mail-Adresse fehlen.', limit: 'Im Moment kommen sehr viele Anfragen an.' })[s.sendFehler] || 'Das Senden hat nicht geklappt.',
+      fehlerText: ({
+        einwilligung: 'Setzen Sie das Häkchen bei AGB und Datenschutzerklärung, dann können Sie senden.',
+        kontakt: 'Tragen Sie bei «Von» Ihren Namen und eine gültige E-Mail-Adresse ein, damit ich Ihnen antworten kann.',
+        limit: 'Bitte versuchen Sie es in einer Stunde wieder. Oder senden Sie Ihre Anfrage gleich mit Ihrem E-Mail-Programm.',
+        pruefung: 'Die Sicherheitsprüfung hat nicht geklappt. Versuchen Sie es nochmals, oder senden Sie mit Ihrem E-Mail-Programm.',
+        netz: 'Die Verbindung ist unterbrochen. Versuchen Sie es nochmals, oder senden Sie mit Ihrem E-Mail-Programm.',
+      })[s.sendFehler] || 'Ihre Antworten sind noch da. Versuchen Sie es nochmals, oder senden Sie mit Ihrem E-Mail-Programm.',
+      nochmalsDisplay: (s.sendFehler === 'limit') ? 'none' : 'inline-flex',
+      kopierenLabel: s.copied ? 'Kopiert' : 'Text kopieren',
+      mailtoFallback: 'mailto:' + this.EMAIL + '?subject=' + encodeURIComponent(s.quick ? 'Kurzanfrage: ' + (s.ans[0] || 'Anfrage') : this.mailSubject()) + '&body=' + encodeURIComponent(isCheck && s.result ? (s.quick ? (this.direkt() ? this.kurzText() : this.quickBody()) : this.mailBody()) : ''),
+      onAnfrageSenden: this.anfrageSenden,
+      onZurueckAendern: () => { this.idem = null; if (s.quick) this.setState({ result: false, step: 2, senden: 'bereit', sendFehler: '' }); else { this.setState({ senden: 'bereit', sendFehler: '' }); this.showReview(); } },
+      inDanke: isCheck && !!s.gesendet,
+      abbrechenDisplay: s.gesendet ? 'none' : 'inline-flex',
+      dankeVorname: s.gesendet ? s.gesendet.vorname : '',
+      dankeReferenz: s.gesendet ? s.gesendet.referenz : '',
+      dankeMail: s.gesendet ? s.gesendet.mail : '',
+      dankeKopieDisplay: s.gesendet && s.gesendet.kopie ? 'block' : 'none',
+      naechsteSchritte: this.ANFRAGE.naechsteSchritte.map((x, i) => ({ n: String(i + 1), titel: x[0], satz: x[1] }))
     };
   }
 

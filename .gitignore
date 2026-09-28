@@ -27,3 +27,4 @@ _lokal/
 # Chat-Proxy: lokale Geheimnisse und Cloudflare-Zwischenstände
 .dev.vars
 .wrangler/
+

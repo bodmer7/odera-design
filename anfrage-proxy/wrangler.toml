@@ -1,0 +1,27 @@
+# Cloudflare Worker für den Projekt-Check auf odera.ch: Anfrage prüfen und per E-Mail zustellen (Resend).
+# Läuft im Gratis-Plan, ohne Zahlungsmittel.
+name = "odera-anfrage"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# Keine dauerhaften Protokolle. Live mitlesen: npx wrangler tail
+[observability]
+enabled = false
+
+[vars]
+ERLAUBTE_URSPRUENGE = "https://odera.ch,https://www.odera.ch"
+TURNSTILE_HOSTS = "odera.ch,www.odera.ch"
+# Anfragen pro Tag über alle Besucher. Resend Gratis: 100 E-Mails pro Tag, eine Anfrage braucht bis zu zwei.
+TAGESLIMIT_GESAMT = "40"
+
+[[durable_objects.bindings]]
+name = "LIMITER"
+class_name = "Limiter"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Limiter"]
+
+# Secrets (nie hier eintragen, sondern mit «npx wrangler secret put NAME»):
+#   RESEND_API_KEY     Resend-Schlüssel nur mit Senderecht für die Domain odera.ch
+#   TURNSTILE_SECRET   Secret Key des Turnstile-Widgets für odera.ch

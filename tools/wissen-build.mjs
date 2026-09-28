@@ -112,11 +112,19 @@ function projektCheck() {
   const fragen = (quelle.match(/ {2}Q = \[([\s\S]*?)\n {2}\];/) || [])[1];
   if (!hinweis || !fragen) throw new Error('Angaben zum Projekt-Check nicht gefunden.');
   const anzahl = (fragen.match(/\{ key: '/g) || []).length;
+  // Schalter «direkt senden»: beide Konstanten gesetzt
+  const konst = (n) => (quelle.match(new RegExp(' {2}' + n + " = '([^']*)';")) || [])[1] || '';
+  const direkt = !!(konst('ANFRAGE_ENDPOINT') && konst('TURNSTILE_SITEKEY'));
+  const varianten = quelle.match(/hinweisErsterSchritt: this\.direkt\(\)\s*\? '([^']+)'\s*: '([^']+)'/);
+  if (!varianten) throw new Error('Varianten von hinweisErsterSchritt nicht gefunden.');
+  const hinweisText = hinweis[1].replace('{{ hinweisErsterSchritt }}', direkt ? varianten[1] : varianten[2]);
   return [
     `Adresse: ${SITE}/projekt-check/`,
     `Der Projekt-Check hat ${anzahl} Fragen. Nach 13 Fragen kann man die Anfrage bereits abschicken. Eine Kurzschätzung mit drei Fragen gibt es unter ${SITE}/projekt-check/?kurz=1.`,
-    'Am Schluss zeigt der Projekt-Check eine Paketempfehlung mit Richtpreis und öffnet eine vorbereitete E-Mail, die man selbst absendet.',
-    hinweis[1].replace(/\s*Mehr dazu in der\s*$/, ''),
+    direkt
+      ? 'Am Schluss zeigt der Projekt-Check eine Paketempfehlung mit Richtpreis und die fertige Anfrage. Mit einem Klick auf «Anfrage senden» geht sie direkt an Nico. Auf Wunsch kommt eine Kopie an die eigene E-Mail-Adresse. Danach erscheint eine Referenznummer.'
+      : 'Am Schluss zeigt der Projekt-Check eine Paketempfehlung mit Richtpreis und öffnet eine vorbereitete E-Mail, die man selbst absendet.',
+    hinweisText.replace(/\s*Mehr dazu in der\s*$/, ''),
   ].join('\n');
 }
 

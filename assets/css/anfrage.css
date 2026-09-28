@@ -1,0 +1,61 @@
+/* Projekt-Check direkt senden: Mail-Fenster und Dankesbildschirm. Wird erst im Projekt-Check geladen (index.html, anfrageVorladen). */
+.mf{max-width:880px;margin:0 auto;background:#FFFFFF;color:#11131A;border:1px solid #E2DFD8;border-radius:16px;box-shadow:0 30px 70px rgba(17,19,26,0.28);overflow:hidden;transform-origin:50% 0}
+.mf-leiste{display:flex;align-items:center;gap:12px;min-height:52px;padding:0 10px 0 16px;background:#F6F5F1;border-bottom:1px solid #E2DFD8}
+.mf-punkte{display:flex;gap:7px;flex:none}.mf-punkte i{display:block;width:11px;height:11px;border-radius:999px;background:#E2DFD8}.mf-punkte i:first-child{background:#FF5A3C}
+.mf-titel{flex:1;margin:0;text-align:center;font-size:13px;color:#5B6270;font-weight:500}
+.mf-flieger{flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:none;border-radius:999px;background:#2D4CF0;color:#FFFFFF;cursor:pointer;overflow:visible}
+.mf-flieger:disabled{background:#E2DFD8;color:#5B6270;cursor:not-allowed}
+.mf-kopf{padding:4px 20px}
+.mf-zeile{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;padding:10px 0;border-bottom:1px solid #E2DFD8}
+.mf-l{flex:none;width:64px;font-size:13px;color:#5B6270}
+.mf-w{flex:1;min-width:0;font-size:13px;overflow-wrap:anywhere}
+.mf-von{flex:1;display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.mf-eingabe{flex:1 1 180px;min-width:0}
+.mf-eingabe input{width:100%;min-height:44px;padding:8px 12px;border:1px solid #A8B0BD;border-radius:10px;font:inherit;font-size:16px;color:#11131A;background:#FFFFFF}
+.mf-text{margin:0;padding:20px;font-size:13px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;max-height:360px;overflow:auto;background:#FFFFFF;color:#11131A;border-bottom:1px solid #E2DFD8}
+.mf-fuss{padding:20px;display:flex;flex-direction:column;gap:14px;background:#FFFFFF}
+.mf-check{display:flex;align-items:flex-start;gap:12px;font-size:15px;line-height:1.5;cursor:pointer}
+.mf-check input{flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:#2D4CF0}
+.mf-check a{color:#1E34B8}
+.mf-ts:empty{display:none}
+.mf-offline{margin:0;padding:12px 14px;border-radius:12px;background:#F6F5F1;border:1px solid #A8B0BD;font-size:14px;line-height:1.5}
+.mf-fehler{padding:16px;border-radius:12px;background:#FFF4F1;border:1px solid #FF5A3C}
+.mf-fehler-t{margin:0 0 4px;font-weight:600;font-size:16px}.mf-fehler-s{margin:0 0 12px;font-size:14px;line-height:1.5}
+.mf-fehler-knopf{display:flex;flex-wrap:wrap;gap:8px}
+.mf-zweit{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid #11131A;border-radius:999px;background:#FFFFFF;color:#11131A;font:inherit;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer}
+.mf-senden{display:flex;flex-direction:column;gap:8px;position:sticky;bottom:0;background:#FFFFFF;padding:8px 0 4px;margin:0 -2px}
+.mf-hinweis{margin:0;font-size:13px;line-height:1.5;color:#5B6270}.mf-hinweis a{color:#1E34B8}
+.mf-status{margin:0;min-height:18px;font-size:13px;color:#1E34B8}
+.mf-haupt{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:60px;border:none;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font:inherit;font-size:18px;font-weight:600;cursor:pointer}
+.mf-haupt:disabled{background:#E2DFD8;color:#5B6270;cursor:not-allowed}
+.mf-haupt:not(:disabled):hover,.mf-flieger:not(:disabled):hover{background:#1E34B8}
+.mf-taste{margin:0;text-align:center;font-size:12px;color:#5B6270}
+.mf-links{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin:0}
+.mf-link{min-height:44px;padding:0;border:none;background:none;color:#1E34B8;font:inherit;font-size:15px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+@keyframes mfFlug{0%{transform:none;opacity:1}55%{transform:translate(90px,-70px) rotate(-14deg);opacity:1}100%{transform:translate(260px,-220px) rotate(-22deg) scale(0.6);opacity:0}}
+@keyframes mfZu{0%{transform:none;opacity:1}100%{transform:scaleY(0.04) translateY(-30%);opacity:0}}
+@keyframes mfWeg{from{opacity:1}to{opacity:0}}
+.dk{max-width:680px;margin:0 auto;padding-top:48px;text-align:center}
+.dk-logo{position:relative;width:120px;height:120px;margin:0 auto 32px;display:flex;align-items:center;justify-content:center}
+.dk-ring{position:absolute;inset:0;transform:rotate(-90deg)}
+.dk-ring circle{stroke-dasharray:100;stroke-dashoffset:0;animation:dkRing 900ms cubic-bezier(0.2,0,0,1) both}
+.dk-zeichen{animation:dkPop 520ms cubic-bezier(0.2,0,0,1) 200ms both}
+@keyframes dkRing{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+@keyframes dkPop{0%{transform:scale(0.6);opacity:0}65%{transform:scale(1.06);opacity:1}100%{transform:none;opacity:1}}
+.dk-titel{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(30px,4vw,48px);line-height:1.08;letter-spacing:-0.03em;margin:0 0 16px;text-wrap:balance;animation:fade 400ms ease-out 300ms both}
+.dk-ref{margin:0 0 8px;font-size:14px;color:#5B6270}.dk-ref span{display:inline-block;margin-left:6px;padding:4px 12px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:15px}
+.dk-kopie{margin:0;font-size:15px;color:#5B6270}
+.dk-zeit{list-style:none;margin:40px auto 40px;padding:0;max-width:520px;text-align:left;border-left:2px solid #E2DFD8}
+.dk-zeit li{position:relative;display:flex;gap:16px;padding:0 0 22px 24px}
+.dk-n{position:absolute;left:-15px;top:0;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font-size:12px}
+.dk-zt{margin:0 0 2px;font-weight:600;font-size:16px}.dk-zs{margin:0;font-size:15px;line-height:1.5;color:#5B6270}
+.dk-knopf{justify-content:center;gap:16px}
+.dk-knopf a{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 28px;border-radius:999px;font-size:17px;font-weight:600;text-decoration:none}
+.dk-knopf .g3{color:#FFFFFF}.dk-zweit{border:1px solid #11131A;color:#11131A;background:#FFFFFF}
+@media(max-width:560px){
+ .mf{border-radius:12px;margin:0 -8px}
+ .mf-kopf,.mf-fuss{padding-left:14px;padding-right:14px}
+ .mf-text{max-height:34vh;padding:14px}
+ .mf-l{width:52px}
+ .dk{padding-top:24px}
+}

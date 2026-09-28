@@ -200,6 +200,20 @@ Fragen zum Angebot beantwortet. Der Knopf ist reines HTML/CSS. Das eigentliche C
 - Solange `CHAT_ENDPOINT` in `index.html` leer ist, ist der Assistent unsichtbar.
 - Taste f öffnet den Assistenten, Esc schliesst ihn. Der Verlauf lebt nur im offenen Tab.
 
+## Projekt-Check direkt senden
+
+Am Schluss des Projekt-Checks erscheint ein Mail-Fenster mit der fertigen Anfrage. «Anfrage senden»
+(oder Cmd/Ctrl+Enter) schickt sie über einen eigenen Cloudflare Worker (`anfrage-proxy/`) und Resend an
+kontakt@odera.ch. Danach folgt ein Dankesbildschirm mit Referenz (zum Beispiel ODR-4K7P).
+
+- Schalter: `ANFRAGE_ENDPOINT` und `TURNSTILE_SITEKEY` in `index.html`. Ist einer leer, öffnet sich wie
+  bisher das eigene E-Mail-Programm. Rechtstexte und Hinweise passen sich an.
+- Die Felder des Formulars stehen in `ANFRAGE` (`index.html`). Der Worker bekommt sie über
+  `anfrage-proxy/src/schema.js`, das `tools/seo-build.mjs` erzeugt.
+- Fällt der Versand aus, bietet das Fenster «Nochmals versuchen», das eigene E-Mail-Programm und
+  «Text kopieren» an.
+- Einrichtung und Grenzen: `anfrage-proxy/README.md`.
+
 ## Stellen, die du pflegen musst
 
 Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse
@@ -213,6 +227,7 @@ Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse
 | `HOSTING_AUSLAND_CHF`, `HOSTING_SCHWEIZ_CHF`, `STUNDENSATZ_CHF` | 240, 480 und 120 | Einzige Quelle für die Hostingpreise und den Stundensatz. Sie erscheinen auf der Angebotsseite, der Ablaufseite, in den AGB (Paragraf 7), im Ergebnis des Projekt-Checks und im Mailtext. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `LOGO_ALLEIN_CHF`, `LOGO_MIT_WEBSITE_CHF` | 490 und 390 | Einzige Quelle für den Logo-Zusatz. Erscheint auf der Angebotsseite (Karte und Druckansicht), im Ergebnis des Projekt-Checks und im Mailtext (`LOGO_PREIS`). Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | Fragenzahl des Projekt-Checks | 13 in Teil 1, 27 insgesamt | Die Zahl 27 steht als Text auf der Startseite, der Ablaufseite, der Seite „Über mich“, im Seitentitel, in der klebenden Leiste und im Kurz-Ergebnis. Die Zähler im Formular rechnen selbst. Ändert sich die Zahl der Fragen, alle Stellen mit `grep -n "Fragen" index.html` prüfen. Die Fragen werden im Code über ihre Reihenfolge angesprochen (Feld `Q`), eine Frage in der Mitte verschiebt die folgenden. |
+| `ANFRAGE_ENDPOINT`, `TURNSTILE_SITEKEY` | leer | Schalter für den Direktversand im Projekt-Check (`anfrage-proxy/`). Erst setzen, wenn die Domain in Resend verifiziert ist. Danach `STAND_RECHTSTEXTE` anpassen und `node tools/seo-build.mjs` ausführen. |
 | `CHAT_ENDPOINT` | leer | Adresse des Chat-Proxys (`chat-proxy/`). Leer heisst: Assistent ausgeblendet. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `SITE` | `https://odera.ch` | Adresse der Website in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `EMAIL` und feste Texte | `kontakt@odera.ch`, `odera.ch` | Setzen die Domain odera.ch voraus, auch die Mailtexte aus dem Projekt-Check. Das Postfach `kontakt@odera.ch` muss existieren, bevor die Seite online geht. |

@@ -204,3 +204,6 @@ console.log('Nicht in der Suche (noindex):', Object.keys(PAGES).filter((p) => PA
 
 // ---------- 5. Wissensbasis des Chat-Assistenten aus denselben Seiten ----------
 await import('./wissen-build.mjs');
+
+// ---------- 6. Felddefinition des Projekt-Checks für den Worker anfrage-proxy/ ----------
+await import('./anfrage-schema.mjs');
