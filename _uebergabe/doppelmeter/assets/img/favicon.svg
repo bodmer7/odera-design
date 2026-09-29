@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!-- Favicon Doppelmeter: Bildzeichen ohne Skala, auf Waldgrün -->
+  <rect width="48" height="48" rx="9" fill="#2F4A3C"/>
+  <path transform="translate(7.2 7.2) scale(0.7)" fill="none" stroke="#F6F5F1" stroke-width="8.5" stroke-linecap="round" d="M6.25 5V24M6.25 24V43M6.25 43H25.25M25.25 43L41.7 33.5M41.7 33.5V14.5M41.7 14.5L25.25 5M25.25 5H6.25"/>
+</svg>

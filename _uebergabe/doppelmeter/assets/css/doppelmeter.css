@@ -1,0 +1,2879 @@
+/* ==========================================================================
+   Schreinerei Doppelmeter, Beispielseite von ODERA Design
+   Eine Datei für alle fünf Seiten. Mobile first.
+
+   Inhalt
+   01  Tokens (Farben, Schriften, Skalen)
+   02  Grundlagen
+   03  Hilfsklassen
+   04  Beispiel-Leiste, Kopfzeile, Navigation
+   05  Typografie-Bausteine (Vorzeile, Abschnittskopf, Masslinie, Massstab)
+   06  Knöpfe und Links
+   07  Bilder und Platzhalter
+   08  Abschnitte der Startseite
+   09  Bausteine der Unterseiten
+   10  Kontakt, Formular, Rechtstexte
+   11  Anruf-Abschluss, Fusszeile, Anruf-Leiste
+   12  Bewegung reduzieren, Druck
+   ========================================================================== */
+
+
+/* 01  Tokens
+   ========================================================================== */
+
+:root {
+  /* Farben. Kontrast jeweils gegen --farbe-grund (#F6F5F1), WCAG 2.2 */
+  --farbe-tinte: #14130F;         /* Fliesstext, Titel          17.0 : 1 */
+  --farbe-text-2: #4A463D;        /* Nebentext                   8.6 : 1 */
+  --farbe-grund: #F6F5F1;         /* Seitengrund (Creme)                 */
+  --farbe-grund-warm: #EFEAE0;    /* Wechselnde Abschnitte, Fusszeile    */
+  --farbe-weiss: #FFFFFF;         /* Formularfelder                      */
+  --farbe-linie: #DCD5C6;         /* Haarlinien, nur Schmuck             */
+  --farbe-linie-stark: #8C8474;   /* Feldränder                  3.4 : 1 */
+  --farbe-wald: #2F4A3C;          /* Knöpfe, Links               8.9 : 1 */
+  --farbe-wald-dunkel: #1F3329;   /* Hover, dunkle Abschnitte            */
+  --farbe-kupfer: #C2762F;        /* Nur Schmuck: Striche, Nieten 3.3 : 1 */
+  --farbe-kupfer-text: #95531A;   /* Kupfer für Text und Fokus   5.5 : 1 */
+  --farbe-kupfer-hell: #E0A263;   /* Kupfer auf Waldgrün dunkel  6.1 : 1 */
+  --farbe-auf-dunkel: #F6F5F1;    /* Text auf Waldgrün dunkel   12.3 : 1 */
+  --farbe-auf-dunkel-2: #C9C1B0;  /* Nebentext auf Waldgrün dkl. 7.5 : 1 */
+  --farbe-fehler: #A23B2A;        /* Fehlermeldungen             6.0 : 1 */
+  --farbe-fokus: var(--farbe-kupfer-text);
+
+  /* Holz- und Materialtöne: Bild-Platzhalter und Musterkarten */
+  --ton-eiche: linear-gradient(155deg, #DCC29A 0%, #BD925F 52%, #93704A 100%);
+  --ton-nuss: linear-gradient(155deg, #8C6C57 0%, #5F4232 55%, #3F2B21 100%);
+  --ton-esche: linear-gradient(155deg, #F2E9D8 0%, #DFCFB3 55%, #C7B28F 100%);
+  --ton-fichte: linear-gradient(155deg, #EDD9B3 0%, #D4B587 55%, #B39262 100%);
+  --ton-wald: linear-gradient(155deg, #4A6858 0%, #2F4A3C 55%, #1F3329 100%);
+  --ton-rauch: linear-gradient(155deg, #7D6855 0%, #4E3E31 55%, #2F251E 100%);
+  --ton-stein: linear-gradient(155deg, #DAD6CE 0%, #B9B4AA 55%, #97928A 100%);
+  --ton-kreide: linear-gradient(155deg, #F4F1EA 0%, #E6E0D3 55%, #D2CABA 100%);
+  --ton-chrom: linear-gradient(155deg, #EEF0F0 0%, #C9CDCE 50%, #A4AAAC 100%);
+  --ton-linol: linear-gradient(155deg, #6E8471 0%, #56695A 55%, #435347 100%);
+  --ton-laerche: linear-gradient(155deg, #E3B98E 0%, #C98F5E 55%, #A2683D 100%);
+  --ton-ahorn: linear-gradient(155deg, #F7F1E6 0%, #EDE2CE 55%, #DDCDB0 100%);
+
+  /* Schriften. Vorschau über Google Fonts, vor dem Einbau lokal hosten (README) */
+  --schrift-titel: "Fraunces", Georgia, "Times New Roman", serif;
+  --schrift-text: "Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --schrift-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Schrift-Skala, 6 Stufen */
+  --fs-1: 0.875rem;                                    /* 14 px  Labels, Masse, Legenden */
+  --fs-2: 1rem;                                        /* 16 px  Navigation, Knöpfe      */
+  --fs-3: 1.125rem;                                    /* 18 px  Fliesstext              */
+  --fs-4: clamp(1.25rem, 1.08rem + 0.6vw, 1.5rem);     /* 20 bis 24 px  H3, Einleitung   */
+  --fs-5: clamp(1.875rem, 1.35rem + 2.2vw, 3.125rem);  /* 30 bis 50 px  H2               */
+  --fs-6: clamp(2.5rem, 1.55rem + 4.3vw, 5.25rem);     /* 40 bis 84 px  H1               */
+
+  /* Abstands-Skala, Basis 4 px */
+  --s-1: 0.25rem;   /*   4 */
+  --s-2: 0.5rem;    /*   8 */
+  --s-3: 0.75rem;   /*  12 */
+  --s-4: 1rem;      /*  16 */
+  --s-5: 1.5rem;    /*  24 */
+  --s-6: 2rem;      /*  32 */
+  --s-7: 3rem;      /*  48 */
+  --s-8: 4rem;      /*  64 */
+  --s-9: 6rem;      /*  96 */
+  --s-10: 8rem;     /* 128 */
+
+  /* Raster */
+  --breite: 76rem;                                  /* 1216 px Inhalt */
+  --rand: clamp(1rem, 0.35rem + 3.2vw, 3rem);       /* 16 bis 48 px Seitenrand */
+  --spalt: clamp(1rem, 0.5rem + 2vw, 2rem);         /* 16 bis 32 px Spaltenabstand */
+  --abschnitt: clamp(4rem, 2.6rem + 6vw, 8rem);     /* 64 bis 128 px Abschnitt oben und unten */
+  --lesebreite: 38rem;
+
+  /* Form und Bewegung */
+  --radius: 4px;
+  --dauer: 160ms;
+  --kurve: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --kopf-hoehe: 4rem;
+  --anruf-leiste-hoehe: 4.5rem;
+}
+
+@media (min-width: 45em) {
+  :root {
+    --kopf-hoehe: 5rem;
+  }
+}
+
+
+/* 02  Grundlagen
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--farbe-grund);
+  color: var(--farbe-tinte);
+  font-family: var(--schrift-text);
+  font-size: var(--fs-3);
+  line-height: 1.6;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+@media (min-width: 45em) {
+  /* Anker landen unter der klebenden Kopfzeile */
+  html {
+    scroll-padding-top: calc(var(--kopf-hoehe) + var(--s-4));
+  }
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* hidden gilt immer, auch bei Bausteinen mit eigener display-Regel */
+[hidden] {
+  display: none !important;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--schrift-titel);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+  color: var(--farbe-tinte);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-6);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--fs-5);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-size: var(--fs-4);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+
+p,
+ul,
+ol,
+dl,
+figure,
+blockquote {
+  margin: 0;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--farbe-wald);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--dauer) var(--kurve), text-decoration-color var(--dauer) var(--kurve);
+}
+
+a:hover {
+  color: var(--farbe-kupfer-text);
+}
+
+:focus-visible {
+  outline: 3px solid var(--farbe-fokus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+main:focus,
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
+::selection {
+  background: #E8CFA9;
+  color: var(--farbe-tinte);
+}
+
+strong {
+  font-weight: 600;
+}
+
+abbr[title] {
+  text-decoration: none;
+}
+
+
+/* 03  Hilfsklassen
+   ========================================================================== */
+
+/* Inhaltsbreite mit Seitenrand */
+.huelle {
+  width: min(100% - 2 * var(--rand), var(--breite));
+  margin-inline: auto;
+}
+
+/* Nur für Screenreader */
+.nur-sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Sprungmarke zum Inhalt */
+.sprungmarke {
+  position: absolute;
+  top: var(--s-2);
+  left: var(--s-2);
+  z-index: 100;
+  padding: var(--s-3) var(--s-4);
+  background: var(--farbe-tinte);
+  color: var(--farbe-grund);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+
+.sprungmarke:focus {
+  transform: none;
+  color: var(--farbe-grund);
+}
+
+/* SVG-Vorrat (Logo und Symbole), unsichtbar, aber nicht display:none,
+   damit Masken in allen Browsern greifen */
+.svg-vorrat {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.symbol {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.zahl {
+  font-family: var(--schrift-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+
+/* 04  Beispiel-Leiste, Kopfzeile, Navigation
+   ========================================================================== */
+
+/* Schmale Leiste ganz oben: klar als Beispiel erkennbar */
+.beispiel-leiste {
+  background: var(--farbe-tinte);
+  color: var(--farbe-grund);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+/* Handy: Text und Link fliessen in einem Absatz */
+.beispiel-leiste__innen {
+  padding-block: var(--s-2);
+}
+
+.beispiel-leiste__text,
+.beispiel-leiste__links {
+  display: inline;
+}
+
+.beispiel-leiste a {
+  margin-left: var(--s-2);
+  padding-block: var(--s-1);
+  color: var(--farbe-kupfer-hell);
+}
+
+.beispiel-leiste a:hover {
+  color: var(--farbe-grund);
+}
+
+.beispiel-leiste a:focus-visible {
+  outline-color: var(--farbe-kupfer-hell);
+}
+
+.beispiel-leiste .beispiel-leiste__zusatz {
+  display: none;
+}
+
+@media (min-width: 45em) {
+  .beispiel-leiste {
+    font-family: var(--schrift-mono);
+  }
+
+  .beispiel-leiste__innen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-1) var(--s-5);
+  }
+
+  .beispiel-leiste__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--s-5);
+  }
+
+  .beispiel-leiste a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.75rem;
+    margin-left: 0;
+    padding-block: 0;
+  }
+}
+
+@media (min-width: 64em) {
+  .beispiel-leiste .beispiel-leiste__zusatz {
+    display: inline-flex;
+  }
+}
+
+/* Kopfzeile */
+.kopf {
+  position: relative;
+  z-index: 20;
+  background: var(--farbe-grund);
+  border-bottom: 1px solid var(--farbe-linie);
+}
+
+@media (min-width: 45em) {
+  .kopf {
+    position: sticky;
+    top: 0;
+  }
+}
+
+.kopf__innen {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  min-height: var(--kopf-hoehe);
+}
+
+/* Logo */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin-right: auto;
+  padding-block: var(--s-2);
+  color: var(--farbe-tinte);
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--farbe-tinte);
+}
+
+.logo__bild {
+  width: auto;
+  height: 2.125rem;
+}
+
+.logo__zeichen {
+  color: var(--farbe-wald);
+}
+
+.logo__zusatz {
+  display: none;
+  padding-left: var(--s-4);
+  border-left: 1px solid var(--farbe-linie);
+  font-family: var(--schrift-mono);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--farbe-text-2);
+}
+
+@media (min-width: 45em) {
+  .logo__bild {
+    height: 2.5rem;
+  }
+}
+
+@media (min-width: 80em) {
+  .logo__zusatz {
+    display: block;
+  }
+}
+
+/* Telefon in der Kopfzeile: ab Tablet sichtbar, auf dem Handy übernimmt die Anruf-Leiste */
+.kopf .kopf__telefon {
+  display: none;
+}
+
+@media (min-width: 45em) {
+  .kopf .kopf__telefon {
+    display: inline-flex;
+  }
+}
+
+/* Menü-Knopf (ohne JavaScript ein Link zur Navigation in der Fusszeile) */
+.menu-knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--farbe-linie-stark);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--farbe-tinte);
+  font: 500 var(--fs-2) / 1 var(--schrift-text);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menu-knopf:hover {
+  border-color: var(--farbe-tinte);
+  color: var(--farbe-tinte);
+}
+
+.menu-knopf__striche {
+  position: relative;
+  width: 1.125rem;
+  height: 0.75rem;
+  border-block: 1.5px solid currentColor;
+}
+
+.menu-knopf__striche::after {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 1.5px;
+  background: currentColor;
+  transform: translateY(-50%);
+}
+
+.menu-knopf[aria-expanded="true"] .menu-knopf__striche {
+  border-color: transparent;
+}
+
+.menu-knopf[aria-expanded="true"] .menu-knopf__striche::before,
+.menu-knopf[aria-expanded="true"] .menu-knopf__striche::after {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.menu-knopf[aria-expanded="true"] .menu-knopf__striche::before {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.menu-knopf[aria-expanded="true"] .menu-knopf__striche::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* Hauptnavigation: auf Handy und Tablet ausklappbar */
+.hauptnav {
+  display: none;
+}
+
+.hauptnav.ist-offen {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--farbe-grund);
+  border-bottom: 1px solid var(--farbe-linie);
+  box-shadow: 0 16px 24px -16px rgba(20, 19, 15, 0.25);
+}
+
+.hauptnav__liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hauptnav.ist-offen .hauptnav__liste {
+  width: min(100% - 2 * var(--rand), var(--breite));
+  margin-inline: auto;
+  padding-block: var(--s-2) var(--s-4);
+}
+
+.hauptnav.ist-offen a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3.5rem;
+  border-bottom: 1px solid var(--farbe-linie);
+  color: var(--farbe-tinte);
+  font-family: var(--schrift-titel);
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+  font-size: var(--fs-4);
+  text-decoration: none;
+}
+
+.hauptnav.ist-offen a[aria-current="page"] {
+  color: var(--farbe-kupfer-text);
+}
+
+@media (min-width: 64em) {
+  .menu-knopf {
+    display: none;
+  }
+
+  .hauptnav,
+  .hauptnav.ist-offen {
+    display: block;
+    position: static;
+    border: 0;
+    box-shadow: none;
+    background: none;
+  }
+
+  .hauptnav__liste,
+  .hauptnav.ist-offen .hauptnav__liste {
+    display: flex;
+    gap: var(--s-1);
+    width: auto;
+    padding: 0;
+  }
+
+  .hauptnav a,
+  .hauptnav.ist-offen a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 var(--s-3);
+    border: 0;
+    color: var(--farbe-tinte);
+    font-family: var(--schrift-text);
+    font-size: var(--fs-2);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  /* Aktive Seite: kurzer Kupferstrich wie eine Markierung am Massstab */
+  .hauptnav a::after {
+    content: "";
+    position: absolute;
+    left: var(--s-3);
+    right: var(--s-3);
+    bottom: 0.45rem;
+    height: 2px;
+    background: var(--farbe-kupfer);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dauer) var(--kurve);
+  }
+
+  .hauptnav a:hover::after,
+  .hauptnav a[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+
+  .hauptnav a:hover,
+  .hauptnav.ist-offen a[aria-current="page"] {
+    color: var(--farbe-tinte);
+  }
+
+  .kopf__innen {
+    gap: var(--s-5);
+  }
+}
+
+
+/* 05  Typografie-Bausteine
+   ========================================================================== */
+
+/* Vorzeile über Titeln: Mono, mit kleiner Masslinie davor */
+.vorzeile {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
+  font-family: var(--schrift-mono);
+  font-size: var(--fs-1);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--farbe-kupfer-text);
+}
+
+.vorzeile::before {
+  content: "";
+  flex: none;
+  width: 1.75rem;
+  height: 0.5625rem;
+  border-inline: 1px solid currentColor;
+  background: linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat;
+}
+
+/* Kopf eines Abschnitts */
+.abschnitt__kopf {
+  max-width: 46rem;
+  margin-bottom: var(--s-7);
+}
+
+.abschnitt__kopf h2 + p,
+.abschnitt__kopf .einleitung {
+  margin-top: var(--s-4);
+}
+
+@media (min-width: 64em) {
+  .abschnitt__kopf {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--spalt);
+    align-items: end;
+    max-width: none;
+  }
+
+  .abschnitt__titel {
+    grid-column: 1 / span 7;
+  }
+
+  .abschnitt__kopf > .einleitung {
+    grid-column: 8 / -1;
+    margin-top: 0;
+    padding-bottom: 0.3em;
+  }
+}
+
+h1 + .einleitung,
+h2 + .einleitung {
+  margin-top: var(--s-4);
+}
+
+.einleitung {
+  max-width: var(--lesebreite);
+  font-size: var(--fs-4);
+  line-height: 1.5;
+  color: var(--farbe-text-2);
+}
+
+.fliesstext > * + * {
+  margin-top: var(--s-4);
+}
+
+.fliesstext {
+  max-width: var(--lesebreite);
+}
+
+/* Masslinie: Legende mit Bemassungsstrich, wie auf einer Werkstattzeichnung */
+.masslinie {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--schrift-mono);
+  font-size: var(--fs-1);
+  line-height: 1.4;
+  color: var(--farbe-text-2);
+}
+
+.masslinie::before,
+.masslinie::after {
+  content: "";
+  flex: 1 1 1.5rem;
+  min-width: 1.5rem;
+  height: 0.5625rem;
+  background: linear-gradient(var(--farbe-linie-stark), var(--farbe-linie-stark)) center / 100% 1px no-repeat;
+}
+
+.masslinie::before {
+  border-left: 1px solid var(--farbe-linie-stark);
+}
+
+.masslinie::after {
+  border-right: 1px solid var(--farbe-linie-stark);
+}
+
+/* Massstab: Striche wie auf einem Doppelmeter, reiner Schmuck */
+.massstab {
+  height: 0.875rem;
+  color: var(--farbe-linie-stark);
+  background-image:
+    repeating-linear-gradient(to right, currentColor 0 1px, transparent 1px 5rem),
+    repeating-linear-gradient(to right, currentColor 0 1px, transparent 1px 2.5rem),
+    repeating-linear-gradient(to right, currentColor 0 1px, transparent 1px 0.5rem);
+  background-size: 100% 100%, 100% 60%, 100% 32%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  opacity: 0.7;
+}
+
+
+/* 06  Knöpfe und Links
+   Drei Varianten: primär, sekundär, Pfeil-Link
+   ========================================================================== */
+
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  min-height: 3.25rem;
+  padding: var(--s-3) var(--s-5);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius);
+  font-family: var(--schrift-text);
+  font-size: var(--fs-2);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--dauer) var(--kurve), color var(--dauer) var(--kurve), border-color var(--dauer) var(--kurve);
+}
+
+.knopf--primaer {
+  background: var(--farbe-wald);
+  border-color: var(--farbe-wald);
+  color: var(--farbe-grund);
+}
+
+.knopf--primaer:hover {
+  background: var(--farbe-wald-dunkel);
+  border-color: var(--farbe-wald-dunkel);
+  color: var(--farbe-grund);
+}
+
+.knopf--sekundaer {
+  background: transparent;
+  border-color: var(--farbe-tinte);
+  color: var(--farbe-tinte);
+}
+
+.knopf--sekundaer:hover {
+  background: var(--farbe-tinte);
+  color: var(--farbe-grund);
+}
+
+/* Kleinere Fassung für die Kopfzeile */
+.knopf--klein {
+  min-height: 2.75rem;
+  padding: var(--s-2) var(--s-4);
+}
+
+.knopf .zahl {
+  letter-spacing: 0.02em;
+}
+
+/* Pfeil-Link für Weiterführendes */
+.pfeil-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 2.75rem;
+  color: var(--farbe-wald);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pfeil-link .symbol {
+  transition: transform var(--dauer) var(--kurve);
+}
+
+.pfeil-link:hover {
+  color: var(--farbe-kupfer-text);
+}
+
+.pfeil-link:hover .symbol {
+  transform: translateX(0.25rem);
+}
+
+.pfeil-link__text {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  text-decoration-color: var(--farbe-linie-stark);
+}
+
+.aktionen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3) var(--s-5);
+}
+
+@media (max-width: 29.99em) {
+  .aktionen .knopf {
+    flex: 1 1 100%;
+  }
+}
+
+
+/* 07  Bilder und Platzhalter
+   Jede Bildstelle: <figure class="bild" data-bild="…" data-ton="…">.
+   Der Platzhalter ist reines CSS hinter einem transparenten <img>.
+   Sobald ein echtes Foto im src steht, deckt es den Platzhalter zu.
+   ========================================================================== */
+
+.bild__rahmen {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--ton-eiche);
+  color: rgba(20, 19, 15, 0.72);
+  isolation: isolate;
+}
+
+/* Lichtkante und Massstab am unteren Rand */
+.bild__rahmen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(120% 80% at 12% 0%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 60%),
+    repeating-linear-gradient(to right, currentColor 0 1px, transparent 1px 3rem) left bottom / 100% 0.875rem no-repeat,
+    repeating-linear-gradient(to right, currentColor 0 1px, transparent 1px 0.6rem) left bottom / 100% 0.375rem no-repeat;
+  opacity: 0.55;
+}
+
+/* Kleines Label: Bild-ID und Motiv */
+.bild__rahmen::after {
+  content: attr(data-platzhalter);
+  position: absolute;
+  left: var(--s-4);
+  right: var(--s-4);
+  bottom: 1.35rem;
+  z-index: 0;
+  font-family: var(--schrift-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.bild__rahmen img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bild[data-ton="eiche"] .bild__rahmen { background: var(--ton-eiche); }
+.bild[data-ton="esche"] .bild__rahmen { background: var(--ton-esche); }
+.bild[data-ton="fichte"] .bild__rahmen { background: var(--ton-fichte); }
+.bild[data-ton="stein"] .bild__rahmen { background: var(--ton-stein); }
+.bild[data-ton="kreide"] .bild__rahmen { background: var(--ton-kreide); }
+.bild[data-ton="chrom"] .bild__rahmen { background: var(--ton-chrom); }
+
+.bild[data-ton="nuss"] .bild__rahmen,
+.bild[data-ton="wald"] .bild__rahmen,
+.bild[data-ton="rauch"] .bild__rahmen,
+.bild[data-ton="linol"] .bild__rahmen {
+  color: rgba(246, 245, 241, 0.8);
+}
+
+.bild[data-ton="nuss"] .bild__rahmen { background: var(--ton-nuss); }
+.bild[data-ton="wald"] .bild__rahmen { background: var(--ton-wald); }
+.bild[data-ton="rauch"] .bild__rahmen { background: var(--ton-rauch); }
+.bild[data-ton="linol"] .bild__rahmen { background: var(--ton-linol); }
+
+.bild__legende {
+  margin-top: var(--s-3);
+}
+
+
+/* 08  Abschnitte der Startseite
+   ========================================================================== */
+
+.abschnitt {
+  padding-block: var(--abschnitt);
+}
+
+.abschnitt--warm {
+  background: var(--farbe-grund-warm);
+}
+
+/* Hero */
+.hero {
+  padding-block: var(--s-7) var(--s-8);
+}
+
+.hero__raster {
+  display: grid;
+  gap: var(--s-7);
+}
+
+.hero__text h1 {
+  max-width: 11ch;
+}
+
+.hero__einleitung {
+  margin-top: var(--s-5);
+  max-width: 34rem;
+  font-size: var(--fs-4);
+  line-height: 1.5;
+  color: var(--farbe-text-2);
+}
+
+.hero__aktionen {
+  margin-top: var(--s-6);
+}
+
+.hero__erreichbar {
+  margin-top: var(--s-4);
+  font-size: var(--fs-1);
+  color: var(--farbe-text-2);
+}
+
+.hero__erreichbar a {
+  color: var(--farbe-tinte);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (min-width: 45em) {
+  .hero__raster {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--spalt);
+    align-items: end;
+  }
+
+  .hero__text {
+    grid-column: 1 / span 7;
+  }
+
+  .hero__bild {
+    grid-column: 8 / -1;
+  }
+}
+
+@media (min-width: 64em) {
+  .hero {
+    padding-block: var(--s-8) var(--s-9);
+  }
+
+  .hero__text {
+    padding-bottom: var(--s-8);
+  }
+}
+
+/* Massband: vier Kennzahlen auf einem Massstab */
+.massband {
+  margin-top: var(--s-8);
+}
+
+.massband__liste {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-5) var(--spalt);
+  padding: var(--s-5) 0 0;
+  list-style: none;
+}
+
+.massband__eintrag {
+  position: relative;
+  padding-top: var(--s-3);
+  font-size: var(--fs-2);
+  line-height: 1.4;
+  color: var(--farbe-text-2);
+}
+
+/* Kupferne Marke, wie ein Strich am Massstab */
+.massband__eintrag::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--s-5) - 0.875rem);
+  left: 0;
+  width: 2px;
+  height: calc(var(--s-5) + 0.875rem);
+  background: var(--farbe-kupfer);
+}
+
+.massband__eintrag strong {
+  display: block;
+  margin-bottom: var(--s-1);
+  font-family: var(--schrift-titel);
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+  font-size: var(--fs-5);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--farbe-tinte);
+}
+
+@media (max-width: 44.99em) {
+  .massband__eintrag::before {
+    display: none;
+  }
+}
+
+@media (min-width: 45em) {
+  .massband__liste {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Leistungen: vier Karten, ganze Karte klickbar */
+.leistungen {
+  display: grid;
+  gap: var(--s-7) var(--spalt);
+  list-style: none;
+  padding: 0;
+}
+
+@media (min-width: 45em) {
+  .leistungen {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64em) {
+  .leistungen {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.leistung {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Handy: kompakte Karte, Bild links */
+@media (max-width: 44.99em) {
+  .leistungen {
+    gap: var(--s-5);
+  }
+
+  .leistung {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    column-gap: var(--s-4);
+    align-content: start;
+  }
+
+  .leistung .bild {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    margin-bottom: 0;
+  }
+
+  .leistung .bild__rahmen::after {
+    display: none;
+  }
+
+  .leistung > :not(.bild) {
+    grid-column: 2;
+  }
+
+  .leistung p {
+    margin-top: var(--s-1);
+  }
+
+  .leistung .pfeil-link {
+    display: none;
+  }
+}
+
+.leistung .bild {
+  order: -1;
+  margin-bottom: var(--s-5);
+}
+
+.leistung h3 a {
+  color: var(--farbe-tinte);
+  text-decoration: none;
+}
+
+/* Ganze Karte als Klickfläche */
+.leistung h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.leistung h3 a:focus-visible {
+  outline: none;
+}
+
+.leistung:has(a:focus-visible) {
+  outline: 3px solid var(--farbe-fokus);
+  outline-offset: 6px;
+  border-radius: var(--radius);
+}
+
+.leistung p {
+  margin-top: var(--s-3);
+  font-size: var(--fs-2);
+  color: var(--farbe-text-2);
+}
+
+.leistung .pfeil-link {
+  margin-top: auto;
+  padding-top: var(--s-3);
+}
+
+.leistung__nummer {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-family: var(--schrift-mono);
+  font-size: var(--fs-1);
+  color: var(--farbe-kupfer-text);
+}
+
+.leistung .bild__rahmen img {
+  transition: transform 400ms var(--kurve);
+}
+
+.leistung:hover .bild__rahmen img {
+  transform: scale(1.02);
+}
+
+.leistung:hover h3 a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* Referenzprojekte */
+.referenzen {
+  display: grid;
+  gap: var(--s-8) var(--spalt);
+}
+
+.referenz {
+  display: grid;
+  gap: var(--s-5);
+  align-content: start;
+}
+
+.referenz__ort {
+  margin-bottom: var(--s-2);
+}
+
+.referenz h3 {
+  font-size: var(--fs-4);
+}
+
+.referenz--gross h3 {
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+  line-height: 1.15;
+}
+
+@media (min-width: 45em) {
+  .referenzen {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .referenz--gross {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 64em) {
+  .referenz--gross {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--spalt);
+    align-items: center;
+  }
+
+  .referenz--gross .bild {
+    grid-column: 1 / span 7;
+  }
+
+  .referenz--gross .referenz__text {
+    grid-column: 9 / -1;
+  }
+}
+
+/* Datenblatt: Aufgabe, Lösung, Holz, Montage */
+.datenblatt {
+  margin-top: var(--s-4);
+  border-top: 1px solid var(--farbe-tinte);
+}
+
+.datenblatt > div {
+  display: grid;
+  gap: var(--s-1);
+  padding-block: var(--s-3);
+  border-bottom: 1px solid var(--farbe-linie);
+}
+
+.datenblatt dt {
+  font-family: var(--schrift-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--farbe-kupfer-text);
+}
+
+.datenblatt dd {
+  margin: 0;
+  font-size: var(--fs-2);
+}
+
+@media (min-width: 30em) {
+  .datenblatt > div {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: var(--s-4);
+  }
+
+  .datenblatt dt {
+    padding-top: 0.2em;
+  }
+}
+
+.weiter-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-6);
+  margin-top: var(--s-7);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--farbe-linie);
+}
+
+/* Werkstatt und Menschen */
+.werkstatt-teaser {
+  display: grid;
+  gap: var(--s-7) var(--spalt);
+}
+
+.werkstatt-teaser__bilder {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: end;
+}
+
+.werkstatt-teaser__bilder .bild:first-child {
+  grid-column: 1 / span 8;
+  grid-row: 1;
+}
+
+.werkstatt-teaser__bilder .bild:last-child {
+  grid-column: 6 / -1;
+  grid-row: 1;
+  margin-bottom: calc(-1 * var(--s-7));
+  box-shadow: 0 0 0 0.5rem var(--farbe-grund-warm);
+  border-radius: var(--radius);
+}
+
+.werkstatt-teaser__text .fliesstext {
+  margin-top: var(--s-5);
+}
+
+@media (min-width: 64em) {
+  .werkstatt-teaser {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+  }
+
+  .werkstatt-teaser__bilder {
+    grid-column: 1 / span 7;
+  }
+
+  .werkstatt-teaser__text {
+    grid-column: 9 / -1;
+  }
+}
+
+@media (max-width: 63.99em) {
+  .werkstatt-teaser__bilder {
+    margin-bottom: var(--s-7);
+  }
+}
+
+/* Fakten mit Punktlinie, wie in einer Stückliste */
+.fakten {
+  margin-top: var(--s-6);
+  max-width: 30rem;
+}
+
+.fakten > div {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  padding-block: var(--s-2);
+}
+
+.fakten dt {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  gap: var(--s-2);
+  font-size: var(--fs-2);
+  color: var(--farbe-text-2);
+}
+
+.fakten dt::after {
+  content: "";
+  flex: 1;
+  min-width: var(--s-4);
+  border-bottom: 1px dotted var(--farbe-linie-stark);
+  transform: translateY(-0.3em);
+}
+
+.fakten dd {
+  margin: 0;
+  font-family: var(--schrift-mono);
+  font-size: var(--fs-2);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Ablauf: Schritte an den Gelenken eines Massstabs */
+.schritte {
+  position: relative;
+  display: grid;
+  gap: var(--s-6);
+  margin: 0;
+  padding: 0 0 0 var(--s-6);
+  list-style: none;
+  counter-reset: schritt;
+}
+
+/* Senkrechter Massstab links (Handy, Tablet) */
+.schritte::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 0;
+  width: 0.875rem;
+  color: var(--farbe-linie-stark);
+  background-image:
+    linear-gradient(currentColor, currentColor),
+    repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px 0.5rem);
+  background-size: 1px 100%, 45% 100%;
+  background-position: left top, left top;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+}
+
+.schritt {
+  position: relative;
+}
+
+/* Gelenk mit Niete */
+.schritt::before {
+  content: "";
+  position: absolute;
+  top: 0.35rem;
+  left: calc(-1 * var(--s-6) - 0.4375rem);
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 2px solid var(--farbe-kupfer);
+  border-radius: 50%;
+  background: var(--farbe-grund);
+}
+
+.abschnitt--warm .schritt::before {
+  background: var(--farbe-grund-warm);
+}
+
+.schritt__nummer {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-family: var(--schrift-mono);
+  font-size: var(--fs-1);
+  font-weight: 500;
+  color: var(--farbe-kupfer-text);
+}
+
+.schritt p {
+  margin-top: var(--s-2);
+  font-size: var(--fs-2);
+  color: var(--farbe-text-2);
+}
+
+.schritt__dauer {
+  margin-top: var(--s-3);
+  padding-top: var(--s-2);
+  border-top: 1px dotted var(--farbe-linie-stark);
+  font-family: var(--schrift-mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--farbe-text-2);
+}
+
+@media (min-width: 64em) {
+  .schritte {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--spalt);
+    padding: var(--s-7) 0 0;
+  }
+
+  /* Waagrechter Massstab oben (Desktop) */
+  .schritte::before {
+    top: 0;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 1.25rem;
+    background-image:
+      linear-gradient(currentColor, currentColor),
+      repeating-linear-gradient(to right, currentColor 0 1px, transparent 1px 0.5rem),
+      repeating-linear-gradient(to right, currentColor 0 1px, transparent 1px 2.5rem);
+    background-size: 100% 1px, 100% 40%, 100% 75%;
+    background-position: left top, left top, left top;
+  }
+
+  .schritt::before {
+    top: calc(-1 * var(--s-7) - 0.4375rem);
+    left: 0;
+  }
+}
+
+
+/* 09  Bausteine der Unterseiten
+   ========================================================================== */
+
+/* Kopf der Unterseiten: Titel links, Einleitung rechts, breites Bild darunter */
+.seitenkopf {
+  padding-block: var(--s-7) var(--s-8);
+}
+
+.seitenkopf__raster {
+  display: grid;
+  gap: var(--s-5) var(--spalt);
+}
+
+.seitenkopf .einleitung {
+  color: var(--farbe-text-2);
+}
+
+.seitenkopf__text .aktionen {
+  margin-top: var(--s-5);
+}
+
+.seitenkopf__bild {
+  margin-top: var(--s-7);
+}
+
+/* Handy: das breite Kopfbild (21:9) wird zu 3:2 beschnitten, Motiv mittig halten (bilder.md) */
+@media (max-width: 44.99em) {
+  .seitenkopf__bild .bild__rahmen {
+    aspect-ratio: 3 / 2 !important;
+  }
+}
+
+@media (min-width: 64em) {
+  .seitenkopf {
+    padding-top: var(--s-8);
+  }
+
+  .seitenkopf__raster {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: end;
+  }
+
+  .seitenkopf__titel {
+    grid-column: 1 / span 7;
+  }
+
+  .seitenkopf__text {
+    grid-column: 8 / -1;
+  }
+}
+
+/* Sprungnavigation innerhalb einer Seite */
+.seitennav {
+  margin-top: var(--s-6);
+}
+
+.seitennav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  padding: 0;
+  list-style: none;
+}
+
+.seitennav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--farbe-linie-stark);
+  border-radius: 999px;
+  color: var(--farbe-tinte);
+  font-size: var(--fs-2);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.seitennav a:hover {
+  border-color: var(--farbe-wald);
+  background: var(--farbe-wald);
+  color: var(--farbe-grund);
+}
+
+/* Drei Spalten mit Nummer (z. B. "Was wir bei Küchen machen") */
+.dreier {
+  display: grid;
+  gap: var(--s-6) var(--spalt);
+  padding: 0;
+  list-style: none;
+}
+
+.dreier__eintrag {
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--farbe-tinte);
+}
+
+.dreier__eintrag p {
+  margin-top: var(--s-3);
+  font-size: var(--fs-2);
+  color: var(--farbe-text-2);
+}
+
+@media (min-width: 45em) {
+  .dreier {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Musterkarte: Materialien als Farbmuster */
+.musterkarte {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-6) var(--spalt);
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 45em) {
+  .musterkarte {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64em) {
+  .musterkarte--sechs {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .musterkarte--vier {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.muster__chip {
+  display: block;
+  aspect-ratio: 4 / 3;
+  margin-bottom: var(--s-3);
+  border-radius: var(--radius);
+  background: var(--ton-eiche);
+  box-shadow: inset 0 0 0 1px rgba(20, 19, 15, 0.08);
+}
+
+.muster__chip[data-ton="nuss"] { background: var(--ton-nuss); }
+.muster__chip[data-ton="esche"] { background: var(--ton-esche); }
+.muster__chip[data-ton="fichte"] { background: var(--ton-fichte); }
+.muster__chip[data-ton="wald"] { background: var(--ton-wald); }
+.muster__chip[data-ton="rauch"] { background: var(--ton-rauch); }
+.muster__chip[data-ton="stein"] { background: var(--ton-stein); }
+.muster__chip[data-ton="kreide"] { background: var(--ton-kreide); }
+.muster__chip[data-ton="chrom"] { background: var(--ton-chrom); }
+.muster__chip[data-ton="linol"] { background: var(--ton-linol); }
+.muster__chip[data-ton="laerche"] { background: var(--ton-laerche); }
+.muster__chip[data-ton="ahorn"] { background: var(--ton-ahorn); }
+
+.muster__name {
+  margin: 0;
+  font-family: var(--schrift-titel);
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+  font-size: var(--fs-3);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.muster__herkunft {
+  margin-top: var(--s-1);
+  font-family: var(--schrift-mono);
+  font-size: 0.8125rem;
+  color: var(--farbe-kupfer-text);
+}
+
+.muster p:not(.muster__herkunft) {
+  margin-top: var(--s-1);
+  font-size: var(--fs-1);
+  line-height: 1.5;
+  color: var(--farbe-text-2);
+}
+
+.untertitel {
+  margin-bottom: var(--s-5);
+  font-family: var(--schrift-mono);
+  font-size: var(--fs-1);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--farbe-text-2);
+}
+
+.musterkarte + .untertitel {
+  margin-top: var(--s-8);
+}
+
+.randnotiz {
+  margin-top: var(--s-7);
+  padding: var(--s-5);
+  border-left: 3px solid var(--farbe-kupfer);
+  background: var(--farbe-grund-warm);
+  font-size: var(--fs-2);
+  max-width: 48rem;
+}
+
+.abschnitt--warm .randnotiz {
+  background: var(--farbe-grund);
+}
+
+/* Galerie: ruhiges Raster mit wechselnden Formaten */
+.galerie {
+  display: grid;
+  gap: var(--s-6) var(--spalt);
+  padding: 0;
+  list-style: none;
+}
+
+/* Handy: schmale Bilder nebeneinander */
+@media (max-width: 44.99em) {
+  .galerie {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-5) var(--s-4);
+  }
+
+  .galerie > .galerie__breit,
+  .galerie > .galerie__halb {
+    grid-column: span 2;
+  }
+
+  .galerie__klein .bild__rahmen::after {
+    display: none;
+  }
+}
+
+/* Reihenfolge im HTML: breit, schmal, schmal, breit, halb, halb.
+   Desktop: 8+4 / 4+8 / 6+6. Tablet: 12 / 6+6 / 12 / 6+6. */
+@media (min-width: 45em) {
+  .galerie {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .galerie > li {
+    grid-column: span 6;
+  }
+
+  .galerie > .galerie__breit {
+    grid-column: span 12;
+  }
+}
+
+@media (min-width: 64em) {
+  .galerie > .galerie__breit {
+    grid-column: span 8;
+  }
+
+  .galerie > .galerie__klein {
+    grid-column: span 4;
+  }
+
+  .galerie > .galerie__halb {
+    grid-column: span 6;
+  }
+}
+
+/* Häufige Fragen */
+.fragen {
+  max-width: 52rem;
+  border-top: 1px solid var(--farbe-tinte);
+}
+
+.frage {
+  border-bottom: 1px solid var(--farbe-linie);
+}
+
+.frage summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 3.75rem;
+  padding: var(--s-4) var(--s-8) var(--s-4) 0;
+  font-family: var(--schrift-titel);
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+  font-size: var(--fs-4);
+  line-height: 1.3;
+  cursor: pointer;
+  list-style: none;
+}
+
+.frage summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Plus, das zum Minus wird */
+.frage summary::before,
+.frage summary::after {
+  content: "";
+  position: absolute;
+  right: var(--s-2);
+  top: 50%;
+  width: 1rem;
+  height: 2px;
+  background: var(--farbe-kupfer-text);
+  transition: transform var(--dauer) var(--kurve);
+}
+
+.frage summary::after {
+  transform: rotate(90deg);
+}
+
+.frage[open] summary::after {
+  transform: rotate(0deg);
+}
+
+.frage summary:hover {
+  color: var(--farbe-wald);
+}
+
+.frage__antwort {
+  max-width: var(--lesebreite);
+  padding-bottom: var(--s-5);
+  color: var(--farbe-text-2);
+}
+
+/* Leistungsblöcke mit Bild (Schränke und Innenausbau) */
+.block {
+  display: grid;
+  gap: var(--s-6) var(--spalt);
+  align-items: center;
+}
+
+.block + .block {
+  margin-top: var(--s-9);
+}
+
+.block__text h2 {
+  margin-bottom: var(--s-4);
+}
+
+.liste-strich {
+  margin-top: var(--s-5);
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--farbe-linie);
+}
+
+.liste-strich li {
+  position: relative;
+  padding: var(--s-3) 0 var(--s-3) var(--s-6);
+  border-bottom: 1px solid var(--farbe-linie);
+  font-size: var(--fs-2);
+}
+
+.liste-strich li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.35em;
+  width: 1rem;
+  height: 1px;
+  background: var(--farbe-kupfer);
+}
+
+@media (min-width: 64em) {
+  .block {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .block .bild {
+    grid-column: 1 / span 6;
+  }
+
+  .block__text {
+    grid-column: 8 / -1;
+  }
+
+  .block--gespiegelt .bild {
+    grid-column: 7 / -1;
+    grid-row: 1;
+  }
+
+  .block--gespiegelt .block__text {
+    grid-column: 1 / span 5;
+    grid-row: 1;
+  }
+}
+
+/* Tabellen: Nischen-Tabelle, Stückliste, Öffnungszeiten */
+.tabelle {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-2);
+}
+
+.tabelle caption {
+  padding-bottom: var(--s-4);
+  text-align: left;
+  font-size: var(--fs-1);
+  color: var(--farbe-text-2);
+}
+
+.tabelle th,
+.tabelle td {
+  padding: var(--s-3) var(--s-4) var(--s-3) 0;
+  border-bottom: 1px solid var(--farbe-linie);
+  text-align: left;
+  vertical-align: top;
+}
+
+.tabelle thead th {
+  border-bottom-color: var(--farbe-tinte);
+  font-family: var(--schrift-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--farbe-kupfer-text);
+}
+
+.tabelle tbody th {
+  font-weight: 600;
+}
+
+.tabelle tfoot th,
+.tabelle tfoot td {
+  border-bottom: 0;
+  border-top: 1px solid var(--farbe-tinte);
+  font-weight: 600;
+}
+
+.tabelle .zahl {
+  white-space: nowrap;
+}
+
+.tabelle__gross {
+  font-family: var(--schrift-titel);
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+  font-size: var(--fs-4);
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.stueckliste td:last-child {
+  color: var(--farbe-text-2);
+}
+
+.stueckliste__rolle {
+  display: block;
+  font-weight: 600;
+  color: var(--farbe-tinte);
+}
+
+/* Zeitleiste als senkrechter Massstab */
+.zeitleiste {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zeitleiste__eintrag {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.75rem minmax(0, 1fr);
+  gap: var(--s-5);
+  padding-bottom: var(--s-7);
+}
+
+.zeitleiste__eintrag:last-child {
+  padding-bottom: 0;
+}
+
+/* Skala zwischen Jahr und Text */
+.zeitleiste__eintrag::before {
+  content: "";
+  position: absolute;
+  top: 0.6rem;
+  bottom: 0;
+  left: 5.5rem;
+  width: 0.625rem;
+  color: var(--farbe-linie-stark);
+  background-image:
+    linear-gradient(currentColor, currentColor),
+    repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px 0.5rem);
+  background-size: 1px 100%, 100% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+}
+
+.zeitleiste__eintrag:last-child::before {
+  display: none;
+}
+
+.zeitleiste__jahr {
+  position: relative;
+  font-family: var(--schrift-mono);
+  font-size: var(--fs-4);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--farbe-kupfer-text);
+}
+
+/* Kupferner Strich am Jahr */
+.zeitleiste__jahr::after {
+  content: "";
+  position: absolute;
+  top: 0.6rem;
+  right: -1.25rem;
+  width: 1rem;
+  height: 2px;
+  background: var(--farbe-kupfer);
+}
+
+.zeitleiste__text {
+  padding-left: var(--s-5);
+}
+
+.zeitleiste__text p {
+  margin-top: var(--s-2);
+  font-size: var(--fs-2);
+  color: var(--farbe-text-2);
+}
+
+@media (min-width: 45em) {
+  .zeitleiste__eintrag {
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: var(--s-6);
+  }
+
+  .zeitleiste__eintrag::before {
+    left: 7rem;
+  }
+
+  .zeitleiste__jahr::after {
+    right: -1.5rem;
+  }
+}
+
+/* Zwei Spalten: Titel links, Inhalt rechts */
+.zweier {
+  display: grid;
+  gap: var(--s-6) var(--spalt);
+}
+
+@media (min-width: 64em) {
+  .zweier {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .zweier__links {
+    grid-column: 1 / span 4;
+  }
+
+  .zweier__rechts {
+    grid-column: 6 / -1;
+  }
+
+  .zweier__links--klebt {
+    position: sticky;
+    top: calc(var(--kopf-hoehe) + var(--s-6));
+    align-self: start;
+  }
+}
+
+.bilderpaar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spalt);
+  margin-top: var(--s-7);
+}
+
+/* Name der Firma: kleine Erklärung mit Bildzeichen */
+.namensschild {
+  display: grid;
+  gap: var(--s-5);
+  align-items: center;
+  padding: var(--s-6);
+  border: 1px solid var(--farbe-linie);
+  border-radius: var(--radius);
+  background: var(--farbe-grund);
+}
+
+.namensschild__zeichen {
+  width: 4.5rem;
+  height: 4.5rem;
+  color: var(--farbe-wald);
+}
+
+.namensschild h2 {
+  font-size: var(--fs-4);
+}
+
+.namensschild p {
+  margin-top: var(--s-2);
+  font-size: var(--fs-2);
+  color: var(--farbe-text-2);
+}
+
+@media (min-width: 45em) {
+  .namensschild {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--s-6);
+  }
+}
+
+/* Gegenüberstellung: was wir tun, was wir nicht versprechen */
+.ehrlich {
+  display: grid;
+  gap: var(--s-6) var(--spalt);
+  margin-top: var(--s-8);
+}
+
+.ehrlich h3 {
+  margin-bottom: var(--s-2);
+}
+
+@media (min-width: 45em) {
+  .ehrlich {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* 10  Kontakt, Formular, Rechtstexte
+   ========================================================================== */
+
+.kontakt-kopf {
+  padding-block: var(--s-7) var(--s-8);
+}
+
+.telefon-gross {
+  display: inline-block;
+  margin-top: var(--s-4);
+  padding-block: var(--s-2);
+  font-family: var(--schrift-titel);
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+  font-size: clamp(2.5rem, 1.4rem + 5vw, 5.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--farbe-wald);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.telefon-gross:hover {
+  color: var(--farbe-kupfer-text);
+}
+
+.telefon-gross__zeit {
+  margin-top: var(--s-3);
+  font-size: var(--fs-2);
+  color: var(--farbe-text-2);
+}
+
+.kontakt-raster {
+  display: grid;
+  gap: var(--s-8) var(--spalt);
+}
+
+@media (min-width: 64em) {
+  .kontakt-raster {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .kontakt-raster__daten {
+    grid-column: 1 / span 5;
+  }
+
+  .kontakt-raster__karte {
+    grid-column: 7 / -1;
+  }
+}
+
+.kontaktliste > div {
+  padding-block: var(--s-4);
+  border-bottom: 1px solid var(--farbe-linie);
+}
+
+.kontaktliste > div:first-child {
+  border-top: 1px solid var(--farbe-tinte);
+}
+
+.kontaktliste dt {
+  font-family: var(--schrift-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--farbe-kupfer-text);
+}
+
+.kontaktliste dd {
+  margin: var(--s-1) 0 0;
+}
+
+.kontaktliste address {
+  font-style: normal;
+}
+
+.oeffnungszeiten {
+  margin-top: var(--s-2);
+}
+
+.oeffnungszeiten th,
+.oeffnungszeiten td {
+  padding-block: var(--s-2);
+}
+
+.oeffnungszeiten tbody th {
+  font-weight: 500;
+}
+
+/* Anfahrtsskizze */
+.skizze {
+  border: 1px solid var(--farbe-linie);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--farbe-grund-warm);
+}
+
+.skizze svg {
+  width: 100%;
+  height: auto;
+}
+
+.skizze-bild {
+  margin-top: var(--s-5);
+}
+
+.skizze-bild .masslinie {
+  margin-top: var(--s-3);
+}
+
+/* Beschriftung in der Skizze */
+.skizze text {
+  font-family: var(--schrift-text);
+  font-size: 15px;
+  fill: var(--farbe-tinte);
+}
+
+.skizze .skizze__klein {
+  font-size: 13px;
+  fill: var(--farbe-text-2);
+}
+
+.skizze .skizze__stark {
+  font-weight: 600;
+  fill: var(--farbe-tinte);
+}
+
+.skizze .skizze__weg {
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--farbe-kupfer-text);
+}
+
+.skizze .skizze__p {
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--farbe-grund);
+}
+
+.skizze .skizze__mono {
+  font-family: var(--schrift-mono);
+  font-size: 12px;
+}
+
+.anfahrt {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-5);
+  font-size: var(--fs-2);
+}
+
+.anfahrt h3 {
+  font-family: var(--schrift-text);
+  font-variation-settings: normal;
+  font-size: var(--fs-2);
+  font-weight: 600;
+}
+
+@media (min-width: 45em) {
+  .anfahrt {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-5) var(--spalt);
+  }
+}
+
+/* Hinweise: Info und Erfolg */
+.hinweis {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-5);
+  border-radius: var(--radius);
+  border: 1px solid var(--farbe-linie);
+  border-left: 4px solid var(--farbe-kupfer);
+  background: var(--farbe-grund);
+  font-size: var(--fs-2);
+}
+
+.hinweis__titel {
+  font-weight: 600;
+}
+
+.hinweis__klein {
+  font-size: var(--fs-1);
+  color: var(--farbe-text-2);
+}
+
+.hinweis--erfolg {
+  border-left-color: var(--farbe-wald);
+  background: #E7EDE8;
+}
+
+.hinweis--erfolg:focus {
+  outline: 3px solid var(--farbe-fokus);
+  outline-offset: 3px;
+}
+
+.google-hinweis {
+  margin-top: var(--s-6);
+}
+
+/* Knopf, der wie ein Pfeil-Link aussieht */
+.knopf-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.formular-bereich__bild {
+  margin-top: var(--s-7);
+}
+
+@media (max-width: 63.99em) {
+  .formular-bereich__bild {
+    display: none;
+  }
+}
+
+/* Formular */
+.formular-bereich {
+  display: grid;
+  gap: var(--s-7) var(--spalt);
+}
+
+@media (min-width: 64em) {
+  .formular-bereich {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .formular-bereich__text {
+    grid-column: 1 / span 4;
+  }
+
+  .formular-bereich__formular {
+    grid-column: 6 / -1;
+  }
+}
+
+.formular {
+  display: grid;
+  gap: var(--s-5);
+}
+
+.formular__zeile {
+  display: grid;
+  gap: var(--s-5);
+}
+
+@media (min-width: 45em) {
+  .formular__zeile {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.feld {
+  display: grid;
+  gap: var(--s-2);
+  align-content: start;
+}
+
+.feld__label,
+.auswahl legend {
+  font-size: var(--fs-2);
+  font-weight: 600;
+}
+
+.feld__zusatz {
+  font-weight: 400;
+  color: var(--farbe-text-2);
+}
+
+.feld__hilfe {
+  font-size: var(--fs-1);
+  color: var(--farbe-text-2);
+}
+
+.feld__fehler {
+  display: flex;
+  gap: var(--s-2);
+  font-size: var(--fs-1);
+  font-weight: 600;
+  color: var(--farbe-fehler);
+}
+
+.feld__fehler[hidden] {
+  display: none;
+}
+
+.feld__fehler::before {
+  content: "!";
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--farbe-fehler);
+  color: var(--farbe-weiss);
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.eingabe {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--farbe-linie-stark);
+  border-radius: var(--radius);
+  background: var(--farbe-weiss);
+  color: var(--farbe-tinte);
+  font: 400 var(--fs-3) / 1.4 var(--schrift-text);
+  transition: border-color var(--dauer) var(--kurve), box-shadow var(--dauer) var(--kurve);
+}
+
+.eingabe:hover {
+  border-color: var(--farbe-tinte);
+}
+
+.eingabe:focus-visible {
+  outline: none;
+  border-color: var(--farbe-wald);
+  box-shadow: 0 0 0 3px var(--farbe-fokus);
+}
+
+textarea.eingabe {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+select.eingabe {
+  appearance: none;
+  padding-right: var(--s-8);
+  /* Pfeil als eingebettetes SVG (data-URI, keine externe Anfrage) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%2314130F' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position: right 1rem center;
+  background-size: 0.75rem 0.5rem;
+  background-repeat: no-repeat;
+}
+
+.eingabe[aria-invalid="true"] {
+  border-color: var(--farbe-fehler);
+  box-shadow: inset 0 0 0 1px var(--farbe-fehler);
+}
+
+/* Rückruf-Zeitfenster */
+.auswahl {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.auswahl legend {
+  margin-bottom: var(--s-2);
+  padding: 0;
+}
+
+.auswahl__optionen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.option {
+  position: relative;
+  display: inline-flex;
+}
+
+.option input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.option span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 2.75rem;
+  padding: var(--s-2) var(--s-4);
+  border: 1px solid var(--farbe-linie-stark);
+  border-radius: var(--radius);
+  background: var(--farbe-weiss);
+  font-size: var(--fs-2);
+}
+
+.option span::before {
+  content: "";
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  border: 1.5px solid var(--farbe-linie-stark);
+  border-radius: 50%;
+  background: var(--farbe-weiss);
+}
+
+.option input:checked + span {
+  border-color: var(--farbe-wald);
+  box-shadow: inset 0 0 0 1px var(--farbe-wald);
+}
+
+.option input:checked + span::before {
+  border-color: var(--farbe-wald);
+  background: radial-gradient(circle, var(--farbe-wald) 0 0.25rem, var(--farbe-weiss) 0.3rem);
+}
+
+.option input:focus-visible + span {
+  outline: 3px solid var(--farbe-fokus);
+  outline-offset: 2px;
+}
+
+.formular__demo {
+  font-size: var(--fs-1);
+  color: var(--farbe-text-2);
+}
+
+.formular__abschluss {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4) var(--s-5);
+  padding-top: var(--s-2);
+}
+
+.formular__abschluss p {
+  flex: 1 1 16rem;
+  font-size: var(--fs-1);
+  color: var(--farbe-text-2);
+}
+
+/* Rechtstexte am Ende der Kontaktseite */
+.rechtstexte {
+  display: grid;
+  gap: var(--s-7) var(--spalt);
+  font-size: var(--fs-2);
+}
+
+.rechtstext h2 {
+  font-size: var(--fs-4);
+  margin-bottom: var(--s-3);
+}
+
+.rechtstext p + p {
+  margin-top: var(--s-3);
+}
+
+.rechtstext p {
+  color: var(--farbe-text-2);
+  max-width: var(--lesebreite);
+}
+
+.marke-beispiel {
+  display: inline-block;
+  margin-bottom: var(--s-3);
+  padding: 0.125rem var(--s-2);
+  border: 1px solid var(--farbe-kupfer-text);
+  border-radius: 2px;
+  font-family: var(--schrift-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--farbe-kupfer-text);
+}
+
+@media (min-width: 64em) {
+  .rechtstexte {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* 11  Anruf-Abschluss, Fusszeile, Anruf-Leiste
+   ========================================================================== */
+
+/* Dunkler Abschluss mit grosser Telefonnummer */
+.anruf {
+  position: relative;
+  padding-block: var(--abschnitt);
+  background: var(--farbe-wald-dunkel);
+  color: var(--farbe-auf-dunkel);
+  --farbe-fokus: var(--farbe-kupfer-hell);
+}
+
+.anruf .massstab {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: var(--farbe-auf-dunkel-2);
+  opacity: 0.45;
+}
+
+.anruf__raster {
+  display: grid;
+  gap: var(--s-6) var(--spalt);
+}
+
+.anruf h2 {
+  color: var(--farbe-auf-dunkel);
+  max-width: 14ch;
+}
+
+.anruf .vorzeile {
+  color: var(--farbe-kupfer-hell);
+}
+
+.anruf__text {
+  margin-top: var(--s-4);
+  max-width: 32rem;
+  font-size: var(--fs-4);
+  line-height: 1.5;
+  color: var(--farbe-auf-dunkel-2);
+}
+
+.anruf__nummer {
+  display: inline-block;
+  padding-block: var(--s-2);
+  font-family: var(--schrift-titel);
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+  font-size: clamp(2.25rem, 1.3rem + 3.9vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--farbe-auf-dunkel);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.anruf__nummer:hover {
+  color: var(--farbe-kupfer-hell);
+}
+
+.anruf__zeit {
+  margin-top: var(--s-3);
+  font-size: var(--fs-2);
+  color: var(--farbe-auf-dunkel-2);
+}
+
+.anruf__aktionen {
+  margin-top: var(--s-6);
+}
+
+.anruf .knopf--primaer {
+  background: var(--farbe-grund);
+  border-color: var(--farbe-grund);
+  color: var(--farbe-wald-dunkel);
+}
+
+.anruf .knopf--primaer:hover {
+  background: var(--farbe-kupfer-hell);
+  border-color: var(--farbe-kupfer-hell);
+  color: var(--farbe-tinte);
+}
+
+.anruf .pfeil-link {
+  color: var(--farbe-auf-dunkel);
+}
+
+.anruf .pfeil-link:hover {
+  color: var(--farbe-kupfer-hell);
+}
+
+.anruf .pfeil-link__text {
+  text-decoration-color: var(--farbe-auf-dunkel-2);
+}
+
+@media (min-width: 64em) {
+  .anruf__raster {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: end;
+  }
+
+  .anruf__links {
+    grid-column: 1 / span 6;
+  }
+
+  .anruf__rechts {
+    grid-column: 7 / -1;
+    justify-self: end;
+  }
+}
+
+/* Fusszeile */
+.fuss {
+  /* Unten Platz für die Anruf-Leiste auf dem Handy */
+  padding-block: var(--s-8) calc(var(--s-6) + var(--anruf-leiste-hoehe));
+  background: var(--farbe-grund-warm);
+  border-top: 1px solid var(--farbe-linie);
+  font-size: var(--fs-2);
+}
+
+.fuss__raster {
+  display: grid;
+  gap: var(--s-6) var(--spalt);
+}
+
+.fuss .logo__bild {
+  height: 2.25rem;
+}
+
+.fuss__marke p {
+  margin-top: var(--s-4);
+  max-width: 22rem;
+  color: var(--farbe-text-2);
+}
+
+.fuss h2 {
+  margin-bottom: var(--s-3);
+  font-family: var(--schrift-mono);
+  font-variation-settings: normal;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--farbe-kupfer-text);
+}
+
+.fuss address {
+  font-style: normal;
+}
+
+.fuss__liste {
+  padding: 0;
+  list-style: none;
+}
+
+.fuss__liste a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--farbe-tinte);
+}
+
+.fuss__liste a:hover {
+  color: var(--farbe-kupfer-text);
+}
+
+.fuss__zeiten {
+  color: var(--farbe-text-2);
+}
+
+.fuss__zeiten strong {
+  color: var(--farbe-tinte);
+  font-weight: 500;
+}
+
+.fuss__beispiel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-6);
+  margin-top: var(--s-8);
+  padding: var(--s-4) var(--s-5);
+  border: 1px dashed var(--farbe-linie-stark);
+  border-radius: var(--radius);
+  font-size: var(--fs-1);
+  color: var(--farbe-text-2);
+}
+
+.fuss__beispiel p {
+  flex: 1 1 24rem;
+}
+
+.fuss__beispiel-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--s-5);
+}
+
+.fuss__beispiel-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 600;
+}
+
+.fuss__unten {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-5);
+  margin-top: var(--s-5);
+  font-size: var(--fs-1);
+  color: var(--farbe-text-2);
+}
+
+.fuss__unten ul {
+  display: flex;
+  gap: var(--s-5);
+  padding: 0;
+  list-style: none;
+}
+
+.fuss__unten a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--farbe-text-2);
+}
+
+@media (min-width: 45em) {
+  .fuss {
+    padding-bottom: var(--s-6);
+  }
+
+  .fuss__raster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64em) {
+  .fuss__raster {
+    grid-template-columns: 1.4fr 1fr 1fr 0.8fr;
+  }
+}
+
+/* Anruf-Leiste: auf dem Handy immer unten sichtbar */
+.anruf-leiste {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  padding: var(--s-2) var(--rand) calc(var(--s-2) + env(safe-area-inset-bottom));
+  background: rgba(246, 245, 241, 0.96);
+  border-top: 1px solid var(--farbe-linie);
+  box-shadow: 0 -8px 24px -12px rgba(20, 19, 15, 0.3);
+}
+
+.anruf-leiste .knopf {
+  width: 100%;
+  min-height: 3.5rem;
+  font-size: var(--fs-3);
+}
+
+.anruf-leiste__nummer {
+  font-family: var(--schrift-mono);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 45em) {
+  .anruf-leiste {
+    display: none;
+  }
+}
+
+
+/* 12  Bewegung reduzieren, Druck
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .leistung:hover .bild__rahmen img,
+  .pfeil-link:hover .symbol {
+    transform: none;
+  }
+}
+
+@media print {
+  .beispiel-leiste,
+  .menu-knopf,
+  .anruf-leiste,
+  .sprungmarke {
+    display: none;
+  }
+
+  .kopf {
+    position: static;
+  }
+
+  body {
+    background: #FFFFFF;
+  }
+
+  .anruf {
+    background: none;
+    color: var(--farbe-tinte);
+  }
+}
