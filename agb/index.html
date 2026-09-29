@@ -192,32 +192,14 @@ button,input,textarea{font-family:inherit}
 @media(max-width:430px){.hdr-price{min-height:32vh}.hdr-flow{min-height:0}.hdr-decor{display:none}}
 @keyframes heroPop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes scrollBob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
-.hero-frage{max-width:520px;margin:0}
 /* Startseite */
 .hero{background:var(--grund)}
 .wrap.hero-pad{padding-top:72px;padding-bottom:88px}
-.vertrauen{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none;margin:22px 0 0;padding:0;font-size:var(--fs-klein);font-weight:500;letter-spacing:0.01em;color:var(--tinte)}
-.vertrauen li{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
-.vertrauen li::before{content:"";width:6px;height:6px;border-radius:999px;background:var(--primaer)}
-.vergleich-labels{display:flex;justify-content:space-between;margin:0 0 10px}
-.vergleich-l{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-klein);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-2);transition:opacity var(--dauer) linear}
-.vergleich-l::before{content:"";width:8px;height:8px;border-radius:999px;background:var(--linie-stark)}
-.vergleich-l[data-aktiv="1"]{color:var(--tinte);font-weight:600}
-.vergleich-l-neu[data-aktiv="1"]{color:var(--tinte)}.vergleich-l-neu::before{background:var(--akzent);box-shadow:0 0 0 1px var(--akzent-tief)}
-.vergleich-rahmen{position:relative;aspect-ratio:16/10.5;border-radius:20px;overflow:hidden;background:var(--grund);border:1px solid var(--linie);box-shadow:0 30px 70px rgba(17,19,26,0.14)}
-.vergleich-griff{position:absolute;top:50%;z-index:3;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;background:var(--akzent);color:var(--tinte);box-shadow:0 4px 14px rgba(17,19,26,0.2);transform:translate(-22px,-22px)}
-.vergleich-fuss{margin:12px 0 0}
 .nowrap{white-space:nowrap}
 .sektion{padding:var(--a-6) 0}
 .sektion-eng{padding:var(--a-5) 0 var(--a-6)}
 .sektion-flaeche{background:var(--flaeche)}
 .sektion-blau{background:var(--primaer);color:var(--auf-dunkel)}
-.mw-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.mw{padding:28px;border-radius:var(--radius);background:var(--flaeche);border:1px solid var(--linie)}
-.mw-l{margin:0 0 12px;font-size:var(--fs-klein);letter-spacing:0.02em;color:var(--text-2)}
-.mw-z{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 16px;margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-variant-numeric:tabular-nums}
-.mw-alt{font-size:20px;color:var(--text-2);text-decoration-thickness:2px}
-.mw-neu{font-size:clamp(34px,3.4vw,48px);line-height:1;color:var(--tinte);white-space:nowrap;padding:4px 12px 6px;border-radius:12px;background:var(--akzent)}
 .schritte{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;list-style:none;margin:0;padding:0}
 .schritte li{border-top:2px solid var(--tinte);padding-top:18px}
 .schritt-n{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin:0 0 12px;border-radius:999px;background:var(--akzent);box-shadow:inset 0 0 0 1px var(--akzent-linie);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-klein);color:var(--tinte)}
@@ -231,13 +213,13 @@ button,input,textarea{font-family:inherit}
 .pk-punkte li::after{content:"";position:absolute;left:6px;top:8px;width:8px;height:4px;border-left:2px solid var(--tinte);border-bottom:2px solid var(--tinte);transform:rotate(-45deg)}
 .pk-link{margin-top:auto;align-self:flex-start}
 .muster-vorschau{display:block;position:relative;aspect-ratio:16/10;border-radius:var(--radius);overflow:hidden;margin:0 0 24px;border:1px solid var(--linie)}
-.person{display:grid;grid-template-columns:160px minmax(0,1fr);gap:40px;align-items:center;max-width:900px}
+.person{display:grid;grid-template-columns:160px minmax(0,1fr);gap:var(--a-4);align-items:start;max-width:980px}
 .person-bild{width:160px;height:160px;border-radius:999px;object-fit:cover;object-position:50% 22%;background:var(--linie)}
 .auslastung{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 32px;padding:10px 18px;border:1px solid rgba(255,255,255,0.45);border-radius:999px;font-size:var(--fs-klein);color:var(--auf-dunkel)}
 .auslastung strong{font-weight:600;white-space:nowrap}
 .ausl-balken{display:inline-flex;gap:3px}.ausl-balken i{display:block;width:22px;height:8px;border-radius:999px;background:rgba(255,255,255,0.35)}.ausl-balken i[data-frei="1"]{background:var(--akzent)}
-@media(max-width:900px){.mw-grid{grid-template-columns:1fr}.schritte{grid-template-columns:repeat(2,minmax(0,1fr))}.sektion{padding:88px 0}.sektion-eng{padding:48px 0 88px}}
-@media(max-width:560px){.schritte{grid-template-columns:1fr;gap:24px}.sektion{padding:64px 0}.sektion-eng{padding:40px 0 64px}.person{grid-template-columns:1fr;gap:24px}.person-bild{width:112px;height:112px}.wrap.hero-pad{padding-top:40px;padding-bottom:56px}.mw{padding:20px}}
+@media(max-width:900px){.schritte{grid-template-columns:repeat(2,minmax(0,1fr))}.sektion{padding:88px 0}.sektion-eng{padding:48px 0 88px}}
+@media(max-width:560px){.schritte{grid-template-columns:1fr;gap:24px}.sektion{padding:64px 0}.sektion-eng{padding:40px 0 64px}.person{grid-template-columns:1fr;gap:24px}.person-bild{width:112px;height:112px}.wrap.hero-pad{padding-top:32px;padding-bottom:56px}}
 .einstieg{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:600;color:var(--primaer-dunkel)}
 .einstieg span{transition:transform 140ms ease-out}.einstieg:hover span{transform:translateX(3px)}
 .einstieg-zeile{margin:6px 0 0;text-align:center;font-size:16px}
@@ -272,10 +254,8 @@ button,input,textarea{font-family:inherit}
 .hero-chip:hover{background:var(--akzent-tint)}
 .hero-chip[data-gewaehlt="1"]{background:var(--akzent);border-color:var(--tinte);color:var(--tinte)}
 .hero-chip:focus-visible{outline:3px solid var(--tinte);outline-offset:2px}
-.hero-frage-l{display:flex;flex-wrap:wrap;gap:8px 24px;margin:10px 0 0;font-size:16px}
-.hero-frage-l a{display:inline-flex;align-items:center;min-height:44px}
 ::view-transition-old(einstieg),::view-transition-new(einstieg){animation-duration:360ms}
-@media(max-width:430px){.hero-chip{font-size:16px;padding:0 12px;text-align:center}.hero-frage-l{gap:0 24px}}
+@media(max-width:430px){.hero-chip{font-size:16px;padding:0 12px;text-align:center}}
 .wrap{max-width:1440px;margin:0 auto;padding:0 120px}
 .sect{padding-top:var(--a-6);padding-bottom:var(--a-6)}
 .inner{max-width:1200px;margin:0 auto}
@@ -503,6 +483,56 @@ footer a:hover{color:var(--akzent)!important}
  .mdet[open]>summary::after{content:"\2013"}
  .mhide{display:none}
 }
+/* Startseite: Hero mit Musterprojekt, nummerierte Abschnitte, Vergleich, Fragen */
+.hero-raster{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:var(--a-5);align-items:center}
+.hero-ort{margin:0 0 var(--a-3)}
+.hero-h1{margin:0 0 var(--a-3);max-width:14ch}
+.hero-lead{margin:0 0 var(--a-4);max-width:34ch}
+.hero-aktion{display:flex;flex-wrap:wrap;gap:12px}
+.fakten{display:grid;grid-template-columns:repeat(3,max-content);margin:var(--a-4) 0 0;border-top:1px solid var(--linie)}
+.fakten div{padding:14px var(--a-3) 0 0;margin-right:var(--a-3);border-right:1px solid var(--linie)}
+.fakten div:last-child{border-right:0;margin-right:0}
+.fakten dt{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:var(--fs-lead);line-height:1.2;white-space:nowrap;font-variant-numeric:tabular-nums}
+.fakten dd{margin:4px 0 0;font-size:var(--fs-klein);color:var(--text-2);white-space:nowrap}
+.werk{position:relative;margin:0;padding-bottom:var(--a-4)}
+.werk-browser{background:var(--flaeche);border:1px solid var(--linie);border-radius:12px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(17,19,26,0.35)}
+.werk-leiste{display:flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-bottom:1px solid var(--linie)}
+.werk-leiste i{width:8px;height:8px;border-radius:999px;background:var(--linie)}
+.werk-leiste span{margin-left:12px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-klein);color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.werk-handy{position:absolute;right:-12px;bottom:0;width:26%;border:6px solid var(--tinte);border-radius:22px;overflow:hidden;background:var(--tinte);box-shadow:0 20px 40px -24px rgba(17,19,26,0.5)}
+.werk figcaption{margin-top:var(--a-2);max-width:70%;font-size:var(--fs-klein);line-height:1.5;color:var(--text-2)}
+.abschnitt-nr{margin:0 0 var(--a-2)}
+.muster-bild{display:block;margin:0 0 var(--a-3);border:1px solid var(--linie);border-radius:12px;overflow:hidden;background:var(--grund)}
+.bild{display:block;width:100%;background-size:cover;background-position:top center;background-repeat:no-repeat}
+.muster-bild .bild{transition:transform 400ms var(--kurve)}
+@media(hover:hover){.muster-bild:hover .bild{transform:scale(1.015)}}
+.stempel{display:inline-flex;align-items:center;padding:4px 10px;border:1.5px solid var(--tinte);border-radius:4px;background:var(--akzent);color:var(--tinte);font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:var(--fs-klein);letter-spacing:0.04em;line-height:1.2;text-transform:none;transform:rotate(-2deg)}
+.wahl{border-top:2px solid var(--tinte)}
+.wahl-kopf,.wahl-zeile{display:grid;grid-template-columns:minmax(0,1.1fr) repeat(3,minmax(0,1fr));gap:var(--a-3);border-bottom:1px solid var(--linie)}
+.wahl-kopf{padding:14px 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:var(--fs-klein);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-2)}
+.wahl-zeile{padding:20px 0}
+.wahl-zeile span{font-size:var(--fs-text);line-height:1.5;color:var(--text-2)}
+.wahl-zeile .wahl-frage{color:var(--tinte);font-weight:600}
+.wahl .wahl-ich{padding-left:14px;border-left:3px solid var(--akzent);color:var(--tinte)}
+.wahl-zeile .wahl-ich{font-weight:600}
+.lebenslauf{margin:0 0 28px;border-top:1px solid var(--linie)}
+.lebenslauf div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:var(--a-2);padding:12px 0;border-bottom:1px solid var(--linie)}
+.lebenslauf dt{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-klein);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-2);padding-top:2px}
+.lebenslauf dd{margin:0;font-size:var(--fs-text);line-height:1.5}
+.fragen{border-top:1px solid var(--linie)}
+.frage{border-bottom:1px solid var(--linie)}
+.frage summary{display:flex;align-items:center;justify-content:space-between;gap:var(--a-3);min-height:64px;padding:16px 0;font-size:var(--fs-lead);font-weight:600;line-height:1.35;cursor:pointer;list-style:none}
+.frage summary::-webkit-details-marker{display:none}
+.frage summary::after{content:"";flex:none;width:10px;height:10px;margin-right:6px;border-right:2px solid var(--primaer);border-bottom:2px solid var(--primaer);transform:rotate(45deg) translateY(-3px);transition:transform var(--dauer) var(--kurve)}
+.frage[open] summary::after{transform:rotate(-135deg) translateY(-3px)}
+.frage p{margin:0 0 var(--a-3);max-width:65ch;font-size:var(--fs-text);line-height:1.65;color:var(--text-2)}
+.fragen-weiter{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--a-2) var(--a-3);margin:var(--a-4) 0 0;font-size:var(--fs-text)}
+.abschluss{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:var(--a-5);align-items:end}
+.abschluss-seite{font-size:var(--fs-text);line-height:1.6;color:var(--auf-dunkel)}
+[data-flaeche="blau"] .hero-chip{border-color:var(--flaeche)}
+@media(max-width:1000px){.hero-raster,.abschluss{grid-template-columns:minmax(0,1fr);gap:var(--a-4)}.werk{max-width:640px}}
+@media(max-width:760px){.wahl-kopf{display:none}.wahl-zeile{grid-template-columns:minmax(0,1fr);gap:6px}.wahl-zeile .wahl-frage{font-size:var(--fs-lead);margin-bottom:4px}.wahl-zeile span[data-l]::before{content:attr(data-l) ": ";color:var(--tinte);font-weight:600}.wahl-zeile .wahl-ich{margin-top:4px}}
+@media(max-width:560px){.hero-aktion .btn{flex:1 1 100%}.fakten{grid-template-columns:minmax(0,1fr)}.fakten div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0;padding:12px 0;border-right:0;border-bottom:1px solid var(--linie)}.fakten dt{font-size:17px}.fakten dd{margin:0}.werk figcaption{max-width:62%}.lebenslauf div{grid-template-columns:minmax(0,1fr);gap:2px}.frage summary{font-size:18px}}
 .blob,.glow{display:none!important}
 .blob{position:fixed;width:720px;height:720px;border-radius:999px;opacity:0.12;filter:blur(120px);pointer-events:none;z-index:0;transition:background 800ms linear,left 800ms ease-in-out,top 800ms ease-in-out}
 .printonly{display:none}
@@ -639,221 +669,182 @@ footer a:hover{color:var(--akzent)!important}
 
 <sc-if value="{{ isStart }}" hint-placeholder-val="{{ true }}">
 <div>
-<section class="hero">
+<section class="hero" aria-labelledby="hero-t">
   <div class="wrap hero-pad">
-    <div class="inner g-hero">
-      <div>
-        <h1 tabindex="-1" class="t-h1" style="margin:0 0 20px;animation:{{ heroAnim1 }}">Sie sehen Ihre neue Website, <span class="leuchtstift" style="animation-delay:450ms">bevor </span><span class="leuchtstift" style="animation-delay:560ms">Sie </span><span class="leuchtstift" style="animation-delay:670ms">einen </span><span class="leuchtstift" style="animation-delay:780ms">Franken </span><span class="leuchtstift" style="animation-delay:890ms">bezahlen</span>.</h1>
-        <p class="t-lead" style="margin:0 0 36px;animation:{{ heroAnim2 }}">Sie beantworten ein paar Fragen, ich gestalte daraus eine fertige Seite.</p>
-        <div class="hero-frage" style="animation:{{ heroAnim3 }}">
-          <p class="hero-gruss" style="display:{{ grussDisplay }}">{{ grussText }}</p>
-          <p class="hero-frage-t" id="hero-frage-t">Was sollen Besucher auf Ihrer neuen Website tun?</p>
-          <div class="hero-chips" role="group" aria-labelledby="hero-frage-t">
-            <sc-for list="{{ heroChips }}" as="c" hint-placeholder-count="4">
-              <button type="button" class="hero-chip" data-v="{{ c.v }}" onClick="{{ onHeroChip }}" aria-describedby="hero-vertrauen">{{ c.label }}</button>
-            </sc-for>
-          </div>
-          <ul class="vertrauen" id="hero-vertrauen" aria-label="Ein Klick startet den Projekt-Check">
-            <li>Fixpreis</li><li>Entwurf in 5 Arbeitstagen</li><li>Zahlung erst, wenn er gefällt</li>
-          </ul>
-          <p class="hero-frage-l"><a href="/angebot/">Was das kostet</a></p>
+    <div class="inner hero-raster">
+      <div class="hero-text">
+        <p class="hero-gruss" style="display:{{ grussDisplay }}">{{ grussText }}</p>
+        <p class="label hero-ort" style="animation:{{ heroAnim0 }}">Nico Bodmer · Webseiten aus Berikon AG</p>
+        <h1 id="hero-t" tabindex="-1" class="t-h1 hero-h1" style="animation:{{ heroAnim1 }}">Sie sehen Ihre neue Website, <span class="leuchtstift" style="animation-delay:450ms">bevor </span><span class="leuchtstift" style="animation-delay:560ms">Sie </span><span class="leuchtstift" style="animation-delay:670ms">bezahlen.</span></h1>
+        <p class="t-lead hero-lead" style="animation:{{ heroAnim2 }}">Für Handwerk, Gastro, Praxen und Läden. Ich zeige Ihnen den fertigen Entwurf, Sie entscheiden danach.</p>
+        <div class="hero-aktion" style="animation:{{ heroAnim3 }}">
+          <a href="/projekt-check/" class="btn btn-primaer" data-quelle="hero" onClick="{{ onEinstieg }}">Projekt-Check starten</a>
+          <a href="/angebot/" class="btn btn-sekundaer">Preise ansehen</a>
         </div>
+        <dl class="fakten" style="animation:{{ heroAnim3 }}">
+          <div><dt>ab {{ price1 }}</dt><dd>Fixpreis, einmalig</dd></div>
+          <div><dt>{{ entwurfTageKurz }}</dt><dd>bis zum Entwurf</dd></div>
+          <div><dt>CHF 0</dt><dd>wenn er nicht gefällt</dd></div>
+        </dl>
       </div>
-      <div class="vergleich" style="animation:{{ heroAnim4 }}">
-        <div class="vergleich-labels" aria-hidden="true">
-          <span class="vergleich-l" data-aktiv="{{ altAktiv }}">2014</span>
-          <span class="vergleich-l vergleich-l-neu" data-aktiv="{{ neuAktiv }}">heute</span>
+      <figure class="werk" style="animation:{{ heroAnim4 }}">
+        <div class="werk-browser">
+          <div class="werk-leiste" aria-hidden="true"><i></i><i></i><i></i><span>doppelmeter, Musterprojekt</span></div>
+          <div class="bild" role="img" aria-label="Startseite des Musterprojekts Schreinerei Doppelmeter am Computer" style="aspect-ratio:1120/658;background-image:url(assets/img/muster-doppelmeter-desktop.webp)"></div>
         </div>
-        <div data-nosnap="1" class="vergleich-rahmen">
-            <div style="position:absolute;inset:0;overflow:hidden">
-              <div style="width:100%;height:100%;background:#E9E9E6;display:flex;flex-direction:column;overflow:hidden">
-                  <div style="padding:6px 8px;background-color:var(--primaer-dunkel);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.14) 0 4px,rgba(0,0,0,0.12) 4px 8px);display:flex;align-items:baseline;justify-content:space-between;gap:8px">
-                    <span style="font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--auf-dunkel);text-shadow:2px 2px 2px rgba(0,0,0,0.6)">Schreinerei Doppelmeter</span>
-                    <span style="font-family:Georgia,'Times New Roman',serif;font-size:8px;color:var(--auf-dunkel);text-shadow:1px 1px 1px rgba(0,0,0,0.5);white-space:nowrap">Qualität seit 1961</span>
-                  </div>
-                  <div style="padding:3px 6px;border-bottom:1px solid var(--linie-stark);background:#E9E9E6;text-align:center">
-                    <span style="font-size:8px;color:var(--primaer-dunkel);text-decoration:underline">Startseite</span><span style="font-size:8px;color:#4A4F57"> | </span>
-                    <span style="font-size:8px;color:var(--primaer-dunkel);text-decoration:underline">Über uns</span><span style="font-size:8px;color:#4A4F57"> | </span>
-                    <span style="font-size:8px;color:var(--primaer-dunkel);text-decoration:underline">Produkte</span><span style="font-size:8px;color:#4A4F57"> | </span>
-                    <span style="font-size:8px;color:var(--primaer-dunkel);text-decoration:underline">Galerie</span><span style="font-size:8px;color:#4A4F57"> | </span>
-                    <span style="font-size:8px;color:var(--primaer-dunkel);text-decoration:underline">Kontakt</span>
-                  </div>
-                  <div style="flex:1;display:grid;grid-template-columns:minmax(0,1fr) 66px;gap:5px;padding:5px;align-content:stretch;min-height:0;overflow:hidden">
-                    <div style="display:flex;flex-direction:column;justify-content:center">
-                      <p style="font-family:Georgia,'Times New Roman',serif;font-size:9px;color:#4A4F57;margin:0 0 5px;text-decoration:underline">Herzlich willkommen auf unserer Homepage!</p>
-                      <p style="font-size:8px;line-height:1.4;color:#4A4F57;margin:0 0 6px;text-align:left">Die Schreinerei Doppelmeter fertigt seit vielen Jahren Möbel nach Mass sowie Innenausbauten aller Art in bewährter handwerklicher Qualität für Privatkundschaft und Gewerbe in der ganzen Region.</p>
-                      <div style="display:flex;gap:4px;margin-bottom:6px">
-                        <div style="width:38px;height:26px;border:2px solid #4A4F57;background-color:#C9B99E"></div>
-                        <div style="width:38px;height:26px;border:2px solid #4A4F57;background-color:#9FB0A6"></div>
-                        <div style="width:38px;height:26px;border:2px solid #4A4F57;background-color:#B3A9C4"></div>
-                      </div>
-                      <p style="font-family:Georgia,'Times New Roman',serif;font-size:9px;color:#4A4F57;margin:0 0 4px;text-decoration:underline">Unsere Leistungen</p>
-                      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 6px">
-                        <span style="font-size:8px;line-height:1.4;color:#4A4F57">- Küchenbau und Montage</span>
-                        <span style="font-size:8px;line-height:1.4;color:#4A4F57">- Innenausbau aller Art</span>
-                        <span style="font-size:8px;line-height:1.4;color:#4A4F57">- Einbauschränke nach Mass</span>
-                        <span style="font-size:8px;line-height:1.4;color:#4A4F57">- Türen und Fenster</span>
-                      </div>
-                    </div>
-                    <div style="border-left:1px solid var(--linie-stark);padding-left:5px;display:flex;flex-direction:column;justify-content:center;gap:8px;min-height:0;overflow:hidden">
-                      <div style="border:1px solid var(--linie-stark);padding:4px">
-                        <span style="font-family:Georgia,'Times New Roman',serif;font-size:8px;color:var(--primaer-dunkel);text-decoration:underline;display:block;margin-bottom:3px">Aktuell</span>
-                        <span style="font-size:7px;line-height:1.3;color:#4A4F57;display:block">Neu: auch Fenster und Türen im Programm.</span>
-                      </div>
-                      <span style="font-family:'Courier New',monospace;font-size:7px;color:#4A4F57;line-height:1.3">Besucher:<br>04831</span>
-                      <span style="font-size:8px;color:var(--primaer-dunkel);text-decoration:underline">Gästebuch</span>
-                      <span style="font-size:8px;color:var(--primaer-dunkel);text-decoration:underline">Impressum</span>
-                      <span style="font-size:8px;color:var(--primaer-dunkel);text-decoration:underline">Links</span>
-                    </div>
-                  </div>
-                  <div style="padding:3px 6px;border-top:1px solid var(--linie-stark);background:#E9E9E6;text-align:center">
-                    <span style="font-size:8px;color:#4A4F57">Optimiert für 1024 × 768 · Letzte Aktualisierung 14.03.2014</span>
-                  </div>
-                  <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(180deg,rgba(233,233,230,0) 0%,#E9E9E6 100%);pointer-events:none"></div>
-                </div>
-            </div>
-
-            <div style="position:absolute;top:0;bottom:0;right:0;width:{{ sliderPct }};overflow:hidden">
-              <div style="position:absolute;top:0;right:0;height:100%;width:{{ sliderInvW }};display:flex;justify-content:flex-end">
-                <div style="width:100%;height:100%;background:var(--papier);display:flex;flex-direction:column;overflow:hidden">
-              <div style="display:flex;align-items:center;gap:6px;padding:1.6% 4%;border-bottom:1px solid #E4DED2;background:var(--papier)">
-                <span aria-hidden="true" style="width:clamp(8px,0.8vw,11px);height:clamp(8px,0.8vw,11px);background:#2F4A3C;flex:none"></span>
-                <span style="font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:clamp(11px,1.15vw,15px);letter-spacing:-0.02em;color:#14130F">Doppelmeter</span>
-              </div>
-              <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:3%;padding:3% 4%;overflow:hidden">
-                <div style="display:flex;flex-direction:column;gap:5%;justify-content:center;min-height:0">
-                  <span class="mono" style="font-size:clamp(6px,0.6vw,8px);letter-spacing:0.1em;color:#C2762F">SEIT 1961</span>
-                  <p style="font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:clamp(11px,1.35vw,17px);line-height:1.1;letter-spacing:-0.02em;color:#14130F;margin:0">Möbel für Ihre Enkel.</p>
-                  <span style="display:inline-flex;align-items:center;min-height:clamp(14px,1.5vw,20px);padding:0 4%;border-radius:999px;background:#2F4A3C;color:var(--papier);font-size:clamp(7px,0.68vw,9px);font-weight:600;width:fit-content;white-space:nowrap">Jetzt anrufen</span>
-                </div>
-                <div style="position:relative;border-radius:10px;overflow:hidden;min-height:0">
-                  <img src="assets/img/kueche-detail-tile-merchant-ireland-unsplash.webp" alt="Ausschnitt einer modernen Küche mit Holzfronten" width="560" height="560" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-                </div>
-              </div>
-              <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(180deg,rgba(251,250,247,0) 0%,var(--papier) 100%);pointer-events:none"></div>
-                </div>
-              </div>
-            </div>
-
-            <div aria-hidden="true" style="position:absolute;top:0;bottom:0;left:{{ newRightPct }};width:2px;background:var(--flaeche);transform:translateX(-1px);z-index:3;box-shadow:0 0 0 1px rgba(17,19,26,0.08)"></div>
-            <div aria-hidden="true" class="vergleich-griff" style="left:{{ newRightPct }};animation:{{ nudgeAnim }}">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 7l-5 5 5 5M14 7l5 5-5 5"></path></svg>
-            </div>
-            <input type="range" min="0" max="100" step="1" value="{{ sliderVal }}" onChange="{{ onSlide }}" onKeyDown="{{ onSlideKey }}" aria-label="Vergleich zwischen Website 2014 und heute" style="position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:4;direction:rtl">
-        </div>
-        <p class="t-klein vergleich-fuss">Beispielbetrieb, frei erfunden. Ziehen Sie den Regler.</p>
-      </div>
+        <div class="werk-handy"><div class="bild" role="img" aria-label="Dieselbe Seite auf dem Handy" style="aspect-ratio:300/585;background-image:url(assets/img/muster-doppelmeter-handy.webp)"></div></div>
+        <figcaption>Musterprojekt Schreinerei Doppelmeter. Der Betrieb ist erfunden, die Seite ist echt. <a href="/musterprojekte/">Ganze Seite ansehen</a></figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<section class="sektion sektion-eng" aria-labelledby="mw-t">
+<section class="sektion sektion-flaeche" aria-labelledby="muster-t" id="start-muster">
   <div class="wrap"><div class="inner">
-    <h2 id="mw-t" class="t-h2" style="margin:0 0 8px">Was eine neue Seite verändert</h2>
-    <p class="t-klein" style="margin:0 0 40px">Werte des Beispielbetriebs oben, alte gegen neue Seite.</p>
-    <div class="mw-grid">
-      <sc-for list="{{ metricCols }}" as="col" hint-placeholder-count="3">
-        <div class="mw">
-          <p class="mw-l">{{ col.label }}</p>
-          <p class="mw-z"><s class="mw-alt"><span class="rechner-sr">vorher </span>{{ col.oldVal }}</s><span class="mw-neu"><span class="rechner-sr">, neu </span>{{ col.newVal }}</span></p>
-        </div>
-      </sc-for>
+    <p class="label abschnitt-nr">01 · Musterprojekte</p>
+    <h2 id="muster-t" class="t-h2" style="margin:0 0 12px">So sehen meine Seiten aus</h2>
+    <p class="t-lead" style="margin:0 0 48px">Zwei Seiten mit zwei verschiedenen Zielen. Die erste ist für einen erfundenen Betrieb gebaut, die zweite ist mein eigenes Portfolio.</p>
+    <div class="g-two">
+      <div>
+        <a href="/musterprojekte/" class="muster-bild"><span class="bild" role="img" aria-label="Musterprojekt Doppelmeter, Abschnitt Werkstatt" style="aspect-ratio:960/495;background-image:url(assets/img/muster-doppelmeter-werkstatt.webp)"></span></a>
+        <p class="label" style="margin:0 0 8px">Firmenseite · Paket Standard</p>
+        <h3 class="t-h3" style="margin:0 0 8px">Schreinerei Doppelmeter</h3>
+        <p class="t-text" style="margin:0 0 16px;color:var(--text-2)">Ziel ist der Anruf. Darum steht die Telefonnummer in jedem Bildschirm, alles andere ordnet sich darunter.</p>
+        <a href="/projekt-check/" class="einstieg" data-quelle="doppelmeter" onClick="{{ onEinstieg }}">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
+      </div>
+      <div>
+        <a href="/musterprojekte/" class="muster-bild"><span class="bild" role="img" aria-label="Musterprojekt Portfolio Nico Bodmer, Startbildschirm" style="aspect-ratio:960/495;background-image:url(assets/img/muster-portfolio-desktop.webp)"></span></a>
+        <p class="label" style="margin:0 0 8px">Eigenprojekt · Einzelseite</p>
+        <h3 class="t-h3" style="margin:0 0 8px">Portfolio Nico Bodmer</h3>
+        <p class="t-text" style="margin:0 0 16px;color:var(--text-2)">Ziel ist, im Kopf zu bleiben. Darum bricht der Aufbau bewusst mit den Regeln für Firmenseiten.</p>
+        <a href="/musterprojekte/" class="einstieg">Beide Seiten ansehen<span aria-hidden="true">→</span></a>
+      </div>
     </div>
-    <p style="margin:24px 0 0"><a href="/projekt-check/" class="einstieg" data-quelle="slider" onClick="{{ onEinstieg }}">Meine Seite ist auch zu langsam<span aria-hidden="true">→</span></a></p>
-  </div></div>
-</section>
-
-<section class="sektion sektion-flaeche" aria-labelledby="ablauf-t">
-  <div class="wrap"><div class="inner">
-    <h2 id="ablauf-t" class="t-h2" style="margin:0 0 40px">So läuft es</h2>
-    <ol class="schritte">
-      <li><p class="schritt-n">01</p><p class="schritt-t">Formular</p><p class="schritt-s">{{ checkUmfang }}, ohne Registrierung.</p></li>
-      <li><p class="schritt-n">02</p><p class="schritt-t">Entwurf</p><p class="schritt-s">Innert fünf Arbeitstagen sehen Sie Ihre fertige Seite.</p></li>
-      <li><p class="schritt-n">03</p><p class="schritt-t">Ihre Änderungen</p><p class="schritt-s">Sie sagen, was anders soll, ich setze es um.</p></li>
-      <li><p class="schritt-n">04</p><p class="schritt-t">Online</p><p class="schritt-s">Ich schalte auf und übergebe Ihnen alles.</p></li>
-    </ol>
-    <p class="hinweis hinweis-akzent" style="margin:40px 0 0"><span class="lime-kreis" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><span><strong>Bezahlt wird erst, wenn Ihnen der Entwurf aus Schritt 02 gefällt.</strong> Einmal, ohne Anzahlung.</span></p>
   </div></div>
 </section>
 
 <section class="sektion" aria-labelledby="pakete-t">
   <div class="wrap"><div class="inner">
-    <h2 id="pakete-t" class="t-h2" style="margin:0 0 40px">Drei Pakete, drei Preise</h2>
+    <p class="label abschnitt-nr">02 · Preise</p>
+    <h2 id="pakete-t" class="t-h2" style="margin:0 0 12px">Drei Pakete, feste Preise</h2>
+    <p class="t-lead" style="margin:0 0 48px">Einmalig bezahlt, ohne Abo. Hosting können Sie nach dem Livegang dazunehmen, müssen aber nicht.</p>
     <div class="g-pkg pk-kurz">
       <div class="card pk-start">
         <p class="label" style="margin:0 0 12px">Website</p>
         <p class="preis" style="margin:0 0 4px">{{ price1 }}</p>
         <p class="t-klein" style="margin:0 0 20px">einmalig</p>
         <ul class="pk-punkte"><li>Eine Seite mit allen Abschnitten</li><li>Kontaktformular</li><li>Eine Korrekturrunde</li></ul>
-        <a href="/angebot/" class="btn btn-sekundaer pk-link">Details ansehen</a>
+        <a href="/projekt-check/" class="btn btn-sekundaer pk-link" data-quelle="paket-website" onClick="{{ onEinstieg }}">Mit Website starten</a>
       </div>
       <div class="card pk-std">
-        <p class="label" style="margin:0 0 12px">Standard <span class="badge badge-akzent" style="margin-left:8px">Meine Empfehlung</span></p>
+        <p class="label" style="margin:0 0 12px">Standard <span class="stempel" style="margin-left:8px">Meine Empfehlung</span></p>
         <p class="preis" style="margin:0 0 4px">{{ price2 }}</p>
         <p class="t-klein" style="margin:0 0 20px">einmalig</p>
         <ul class="pk-punkte"><li>Bis 5 Unterseiten</li><li>Bildergalerie und Google-Unternehmensprofil</li><li>Zwei Korrekturrunden</li></ul>
-        <a href="/angebot/" class="btn btn-primaer pk-link">Details ansehen</a>
+        <a href="/projekt-check/" class="btn btn-primaer pk-link" data-quelle="paket-standard" onClick="{{ onEinstieg }}">Mit Standard starten</a>
       </div>
       <div class="card pk-plus">
         <p class="label" style="margin:0 0 12px">Pro</p>
         <p class="preis" style="margin:0 0 4px">{{ price3 }}</p>
         <p class="t-klein" style="margin:0 0 20px">einmalig</p>
         <ul class="pk-punkte"><li>Bis 10 Seiten</li><li>Terminbuchung, zweite Sprache, Texte selbst bearbeiten</li><li>Drei Korrekturrunden</li></ul>
-        <a href="/angebot/" class="btn btn-sekundaer pk-link">Details ansehen</a>
+        <a href="/projekt-check/" class="btn btn-sekundaer pk-link" data-quelle="paket-pro" onClick="{{ onEinstieg }}">Mit Pro starten</a>
       </div>
     </div>
+    <p style="margin:32px 0 0"><a href="/angebot/" class="einstieg">Alle Leistungen und Zusätze im Angebot<span aria-hidden="true">→</span></a></p>
   </div></div>
 </section>
 
-<section class="sektion sektion-flaeche" aria-labelledby="muster-t" id="start-muster">
+<section class="sektion sektion-flaeche" aria-labelledby="ablauf-t">
   <div class="wrap"><div class="inner">
-    <h2 id="muster-t" class="t-h2" style="margin:0 0 8px">Musterprojekte</h2>
-    <p class="t-text" style="margin:0 0 40px;color:var(--text-2)">Die erste Seite ist ein erfundener Betrieb, die zweite mein eigenes Portfolio.</p>
-    <div class="g-two">
-      <div>
-        <p style="margin:0 0 12px"><span class="badge badge-akzent">Firmenseite</span></p>
-        <a href="/musterprojekte/" aria-label="Musterprojekt Doppelmeter ansehen" class="muster-vorschau" style="background:#F4F0E8">
-          <sc-if value="{{ musterSichtbar }}" hint-placeholder-val="{{ true }}"><dc-import name="musterpreview" project="doppelmeter" device="desktop" hint-size="100%,100%" style="position:absolute;inset:0"></dc-import></sc-if>
-        </a>
-        <h3 class="t-h3" style="margin:0 0 8px">Doppelmeter</h3>
-        <p class="t-text" style="margin:0 0 12px;color:var(--text-2)">Ziel war der Anruf, also steht die Telefonnummer in jedem Bildschirm.</p>
-        <p class="t-klein" style="margin:0"><span class="nowrap">Ladezeit 0,9 s</span> · <span class="nowrap">5 Seiten</span> · <span class="nowrap">Paket Standard</span></p>
-      </div>
-      <div>
-        <p style="margin:0 0 12px"><span class="badge badge-akzent">Eigenprojekt</span></p>
-        <a href="/musterprojekte/" aria-label="Musterprojekt Portfolio ansehen" class="muster-vorschau" style="background:var(--tinte)">
-          <sc-if value="{{ musterSichtbar }}" hint-placeholder-val="{{ true }}"><dc-import name="musterpreview" project="portfolio" device="desktop" hint-size="100%,100%" style="position:absolute;inset:0"></dc-import></sc-if>
-        </a>
-        <h3 class="t-h3" style="margin:0 0 8px">Portfolio</h3>
-        <p class="t-text" style="margin:0 0 12px;color:var(--text-2)">Mein eigenes Projekt. Ziel war, im Kopf zu bleiben, also bricht der Aufbau bewusst mit den Regeln für Firmenseiten.</p>
-        <p class="t-klein" style="margin:0"><span class="nowrap">Ladezeit 0,9 s</span> · <span class="nowrap">Einzelseite</span> · <span class="nowrap">Eigenprojekt</span></p>
-      </div>
-    </div>
-    <p style="margin:40px 0 0"><a href="/musterprojekte/" class="btn btn-sekundaer">Musterprojekte ansehen</a></p>
+    <p class="label abschnitt-nr">03 · Ablauf</p>
+    <h2 id="ablauf-t" class="t-h2" style="margin:0 0 48px">So läuft es</h2>
+    <ol class="schritte">
+      <li><p class="schritt-n">01</p><p class="schritt-t">Fragen beantworten</p><p class="schritt-s">{{ checkUmfang }}, ohne Registrierung.</p></li>
+      <li><p class="schritt-n">02</p><p class="schritt-t">Entwurf ansehen</p><p class="schritt-s">Innert {{ entwurfTageText }} sehen Sie Ihre fertige Seite.</p></li>
+      <li><p class="schritt-n">03</p><p class="schritt-t">Änderungen sagen</p><p class="schritt-s">Sie sagen, was anders soll, ich setze es um.</p></li>
+      <li><p class="schritt-n">04</p><p class="schritt-t">Online gehen</p><p class="schritt-s">Ich schalte auf und übergebe Ihnen Domain, Zugänge und Quellcode.</p></li>
+    </ol>
+    <p class="hinweis hinweis-akzent" style="margin:48px 0 0"><span class="lime-kreis" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><span><strong>Bezahlt wird erst, wenn Ihnen der Entwurf aus Schritt 02 gefällt.</strong> Einmal, ohne Anzahlung. Gefällt er Ihnen nicht, kostet es Sie nichts.</span></p>
   </div></div>
 </section>
 
-<section class="sektion" aria-labelledby="person-t">
+<section class="sektion" aria-labelledby="vergleich-t">
+  <div class="wrap"><div class="inner">
+    <p class="label abschnitt-nr">04 · Einordnung</p>
+    <h2 id="vergleich-t" class="t-h2" style="margin:0 0 12px">Baukasten, Agentur oder ich?</h2>
+    <p class="t-lead" style="margin:0 0 48px">Alle drei Wege führen zu einer Website. Sie unterscheiden sich darin, wer die Arbeit macht und wann Sie etwas sehen.</p>
+    <div class="wahl" role="table" aria-label="Vergleich Baukasten, Agentur und ODERA">
+      <div class="wahl-kopf" role="row"><span role="columnheader"><span class="rechner-sr">Frage</span></span><span role="columnheader">Baukasten</span><span role="columnheader">Agentur</span><span role="columnheader" class="wahl-ich">ODERA</span></div>
+      <sc-for list="{{ wahlZeilen }}" as="z" hint-placeholder-count="4">
+        <div class="wahl-zeile" role="row">
+          <span role="rowheader" class="wahl-frage">{{ z.frage }}</span>
+          <span role="cell" data-l="Baukasten">{{ z.baukasten }}</span>
+          <span role="cell" data-l="Agentur">{{ z.agentur }}</span>
+          <span role="cell" data-l="ODERA" class="wahl-ich">{{ z.ich }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <p class="t-klein" style="margin:16px 0 0">Allgemeine Einordnung. Einzelne Anbieter arbeiten anders.</p>
+  </div></div>
+</section>
+
+<section class="sektion sektion-flaeche" aria-labelledby="person-t">
   <div class="wrap"><div class="inner person">
     <img class="person-bild" src="assets/img/portrait-nico-bodmer.webp" alt="Nico Bodmer" width="160" height="160" loading="lazy" decoding="async">
     <div>
-      <h2 id="person-t" class="t-h2" style="margin:0 0 16px">Wer Ihre Seite baut</h2>
-      <p class="t-lead" style="margin:0 0 20px;color:var(--tinte)">Ich heisse Nico Bodmer und baue Webseiten für Betriebe in der ganzen Schweiz. Gelernt habe ich das in einer vierjährigen Lehre als Platform Developer mit eidgenössischem Fähigkeitszeugnis.</p>
-      <a href="/ueber-mich/" class="einstieg">Mehr über mich<span aria-hidden="true">→</span></a>
+      <p class="label abschnitt-nr">05 · Wer das macht</p>
+      <h2 id="person-t" class="t-h2" style="margin:0 0 16px">Sie reden mit dem, der die Seite baut</h2>
+      <p class="t-lead" style="margin:0 0 28px;color:var(--tinte)">Ich heisse Nico Bodmer und baue von Berikon aus Webseiten für kleine Betriebe. Nebenberuflich und darum höchstens {{ plaetzeText }} gleichzeitig.</p>
+      <dl class="lebenslauf">
+        <div><dt>Ausbildung</dt><dd>Platform Developer EFZ, technische Berufsmaturität</dd></div>
+        <div><dt>Beruf</dt><dd>Seit 2021 in der IT, heute technischer Vertrieb für Daten und KI</dd></div>
+        <div><dt>Studium</dt><dd>BSc Digital Business &amp; AI an der HWZ, berufsbegleitend</dd></div>
+      </dl>
+      <a href="/ueber-mich/" class="einstieg">Mehr über mich und meine Arbeitsweise<span aria-hidden="true">→</span></a>
+    </div>
+  </div></div>
+</section>
+
+<section class="sektion" aria-labelledby="fragen-t">
+  <div class="wrap"><div class="inner txt">
+    <p class="label abschnitt-nr">06 · Fragen</p>
+    <h2 id="fragen-t" class="t-h2" style="margin:0 0 32px">Was Sie sich vielleicht fragen</h2>
+    <div class="fragen">
+      <sc-for list="{{ startFaqs }}" as="f" hint-placeholder-count="3">
+        <details class="frage"><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
+      </sc-for>
+    </div>
+    <div class="fragen-weiter">
+      <p style="margin:0">Andere Frage? Mein Assistent antwortet sofort, oder Sie schreiben mir.</p>
+      <div class="row" style="gap:12px">
+        <button class="btn btn-sekundaer" type="button" onClick="{{ openChat }}" aria-haspopup="dialog">Assistent fragen</button>
+        <a class="btn btn-sekundaer" href="{{ mailKontakt }}">E-Mail schreiben</a>
+      </div>
     </div>
   </div></div>
 </section>
 
 <section id="abschluss" class="sektion sektion-blau" data-flaeche="blau" aria-labelledby="abschluss-t">
-  <div class="wrap"><div class="inner txt">
-    <h2 id="abschluss-t" class="t-h2" style="color:var(--auf-dunkel);margin:0 0 24px">Schreiben Sie mir. {{ abschlussMinuten }}</h2>
-    <p data-nosnap="1" style="display:flex;align-items:center;gap:12px;font-size:var(--fs-text);color:var(--auf-dunkel);margin:0 0 24px">
-      <span class="{{ availPuls }}" style="width:10px;height:10px;border-radius:999px;background:{{ availDot }};flex:none"></span>{{ availability }}
-    </p>
-    <p class="auslastung"><span class="label" style="color:var(--auf-dunkel)">Auslastung</span><span class="ausl-balken" aria-hidden="true"><sc-for list="{{ auslPlaetze }}" as="pl" hint-placeholder-count="2"><i data-frei="{{ pl.frei }}"></i></sc-for></span><strong>{{ heroAuslText }}</strong><span>Zwei Plätze, weil ich das nebenberuflich mache.</span></p>
-    <a href="/projekt-check/" class="btn btn-akzent" data-quelle="kontakt" onClick="{{ onEinstieg }}">Projekt-Check starten</a>
-    <p style="font-size:var(--fs-text);color:var(--auf-dunkel);margin:24px 0 0">oder direkt: <a href="{{ mailKontakt }}" style="color:var(--auf-dunkel)">kontakt@odera.ch</a></p>
-    <p data-nosnap="1" style="display:{{ heroLoadDisplay }};align-items:center;gap:8px;font-size:var(--fs-klein);line-height:1.5;color:var(--auf-dunkel);margin:40px 0 0"><span style="width:8px;height:8px;border-radius:999px;background:var(--akzent);flex:none"></span><span>Diese Seite hat bei Ihnen <span data-count="{{ loadSec }}" data-dec="1" style="font-variant-numeric:tabular-nums">{{ loadSecLabel }}</span> Sekunden geladen. Ihre wird genauso schnell.</span></p>
+  <div class="wrap"><div class="inner abschluss">
+    <div>
+      <h2 id="abschluss-t" class="t-h2" style="color:var(--auf-dunkel);margin:0 0 16px">Fangen wir mit der ersten Frage an</h2>
+      <p class="t-lead" style="color:var(--auf-dunkel);margin:0 0 32px">{{ kontaktCheckText }}</p>
+      <p class="hero-frage-t" id="hero-frage-t" style="color:var(--auf-dunkel)">Was sollen Besucher auf Ihrer neuen Website tun?</p>
+      <div class="hero-chips" role="group" aria-labelledby="hero-frage-t">
+        <sc-for list="{{ heroChips }}" as="c" hint-placeholder-count="4">
+          <button type="button" class="hero-chip" data-v="{{ c.v }}" onClick="{{ onHeroChip }}" aria-describedby="chip-hinweis">{{ c.label }}</button>
+        </sc-for>
+      </div>
+      <p id="chip-hinweis" class="t-klein" style="color:var(--auf-dunkel);margin:12px 0 0">Ein Klick startet den Projekt-Check mit dieser Antwort.</p>
+    </div>
+    <div class="abschluss-seite">
+      <p data-nosnap="1" style="display:flex;align-items:flex-start;gap:12px;margin:0 0 20px">
+        <span class="{{ availPuls }}" style="width:10px;height:10px;margin-top:7px;border-radius:999px;background:{{ availDot }};flex:none"></span><span>{{ availability }}</span>
+      </p>
+      <p class="auslastung"><span class="label" style="color:var(--auf-dunkel)">Auslastung</span><span class="ausl-balken" aria-hidden="true"><sc-for list="{{ auslPlaetze }}" as="pl" hint-placeholder-count="2"><i data-frei="{{ pl.frei }}"></i></sc-for></span><strong>{{ heroAuslText }}</strong></p>
+      <p style="margin:0">Lieber direkt schreiben: <a href="{{ mailKontakt }}" style="color:var(--auf-dunkel)">kontakt@odera.ch</a></p>
+    </div>
   </div></div>
 </section>
 </div>
@@ -2585,6 +2576,8 @@ class Component extends DCLogic {
   REFERENZ_SATZ = 'Ich suche zwei Betriebe, deren Website ich zeigen darf. Dafür bekommen Sie {betrag} Rabatt. Was ich brauche: Ihren Namen, Ihr Logo und zwei Sätze nach dem Livegang. Gilt für die nächsten zwei Projekte.';
   // Stand unter Impressum, Datenschutz und AGB. Nur ändern, wenn die Rechtstexte geändert werden.
   STAND_RECHTSTEXTE = '28.09.2026';
+  ENTWURF_TAGE = 5;
+  ZAHLWORT = ['null', 'ein', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf', 'zwölf'];
   PLAETZE_TOTAL = 2;
   PLAETZE_FREI = 1;
   PAGES = {
@@ -2643,7 +2636,8 @@ class Component extends DCLogic {
   // Einstiege in den Projekt-Check. Die Quelle steht nur in der E-Mail an mich (Kurzübersicht «Einstieg»),
   // sie wird nirgends gespeichert. ans/txt: Vorbelegung, skip: Fragen, die dadurch schon beantwortet sind.
   EINSTIEGE = {
-    hero: { label: 'Startseite, erste Frage' },
+    hero: { label: 'Startseite oben' },
+    erstefrage: { label: 'Startseite, erste Frage' },
     rechner: { label: 'Preis-Rechner' },
     'paket-website': { label: 'Paketkarte Website', ans: { SEITENZAHL: 'Eine Seite reicht' }, skip: ['SEITENZAHL'] },
     'paket-standard': { label: 'Paketkarte Standard', ans: { SEITENZAHL: 'Bis 5 Seiten' }, skip: ['SEITENZAHL'] },
@@ -3744,11 +3738,11 @@ class Component extends DCLogic {
         { path: 'M2 6 Q14 16 20 6 T38 12', title: 'Reparaturen', desc: 'Wir flicken, was sich lohnt.' }
       ],
       heroAuslText: this.PLAETZE_FREI > 0 ? (this.PLAETZE_FREI + ' von ' + this.PLAETZE_TOTAL + ' Plätzen frei') : 'Derzeit ausgebucht',
-      heroAnim0: this.reduce ? 'none' : 'heroPop 380ms ease-out 0ms both',
-      heroAnim1: this.reduce ? 'none' : 'heroPop 380ms ease-out 70ms both',
-      heroAnim2: this.reduce ? 'none' : 'heroPop 380ms ease-out 140ms both',
-      heroAnim3: this.reduce ? 'none' : 'heroPop 380ms ease-out 210ms both',
-      heroAnim4: this.reduce ? 'none' : 'heroPop 380ms ease-out 420ms both',
+      heroAnim0: 'none',
+      heroAnim1: 'none',
+      heroAnim2: 'none',
+      heroAnim3: 'none',
+      heroAnim4: 'none',
       scrollHintAnim: this.reduce ? 'none' : 'scrollBob 2.4s ease-in-out infinite',
       onSlide: (e) => { this.moveSlider(Number(e.target.value)); },
       onSlideKey: (e) => {
@@ -3886,8 +3880,18 @@ class Component extends DCLogic {
       quickLinkDisplay: (s.quick || s.editing) ? 'none' : 'block',
       qNum: s.step + 1,
       qTitle: q.t,
+      entwurfTageKurz: this.ENTWURF_TAGE + ' Arbeitstage',
+      entwurfTageText: (this.ZAHLWORT[this.ENTWURF_TAGE] || this.ENTWURF_TAGE) + ' Arbeitstagen',
+      plaetzeText: (this.ZAHLWORT[this.PLAETZE_TOTAL] || this.PLAETZE_TOTAL) + ' Projekte',
+      startFaqs: [0, 1, 3].map((i) => ({ q: this.FAQ[i][0], a: this.FAQ[i][1] })),
+      wahlZeilen: [
+        { frage: 'Wer baut die Seite?', baukasten: 'Sie selbst, mit einer Vorlage.', agentur: 'Ein Team, oft mit Projektleitung.', ich: 'Ich, vom Entwurf bis zur Übergabe.' },
+        { frage: 'Wann sehen Sie das Ergebnis?', baukasten: 'Wenn Sie fertig gebaut haben.', agentur: 'Meist nach Konzept und Auftrag.', ich: 'Innert ' + this.ENTWURF_TAGE + ' Arbeitstagen, vor jeder Zahlung.' },
+        { frage: 'Was kostet es?', baukasten: 'Ein monatliches Abo.', agentur: 'Je nach Offerte.', ich: 'Fixpreis ab ' + 'CHF\u00a0' + this.fmt(this.PAKET_PREIS[0]) + ', einmalig.' },
+        { frage: 'Wem gehört die Seite?', baukasten: 'Sie bleibt meist beim Anbieter.', agentur: 'Je nach Vertrag.', ich: 'Ihnen, samt Quellcode und Zugängen.' },
+      ],
       heroChips: [['Anrufen', 'Anrufen'], ['Offerte anfragen', 'Eine Anfrage oder Offerte schicken'], ['Termin buchen', 'Einen Termin buchen'], ['Vorbeikommen', 'Vorbeikommen']].map((c) => ({ label: c[0], v: c[1] })),
-      onHeroChip: (e) => { const el = e.currentTarget; el.dataset.gewaehlt = '1'; setTimeout(() => { this.checkStarten('hero', { ans: { ZIEL: el.dataset.v }, skip: ['ZIEL'] }, el); }, this.reduce ? 0 : 160); },
+      onHeroChip: (e) => { const el = e.currentTarget; el.dataset.gewaehlt = '1'; setTimeout(() => { this.checkStarten('erstefrage', { ans: { ZIEL: el.dataset.v }, skip: ['ZIEL'] }, el); }, this.reduce ? 0 : 160); },
       grussDisplay: s.brief && s.brief.firma ? 'block' : 'none', grussText: s.brief && s.brief.firma ? 'Guten Tag, ' + s.brief.firma + (/[.!?]$/.test(s.brief.firma) ? '' : '.') : '',
       onEinstieg: this.onEinstieg,
       // Preis-Rechner (Angebotsseite), gleiche Paket-Logik wie der Projekt-Check
