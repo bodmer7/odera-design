@@ -18,44 +18,47 @@ let scrollVorher = '';
 
 // ---------- Darstellung ----------
 const STIL = `
-.oc-root{position:fixed;right:24px;bottom:24px;z-index:70;width:400px;height:min(640px,calc(100vh - 48px));display:flex;flex-direction:column;background:#F6F5F1;color:#11131A;border:1px solid #E2DFD8;border-radius:20px;box-shadow:0 24px 60px rgba(17,19,26,0.22);font-family:'Inter',system-ui,sans-serif;overflow:hidden;animation:ocIn 200ms ease-out}
+.oc-root{position:fixed;right:24px;bottom:24px;z-index:70;width:400px;height:min(640px,calc(100vh - 48px));display:flex;flex-direction:column;background:var(--grund,#F6F5F1);color:var(--tinte,#11131A);border:1px solid var(--linie,#E2DFD8);border-radius:16px;box-shadow:0 24px 60px rgba(17,19,26,0.22);font-family:'Inter',system-ui,sans-serif;overflow:hidden;animation:ocIn 200ms ease-out}
 @keyframes ocIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .oc-root *{box-sizing:border-box}
-.oc-kopf{display:flex;align-items:center;gap:8px;padding:14px 12px 14px 20px;background:#FFFFFF;border-bottom:1px solid #E2DFD8}
+.oc-kopf{display:flex;align-items:center;gap:8px;padding:14px 12px 14px 20px;background:var(--flaeche,#FFFFFF);border-bottom:1px solid var(--linie,#E2DFD8)}
 .oc-kopf-t{flex:1;min-width:0}
-.oc-titel{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.02em;margin:0}
-.oc-unter{font-size:13px;line-height:1.4;color:#5B6270;margin:2px 0 0}
-.oc-knopf{min-height:44px;padding:0 12px;border:none;border-radius:999px;background:none;color:#1E34B8;font:inherit;font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-.oc-zu{width:44px;min-height:44px;padding:0;text-decoration:none;font-size:26px;line-height:1;color:#11131A}
+.oc-titel{display:flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.01em;margin:0}
+.oc-marke{padding:2px 7px;border-radius:4px;background:var(--akzent,#D6F24B);box-shadow:inset 0 0 0 1px rgba(85,99,0,0.28);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:500;letter-spacing:0}
+.oc-unter{font-size:13px;line-height:1.4;color:var(--text-2,#565D6B);margin:2px 0 0}
+.oc-knopf{min-height:44px;padding:0 12px;border:none;border-radius:999px;background:none;color:var(--primaer-dunkel,#1E34B8);font:inherit;font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.oc-zu{width:44px;min-height:44px;padding:0;text-decoration:none;font-size:26px;line-height:1;color:var(--tinte,#11131A)}
+.oc-info{margin:0;padding:8px 20px;background:var(--flaeche,#FFFFFF);border-bottom:1px solid var(--linie,#E2DFD8);font-size:13px;line-height:1.45;color:var(--text-2,#565D6B)}
+.oc-info a{color:var(--primaer-dunkel,#1E34B8)}
 .oc-log{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
-.oc-hinweis{font-size:13px;line-height:1.5;color:#5B6270;margin:0;padding:12px 14px;background:#FFFFFF;border:1px solid #E2DFD8;border-radius:14px}
 .oc-chips{display:flex;flex-wrap:wrap;gap:8px}
-.oc-chip{min-height:44px;padding:8px 14px;border:1px solid #11131A;border-radius:999px;background:#FFFFFF;color:#11131A;font:inherit;font-size:13px;line-height:1.3;text-align:left;cursor:pointer}
-.oc-chip:hover{background:#F4FBD6}
+.oc-chip{min-height:44px;padding:8px 14px;border:1px solid var(--linie-feld,#80879A);border-radius:999px;background:var(--flaeche,#FFFFFF);color:var(--tinte,#11131A);font:inherit;font-size:13px;line-height:1.3;text-align:left;cursor:pointer}
+.oc-chip:hover{background:var(--akzent-tint,#F4FBD6)}
 .oc-msg{max-width:88%;padding:12px 14px;border-radius:16px;font-size:16px;line-height:1.55;overflow-wrap:anywhere}
 .oc-msg p{margin:0 0 8px}.oc-msg p:last-child{margin:0}
 .oc-msg ul,.oc-msg ol{margin:0 0 8px;padding-left:20px}.oc-msg li{margin:0 0 4px}
-.oc-msg a{color:#1E34B8;text-decoration:underline;text-underline-offset:3px}
-.oc-ich{align-self:flex-end;background:#2D4CF0;color:#FFFFFF;border-bottom-right-radius:6px;white-space:pre-wrap}
-.oc-ki{align-self:flex-start;background:#FFFFFF;border:1px solid #E2DFD8;border-bottom-left-radius:6px}
-.oc-fehler{align-self:flex-start;background:#FFF4F1;border:1px solid #FF5A3C;color:#11131A}
+.oc-msg a{color:var(--primaer-dunkel,#1E34B8);text-decoration:underline;text-underline-offset:3px}
+.oc-ich{align-self:flex-end;background:var(--primaer,#2D4CF0);color:#FFFFFF;border-bottom-right-radius:6px;white-space:pre-wrap}
+.oc-ki{align-self:flex-start;background:var(--flaeche,#FFFFFF);border:1px solid var(--linie,#E2DFD8);border-bottom-left-radius:6px}
+.oc-fehler{align-self:flex-start;background:#FFF4F1;border:1px solid #D9482B;color:var(--tinte,#11131A)}
 .oc-tippt{display:inline-flex;gap:5px;align-items:center;min-height:22px}
-.oc-tippt span{width:7px;height:7px;border-radius:999px;background:#5B6270;animation:ocPunkt 1.2s ease-in-out infinite}
+.oc-tippt span{width:7px;height:7px;border-radius:999px;background:var(--text-2,#565D6B);animation:ocPunkt 1.2s ease-in-out infinite}
 .oc-tippt span:nth-child(2){animation-delay:150ms}.oc-tippt span:nth-child(3){animation-delay:300ms}
 @keyframes ocPunkt{0%,80%,100%{opacity:0.25}40%{opacity:1}}
-.oc-form{display:flex;align-items:flex-end;gap:8px;padding:12px;background:#FFFFFF;border-top:1px solid #E2DFD8}
-.oc-eingabe{flex:1;min-height:48px;max-height:140px;padding:12px 14px;border:1px solid #A8B0BD;border-radius:14px;background:#FFFFFF;color:#11131A;font:inherit;font-size:16px;line-height:1.4;resize:none}
-.oc-eingabe:focus{outline:3px solid #11131A;outline-offset:1px}
-.oc-senden{min-height:48px;padding:0 18px;border:none;border-radius:999px;background:#D6F24B;color:#11131A;box-shadow:inset 0 0 0 1px rgba(85,99,0,0.28);font:inherit;font-size:16px;font-weight:600;cursor:pointer}
-.oc-senden:disabled{background:#E2DFD8;color:#5B6270;cursor:not-allowed}
-.oc-fuss{padding:0 12px 12px;background:#FFFFFF}
-.oc-cta{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px;font-weight:600;text-decoration:none}
-.oc-cta:hover{background:#BFEE7C}
-.oc-start{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:none;border-radius:999px;background:#D6F24B;color:#11131A;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
-.oc-start:hover{background:#BFEE7C}
+.oc-form{display:flex;align-items:flex-end;gap:8px;padding:12px 12px 8px;background:var(--flaeche,#FFFFFF);border-top:1px solid var(--linie,#E2DFD8)}
+.oc-eingabe{flex:1;min-height:48px;max-height:140px;padding:12px 14px;border:1px solid var(--linie-feld,#80879A);border-radius:14px;background:var(--flaeche,#FFFFFF);color:var(--tinte,#11131A);font:inherit;font-size:16px;line-height:1.4;resize:none}
+.oc-eingabe::placeholder{color:var(--text-2,#565D6B)}
+.oc-eingabe:focus{outline:3px solid var(--primaer,#2D4CF0);outline-offset:1px}
+.oc-senden{min-height:48px;padding:0 18px;border:none;border-radius:999px;background:var(--akzent,#D6F24B);color:var(--tinte,#11131A);box-shadow:inset 0 0 0 1px rgba(85,99,0,0.28);font:inherit;font-size:16px;font-weight:600;cursor:pointer}
+.oc-senden:hover{background:var(--akzent-hover,#C8E53C)}
+.oc-senden:disabled{background:var(--linie,#E2DFD8);color:var(--text-2,#565D6B);box-shadow:none;cursor:not-allowed}
+.oc-fuss{margin:0;padding:0 16px 12px;background:var(--flaeche,#FFFFFF);font-size:13px;line-height:1.5;color:var(--text-2,#565D6B)}
+.oc-fuss a{color:var(--primaer-dunkel,#1E34B8);font-weight:600}
+.oc-start{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:none;border-radius:999px;background:var(--primaer,#2D4CF0);color:#FFFFFF;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
+.oc-start:hover{background:var(--primaer-dunkel,#1E34B8)}
 .oc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.oc-root :focus-visible{outline:3px solid #11131A;outline-offset:2px}
-@media(max-width:560px){.oc-root{inset:0;width:auto;height:auto;border:none;border-radius:0;box-shadow:none}.oc-kopf{padding-left:16px}.oc-log{padding:16px}}
+.oc-root :focus-visible{outline:3px solid var(--tinte,#11131A);outline-offset:2px}
+@media(max-width:560px){.oc-root{inset:0;width:auto;height:auto;border:none;border-radius:0;box-shadow:none}.oc-kopf{padding-left:16px}.oc-log{padding:16px}.oc-info{padding:8px 16px}}
 @media(prefers-reduced-motion:reduce){.oc-root,.oc-tippt span{animation:none}.oc-log{scroll-behavior:auto}}
 `;
 
@@ -244,12 +247,11 @@ async function frage(text) {
 // ---------- Aufbau ----------
 function introBauen() {
   intro = el('div', { class: 'oc-intro', style: 'display:flex;flex-direction:column;gap:14px' });
-  const hinweis = el('p', { class: 'oc-hinweis' }, ['Ihre Nachrichten werden zur Beantwortung an Cloudflare übermittelt und dort von einem KI-Modell verarbeitet, möglicherweise ausserhalb der Schweiz. Bitte geben Sie keine persönlichen Daten ein. Mehr dazu in der ']);
-  hinweis.appendChild(el('a', { href: '/datenschutz/#ds-8', text: 'Datenschutzerklärung', onclick: () => { if (window.innerWidth <= 560) schliessen(); } }));
-  hinweis.appendChild(document.createTextNode('.'));
-  const chips = el('div', { class: 'oc-chips', role: 'group', 'aria-label': 'Vorschläge' });
+  const gruss = el('div', { class: 'oc-msg oc-ki' });
+  markdown('Grüezi. Ich beantworte Fragen zu Angebot, Preisen und Ablauf, sofort und auch am Abend. Verbindliches klärt Nico persönlich.', gruss);
+  const chips = el('div', { class: 'oc-chips', role: 'group', 'aria-label': 'Häufige Fragen' });
   for (const v of VORSCHLAEGE) chips.appendChild(el('button', { type: 'button', class: 'oc-chip', text: v, onclick: () => vorlage(v) }));
-  intro.append(hinweis, chips);
+  intro.append(gruss, chips);
   log.appendChild(intro);
 }
 
@@ -285,19 +287,23 @@ function bauen() {
   if (!document.getElementById('oc-stil')) document.head.appendChild(el('style', { id: 'oc-stil', text: STIL }));
   root = el('div', { class: 'oc-root', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'oc-titel', 'aria-describedby': 'oc-unter', onkeydown: tasten });
   const kopf = el('div', { class: 'oc-kopf' }, [
-    el('div', { class: 'oc-kopf-t' }, [el('p', { id: 'oc-titel', class: 'oc-titel', text: 'ODERA Assistent' }), el('p', { id: 'oc-unter', class: 'oc-unter', text: 'KI-Assistent. Antworten sind unverbindlich.' })]),
+    el('div', { class: 'oc-kopf-t' }, [el('p', { id: 'oc-titel', class: 'oc-titel' }, ['Assistent von ODERA', el('span', { class: 'oc-marke', text: 'KI' })]), el('p', { id: 'oc-unter', class: 'oc-unter', text: 'Antwortet sofort. Antworten sind unverbindlich.' })]),
     el('button', { type: 'button', class: 'oc-knopf', text: 'Neu starten', onclick: neuStarten }),
     el('button', { type: 'button', class: 'oc-knopf oc-zu', 'aria-label': 'Assistent schliessen', text: '×', onclick: () => schliessen() }),
   ]);
   log = el('div', { class: 'oc-log', role: 'log', 'aria-live': 'polite', 'aria-busy': 'false', 'aria-label': 'Gespräch', tabindex: '0' });
-  eingabe = el('textarea', { id: 'oc-eingabe', class: 'oc-eingabe', rows: '1', maxlength: '1000', placeholder: 'Ihre Frage', autocomplete: 'off' });
+  eingabe = el('textarea', { id: 'oc-eingabe', class: 'oc-eingabe', rows: '1', maxlength: '1000', placeholder: 'Ihre Frage an den Assistenten', autocomplete: 'off' });
   eingabe.addEventListener('input', groesse);
   eingabe.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); frage(eingabe.value); } });
   senden = el('button', { type: 'submit', class: 'oc-senden', text: 'Senden' });
   const form = el('form', { class: 'oc-form', onsubmit: (e) => { e.preventDefault(); frage(eingabe.value); } },
     [el('label', { class: 'oc-sr', for: 'oc-eingabe', text: 'Ihre Frage an den Assistenten' }), eingabe, senden]);
-  const fuss = el('div', { class: 'oc-fuss' }, [el('a', { href: '/projekt-check/', class: 'oc-cta', text: 'Projekt-Check starten', onclick: (e) => { schliessen(false); if (starten && !e.metaKey && !e.ctrlKey) { e.preventDefault(); starten(); } } })]);
-  root.append(kopf, log, form, fuss);
+  const info = el('p', { class: 'oc-info' }, ['KI-Modell bei Cloudflare, möglicherweise ausserhalb der Schweiz. Bitte keine persönlichen Daten eingeben. ']);
+  info.appendChild(el('a', { href: '/datenschutz/#ds-8', text: 'Datenschutz', onclick: () => { if (window.innerWidth <= 560) schliessen(); } }));
+  const fuss = el('p', { class: 'oc-fuss' }, ['Verbindlich wird es im ',
+    el('a', { href: '/projekt-check/', text: 'Projekt-Check', onclick: (e) => { schliessen(false); if (starten && !e.metaKey && !e.ctrlKey) { e.preventDefault(); starten(); } } }),
+    ' oder per Mail an ', el('a', { href: 'mailto:' + MAIL, text: MAIL }), '.']);
+  root.append(kopf, info, log, form, fuss);
   introBauen();
 }
 
@@ -320,6 +326,8 @@ export function oeffnen(opts = {}) {
   }
   zuUnterst();
   eingabe.focus();
+  if (opts.vorlage && VORLAGEN[opts.vorlage]) vorlage(opts.vorlage);
+  else if (opts.frage) frage(String(opts.frage));
 }
 
 export function schliessen(fokusZurueck = true) {

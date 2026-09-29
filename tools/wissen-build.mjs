@@ -179,7 +179,11 @@ console.log(`chat-proxy/src/wissen.js: Kern ${kernZeichen} Zeichen, dazu je nach
   const liste = (name) => new Function('return ' + (quelle.match(new RegExp(' {2}' + name + ' = (\\[[\\s\\S]*?\\n {2}\\]);')) || [])[1])();
   const chf = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '’');
   const preise = wert('PAKET_PREIS');
-  const phasen = liste('PHASES');
+  // Platzhalter wie in index.html (werte()): Zahlen kommen aus denselben Konstanten
+  const zahlwort = wert('ZAHLWORT'), tage = wert('ENTWURF_TAGE');
+  const platz = { MIN: String(wert('CHECK_MINUTEN')), TAGE: tage + ' Arbeitstagen', TAGE_WORT: (zahlwort[tage] || tage) + ' Arbeitstagen', PREIS_STD: chf(preise[1]) };
+  const werte = (t) => String(t).replace(/\{([A-Z_]+)\}/g, (m, k) => { if (platz[k] === undefined) throw new Error('Platzhalter {' + k + '} in fester Chat-Antwort nicht auflösbar.'); return platz[k]; });
+  const phasen = liste('PHASES').map((p) => Object.assign({}, p, { sie: werte(p.sie), ich: werte(p.ich), dauer: werte(p.dauer) }));
   const nichtDrin = [...(quelle.match(/<p class="pr-h">Was nicht im Preis ist<\/p>\s*<ul class="pr-ul">([\s\S]*?)<\/ul>/) || ['', ''])[1].matchAll(/<li>([^<]+)<\/li>/g)].map((m) => m[1]);
   if (!/ohne Anzahlung/.test((phasen || [])[2] && phasen[2].sie)) throw new Error('Ablauf sagt nicht mehr «ohne Anzahlung»: feste Chat-Antwort prüfen.');
   if (!phasen || phasen.length !== 4 || nichtDrin.length < 5) throw new Error('Angaben für die festen Chat-Antworten nicht gefunden.');
@@ -203,6 +207,8 @@ console.log(`chat-proxy/src/wissen.js: Kern ${kernZeichen} Zeichen, dazu je nach
     'Was ist nicht inbegriffen?': ['Nicht im Preis sind:', ...nichtDrin.map((x) => '- ' + x), '', 'Alles Übrige steht im [Angebot](/angebot/).'].join('\n'),
     'Muss ich etwas anzahlen?': 'Nein. Der Entwurf ist kostenlos und unverbindlich. Die Rechnung über den Fixpreis kommt erst, wenn Sie den Entwurf annehmen, einmal und ohne Anzahlung.',
   };
+  const erwartet = wert('CHAT_VORSCHLAEGE');
+  if (JSON.stringify(Object.keys(vorlagen)) !== JSON.stringify(erwartet)) throw new Error('CHAT_VORSCHLAEGE in index.html passt nicht zu den festen Antworten: ' + erwartet.join(' | '));
   const ZIEL_V = join(ROOT, 'assets', 'js', 'chat-vorlagen.js');
   writeFileSync(ZIEL_V, '// Erzeugt mit tools/wissen-build.mjs aus index.html. Nicht von Hand ändern.\n// Feste Antworten auf die Vorschläge im Chat, ohne Anfrage an das Sprachmodell.\n' +
     `export const VORLAGEN = ${JSON.stringify(vorlagen, null, 1)};\n`);

@@ -359,6 +359,7 @@ footer a:hover{color:var(--akzent)!important}
 /* Tablet:Rand ist schmaler, Knopf kleiner und ganz aussen, damit er keine Inhalte überdeckt */
 @media(min-width:561px) and (max-width:1100px){.chat-btn{width:44px;height:44px;right:4px;bottom:16px}.chat-btn svg{width:22px;height:22px}}
 @media print{.chat-btn{display:none!important}}
+@media(min-width:1280px){.chat-btn{width:auto;gap:10px;padding:0 22px 0 18px}.chat-btn-l{position:static;width:auto;height:auto;overflow:visible;clip:auto;font-size:16px;font-weight:600}}
 .mf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .mf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .editbar{position:sticky;top:0;z-index:5;background:var(--flaeche);border-bottom:1px solid var(--linie)}
@@ -442,6 +443,22 @@ footer a:hover{color:var(--akzent)!important}
 .werk-handy{position:absolute;right:-12px;bottom:0;width:26%;border:6px solid var(--tinte);border-radius:22px;overflow:hidden;background:var(--tinte);box-shadow:0 20px 40px -24px rgba(17,19,26,0.5)}
 .werk figcaption{margin-top:var(--a-2);max-width:70%;font-size:var(--fs-klein);line-height:1.5;color:var(--text-2)}
 .abschnitt-nr{margin:0 0 var(--a-2)}
+.fragen-raster{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--a-5);align-items:start}
+.ki-karte{padding:28px;border-radius:16px;background:var(--flaeche);border:1px solid var(--linie);box-shadow:0 24px 48px -36px rgba(17,19,26,0.35)}
+.ki-kopf{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px;padding:0 0 14px;border-bottom:1px solid var(--linie)}
+.ki-titel{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:var(--fs-lead)}
+.ki-marke{padding:3px 8px;border-radius:4px;background:var(--akzent);color:var(--tinte);box-shadow:inset 0 0 0 1px var(--akzent-linie);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-klein);font-weight:500}
+.ki-gruss{margin:0 0 20px;padding:12px 14px;border-radius:14px 14px 14px 4px;background:var(--grund);font-size:var(--fs-text);line-height:1.55}
+.ki-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.ki-chip{min-height:44px;padding:8px 14px;border:1px solid var(--linie-feld);border-radius:999px;background:var(--flaeche);color:var(--tinte);font:inherit;font-size:var(--fs-text);line-height:1.3;text-align:left;cursor:pointer;transition:background var(--dauer) var(--kurve)}
+.ki-chip:hover{background:var(--akzent-tint)}
+.ki-form{display:flex;gap:8px}
+.ki-form input{flex:1;min-width:0;min-height:48px;padding:0 14px;border:1px solid var(--linie-feld);border-radius:12px;background:var(--flaeche);color:var(--tinte);font:inherit;font-size:16px}
+.ki-form input::placeholder{color:var(--text-2)}
+.ki-los{min-height:48px;padding:0 20px}
+.ki-hinweis{margin:12px 0 0;font-size:var(--fs-klein);line-height:1.5;color:var(--text-2)}
+@media(max-width:1000px){.fragen-raster{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:560px){.ki-karte{padding:20px}}
 /* Projekt-Check auf dem Handy: Frage und Eingabe zuerst, Hinweise danach */
 @media(max-width:1023px){
  .qgrid{display:flex;flex-direction:column;gap:0}
@@ -775,20 +792,35 @@ footer a:hover{color:var(--akzent)!important}
 </section>
 
 <section class="sektion" aria-labelledby="fragen-t">
-  <div class="wrap"><div class="inner txt">
+  <div class="wrap"><div class="inner">
     <p class="label abschnitt-nr">06 · Fragen</p>
-    <h2 id="fragen-t" class="t-h2" style="margin:0 0 32px">Was Sie sich vielleicht fragen</h2>
-    <div class="fragen">
-      <sc-for list="{{ startFaqs }}" as="f" hint-placeholder-count="3">
-        <details class="frage"><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
-      </sc-for>
-    </div>
-    <div class="fragen-weiter">
-      <p style="margin:0">Andere Frage? Mein Assistent antwortet sofort, oder Sie schreiben mir.</p>
-      <div class="row" style="gap:12px">
-        <button class="btn btn-sekundaer" type="button" onClick="{{ openChat }}" aria-haspopup="dialog">Assistent fragen</button>
-        <a class="btn btn-sekundaer" href="{{ mailKontakt }}">E-Mail schreiben</a>
+    <h2 id="fragen-t" class="t-h2" style="margin:0 0 12px">Was Sie sich vielleicht fragen</h2>
+    <p class="t-lead" style="margin:0 0 48px">Die drei häufigsten Fragen stehen hier. Für alles andere antwortet mein Assistent sofort.</p>
+    <div class="fragen-raster">
+      <div>
+        <div class="fragen">
+          <sc-for list="{{ startFaqs }}" as="f" hint-placeholder-count="3">
+            <details class="frage"><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
+          </sc-for>
+        </div>
+        <p class="t-text" style="margin:24px 0 0">Lieber persönlich? <a href="{{ mailKontakt }}">kontakt@odera.ch</a>, Antwort spätestens am nächsten Abend.</p>
       </div>
+      <aside class="ki-karte" aria-labelledby="ki-t" style="display:{{ chatKarteDisplay }}">
+        <div class="ki-kopf"><p id="ki-t" class="ki-titel">Assistent von ODERA</p><span class="ki-marke">KI</span></div>
+        <p class="ki-gruss">Grüezi. Ich kenne Angebot, Preise und Ablauf und antworte sofort. Verbindliches klärt Nico persönlich.</p>
+        <p class="label" style="margin:0 0 10px">Häufig gefragt</p>
+        <div class="ki-chips">
+          <sc-for list="{{ chatVorschlaege }}" as="v" hint-placeholder-count="4">
+            <button type="button" class="ki-chip" data-v="{{ v }}" onClick="{{ onChatVorlage }}" aria-haspopup="dialog">{{ v }}</button>
+          </sc-for>
+        </div>
+        <form class="ki-form" onSubmit="{{ onChatFrage }}">
+          <label class="rechner-sr" for="ki-frage">Eigene Frage an den Assistenten</label>
+          <input id="ki-frage" name="frage" type="text" maxlength="1000" autocomplete="off" placeholder="Eigene Frage stellen">
+          <button type="submit" class="btn btn-primaer ki-los">Fragen</button>
+        </form>
+        <p class="ki-hinweis">KI-Antworten sind unverbindlich. Bitte keine persönlichen Daten eingeben. <a href="/datenschutz/#ds-8">Datenschutz</a></p>
+      </aside>
     </div>
   </div></div>
 </section>
@@ -2396,7 +2428,7 @@ footer a:hover{color:var(--akzent)!important}
 
 <button type="button" class="chat-btn" onClick="{{ openChat }}" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten, Taste f" title="Fragen an den KI-Assistenten (Taste f)" data-bar="{{ chatBar }}" data-hell="{{ chatHell }}" style="display:{{ chatDisplay }};animation:{{ chatAnim }}">
   <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"></path><path d="M8.5 9.5h7M8.5 12.5h4"></path></svg>
-  <span class="chat-btn-l">Fragen?</span>
+  <span class="chat-btn-l">Assistent fragen</span>
 </button>
 
 </x-dc>
@@ -2449,6 +2481,8 @@ class Component extends DCLogic {
   // Stand unter Impressum, Datenschutz und AGB. Nur ändern, wenn die Rechtstexte geändert werden.
   STAND_RECHTSTEXTE = '28.09.2026';
   ENTWURF_TAGE = 5;
+  // Vorschläge im Chat mit fester Antwort (tools/wissen-build.mjs erzeugt die Antworten und prüft die Liste)
+  CHAT_VORSCHLAEGE = ['Was kostet eine Website?', 'Wie läuft ein Projekt ab?', 'Was ist nicht inbegriffen?', 'Muss ich etwas anzahlen?'];
   CHECK_MINUTEN = 6;
   KORREKTUR_CHF = 120;
   ZAHLWORT = ['null', 'ein', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf', 'zwölf'];
@@ -2895,11 +2929,20 @@ class Component extends DCLogic {
   }
 
   // Lädt das Chat-Modul erst beim ersten Öffnen (dynamischer Import), damit die Ladezeit gleich bleibt.
-  chatOeffnen = (e) => {
+  chatOeffnen = (e, extra = {}) => {
     const ausloeser = (e && e.currentTarget) || document.querySelector('.chat-btn');
     import('/assets/js/chat.js')
-      .then((m) => { this.chatModul = m; m.oeffnen({ endpoint: this.CHAT_ENDPOINT, ausloeser: ausloeser, starten: () => this.checkStarten('chat') }); })
+      .then((m) => { this.chatModul = m; m.oeffnen(Object.assign({ endpoint: this.CHAT_ENDPOINT, ausloeser: ausloeser, starten: () => this.checkStarten('chat') }, extra)); })
       .catch(() => this.go('/projekt-check/'));
+  };
+  // Karte auf der Startseite: Vorschlag (feste Antwort, kein Modellaufruf) oder eigene Frage
+  chatVorlage = (e) => { this.chatOeffnen(e, { vorlage: e.currentTarget.dataset.v }); };
+  chatFrage = (e) => {
+    e.preventDefault();
+    const feld = e.currentTarget.elements.frage, text = (feld.value || '').trim();
+    if (!text) { feld.focus(); return; }
+    feld.value = '';
+    this.chatOeffnen({ currentTarget: feld }, { frage: text });
   };
 
   // ---------- Projekt-Check direkt senden ----------
@@ -3761,6 +3804,10 @@ class Component extends DCLogic {
       quickLinkDisplay: (s.quick || s.editing) ? 'none' : 'block',
       qNum: s.step + 1,
       qTitle: q.t,
+      chatVorschlaege: this.CHAT_VORSCHLAEGE,
+      chatKarteDisplay: this.CHAT_ENDPOINT ? 'block' : 'none',
+      onChatVorlage: this.chatVorlage,
+      onChatFrage: this.chatFrage,
       entwurfTageD: this.ENTWURF_TAGE + ' Arbeitstagen',
       korrekturChf: 'CHF\u00a0' + this.KORREKTUR_CHF,
       texteChf: 'CHF\u00a0' + this.TEXT_PRO_SEITE_CHF,
