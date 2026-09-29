@@ -31,7 +31,7 @@ const STIL = `
 .oc-hinweis{font-size:13px;line-height:1.5;color:#5B6270;margin:0;padding:12px 14px;background:#FFFFFF;border:1px solid #E2DFD8;border-radius:14px}
 .oc-chips{display:flex;flex-wrap:wrap;gap:8px}
 .oc-chip{min-height:44px;padding:8px 14px;border:1px solid #11131A;border-radius:999px;background:#FFFFFF;color:#11131A;font:inherit;font-size:13px;line-height:1.3;text-align:left;cursor:pointer}
-.oc-chip:hover{background:#EDEFFF}
+.oc-chip:hover{background:#F4FBD6}
 .oc-msg{max-width:88%;padding:12px 14px;border-radius:16px;font-size:16px;line-height:1.55;overflow-wrap:anywhere}
 .oc-msg p{margin:0 0 8px}.oc-msg p:last-child{margin:0}
 .oc-msg ul,.oc-msg ol{margin:0 0 8px;padding-left:20px}.oc-msg li{margin:0 0 4px}
@@ -46,7 +46,7 @@ const STIL = `
 .oc-form{display:flex;align-items:flex-end;gap:8px;padding:12px;background:#FFFFFF;border-top:1px solid #E2DFD8}
 .oc-eingabe{flex:1;min-height:48px;max-height:140px;padding:12px 14px;border:1px solid #A8B0BD;border-radius:14px;background:#FFFFFF;color:#11131A;font:inherit;font-size:16px;line-height:1.4;resize:none}
 .oc-eingabe:focus{outline:3px solid #11131A;outline-offset:1px}
-.oc-senden{min-height:48px;padding:0 18px;border:none;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
+.oc-senden{min-height:48px;padding:0 18px;border:none;border-radius:999px;background:#D6F24B;color:#11131A;box-shadow:inset 0 0 0 1px rgba(85,99,0,0.28);font:inherit;font-size:16px;font-weight:600;cursor:pointer}
 .oc-senden:disabled{background:#E2DFD8;color:#5B6270;cursor:not-allowed}
 .oc-fuss{padding:0 12px 12px;background:#FFFFFF}
 .oc-cta{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px;font-weight:600;text-decoration:none}

@@ -49,9 +49,9 @@
 .kcard-d{font-size:13px;line-height:1.45;color:var(--grau)}
 .kcard-p{margin-top:6px;font-size:13px;letter-spacing:0.04em;color:var(--grau)}
 .kcard:hover{border-color:var(--tinte)}
-.kcard[data-an="1"]{background:var(--kobalt);border-color:var(--kobalt);color:var(--weiss)}
-.kcard[data-an="1"] .kcard-i,.kcard[data-an="1"] .kcard-d,.kcard[data-an="1"] .kcard-p{color:var(--weiss)}
-.kcard[aria-disabled="true"]{cursor:default;background:var(--kobalt-deep);border-color:var(--kobalt-deep)}
+.kcard[data-an="1"]{background:var(--akzent);border-color:var(--akzent-tief);color:var(--tinte)}
+.kcard[data-an="1"] .kcard-i,.kcard[data-an="1"] .kcard-d,.kcard[data-an="1"] .kcard-p{color:var(--tinte)}
+.kcard[aria-disabled="true"]{cursor:default}
 .kcard:focus-visible{outline:3px solid var(--kobalt);outline-offset:2px}
 @media(max-width:700px){.g-karten{grid-template-columns:1fr}.kcard{min-height:0}}
 
@@ -112,6 +112,9 @@
 .dk-logo{position:relative;width:120px;height:120px;margin:0 auto 32px;display:flex;align-items:center;justify-content:center}
 .dk-ring{position:absolute;inset:0;transform:rotate(-90deg)}
 .dk-ring circle{stroke-dasharray:100;stroke-dashoffset:0;animation:dkRing 900ms cubic-bezier(0.2,0,0,1) both}
+.dk-haken{position:absolute;right:-2px;bottom:-2px;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;background:var(--akzent);color:var(--tinte);box-shadow:0 0 0 4px var(--grund),inset 0 0 0 1px var(--akzent-linie);animation:dkPop 420ms cubic-bezier(0.2,0,0,1) 700ms both}
+.dk-haken path{stroke-dasharray:100;stroke-dashoffset:0;animation:dkHaken 420ms ease-out 950ms both}
+@keyframes dkHaken{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
 .dk-zeichen{animation:dkPop 520ms cubic-bezier(0.2,0,0,1) 200ms both}
 @keyframes dkRing{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
 @keyframes dkPop{0%{transform:scale(0.6);opacity:0}65%{transform:scale(1.06);opacity:1}100%{transform:none;opacity:1}}
