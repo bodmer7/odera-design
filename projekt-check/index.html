@@ -348,6 +348,8 @@ button,input,textarea{font-family:inherit}
 .chat-btn[data-hell="1"]:focus-visible{outline-color:#FFFFFF}
 @keyframes chatIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media(max-width:560px){.chat-btn{display:none!important}}
+/* Tablet: Rand ist schmaler, Knopf kleiner und ganz aussen, damit er keine Inhalte überdeckt */
+@media(min-width:561px) and (max-width:1100px){.chat-btn{width:44px;height:44px;right:4px;bottom:16px}.chat-btn svg{width:22px;height:22px}}
 @media print{.chat-btn{display:none!important}}
 .mf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .mf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -413,6 +415,7 @@ button,input,textarea{font-family:inherit}
  .mdet[open]>summary::after{content:"\2013"}
  .mhide{display:none}
 }
+.blob,.glow{display:none!important}
 .blob{position:fixed;width:720px;height:720px;border-radius:999px;opacity:0.12;filter:blur(120px);pointer-events:none;z-index:0;transition:background 800ms linear,left 800ms ease-in-out,top 800ms ease-in-out}
 .printonly{display:none}
 .row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
