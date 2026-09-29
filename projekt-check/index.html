@@ -545,7 +545,7 @@ footer a:hover{color:var(--akzent)!important}
  .g-four>div>p:nth-child(3){font-size:16px!important;margin:4px 0 0!important}
  .g-prom{gap:0}
  .glow,.blob{display:none!important}
- .f-legal,.f-tip{display:none!important}
+ .f-legal{display:none!important}
  .f-legal-row{display:flex!important}
  .mp-ovbar{height:40px!important;padding:0 12px!important}
  .mp-ovtxt{font-size:13px!important}
@@ -590,7 +590,7 @@ footer a:hover{color:var(--akzent)!important}
       <span aria-hidden="true" style="position:absolute;bottom:-2px;height:3px;background:var(--primaer);left:{{ uLeft }};width:{{ uWidth }};opacity:{{ uOpacity }};transition:left 220ms cubic-bezier(0.2,0,0,1),width 220ms cubic-bezier(0.2,0,0,1),opacity 150ms linear"></span>
     </nav>
     <div style="display:flex;align-items:center;gap:12px">
-      <a class="navcta" href="/projekt-check/"><span class="navcta-lg">Projekt-Check starten</span><span class="navcta-sm">Formular</span></a>
+      <a class="navcta" href="/projekt-check/"><span class="navcta-lg">Projekt-Check starten</span><span class="navcta-sm">Check starten</span></a>
       <div class="burger">
         <button type="button" onClick="{{ toggleMenu }}" aria-label="Menü öffnen" aria-expanded="{{ menuOpen }}" style="width:48px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:var(--flaeche);border:1px solid var(--linie);border-radius:999px;cursor:pointer">
           <span style="display:block;width:20px;height:2px;background:var(--tinte)"></span>
@@ -820,7 +820,7 @@ footer a:hover{color:var(--akzent)!important}
           <li>Impressum und Datenschutzerklärung</li>
           <li>Für Handy, Tablet und Computer</li>
           <li>Eine Korrekturrunde</li>
-          <li>Entwurf innert 5 Arbeitstagen</li>
+          <li>Entwurf innert {{ entwurfTageD }}</li>
           <li>Online 10 Arbeitstage nach Ihrer Freigabe</li>
         </ul>
         <p class="pr-s">Ihr Aufwand: ein Formular und eine Rückmeldung.</p>
@@ -836,7 +836,7 @@ footer a:hover{color:var(--akzent)!important}
           <li>Grundlagen für die Auffindbarkeit bei Google</li>
           <li>Ladezeit unter einer Sekunde</li>
           <li>Zwei Korrekturrunden</li>
-          <li>Entwurf innert 5 Arbeitstagen</li>
+          <li>Entwurf innert {{ entwurfTageD }}</li>
           <li>Online 15 Arbeitstage nach Ihrer Freigabe</li>
         </ul>
         <p class="pr-s">Ihr Aufwand: ein Formular, Ihre Bilder, zwei Rückmeldungen.</p>
@@ -850,7 +850,7 @@ footer a:hover{color:var(--akzent)!important}
           <li>Zweite Sprache</li>
           <li>Bereich für offene Stellen</li>
           <li>Drei Korrekturrunden</li>
-          <li>Entwurf innert 5 Arbeitstagen</li>
+          <li>Entwurf innert {{ entwurfTageD }}</li>
           <li>Online 25 Arbeitstage nach Ihrer Freigabe</li>
         </ul>
         <p class="pr-s">Ihr Aufwand: ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
@@ -861,7 +861,7 @@ footer a:hover{color:var(--akzent)!important}
         <ul class="pr-ul">
           <li>3 Richtungen zur Auswahl</li>
           <li>2 Korrekturrunden</li>
-          <li>Entwurf innert 5 Arbeitstagen</li>
+          <li>Entwurf innert {{ entwurfTageD }}</li>
           <li>Fertige Dateien für Web und Druck, in Farbe, Schwarz und Weiss</li>
           <li>Fassung für Browserfenster und Profilbilder</li>
           <li>Farbwerte und Schrift auf einem Übersichtsblatt</li>
@@ -872,8 +872,8 @@ footer a:hover{color:var(--akzent)!important}
       <div class="pr-blk">
         <p class="pr-h">Zusatzleistungen</p>
         <ul class="pr-ul">
-          <li>Weitere Korrekturrunde: CHF 120</li>
-          <li>Texterstellung: CHF 150 pro Seite</li>
+          <li>Weitere Korrekturrunde: {{ korrekturChf }}</li>
+          <li>Texterstellung: {{ texteChf }} pro Seite</li>
           <li>Fotograf auf Wunsch organisiert, Kosten nach Aufwand</li>
         </ul>
         <p class="pr-s">Alle Paketpreise sind einmalig. Kein Abonnement, keine monatliche Gebühr. Hosting ist in keinem Paket enthalten, kann aber nach dem Livegang optional bei mir bezogen werden. Die Aufschaltung ist im Preis enthalten.</p>
@@ -957,7 +957,7 @@ footer a:hover{color:var(--akzent)!important}
           <p class="mono rechner-zt" id="rechner-zt">Zusätze, optional</p>
           <div class="rechner-fn rechner-fn-z" role="group" aria-labelledby="rechner-zt">
             <button type="button" class="rfn" role="switch" aria-checked="{{ rechnerLogoAn }}" onClick="{{ onRechnerLogo }}"><span>Logo dazu, {{ logoMitChf }}</span></button>
-            <button type="button" class="rfn" role="switch" aria-checked="{{ rechnerTexteAn }}" onClick="{{ onRechnerTexte }}"><span>Texte von mir, CHF 150 pro Seite</span></button>
+            <button type="button" class="rfn" role="switch" aria-checked="{{ rechnerTexteAn }}" onClick="{{ onRechnerTexte }}"><span>Texte von mir, {{ texteChf }} pro Seite</span></button>
           </div>
         </div>
         <div class="rechner-erg">
@@ -988,7 +988,7 @@ footer a:hover{color:var(--akzent)!important}
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Impressum und Datenschutzerklärung</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Für Handy, Tablet und Computer</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Eine Korrekturrunde</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert 5 Arbeitstagen</li>
+            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert {{ entwurfTageD }}</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 10 Arbeitstage nach Ihrer Freigabe</li>
           </ul>
           <p class="aufwand"><span class="label">Ihr Aufwand</span>ein Formular und eine Rückmeldung.</p>
@@ -1010,7 +1010,7 @@ footer a:hover{color:var(--akzent)!important}
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Grundlagen für die Auffindbarkeit bei Google</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Ladezeit unter einer Sekunde</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Zwei Korrekturrunden</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert 5 Arbeitstagen</li>
+            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert {{ entwurfTageD }}</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 15 Arbeitstage nach Ihrer Freigabe</li>
           </ul>
           <p class="aufwand"><span class="label">Ihr Aufwand</span>ein Formular, Ihre Bilder, zwei Rückmeldungen.</p>
@@ -1030,7 +1030,7 @@ footer a:hover{color:var(--akzent)!important}
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Bereich für offene Stellen</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Drei Korrekturrunden</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Bevorzugte Terminvergabe</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert 5 Arbeitstagen</li>
+            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert {{ entwurfTageD }}</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 25 Arbeitstage nach Ihrer Freigabe</li>
           </ul>
           <p class="aufwand"><span class="label">Ihr Aufwand</span>ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
@@ -1050,7 +1050,7 @@ footer a:hover{color:var(--akzent)!important}
           <ul style="list-style:none;margin:0 0 20px;padding:0;display:flex;flex-direction:column;gap:12px">
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>3 Richtungen zur Auswahl</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>2 Korrekturrunden</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert 5 Arbeitstagen</li>
+            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert {{ entwurfTageD }}</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Fertige Dateien für Web und Druck, in Farbe, Schwarz und Weiss</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Fassung für Browserfenster und Profilbilder</li>
             <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Farbwerte und Schrift auf einem Übersichtsblatt</li>
@@ -1064,8 +1064,8 @@ footer a:hover{color:var(--akzent)!important}
         <summary class="msum">Zusatzleistungen</summary>
         <p class="mono mhide" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-2);margin:24px 0 16px">Zusatzleistungen</p>
         <ul style="list-style:none;margin:0;padding:0">
-          <li style="display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65"><span>Weitere Korrekturrunde</span><span class="mono" style="font-variant-numeric:tabular-nums">CHF 120</span></li>
-          <li style="display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65"><span>Texterstellung</span><span class="mono" style="font-variant-numeric:tabular-nums">CHF 150 pro Seite</span></li>
+          <li style="display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65"><span>Weitere Korrekturrunde</span><span class="mono" style="font-variant-numeric:tabular-nums">{{ korrekturChf }}</span></li>
+          <li style="display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65"><span>Texterstellung</span><span class="mono" style="font-variant-numeric:tabular-nums">{{ texteChf }} pro Seite</span></li>
           <li style="display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65"><span>Fotograf auf Wunsch organisiert</span><span class="mono">Kosten nach Aufwand</span></li>
         </ul>
       </details>
@@ -2336,7 +2336,7 @@ footer a:hover{color:var(--akzent)!important}
             <dc-import name="logo" kind="wort" h="32" fg="#F6F5F1" cut="#11131A" hint-size="152px,32px"></dc-import>
           </div>
           <p style="font-size:16px;line-height:1.5;color:#C9CED6;margin:0">Webseiten für Schweizer Betriebe</p>
-          <p style="font-size:16px;line-height:1.5;color:var(--linie-stark);margin:4px 0 0">Schweiz</p>
+          <p style="font-size:16px;line-height:1.5;color:var(--linie-stark);margin:4px 0 0">Berikon AG</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:12px">
           <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="5">
@@ -2361,8 +2361,7 @@ footer a:hover{color:var(--akzent)!important}
       <div class="row" style="justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid rgba(246,245,241,0.15);gap:16px">
         <p style="font-size:16px;color:var(--linie-stark);margin:0">© 2026 ODERA Design · Nico Bodmer</p>
         <div class="row f-tip" style="gap:24px">
-          <p style="font-size:13px;color:var(--linie-stark);margin:0">Tipp: Taste k öffnet den Projekt-Check.</p>
-          <p style="font-size:13px;color:var(--linie-stark);margin:0">Gebaut mit derselben Technik wie Ihre Seite</p>
+          <p style="font-size:13px;color:var(--linie-stark);margin:0">Keine Cookies, kein Tracking.</p>
         </div>
       </div>
     </div>
@@ -2374,7 +2373,7 @@ footer a:hover{color:var(--akzent)!important}
 
 <sc-if value="{{ showMobBar }}" hint-placeholder-val="{{ false }}">
 <div class="mobbar" role="region" aria-label="Projekt-Check starten">
-  <p class="mobbar-t">Kostenloser Entwurf in 5 Tagen</p>
+  <p class="mobbar-t">Kostenloser Entwurf in {{ entwurfTageD }}</p>
   <a href="/projekt-check/" class="mobbar-go" data-quelle="leiste" onClick="{{ onEinstieg }}">Starten</a>
   <button type="button" class="mobbar-chat" onClick="{{ openChat }}" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten" style="display:{{ chatDisplay }}">
     <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"></path><path d="M8.5 9.5h7M8.5 12.5h4"></path></svg>
@@ -2437,6 +2436,8 @@ class Component extends DCLogic {
   // Stand unter Impressum, Datenschutz und AGB. Nur ändern, wenn die Rechtstexte geändert werden.
   STAND_RECHTSTEXTE = '28.09.2026';
   ENTWURF_TAGE = 5;
+  CHECK_MINUTEN = 6;
+  KORREKTUR_CHF = 120;
   ZAHLWORT = ['null', 'ein', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf', 'zwölf'];
   PLAETZE_TOTAL = 2;
   PLAETZE_FREI = 1;
@@ -2524,18 +2525,18 @@ class Component extends DCLogic {
   ];
 
   FAQ = [
-    ['Das ist mir zu teuer.', 'Standard kostet CHF 1\u2019900, einmalig. Danach zahlen Sie nur noch Hosting und Domain bei Ihrem Anbieter, üblicherweise CHF 120 bis 200 pro Jahr. Und Sie sehen den Entwurf, bevor Sie sich entscheiden.'],
-    ['Ich habe keine Zeit dafür.', 'Ein Formular von rund 6 Minuten und Ihre Rückmeldungen. Erforderlich sind 81 Minuten, verteilt auf drei Wochen. Alles Übrige entscheiden Sie.'],
+    ['Das ist mir zu teuer.', 'Standard kostet {PREIS_STD}, einmalig. Danach zahlen Sie nur noch Hosting und Domain bei Ihrem Anbieter, üblicherweise CHF 120 bis 200 pro Jahr. Und Sie sehen den Entwurf, bevor Sie sich entscheiden.'],
+    ['Ich habe keine Zeit dafür.', 'Ein Formular von rund {MIN} Minuten und Ihre Rückmeldungen. Erforderlich sind {ERF_MIN} Minuten, verteilt auf drei Wochen. Alles Übrige entscheiden Sie.'],
     ['Ich bin nicht technisch.', 'Sie brauchen nichts zu können. Ich gestalte, ich schalte auf, ich übergebe. Im Paket Pro können Sie Texte danach selbst bearbeiten, wenn Sie wollen.'],
     ['Sie sind allein: was, wenn Sie ausfallen?', 'Ich verwende gängige Technik ohne Abhängigkeiten. Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag. Jede andere Fachperson kann übernehmen, ohne von vorne zu beginnen.'],
     ['Bringt mir eine Website überhaupt Kunden?', 'Ehrliche Antwort: Sie ersetzt keine Empfehlung. Sie entscheidet aber, ob der Empfohlene anruft oder weiterklickt. Deshalb richte ich auch Ihr Google-Unternehmensprofil ein. Bei lokalen Betrieben bringt das oft mehr als die Seite selbst.']
   ];
 
   STEPS = [
-    ['Formular ausfüllen', '18 kurze Fragen zu Ihrem Betrieb, Ihrem Ziel und Ihrem Stil, fast alles per Klick. Daraus entsteht Ihre Anfrage an mich.', 6, true],
+    ['Formular ausfüllen', '{FRAGEN} kurze Fragen zu Ihrem Betrieb, Ihrem Ziel und Ihrem Stil, fast alles per Klick. Daraus entsteht Ihre Anfrage an mich.', this.CHECK_MINUTEN, true],
     ['Ich melde mich', 'Sie hören von mir, sobald ich die Mail gelesen habe.', 0, true],
     ['Kurzes Gespräch', 'Wenn etwas unklar ist, telefonieren wir kurz.', 20, false, 0, 'Ist alles klar, gestalte ich direkt los.'],
-    ['Ich gestalte Ihren Entwurf', 'Eine fertige Seite mit Ihren Inhalten, innert fünf Arbeitstagen. Kostenlos und unverbindlich.', 0, true],
+    ['Ich gestalte Ihren Entwurf', 'Eine fertige Seite mit Ihren Inhalten, innert {TAGE_WORT}. Kostenlos und unverbindlich.', 0, true],
     ['Entwurf ansehen', 'Sie sehen die fertige Seite, bevor Sie irgendetwas bezahlt haben.', 20, true],
     ['Rückmeldung geben', 'Sie sagen, was anders soll. Nehmen Sie den Entwurf an, kommt die Rechnung, einmal und ohne Anzahlung. Gefällt Ihnen gar nichts, endet es hier und kostet Sie nichts.', 20, true],
     ['Ich setze um', 'Ihre Änderungen, im Preis enthalten.', 0, true],
@@ -2552,8 +2553,8 @@ class Component extends DCLogic {
 
   // Die vier Phasen auf der Ablaufseite. Muss zu den AGB passen (Paragrafen 2 und 4). steps: Indizes in STEPS.
   PHASES = [
-    { t: 'Anfrage und Angebot', sie: 'Sie füllen das Formular aus, rund 6 Minuten, und nehmen das Angebot an, wenn es passt.', ich: 'Ich melde mich und schicke Ihnen ein Angebot zum Fixpreis.', kosten: 'gratis', frei: true, dauer: 'Antwort spätestens am nächsten Abend, ausser am Wochenende', steps: [0, 1, 2] },
-    { t: 'Entwurf', sie: 'Sie sehen den Entwurf an und geben Rückmeldung. Gefällt er Ihnen nicht, endet es hier.', ich: 'Ich gestalte Ihre Seite als fertigen Entwurf.', kosten: 'gratis', frei: true, dauer: 'innert fünf Arbeitstagen', steps: [3, 4, 5] },
+    { t: 'Anfrage und Angebot', sie: 'Sie füllen das Formular aus, rund {MIN} Minuten, und nehmen das Angebot an, wenn es passt.', ich: 'Ich melde mich und schicke Ihnen ein Angebot zum Fixpreis.', kosten: 'gratis', frei: true, dauer: 'Antwort spätestens am nächsten Abend, ausser am Wochenende', steps: [0, 1, 2] },
+    { t: 'Entwurf', sie: 'Sie sehen den Entwurf an und geben Rückmeldung. Gefällt er Ihnen nicht, endet es hier.', ich: 'Ich gestalte Ihre Seite als fertigen Entwurf.', kosten: 'gratis', frei: true, dauer: 'innert {TAGE_WORT}', steps: [3, 4, 5] },
     { t: 'Umsetzung', sie: 'Sie nehmen den Entwurf an. Dann kommt die Rechnung über den Fixpreis, einmal und ohne Anzahlung.', ich: 'Ich setze Ihre Änderungen um, mit den Korrekturrunden aus Ihrem Paket.', kosten: 'Fixpreis, einmal', frei: false, dauer: 'je nach Paket, steht im Angebot', steps: [6, 7] },
     { t: 'Übergabe', sie: 'Sie geben die fertige Seite schriftlich frei.', ich: 'Ich schalte sie auf und übergebe Ihnen Domain, Zugänge und Quellcode.', kosten: 'keine weiteren Kosten', frei: false, dauer: 'rund 35 Minuten Ihrer Zeit', steps: [8, 9] }
   ];
@@ -2578,7 +2579,6 @@ class Component extends DCLogic {
 
   // Projekt-Check: sechs Abschnitte. Jede Frage beeinflusst Paket und Preis, den Entwurf oder die Kontaktaufnahme.
   ABSCHNITTE = ['Ihr Betrieb', 'Das Ziel der Website', 'Was die Seite können soll', 'Inhalte und Stil', 'Technik und Zeitplan', 'Kontakt'];
-  CHECK_MINUTEN = 6;
 
   // Funktionen als Karten: Name, Erklärung, Paket (alle, Standard, Pro, shop), Symbol (SVG-Pfad, 24er Raster)
   FUNKTIONEN = [
@@ -2648,7 +2648,7 @@ class Component extends DCLogic {
   state = {
     path: '/', scrolled: false, menu: false, barOn: false, pageKey: 0,
     slider: 50, nudges: 0, nudging: false, dragged: false, flipGlow: false,
-    faq: (typeof window !== 'undefined' && window.innerWidth <= 560) ? -1 : 0, priceOpen: false, off: {}, reqMin: 90, optMin: 35, totMin: 125,
+    faq: (typeof window !== 'undefined' && window.innerWidth <= 560) ? -1 : 0, priceOpen: false, off: {}, reqMin: this.zeitSumme(true), optMin: this.zeitSumme(false), totMin: this.zeitSumme(true) + this.zeitSumme(false),
     device: 'desktop', muster: null, tilt: false, tx: 0, ty: 0, mailHover: false, deskView: false, closeHover: false,
     gName: '', gBranch: 'Handwerk', gFilled: false,
     consent: false,
@@ -3056,8 +3056,8 @@ class Component extends DCLogic {
     const i = Number(e.currentTarget.dataset.i);
     const off = Object.assign({}, this.state.off);
     off[i] = !off[i];
-    const req = this.STEPS.reduce((sum, st) => sum + (st[3] ? st[2] : 0), 0);
-    const opt = this.STEPS.reduce((sum, st, idx) => sum + (st[3] ? 0 : (off[idx] ? st[4] : st[2])), 0);
+    const req = this.zeitSumme(true);
+    const opt = this.zeitSumme(false, off);
     const fromOpt = this.state.optMin, fromTot = this.state.totMin;
     this.setState({ off: off, reqMin: req });
     this.animate(0, 1, 300, (k) => this.setState({
@@ -3148,6 +3148,14 @@ class Component extends DCLogic {
   vergessen() { try { sessionStorage.removeItem('odera-check'); } catch (err) { /* nichts */ } }
   gemerkt() { try { return JSON.parse(sessionStorage.getItem('odera-check') || 'null'); } catch (err) { return null; } }
   frage(step = this.state.step) { const f = this.fragen(); return f[Math.min(step, f.length - 1)]; }
+  // Werte im Text: {TAGE}, {TAGE_WORT}, {MIN}, {FRAGEN}, {PREIS_STD}, {ERF_MIN} kommen aus den Konstanten oben
+  werte(t) {
+    const w = { TAGE: this.ENTWURF_TAGE + ' Arbeitstagen', TAGE_WORT: (this.ZAHLWORT[this.ENTWURF_TAGE] || this.ENTWURF_TAGE) + ' Arbeitstagen',
+      MIN: String(this.CHECK_MINUTEN), FRAGEN: String(this.fragenZahl()), PREIS_STD: 'CHF\u00a0' + this.fmt(this.PAKET_PREIS[1]), ERF_MIN: String(this.zeitSumme(true)) };
+    return String(t).replace(/\{([A-Z_]+)\}/g, (m, k) => (w[k] !== undefined ? w[k] : m));
+  }
+  // Minuten aus den Ablaufschritten: erforderlich oder optional (ohne abgewählte)
+  zeitSumme(pflicht, off = {}) { return this.STEPS.reduce((sum, st, i) => sum + (pflicht ? (st[3] ? st[2] : 0) : (st[3] ? 0 : (off[i] ? st[4] : st[2]))), 0); }
   // Zahl der Fragen ohne Folgefragen, für die Texte auf der Seite
   fragenZahl() { return this.Q.filter((q) => !q.nurKurz && !q.wenn).length; }
   checkUmfang() { return this.fragenZahl() + ' Fragen, rund ' + this.CHECK_MINUTEN + ' Minuten'; }
@@ -3640,14 +3648,14 @@ class Component extends DCLogic {
       gPrefillDisplay: (s.gFilled && q.key === 'FIRMA') ? 'block' : 'none',
 
       price1: 'CHF\u00a0' + this.fmt(this.PAKET_PREIS[0]), price2: 'CHF\u00a0' + this.fmt(this.PAKET_PREIS[1]), price3: 'CHF\u00a0' + this.fmt(this.PAKET_PREIS[2]),
-      faqs: this.FAQ.map((f, i) => ({ i: i, q: f[0], a: f[1], open: s.faq === i, rows: s.faq === i ? '1fr' : '0fr', rot: s.faq === i ? 'rotate(180deg)' : 'none' })),
+      faqs: this.FAQ.map((f, i) => ({ i: i, q: f[0], a: this.werte(f[1]), open: s.faq === i, rows: s.faq === i ? '1fr' : '0fr', rot: s.faq === i ? 'rotate(180deg)' : 'none' })),
       priceOpen: s.priceOpen,
       priceRows: s.priceOpen ? '1fr' : '0fr',
       priceRot: s.priceOpen ? 'rotate(180deg)' : 'none',
       togglePrice: () => this.setState({ priceOpen: !s.priceOpen }),
       onFaq: (e) => { const i = Number(e.currentTarget.dataset.i); this.setState({ faq: s.faq === i ? -1 : i }); },
 
-      phases: this.PHASES.map((ph, i) => ({ n: String(i + 1), t: ph.t, sie: ph.sie, ich: ph.ich, kosten: ph.kosten, costCls: ph.frei ? 'frei' : '', dauer: ph.dauer })),
+      phases: this.PHASES.map((ph, i) => ({ n: String(i + 1), t: ph.t, sie: this.werte(ph.sie), ich: this.werte(ph.ich), kosten: ph.kosten, costCls: ph.frei ? 'frei' : '', dauer: this.werte(ph.dauer) })),
       phFillPct: s.phFill + '%',
       steps: this.STEPS.map((st, i) => {
         const opt = !st[3];
@@ -3656,7 +3664,7 @@ class Component extends DCLogic {
         const ph = this.PHASES[pi];
         return {
           startDisplay: i === 0 ? 'block' : 'none',
-          i: i, n: String(i + 1).padStart(2, '0'), title: st[0], text: st[1],
+          i: i, n: String(i + 1).padStart(2, '0'), title: st[0], text: this.werte(st[1]),
           headDisplay: ph && ph.steps[0] === i ? 'flex' : 'none', phaseN: String(pi + 1), phaseT: ph ? ph.t : '',
           tag: opt ? 'optional' : 'erforderlich', knobBg: on ? '#FFFFFF' : '#5B6270',
           cardBg: opt ? '#F6F5F1' : '#FFFFFF',
@@ -3740,10 +3748,13 @@ class Component extends DCLogic {
       quickLinkDisplay: (s.quick || s.editing) ? 'none' : 'block',
       qNum: s.step + 1,
       qTitle: q.t,
+      entwurfTageD: this.ENTWURF_TAGE + ' Arbeitstagen',
+      korrekturChf: 'CHF\u00a0' + this.KORREKTUR_CHF,
+      texteChf: 'CHF\u00a0' + this.TEXT_PRO_SEITE_CHF,
       entwurfTageKurz: this.ENTWURF_TAGE + ' Arbeitstage',
       entwurfTageText: (this.ZAHLWORT[this.ENTWURF_TAGE] || this.ENTWURF_TAGE) + ' Arbeitstagen',
       plaetzeText: (this.ZAHLWORT[this.PLAETZE_TOTAL] || this.PLAETZE_TOTAL) + ' Projekte',
-      startFaqs: [0, 1, 3].map((i) => ({ q: this.FAQ[i][0], a: this.FAQ[i][1] })),
+      startFaqs: [0, 1, 3].map((i) => ({ q: this.FAQ[i][0], a: this.werte(this.FAQ[i][1]) })),
       wahlZeilen: [
         { frage: 'Wer baut die Seite?', baukasten: 'Sie selbst, mit einer Vorlage.', agentur: 'Ein Team, oft mit Projektleitung.', ich: 'Ich, vom Entwurf bis zur Übergabe.' },
         { frage: 'Wann sehen Sie das Ergebnis?', baukasten: 'Wenn Sie fertig gebaut haben.', agentur: 'Meist nach Konzept und Auftrag.', ich: 'Innert ' + this.ENTWURF_TAGE + ' Arbeitstagen, vor jeder Zahlung.' },
