@@ -27,6 +27,10 @@ const SITE = (quelle.match(/ {2}SITE = '([^']+)';/) || [])[1];
 const EMAIL = (quelle.match(/ {2}EMAIL = '([^']+)';/) || [])[1];
 if (!SITE || !EMAIL) throw new Error('SITE oder EMAIL in index.html nicht gefunden.');
 const NAME = 'ODERA Design';
+const PREISE = JSON.parse((quelle.match(/ {2}PAKET_PREIS = (\[[^\]]+\]);/) || [])[1] || 'null');
+if (!PREISE || PREISE.length !== 3) throw new Error('PAKET_PREIS in index.html nicht gefunden.');
+// Vorschaubild für geteilte Links (WhatsApp, Mail, soziale Netzwerke), 1200 x 630
+const VORSCHAU = { url: '/assets/img/vorschau-odera.jpg', breite: 1200, hoehe: 630, alt: 'ODERA Design: Sie sehen Ihre neue Website, bevor Sie bezahlen. Ab CHF 890, Entwurf in 5 Arbeitstagen.' };
 
 const urlOf = (p) => (p === '/' ? '/' : p + '/');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -99,6 +103,7 @@ const AUSZUG = `(() => {
   const teil = (sel) => { const el = document.querySelector(sel); return el ? (gehe(el).html || '') : ''; };
   return {
     nav: [...document.querySelectorAll('#dc-root header nav a')].map((a) => ({ label: a.innerText.trim(), href: a.getAttribute('href') })),
+    faq: [...document.querySelectorAll('#dc-root main details.frage')].map((d) => ({ q: d.querySelector('summary').textContent.trim(), a: d.querySelector('p').textContent.trim() })),
     main: teil('#dc-root main'),
     footer: teil('#dc-root footer'),
   };
@@ -110,7 +115,7 @@ function formatiere(html) {
 }
 
 // ---------- 3. Bausteine für <head> und <body> ----------
-function kopf(pfad) {
+function kopf(pfad, teile = {}) {
   const p = PAGES[pfad];
   const url = SITE + urlOf(pfad);
   const zeilen = [
@@ -128,15 +133,29 @@ function kopf(pfad) {
     `<meta property="og:title" content="${escA(p.title)}">`,
     `<meta property="og:description" content="${escA(p.desc || '')}">`,
     `<meta property="og:url" content="${url}">`,
-    '<meta name="twitter:card" content="summary">',
+    `<meta property="og:image" content="${SITE}${VORSCHAU.url}">`,
+    `<meta property="og:image:width" content="${VORSCHAU.breite}">`,
+    `<meta property="og:image:height" content="${VORSCHAU.hoehe}">`,
+    `<meta property="og:image:alt" content="${escA(VORSCHAU.alt)}">`,
+    '<meta name="twitter:card" content="summary_large_image">',
+    `<meta name="twitter:image" content="${SITE}${VORSCHAU.url}">`,
     '<style>x-dc{display:none!important}</style>',
   );
   if (pfad === '/') {
     const ld = { '@context': 'https://schema.org', '@graph': [
       { '@type': 'WebSite', '@id': SITE + '/#website', url: SITE + '/', name: NAME, inLanguage: 'de-CH', publisher: { '@id': SITE + '/#firma' } },
       { '@type': 'ProfessionalService', '@id': SITE + '/#firma', name: NAME, url: SITE + '/', email: EMAIL, description: p.desc,
-        areaServed: { '@type': 'Country', name: 'Schweiz' }, founder: { '@type': 'Person', name: 'Nico Robin Bodmer' } },
+        image: SITE + VORSCHAU.url, logo: SITE + '/favicon.svg', priceRange: 'CHF ' + PREISE[0] + ' bis ' + PREISE[2],
+        address: { '@type': 'PostalAddress', streetAddress: 'Gubelweg 23', postalCode: '8965', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
+        areaServed: { '@type': 'Country', name: 'Schweiz' }, founder: { '@type': 'Person', name: 'Nico Robin Bodmer' },
+        hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Website-Pakete zum Fixpreis', itemListElement: [
+          ['Website', 'Eine Seite mit allen Abschnitten, Kontaktformular, eine Korrekturrunde'],
+          ['Standard', 'Bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil, zwei Korrekturrunden'],
+          ['Pro', 'Bis 10 Seiten, Online-Terminbuchung, zweite Sprache, Texte selbst bearbeiten, drei Korrekturrunden'],
+        ].map(([n, d], i) => ({ '@type': 'Offer', name: 'Paket ' + n, description: d, price: String(PREISE[i]), priceCurrency: 'CHF', url: SITE + '/angebot/' })) } },
     ] };
+    // Fragen nur, wenn sie auf der Seite sichtbar sind (aufklappbar zählt)
+    if (teile.faq && teile.faq.length) ld['@graph'].push({ '@type': 'FAQPage', '@id': SITE + '/#fragen', mainEntity: teile.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
     zeilen.push(`<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`);
   }
   return zeilen.join('\n');
@@ -160,7 +179,7 @@ function baueSeite(pfad, teile) {
     if (!re.test(html)) throw new Error(`Marker ${von} fehlt in index.html`);
     html = html.replace(re, () => `${von}\n${inhalt}\n${bis}`);
   };
-  tausche('<!-- seo:start -->', '<!-- seo:end -->', kopf(pfad));
+  tausche('<!-- seo:start -->', '<!-- seo:end -->', kopf(pfad, teile));
   tausche('<!-- seo-noscript:start -->', '<!-- seo-noscript:end -->', noscriptBlock(pfad, teile));
   html = html.replace(/<html(\s[^>]*)?>/, '<html lang="de-CH">');
   return html;
