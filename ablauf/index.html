@@ -72,7 +72,7 @@ Umsetzung</h3>
 </li>
 </ol>
 <h2>Die Schritte im Einzelnen</h2>
-<p>Optionale Schritte können Sie abwählen. Die Minuten rechnen sich unten zusammen.</p>
+<p>Optionale Schritte können Sie abwählen. Die Minuten rechnen sich nebenan zusammen.</p>
 <h3><p>Anfrage und Angebot</p>
 </h3>
 <p>01</p>
@@ -122,7 +122,7 @@ Umsetzung</h3>
 <p>Aufschaltung und Übergabe erforderlich</p>
 <p>Ich stelle die Seite online und übergebe Ihnen Domain, Zugänge und Quellcode. Danach gehört alles Ihnen.</p>
 <p>30 Min</p>
-<h2>Wie viel Zeit brauchen Sie?</h2>
+<h3>Wie viel Zeit brauchen Sie?</h3>
 <p>Gut zwei Stunden, verteilt auf drei Wochen.</p>
 <p>Erforderlich</p>
 <p>90 Min</p>
@@ -142,9 +142,8 @@ Umsetzung</h3>
 <h3>Die Zugangsdaten sind weg.</h3>
 <p>Ich frage Domain- und Hosting-Zugänge am ersten Tag ab, nicht am letzten. Das rettet mehr Termine als alles andere.</p>
 <h2>Schritt 1 dauert rund 6 Minuten.</h2>
+<p>Ihr Risiko dabei: keines. Der Entwurf kostet Sie nichts, und solange Sie ihn nicht angenommen haben, gibt es keine Rechnung. Ich trage das Risiko, dass mein Entwurf nicht trifft.</p>
 <p><a href="/projekt-check/">Projekt-Check starten</a></p>
-<p>Ihr Risiko</p>
-<p>Keines. Der Entwurf kostet Sie nichts, und solange Sie ihn nicht angenommen haben, gibt es keine Rechnung. Ich trage das Risiko, dass mein Entwurf nicht trifft.</p>
 </main>
 <footer>
 <p>Webseiten für Schweizer Betriebe</p>
@@ -546,6 +545,17 @@ footer a:hover{color:var(--akzent)!important}
 .werk-handy{position:absolute;right:-12px;bottom:0;width:26%;border:6px solid var(--tinte);border-radius:22px;overflow:hidden;background:var(--tinte);box-shadow:0 20px 40px -24px rgba(17,19,26,0.5)}
 .werk figcaption{margin-top:var(--a-2);max-width:70%;font-size:var(--fs-klein);line-height:1.5;color:var(--text-2)}
 .abschnitt-nr{margin:0 0 var(--a-2)}
+.zeitleiste{list-style:none;margin:0;padding:0;border-top:2px solid var(--tinte);max-width:980px}
+.zeitleiste li{display:grid;grid-template-columns:200px minmax(0,1fr);gap:var(--a-3);padding:20px 0;border-bottom:1px solid var(--linie)}
+.zl-jahr{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-text);color:var(--text-2);padding-top:2px}
+.zl-t{margin:0 0 4px;font-size:var(--fs-lead);font-weight:600;line-height:1.3}
+.zl-s{margin:0;font-size:var(--fs-text);line-height:1.55;color:var(--text-2)}
+.tech-karte{display:flex;flex-direction:column;padding:32px;border-radius:16px;background:var(--flaeche);border:1px solid var(--linie)}
+@media(max-width:560px){.zeitleiste li{grid-template-columns:minmax(0,1fr);gap:6px}}
+.st-raster{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:var(--a-5);align-items:start}
+.st-zeit{position:sticky;top:120px}
+.st-zeit .zeit-card{margin-top:var(--a-3)}
+@media(max-width:1000px){.st-raster{grid-template-columns:minmax(0,1fr)}.st-zeit{position:static}}
 .angebot-intro{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px var(--a-3);margin:0 0 var(--a-3)}
 .pk-karte{display:flex;flex-direction:column;padding:32px;border-radius:16px;background:var(--flaeche);border:1px solid var(--linie)}
 .pk-karte.pk-std{border:2px solid var(--tinte);box-shadow:0 18px 48px rgba(17,19,26,0.12)}
@@ -1326,7 +1336,7 @@ footer a:hover{color:var(--akzent)!important}
   <section class="hdr-flow" style="background:var(--grund);align-items:stretch;padding:var(--a-6) 0 var(--a-4)">
     <div class="wrap" style="padding-top:0;padding-bottom:0;width:100%;display:flex;align-items:center">
       <div style="position:relative;z-index:1;max-width:900px;text-align:left">
-        <span class="badge" style="margin-bottom:24px">Ablauf</span>
+        <p class="label" style="margin:0 0 24px">Ablauf</p>
         <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,calc(24px + 2.5vw),60px);line-height:1.06;letter-spacing:-0.03em;word-spacing:normal;color:var(--tinte);margin:0 0 24px;text-wrap:balance">So entsteht Ihre Website.</h1>
         <p style="max-width:640px;font-size:clamp(17px,calc(15.9px + 0.29vw),20px);line-height:1.55;color:var(--tinte);margin:0 0 56px">Sie füllen ein Formular aus. Ich gestalte daraus eine fertige Seite, kostenlos und unverbindlich. Gefällt sie Ihnen, setzen wir Ihre Änderungen um, ich schalte sie auf und übergebe Ihnen alles. Gefällt sie Ihnen nicht, zahlen Sie nichts.</p>
       </div>
@@ -1359,7 +1369,8 @@ footer a:hover{color:var(--akzent)!important}
     <div class="wrap sect">
       <div class="inner">
         <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px">Die Schritte im Einzelnen</h2>
-        <p style="font-size:16px;line-height:1.65;color:var(--text-2);margin:0 0 40px;max-width:65ch">Optionale Schritte können Sie abwählen. Die Minuten rechnen sich unten zusammen.</p>
+        <p style="font-size:16px;line-height:1.65;color:var(--text-2);margin:0 0 40px;max-width:65ch">Optionale Schritte können Sie abwählen. Die Minuten rechnen sich nebenan zusammen.</p>
+        <div class="st-raster">
         <div class="st-list">
           <sc-for list="{{ steps }}" as="s" hint-placeholder-count="10">
             <div>
@@ -1386,19 +1397,11 @@ footer a:hover{color:var(--akzent)!important}
             </div>
           </sc-for>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="ph-sect">
-    <div class="wrap sect">
-      <div class="inner g-abl" style="align-items:center">
-        <div>
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px">Wie viel Zeit brauchen Sie?</h2>
-          <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:var(--tinte);margin:0 0 12px;max-width:560px">{{ totNote }}</p>
+        <aside class="st-zeit" aria-labelledby="zeit-t">
+          <h3 id="zeit-t" class="t-h3" style="margin:0 0 12px">Wie viel Zeit brauchen Sie?</h3>
+          <p style="font-size:var(--fs-text);line-height:1.55;color:var(--tinte);margin:0 0 12px;max-width:560px">{{ totNote }}</p>
           <p class="mono" style="font-size:13px;line-height:1.5;color:var(--tinte);margin:0;display:{{ allOffDisplay }}">{{ allOffNote }}</p>
-        </div>
-        <div class="zeit-card" aria-live="polite">
+          <div class="zeit-card" aria-live="polite">
           <div class="zeit-row"><span class="mono zeit-l"><span class="zeit-dot" style="background:var(--tinte)"></span>Erforderlich</span><span class="mono zeit-v">{{ reqMin }} Min</span></div>
           <div class="zeit-row"><span class="mono zeit-l"><span class="zeit-dot" style="background:#AAB8F7;border:1px solid #AAB8F7"></span>Optional</span><span class="mono zeit-v">{{ optMin }} Min</span></div>
           <div class="zeit-row zeit-tot"><span class="mono zeit-l">Total</span><span class="mono zeit-v" style="font-size:40px">{{ totMin }} Min</span></div>
@@ -1406,10 +1409,13 @@ footer a:hover{color:var(--akzent)!important}
             <span style="width:{{ barReq }};background:var(--tinte);transition:width 300ms ease-in-out"></span>
             <span style="width:{{ barOpt }};background:#AAB8F7;transition:width 300ms ease-in-out"></span>
           </div>
+        </aside>
         </div>
       </div>
     </div>
   </section>
+
+
 
   <section class="ph-tint">
     <div class="wrap" style="padding-top:var(--a-5);padding-bottom:var(--a-5)">
@@ -1422,7 +1428,6 @@ footer a:hover{color:var(--akzent)!important}
   </section>
 
   <section class="sektion-flaeche" style="background:var(--flaeche)">
-    <div class="glow" data-glow="1"></div>
     <div class="wrap sect">
       <div class="inner">
         <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;color:var(--tinte);margin:0 0 16px">Drei Dinge, an denen solche Projekte scheitern</h2>
@@ -1445,21 +1450,12 @@ footer a:hover{color:var(--akzent)!important}
     </div>
   </section>
 
-  <section id="abschluss" style="background:var(--grund)">
-    <div class="wrap sect">
-      <div class="inner txt">
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 32px">{{ schrittEinsDauer }}</h2>
-        <a href="/projekt-check/" class="g3" data-magnet="1" style="display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:18px 32px;border-radius:999px;color:var(--auf-dunkel);font-size:16px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
-      </div>
-    </div>
-  </section>
-  <section class="sektion-blau" data-flaeche="blau" style="background:var(--primaer)">
-        <div class="wrap sect">
-      <div class="inner">
-        <p class="label" style="color:var(--auf-dunkel);margin:0 0 20px">Ihr Risiko</p>
-        <p style="font-size:20px;line-height:1.55;color:var(--grund);margin:0;max-width:760px;text-wrap:pretty">Keines. Der Entwurf kostet Sie nichts, und solange Sie ihn nicht angenommen haben, gibt es keine Rechnung. Ich trage das Risiko, dass mein Entwurf nicht trifft.</p>
-      </div>
-    </div>
+  <section id="abschluss" class="sektion sektion-blau" data-flaeche="blau">
+    <div class="wrap"><div class="inner txt">
+      <h2 class="t-h2" style="color:var(--auf-dunkel);margin:0 0 16px">{{ schrittEinsDauer }}</h2>
+      <p class="t-lead" style="color:var(--auf-dunkel);margin:0 0 32px">Ihr Risiko dabei: keines. Der Entwurf kostet Sie nichts, und solange Sie ihn nicht angenommen haben, gibt es keine Rechnung. Ich trage das Risiko, dass mein Entwurf nicht trifft.</p>
+      <a href="/projekt-check/" class="btn btn-akzent" data-quelle="ablauf" onClick="{{ onEinstieg }}">Projekt-Check starten</a>
+    </div></div>
   </section>
 </div>
 </sc-if>
@@ -1472,14 +1468,13 @@ footer a:hover{color:var(--akzent)!important}
       <div style="max-width:62%">
         <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.06;letter-spacing:-0.03em;color:var(--grund);margin:0 0 24px">Zwei Seiten, zwei Welten.</h1>
         <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:rgba(246,245,241,0.88);margin:0;max-width:640px;text-wrap:pretty">Die eine ist ein erfundener Schreinereibetrieb, die andere mein eigenes Portfolio. Sie sollen zeigen, dass ich nicht eine Vorlage in verschiedenen Farben ausliefere.</p>
-        <p style="font-size:var(--fs-klein);line-height:1.6;color:var(--auf-dunkel);margin:20px 0 0;max-width:65ch">Die erste ist ein erfundener Betrieb, die zweite mein eigenes Portfolio, live unter nico-bodmer.ch.</p>
       </div>
       <div onClick="{{ jumpToSection }}" style="display:flex;flex-direction:column;gap:20px;align-items:flex-start;justify-content:center;height:100%;width:calc(100% - 68px);max-width:420px;margin-left:20px;margin-right:48px;box-sizing:border-box">
         <a class="mp-jump" href="#mp-1">
           <span class="mp-jump-num" aria-hidden="true">01</span>
           <span class="mp-jump-body">
             <span class="mp-jump-name">Doppelmeter</span>
-            <span class="mp-jump-sub">Firmenseite für einen Kunden</span>
+            <span class="mp-jump-sub">Firmenseite, Betrieb erfunden</span>
           </span>
           <span class="mp-jump-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v14M5 12l7 7 7-7"></path></svg></span>
         </a>
@@ -1498,7 +1493,7 @@ footer a:hover{color:var(--akzent)!important}
   <section style="background:var(--grund)">
     <div class="wrap sect">
     <div class="inner">
-      <p style="margin:0 0 16px"><span class="badge badge-akzent">Firmenseite für einen Kunden</span></p>
+      <p class="label" style="margin:0 0 16px">Firmenseite, Betrieb erfunden</p>
       <p style="font-size:16px;line-height:1.55;color:var(--tinte);margin:0 0 48px;max-width:640px;text-wrap:pretty">Zurückhaltend, klar, auf den Anruf ausgerichtet. So sieht eine Seite aus, die für einen Kunden arbeitet.</p>
       <div style="display:flex;flex-direction:column;gap:64px">
         <div id="mp-1" class="g-proj mp-desk">
@@ -1506,7 +1501,7 @@ footer a:hover{color:var(--akzent)!important}
             <p class="mono" style="font-size:13px;color:var(--text-2);margin:0 0 16px">01</p>
             <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 24px">Doppelmeter</h2>
             <p style="font-size:16px;line-height:1.65;color:var(--text-2);margin:0 0 24px;max-width:680px;text-wrap:pretty">Ausgangslage: Betrieb ohne Website, Anfragen nur über Empfehlung. Ziel: Der Besucher soll anrufen. Entscheidung: Die Telefonnummer steht in jedem Bildschirm sichtbar, alles andere ordnet sich darunter.</p>
-            <p style="font-size:13px;line-height:1.6;color:var(--tinte);margin:0 0 24px"><span style="white-space:nowrap">Ladezeit 0,9 s</span> · <span style="white-space:nowrap">5 Seiten</span> · <span style="white-space:nowrap">Paket Standard</span></p>
+            <p style="font-size:13px;line-height:1.6;color:var(--tinte);margin:0 0 24px"><span style="white-space:nowrap">Ladezeit 0,5 s</span> · <span style="white-space:nowrap">5 Seiten</span> · <span style="white-space:nowrap">Paket Standard</span></p>
             <button class="btn btn-primaer" type="button" data-src="muster/doppelmeter.html" data-title="Doppelmeter" onClick="{{ openMuster }}">Ganze Seite ansehen</button>
             <a href="/projekt-check/" class="einstieg" data-quelle="doppelmeter" onClick="{{ onEinstieg }}">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
           </div>
@@ -1533,7 +1528,7 @@ footer a:hover{color:var(--akzent)!important}
           <p class="mono" style="font-size:13px;color:var(--text-2);margin:20px 0 8px">01</p>
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;line-height:1.12;letter-spacing:-0.02em;margin:0 0 16px">Doppelmeter</h2>
           <p style="font-size:16px;line-height:1.6;color:var(--text-2);margin:0 0 16px;text-wrap:pretty">Ausgangslage: Betrieb ohne Website, Anfragen nur über Empfehlung. Ziel: Der Besucher soll anrufen. Entscheidung: Die Telefonnummer steht in jedem Bildschirm sichtbar, alles andere ordnet sich darunter.</p>
-          <p style="font-size:13px;line-height:1.7;color:var(--tinte);margin:0 0 20px"><span style="white-space:nowrap">Ladezeit 0,9 s</span> · <span style="white-space:nowrap">5 Seiten</span> · <span style="white-space:nowrap">Paket Standard</span></p>
+          <p style="font-size:13px;line-height:1.7;color:var(--tinte);margin:0 0 20px"><span style="white-space:nowrap">Ladezeit 0,5 s</span> · <span style="white-space:nowrap">5 Seiten</span> · <span style="white-space:nowrap">Paket Standard</span></p>
           <button class="btn btn-primaer" type="button" data-src="muster/doppelmeter.html" data-title="Doppelmeter" onClick="{{ openMuster }}">Ganze Seite ansehen</button>
             <a href="/projekt-check/" class="einstieg" data-quelle="doppelmeter" onClick="{{ onEinstieg }}">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
         </div>
@@ -1545,7 +1540,7 @@ footer a:hover{color:var(--akzent)!important}
     <section class="mp-block2" style="background:var(--flaeche)">
     <div class="wrap sect">
     <div class="inner">
-      <p style="margin:0 0 16px"><span class="badge badge-akzent">Mein eigenes Projekt</span></p>
+      <p class="label" style="margin:0 0 16px">Eigenprojekt</p>
       <p style="font-size:16px;line-height:1.55;color:var(--tinte);margin:0 0 48px;max-width:640px;text-wrap:pretty">Farbig, verspielt, persönlich. So sieht eine Seite aus, die auffallen darf.</p>
       <div style="display:flex;flex-direction:column;gap:64px">
         <div id="mp-2" class="g-proj rev mp-desk">
@@ -1553,7 +1548,7 @@ footer a:hover{color:var(--akzent)!important}
             <p class="mono" style="font-size:13px;color:var(--text-2);margin:0 0 16px">02</p>
             <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 24px">Portfolio</h2>
             <p style="font-size:16px;line-height:1.65;color:var(--text-2);margin:0 0 24px;max-width:680px;text-wrap:pretty">Ausgangslage: Ein persönlicher Auftritt, der auffallen darf. Ziel: Im Kopf bleiben. Entscheidung: Farbe, Bewegung und ein Aufbau, der bewusst mit den Regeln bricht, die für Firmenseiten gelten.</p>
-            <p style="font-size:13px;line-height:1.6;color:var(--tinte);margin:0 0 12px"><span style="white-space:nowrap">Ladezeit 0,9 s</span> · <span style="white-space:nowrap">Einzelseite</span> · <span style="white-space:nowrap">Eigenprojekt</span> · <span style="white-space:nowrap">live auf nico-bodmer.ch</span></p>
+            <p style="font-size:13px;line-height:1.6;color:var(--tinte);margin:0 0 12px"><span style="white-space:nowrap">Ladezeit 0,5 s</span> · <span style="white-space:nowrap">Einzelseite</span> · <span style="white-space:nowrap">Eigenprojekt</span> · <span style="white-space:nowrap">live auf nico-bodmer.ch</span></p>
             <button class="btn btn-primaer" type="button" data-src="muster/portfolio.html" data-title="Portfolio" onClick="{{ openMuster }}">Ganze Seite ansehen</button>
             <p style="margin:0"><a href="https://nico-bodmer.ch" target="_blank" rel="noopener" style="font-size:16px;color:var(--primaer-dunkel)">Oder direkt zur Originalseite: nico-bodmer.ch</a></p>
           </div>
@@ -1580,11 +1575,12 @@ footer a:hover{color:var(--akzent)!important}
           <p class="mono" style="font-size:13px;color:var(--text-2);margin:20px 0 8px">02</p>
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;line-height:1.12;letter-spacing:-0.02em;margin:0 0 16px">Portfolio</h2>
           <p style="font-size:16px;line-height:1.6;color:var(--text-2);margin:0 0 16px;text-wrap:pretty">Ausgangslage: Ein persönlicher Auftritt, der auffallen darf. Ziel: Im Kopf bleiben. Entscheidung: Farbe, Bewegung und ein Aufbau, der bewusst mit den Regeln bricht, die für Firmenseiten gelten.</p>
-          <p style="font-size:13px;line-height:1.7;color:var(--tinte);margin:0 0 20px"><span style="white-space:nowrap">Ladezeit 0,9 s</span> · <span style="white-space:nowrap">Einzelseite</span> · <span style="white-space:nowrap">Eigenprojekt</span> · <span style="white-space:nowrap">live auf nico-bodmer.ch</span></p>
+          <p style="font-size:13px;line-height:1.7;color:var(--tinte);margin:0 0 20px"><span style="white-space:nowrap">Ladezeit 0,5 s</span> · <span style="white-space:nowrap">Einzelseite</span> · <span style="white-space:nowrap">Eigenprojekt</span> · <span style="white-space:nowrap">live auf nico-bodmer.ch</span></p>
           <button class="btn btn-primaer" type="button" data-src="muster/portfolio.html" data-title="Portfolio" onClick="{{ openMuster }}">Ganze Seite ansehen</button>
             <p style="margin:12px 0 0"><a href="https://nico-bodmer.ch" target="_blank" rel="noopener" style="font-size:16px;color:var(--primaer-dunkel)">Oder direkt zur Originalseite: nico-bodmer.ch</a></p>
         </div>
       </div>
+      <p class="t-klein" style="margin:40px 0 0">Ladezeit: bis der grösste Inhalt sichtbar ist, gemessen mit Google Lighthouse im Profil Desktop am 29. September 2026.</p>
     </div>
     </div>
   </section>
@@ -1640,39 +1636,6 @@ footer a:hover{color:var(--akzent)!important}
     </div>
   </section>
 
-  <section class="sektion-flaeche" style="background:var(--flaeche)">
-    <div class="glow" data-glow="1"></div>
-    <div class="wrap" style="padding-top:var(--a-5);padding-bottom:var(--a-5)">
-      <div class="inner" style="max-width:900px">
-        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2.1vw,30px);line-height:1.28;color:var(--tinte);margin:0 0 16px">Wie lange 6,4 Sekunden Ladezeit wirklich sind</h3>
-        <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:var(--text-2);margin:0 0 40px;max-width:680px;text-wrap:pretty">Zwei Balken, in Echtzeit. Der untere ist die Ladezeit einer Seite von mir, der obere die einer typischen alten Firmenseite.</p>
-        <div style="display:flex;flex-direction:column;gap:32px;margin-bottom:24px">
-          <div>
-            <div class="row" style="justify-content:space-between;gap:12px;margin-bottom:8px">
-              <span style="font-size:16px;color:var(--tinte)">Alte Firmenseite: 6,4 Sekunden, bis sie da ist</span>
-              <span class="mono" style="font-size:16px;color:var(--tinte);font-variant-numeric:tabular-nums">{{ duelALabel }}</span>
-            </div>
-            <div style="height:16px;border-radius:999px;background:var(--linie);overflow:hidden">
-              <div id="duel-a" style="height:16px;border-radius:999px;background:#FF5A3C;width:{{ duelAW }}"></div>
-            </div>
-            <p id="duel-note" style="font-size:16px;color:var(--grau);margin:10px 0 0;min-height:22px;opacity:{{ duelNoteOp }};transition:opacity 200ms linear">Ab hier steigen die meisten aus.</p>
-          </div>
-          <div>
-            <div class="row" style="justify-content:space-between;gap:12px;margin-bottom:8px">
-              <span style="font-size:16px;color:var(--tinte)">Eine Seite von mir: 0,9 Sekunden, bis sie da ist</span>
-              <span class="mono" style="font-size:16px;color:var(--tinte);font-variant-numeric:tabular-nums">{{ duelBLabel }}</span>
-            </div>
-            <div style="height:16px;border-radius:999px;background:var(--linie);overflow:hidden">
-              <div id="duel-b" style="height:16px;border-radius:999px;background:var(--primaer);width:{{ duelBW }}"></div>
-            </div>
-          </div>
-        </div>
-        <button type="button" class="btn btn-primaer" onClick="{{ startDuel }}">Beide starten</button>
-        <p style="font-size:13px;color:var(--text-2);margin:24px 0 0">Beide Werte sind gemessene Richtwerte, keine Messung Ihrer Seite.</p>
-      </div>
-    </div>
-  </section>
-
   <section id="abschluss" class="sektion-blau" data-flaeche="blau" style="background:var(--primaer)">
         <div class="wrap sect">
       <div class="inner txt">
@@ -1689,13 +1652,13 @@ footer a:hover{color:var(--akzent)!important}
   <section style="background:var(--grund)">
     <div class="wrap sect">
       <div class="inner g-hero" style="align-items:start">
-        <div onMouseMove="{{ onTilt }}" onMouseLeave="{{ onTiltEnd }}" style="position:relative;aspect-ratio:4/5;border-radius:24px;overflow:hidden;background:var(--linie);transform:{{ tilt }};transition:{{ tiltTrans }};will-change:transform">
+        <div style="position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:var(--linie)">
           <img src="assets/img/portrait-nico-bodmer.webp" alt="Porträt von Nico Bodmer" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:20% 50%;display:block">
           <span class="badge" style="position:absolute;left:16px;bottom:16px;background:var(--flaeche)">Nico Bodmer</span>
         </div>
         <div class="stack">
           <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.06;letter-spacing:-0.03em;margin:0">Wer das macht</h1>
-          <p class="label" style="margin:0;color:var(--primaer-dunkel)">Webseiten für Schweizer Betriebe</p>
+          <p class="label" style="margin:0">Nico Bodmer · Berikon AG</p>
           <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;text-wrap:pretty;color:var(--tinte);margin:0;max-width:65ch">Ich heisse Nico Bodmer und baue Webseiten für Betriebe in der ganzen Schweiz. Gelernt habe ich das nicht nebenbei, sondern in einer vierjährigen Lehre als Platform Developer mit eidgenössischem Fähigkeitszeugnis und technischer Berufsmaturität.</p>
           <p style="font-size:16px;line-height:1.65;margin:0;max-width:65ch">Hauptberuflich arbeite ich seit 2021 in der IT-Branche. Was ich dort täglich mache (Systeme aufbauen, betreiben und übergeben) ist dasselbe, was Ihre Website braucht, nur in grösserem Massstab.</p>
           <p style="font-size:16px;line-height:1.65;margin:0;max-width:65ch">Berufsbegleitend studiere ich Digital Business und künstliche Intelligenz an der Hochschule für Wirtschaft Zürich.</p>
@@ -1707,49 +1670,16 @@ footer a:hover{color:var(--akzent)!important}
   <section class="wrap sect">
     <div class="inner">
       <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 48px">Werdegang</h2>
-      <div class="g-carr">
-        <div class="carrwrap">
-          <div class="carr" style="background:var(--flaeche)">
-            <span class="mono jahr" aria-hidden="true">2021</span>
-            
-            <p class="mono" style="position:relative;font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 12px">2021 bis 2025</p>
-            <p style="position:relative;font-size:20px;font-weight:700;line-height:1.25;margin:0 0 12px;text-wrap:pretty">Lehre als Platform Developer EFZ</p>
-            <p style="position:relative;font-size:16px;line-height:1.55;color:var(--text-2);margin:0;text-wrap:pretty">Vier Jahre Ausbildung in Entwicklung, Betrieb und Deployment.</p>
-          </div>
-        </div>
-        <div class="carrwrap">
-          <div class="carr" style="background:var(--flaeche)">
-            <span class="mono jahr" aria-hidden="true">2025</span>
-            
-            <p class="mono" style="position:relative;font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 12px">2025</p>
-            <p style="position:relative;font-size:20px;font-weight:700;line-height:1.25;margin:0 0 12px;text-wrap:pretty">Technische Berufsmaturität</p>
-            <p style="position:relative;font-size:16px;line-height:1.55;color:var(--text-2);margin:0;text-wrap:pretty">Abgeschlossen parallel zur Lehre.</p>
-          </div>
-        </div>
-        <div class="carrwrap">
-          <div class="carr" style="background:var(--flaeche)">
-            <span class="mono jahr" aria-hidden="true">2021</span>
-            
-            <p class="mono" style="position:relative;font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 12px">seit 2021</p>
-            <p style="position:relative;font-size:20px;font-weight:700;line-height:1.25;margin:0 0 12px;text-wrap:pretty">In der IT-Branche tätig</p>
-            <p style="position:relative;font-size:16px;line-height:1.55;color:var(--text-2);margin:0;text-wrap:pretty">Support, Deployment, Webentwicklung, heute im technischen Vertrieb für Daten und künstliche Intelligenz.</p>
-          </div>
-        </div>
-        <div class="carrwrap">
-          <div class="carr" style="background:var(--flaeche)">
-            <span class="mono jahr" aria-hidden="true">2026</span>
-            <span class="badge badge-akzent" style="position:absolute;top:20px;right:20px">heute</span>
-            <p class="mono" style="position:relative;font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 12px">seit 2026</p>
-            <p style="position:relative;font-size:20px;font-weight:700;line-height:1.25;margin:0 0 12px;text-wrap:pretty">BSc Digital Business und AI</p>
-            <p style="position:relative;font-size:16px;line-height:1.55;color:var(--text-2);margin:0;text-wrap:pretty">Berufsbegleitendes Studium an der HWZ Zürich.</p>
-          </div>
-        </div>
-      </div>
+      <ol class="zeitleiste">
+        <li><span class="zl-jahr">2021 bis 2025</span><div><p class="zl-t">Lehre als Platform Developer EFZ</p><p class="zl-s">Vier Jahre Ausbildung in Entwicklung, Betrieb und Deployment.</p></div></li>
+        <li><span class="zl-jahr">2025</span><div><p class="zl-t">Technische Berufsmaturität</p><p class="zl-s">Abgeschlossen parallel zur Lehre.</p></div></li>
+        <li><span class="zl-jahr">seit 2021</span><div><p class="zl-t">In der IT-Branche tätig</p><p class="zl-s">Support, Deployment, Webentwicklung, heute im technischen Vertrieb für Daten und künstliche Intelligenz.</p></div></li>
+        <li><span class="zl-jahr">seit 2026 <span class="stempel" style="margin-left:6px">heute</span></span><div><p class="zl-t">BSc Digital Business und AI</p><p class="zl-s">Berufsbegleitendes Studium an der HWZ Zürich.</p></div></li>
+      </ol>
     </div>
   </section>
 
   <section class="sektion-flaeche" style="background:var(--flaeche)">
-    <div class="glow" data-glow="1"></div>
     <div class="wrap sect">
       <div class="inner">
         <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;color:var(--tinte);margin:0 0 48px">So arbeite ich</h2>
@@ -1800,43 +1730,29 @@ footer a:hover{color:var(--akzent)!important}
       <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px">Womit ich arbeite</h2>
       <p class="txt" style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;text-wrap:pretty;color:var(--text-2);margin:0 0 48px">Gängige Technik, keine Eigenbauten, die niemand ausser mir warten kann. Hier steht, was das für Sie bedeutet.</p>
       <div class="g-tech">
-        <div style="background:var(--flaeche);border:1px solid var(--linie);border-radius:20px;padding:32px;display:flex;flex-direction:column">
+        <div class="tech-karte">
           <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:var(--text-2);margin:0 0 20px">AUFBAU</p>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px">
-            <span class="mono chip">React</span>
-            <span class="mono chip">TypeScript</span>
-            <span class="mono chip">Astro</span>
-            <span class="mono chip">Tailwind CSS</span>
-            <span class="mono chip">Vite</span>
-          </div>
-          <div style="height:1px;background:var(--linie);margin:auto 0 20px"></div>
-          <p style="font-size:16px;font-weight:600;line-height:1.4;margin:0 0 8px">Was Ihnen das bringt</p>
-          <p style="font-size:16px;line-height:1.6;color:var(--text-2);margin:0;text-wrap:pretty">Ihre Seite lädt in unter einer Sekunde, weil sie fertig ausgeliefert wird statt bei jedem Aufruf neu zusammengebaut zu werden.</p>
+          <p style="font-size:16px;line-height:1.6;color:var(--tinte);margin:0 0 16px;text-wrap:pretty">Ihre Seite lädt in unter einer Sekunde, weil sie fertig ausgeliefert wird statt bei jedem Aufruf neu zusammengebaut zu werden.</p>
+          <p class="t-klein" style="margin:auto 0 0">Werkzeuge: React, TypeScript, Astro, Tailwind CSS, Vite</p>
+          
+          
+          
         </div>
-        <div style="background:var(--flaeche);border:1px solid var(--linie);border-radius:20px;padding:32px;display:flex;flex-direction:column">
+        <div class="tech-karte">
           <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:var(--text-2);margin:0 0 20px">BETRIEB UND SICHERHEIT</p>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px">
-            <span class="mono chip">GitHub Actions</span>
-            <span class="mono chip">Docker</span>
-            <span class="mono chip">automatische Backups</span>
-            <span class="mono chip">SSL</span>
-            <span class="mono chip">Überwachung</span>
-          </div>
-          <div style="height:1px;background:var(--linie);margin:auto 0 20px"></div>
-          <p style="font-size:16px;font-weight:600;line-height:1.4;margin:0 0 8px">Was Ihnen das bringt</p>
-          <p style="font-size:16px;line-height:1.6;color:var(--text-2);margin:0;text-wrap:pretty">Updates laufen automatisch. Fällt etwas aus, ist die letzte funktionierende Fassung innert Minuten wieder online.</p>
+          <p style="font-size:16px;line-height:1.6;color:var(--tinte);margin:0 0 16px;text-wrap:pretty">Updates laufen automatisch. Fällt etwas aus, ist die letzte funktionierende Fassung innert Minuten wieder online.</p>
+          <p class="t-klein" style="margin:auto 0 0">Werkzeuge: GitHub Actions, Docker, automatische Backups, SSL, Überwachung</p>
+          
+          
+          
         </div>
-        <div style="background:var(--flaeche);border:1px solid var(--linie);border-radius:20px;padding:32px;display:flex;flex-direction:column">
+        <div class="tech-karte">
           <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:var(--text-2);margin:0 0 20px">DATEN UND FORMULARE</p>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px">
-            <span class="mono chip">Schweizer Rechenzentrum</span>
-            <span class="mono chip">Supabase</span>
-            <span class="mono chip">Formularversand</span>
-            <span class="mono chip">Datenschutz nach revDSG</span>
-          </div>
-          <div style="height:1px;background:var(--linie);margin:auto 0 20px"></div>
-          <p style="font-size:16px;font-weight:600;line-height:1.4;margin:0 0 8px">Was Ihnen das bringt</p>
-          <p style="font-size:16px;line-height:1.6;color:var(--text-2);margin:0;text-wrap:pretty">Anfragen aus Ihrem Formular bleiben in der Schweiz oder in Europa. Das können Sie Ihren Kunden sagen, ohne zu zögern.</p>
+          <p style="font-size:16px;line-height:1.6;color:var(--tinte);margin:0 0 16px;text-wrap:pretty">Anfragen aus Ihrem Formular bleiben in der Schweiz oder in Europa. Das können Sie Ihren Kunden sagen, ohne zu zögern.</p>
+          <p class="t-klein" style="margin:auto 0 0">Werkzeuge: Schweizer Rechenzentrum, Supabase, Formularversand, Datenschutz nach revDSG</p>
+          
+          
+          
         </div>
       </div>
       <div style="margin-top:24px;border-radius:20px;padding:32px;background:var(--flaeche);border:1px solid var(--linie)">
@@ -1891,7 +1807,6 @@ footer a:hover{color:var(--akzent)!important}
   </section>
 
   <section id="abschluss" class="sektion-blau" data-flaeche="blau" style="background:var(--primaer)">
-    <div class="glow" data-glow="1"></div>
     <div class="wrap" style="padding-top:var(--a-6);padding-bottom:var(--a-6)">
       <div class="inner">
         <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;color:var(--grund);margin:0 0 16px">Schreiben Sie mir. Ich antworte spätestens am nächsten Abend.</h2>
@@ -1901,7 +1816,7 @@ footer a:hover{color:var(--akzent)!important}
             <p data-nosnap="1" class="mono" style="display:flex;align-items:center;gap:12px;font-size:16px;color:var(--grund);margin:0 0 24px">
               <span style="width:10px;height:10px;border-radius:999px;background:{{ availDot }};flex:none"></span>{{ availability }}
             </p>
-            <a href="/projekt-check/" data-quelle="ueber" onClick="{{ onEinstieg }}" data-magnet="1" onMouseEnter="{{ onMailHover }}" onMouseLeave="{{ onMailLeave }}" style="display:flex;align-items:center;gap:24px;min-height:88px;padding:20px 32px;border-radius:999px;background:var(--akzent);color:var(--tinte);text-decoration:none;box-shadow:{{ mailShadow }};transition:box-shadow 200ms ease-out">
+            <a href="/projekt-check/" data-quelle="ueber" onClick="{{ onEinstieg }}" data-magnet="1" style="display:flex;align-items:center;gap:24px;min-height:88px;padding:20px 32px;border-radius:999px;background:var(--akzent);color:var(--tinte);text-decoration:none;box-shadow:{{ mailShadow }};transition:box-shadow 200ms ease-out">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#11131A" stroke-width="1.8" style="flex:none">
                 <rect x="2" y="6" width="24" height="16" rx="3"></rect>
                 <path d="M2 8l12 8 12-8" style="transform:{{ flapT }};transform-origin:14px 8px;transition:transform 200ms ease-out"></path>
@@ -1911,7 +1826,6 @@ footer a:hover{color:var(--akzent)!important}
                 <span style="display:block;font-size:16px;line-height:1.5;margin-top:4px">{{ kontaktCheckText }}</span>
               </span>
             </a>
-            <p style="height:24px;margin:12px 0 0;font-size:16px;color:#DDE3FF;opacity:{{ mailHintOp }};transition:opacity 160ms linear">meist antworte ich innert vier Stunden</p>
             <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px">
               <a href="{{ mailKontakt }}" style="font-size:16px;color:var(--auf-dunkel)">Oder direkt schreiben: kontakt@odera.ch</a>
             </div>
