@@ -23,16 +23,16 @@ const STIL = `
 .oc-root *{box-sizing:border-box}
 .oc-kopf{display:flex;align-items:center;gap:8px;padding:14px 12px 14px 20px;background:#FFFFFF;border-bottom:1px solid #E2DFD8}
 .oc-kopf-t{flex:1;min-width:0}
-.oc-titel{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.02em;margin:0}
-.oc-unter{font-size:12px;line-height:1.4;color:#5B6270;margin:2px 0 0}
-.oc-knopf{min-height:44px;padding:0 12px;border:none;border-radius:999px;background:none;color:#1E34B8;font:inherit;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-.oc-zu{width:44px;min-height:44px;padding:0;text-decoration:none;font-size:24px;line-height:1;color:#11131A}
+.oc-titel{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.02em;margin:0}
+.oc-unter{font-size:13px;line-height:1.4;color:#5B6270;margin:2px 0 0}
+.oc-knopf{min-height:44px;padding:0 12px;border:none;border-radius:999px;background:none;color:#1E34B8;font:inherit;font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.oc-zu{width:44px;min-height:44px;padding:0;text-decoration:none;font-size:26px;line-height:1;color:#11131A}
 .oc-log{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
 .oc-hinweis{font-size:13px;line-height:1.5;color:#5B6270;margin:0;padding:12px 14px;background:#FFFFFF;border:1px solid #E2DFD8;border-radius:14px}
 .oc-chips{display:flex;flex-wrap:wrap;gap:8px}
-.oc-chip{min-height:44px;padding:8px 14px;border:1px solid #11131A;border-radius:999px;background:#FFFFFF;color:#11131A;font:inherit;font-size:14px;line-height:1.3;text-align:left;cursor:pointer}
+.oc-chip{min-height:44px;padding:8px 14px;border:1px solid #11131A;border-radius:999px;background:#FFFFFF;color:#11131A;font:inherit;font-size:13px;line-height:1.3;text-align:left;cursor:pointer}
 .oc-chip:hover{background:#EDEFFF}
-.oc-msg{max-width:88%;padding:12px 14px;border-radius:16px;font-size:15px;line-height:1.55;overflow-wrap:anywhere}
+.oc-msg{max-width:88%;padding:12px 14px;border-radius:16px;font-size:16px;line-height:1.55;overflow-wrap:anywhere}
 .oc-msg p{margin:0 0 8px}.oc-msg p:last-child{margin:0}
 .oc-msg ul,.oc-msg ol{margin:0 0 8px;padding-left:20px}.oc-msg li{margin:0 0 4px}
 .oc-msg a{color:#1E34B8;text-decoration:underline;text-underline-offset:3px}
@@ -46,12 +46,12 @@ const STIL = `
 .oc-form{display:flex;align-items:flex-end;gap:8px;padding:12px;background:#FFFFFF;border-top:1px solid #E2DFD8}
 .oc-eingabe{flex:1;min-height:48px;max-height:140px;padding:12px 14px;border:1px solid #A8B0BD;border-radius:14px;background:#FFFFFF;color:#11131A;font:inherit;font-size:16px;line-height:1.4;resize:none}
 .oc-eingabe:focus{outline:3px solid #11131A;outline-offset:1px}
-.oc-senden{min-height:48px;padding:0 18px;border:none;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.oc-senden{min-height:48px;padding:0 18px;border:none;border-radius:999px;background:#2D4CF0;color:#FFFFFF;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
 .oc-senden:disabled{background:#E2DFD8;color:#5B6270;cursor:not-allowed}
 .oc-fuss{padding:0 12px 12px;background:#FFFFFF}
-.oc-cta{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:15px;font-weight:600;text-decoration:none}
+.oc-cta{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#D6F24B;color:#11131A;font-size:16px;font-weight:600;text-decoration:none}
 .oc-cta:hover{background:#BFEE7C}
-.oc-start{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:none;border-radius:999px;background:#D6F24B;color:#11131A;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.oc-start{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:none;border-radius:999px;background:#D6F24B;color:#11131A;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
 .oc-start:hover{background:#BFEE7C}
 .oc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .oc-root :focus-visible{outline:3px solid #11131A;outline-offset:2px}

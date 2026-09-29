@@ -12,9 +12,9 @@
 <helmet>
 <style>
 .kap-tile{height:64px}
-.kap-num{font-size:15px}
-.kap-cap{font-size:12px}
-@media(max-width:430px){.kap-tile{height:56px}.kap-num{font-size:14px}.kap-cap{font-size:11px}}
+.kap-num{font-size:16px}
+.kap-cap{font-size:13px}
+@media(max-width:430px){.kap-tile{height:56px}.kap-num{font-size:13px}.kap-cap{font-size:13px}}
 </style>
 </helmet>
 <div style="display:flex;flex-direction:column;gap:16px;width:100%">
@@ -22,7 +22,7 @@
     <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
       <span style="display:flex;align-items:center;gap:10px;flex:none">
         <span aria-hidden="true" style="width:10px;height:10px;border-radius:999px;background:#D6F24B;flex:none"></span>
-        <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;color:#11131A">AUSLASTUNG</span>
+        <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:13px;letter-spacing:0.08em;color:#11131A">AUSLASTUNG</span>
       </span>
       <span style="flex:1;min-width:180px;font-size:20px;font-weight:700;color:#11131A">{{ mid }}</span>
     </div>
@@ -37,8 +37,8 @@
   </div>
   <sc-if value="{{ notesOn }}" hint-placeholder-val="{{ false }}">
   <div>
-    <p style="font-size:15px;line-height:1.5;color:#5B6270;margin:0 0 8px;text-wrap:pretty">Ich arbeite an höchstens zwei Entwürfen gleichzeitig. Anfragen bearbeite ich in der Reihenfolge des Eingangs.{{ extra }}</p>
-    <p style="font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:12px;line-height:1.5;color:#5B6270;margin:0">Zwei Plätze, weil ich das nebenberuflich mache. Keine erfundene Knappheit.</p>
+    <p style="font-size:16px;line-height:1.5;color:#5B6270;margin:0 0 8px;text-wrap:pretty">Ich arbeite an höchstens zwei Entwürfen gleichzeitig. Anfragen bearbeite ich in der Reihenfolge des Eingangs.{{ extra }}</p>
+    <p style="font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:13px;line-height:1.5;color:#5B6270;margin:0">Zwei Plätze, weil ich das nebenberuflich mache. Keine erfundene Knappheit.</p>
   </div>
   </sc-if>
 </div>
