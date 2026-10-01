@@ -236,6 +236,60 @@ export const ANFRAGE = {
    "Sie zahlen erst, wenn Ihnen der Entwurf gefällt."
   ]
  ],
+ "pruefung": {
+  "email": "^[^\\s@<>()[\\]\\\\,;:\"]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*\\.[A-Za-z]{2,}$",
+  "telefonZeichen": "^\\+?[0-9 ().\\/-]+$",
+  "telefonZiffern": [
+   9,
+   15
+  ],
+  "telefonCh": 10,
+  "pflichtWenn": {
+   "KONTAKT_TEL": [
+    "KONTAKTWEG",
+    "Telefon"
+   ]
+  },
+  "formular": {
+   "firma": "FIRMA",
+   "angebot": "ANGEBOT",
+   "name": "KONTAKT_NAME",
+   "email": "KONTAKT_MAIL",
+   "tel": "KONTAKT_TEL"
+  },
+  "domains": [
+   "gmail.com",
+   "googlemail.com",
+   "gmx.ch",
+   "gmx.net",
+   "gmx.de",
+   "bluewin.ch",
+   "hotmail.com",
+   "hotmail.ch",
+   "outlook.com",
+   "live.com",
+   "icloud.com",
+   "me.com",
+   "yahoo.com",
+   "yahoo.de",
+   "sunrise.ch",
+   "hispeed.ch",
+   "protonmail.com",
+   "proton.me",
+   "web.de",
+   "quickline.ch"
+  ],
+  "meldungen": {
+   "KONTAKT_NAME": "Bitte geben Sie Ihren Namen ein.",
+   "KONTAKT_MAIL": "Bitte geben Sie Ihre E-Mail-Adresse ein, damit ich Ihnen antworten kann.",
+   "KONTAKT_TEL": "Sie möchten lieber angerufen werden. Bitte geben Sie Ihre Telefonnummer ein.",
+   "FIRMA": "Bitte geben Sie den Namen Ihres Betriebs ein.",
+   "ANGEBOT": "Bitte beschreiben Sie Ihr Angebot in einem Satz.",
+   "wahl": "Bitte wählen Sie eine Antwort.",
+   "email": "Diese E-Mail-Adresse scheint unvollständig. Beispiel: anna@ihrbetrieb.ch",
+   "telefon": "Diese Telefonnummer scheint unvollständig. Beispiel: 079 123 45 67"
+  }
+ },
  "eingabeMax": {
   "firma": 120,
   "ort": 80,

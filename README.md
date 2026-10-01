@@ -240,6 +240,14 @@ kontakt@odera.ch. Danach folgt ein Dankesbildschirm mit Referenz (zum Beispiel O
   bisher das eigene E-Mail-Programm. Rechtstexte und Hinweise passen sich an.
 - Die Felder des Formulars stehen in `ANFRAGE` (`index.html`). Der Worker bekommt sie über
   `anfrage-proxy/src/schema.js`, das `tools/seo-build.mjs` erzeugt.
+- **Prüfregeln** stehen in `ANFRAGE.pruefung`: E-Mail-Muster, Telefon (9 bis 15 Ziffern, Schweizer
+  Nummern mit 0 genau 10), «Telefon wird Pflicht, wenn der Kontaktweg Telefon ist», die Meldungen und
+  die Adressen für den Tippfehler-Vorschlag. Formular und Worker prüfen damit gleich. Lehnt der Worker
+  ein Feld ab, antwortet er mit `feld` und `meldung`, und das Formular zeigt die Meldung an diesem Feld.
+- Im Formular ist jedes Feld als «Pflichtfeld» oder «optional» gekennzeichnet. «Weiter» ist nie
+  gesperrt: Fehlt etwas, leuchtet das Feld rot auf, die Meldung steht darunter (mit Symbol, in einem
+  `aria-live`-Bereich), der Fokus springt ins erste Feld. Geprüft wird erst nach dem Verlassen eines
+  bearbeiteten Feldes oder nach dem ersten Klick auf «Weiter». Farben: `--fehler`, `--fehler-tint`.
 - Fällt der Versand aus, bietet das Fenster «Nochmals versuchen», das eigene E-Mail-Programm und
   «Text kopieren» an.
 - Einrichtung und Grenzen: `anfrage-proxy/README.md`.

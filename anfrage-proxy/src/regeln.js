@@ -8,8 +8,20 @@ export const FELD_REIHENFOLGE = ANFRAGE.felder.map((f) => f[0]);
 // jede Anfrage braucht bis zu zwei).
 export const FENSTER = [{ dauer: 60 * 60 * 1000, max: 3 }];
 
-const EMAIL = /^[^\s@<>()[\]\\,;:"]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
+// Prüfregeln aus der gemeinsamen Definition (ANFRAGE.pruefung in index.html), dieselben wie im Formular
+const P = ANFRAGE.pruefung;
+const EMAIL = new RegExp(P.email);
 export const istEmail = (s) => typeof s === 'string' && s.length <= 200 && EMAIL.test(s);
+/** Gleiche Regel wie gueltigesTelefon() in index.html */
+export function telefonOk(v) {
+  const t = String(v || '').trim();
+  if (!new RegExp(P.telefonZeichen).test(t)) return false;
+  const z = t.replace(/\D/g, '');
+  if (z.length < P.telefonZiffern[0] || z.length > P.telefonZiffern[1]) return false;
+  if (t[0] !== '+' && /^0[1-9]/.test(z)) return z.length === P.telefonCh;
+  return true;
+}
+const meldung = (k) => P.meldungen[k] || P.meldungen.wahl;
 
 /** Ohne Zeilenumbrüche und Steuerzeichen (gegen Header-Injection) */
 export const einzeilig = (s) => String(s).replace(/[\r\n\t\u0000-\u001f\u007f\u2028\u2029]+/g, ' ').replace(/\s{2,}/g, ' ').trim();
@@ -39,10 +51,19 @@ export function pruefeAnfrage(body) {
     if (wert.length > FELDER.get(k).max) return { ok: false, fehler: 'ungueltig', grund: 'zu lang ' + k };
     felder[k] = wert;
   }
-  for (const k of ANFRAGE.pflicht[art]) if (!felder[k]) return { ok: false, fehler: 'ungueltig', grund: 'pflicht ' + k };
+  // Bei Fehlern: feld und meldung, damit das Formular die Meldung am richtigen Feld zeigt
+  const abgelehnt = (feld, grund, text) => ({ ok: false, fehler: 'ungueltig', grund, feld, meldung: text || meldung(feld) });
+  for (const k of ANFRAGE.pflicht[art]) if (!felder[k]) return abgelehnt(k, 'pflicht ' + k);
+  for (const [k, [wennFeld, wert]] of Object.entries(P.pflichtWenn)) {
+    if (art === 'voll' && (felder[wennFeld] || '') === wert && !felder[k]) return abgelehnt(k, 'pflicht ' + k);
+  }
   if (felder.KONTAKT_NAME) felder.KONTAKT_NAME = einzeilig(felder.KONTAKT_NAME);
   felder.KONTAKT_MAIL = einzeilig(felder.KONTAKT_MAIL);
-  if (!istEmail(felder.KONTAKT_MAIL)) return { ok: false, fehler: 'ungueltig', grund: 'email' };
+  if (!istEmail(felder.KONTAKT_MAIL)) return abgelehnt('KONTAKT_MAIL', 'email', P.meldungen.email);
+  if (felder.KONTAKT_TEL) {
+    felder.KONTAKT_TEL = einzeilig(felder.KONTAKT_TEL);
+    if (!telefonOk(felder.KONTAKT_TEL)) return abgelehnt('KONTAKT_TEL', 'telefon', P.meldungen.telefon);
+  }
   return { ok: true, daten: { art, felder, kopie: body.kopie === true, idem: body.idem } };
 }
 

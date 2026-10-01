@@ -71,7 +71,7 @@ export default {
     try { body = JSON.parse(roh); } catch { return json({ ok: false, fehler: 'ungueltig' }, 400, origin); }
 
     const p = pruefeAnfrage(body);
-    if (!p.ok) { protokoll('abgewiesen', { grund: p.grund.split(' ')[0] }); return json({ ok: false, fehler: p.fehler }, 400, origin); }
+    if (!p.ok) { protokoll('abgewiesen', { grund: p.grund.split(' ')[0] }); return json({ ok: false, fehler: p.fehler, ...(p.feld ? { feld: p.feld, meldung: p.meldung } : {}) }, 400, origin); }
     if (!env.RESEND_API_KEY || !env.TURNSTILE_SECRET) { protokoll('fehler', { art: 'konfiguration' }); return json({ ok: false, fehler: 'versand' }, 503, origin); }
 
     const ip = request.headers.get('CF-Connecting-IP') || '';

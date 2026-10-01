@@ -3,7 +3,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import worker, { Limiter } from '../src/index.js';
-import { pruefeAnfrage, referenzAus, einzeilig, istEmail } from '../src/regeln.js';
+import { pruefeAnfrage, referenzAus, einzeilig, istEmail, telefonOk } from '../src/regeln.js';
+import { ANFRAGE } from '../src/schema.js';
 import { mailAnNico, mailKopie, maskiere } from '../src/mail.js';
 
 const VOLL = {
@@ -151,4 +152,26 @@ test('IP nur gehasht in den Zählern', async () => {
   const { env, objekte } = umgebung();
   await post(env, koerper(), { ip: '203.0.113.99' });
   assert.ok(![...objekte.keys()].join().includes('203.0.113.99'));
+});
+
+test('Gemeinsame Regeln: Telefon, E-Mail, Pflicht bei «Telefon», Feld und Meldung zurück', async () => {
+  for (const t of ['079 123 45 67', '0791234567', '+41 79 123 45 67', '+41 (0)79 123 45 67', '0041 79 123 45 67', '056/000.00.00', '+49 30 1234567']) assert.ok(telefonOk(t), t);
+  for (const t of ['079 123 45', '12345', 'Nummer folgt', '079 123 45 67 89', '+41 79 12']) assert.ok(!telefonOk(t), t);
+  for (const m of ['nico@test', 'nico@gmx.c', 'anna@', 'anna beispiel.ch']) assert.ok(!istEmail(m), m);
+  for (const m of ['nico@gmail.con', 'anna@bluewin.chh', 'a.b@ihrbetrieb.ch']) assert.ok(istEmail(m), m); // Tippfehler sind nur ein Hinweis im Formular
+  const ohneTel = pruefeAnfrage(koerper({ felder: { ...VOLL, KONTAKT_TEL: '' } }));
+  assert.deepEqual([ohneTel.ok, ohneTel.feld, ohneTel.meldung], [false, 'KONTAKT_TEL', ANFRAGE.pruefung.meldungen.KONTAKT_TEL]);
+  assert.ok(pruefeAnfrage(koerper({ felder: { ...VOLL, KONTAKT_TEL: '', KONTAKTWEG: 'E-Mail' } })).ok);
+  const falschTel = pruefeAnfrage(koerper({ felder: { ...VOLL, KONTAKT_TEL: '079 12' } }));
+  assert.equal(falschTel.feld, 'KONTAKT_TEL');
+  const falschMail = pruefeAnfrage(koerper({ felder: { ...VOLL, KONTAKT_MAIL: 'nico@test' } }));
+  assert.deepEqual([falschMail.feld, falschMail.meldung], ['KONTAKT_MAIL', ANFRAGE.pruefung.meldungen.email]);
+  const ohneName = pruefeAnfrage(koerper({ felder: { ...VOLL, KONTAKT_NAME: '' } }));
+  assert.deepEqual([ohneName.feld, ohneName.meldung], ['KONTAKT_NAME', ANFRAGE.pruefung.meldungen.KONTAKT_NAME]);
+  const ohneZiel = pruefeAnfrage(koerper({ felder: { ...VOLL, ZIEL: '' } }));
+  assert.deepEqual([ohneZiel.feld, ohneZiel.meldung], ['ZIEL', ANFRAGE.pruefung.meldungen.wahl]);
+  const { env } = umgebung();
+  const r = await worker.fetch(new Request('https://x/', { method: 'POST', headers: { Origin: 'https://odera.ch', 'Content-Type': 'application/json' }, body: JSON.stringify(koerper({ felder: { ...VOLL, KONTAKT_MAIL: 'nico@test' } })) }), env);
+  const d = await r.json();
+  assert.deepEqual([r.status, d.fehler, d.feld], [400, 'ungueltig', 'KONTAKT_MAIL']);
 });

@@ -50,7 +50,7 @@ export async function senden(c) {
   const art = s.quick ? 'kurz' : 'voll';
   const felder = art === 'kurz' ? c.felderKurz() : c.felderVoll();
   const mail = felder.KONTAKT_MAIL || '';
-  if ((art === 'voll' && !felder.KONTAKT_NAME) || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) { c.setState({ senden: 'fehler', sendFehler: 'kontakt' }); return; }
+  if (!c.kontaktPruefen()) return; // Fehler steht am Feld (Mail-Fenster oder Frage «Wie erreiche ich Sie?»)
   c.setState({ senden: 'laeuft', sendFehler: '' });
   if (!c.idem) c.idem = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2));
   const token = await tokenHolen(c);
@@ -65,6 +65,13 @@ export async function senden(c) {
     antwort = await r.json().catch(() => null);
   } catch (e) { status = 0; }
   tsNeu(c);
+  if (antwort && !antwort.ok && antwort.fehler === 'ungueltig' && antwort.feld) {
+    // Der Worker prüft mit denselben Regeln. Lehnt er ein Feld ab, steht die Meldung an diesem Feld.
+    const form = c.ANFRAGE.pruefung.formular;
+    const k = Object.keys(form).find((x) => form[x] === antwort.feld) || antwort.feld;
+    c.zumFeldMitFehler(k, antwort.meldung || '');
+    return;
+  }
   if (!antwort || !antwort.ok) {
     const fehler = status === 429 ? 'limit' : (antwort && antwort.fehler === 'pruefung') ? 'pruefung' : status === 0 ? 'netz' : 'versand';
     c.setState({ senden: 'fehler', sendFehler: fehler });

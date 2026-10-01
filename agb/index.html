@@ -32,7 +32,7 @@
 html{scroll-behavior:smooth}
 :root{
  /* Design-Tokens. Einzige Stelle für Farben, Schrift-Skala und Abstände. */
- --grund:#F6F5F1;--flaeche:#FFFFFF;--tinte:#11131A;--text-2:#565D6B;--primaer:#2D4CF0;--primaer-dunkel:#1E34B8;--akzent:#D6F24B;--akzent-hover:#C8E53C;--akzent-tint:#F4FBD6;--akzent-tief:#556300;--akzent-linie:rgba(85,99,0,0.28);--info:#EEF1FD;--linie:#E2DFD8;--linie-stark:#A8B0BD;--linie-feld:#80879A;--auf-dunkel:#FFFFFF;
+ --grund:#F6F5F1;--flaeche:#FFFFFF;--tinte:#11131A;--text-2:#565D6B;--primaer:#2D4CF0;--primaer-dunkel:#1E34B8;--akzent:#D6F24B;--akzent-hover:#C8E53C;--akzent-tint:#F4FBD6;--akzent-tief:#556300;--akzent-linie:rgba(85,99,0,0.28);--info:#EEF1FD;--linie:#E2DFD8;--linie-stark:#A8B0BD;--linie-feld:#80879A;--fehler:#B42318;--fehler-tint:#FDEDEA;--auf-dunkel:#FFFFFF;
  --fs-klein:13px;--fs-text:16px;--fs-lead:20px;--fs-h3:26px;--fs-h2:clamp(30px,3.2vw,44px);--fs-h1:clamp(38px,4.4vw,60px);
  --a-1:8px;--a-2:16px;--a-3:24px;--a-4:40px;--a-5:64px;--a-6:112px;
  --dauer:240ms;--kurve:cubic-bezier(0.2,0,0,1);--radius:16px;--knopf-h:52px;
@@ -312,7 +312,7 @@ footer a:hover{color:var(--akzent)!important}
 .fline{position:relative;display:block;padding-bottom:2px}
 .fline input,.fline textarea{width:100%;border:none;background:none;font-size:20px;line-height:1.4;color:var(--tinte);padding:10px 0;outline:none;font-family:inherit}
 .fline textarea{resize:vertical}
-.ulx{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--linie)}
+.ulx{position:relative;display:block;height:2px;background:var(--linie)}
 .ulx::after{content:"";position:absolute;left:0;top:0;height:2px;width:0;background:var(--primaer);transition:width 200ms ease-out}
 .fline:focus-within .ulx::after{width:100%}
 .apill{display:inline-flex;align-items:center;padding:6px 12px;border:1px solid var(--linie);border-radius:999px;background:var(--flaeche);font-size:13px;line-height:1.3;cursor:pointer;text-align:left;max-width:100%;color:var(--tinte)}
@@ -414,6 +414,36 @@ footer a:hover{color:var(--akzent)!important}
 .werk-handy{position:absolute;right:-12px;bottom:0;width:26%;border:6px solid var(--tinte);border-radius:22px;overflow:hidden;background:var(--tinte);box-shadow:0 20px 40px -24px rgba(17,19,26,0.5)}
 .werk figcaption{margin-top:var(--a-2);max-width:70%;font-size:var(--fs-klein);line-height:1.5;color:var(--text-2)}
 .abschnitt-nr{margin:0 0 var(--a-2)}
+/* Formularfelder: Kennzeichnung, Fehler, Häkchen. Rot nur für Fehler, Lime nur für Bestätigung. */
+.f-label{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-2)}
+.f-tag{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-2);animation-duration:260ms;animation-timing-function:ease-out;animation-fill-mode:both}
+.f-tag::before{content:"·";margin:0 8px}
+.f-tag[data-pflicht="1"]{color:var(--tinte);font-weight:600}
+@keyframes tagRein{from{opacity:0}to{opacity:1}}
+@keyframes tagRein2{from{opacity:0}to{opacity:1}}
+.fline[data-fehler="1"] .ulx,.fline[data-fehler="1"] .ulx::after{background:var(--fehler)}
+.fline[data-fehler="1"] .ulx::after{width:100%}
+.fline[data-fehler="1"]{animation-duration:340ms;animation-timing-function:ease-out}
+@keyframes feldPulsA{0%{transform:none;background:var(--fehler-tint)}15%{transform:translateX(-5px)}30%{transform:translateX(5px)}45%{transform:translateX(-3px)}60%{transform:translateX(2px)}100%{transform:none;background:transparent}}
+@keyframes feldPulsB{0%{transform:none;background:var(--fehler-tint)}15%{transform:translateX(-5px)}30%{transform:translateX(5px)}45%{transform:translateX(-3px)}60%{transform:translateX(2px)}100%{transform:none;background:transparent}}
+.f-fehler{display:flex;align-items:flex-start;gap:8px;margin:0;font-size:15px;line-height:1.45;font-weight:500;color:var(--fehler)}
+.f-fehler[data-an="1"]{margin-top:8px}
+.f-fehler-i{flex:none;align-items:center;justify-content:center;width:18px;height:18px;margin-top:1px;border-radius:999px;background:var(--fehler);color:var(--flaeche);font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:700;line-height:1}
+.f-vorschlag{margin:6px 0 0;font-size:15px;line-height:1.45;color:var(--tinte)}
+.f-vorschlag .textknopf{min-height:0;font-weight:600}
+.f-ok{position:absolute;right:0;top:38px;align-items:center;justify-content:center;width:24px;height:24px;border-radius:999px;background:var(--akzent);color:var(--tinte);box-shadow:inset 0 0 0 1px var(--akzent-linie);animation-duration:1800ms;animation-fill-mode:both}
+@keyframes okHakenA{0%{opacity:0;transform:scale(0.6)}12%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0}}
+@keyframes okHakenB{0%{opacity:0;transform:scale(0.6)}12%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0}}
+.g-ans[data-fehler="1"] .acard,.g-stil[data-fehler="1"] .acard{border-color:var(--fehler)!important;box-shadow:inset 0 0 0 1px var(--fehler)}
+.f-zusammen{order:0;margin:0 0 24px;padding:14px 18px;border-radius:12px;background:var(--fehler-tint);border:1px solid var(--fehler);color:var(--tinte);font-size:16px}
+.f-zusammen p{margin:0 0 6px;font-weight:600}
+.f-zusammen ul{margin:0;padding-left:20px}
+.f-zusammen .textknopf{min-height:32px}
+.q-weiter-knopf{min-height:56px;padding:0 32px;border:none;border-radius:999px;background:var(--primaer);color:var(--auf-dunkel);font:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:background var(--dauer) var(--kurve)}
+.q-weiter-knopf:hover{background:var(--primaer-dunkel)}
+.q-offen{margin:10px 0 0;min-height:18px;text-align:right;font-size:13px;color:var(--text-2)}
+.mf-eingabe[data-fehler="1"] input{border-color:var(--fehler);box-shadow:inset 0 0 0 1px var(--fehler)}
+.mf-feldfehler{flex-basis:100%}
 .ico{display:inline-block;flex:none;width:20px;height:20px;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
 .ico-26{width:26px;height:26px}
 .fragen-raster{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--a-5);align-items:start}
@@ -2419,8 +2449,12 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
           </div>
 
           <div class="qright" style="animation:{{ qAnim }};display:flex;flex-direction:column">
-            <p class="mono q-optlabel" style="display:{{ optLabelDisplay }};order:{{ optOrder }};margin-top:{{ optTop }}">{{ optLabel }}</p>
-            <div class="g-ans" style="display:{{ optDisplay }};grid-auto-rows:1fr;order:{{ optOrder }}">
+            <div class="f-zusammen" role="alert" style="display:{{ zusammenDisplay }}">
+              <p>{{ zusammenText }}</p>
+              <ul><sc-for list="{{ zusammenListe }}" as="z" hint-placeholder-count="2"><li><button type="button" class="textknopf" data-own-enter="1" data-k="{{ z.k }}" onClick="{{ onZuFeld }}">{{ z.label }}</button></li></sc-for></ul>
+            </div>
+            <p class="mono q-optlabel" style="display:{{ optLabelDisplay }};order:{{ optOrder }};margin-top:{{ optTop }}">{{ optLabel }}<span class="f-tag" data-pflicht="0" style="display:{{ optTagDisplay }}">optional</span></p>
+            <div class="g-ans" data-fehler="{{ wahlFehlerAttr }}" style="display:{{ optDisplay }};grid-auto-rows:1fr;order:{{ optOrder }}">
               <sc-for list="{{ options }}" as="o" hint-placeholder-count="4">
                 <button type="button" class="acard" data-v="{{ o.v }}" onClick="{{ onPick }}" aria-pressed="{{ o.sel }}" style="border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }}">
                   <span class="mono" style="flex:none;width:28px;height:28px;border-radius:{{ o.keyRadius }};border:2px solid {{ o.keyBd }};background:{{ o.keyBg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ o.keyFg }}">{{ o.key }}</span>
@@ -2429,6 +2463,7 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
               </sc-for>
             </div>
 
+            <p class="f-fehler f-fehler-wahl" id="f-wahl-fehler" data-an="{{ wahlFehlerAttr }}" aria-live="polite" style="order:{{ optOrder }}"><span class="f-fehler-i" aria-hidden="true" style="display:{{ wahlIconDisplay }}">!</span>{{ wahlMeldung }}</p>
             <p class="q-hinweis" role="status" style="display:{{ optHinweisDisplay }};order:{{ optOrder }}">{{ optHinweis }}</p>
 
             <div class="g-karten" style="display:{{ kartenDisplay }}">
@@ -2442,7 +2477,7 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
               </sc-for>
             </div>
 
-            <div style="display:{{ styleDisplay }};grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+            <div class="g-stil" data-fehler="{{ wahlFehlerAttr }}" style="display:{{ styleDisplay }};grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
               <sc-for list="{{ styleCards }}" as="c" hint-placeholder-count="4">
                 <button type="button" class="acard" data-v="{{ c.v }}" onClick="{{ onPick }}" aria-pressed="{{ c.sel }}" style="flex-direction:column;align-items:stretch;gap:14px;min-height:160px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }}">
                   <span aria-hidden="true" style="display:block;height:64px;border-radius:8px;border:1px solid var(--linie);background:{{ c.prev }}"></span>
@@ -2453,26 +2488,41 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 
             <div style="display:{{ fieldsDisplay }};flex-direction:{{ fieldsDir }};flex-wrap:wrap;gap:28px;margin-top:{{ fieldsTop }};order:{{ fieldsOrder }}">
               <sc-for list="{{ fields }}" as="f" hint-placeholder-count="2">
-                <label class="fline">
-                  <span class="mono" style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-2)">{{ f.label }}</span>
-                  <input type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" onChange="{{ onField }}" onKeyDown="{{ onFieldKey }}">
+                <div class="fline" data-fehler="{{ f.fehlerAttr }}" style="animation-name:{{ f.anim }}">
+                  <label class="f-label" for="{{ f.id }}"><span>{{ f.label }}</span><span class="f-tag" data-pflicht="{{ f.pflichtAttr }}" style="animation-name:{{ f.tagAnim }}">{{ f.tag }}</span></label>
+                  <input id="{{ f.id }}" type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" autocomplete="{{ f.auto }}" required="{{ f.pflicht }}" aria-required="{{ f.ariaReq }}" aria-invalid="{{ f.ariaInv }}" aria-describedby="{{ f.fehlerId }}" onChange="{{ onField }}" onBlur="{{ onFieldBlur }}" onKeyDown="{{ onFieldKey }}">
                   <span class="ulx" aria-hidden="true"></span>
-                </label>
+                  <span class="f-ok" aria-hidden="true" style="display:{{ f.okDisplay }};animation-name:{{ f.okAnim }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+                  <p class="f-fehler" id="{{ f.fehlerId }}" data-an="{{ f.fehlerAttr }}" aria-live="polite"><span class="f-fehler-i" aria-hidden="true" style="display:{{ f.iconDisplay }}">!</span>{{ f.meldung }}</p>
+                  <p class="f-vorschlag" style="display:{{ f.vorschlagDisplay }}">Meinten Sie <button type="button" class="textknopf" data-own-enter="1" data-k="{{ f.k }}" data-v="{{ f.vorschlag }}" onClick="{{ onVorschlag }}">{{ f.vorschlag }}</button>?</p>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:{{ fields2Display }};flex-direction:column;gap:28px;margin-top:28px;order:4">
+              <sc-for list="{{ fields2 }}" as="f" hint-placeholder-count="1">
+                <div class="fline" data-fehler="{{ f.fehlerAttr }}" style="animation-name:{{ f.anim }}">
+                  <label class="f-label" for="{{ f.id }}"><span>{{ f.label }}</span><span class="f-tag" data-pflicht="{{ f.pflichtAttr }}" style="animation-name:{{ f.tagAnim }}">{{ f.tag }}</span></label>
+                  <input id="{{ f.id }}" type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" autocomplete="{{ f.auto }}" required="{{ f.pflicht }}" aria-required="{{ f.ariaReq }}" aria-invalid="{{ f.ariaInv }}" aria-describedby="{{ f.fehlerId }}" onChange="{{ onField }}" onBlur="{{ onFieldBlur }}" onKeyDown="{{ onFieldKey }}">
+                  <span class="ulx" aria-hidden="true"></span>
+                  <span class="f-ok" aria-hidden="true" style="display:{{ f.okDisplay }};animation-name:{{ f.okAnim }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+                  <p class="f-fehler" id="{{ f.fehlerId }}" data-an="{{ f.fehlerAttr }}" aria-live="polite"><span class="f-fehler-i" aria-hidden="true" style="display:{{ f.iconDisplay }}">!</span>{{ f.meldung }}</p>
+                  <p class="f-vorschlag" style="display:{{ f.vorschlagDisplay }}">Meinten Sie <button type="button" class="textknopf" data-own-enter="1" data-k="{{ f.k }}" data-v="{{ f.vorschlag }}" onClick="{{ onVorschlag }}">{{ f.vorschlag }}</button>?</p>
+                </div>
               </sc-for>
               <sc-if value="{{ hasArea }}" hint-placeholder-val="{{ false }}">
-                <label class="fline">
-                  <span class="mono" style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-2)">{{ areaLabel }}</span>
-                  <textarea rows="3" value="{{ areaValue }}" data-k="{{ areaKey }}" maxlength="{{ areaMax }}" onChange="{{ onField }}" placeholder="{{ areaPh }}"></textarea>
+                <div class="fline">
+                  <label class="f-label" for="f-area"><span>{{ areaLabel }}</span><span class="f-tag" data-pflicht="0">optional</span></label>
+                  <textarea id="f-area" rows="3" value="{{ areaValue }}" data-k="{{ areaKey }}" maxlength="{{ areaMax }}" onChange="{{ onField }}" placeholder="{{ areaPh }}"></textarea>
                   <span class="ulx" aria-hidden="true"></span>
-                </label>
+                </div>
               </sc-if>
             </div>
 
-            <p class="mono" style="font-size:13px;color:var(--text-2);margin:24px 0 0;display:{{ warnDisplay }};order:5">{{ warnText }}</p>
             <div class="row" style="justify-content:space-between;margin-top:32px;gap:16px;order:6">
               <button type="button" onClick="{{ onBack }}" style="min-height:56px;padding:0 24px;background:none;border:1px solid var(--tinte);border-radius:999px;font-size:16px;font-weight:600;color:var(--tinte);cursor:pointer;visibility:{{ backVis }}">Zurück</button>
-              <button type="button" onClick="{{ onNext }}" disabled="{{ nextDisabled }}" style="min-height:56px;padding:0 32px;border:none;border-radius:999px;background:{{ nextBg }};color:{{ nextFg }};font-size:16px;font-weight:600;cursor:{{ nextCursor }}">{{ nextLabel }}</button>
+              <button type="button" class="q-weiter-knopf" onClick="{{ onNext }}" aria-describedby="q-offen">{{ nextLabel }}</button>
             </div>
+            <p id="q-offen" class="mono q-offen" style="order:6">{{ offenText }}</p>
             <p style="display:{{ editDisplay }};margin:16px 0 0;text-align:right;order:7"><button type="button" data-own-enter="1" onClick="{{ onEditToReview }}" style="background:none;border:none;padding:0;min-height:44px;color:var(--tinte);font-size:16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer">Zurück zur Übersicht</button></p>
             <p style="display:{{ quickLinkDisplay }};font-size:13px;line-height:1.5;margin:16px 0 0;order:8"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
           </div>
@@ -2552,8 +2602,9 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
         <div class="mf-zeile"><span class="mf-l">Von</span>
           <span class="mf-w" style="display:{{ vonTextDisplay }}">{{ vonText }}</span>
           <span class="mf-von" style="display:{{ vonEingabeDisplay }}">
-            <label class="mf-eingabe"><span class="mf-sr">Ihr Name</span><input type="text" autocomplete="name" placeholder="Ihr Name" maxlength="120" value="{{ vonName }}" data-k="name" onChange="{{ onField }}"></label>
-            <label class="mf-eingabe"><span class="mf-sr">Ihre E-Mail-Adresse</span><input type="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse" maxlength="200" value="{{ vonMail }}" data-k="email" onChange="{{ onField }}"></label>
+            <label class="mf-eingabe"><span class="mf-sr">Ihr Name, optional</span><input id="mf-name" type="text" autocomplete="name" placeholder="Ihr Name, optional" maxlength="120" value="{{ vonName }}" data-k="name" onChange="{{ onField }}"></label>
+            <label class="mf-eingabe" data-fehler="{{ mfMailFehlerAttr }}"><span class="mf-sr">Ihre E-Mail-Adresse, Pflichtfeld</span><input id="mf-email" type="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse (Pflichtfeld)" maxlength="200" value="{{ vonMail }}" data-k="email" required="{{ true }}" aria-required="true" aria-invalid="{{ mfMailAriaInv }}" aria-describedby="mf-email-fehler" onChange="{{ onField }}"></label>
+            <span class="f-fehler mf-feldfehler" id="mf-email-fehler" data-an="{{ mfMailFehlerAttr }}" aria-live="polite"><span class="f-fehler-i" aria-hidden="true" style="display:{{ mfMailIcon }}">!</span>{{ mfMailMeldung }}</span>
             <label class="mf-eingabe"><span class="mf-sr">Betrieb, optional</span><input type="text" autocomplete="organization" placeholder="Betrieb, optional" maxlength="120" value="{{ vonFirma }}" data-k="firma" onChange="{{ onField }}"></label>
           </span>
         </div>
@@ -2752,6 +2803,29 @@ class Component extends DCLogic {
       ['Kostenloser Entwurf', 'Innert fünf Arbeitstagen sehen Sie Ihre fertige Seite.'],
       ['Zahlung', 'Sie zahlen erst, wenn Ihnen der Entwurf gefällt.'],
     ],
+    // Prüfregeln für Formular und Worker (anfrage-proxy/src/regeln.js). Muster als Text, damit sie in JSON passen.
+    pruefung: {
+      email: '^[^\\s@<>()[\\]\\\\,;:"]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*\\.[A-Za-z]{2,}$',
+      // Telefon grosszügig: Ziffern, Leerzeichen, + ( ) . / -, 9 bis 15 Ziffern. Schweizer Nummern mit 0 vorne: genau 10 Ziffern.
+      telefonZeichen: '^\\+?[0-9 ().\\/-]+$', telefonZiffern: [9, 15], telefonCh: 10,
+      // Feld wird Pflicht, wenn ein anderes Feld einen bestimmten Wert hat
+      pflichtWenn: { KONTAKT_TEL: ['KONTAKTWEG', 'Telefon'] },
+      // Eingabefelder im Formular (Schlüssel in txt) und ihr Feld im Schema
+      formular: { firma: 'FIRMA', angebot: 'ANGEBOT', name: 'KONTAKT_NAME', email: 'KONTAKT_MAIL', tel: 'KONTAKT_TEL' },
+      // Häufige Adressen für den Vorschlag bei Tippfehlern (nur Hinweis, kein Fehler)
+      domains: ['gmail.com', 'googlemail.com', 'gmx.ch', 'gmx.net', 'gmx.de', 'bluewin.ch', 'hotmail.com', 'hotmail.ch', 'outlook.com', 'live.com',
+        'icloud.com', 'me.com', 'yahoo.com', 'yahoo.de', 'sunrise.ch', 'hispeed.ch', 'protonmail.com', 'proton.me', 'web.de', 'quickline.ch'],
+      meldungen: {
+        KONTAKT_NAME: 'Bitte geben Sie Ihren Namen ein.',
+        KONTAKT_MAIL: 'Bitte geben Sie Ihre E-Mail-Adresse ein, damit ich Ihnen antworten kann.',
+        KONTAKT_TEL: 'Sie möchten lieber angerufen werden. Bitte geben Sie Ihre Telefonnummer ein.',
+        FIRMA: 'Bitte geben Sie den Namen Ihres Betriebs ein.',
+        ANGEBOT: 'Bitte beschreiben Sie Ihr Angebot in einem Satz.',
+        wahl: 'Bitte wählen Sie eine Antwort.',
+        email: 'Diese E-Mail-Adresse scheint unvollständig. Beispiel: anna@ihrbetrieb.ch',
+        telefon: 'Diese Telefonnummer scheint unvollständig. Beispiel: 079 123 45 67',
+      },
+    },
     // Maximallängen der Eingabefelder im Formular
     eingabeMax: { firma: 120, ort: 80, branche: 120, angebot: 300, url: 300, stoerung: 200, sprache: 60, vorbilder: 500, farben: 200,
       domain: 200, name: 120, email: 200, tel: 40, sonstiges: 2000 },
@@ -2920,7 +2994,7 @@ class Component extends DCLogic {
 
   Q = [
     { key: 'FIRMA', ab: 1, n: 'Betrieb', t: 'Wie heisst Ihr Betrieb?', typ: 'felder',
-      felder: [['firma', 'Name des Betriebs', 'Schreinerei Muster GmbH', true], ['ort', 'Ort, optional', 'Wohlen AG', false]] },
+      felder: [['firma', 'Name des Betriebs', 'Schreinerei Muster GmbH', true, 'text', 'organization'], ['ort', 'Ort', 'Wohlen AG', false, 'text', 'address-level2']] },
     { key: 'BRANCHE', ab: 1, n: 'Branche', t: 'In welcher Branche sind Sie tätig?', typ: 'wahl',
       o: ['Handwerk und Bau', 'Gastronomie und Hotellerie', 'Gesundheit und Therapie', 'Beratung und Treuhand', 'Beauty und Coiffeur', 'Laden und Handel', 'Andere'],
       extra: { 'Andere': ['branche', 'Welche Branche?', 'Fahrschule'] } },
@@ -2951,7 +3025,7 @@ class Component extends DCLogic {
     { key: 'FOTOS', ab: 4, n: 'Fotos', t: 'Haben Sie eigene Fotos?', typ: 'wahl', o: ['Ja, gute', 'Nur wenige', 'Keine'],
       hinweis: { 'Nur wenige': 'Einen Fotografen kann ich organisieren, Kosten nach Aufwand.', 'Keine': 'Einen Fotografen kann ich organisieren, Kosten nach Aufwand.' } },
     { key: 'STIL', ab: 4, n: 'Stil', t: 'Welcher Stil passt zu Ihnen?', typ: 'stil',
-      felder: [['vorbilder', 'Websites, die Ihnen gefallen, optional', 'www.beispiel.ch, www.vorbild.ch', false], ['farben', 'Feste Firmenfarben, optional', 'Dunkelgrün und Beige', false]] },
+      felder: [['vorbilder', 'Websites, die Ihnen gefallen', 'www.beispiel.ch, www.vorbild.ch', false], ['farben', 'Feste Firmenfarben', 'Dunkelgrün und Beige', false]] },
     { key: 'DOMAIN', ab: 5, n: 'Domain', t: 'Haben Sie schon eine Domain?', typ: 'wahl',
       was: 'Die Domain ist die Adresse Ihrer Website, zum Beispiel ihrbetrieb.ch.',
       o: ['Ja', 'Nein', 'Weiss ich nicht'], extra: { 'Ja': ['domain', 'Welche?', 'ihrbetrieb.ch'] } },
@@ -2963,11 +3037,13 @@ class Component extends DCLogic {
       help: 'Für die nächsten zwei Betriebe gibt es dafür einen Rabatt.',
       o: ['Ja, gerne mit Name, Logo und zwei Sätzen', 'Ja, aber ohne meinen Namen', 'Nein, lieber nicht', 'Entscheide ich später'] },
     { key: 'KONTAKT', ab: 6, n: 'Kontakt', t: 'Wie erreiche ich Sie?', typ: 'felder',
-      felder: [['name', 'Vorname und Name', 'Anna Muster', true], ['email', 'E-Mail', 'anna@ihrbetrieb.ch', true, 'email'], ['tel', 'Telefon, optional', '079 123 45 67', false, 'tel']],
-      area: ['sonstiges', 'Sonst noch etwas? Optional', 'Zum Beispiel: Im Frühling eröffnen wir einen zweiten Standort.'],
-      optLabel: 'Am liebsten erreichen Sie mich per', o: ['E-Mail', 'Telefon'] },
+      // Reihenfolge: Name, E-Mail, dann die Wahl, dann das Telefon, das von ihr abhängt (Pflicht bei «Telefon», ANFRAGE.pruefung.pflichtWenn)
+      felder: [['name', 'Vorname und Name', 'Anna Muster', true, 'text', 'name'], ['email', 'E-Mail', 'anna@ihrbetrieb.ch', true, 'email', 'email']],
+      felderNach: [['tel', 'Telefon', '079 123 45 67', false, 'tel', 'tel']],
+      area: ['sonstiges', 'Sonst noch etwas?', 'Zum Beispiel: Im Frühling eröffnen wir einen zweiten Standort.'],
+      optLabel: 'Am liebsten erreichen Sie mich per', optOptional: true, o: ['E-Mail', 'Telefon'] },
     { key: 'MAIL', ab: 6, n: 'E-Mail', t: 'Wohin darf ich Ihnen antworten?', typ: 'felder', nurKurz: true,
-      felder: [['email', 'E-Mail', 'anna@ihrbetrieb.ch', true, 'email']] }
+      felder: [['email', 'E-Mail', 'anna@ihrbetrieb.ch', true, 'email', 'email']] }
   ];
 
   state = {
@@ -2981,6 +3057,7 @@ class Component extends DCLogic {
     review: false, editing: false, editNote: '', reached: 0, phFill: 0,
     senden: 'bereit', sendFehler: '', gesendet: null, kopieWunsch: false, offline: false, hp: '', fensterWeg: false, vglOffen: false,
     ueberspringen: [], quelle: '', fortsetzen: null, vtAktiv: false, brief: this.briefAusUrl(), rechnerFn: [], rechnerLogo: false, rechnerTexte: false, rechnerAn: false, rechnerPreis: 0,
+    beruehrt: {}, bearbeitet: {}, versucht: '', puls: 0, okPuls: {}, serverFehler: {}, mfFehler: {},
     copied: false, toast: '', mailOpen: false, ring: 0, cmpGrow: false,
     uLeft: '0px', uWidth: '0px', tick: 0, chatIntro: false
   };
@@ -3227,6 +3304,34 @@ class Component extends DCLogic {
 
   // ---------- Projekt-Check direkt senden ----------
   direkt() { return !!(this.ANFRAGE_ENDPOINT && this.TURNSTILE_SITEKEY); }
+
+  // Vor dem Senden: Kontaktangaben nach denselben Regeln wie im Fragebogen. Liefert true, wenn alles stimmt.
+  kontaktPruefen() {
+    const s = this.state;
+    if (s.quick) {
+      const r = this.pruefeFeld({ k: 'email', typ: 'email', pflicht: true }, s.txt.email);
+      if (r.meldung) { this.setState({ mfFehler: { email: r.meldung }, senden: 'bereit' }); setTimeout(() => { const el = document.getElementById('mf-email'); if (el) el.focus(); }, 40); return false; }
+      return true;
+    }
+    const q = this.Q.find((x) => x.key === 'KONTAKT');
+    const liste = this.fehlerListe(q);
+    if (liste.length) { this.zumFeldMitFehler(liste[0].k, null); return false; }
+    return true;
+  }
+  // Fehler eines Feldes (auch vom Worker) dort zeigen, wo das Feld steht: im Mail-Fenster oder in der Frage
+  zumFeldMitFehler(k, meldung) {
+    const s = this.state;
+    if (s.quick && k === 'email') { this.setState({ mfFehler: { email: meldung || this.pruefeFeld({ k, typ: 'email', pflicht: true }, s.txt.email).meldung }, senden: 'bereit' }); setTimeout(() => { const el = document.getElementById('mf-email'); if (el) el.focus(); }, 40); return; }
+    // k ist ein Eingabefeld (txt) oder der Schlüssel einer Auswahlfrage (zum Beispiel BRANCHE)
+    let st = this.fragenAlle().findIndex((q) => this.feldDefs(q).some((f) => f.k === k));
+    if (st < 0) { st = this.fragenAlle().findIndex((q) => q.key === k); if (st >= 0) k = '_wahl'; }
+    if (st < 0) return;
+    const q = this.fragenAlle()[st];
+    this.setState({ result: false, review: false, mid: false, editing: true, editNote: '', step: st, dir: 'fwd', tick: this.state.tick + 1,
+      versucht: q.key + ':' + st, puls: this.state.puls + 1, senden: 'bereit', sendFehler: '',
+      serverFehler: meldung ? Object.assign({}, this.state.serverFehler, { [k]: meldung }) : this.state.serverFehler });
+    this.zuFeld(k);
+  }
 
   felderVoll() {
     const f = {};
@@ -3487,7 +3592,7 @@ class Component extends DCLogic {
       if (at >= 0) cur.splice(at, 1); else cur.push(v);
       ans[q.key] = cur;
     } else {
-      ans[q.key] = ans[q.key] === v && q.key === 'KONTAKT' ? undefined : v;
+      ans[q.key] = v;
     }
     this.setState({ ans: ans, warn: false }, () => {
       this.merken();
@@ -3497,18 +3602,86 @@ class Component extends DCLogic {
     });
   }
 
-  gueltigeMail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v || '').trim()); }
-
-  complete(q) {
-    if (!q) return true;
-    const a = this.state.ans[q.key], t = this.state.txt;
-    if (q.felder) for (const f of q.felder) {
-      if (f[3] && !String(t[f[0]] || '').trim()) return false;
-      if (f[4] === 'email' && (f[3] || t[f[0]]) && !this.gueltigeMail(t[f[0]])) return false;
+  gueltigeMail(v) { return new RegExp(this.ANFRAGE.pruefung.email).test(String(v || '').trim()); }
+  // Gleiche Regel wie telefonOk() in anfrage-proxy/src/regeln.js
+  gueltigesTelefon(v) {
+    const P = this.ANFRAGE.pruefung, t = String(v || '').trim();
+    if (!new RegExp(P.telefonZeichen).test(t)) return false;
+    const z = t.replace(/\D/g, '');
+    if (z.length < P.telefonZiffern[0] || z.length > P.telefonZiffern[1]) return false;
+    if (t[0] !== '+' && /^0[1-9]/.test(z)) return z.length === P.telefonCh;
+    return true;
+  }
+  // Tippfehler in bekannten Adressen: Vorschlag oder ''
+  mailVorschlag(v) {
+    const t = String(v || '').trim().toLowerCase(), at = t.lastIndexOf('@');
+    if (at < 1) return '';
+    const dom = t.slice(at + 1), liste = this.ANFRAGE.pruefung.domains;
+    if (!dom || liste.indexOf(dom) >= 0) return '';
+    const abstand = (a, b) => {
+      const d = Array.from({ length: a.length + 1 }, (x, i) => [i]);
+      for (let j = 1; j <= b.length; j++) d[0][j] = j;
+      for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      return d[a.length][b.length];
+    };
+    let best = '', bestD = 9;
+    for (const x of liste) { const n = abstand(dom, x); if (n < bestD) { bestD = n; best = x; } }
+    return bestD === 1 || (bestD === 2 && dom.length >= 9) ? t.slice(0, at + 1) + best : '';
+  }
+  kontaktweg() { return this.state.ans.KONTAKT || 'E-Mail'; }
+  // Alle Eingabefelder einer Frage: [k, label, ph, pflicht, typ, autocomplete, gruppe]
+  feldDefs(q, s = this.state) {
+    if (!q) return [];
+    const picked = s.ans[q.key], out = [];
+    const pw = this.ANFRAGE.pruefung.pflichtWenn, form = this.ANFRAGE.pruefung.formular;
+    const pflicht = (f) => {
+      const regel = pw[form[f[0]]];
+      if (regel && regel[0] === 'KONTAKTWEG') return this.kontaktweg() === regel[1];
+      return !!f[3];
+    };
+    (q.felder || []).forEach((f) => out.push({ k: f[0], label: f[1], ph: f[2] || '', pflicht: pflicht(f), typ: f[4] || 'text', auto: f[5] || 'off', gruppe: 1 }));
+    if (q.extra) Object.keys(q.extra).forEach((o) => { if (picked === o || (Array.isArray(picked) && picked.indexOf(o) >= 0)) { const f = q.extra[o]; out.push({ k: f[0], label: f[1], ph: f[2] || '', pflicht: false, typ: 'text', auto: 'off', gruppe: 1 }); } });
+    (q.felderNach || []).forEach((f) => out.push({ k: f[0], label: f[1], ph: f[2] || '', pflicht: pflicht(f), typ: f[4] || 'text', auto: f[5] || 'off', gruppe: 2 }));
+    return out;
+  }
+  // Prüft einen Wert: { meldung } bei Fehler, { vorschlag } als Hinweis, sonst {}
+  pruefeFeld(f, wert) {
+    const M = this.ANFRAGE.pruefung.meldungen, t = String(wert || '').trim();
+    if (!t) return f.pflicht ? { meldung: M[this.ANFRAGE.pruefung.formular[f.k]] || 'Bitte füllen Sie dieses Feld aus.' } : {};
+    if (f.typ === 'email') {
+      const vorschlag = this.mailVorschlag(t);
+      return this.gueltigeMail(t) ? { vorschlag } : { meldung: M.email, vorschlag };
     }
-    if (q.optional || q.typ === 'felder') return true;
-    if (q.typ === 'multi') return Array.isArray(a) && a.length > 0;
-    return !!a;
+    if (f.typ === 'tel' && !this.gueltigesTelefon(t)) return { meldung: M.telefon };
+    return {};
+  }
+  // Fehler der aktuellen Frage: [{ k, label, meldung }], k '_wahl' für Auswahlfragen
+  fehlerListe(q, s = this.state) {
+    if (!q) return [];
+    const out = [];
+    for (const f of this.feldDefs(q, s)) {
+      const r = this.pruefeFeld(f, s.txt[f.k]);
+      if (r.meldung) out.push({ k: f.k, label: f.label, meldung: r.meldung });
+    }
+    if (!q.optional && q.typ !== 'felder') {
+      const a = s.ans[q.key];
+      if (!(q.typ === 'multi' ? Array.isArray(a) && a.length : a)) out.unshift({ k: '_wahl', label: 'Eine Antwort wählen', meldung: this.ANFRAGE.pruefung.meldungen.wahl });
+    }
+    return out;
+  }
+  complete(q) { return this.fehlerListe(q).length === 0; }
+  // Nach einem Klick auf Weiter mit Fehlern: alle Fehler zeigen, kurz aufleuchten, Fokus ins erste Feld
+  fehlerZeigen(q) {
+    const liste = this.fehlerListe(q);
+    this.setState({ versucht: q.key + ':' + this.state.step, puls: this.state.puls + 1 });
+    this.zuFeld(liste[0] && liste[0].k);
+  }
+  zuFeld(k) {
+    if (!k) return;
+    setTimeout(() => {
+      const el = k === '_wahl' ? document.querySelector('.qright .g-ans .acard, .qright .g-stil .acard') : document.getElementById('f-' + k);
+      if (el) { el.focus({ preventScroll: true }); el.scrollIntoView({ block: 'center', behavior: this.reduce ? 'auto' : 'smooth' }); }
+    }, 60);
   }
 
   answeredPills() {
@@ -3580,7 +3753,7 @@ class Component extends DCLogic {
 
   leaveEdit(target) {
     const q = this.frage();
-    if (!this.complete(q)) { this.setState({ warn: true }); return; }
+    if (!this.complete(q)) { this.fehlerZeigen(q); return; }
     // Wird eine Folgefrage neu sichtbar (bestehende Website), führt der Weg zuerst dorthin
     if (q.key === 'WEBSITE_HEUTE' && this.state.ans.WEBSITE_HEUTE === 'Ja' && !this.state.ans.WEBSITE_PROBLEME) {
       const st = this.fragen().findIndex((x) => x.key === 'WEBSITE_PROBLEME');
@@ -3592,7 +3765,7 @@ class Component extends DCLogic {
   next = () => {
     const step = this.state.step;
     const q = this.frage();
-    if (!this.complete(q)) { this.setState({ warn: true }); return; }
+    if (!this.complete(q)) { this.fehlerZeigen(q); return; }
     if (this.state.editing) { this.leaveEdit('result'); return; }
     if (step >= this.fragen().length - 1) { this.showResult(); this.merken(); return; }
     this.setState({ step: step + 1, dir: 'fwd', warn: false, tick: this.state.tick + 1 });
@@ -3702,7 +3875,7 @@ class Component extends DCLogic {
     put('KONTAKT_NAME', t.name);
     put('KONTAKT_MAIL', t.email);
     put('KONTAKT_TEL', t.tel);
-    put('KONTAKTWEG', a.KONTAKT);
+    put('KONTAKTWEG', this.kontaktweg());
     put('REFERENZ', a.REFERENZ);
     put('SONSTIGES', t.sonstiges);
     const r = this.rec();
@@ -3785,7 +3958,7 @@ class Component extends DCLogic {
     const total = fr.length;
     const q = fr[Math.min(s.step, total - 1)] || this.Q[0];
     const opts = (q.typ === 'wahl' || q.typ === 'multi' || (q.o && q.typ === 'felder')) ? this.optsFor(q) : [];
-    const picked = s.ans[q.key];
+    const picked = q.key === 'KONTAKT' ? this.kontaktweg() : s.ans[q.key];
     const isMulti = q.typ === 'multi' || q.typ === 'karten';
     const shopGewaehlt = q.typ === 'karten' && Array.isArray(picked) && picked.some((n) => (this.FUNKTIONEN.find((f) => f[0] === n) || [])[2] === 'shop');
     const hinweisOpt = shopGewaehlt ? 'Einen Onlineshop biete ich nicht an. Schicken Sie die Anfrage trotzdem ab, ich sage Ihnen ehrlich, was möglich ist.'
@@ -3794,13 +3967,31 @@ class Component extends DCLogic {
     const allOff = this.STEPS.every((st, i) => st[3] || s.off[i]);
 
 
-    const fields = [];
     const eMax = this.ANFRAGE.eingabeMax;
-    const feld = (f) => fields.push({ k: f[0], label: f[1], ph: f[2] || '', type: f[4] || 'text', value: s.txt[f[0]] || '' });
-    if (q.felder) q.felder.forEach(feld);
-    if (q.extra) Object.keys(q.extra).forEach((o) => { if (picked === o || (Array.isArray(picked) && picked.indexOf(o) >= 0)) feld(q.extra[o]); });
+    // Fehler zeigen: nach dem Verlassen eines bearbeiteten Feldes, nach einem Klick auf Weiter oder wenn der Worker ein Feld ablehnt
+    const versucht = s.versucht === q.key + ':' + s.step;
+    const fehlerAlle = this.fehlerListe(q);
+    const sichtbar = (k) => versucht || !!s.beruehrt[k] || !!s.serverFehler[k];
+    const fehlerSichtbar = fehlerAlle.filter((e) => sichtbar(e.k)).map((e) => s.serverFehler[e.k] ? Object.assign({}, e, { meldung: s.serverFehler[e.k] }) : e);
+    for (const k of Object.keys(s.serverFehler)) if (!fehlerSichtbar.some((e) => e.k === k) && this.feldDefs(q).some((f) => f.k === k)) fehlerSichtbar.push({ k, label: (this.feldDefs(q).find((f) => f.k === k) || {}).label, meldung: s.serverFehler[k] });
+    const feldAnsicht = (f) => {
+      const e = fehlerSichtbar.find((x) => x.k === f.k);
+      const r = this.pruefeFeld(f, s.txt[f.k]);
+      const ok = !!s.okPuls[f.k] && !e && !r.vorschlag;
+      return { k: f.k, id: 'f-' + f.k, fehlerId: 'f-' + f.k + '-fehler', label: f.label, ph: f.ph, type: f.typ, auto: f.auto, value: s.txt[f.k] || '', max: eMax[f.k] || 200,
+        pflicht: f.pflicht, pflichtAttr: f.pflicht ? '1' : '0', ariaReq: f.pflicht ? 'true' : 'false', tag: f.pflicht ? 'Pflichtfeld' : 'optional',
+        tagAnim: f.pflicht ? 'tagRein' : 'tagRein2',
+        fehlerAttr: e ? '1' : '0', ariaInv: e ? 'true' : 'false', meldung: e ? e.meldung : '', iconDisplay: e ? 'inline-flex' : 'none',
+        anim: e ? (s.puls % 2 ? 'feldPulsA' : 'feldPulsB') : 'none',
+        vorschlag: r.vorschlag || '', vorschlagDisplay: r.vorschlag && sichtbar(f.k) ? 'block' : 'none',
+        okDisplay: ok ? 'inline-flex' : 'none', okAnim: ok ? (s.okPuls[f.k] % 2 ? 'okHakenA' : 'okHakenB') : 'none' };
+    };
+    const defs = this.feldDefs(q);
+    const fields = defs.filter((f) => f.gruppe === 1).map(feldAnsicht);
+    const fields2 = defs.filter((f) => f.gruppe === 2).map(feldAnsicht);
+    const wahlFehler = fehlerSichtbar.find((e) => e.k === '_wahl');
+    const offen = fehlerAlle.map((e) => e.k === '_wahl' ? 'eine Antwort' : e.label);
 
-    const complete = this.complete(q);
     const remainMin = Math.max(1, Math.ceil((total - (s.step + 1)) * 20 / 60));
     const felderZuerst = q.typ === 'felder';
 
@@ -4085,8 +4276,27 @@ class Component extends DCLogic {
         };
       }),
       onPick: (e) => this.choose(e.currentTarget.dataset.v),
-      fields: fields.map((f) => ({ ...f, max: eMax[f.k] || 200 })),
-      fieldsDisplay: (fields.length || q.area) ? 'flex' : 'none',
+      fields: fields,
+      fieldsDisplay: fields.length ? 'flex' : 'none',
+      fields2: fields2,
+      fields2Display: (fields2.length || q.area) ? 'flex' : 'none',
+      wahlFehlerAttr: wahlFehler ? '1' : '0', wahlMeldung: wahlFehler ? wahlFehler.meldung : '', wahlIconDisplay: wahlFehler ? 'inline-flex' : 'none',
+      optTagDisplay: q.optOptional ? 'inline' : 'none',
+      zusammenDisplay: versucht && fehlerSichtbar.length >= 2 ? 'block' : 'none',
+      zusammenText: 'Bitte prüfen Sie ' + fehlerSichtbar.length + ' Angaben:',
+      zusammenListe: fehlerSichtbar.map((e) => ({ k: e.k, label: e.k === '_wahl' ? 'Eine Antwort wählen' : e.label })),
+      onZuFeld: (e) => this.zuFeld(e.currentTarget.dataset.k),
+      offenText: offen.length ? 'Noch offen: ' + offen.join(', ') : '',
+      onFieldBlur: (e) => {
+        const k = e.currentTarget.dataset.k;
+        // Erst prüfen, wenn jemand im Feld etwas getan hat: leere, nur durchquerte Felder bleiben ruhig
+        if (!this.state.bearbeitet || !this.state.bearbeitet[k] || this.state.beruehrt[k]) return;
+        this.setState({ beruehrt: Object.assign({}, this.state.beruehrt, { [k]: true }) });
+      },
+      onVorschlag: (e) => {
+        const k = e.currentTarget.dataset.k, v = e.currentTarget.dataset.v;
+        this.setState({ txt: Object.assign({}, this.state.txt, { [k]: v }) }, () => { this.merken(); const el = document.getElementById('f-' + k); if (el) el.focus(); });
+      },
       fieldsTop: (opts.length || q.typ === 'stil' || q.typ === 'karten') && !felderZuerst ? '24px' : '0px',
       optTop: felderZuerst && opts.length ? '28px' : '0px',
       hasArea: !!q.area,
@@ -4097,22 +4307,22 @@ class Component extends DCLogic {
       areaMax: q.area ? (eMax[q.area[0]] || 2000) : 2000,
       onField: (e) => {
         const kk = e.currentTarget.dataset.k;
-        const txt = Object.assign({}, s.txt);
+        const st = this.state, txt = Object.assign({}, st.txt);
         txt[kk] = e.currentTarget.value;
-        const hinweisWeg = s.senden === 'fehler' && s.sendFehler === 'kontakt';
-        this.setState({ txt: txt, warn: false, ...(hinweisWeg ? { senden: 'bereit', sendFehler: '' } : {}) });
+        const hinweisWeg = st.senden === 'fehler' && (st.sendFehler === 'kontakt' || st.sendFehler === 'feld');
+        // Fehler behoben: Rot weg, kurz ein Häkchen
+        const fq = this.frage(), def = this.feldDefs(fq).find((f) => f.k === kk);
+        const warSichtbar = def && (st.versucht === fq.key + ':' + st.step || st.beruehrt[kk] || st.serverFehler[kk]) && (st.serverFehler[kk] || this.pruefeFeld(def, st.txt[kk]).meldung);
+        const jetztOk = def && !this.pruefeFeld(def, txt[kk]).meldung;
+        const okPuls = warSichtbar && jetztOk ? Object.assign({}, st.okPuls, { [kk]: (st.okPuls[kk] || 0) + 1 }) : st.okPuls;
+        const serverFehler = Object.assign({}, st.serverFehler); delete serverFehler[kk];
+        const mfFehler = Object.assign({}, st.mfFehler || {}); delete mfFehler[kk];
+        this.setState({ txt: txt, okPuls, serverFehler, mfFehler, bearbeitet: Object.assign({}, st.bearbeitet, { [kk]: true }), ...(hinweisWeg ? { senden: 'bereit', sendFehler: '' } : {}) });
         this.merken();
       },
-      warnDisplay: s.warn ? 'block' : 'none',
-      warnText: q.felder && q.felder.some((f) => f[4] === 'email' && s.txt[f[0]] && !this.gueltigeMail(s.txt[f[0]])) ? 'Bitte prüfen Sie die E-Mail-Adresse'
-        : q.felder ? 'Bitte füllen Sie die Felder ohne «optional» aus' : isMulti ? 'Bitte wählen Sie mindestens eine Antwort' : 'Bitte wählen Sie eine Antwort',
       backVis: (s.step > 0 && !s.editing) ? 'visible' : 'hidden',
       onBack: this.back, onNext: this.next,
       nextLabel: s.editing ? 'Übernehmen und zurück zum Ergebnis' : s.step >= total - 1 ? 'Ergebnis ansehen' : 'Weiter',
-      nextDisabled: !complete,
-      nextBg: complete ? '#2D4CF0' : '#E2DFD8',
-      nextFg: complete ? '#FFFFFF' : '#5B6270',
-      nextCursor: complete ? 'pointer' : 'not-allowed',
       toast: s.toast, toastOp: s.toast ? 1 : 0,
 
       recName: r.name, recPrice: r.price,
@@ -4148,6 +4358,8 @@ class Component extends DCLogic {
       vonEingabeDisplay: s.quick ? 'flex' : 'none',
       vonText: [s.txt.name, s.txt.email ? '<' + s.txt.email + '>' : ''].filter(Boolean).join(' '),
       vonName: s.txt.name || '', vonMail: s.txt.email || '', vonFirma: s.txt.firma || '',
+      mfMailFehlerAttr: s.mfFehler.email ? '1' : '0', mfMailAriaInv: s.mfFehler.email ? 'true' : 'false',
+      mfMailMeldung: s.mfFehler.email || '', mfMailIcon: s.mfFehler.email ? 'inline-flex' : 'none',
       fensterBetreff: this.fensterBetreff(),
       hpWert: s.hp, onHp: (e) => this.setState({ hp: e.currentTarget.value }),
       kopieWunsch: s.kopieWunsch, onKopie: () => this.setState((st) => ({ kopieWunsch: !st.kopieWunsch })),
