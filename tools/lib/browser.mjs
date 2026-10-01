@@ -62,6 +62,7 @@ export async function startChrome() {
   // Ohne Bewegung, damit Zähler und Animationen sofort ihren Endwert zeigen
   await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
   return {
+    send, // direkter Zugriff auf das DevTools-Protokoll (zum Beispiel für Screenshots)
     async ausfuehren(url, ausdruck) {
       await send('Page.navigate', { url });
       for (let i = 0; i < 50; i++) {

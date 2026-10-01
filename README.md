@@ -25,8 +25,8 @@ Wie die Seite automatisch bei jedem Push online geht, steht im Abschnitt
 - Damit jede Adresse für Suchmaschinen eine eigene Seite ist, erzeugt
   `tools/seo-build.mjs` aus `index.html` je Adresse eine Datei
   (`angebot/index.html` usw.). Siehe „Suchmaschinen“.
-- Die Komponenten `logo.dc.html`, `kapazitaet.dc.html` und
-  `musterpreview.dc.html` lädt `support.js` beim Aufruf nach. Sie müssen im
+- Die Komponenten `logo.dc.html` und `kapazitaet.dc.html` lädt `support.js`
+  beim Aufruf nach. Sie müssen im
   selben Ordner wie `index.html` liegen. Der Dateiname muss dem Namen in
   `<dc-import name="…">` entsprechen, plus `.dc.html`.
 - Beim Laden wird nichts von fremden Servern abgerufen. React, Schriften und
@@ -94,9 +94,10 @@ tools/seo-build.mjs         Erzeugt die Dateien oben
 tools/portfolio-sync.mjs    Holt das aktuelle Portfolio als Musterprojekt (muster/portfolio/)
 logo.dc.html                Komponente: Logo (Zeichen und Wortmarke)
 kapazitaet.dc.html          Komponente: Auslastungsanzeige
-musterpreview.dc.html       Komponente: Vorschau der Musterprojekte
+musterprojekte/doppelmeter/ Musterprojekt Schreinerei Doppelmeter, fünf statische Seiten (siehe „Musterprojekt Doppelmeter“)
+tools/screenshots-doppelmeter.mjs  Erzeugt die Aufnahmen der Doppelmeter-Seite für Startseite und Musterprojekte
 muster/
-  doppelmeter.html          Musterprojekt Schreinerei (öffnet im Overlay)
+  doppelmeter.html          Weiterleitung auf /musterprojekte/doppelmeter/ (alte Adresse)
   portfolio.html            Rahmen für das Musterprojekt Portfolio
   portfolio/                Kopie des echten Portfolios (erzeugt, siehe „Portfolio-Muster“)
 assets/
@@ -104,7 +105,7 @@ assets/
   js/vendor/                React 18.3.1 und ReactDOM, Produktionsfassungen
   fonts/                    Schriften als WOFF2, pro Seite eine CSS-Datei
   fonts/lizenzen/           Lizenztexte der Schriften (SIL Open Font License)
-  img/                      Küchenfoto (Unsplash), Porträt, Vorschaubild für die Portfolio-Kachel
+  img/                      Porträt, Aufnahmen der Musterprojekte, Vorschaubild für geteilte Links
 .github/workflows/          Automatischer Upload zu Infomaniak
 ```
 
@@ -133,7 +134,8 @@ Was für die Auffindbarkeit im Code steckt und wie es gepflegt wird:
   Inhalt statt der Vorlage mit `{{ ... }}`. Der Projekt-Check braucht
   JavaScript, dort steht ein Hinweis mit der E-Mail-Adresse.
 - **Nicht in der Suche** (`noindex`): Projekt-Check, Impressum, Datenschutz,
-  AGB, 404-Seite und die drei Musterseiten unter `muster/`. Das Impressum
+  AGB, 404-Seite, die Musterseiten unter `muster/` und die fünf Seiten unter
+  `musterprojekte/doppelmeter/`. Das Impressum
   enthält die Wohnadresse, und die Musterseiten zeigen einen erfundenen Betrieb
   mit erfundener Telefonnummer. Die Seiten bleiben erreichbar und verlinkt.
 - **`sitemap.xml` und `robots.txt`** mit den fünf Seiten, die in die Suche
@@ -192,9 +194,44 @@ das Portfolio merkt sich Farbschema und Sprache nicht im Browser, die Kopie ist
 Findet das Skript eine der Stellen nicht mehr, weil sich das Portfolio
 verändert hat, bricht es mit einer Meldung ab.
 
-Die kleine Vorschau der Kachel auf der Musterprojekte-Seite ist von Hand
-nachgezeichnet (`musterpreview.dc.html`, Bild `assets/img/portfolio-vorschau.webp`).
-Ändert sich der Hero des Portfolios, muss sie mit angepasst werden.
+## Musterprojekt Doppelmeter
+
+Die Seite der erfundenen Schreinerei liegt als fünf statische Seiten in
+`musterprojekte/doppelmeter/` (Start, Küchen, Schränke, Werkstatt, Kontakt) und
+ist unter `/musterprojekte/doppelmeter/` erreichbar. `tools/seo-build.mjs`
+lässt den Ordner stehen, er ist `noindex` und steht nicht in der Sitemap. Die
+alte Adresse `/muster/doppelmeter.html` leitet dorthin weiter.
+
+- **Beispiel-Leiste** oben auf jeder Seite: Hinweis auf den erfundenen Betrieb,
+  Links zu `/musterprojekte/` und zum Projekt-Check. Der Link zum Check trägt
+  `?quelle=doppelmeter`, damit die Vorbelegung (Einstieg `doppelmeter`) greift.
+- **Schriften** lokal: Fraunces 500 (fest eingerechnet), Work Sans, IBM Plex
+  Mono, eingebunden über `assets/fonts/doppelmeter.css`.
+- **Fotos** von Unsplash (Unsplash-Lizenz) in `assets/img/fotos/`, je Motiv
+  AVIF und WebP in zwei Breiten. Die Namen der Urheber stehen im Impressum
+  von odera.ch und im Impressum der Musterseite (`kontakt.html#bildnachweise`).
+- **Demo-Formular** auf `kontakt.html`: dieselben Prüfregeln und Meldungen wie
+  der Projekt-Check, es wird nichts gesendet.
+- Auf odera.ch öffnet «Ganze Seite ansehen» die Seite im Overlay, auf dem Handy
+  (bis 700 px Breite) und mit gedrückter Befehls- oder Umschalttaste direkt.
+
+**Aufnahmen neu erzeugen**, wenn sich die Seite ändert (Startseite,
+Musterprojekte und Vorschaubild für geteilte Links zeigen sie):
+
+```bash
+node tools/screenshots-doppelmeter.mjs
+```
+
+Das Skript startet einen kleinen lokalen Server und Chrome und schreibt
+`assets/img/muster-doppelmeter-desktop.webp`, `-handy.webp` und
+`-werkstatt.webp`. Die Beispiel-Leiste wird dabei abgeschnitten.
+
+**Ladezeit.** Die Zahl auf der Musterprojekte-Seite steht nur in `LADEZEIT`
+(`index.html`), zusammen mit der Fussnote. Gemessen wird der Largest
+Contentful Paint mit Lighthouse im Profil Desktop, Median aus drei Läufen,
+für jede der fünf Seiten; angezeigt wird der langsamste Wert, aufgerundet.
+Nach einer Änderung neu messen, `LADEZEIT` anpassen und
+`node tools/seo-build.mjs` ausführen.
 
 ## Rechtliche Seiten
 
@@ -419,6 +456,6 @@ lokalen Ordnern, also `index.html`, die Ordner der Unterseiten (`angebot/`,
 `ablauf/`, `musterprojekte/`, `ueber-mich/`, `projekt-check/`, `impressum/`,
 `datenschutz/`, `agb/`), `404.html`, `favicon.svg`, `robots.txt`,
 `sitemap.xml`, `.htaccess`, `logo.dc.html`, `kapazitaet.dc.html`,
-`musterpreview.dc.html`, `muster/` und `assets/`. Die Datei `.htaccess`
+`muster/` und `assets/`. Die Datei `.htaccess`
 beginnt mit einem Punkt und ist im Finder unsichtbar, im SFTP-Programm ist sie
 über „Versteckte Dateien anzeigen“ sichtbar.

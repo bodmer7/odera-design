@@ -37,7 +37,7 @@ jobs:
         if: steps.pruefen.outputs.bereit == 'true'
         run: |
           fehlt=0
-          for d in index.html 404.html favicon.svg robots.txt sitemap.xml .htaccess angebot/index.html ablauf/index.html musterprojekte/index.html ueber-mich/index.html projekt-check/index.html impressum/index.html datenschutz/index.html agb/index.html muster/portfolio/index.html assets/js/support.js; do
+          for d in index.html 404.html favicon.svg robots.txt sitemap.xml .htaccess angebot/index.html ablauf/index.html musterprojekte/index.html ueber-mich/index.html projekt-check/index.html impressum/index.html datenschutz/index.html agb/index.html muster/portfolio/index.html musterprojekte/doppelmeter/index.html assets/js/support.js; do
             [ -f "$d" ] || { echo "::error::Datei fehlt: $d"; fehlt=1; }
           done
           [ "$fehlt" = 0 ] || exit 1
