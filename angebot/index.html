@@ -3181,10 +3181,10 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
     </span>
   </div>
   <div style="flex:1;position:relative;background:var(--flaeche)">
+    <div class="mp-rahmen" style="position:absolute;inset:0"></div>
     <sc-if value="{{ musterLaedt }}" hint-placeholder-val="{{ true }}">
       <div class="mp-laden" role="status"><span class="mp-laden-punkt" aria-hidden="true"></span>Seite wird geladen</div>
     </sc-if>
-    <iframe src="{{ musterSrc }}" loading="lazy" title="{{ musterTitle }}" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:var(--flaeche);opacity:{{ musterIfOpacity }};transition:opacity 160ms linear"></iframe>
   </div>
 </div>
 </sc-if>
@@ -4630,19 +4630,23 @@ class Component extends DCLogic {
         e.preventDefault();
         const src = e.currentTarget.getAttribute('href');
         this.setState({ muster: { src, title: e.currentTarget.dataset.title, geladen: false } });
-        // Ladezustand bis zum load des iframes (Listener per Code: ein onload-Attribut liefe in der rohen Vorlage). Spätestens nach 5 s.
+        // Das iframe entsteht erst hier, sonst lädt die rohe Vorlage ihre unaufgelöste Adresse. Der load-Listener hängt vor src.
         const fertig = () => { if (this.state.muster && this.state.muster.src === src && !this.state.muster.geladen) this.setState({ muster: { ...this.state.muster, geladen: true } }); };
-        const warte = (n) => {
-          const f = [...document.querySelectorAll('[role=dialog] iframe')].find((x) => x.getAttribute('src') === src);
-          if (!f) { if (n < 60) requestAnimationFrame(() => warte(n + 1)); return; }
-          f.addEventListener('load', fertig, { once: true });
-          try { const d = f.contentDocument; if (d && d.readyState === 'complete' && d.URL !== 'about:blank') fertig(); } catch (_) {}
+        const titel = e.currentTarget.dataset.title;
+        const einsetzen = (n) => {
+          const rahmen = [...document.querySelectorAll('[role=dialog] .mp-rahmen')].find((r) => r.getClientRects().length);
+          if (!rahmen) { if (n < 60) requestAnimationFrame(() => einsetzen(n + 1)); return; }
+          const f = document.createElement('iframe');
+          f.title = titel;
+          f.style.cssText = 'width:100%;height:100%;border:0;background:var(--flaeche);opacity:0;transition:opacity 160ms linear';
+          f.addEventListener('load', () => { f.style.opacity = '1'; fertig(); }, { once: true });
+          f.src = src;
+          rahmen.replaceChildren(f);
         };
-        requestAnimationFrame(() => warte(0));
-        setTimeout(fertig, 5000);
+        requestAnimationFrame(() => einsetzen(0));
+        setTimeout(() => { document.querySelectorAll('[role=dialog] .mp-rahmen iframe').forEach((f) => { f.style.opacity = '1'; }); fertig(); }, 5000);
       },
       musterLaedt: !!s.muster && !s.muster.geladen,
-      musterIfOpacity: s.muster && s.muster.geladen ? 1 : 0,
       ladezeitDm: this.LADEZEIT.doppelmeter,
       ladezeitPf: this.LADEZEIT.portfolio,
       ladezeitNotiz: this.LADEZEIT.notiz,
