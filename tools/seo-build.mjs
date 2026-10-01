@@ -103,6 +103,8 @@ const AUSZUG = `(() => {
   const teil = (sel) => { const el = document.querySelector(sel); return el ? (gehe(el).html || '') : ''; };
   return {
     nav: [...document.querySelectorAll('#dc-root header nav a')].map((a) => ({ label: a.innerText.trim(), href: a.getAttribute('href') })),
+    // Fertig gerenderte Seite für den Vorab-Block (ohne interne Zähler der Laufzeit)
+    vorab: document.getElementById('dc-root').innerHTML.replace(/ data-dc-tpl="\\d+"/g, ''),
     faq: [...document.querySelectorAll('#dc-root main details.frage')].map((d) => ({ q: d.querySelector('summary').textContent.trim(), a: d.querySelector('p').textContent.trim() })),
     main: teil('#dc-root main'),
     footer: teil('#dc-root footer'),
@@ -181,6 +183,8 @@ function baueSeite(pfad, teile) {
   };
   tausche('<!-- seo:start -->', '<!-- seo:end -->', kopf(pfad, teile));
   tausche('<!-- seo-noscript:start -->', '<!-- seo-noscript:end -->', noscriptBlock(pfad, teile));
+  // Vorab gerenderte Fassung: sichtbar ab dem ersten Zeichnen, React ersetzt sie beim Aufbau (componentDidMount)
+  tausche('<!-- vorab:start -->', '<!-- vorab:end -->', teile.vorab ? `<div id="vorab">${teile.vorab}</div>` : '');
   html = html.replace(/<html(\s[^>]*)?>/, '<html lang="de-CH">');
   return html;
 }
@@ -195,7 +199,7 @@ try {
     let teile;
     if (pfad === '/projekt-check') {
       teile = await chrome.ausfuehren(basis + '/', AUSZUG); // Navigation kommt von der Startseite
-      teile = { nav: teile.nav, main: '', footer: '' };
+      teile = { nav: teile.nav, main: '', footer: '', vorab: '' };
     } else {
       teile = await chrome.ausfuehren(basis + urlOf(pfad), AUSZUG);
       if (!teile.main || teile.main.length < 80) throw new Error('Leerer Textauszug für ' + pfad);

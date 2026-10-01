@@ -27,41 +27,7 @@
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/jetbrains-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts/index.css">
-<script src="assets/js/vendor/react-18.3.1.production.min.js"></script>
-<script src="assets/js/vendor/react-dom-18.3.1.production.min.js"></script>
-<script src="assets/js/support.js"></script>
-</head>
-<body>
-<!-- seo-noscript:start -->
-<noscript>
-<header><p><a href="/">ODERA Design</a></p>
-<nav aria-label="Hauptnavigation"><ul><li><a href="/angebot/">Angebot</a></li>
-<li><a href="/ablauf/">Ablauf</a></li>
-<li><a href="/musterprojekte/">Musterprojekte</a></li>
-<li><a href="/ueber-mich/">Über mich</a></li>
-</ul>
-</nav></header>
-<main>
-<p>404</p>
-<h1>Diese Seite gibt es nicht. Ihre wird besser.</h1>
-<p>Sie haben sich vertippt oder ich habe etwas verschoben. Beides lässt sich beheben.</p>
-<p><a href="/">Zur Startseite</a> <a href="/projekt-check/">Projekt-Check starten</a></p>
-<p>Falls Sie über einen Link von mir hierher kamen, schreiben Sie mir kurz: kontakt@odera.ch</p>
-</main>
-<footer>
-<p>Webseiten für Schweizer Betriebe</p>
-<p>Berikon AG</p>
-<p><a href="/angebot/">Angebot</a>  <a href="/ablauf/">Ablauf</a>  <a href="/musterprojekte/">Musterprojekte</a>  <a href="/ueber-mich/">Über mich</a></p>
-<p><a href="mailto:kontakt@odera.ch">kontakt@odera.ch</a></p>
-<p>Antwort spätestens am nächsten Abend, ausser am Wochenende</p>
-<p><a href="/impressum/">Impressum</a> <a href="/datenschutz/">Datenschutz</a> <a href="/agb/">AGB</a></p>
-<p>© 2026 ODERA Design · Nico Bodmer</p>
-<p>Keine Cookies, kein Tracking.</p>
-</footer>
-</noscript>
-<!-- seo-noscript:end -->
-<x-dc>
-<helmet>
+<!-- Seitenstil im Kopf: gilt ab dem ersten Zeichnen, auch für den Vorab-Block -->
 <style>
 html{scroll-behavior:smooth}
 :root{
@@ -78,7 +44,7 @@ body{margin:0;background:var(--papier);color:var(--tinte);font-family:'Inter',sy
 a{color:var(--primaer-dunkel);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 a:hover{text-decoration-thickness:2px}
 :focus-visible{outline:3px solid var(--primaer);outline-offset:2px}
-[data-flaeche="blau"] :focus-visible,.ink:focus-visible,footer :focus-visible,.mobbar :focus-visible{outline-color:var(--akzent)}
+[data-flaeche="blau"] :focus-visible,.ink :focus-visible,footer :focus-visible,.mobbar :focus-visible{outline-color:var(--akzent)}
 ::selection{background:var(--akzent);color:var(--tinte)}
 .ink::selection,#abschluss ::selection,footer ::selection{background:var(--akzent);color:var(--tinte)}
 main h1[tabindex="-1"]:focus,main h1[tabindex="-1"]:focus-visible,main h2[tabindex="-1"]:focus,main h2[tabindex="-1"]:focus-visible{outline:none}
@@ -87,7 +53,6 @@ button,input,textarea{font-family:inherit}
 @keyframes pageIn{from{opacity:0}to{opacity:1}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes tickIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
-@keyframes nudge{0%,100%{transform:translate(-22px,-22px)}30%{transform:translate(-18px,-22px)}70%{transform:translate(-26px,-22px)}}
 @keyframes pulseDot{0%,100%{opacity:1}50%{opacity:0.62}}
 @keyframes gradW{from{background-position:0% 50%}to{background-position:100% 50%}}
 .g3{background:var(--primaer);transition:background var(--dauer) var(--kurve)}
@@ -114,6 +79,7 @@ button,input,textarea{font-family:inherit}
 /* Lime als Signatur:Leuchtstift, Kreise mit Häkchen, Punkte */
 .leuchtstift{padding:0 0.08em;margin:0 -0.04em;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 200 40' %70reserveAspectRatio='none'%3E%3Cpath d='M2 14 C40 9 90 12 130 10 C160 9 185 11 198 12 L197 36 C150 38 110 35 70 37 C40 38 18 36 3 38 Z' fill='%23D6F24B'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:0 88%;background-size:100% 52%;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:leuchten 200ms linear both}
 @keyframes leuchten{from{background-size:0% 52%}to{background-size:100% 52%}}
+html.vorab-weg #dc-root .leuchtstift{animation:none}
 .lime-kreis{display:inline-flex;align-items:center;justify-content:center;flex:none;width:32px;height:32px;border-radius:999px;background:var(--akzent);color:var(--tinte);box-shadow:inset 0 0 0 1px var(--akzent-linie)}
 .hinweis.hinweis-akzent{background:var(--akzent-tint);border:1px solid var(--akzent-linie)}
 .hinweis-akzent .lime-kreis svg{margin:0;color:var(--tinte)}
@@ -173,9 +139,9 @@ button,input,textarea{font-family:inherit}
 .rechner-u{font-size:16px;line-height:1.5;color:var(--text-2);margin:0 0 20px}
 .rechner-fn{display:flex;flex-wrap:wrap;gap:8px}
 .rfn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1px solid var(--linie-stark);border-radius:999px;background:var(--flaeche);color:var(--tinte);font:inherit;font-size:16px;line-height:1.3;text-align:left;cursor:pointer;transition:background 140ms ease-out,border-color 140ms ease-out}
-.rfn svg{flex:none;color:var(--primaer)}
+.rfn .ico{color:var(--primaer)}
 .rfn[aria-checked="true"]{border-color:var(--akzent);box-shadow:inset 0 0 0 1px var(--akzent),0 0 0 1px var(--akzent-linie);font-weight:600}
-.rfn[aria-checked="true"] svg{color:var(--akzent-tief)}
+.rfn[aria-checked="true"] .ico{color:var(--akzent-tief)}
 .rfn[aria-checked="true"]::after{content:"";flex:none;width:18px;height:18px;border-radius:999px;background:var(--akzent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%2311131A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat;box-shadow:inset 0 0 0 1px var(--akzent-linie)}
 .rfn[aria-disabled="true"]{cursor:default}
 .rfn:focus-visible{outline:3px solid var(--tinte);outline-offset:2px}
@@ -364,7 +330,7 @@ footer a:hover{color:var(--akzent)!important}
 /* Tablet:Rand ist schmaler, Knopf kleiner und ganz aussen, damit er keine Inhalte überdeckt */
 @media(min-width:561px) and (max-width:1100px){.chat-btn{width:44px;height:44px;right:4px;bottom:16px}.chat-btn svg{width:22px;height:22px}}
 @media print{.chat-btn{display:none!important}}
-@media(min-width:1280px){.chat-btn{width:auto;gap:10px;padding:0 22px 0 18px}.chat-btn-l{position:static;width:auto;height:auto;overflow:visible;clip:auto;font-size:16px;font-weight:600}}
+@media(min-width:1680px){.chat-btn{width:auto;gap:10px;padding:0 22px 0 18px}.chat-btn-l{position:static;width:auto;height:auto;overflow:visible;clip:auto;font-size:16px;font-weight:600}}
 .mf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .mf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .editbar{position:sticky;top:0;z-index:5;background:var(--flaeche);border-bottom:1px solid var(--linie)}
@@ -385,7 +351,7 @@ footer a:hover{color:var(--akzent)!important}
 }
 .mp-green{clip-path:polygon(0 0,calc(52% + 60px) 0,52% 100%,0 100%)}
 .mp-jump{display:flex;align-items:center;gap:16px;height:88px;padding:0 20px 0 28px;border-radius:999px;border:1px solid rgba(255,255,255,0.35);background:rgba(255,255,255,0.08);color:var(--auf-dunkel);text-decoration:none;transition:background 160ms linear,border-color 160ms linear,transform 160ms ease-out;width:100%;box-sizing:border-box}
-.mp-jump-num{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:13px;color:rgba(255,255,255,0.6);flex:none}
+.mp-jump-num{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:rgba(255,255,255,0.6);flex:none}
 .mp-jump-body{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
 .mp-jump-name{font-size:26px;font-weight:700;color:var(--auf-dunkel);line-height:1.15}
 .mp-jump-sub{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.3}
@@ -425,7 +391,7 @@ footer a:hover{color:var(--akzent)!important}
 @media(max-width:560px){
  .mdet>summary{display:flex;align-items:center;justify-content:space-between;min-height:56px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;color:var(--tinte);cursor:pointer;list-style:none}
  .mdet>summary::-webkit-details-marker{display:none}
- .mdet>summary::after{content:"+";font-family:'IBM Plex Mono',monospace;font-size:26px;color:var(--primaer)}
+ .mdet>summary::after{content:"+";font-family:'JetBrains Mono',monospace;font-size:26px;color:var(--primaer)}
  .mdet[open]>summary::after{content:"\2013"}
  .mhide{display:none}
 }
@@ -448,6 +414,8 @@ footer a:hover{color:var(--akzent)!important}
 .werk-handy{position:absolute;right:-12px;bottom:0;width:26%;border:6px solid var(--tinte);border-radius:22px;overflow:hidden;background:var(--tinte);box-shadow:0 20px 40px -24px rgba(17,19,26,0.5)}
 .werk figcaption{margin-top:var(--a-2);max-width:70%;font-size:var(--fs-klein);line-height:1.5;color:var(--text-2)}
 .abschnitt-nr{margin:0 0 var(--a-2)}
+.ico{display:inline-block;flex:none;width:20px;height:20px;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
+.ico-26{width:26px;height:26px}
 .fragen-raster{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--a-5);align-items:start}
 .ki-karte{padding:28px;border-radius:16px;background:var(--flaeche);border:1px solid var(--linie);box-shadow:0 24px 48px -36px rgba(17,19,26,0.35)}
 .ki-kopf{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px;padding:0 0 14px;border-bottom:1px solid var(--linie)}
@@ -604,8 +572,161 @@ footer a:hover{color:var(--akzent)!important}
  .pr-ul{margin:0 0 4pt;padding-left:14pt;font-size:11pt;line-height:1.45}
 }
 </style>
-</helmet>
-
+<style>#vorab{display:none}.js #vorab{display:block}</style>
+<script>
+// Vorab-Block erst zeigen, wenn die Schriften da sind: sonst springt der Text beim Wechsel der Schrift (CLS)
+(function(){var h=document.documentElement,f=document.fonts,zeigen=function(){h.classList.add('schrift')};h.classList.add('js');
+if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1em Inter'),f.load('600 1em Inter'),f.load('500 1em "JetBrains Mono"')]).then(zeigen,zeigen)}else zeigen();setTimeout(zeigen,3000)})();
+</script>
+<script>window.__resources = {}; // Seite nicht ein zweites Mal laden (support.js), logo.dc.html liest auch kleingeschriebene Eigenschaften</script>
+<script defer src="assets/js/vendor/react-18.3.1.production.min.js"></script>
+<script defer src="assets/js/vendor/react-dom-18.3.1.production.min.js"></script>
+<script>
+// Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
+// und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false;
+var start=function(){if(los||!dom||!lcp)return;los=true;var s=document.createElement('script');s.src='assets/js/support.js';document.head.appendChild(s)};
+var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
+try{new PerformanceObserver(gemeldet).observe({type:'largest-contentful-paint',buffered:true})}catch(e){}
+setTimeout(gemeldet,400);
+if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()});else start()})();
+</script>
+</head>
+<body>
+<!-- seo-noscript:start -->
+<noscript>
+<header><p><a href="/">ODERA Design</a></p>
+<nav aria-label="Hauptnavigation"><ul><li><a href="/angebot/">Angebot</a></li>
+<li><a href="/ablauf/">Ablauf</a></li>
+<li><a href="/musterprojekte/">Musterprojekte</a></li>
+<li><a href="/ueber-mich/">Über mich</a></li>
+</ul>
+</nav></header>
+<main>
+<p>404</p>
+<h1>Diese Seite gibt es nicht. Ihre wird besser.</h1>
+<p>Sie haben sich vertippt oder ich habe etwas verschoben. Beides lässt sich beheben.</p>
+<p><a href="/">Zur Startseite</a> <a href="/projekt-check/">Projekt-Check starten</a></p>
+<p>Falls Sie über einen Link von mir hierher kamen, schreiben Sie mir kurz: kontakt@odera.ch</p>
+</main>
+<footer>
+<p>Webseiten für Schweizer Betriebe</p>
+<p>Berikon AG</p>
+<p><a href="/angebot/">Angebot</a>  <a href="/ablauf/">Ablauf</a>  <a href="/musterprojekte/">Musterprojekte</a>  <a href="/ueber-mich/">Über mich</a></p>
+<p><a href="mailto:kontakt@odera.ch">kontakt@odera.ch</a></p>
+<p>Antwort spätestens am nächsten Abend, ausser am Wochenende</p>
+<p><a href="/impressum/">Impressum</a> <a href="/datenschutz/">Datenschutz</a> <a href="/agb/">AGB</a></p>
+<p>© 2026 ODERA Design · Nico Bodmer</p>
+<p>Keine Cookies, kein Tracking.</p>
+</footer>
+</noscript>
+<!-- seo-noscript:end -->
+<!-- vorab:start -->
+<div id="vorab"><div class="sc-host" data-sc-name="Root"><header class="kopf" data-scroll="0">
+  <div id="thread" aria-hidden="true" style="height: 2px; width: 0%; background: var(--akzent); box-shadow: rgba(17, 19, 26, 0.45) 0px 1px 0px; transition: width 80ms linear;"></div>
+  <div class="wrap navbar">
+    <a href="/" style="text-decoration: none; color: var(--tinte); display: flex; align-items: center; gap: 12px;">
+      <div class="sc-host" data-sc-name="logo"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(45, 76, 240); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 21px; color: rgb(246, 245, 241);">
+  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(45, 76, 240); transform: rotate(-19deg);"></span></span></span></div>
+      <span style="display: block;">
+        <span class="logo-lg"><div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(17, 19, 26);">
+  <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span>DERA</span>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div></span>
+        <span class="logo-sm"><div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 23px; color: rgb(17, 19, 26);">
+  <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span>DERA</span>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div></span>
+        <span class="tagline">Webseiten für Schweizer Betriebe</span>
+      </span>
+    </a>
+    <nav class="navmid" aria-label="Hauptnavigation">
+      
+        <a href="/angebot/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Angebot</span></a>
+      
+        <a href="/ablauf/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Ablauf</span></a>
+      
+        <a href="/musterprojekte/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Musterprojekte</span></a>
+      
+        <a href="/ueber-mich/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Über mich</span></a>
+      
+      <span aria-hidden="true" style="position: absolute; bottom: -2px; height: 3px; background: var(--primaer); left: 0px; width: 0px; opacity: 0; transition: left 220ms cubic-bezier(0.2, 0, 0, 1), width 220ms cubic-bezier(0.2, 0, 0, 1), opacity 150ms linear;"></span>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a class="navcta" href="/projekt-check/"><span class="navcta-lg">Projekt-Check starten</span><span class="navcta-sm">Check starten</span></a>
+      <div class="burger">
+        <button type="button" aria-label="Menü öffnen" aria-expanded="false" style="width: 48px; height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; background: var(--flaeche); border: 1px solid var(--linie); border-radius: 999px; cursor: pointer;">
+          <span style="display: block; width: 20px; height: 2px; background: var(--tinte);"></span>
+          <span style="display: block; width: 20px; height: 2px; background: var(--tinte);"></span>
+          <span style="display: block; width: 20px; height: 2px; background: var(--tinte);"></span>
+        </button>
+      </div>
+    </div>
+  </div></header><main style="animation: auto ease 0s 1 normal none running none;"><div>
+  <section style="background: var(--grund);">
+    <div class="wrap" style="padding-top: var(--a-6); padding-bottom: var(--a-6);">
+      <div style="max-width: 640px; margin: 0px auto; text-align: center;">
+        <p style="margin: 0px 0px 24px;"><span class="badge badge-akzent">404</span></p>
+        <h1 tabindex="-1" style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; font-size: var(--fs-h1); line-height: 1.06; letter-spacing: -0.03em; margin: 0px 0px 24px; text-wrap: pretty;">Diese Seite gibt es nicht. Ihre wird besser.</h1>
+        <p style="font-size: clamp(18px, 1.6vw, 22px); line-height: 1.52; color: var(--text-2); margin: 0px 0px 40px; text-wrap: pretty;">Sie haben sich vertippt oder ich habe etwas verschoben. Beides lässt sich beheben.</p>
+        <div class="row" style="justify-content: center; gap: 16px;">
+          <a class="btn btn-primaer" href="/">Zur Startseite</a>
+          <a href="/projekt-check/" style="display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0px 32px; border-radius: 999px; background: var(--flaeche); border: 1px solid var(--tinte); color: var(--tinte); font-size: 16px; font-weight: 600; text-decoration: none;">Projekt-Check starten</a>
+        </div>
+        <p style="font-size: 13px; line-height: 1.6; color: var(--text-2); margin: 32px 0px 0px;">Falls Sie über einen Link von mir hierher kamen, schreiben Sie mir kurz: kontakt@odera.ch</p>
+      </div>
+    </div>
+  </section></div></main><footer class="footpad ink" style="background: var(--tinte);">
+  <div class="wrap" style="padding-top: var(--a-5); padding-bottom: var(--a-5);">
+    <div class="inner">
+      <div class="g-foot">
+        <div>
+          <div style="display: flex; align-items: center; gap: 12px; margin: 0px 0px 12px;">
+            <div class="sc-host" data-sc-name="logo"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(246, 245, 241); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 21px; color: rgb(17, 19, 26);">
+  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span></span></div>
+            <div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(246, 245, 241);">
+  <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(17, 19, 26); transform: rotate(-19deg);"></span></span>DERA</span>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div>
+          </div>
+          <p style="font-size: 16px; line-height: 1.5; color: rgb(201, 206, 214); margin: 0px;">Webseiten für Schweizer Betriebe</p>
+          <p style="font-size: 16px; line-height: 1.5; color: var(--linie-stark); margin: 4px 0px 0px;">Berikon AG</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          
+            <a href="/angebot/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Angebot</span></a>
+          
+            <a href="/ablauf/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Ablauf</span></a>
+          
+            <a href="/musterprojekte/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Musterprojekte</span></a>
+          
+            <a href="/ueber-mich/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Über mich</span></a>
+          
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href="mailto:kontakt@odera.ch" style="font-size: 20px; color: var(--akzent);">kontakt@odera.ch</a>
+          <p style="font-size: 13px; color: var(--linie-stark); margin: 0px;">Antwort spätestens am nächsten Abend, ausser am Wochenende</p>
+        </div>
+        <div class="f-legal" style="display: flex; flex-direction: column; gap: 12px;">
+          <a href="/impressum/" style="font-size: 16px; color: var(--grund); text-decoration: none;">Impressum</a>
+          <a href="/datenschutz/" style="font-size: 16px; color: var(--grund); text-decoration: none;">Datenschutz</a>
+          <a href="/agb/" style="font-size: 16px; color: var(--grund); text-decoration: none;">AGB</a>
+        </div>
+      </div>
+      <div class="f-legal-row" style="display: none; gap: 20px; flex-wrap: wrap; margin-top: 32px;">
+        <a href="/impressum/" style="font-size: 16px; color: var(--linie-stark);">Impressum</a>
+        <a href="/datenschutz/" style="font-size: 16px; color: var(--linie-stark);">Datenschutz</a>
+        <a href="/agb/" style="font-size: 16px; color: var(--linie-stark);">AGB</a>
+      </div>
+      <div class="row" style="justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(246, 245, 241, 0.15); gap: 16px;">
+        <p style="font-size: 16px; color: var(--linie-stark); margin: 0px;">© 2026 ODERA Design · Nico Bodmer</p>
+        <div class="row f-tip" style="gap: 24px;">
+          <p style="font-size: 13px; color: var(--linie-stark); margin: 0px;">Keine Cookies, kein Tracking.</p>
+        </div>
+      </div>
+    </div>
+  </div></footer><button type="button" class="chat-btn" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten, Taste f" title="Fragen an den KI-Assistenten (Taste f)" data-bar="0" data-hell="0" style="display: inline-flex; animation: auto ease 0s 1 normal none running none;">
+  <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"></path><path d="M8.5 9.5h7M8.5 12.5h4"></path></svg>
+  <span class="chat-btn-l">Assistent fragen</span></button></div></div>
+<!-- vorab:end -->
+<x-dc>
 <sc-if value="{{ showChrome }}" hint-placeholder-val="{{ true }}">
 <header class="kopf" data-scroll="{{ headScroll }}">
   <div id="thread" aria-hidden="true" style="height:2px;width:0%;background:var(--akzent);box-shadow:0 1px 0 rgba(17,19,26,0.45);transition:width 80ms linear"></div>
@@ -999,7 +1120,7 @@ footer a:hover{color:var(--akzent)!important}
           <div class="rechner-fn" role="group" aria-labelledby="rechner-t">
             <sc-for list="{{ rechnerKarten }}" as="c" hint-placeholder-count="8">
               <button type="button" class="rfn" role="switch" aria-checked="{{ c.an }}" aria-disabled="{{ c.fix }}" data-v="{{ c.v }}" onClick="{{ onRechnerFn }}">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ c.icon }}"></path></svg>
+                <span class="ico" aria-hidden="true" style="--ico:{{ c.icoUrl }}"></span>
                 <span>{{ c.label }}</span>
               </button>
             </sc-for>
@@ -2157,7 +2278,7 @@ footer a:hover{color:var(--akzent)!important}
             <div class="g-karten" style="display:{{ kartenDisplay }}">
               <sc-for list="{{ karten }}" as="c" hint-placeholder-count="4">
                 <button type="button" class="kcard" data-v="{{ c.v }}" onClick="{{ onPick }}" aria-pressed="{{ c.sel }}" aria-disabled="{{ c.fix }}" data-an="{{ c.an }}">
-                  <svg class="kcard-i" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ c.icon }}"></path></svg>
+                  <span class="kcard-i ico ico-26" aria-hidden="true" style="--ico:{{ c.icoUrl }}"></span>
                   <span class="kcard-t">{{ c.label }}</span>
                   <span class="kcard-d">{{ c.desc }}</span>
                   <span class="mono kcard-p">{{ c.tag }}</span>
@@ -2513,9 +2634,6 @@ class Component extends DCLogic {
     '/agb': { key: 'agb', title: 'Allgemeine Geschäftsbedingungen | ODERA Design', noindex: true }
   };
 
-  PLAETZE_TOTAL = 2;
-  PLAETZE_FREI = 1;
-  DURCHSCHNITT_SEKUNDEN = 0;
 
   BRANCHEN = [
     ['Handwerk', 'Handwerk und Bau', ', seit Jahren in Ihrer Region.', 'Jetzt anrufen', '#2D4CF0', '#FFFFFF',
@@ -2556,7 +2674,6 @@ class Component extends DCLogic {
     'paket-standard': { label: 'Paketkarte Standard', ans: { SEITENZAHL: 'Bis 5 Seiten' }, skip: ['SEITENZAHL'] },
     'paket-pro': { label: 'Paketkarte Pro', ans: { SEITENZAHL: 'Bis 10 Seiten' }, skip: ['SEITENZAHL'] },
     doppelmeter: { label: 'Musterprojekt Doppelmeter', ans: { BRANCHE: 'Handwerk und Bau', SEITENZAHL: 'Bis 5 Seiten', ZIEL: 'Anrufen' }, skip: ['BRANCHE', 'SEITENZAHL', 'ZIEL'] },
-    slider: { label: 'Ladezeit-Vergleich', ans: { WEBSITE_HEUTE: 'Ja', WEBSITE_PROBLEME: ['Wirkt veraltet', 'Anderes'] }, txt: { stoerung: 'Lädt langsam' }, skip: ['WEBSITE_PROBLEME'] },
     ablauf: { label: 'Ablauf, Schritt 1' },
     faq: { label: 'Häufige Fragen' },
     chat: { label: 'Chat-Assistent' },
@@ -2699,9 +2816,9 @@ class Component extends DCLogic {
 
   state = {
     path: '/', scrolled: false, menu: false, barOn: false, pageKey: 0,
-    slider: 50, nudges: 0, nudging: false, dragged: false, flipGlow: false,
+
     faq: (typeof window !== 'undefined' && window.innerWidth <= 560) ? -1 : 0, priceOpen: false, off: {}, reqMin: this.zeitSumme(true), optMin: this.zeitSumme(false), totMin: this.zeitSumme(true) + this.zeitSumme(false),
-    device: 'desktop', muster: null, tilt: false, tx: 0, ty: 0, mailHover: false, deskView: false, closeHover: false,
+    device: 'desktop', muster: null, deskView: false, closeHover: false,
     gName: '', gBranch: 'Handwerk', gFilled: false,
     consent: false,
     step: 0, dir: 'fwd', ans: {}, txt: {}, timing: 1, mid: false, result: false, warn: false, quick: false,
@@ -2709,14 +2826,24 @@ class Component extends DCLogic {
     senden: 'bereit', sendFehler: '', gesendet: null, kopieWunsch: false, offline: false, hp: '', fensterWeg: false, vglOffen: false,
     ueberspringen: [], quelle: '', fortsetzen: null, vtAktiv: false, brief: this.briefAusUrl(), rechnerFn: [], rechnerLogo: false, rechnerTexte: false, rechnerAn: false, rechnerPreis: 0,
     copied: false, toast: '', mailOpen: false, ring: 0, cmpGrow: false,
-    duelA: 0, duelB: 0, duelNote: false, duelALabel: '6,4 s', duelBLabel: '0,9 s',
-    uLeft: '0px', uWidth: '0px', tick: 0, loadSec: 0, loadGrow: false, chatIntro: false
+    uLeft: '0px', uWidth: '0px', tick: 0, chatIntro: false
   };
 
   componentDidMount() {
+    // Vorab gerenderte Fassung (tools/seo-build.mjs) im selben Schritt ersetzen, vor dem nächsten Zeichnen
+    const vorab = document.getElementById('vorab');
+    // Ausblenden statt sofort entfernen: So bleibt der schon gezeichnete Inhalt für die Messung des grössten Inhalts (LCP) gültig.
+    // IDs weg, damit getElementById die richtigen Elemente findet. Entfernt wird er, sobald der Browser Zeit hat.
+    if (vorab) {
+      vorab.style.display = 'none';
+      vorab.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+      vorab.removeAttribute('id');
+      document.documentElement.classList.add('vorab-weg');
+      const weg = () => vorab.remove();
+      if ('requestIdleCallback' in window) requestIdleCallback(weg, { timeout: 4000 }); else setTimeout(weg, 2000);
+    }
     this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (this.reduce) { this.setState({ slider: 34 }); }
 
     this.onRoute = () => {
       const path = this.pathOf(location.pathname);
@@ -2908,15 +3035,7 @@ class Component extends DCLogic {
       window.addEventListener('mousemove', this.onMove, { passive: true });
     }
 
-    const navEntry = (performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null);
-    let ms = navEntry ? navEntry.duration : 0;
-    if (!ms && performance.timing) ms = performance.timing.loadEventEnd - performance.timing.navigationStart;
-    if (ms > 0 && ms < 60000) {
-      this.setState({ loadSec: Math.round(ms / 100) / 10 });
-      setTimeout(() => this.setState({ loadGrow: true }), 400);
-    }
 
-    this.slideIntro();
     setTimeout(() => this.setState({ chatIntro: true }), 3600);
     setTimeout(() => { this.measure(); this.countUp(); }, 140);
   }
@@ -3066,18 +3185,7 @@ class Component extends DCLogic {
     els.forEach(el => io.observe(el));
   }
 
-  slideIntro() {
-    if (this.reduce) { this.nudgeTimer = setTimeout(() => this.maybeNudge(), 6000); return; }
-    setTimeout(() => { this.animate(50, 34, 700, (v) => this.setState({ slider: v })); }, 600);
-    this.nudgeTimer = setTimeout(() => this.maybeNudge(), 6000);
-  }
 
-  maybeNudge() {
-    if (this.reduce || this.state.nudges >= 2 || this.touched) return;
-    this.setState({ nudging: true, nudges: this.state.nudges + 1 });
-    setTimeout(() => this.setState({ nudging: false }), 320);
-    this.nudgeTimer = setTimeout(() => this.maybeNudge(), 6000);
-  }
 
   gBr() { return this.BRANCHEN.find(b => b[0] === this.state.gBranch) || this.BRANCHEN[0]; }
 
@@ -3125,26 +3233,6 @@ class Component extends DCLogic {
       optMin: Math.round(fromOpt + (opt - fromOpt) * k),
       totMin: Math.round(fromTot + (req + opt - fromTot) * k)
     }));
-  };
-  runDuel = () => {
-    if (this.reduce) {
-      this.setState({ duelA: 100, duelB: 100, duelNote: true, duelALabel: '6,4 s fertig', duelBLabel: '0,9 s fertig' });
-      return;
-    }
-    this.setState({ duelA: 0, duelB: 0, duelNote: false, duelALabel: '0,0 s', duelBLabel: '0,0 s' });
-    const t0 = performance.now();
-    const run = (t) => {
-      const el = (t - t0) / 1000;
-      const a = Math.min(1, el / 6.4), b = Math.min(1, el / 0.9);
-      this.setState({
-        duelA: a * 100, duelB: b * 100,
-        duelALabel: (Math.min(el, 6.4)).toFixed(1).replace('.', ',') + ' s' + (a >= 1 ? ' fertig' : ''),
-        duelBLabel: (Math.min(el, 0.9)).toFixed(1).replace('.', ',') + ' s' + (b >= 1 ? ' fertig' : ''),
-        duelNote: el >= 3 && a < 1 ? true : (a >= 1 ? true : this.state.duelNote)
-      });
-      if (a < 1) requestAnimationFrame(run);
-    };
-    requestAnimationFrame(run);
   };
 
   // Sichtbare Fragen in der Reihenfolge des Formulars. Folgefragen erscheinen nur, wenn sie zutreffen.
@@ -3209,6 +3297,11 @@ class Component extends DCLogic {
   vergessen() { try { sessionStorage.removeItem('odera-check'); } catch (err) { /* nichts */ } }
   gemerkt() { try { return JSON.parse(sessionStorage.getItem('odera-check') || 'null'); } catch (err) { return null; } }
   frage(step = this.state.step) { const f = this.fragen(); return f[Math.min(step, f.length - 1)]; }
+  // Symbol als CSS-Maske: Ein gebundener SVG-Pfad in der verborgenen Vorlage erzeugt sonst Konsolenfehler
+  icoUrl(d) {
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" ' + 'view' + 'Box="0 0 24 24" fill="none" stroke="black" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="' + d + '"/></svg>';
+    return "url('data:image/svg+xml," + encodeURIComponent(svg) + "')";
+  }
   // Werte im Text: {TAGE}, {TAGE_WORT}, {MIN}, {FRAGEN}, {PREIS_STD}, {ERF_MIN} kommen aus den Konstanten oben
   werte(t) {
     const w = { TAGE: this.ENTWURF_TAGE + ' Arbeitstagen', TAGE_WORT: (this.ZAHLWORT[this.ENTWURF_TAGE] || this.ENTWURF_TAGE) + ' Arbeitstagen',
@@ -3491,17 +3584,6 @@ class Component extends DCLogic {
     0: [[24, 'Am Wochenende arbeite ich nicht. Ihre Anfrage beantworte ich am Montagabend.', false]]
   };
 
-  moveSlider(v) {
-    this.touched = true;
-    const prevBucket = this.state.slider < 50 ? 'old' : 'new';
-    const nextBucket = v < 50 ? 'old' : 'new';
-    this.setState({ slider: v, dragged: true });
-    if (!this.reduce && prevBucket !== nextBucket && nextBucket === 'new') {
-      this.setState({ flipGlow: true });
-      clearTimeout(this._glowT);
-      this._glowT = setTimeout(() => this.setState({ flipGlow: false }), 400);
-    }
-  }
 
   pathOf(p) {
     p = (p || '/').replace(/\/index\.html$/, '/').replace(/\/+$/, '');
@@ -3553,26 +3635,8 @@ class Component extends DCLogic {
     const hinweisOpt = shopGewaehlt ? 'Einen Onlineshop biete ich nicht an. Schicken Sie die Anfrage trotzdem ab, ich sage Ihnen ehrlich, was möglich ist.'
       : q.hinweis && typeof picked === 'string' ? (q.hinweis[picked] || '') : '';
     const r = this.rec();
-    const k = 1 - s.slider / 100;
     const allOff = this.STEPS.every((st, i) => st[3] || s.off[i]);
 
-    const bucket = s.slider < 50 ? 'old' : 'new';
-    const capOldOn = bucket === 'old';
-    const dotLeft = capOldOn ? '12%' : '88%';
-    const dotColor = capOldOn ? '#5B6270' : '#2D4CF0';
-    const metricDefs = [
-      ['Ladezeit dieser Seite', '6,4 s', '0,9 s'],
-      ['Auf dem Handy lesbar', 'nein', 'ja'],
-      ['Klicks bis zur Anfrage', '5', '2']
-    ];
-    const metricCols = metricDefs.map((d, i) => ({
-      label: d[0], oldVal: d[1], newVal: d[2],
-      oldOp: capOldOn ? 1 : 0, oldTf: capOldOn ? 'translateY(0)' : 'translateY(-100%)',
-      newOp: capOldOn ? 0 : 1, newTf: capOldOn ? 'translateY(100%)' : 'translateY(0)',
-      dotLeft: dotLeft, dotColor: dotColor,
-      delay: this.reduce ? '0ms' : (i * 40) + 'ms',
-      bl: i === 0 ? 'none' : '1px solid #E2DFD8'
-    }));
 
     const fields = [];
     const eMax = this.ANFRAGE.eingabeMax;
@@ -3626,14 +3690,6 @@ class Component extends DCLogic {
       headShadow: s.scrolled ? '0 1px 2px rgba(17,19,26,0.06)' : 'none',
       headLine: s.scrolled ? '#E2DFD8' : 'transparent',
       uLeft: s.uLeft, uWidth: s.uWidth, uOpacity: s.uWidth === '0px' ? 0 : 1,
-      heroLoadDisplay: s.loadSec > 0 ? 'flex' : 'none',
-      loadDisplay: (s.loadSec > 0 && this.DURCHSCHNITT_SEKUNDEN > 0) ? 'block' : 'none',
-      loadSec: s.loadSec,
-      loadSecLabel: String(s.loadSec).replace('.', ','),
-      loadLabel: String(s.loadSec).replace('.', ',') + ' s',
-      avgLabel: this.DURCHSCHNITT_SEKUNDEN > 0 ? String(this.DURCHSCHNITT_SEKUNDEN).replace('.', ',') + ' s' : 'Wert einsetzen',
-      avgW: (s.loadGrow || this.reduce) ? (this.DURCHSCHNITT_SEKUNDEN > 0 ? Math.min(100, this.DURCHSCHNITT_SEKUNDEN / Math.max(this.DURCHSCHNITT_SEKUNDEN, s.loadSec) * 100) : 0) + '%' : '0%',
-      loadW: (s.loadGrow || this.reduce) ? (this.DURCHSCHNITT_SEKUNDEN > 0 ? Math.min(100, s.loadSec / Math.max(this.DURCHSCHNITT_SEKUNDEN, s.loadSec) * 100) : 0) + '%' : '0%',
       availability: this.availability().text,
       availDot: this.availability().live ? '#D6F24B' : '#A8B0BD',
       availPuls: this.availability().live && !this.reduce ? 'puls' : '',
@@ -3642,25 +3698,6 @@ class Component extends DCLogic {
       plaetzeFrei: String(this.PLAETZE_FREI),
       dotAnim: this.reduce ? 'none' : 'pulseDot 2.4s ease-in-out infinite',
 
-      sliderVal: Math.round(s.slider),
-      sliderPct: s.slider + '%',
-      sliderInvW: (s.slider > 0 ? (10000 / s.slider) : 100) + '%',
-      sliderRev: (100 - s.slider) + '%',
-      sliderRevInv: (s.slider < 100 ? (10000 / (100 - s.slider)) : 100) + '%',
-      oldPct: (100 - s.slider) + '%',
-      oldInvW: (s.slider < 100 ? (10000 / (100 - s.slider)) : 100) + '%',
-      newRightPct: (100 - s.slider) + '%',
-      nudgeAnim: s.nudging ? 'nudge 300ms ease-in-out' : 'none',
-      bucket: bucket,
-      oldBadgeOp: capOldOn ? 1 : 0.45,
-      altAktiv: capOldOn ? '1' : '0', neuAktiv: capOldOn ? '0' : '1',
-      newBadgeOp: capOldOn ? 0.45 : 1,
-      capOldOp: capOldOn ? 1 : 0, capOldTf: capOldOn ? 'translateY(0)' : 'translateY(-100%)',
-      capNewOp: capOldOn ? 0 : 1, capNewTf: capOldOn ? 'translateY(100%)' : 'translateY(0)',
-      metricCols: metricCols,
-      glowShadow: s.flipGlow ? '0 0 0 3px rgba(45,76,240,0.3)' : '0 0 0 0 rgba(45,76,240,0)',
-      dragHintOp: s.dragged ? 0 : 1,
-      dragHintAnim: (this.reduce || s.dragged) ? 'none' : 'dragWander 2.6s ease-in-out infinite',
       dmServices: [
         { path: 'M2 14 Q10 2 20 10 T38 6', title: 'Küchen', desc: 'Vom Entwurf bis zur Montage.' },
         { path: 'M2 10 L14 4 L26 14 L38 4', title: 'Einbauschränke', desc: 'Massgenau für jede Nische.' },
@@ -3673,13 +3710,6 @@ class Component extends DCLogic {
       heroAnim3: 'none',
       heroAnim4: 'none',
       scrollHintAnim: this.reduce ? 'none' : 'scrollBob 2.4s ease-in-out infinite',
-      onSlide: (e) => { this.moveSlider(Number(e.target.value)); },
-      onSlideKey: (e) => {
-        this.touched = true;
-        if (!e.shiftKey) return;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { this.moveSlider(Math.min(100, s.slider + 20)); e.preventDefault(); }
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { this.moveSlider(Math.max(0, s.slider - 20)); e.preventDefault(); }
-      },
 
       oldClock: '14:07 Uhr',
       gName: s.gName,
@@ -3775,27 +3805,10 @@ class Component extends DCLogic {
       devDeskColor: s.device === 'desktop' ? '#FFFFFF' : '#11131A',
       setDevMob: () => this.setState({ device: 'mobile' }), setDevDesk: () => this.setState({ device: 'desktop' }),
 
-      duelAW: s.duelA + '%', duelBW: s.duelB + '%',
-      duelALabel: s.duelALabel, duelBLabel: s.duelBLabel,
-      duelNoteOp: s.duelNote ? 1 : 0,
-      startDuel: this.runDuel,
 
-      tilt: s.tilt ? 'perspective(900px) rotateX(' + s.tx + 'deg) rotateY(' + s.ty + 'deg)' : 'none',
-      tiltTrans: s.tilt ? 'none' : 'transform 400ms ease-out',
-      onTilt: (e) => {
-        if (this.reduce || !this.fine || window.innerWidth <= 560) return;
-        const r2 = e.currentTarget.getBoundingClientRect();
-        const px = (e.clientX - r2.left) / r2.width - 0.5;
-        const py = (e.clientY - r2.top) / r2.height - 0.5;
-        this.setState({ tilt: true, ty: px * 6, tx: -py * 6 });
-      },
-      onTiltEnd: () => this.setState({ tilt: false, tx: 0, ty: 0 }),
 
-      onMailHover: () => this.setState({ mailHover: true }),
-      onMailLeave: () => this.setState({ mailHover: false }),
-      mailShadow: s.mailHover ? '0 10px 30px rgba(17,19,26,0.12)' : '0 1px 2px rgba(17,19,26,0.06)',
-      flapT: s.mailHover ? 'rotateX(180deg)' : 'none',
-      mailHintOp: s.mailHover ? 1 : 0,
+      mailShadow: '0 1px 2px rgba(17,19,26,0.06)',
+      flapT: 'none',
 
       checkBg: (s.result && !s.review && !s.gesendet) ? '#2D4CF0' : s.mid ? 'linear-gradient(120deg,#1E34B8 0%,#2D4CF0 45%,#0E4A2B 100%)' : '#F6F5F1',
       checkFg: ((s.result && !s.review) || s.mid) ? '#FFFFFF' : '#11131A',
@@ -3831,7 +3844,7 @@ class Component extends DCLogic {
       grussDisplay: s.brief && s.brief.firma ? 'block' : 'none', grussText: s.brief && s.brief.firma ? 'Guten Tag, ' + s.brief.firma + (/[.!?]$/.test(s.brief.firma) ? '' : '.') : '',
       onEinstieg: this.onEinstieg,
       // Preis-Rechner (Angebotsseite), gleiche Paket-Logik wie der Projekt-Check
-      rechnerKarten: this.FUNKTIONEN.filter((f) => f[2] !== 'shop').map((f) => ({ v: f[0], label: f[0], icon: f[3], fix: f[2] === 'alle' ? 'true' : 'false',
+      rechnerKarten: this.FUNKTIONEN.filter((f) => f[2] !== 'shop').map((f) => ({ v: f[0], label: f[0], icoUrl: this.icoUrl(f[3]), fix: f[2] === 'alle' ? 'true' : 'false',
         an: f[2] === 'alle' || s.rechnerFn.indexOf(f[0]) >= 0 ? 'true' : 'false' })),
       onRechnerFn: (e) => { const v = e.currentTarget.dataset.v; if ((this.FUNKTIONEN.find((f) => f[0] === v) || [])[2] === 'alle') return;
         const fn = s.rechnerFn.indexOf(v) >= 0 ? s.rechnerFn.filter((x) => x !== v) : s.rechnerFn.concat([v]); this.rechnerSetzen({ rechnerFn: fn }); },
@@ -3878,7 +3891,7 @@ class Component extends DCLogic {
       karten: this.FUNKTIONEN.map((f) => {
         const fix = f[2] === 'alle';
         const sel = fix || (Array.isArray(picked) && picked.indexOf(f[0]) >= 0);
-        return { v: f[0], label: f[0], desc: f[1], icon: f[3], sel: sel, fix: fix ? 'true' : 'false', an: sel ? '1' : '0',
+        return { v: f[0], label: f[0], desc: f[1], icoUrl: this.icoUrl(f[3]), sel: sel, fix: fix ? 'true' : 'false', an: sel ? '1' : '0',
           tag: fix ? 'In jedem Paket' : f[2] === 'shop' ? 'Nicht im Angebot' : 'Paket ' + f[2] };
       }),
       styleCards: this.STILE.map(c => ({ v: c[0], label: c[0], prev: c[1], sel: picked === c[0], bg: picked === c[0] ? '#D6F24B' : 'rgba(255,255,255,0.7)', bd: picked === c[0] ? '#556300' : '#E2DFD8', fg: '#11131A' })),

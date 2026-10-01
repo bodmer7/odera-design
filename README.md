@@ -32,7 +32,37 @@ Wie die Seite automatisch bei jedem Push online geht, steht im Abschnitt
 - Beim Laden wird nichts von fremden Servern abgerufen. React, Schriften und
   Bilder liegen alle im Repository. In `support.js` stehen die unpkg-Adressen
   von React noch als Rückfall. Der greift aber nicht, weil React vorher lokal
-  geladen wird.
+  geladen wird. Darum startet `support.js` erst nach `DOMContentLoaded`
+  (Skript im `<head>` von `index.html`), wenn React sicher geladen ist.
+
+## Ladezeit: vorab gerendert
+
+- **Vorab-Block.** `tools/seo-build.mjs` rendert jede Seite im Browser und
+  schreibt das fertige Ergebnis zwischen `<!-- vorab:start -->` und
+  `<!-- vorab:end -->` ins HTML. Besucher sehen den Inhalt so schon beim
+  ersten Zeichnen, nicht erst, wenn React die Seite aufgebaut hat.
+- **Übergabe an React.** `support.js` wird erst geladen, wenn der Browser den
+  Vorab-Block als grössten Inhalt (LCP) gemeldet hat, spätestens nach 400 ms.
+  Beim Aufbau blendet `componentDidMount` den Vorab-Block im selben Schritt
+  aus (ohne IDs, damit `getElementById` stimmt) und entfernt ihn, sobald der
+  Browser Zeit hat. Der Leuchtstift im Hero wird darum nur einmal gezeichnet.
+- **Stil im Kopf.** Der ganze Seitenstil steht im `<head>`, nicht in der
+  Vorlage. Sonst stünde der Vorab-Block beim Start der Laufzeit kurz ohne CSS
+  da (Layoutverschiebung).
+- **Kein zweites Laden.** `window.__resources = {}` verhindert, dass
+  `support.js` die ganze Seite ein zweites Mal herunterlädt. Dafür dürfen
+  Eigenschaften an `<dc-import>` nicht auf Gross- und Kleinschreibung
+  angewiesen sein (der Browser schreibt Attribute klein; `logo.dc.html` liest
+  darum `markBg` und `markbg`).
+- **Keine gebundenen SVG-Pfade.** `d="{{ … }}"` in der Vorlage erzeugt
+  Konsolenfehler, weil der Browser die verborgene Vorlage als SVG liest.
+  Symbole mit wechselndem Pfad laufen darum als CSS-Maske (`.ico`, `icoUrl()`).
+- **Schriften.** `tools/schriften-schlank.py` begrenzt die variablen Achsen und
+  OpenType-Funktionen auf das Genutzte. Nach dem Austausch einer Schriftdatei
+  erneut ausführen (Anleitung im Skript).
+- **Camel-Case in CSS-Daten-URLs.** Die Laufzeit schreibt `viewBox` und
+  `preserveAspectRatio` in der Vorlage um. In Daten-URLs darum `%76iewBox`
+  und `%70reserveAspectRatio` schreiben.
 
 ## Lokal öffnen
 

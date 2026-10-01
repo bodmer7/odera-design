@@ -35,8 +35,8 @@ class Component extends DCLogic {
       fs: (p.fs ? parseFloat(p.fs) : Math.round(h * 0.88)) + 'px',
       fg: p.fg || '#11131A',
       cut: p.cut || '#F6F5F1',
-      markBg: p.markBg || '#2D4CF0',
-      markFg: p.markFg || '#F6F5F1'
+      markBg: p.markBg || p.markbg || '#2D4CF0',
+      markFg: p.markFg || p.markfg || '#F6F5F1'
     };
   }
 }
