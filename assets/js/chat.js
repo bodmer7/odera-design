@@ -14,7 +14,7 @@ const MAIL = 'kontakt@odera.ch';
 let verlauf = [];           // [{ role: 'user' | 'assistant', content }]
 let root = null, log = null, eingabe = null, senden = null, intro = null;
 let ausloeser = null, endpoint = '', laufend = null, offen = false, starten = null;
-let scrollVorher = '';
+let scrollVorher = '', hinter = null, griff = null, scrollY = 0;
 
 // ---------- Darstellung ----------
 const STIL = `
@@ -33,7 +33,7 @@ const STIL = `
 .oc-log{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
 .oc-chips{display:flex;flex-wrap:wrap;gap:8px}
 .oc-chip{min-height:44px;padding:8px 14px;border:1px solid var(--linie-feld,#80879A);border-radius:999px;background:var(--flaeche,#FFFFFF);color:var(--tinte,#11131A);font:inherit;font-size:13px;line-height:1.3;text-align:left;cursor:pointer}
-.oc-chip:hover{background:var(--akzent-tint,#F4FBD6)}
+@media(hover:hover){.oc-chip:hover{background:var(--akzent-tint,#F4FBD6)}}
 .oc-msg{max-width:88%;padding:12px 14px;border-radius:16px;font-size:16px;line-height:1.55;overflow-wrap:anywhere}
 .oc-msg p{margin:0 0 8px}.oc-msg p:last-child{margin:0}
 .oc-msg ul,.oc-msg ol{margin:0 0 8px;padding-left:20px}.oc-msg li{margin:0 0 4px}
@@ -50,15 +50,29 @@ const STIL = `
 .oc-eingabe::placeholder{color:var(--text-2,#565D6B)}
 .oc-eingabe:focus{outline:3px solid var(--primaer,#2D4CF0);outline-offset:1px}
 .oc-senden{min-height:48px;padding:0 18px;border:none;border-radius:999px;background:var(--akzent,#D6F24B);color:var(--tinte,#11131A);box-shadow:inset 0 0 0 1px rgba(85,99,0,0.28);font:inherit;font-size:16px;font-weight:600;cursor:pointer}
-.oc-senden:hover{background:var(--akzent-hover,#C8E53C)}
+@media(hover:hover){.oc-senden:hover{background:var(--akzent-hover,#C8E53C)}}
 .oc-senden:disabled{background:var(--linie,#E2DFD8);color:var(--text-2,#565D6B);box-shadow:none;cursor:not-allowed}
 .oc-fuss{margin:0;padding:0 16px 12px;background:var(--flaeche,#FFFFFF);font-size:13px;line-height:1.5;color:var(--text-2,#565D6B)}
 .oc-fuss a{color:var(--primaer-dunkel,#1E34B8);font-weight:600}
 .oc-start{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:none;border-radius:999px;background:var(--primaer,#2D4CF0);color:#FFFFFF;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
-.oc-start:hover{background:var(--primaer-dunkel,#1E34B8)}
+@media(hover:hover){.oc-start:hover{background:var(--primaer-dunkel,#1E34B8)}}
 .oc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .oc-root :focus-visible{outline:3px solid var(--tinte,#11131A);outline-offset:2px}
-@media(max-width:560px){.oc-root{inset:0;width:auto;height:auto;border:none;border-radius:0;box-shadow:none}.oc-kopf{padding-left:16px}.oc-log{padding:16px}.oc-info{padding:8px 16px}}
+.oc-griff,.oc-hinter{display:none}
+@media(max-width:767px){
+.oc-hinter{display:block;position:fixed;inset:0;z-index:69;background:rgba(17,19,26,0.42);animation:ocBlende 240ms linear both}
+.oc-root{left:0;right:0;top:auto;bottom:var(--oc-unten,0px);width:auto;height:var(--oc-hoehe,calc(100dvh - max(env(safe-area-inset-top),20px) - 12px));border:none;border-radius:20px 20px 0 0;box-shadow:0 -12px 40px rgba(17,19,26,0.22);animation:ocBlatt 380ms cubic-bezier(0.2,0.9,0.3,1) both;overscroll-behavior:contain}
+.oc-griff{display:block;flex:none;position:relative;height:22px;background:var(--flaeche,#FFFFFF);border-radius:20px 20px 0 0;touch-action:none;cursor:grab}
+.oc-griff::before{content:"";position:absolute;left:50%;top:8px;width:40px;height:5px;margin-left:-20px;border-radius:999px;background:var(--linie-stark,#A8B0BD)}
+.oc-kopf{padding:2px 8px 12px 16px;touch-action:none}
+.oc-log{padding:16px;overscroll-behavior:contain}
+.oc-info{padding:8px 16px}
+.oc-fuss{padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+html[data-tastatur="1"] .oc-fuss{display:none}
+html[data-tastatur="1"] .oc-form{padding-bottom:8px}
+}
+@keyframes ocBlatt{from{transform:translateY(100%)}to{transform:none}}
+@keyframes ocBlende{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.oc-root,.oc-tippt span{animation:none}.oc-log{scroll-behavior:auto}}
 `;
 
@@ -299,12 +313,55 @@ function bauen() {
   const form = el('form', { class: 'oc-form', onsubmit: (e) => { e.preventDefault(); frage(eingabe.value); } },
     [el('label', { class: 'oc-sr', for: 'oc-eingabe', text: 'Ihre Frage an den Assistenten' }), eingabe, senden]);
   const info = el('p', { class: 'oc-info' }, ['KI-Modell bei Cloudflare, möglicherweise ausserhalb der Schweiz. Bitte keine persönlichen Daten eingeben. ']);
-  info.appendChild(el('a', { href: '/datenschutz/#ds-8', text: 'Datenschutz', onclick: () => { if (window.innerWidth <= 560) schliessen(); } }));
+  info.appendChild(el('a', { href: '/datenschutz/#ds-8', text: 'Datenschutz', onclick: () => { if (window.innerWidth < 768) schliessen(); } }));
   const fuss = el('p', { class: 'oc-fuss' }, ['Verbindlich wird es im ',
     el('a', { href: '/projekt-check/', text: 'Projekt-Check', onclick: (e) => { schliessen(false); if (starten && !e.metaKey && !e.ctrlKey) { e.preventDefault(); starten(); } } }),
     ' oder per Mail an ', el('a', { href: 'mailto:' + MAIL, text: MAIL }), '.']);
-  root.append(kopf, info, log, form, fuss);
+  griff = el('div', { class: 'oc-griff', 'aria-hidden': 'true' });
+  hinter = el('div', { class: 'oc-hinter', 'aria-hidden': 'true', onclick: () => schliessen() });
+  root.append(griff, kopf, info, log, form, fuss);
+  wischen(griff); wischen(kopf);
   introBauen();
+}
+
+// Blatt nach unten wischen schliesst (ab 80 px), es folgt dem Finger
+function wischen(ziel) {
+  let y0 = null, d = 0;
+  ziel.addEventListener('touchstart', (e) => { if (window.innerWidth >= 768 || e.target.closest('button,a')) return; y0 = e.touches[0].clientY; d = 0; }, { passive: true });
+  ziel.addEventListener('touchmove', (e) => {
+    if (y0 === null) return;
+    d = Math.max(0, e.touches[0].clientY - y0);
+    root.style.animation = 'none'; root.style.transition = 'none'; root.style.transform = 'translateY(' + d + 'px)';
+  }, { passive: true });
+  ziel.addEventListener('touchend', () => {
+    if (y0 === null) return;
+    y0 = null;
+    if (d > 80) { schliessen(); return; }
+    root.style.transition = 'transform 200ms ease-out'; root.style.transform = '';
+  }, { passive: true });
+}
+
+// Tastatur auf dem Handy: Blatt endet direkt über der Tastatur, letzte Nachricht bleibt sichtbar
+function ansicht() {
+  const vv = window.visualViewport;
+  if (!vv || !root) return;
+  if (window.innerWidth >= 768) { root.style.removeProperty('--oc-unten'); root.style.removeProperty('--oc-hoehe'); return; }
+  const unten = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
+  if (unten > 120) { root.style.setProperty('--oc-unten', unten + 'px'); root.style.setProperty('--oc-hoehe', Math.round(vv.height - 8) + 'px'); }
+  else { root.style.removeProperty('--oc-unten'); root.style.removeProperty('--oc-hoehe'); }
+  zuUnterst();
+}
+
+// Seite dahinter sperren, auch auf iOS: body fest, Position merken
+function sperren(an) {
+  const b = document.body.style;
+  if (an) {
+    scrollY = window.scrollY || 0;
+    b.position = 'fixed'; b.top = -scrollY + 'px'; b.left = '0'; b.right = '0'; b.width = '100%';
+  } else {
+    b.position = ''; b.top = ''; b.left = ''; b.right = ''; b.width = '';
+    window.scrollTo({ top: scrollY, behavior: 'instant' });
+  }
 }
 
 // Esc schliesst auch, wenn der Fokus gerade ausserhalb des Fensters liegt
@@ -322,7 +379,13 @@ export function oeffnen(opts = {}) {
     offen = true;
     window.addEventListener('popstate', beiNavigation);
     window.addEventListener('keydown', escSeite);
-    if (window.innerWidth <= 560) { scrollVorher = document.documentElement.style.overflow; document.documentElement.style.overflow = 'hidden'; }
+    document.documentElement.dataset.chat = '1';
+    if (window.innerWidth < 768) {
+      document.body.appendChild(hinter);
+      root.style.transform = ''; root.style.transition = ''; root.style.animation = '';
+      sperren(true);
+      if (window.visualViewport) { window.visualViewport.addEventListener('resize', ansicht); window.visualViewport.addEventListener('scroll', ansicht); }
+    } else { scrollVorher = document.documentElement.style.overflow; }
   }
   zuUnterst();
   eingabe.focus();
@@ -334,9 +397,13 @@ export function schliessen(fokusZurueck = true) {
   if (!offen) return;
   offen = false;
   root.remove();
+  if (hinter) hinter.remove();
   window.removeEventListener('popstate', beiNavigation);
   window.removeEventListener('keydown', escSeite);
-  document.documentElement.style.overflow = scrollVorher;
+  delete document.documentElement.dataset.chat;
+  if (window.visualViewport) { window.visualViewport.removeEventListener('resize', ansicht); window.visualViewport.removeEventListener('scroll', ansicht); }
+  if (document.body.style.position === 'fixed' && !document.documentElement.dataset.menue) sperren(false);
+  else document.documentElement.style.overflow = scrollVorher;
   if (fokusZurueck && ausloeser && document.contains(ausloeser)) ausloeser.focus();
 }
 

@@ -2,7 +2,10 @@
 <html lang="de-CH">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F6F5F1">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <!-- seo:start -->
 <base href="/">
 <title>Preise und Pakete | ODERA Design</title>
@@ -43,7 +46,7 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--papier);color:var(--tinte);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 *{box-sizing:border-box}
 a{color:var(--primaer-dunkel);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
-a:hover{text-decoration-thickness:2px}
+@media(hover:hover){a:hover{text-decoration-thickness:2px}}
 :focus-visible{outline:3px solid var(--primaer);outline-offset:2px}
 [data-flaeche="blau"] :focus-visible,.ink :focus-visible,footer :focus-visible,.mobbar :focus-visible{outline-color:var(--akzent)}
 ::selection{background:var(--akzent);color:var(--tinte)}
@@ -57,15 +60,15 @@ button,input,textarea{font-family:inherit}
 @keyframes pulseDot{0%,100%{opacity:1}50%{opacity:0.62}}
 @keyframes gradW{from{background-position:0% 50%}to{background-position:100% 50%}}
 .g3{background:var(--primaer);transition:background var(--dauer) var(--kurve)}
-.g3:hover{background:var(--primaer-dunkel)}
+@media(hover:hover){.g3:hover{background:var(--primaer-dunkel)}}
 .g4{background:var(--akzent);transition:background var(--dauer) var(--kurve)}
-.g4:hover{background:var(--akzent-hover)}
+@media(hover:hover){.g4:hover{background:var(--akzent-hover)}}
 /* Knöpfe:primär (Blau), Akzent (Lime, nur die wichtigste Handlung), sekundär (Umriss). Gleiche Höhe, Radius, Schrift. */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:var(--knopf-h);padding:0 28px;border-radius:999px;border:1px solid transparent;font:inherit;font-size:16px;font-weight:600;line-height:1.2;text-decoration:none;text-align:center;cursor:pointer;transition:background var(--dauer) var(--kurve),border-color var(--dauer) var(--kurve),color var(--dauer) var(--kurve)}
-.btn-primaer{background:var(--primaer);color:var(--auf-dunkel)}.btn-primaer:hover{background:var(--primaer-dunkel)}
-.btn-akzent{background:var(--akzent);color:var(--tinte)}.btn-akzent:hover{background:var(--akzent-hover)}
-.btn-sekundaer{background:transparent;border-color:var(--tinte);color:var(--tinte)}.btn-sekundaer:hover{background:var(--tinte);color:var(--auf-dunkel)}
-[data-flaeche="blau"] .btn-sekundaer{border-color:var(--flaeche);color:var(--auf-dunkel)}[data-flaeche="blau"] .btn-sekundaer:hover{background:var(--flaeche);color:var(--primaer)}
+.btn-primaer{background:var(--primaer);color:var(--auf-dunkel)}@media(hover:hover){.btn-primaer:hover{background:var(--primaer-dunkel)}}
+.btn-akzent{background:var(--akzent);color:var(--tinte)}@media(hover:hover){.btn-akzent:hover{background:var(--akzent-hover)}}
+.btn-sekundaer{background:transparent;border-color:var(--tinte);color:var(--tinte)}@media(hover:hover){.btn-sekundaer:hover{background:var(--tinte);color:var(--auf-dunkel)}}
+[data-flaeche="blau"] .btn-sekundaer{border-color:var(--flaeche);color:var(--auf-dunkel)}@media(hover:hover){[data-flaeche="blau"] .btn-sekundaer:hover{background:var(--flaeche);color:var(--primaer)}}
 /* Schrift-Skala:sechs Stufen */
 .t-h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.05;letter-spacing:-0.03em;text-wrap:balance}
 .t-h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.025em;text-wrap:balance}
@@ -129,7 +132,7 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 @media(max-width:900px){.schritte{grid-template-columns:repeat(2,minmax(0,1fr))}.sektion{padding:88px 0}.sektion-eng{padding:48px 0 88px}}
 @media(max-width:560px){.schritte{grid-template-columns:1fr;gap:24px}.sektion{padding:64px 0}.sektion-eng{padding:40px 0 64px}.person{grid-template-columns:1fr;gap:24px}.person-bild{width:112px;height:112px}.wrap.hero-pad{padding-top:32px;padding-bottom:56px}}
 .einstieg{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:600;color:var(--primaer-dunkel)}
-.einstieg span{transition:transform 140ms ease-out}.einstieg:hover span{transform:translateX(3px)}
+.einstieg span{transition:transform 140ms ease-out}@media(hover:hover){.einstieg:hover span{transform:translateX(3px)}}
 .rechner{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:32px;margin:0 0 48px;padding:32px;border-radius:20px;background:var(--flaeche);border:1px solid var(--linie)}
 .rechner-t{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(24px,2.4vw,32px);line-height:1.15;letter-spacing:-0.02em;margin:0 0 8px}
 .rechner-u{font-size:16px;line-height:1.5;color:var(--text-2);margin:0 0 20px}
@@ -158,7 +161,7 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .hero-frage-t{margin:0 0 12px;font-size:16px;font-weight:700;color:var(--tinte)}
 .hero-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,56px);gap:10px}
 .hero-chip{min-height:56px;padding:0 18px;border:1px solid var(--primaer);border-radius:999px;background:var(--flaeche);color:var(--tinte);font:inherit;font-size:16px;font-weight:600;text-align:left;cursor:pointer;transition:background 140ms ease-out,color 140ms ease-out}
-.hero-chip:hover{background:var(--akzent-tint)}
+@media(hover:hover){.hero-chip:hover{background:var(--akzent-tint)}}
 .hero-chip[data-gewaehlt="1"]{background:var(--akzent);border-color:var(--tinte);color:var(--tinte)}
 .hero-chip:focus-visible{outline:3px solid var(--tinte);outline-offset:2px}
 ::view-transition-old(einstieg),::view-transition-new(einstieg){animation-duration:360ms}
@@ -179,7 +182,7 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 @media(max-width:1100px){.navbar{height:88px}}
 @media(max-width:560px){.navbar{height:68px;gap:16px}}
 .navcta{display:inline-flex;align-items:center;height:var(--knopf-h);padding:0 28px;border-radius:999px;background:var(--primaer);color:var(--auf-dunkel);font-size:16px;font-weight:600;text-decoration:none;white-space:nowrap;transition:background var(--dauer) var(--kurve)}
-.navcta:hover{background:var(--primaer-dunkel)}
+@media(hover:hover){.navcta:hover{background:var(--primaer-dunkel)}}
 .navcta-sm{display:none}
 .burger{display:none;align-items:center;gap:12px}
 .mobbar{display:none}
@@ -198,7 +201,7 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .pk-std{position:relative;z-index:2;box-shadow:0 24px 60px rgba(17,19,26,0.12)}
 .chk{display:inline-flex;align-items:center;justify-content:center;flex:none;width:20px;height:20px;margin-top:3px;border-radius:999px;background:var(--akzent);box-shadow:inset 0 0 0 1px var(--akzent-linie);color:var(--tinte)!important;font-size:13px;line-height:1}
 .ph-sect{background:var(--grund)}
-footer a:hover{color:var(--akzent)!important}
+@media(hover:hover){footer a:hover{color:var(--akzent)!important}}
 .ph-tint{background:var(--flaeche)}
 .ph-wrap{position:relative}
 .ph-track{position:absolute;left:24px;right:calc((100% - 96px) / 4 - 25px);top:23px;height:4px;border-radius:999px;background:var(--info)}
@@ -292,14 +295,14 @@ footer a:hover{color:var(--akzent)!important}
 .ulx::after{content:"";position:absolute;left:0;top:0;height:2px;width:0;background:var(--primaer);transition:width 200ms ease-out}
 .fline:focus-within .ulx::after{width:100%}
 .apill{display:inline-flex;align-items:center;padding:6px 12px;border:1px solid var(--linie);border-radius:999px;background:var(--flaeche);font-size:13px;line-height:1.3;cursor:pointer;text-align:left;max-width:100%;color:var(--tinte)}
-.apill:hover{border-color:var(--tinte)}
+@media(hover:hover){.apill:hover{border-color:var(--tinte)}}
 @media(max-width:560px){.apills{display:none}}
 .chat-btn{position:fixed;right:24px;bottom:24px;z-index:56;align-items:center;justify-content:center;width:56px;height:56px;padding:0;border:none;border-radius:999px;background:var(--primaer);color:var(--auf-dunkel);box-shadow:0 10px 26px rgba(17,19,26,0.22);cursor:pointer;transition:background var(--dauer) var(--kurve),color var(--dauer) var(--kurve),transform var(--dauer) var(--kurve)}
 .chat-btn svg{width:26px;height:26px}
 .chat-btn-l{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.chat-btn:hover{background:var(--primaer-dunkel);transform:translateY(-2px)}
+@media(hover:hover){.chat-btn:hover{background:var(--primaer-dunkel);transform:translateY(-2px)}}
 .chat-btn:focus-visible{outline:3px solid var(--tinte);outline-offset:3px}
-.chat-btn[data-hell="1"]{background:var(--flaeche);color:var(--primaer)}.chat-btn[data-hell="1"]:hover{background:var(--info)}
+.chat-btn[data-hell="1"]{background:var(--flaeche);color:var(--primaer)}@media(hover:hover){.chat-btn[data-hell="1"]:hover{background:var(--info)}}
 .chat-btn[data-hell="1"]:focus-visible{outline-color:var(--flaeche)}
 @keyframes chatIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media(max-width:560px){.chat-btn{display:none!important}}
@@ -417,7 +420,7 @@ footer a:hover{color:var(--akzent)!important}
 .f-zusammen ul{margin:0;padding-left:20px}
 .f-zusammen .textknopf{min-height:32px}
 .q-weiter-knopf{min-height:56px;padding:0 32px;border:none;border-radius:999px;background:var(--primaer);color:var(--auf-dunkel);font:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:background var(--dauer) var(--kurve)}
-.q-weiter-knopf:hover{background:var(--primaer-dunkel)}
+@media(hover:hover){.q-weiter-knopf:hover{background:var(--primaer-dunkel)}}
 .q-offen{margin:10px 0 0;min-height:18px;text-align:right;font-size:13px;color:var(--text-2)}
 .mf-eingabe[data-fehler="1"] input{border-color:var(--fehler);box-shadow:inset 0 0 0 1px var(--fehler)}
 .mf-feldfehler{flex-basis:100%}
@@ -431,7 +434,7 @@ footer a:hover{color:var(--akzent)!important}
 .ki-gruss{margin:0 0 20px;padding:12px 14px;border-radius:14px 14px 14px 4px;background:var(--grund);font-size:var(--fs-text);line-height:1.55}
 .ki-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
 .ki-chip{min-height:44px;padding:8px 14px;border:1px solid var(--linie-feld);border-radius:999px;background:var(--flaeche);color:var(--tinte);font:inherit;font-size:var(--fs-text);line-height:1.3;text-align:left;cursor:pointer;transition:background var(--dauer) var(--kurve)}
-.ki-chip:hover{background:var(--akzent-tint)}
+@media(hover:hover){.ki-chip:hover{background:var(--akzent-tint)}}
 .ki-form{display:flex;gap:8px}
 .ki-form input{flex:1;min-width:0;min-height:48px;padding:0 14px;border:1px solid var(--linie-feld);border-radius:12px;background:var(--flaeche);color:var(--tinte);font:inherit;font-size:16px}
 .ki-form input::placeholder{color:var(--text-2)}
@@ -551,7 +554,7 @@ footer a:hover{color:var(--akzent)!important}
  .mp-ovbar a{min-height:32px!important;padding:0 8px!important;font-size:13px!important}
  .card .card{border:none!important;padding:0!important;background:none!important}
  h1{font-size:var(--fs-h1)!important;line-height:1.06!important}
- h2{font-size:26px!important}
+ h2{font-size:clamp(28px,7.6vw,32px)!important}
 }
 @media print{
  @page{size:A4 portrait;margin:16mm}
@@ -585,6 +588,144 @@ try{new PerformanceObserver(gemeldet).observe({type:'largest-contentful-paint',b
 setTimeout(gemeldet,400);
 if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()});else start()})();
 </script>
+<style id="mobil">
+/* Handy und Tablet bis 1023 px. Die Ansicht ab 1024 px bleibt unverändert. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+:root{color-scheme:light}
+a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
+.logo-normal{display:flex;align-items:center;gap:12px}
+.logo-menue{display:none;align-items:center;gap:10px}
+.bs{display:block;width:20px;height:2px;background:var(--tinte)}
+.menue,.hero-handy-chips,.pk-punkte-nav,.wahl-mehr{display:none}
+@media(max-width:1023px){
+ a,button,[role=button],input,select,textarea,label{touch-action:manipulation}
+ h1,h2,h3{text-wrap:balance}
+ p,li,dd{text-wrap:pretty}
+ /* Kopf: schlank, durchscheinend, gleitet beim Runterscrollen weg */
+ .kopf{padding-top:env(safe-area-inset-top);background:rgba(246,245,241,0.86);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);transition:transform 260ms cubic-bezier(0.2,0,0,1),background 200ms linear,border-color 200ms linear;will-change:transform}
+ .kopf[data-weg="1"]{transform:translateY(-100%)}
+ .kopf:focus-within{transform:none}
+ .navbar,.navbar{height:56px!important}
+ .tagline,.logo-lg{display:none!important}
+ .logo-sm{display:inline-flex!important}
+ .kopf-logo{min-height:44px}
+ .burger-knopf{position:relative;width:44px!important;height:44px!important;transition:background 200ms linear,border-color 200ms linear}
+ .burger-knopf .bs{position:absolute;left:11px;width:20px;transition:transform 300ms cubic-bezier(0.2,0.8,0.2,1),opacity 200ms linear,background 200ms linear}
+ .burger-knopf .bs:nth-child(1){top:14px}
+ .burger-knopf .bs:nth-child(2){top:20px}
+ .burger-knopf .bs:nth-child(3){top:26px}
+ /* Menü offen: Kopf bleibt stehen und wird Teil des blauen Menüs */
+ html[data-menue="1"] .kopf{position:fixed;left:0;right:0;top:0;z-index:62;transform:none;background:transparent;border-bottom-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+ #thread{position:absolute;left:0;bottom:-1px;z-index:1}
+ .kopf{border-bottom-width:0!important;box-shadow:0 1px 0 transparent}
+ .kopf[data-scroll="1"]{box-shadow:0 1px 0 var(--linie)}
+ html[data-menue="1"] #thread{opacity:0}
+ html[data-menue="1"] .logo-normal{display:none}
+ html[data-menue="1"] .logo-menue{display:flex}
+ html[data-menue="1"] .burger-knopf{background:transparent!important;border-color:rgba(255,255,255,0.4)!important}
+ html[data-menue="1"] .burger-knopf .bs{background:#FFFFFF}
+ html[data-menue="1"] .burger-knopf .bs:nth-child(1){transform:translateY(6px) rotate(45deg)}
+ html[data-menue="1"] .burger-knopf .bs:nth-child(2){opacity:0}
+ html[data-menue="1"] .burger-knopf .bs:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+ html[data-menue="1"] .chat-btn,html[data-menue="1"] .mobbar,html[data-chat="1"] .mobbar,html[data-tastatur="1"] .mobbar,html[data-chat="1"] .chat-btn{display:none!important}
+ .menue-alt{display:none!important}
+ .menue{display:block;position:fixed;left:0;right:0;top:-48px;height:calc(100dvh + 48px);z-index:61;background:var(--primaer);color:#FFFFFF;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;animation:menueRein 560ms cubic-bezier(0.18,1.18,0.32,1) both}
+ .menue[data-zu="1"]{animation:menueRaus 220ms cubic-bezier(0.5,0,0.9,0.4) both}
+ .menue-innen{min-height:100%;display:flex;flex-direction:column;padding:calc(48px + env(safe-area-inset-top) + 56px + 20px) 20px calc(20px + env(safe-area-inset-bottom))}
+ .menue-nav{display:flex;flex-direction:column}
+ .menue-link{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;color:#FFFFFF;text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(34px,9.6vw,40px);line-height:1.1;letter-spacing:-0.025em;border-bottom:1px solid rgba(255,255,255,0.16);animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:calc(140ms + var(--i,0) * 40ms);transition:transform 140ms ease-out}
+ .menue-link:active{transform:translateX(6px)}
+ .menue-link[aria-current="page"] .menue-link-t{text-decoration:underline;text-decoration-color:var(--akzent);text-decoration-thickness:4px;text-underline-offset:9px;text-decoration-skip-ink:none}
+ .menue-pfeil{flex:none;width:22px;height:22px;opacity:0.75;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat}
+ .menue-frage{align-items:center;gap:12px;min-height:56px;margin-top:8px;padding:0;border:0;background:none;color:#FFFFFF;font:inherit;font-size:18px;font-weight:600;text-align:left;cursor:pointer;animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:300ms;transition:transform 140ms ease-out}
+ .menue-frage:active{transform:translateX(6px)}
+ .menue-frage-i{flex:none;width:24px;height:24px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E") center/contain no-repeat}
+ .menue-unten{margin-top:auto;padding-top:32px;display:flex;flex-direction:column;gap:8px;animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:340ms}
+ .menue-cta{display:flex;align-items:center;justify-content:center;min-height:60px;border-radius:999px;background:var(--akzent);color:var(--tinte);font-size:17px;font-weight:700;text-decoration:none;transition:transform 120ms ease-out}
+ .menue-cta:active{transform:scale(0.97)}
+ .menue-mail{align-self:flex-start;display:inline-flex;align-items:center;min-height:48px;color:#FFFFFF;font-size:17px;text-underline-offset:4px}
+ .menue-status{display:flex;align-items:center;gap:10px;margin:0;font-size:14px;line-height:1.4;color:#FFFFFF}
+ .menue-status .ausl-balken{flex:none}
+ .menue-punkt{flex:none;width:10px;height:10px;border-radius:999px}
+ .menue-recht{display:flex;gap:20px;margin:8px 0 0}
+ .menue-recht a{display:inline-flex;align-items:center;min-height:44px;color:#FFFFFF;font-size:13px;text-underline-offset:3px}
+ @keyframes menueRein{from{transform:translateY(-100%)}to{transform:none}}
+ @keyframes menueRaus{from{transform:none}to{transform:translateY(-100%)}}
+ @keyframes menueEintrag{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+ /* Antippen statt Hover: dezentes Feedback */
+ .btn,.hero-chip,.kcard,.acard,.mobbar-go,.mobbar-chat,.q-weiter-knopf,.einstieg,.wahl-mehr{transition:transform 120ms ease-out,background 200ms linear}
+ .btn:active,.hero-chip:active,.kcard:active,.acard:active,.mobbar-go:active,.mobbar-chat:active,.q-weiter-knopf:active,.wahl-mehr:active{transform:scale(0.97)}
+ /* Formularfelder: mindestens 16 px, damit Safari nicht hineinzoomt */
+ :where(input:not([type=checkbox]):not([type=radio]),select,textarea){font-size:16px}
+ /* Projekt-Check: Fortschritt oben fix, Weiter-Leiste über der Tastatur */
+ .q-prog{position:sticky;top:0;z-index:30;height:3px!important}
+ .q-prog>div{height:3px!important}
+ .q-leiste{position:fixed;left:0;right:0;bottom:var(--tastatur,0px);z-index:40;padding:8px 20px calc(10px + env(safe-area-inset-bottom));background:rgba(246,245,241,0.98);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--linie);transition:bottom 120ms linear}
+ .q-leiste .row>button[style*="hidden"]{display:none}
+ html[data-tastatur="1"] .q-leiste{padding-bottom:8px}
+ .q-leiste .row{margin-top:0!important;flex-wrap:nowrap!important}
+ .q-leiste .row>button{min-height:52px!important}
+ .q-leiste .q-weiter-knopf{flex:1}
+ .q-leiste .q-offen{margin:6px 0 0;text-align:center}
+ .q-leiste .q-offen:empty{display:none}
+ .qright{padding-bottom:140px}
+ .fline,.f-fehler{scroll-margin-bottom:150px;scroll-margin-top:24px}
+ .apill{min-height:44px}
+ .mf-check{min-height:44px;display:flex;align-items:center;gap:10px}
+ .mf-check input{width:22px;height:22px}
+ .menue-recht a{padding:0 4px;min-width:44px;justify-content:center}
+ .link-44{display:inline-flex;align-items:center;min-height:44px}
+}
+@media(min-width:1024px){.q-leiste{display:contents}}
+@media(max-width:767px){
+ :root{--fs-text:17px;--fs-lead:19px}
+ /* Hero: Titel, ein Satz, vier Antworten, Vertrauenszeile */
+ .hero-ort,.hero-aktion,.hero-gruss{display:none!important}
+ .wrap.hero-pad{padding-top:20px!important;padding-bottom:40px!important}
+ .hero-h1{font-size:clamp(34px,9.8vw,40px)!important;line-height:1.06!important;margin:0 0 14px!important;max-width:none}
+ .hero-lead{margin:0 0 20px!important;font-size:17px!important;line-height:1.5}
+ .hero-handy-chips{display:block}
+ .hero-handy-chips .hero-frage-t{font-size:15px;margin:0 0 10px}
+ .hero-handy-chips .hero-chips{grid-template-rows:repeat(2,minmax(52px,auto));gap:10px}
+ .hero-handy-chips .hero-chip{min-height:52px;text-align:center;padding:0 10px;font-size:16px;background:var(--flaeche)}
+ .fakten{grid-template-columns:repeat(3,minmax(0,1fr))!important;margin-top:18px!important;border-top:1px solid var(--linie)}
+ .fakten div{display:block!important;padding:10px 8px 0 0!important;margin:0!important;border:0!important}
+ .fakten dt{font-size:14px!important;white-space:nowrap}
+ .fakten dd{font-size:13px!important;white-space:normal;line-height:1.3}
+ .werk{padding-bottom:0;margin-top:8px;display:flex;flex-direction:column;align-items:center}
+ .werk-browser{display:none}
+ .werk-handy{position:static;width:min(62%,240px);border-width:7px;border-radius:30px;box-shadow:0 24px 48px -28px rgba(17,19,26,0.55)}
+ .werk figcaption{max-width:32ch;text-align:center;margin-top:16px}
+ /* Pakete: wischbare Karten, Standard zuerst */
+ .wisch{display:flex!important;gap:12px!important;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:6px 20px 14px;scroll-padding:0 20px;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:stretch!important}
+ .wisch::-webkit-scrollbar{display:none}
+ .wisch>*{flex:0 0 85%;min-width:0;scroll-snap-align:start;margin:0!important;transform:none!important}
+ .wisch>.pk-std{order:1}.wisch>.pk-start{order:2}.wisch>.pk-plus{order:3}
+ .pk-kurz .pk-link{margin-top:auto}
+ .pk-punkte-nav{display:flex;justify-content:center;gap:8px;margin:4px 0 0}
+ .pk-punkte-nav i{width:8px;height:8px;border-radius:999px;background:var(--linie-stark);transition:width 200ms ease-out,background 200ms linear}
+ .pk-punkte-nav:not([data-aktiv]) i:nth-child(1),.pk-punkte-nav[data-aktiv="0"] i:nth-child(1),.pk-punkte-nav[data-aktiv="1"] i:nth-child(2),.pk-punkte-nav[data-aktiv="2"] i:nth-child(3){width:22px;background:var(--tinte)}
+ /* Einordnung: nur die eigene Antwort, Vergleich zum Aufklappen */
+ .wahl:not([data-offen="1"]) [data-l="Baukasten"],.wahl:not([data-offen="1"]) [data-l="Agentur"]{display:none}
+ .wahl-mehr{display:inline-flex;align-items:center;min-height:48px;margin:12px 0 0;padding:0 20px;border:1px solid var(--tinte);border-radius:999px;background:none;color:var(--tinte);font:inherit;font-size:16px;font-weight:600;cursor:pointer}
+ .wahl-zeile{padding:16px 0}
+ /* Untere Leiste über dem Home-Indikator, Abstand am Seitenende */
+ .footpad{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
+ footer .g-foot>div{gap:0!important}
+ footer .g-foot a,footer .f-legal-row a{display:inline-flex;align-items:center;min-height:44px;min-width:44px}
+ footer .f-legal-row{gap:4px 20px!important}
+ .apills{display:none!important}
+ /* Vertrauenszeile: drei kurze Spalten */
+ .fakten{grid-template-columns:max-content max-content minmax(0,1fr)!important;column-gap:16px}
+}
+@media(max-width:1023px) and (prefers-reduced-motion:reduce){
+ html .menue{animation:menueBlende 150ms linear both!important}
+ html .menue[data-zu="1"]{animation:menueBlendeAus 120ms linear both!important}
+ .menue-link,.menue-frage,.menue-unten{animation:none}
+ @keyframes menueBlende{from{opacity:0}to{opacity:1}}
+ @keyframes menueBlendeAus{from{opacity:1}to{opacity:0}}
+}
+</style>
 </head>
 <body>
 <!-- seo-noscript:start -->
@@ -815,10 +956,11 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
 </noscript>
 <!-- seo-noscript:end -->
 <!-- vorab:start -->
-<div id="vorab"><div class="sc-host" data-sc-name="Root"><header class="kopf" data-scroll="0">
+<div id="vorab"><div class="sc-host" data-sc-name="Root"><header class="kopf" data-scroll="0" data-weg="0" data-menue="0">
   <div id="thread" aria-hidden="true" style="height: 2px; width: 0%; background: var(--akzent); box-shadow: rgba(17, 19, 26, 0.45) 0px 1px 0px; transition: width 80ms linear;"></div>
   <div class="wrap navbar">
-    <a href="/" style="text-decoration: none; color: var(--tinte); display: flex; align-items: center; gap: 12px;">
+    <a href="/" class="kopf-logo" style="text-decoration: none; color: var(--tinte); display: flex; align-items: center; gap: 12px;">
+      <span class="logo-normal">
       <div class="sc-host" data-sc-name="logo"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(45, 76, 240); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 21px; color: rgb(246, 245, 241);">
   <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(45, 76, 240); transform: rotate(-19deg);"></span></span></span></div>
       <span style="display: block;">
@@ -829,6 +971,14 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
   <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span>DERA</span>
   <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div></span>
         <span class="tagline">Webseiten für Schweizer Betriebe</span>
+      </span>
+      </span>
+      <span class="logo-menue" aria-hidden="true">
+        <div class="sc-host" data-sc-name="logo"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgb(255, 255, 255); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 18px; color: rgb(45, 76, 240);">
+  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(255, 255, 255); transform: rotate(-19deg);"></span></span></span></div>
+        <div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 23px; color: rgb(255, 255, 255);">
+  <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(45, 76, 240); transform: rotate(-19deg);"></span></span>DERA</span>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div>
       </span>
     </a>
     <nav class="navmid" aria-label="Hauptnavigation">
@@ -846,10 +996,10 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
     <div style="display: flex; align-items: center; gap: 12px;">
       <a class="navcta" href="/projekt-check/"><span class="navcta-lg">Projekt-Check starten</span><span class="navcta-sm">Check starten</span></a>
       <div class="burger">
-        <button type="button" aria-label="Menü öffnen" aria-expanded="false" style="width: 48px; height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; background: var(--flaeche); border: 1px solid var(--linie); border-radius: 999px; cursor: pointer;">
-          <span style="display: block; width: 20px; height: 2px; background: var(--tinte);"></span>
-          <span style="display: block; width: 20px; height: 2px; background: var(--tinte);"></span>
-          <span style="display: block; width: 20px; height: 2px; background: var(--tinte);"></span>
+        <button type="button" class="burger-knopf" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menue" style="width: 48px; height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; background: var(--flaeche); border: 1px solid var(--linie); border-radius: 999px; cursor: pointer;">
+          <span class="bs"></span>
+          <span class="bs"></span>
+          <span class="bs"></span>
         </button>
       </div>
     </div>
@@ -858,7 +1008,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
     <div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 26px; color: rgb(0, 0, 0);">
   <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(255, 255, 255); transform: rotate(-19deg);"></span></span>DERA</span>
   <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div>
-    <p class="pr-s" style="margin: 4pt 0px 0px;">Preise, Stand <span class="sc-interp">1. Oktober 2026</span></p>
+    <p class="pr-s" style="margin: 4pt 0px 0px;">Preise, Stand <span class="sc-interp">2. Oktober 2026</span></p>
   </div>
       <div class="pr-blk">
         <p class="pr-h">Website: CHF 890</p>
@@ -1057,7 +1207,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
 
       <p class="label abschnitt-nr" style="margin-top: var(--a-5);">02 · Pakete</p>
       <h2 class="t-h2" style="margin: 0 0 var(--a-4);">Was in jedem Paket steckt</h2>
-      <div class="g-pkg" style="align-items: stretch;">
+      <div class="g-pkg wisch" style="align-items: stretch;">
         <div class="card pk-karte pk-start" data-passt="0">
           <p class="mono" style="font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-2); margin: 0px 0px 12px;">Website</p>
           <p class="preis" style="margin: 0px 0px 8px;"><span class="sc-interp">CHF&nbsp;890</span></p>
@@ -1118,6 +1268,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
           <a class="btn btn-sekundaer" href="/projekt-check/?paket=pro" data-quelle="paket-pro">Mit Paket Pro starten</a>
         </div>
       </div>
+    <div class="pk-punkte-nav" aria-hidden="true"><i></i><i></i><i></i></div>
 
       <div class="card logo-add">
         <div class="logo-add-head">
@@ -1159,7 +1310,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
         <p class="label abschnitt-nr">03 · Betrieb, optional nach dem Livegang</p>
         <h2 style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; font-size: var(--fs-h2); line-height: 1.12; letter-spacing: -0.03em; color: var(--tinte); margin: 0px 0px 20px; text-wrap: balance;">Wer betreibt Ihre Website danach?</h2>
         <p style="font-size: clamp(18px, 1.6vw, 22px); line-height: 1.52; color: var(--text-2); margin: 0px 0px 48px; max-width: 760px; text-wrap: pretty;">Nach der Übergabe gehört die Website Ihnen. Sie können sie selbst betreiben oder den Betrieb mir überlassen. Beides ist möglich, Sie entscheiden erst am Schluss.</p>
-        <div class="g-host">
+        <div class="g-host wisch">
         <div class="host-card">
           <h3 style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 700; font-size: clamp(22px, 2vw, 26px); line-height: 1.2; letter-spacing: -0.02em; color: var(--tinte); margin: 0px 0px 20px;">Sie hosten selbst</h3>
           <p class="mono" style="font-size: clamp(30px, 3.2vw, 42px); line-height: 1.05; color: var(--tinte); margin: 0px 0px 8px; font-variant-numeric: tabular-nums; white-space: nowrap;">CHF 0</p>
@@ -1201,6 +1352,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
           </ul>
         </div>
         </div>
+    <div class="pk-punkte-nav" aria-hidden="true"><i></i><i></i><i></i></div>
         <p style="font-size: 16px; line-height: 1.65; color: var(--tinte); margin: 40px 0px 12px; max-width: 760px; text-wrap: pretty;">Die Einrichtung ist in beiden Betriebsvarianten im Projektpreis enthalten. Abgerechnet wird einmal jährlich im Voraus, kündbar mit 30 Tagen auf Monatsende.</p>
         <p style="font-size: 13px; line-height: 1.7; color: var(--text-2); margin: 0px; max-width: 760px;">Nicht enthalten: Textänderungen, neue Seiten, neue Bilder, Suchmaschinenoptimierung und Domainkosten. Änderungen nach Aufwand zu <span class="sc-interp">CHF&nbsp;120&nbsp;pro&nbsp;Stunde</span>.</p>
       </div>
@@ -1396,15 +1548,21 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
 <!-- vorab:end -->
 <x-dc>
 <sc-if value="{{ showChrome }}" hint-placeholder-val="{{ true }}">
-<header class="kopf" data-scroll="{{ headScroll }}">
+<header class="kopf" data-scroll="{{ headScroll }}" data-weg="{{ kopfWeg }}" data-menue="{{ menuAttr }}">
   <div id="thread" aria-hidden="true" style="height:2px;width:0%;background:var(--akzent);box-shadow:0 1px 0 rgba(17,19,26,0.45);transition:width 80ms linear"></div>
   <div class="wrap navbar">
-    <a href="/" style="text-decoration:none;color:var(--tinte);display:flex;align-items:center;gap:12px">
+    <a href="/" class="kopf-logo" style="text-decoration:none;color:var(--tinte);display:flex;align-items:center;gap:12px">
+      <span class="logo-normal">
       <dc-import name="logo" kind="zeichen" h="32" hint-size="32px,32px"></dc-import>
       <span style="display:block">
         <span class="logo-lg"><dc-import name="logo" kind="wort" h="32" hint-size="152px,32px"></dc-import></span>
         <span class="logo-sm"><dc-import name="logo" kind="wort" h="26" hint-size="124px,26px"></dc-import></span>
         <span class="tagline">Webseiten für Schweizer Betriebe</span>
+      </span>
+      </span>
+      <span class="logo-menue" aria-hidden="true">
+        <dc-import name="logo" kind="zeichen" h="28" markBg="#FFFFFF" markFg="#2D4CF0" hint-size="28px,28px"></dc-import>
+        <dc-import name="logo" kind="wort" h="26" fg="#FFFFFF" cut="#2D4CF0" hint-size="124px,26px"></dc-import>
       </span>
     </a>
     <nav class="navmid" aria-label="Hauptnavigation">
@@ -1416,10 +1574,10 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
     <div style="display:flex;align-items:center;gap:12px">
       <a class="navcta" href="/projekt-check/"><span class="navcta-lg">Projekt-Check starten</span><span class="navcta-sm">Check starten</span></a>
       <div class="burger">
-        <button type="button" onClick="{{ toggleMenu }}" aria-label="Menü öffnen" aria-expanded="{{ menuOpen }}" style="width:48px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:var(--flaeche);border:1px solid var(--linie);border-radius:999px;cursor:pointer">
-          <span style="display:block;width:20px;height:2px;background:var(--tinte)"></span>
-          <span style="display:block;width:20px;height:2px;background:var(--tinte)"></span>
-          <span style="display:block;width:20px;height:2px;background:var(--tinte)"></span>
+        <button type="button" class="burger-knopf" onClick="{{ toggleMenu }}" aria-label="{{ menuLabel }}" aria-expanded="{{ menuOpen }}" aria-controls="menue" style="width:48px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:var(--flaeche);border:1px solid var(--linie);border-radius:999px;cursor:pointer">
+          <span class="bs"></span>
+          <span class="bs"></span>
+          <span class="bs"></span>
         </button>
       </div>
     </div>
@@ -1428,7 +1586,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
 </sc-if>
 
 <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-<div style="position:fixed;inset:0;z-index:60;background:var(--tinte);padding:24px 48px 48px;overflow:auto;animation:fade 120ms linear">
+<div class="menue-alt" style="position:fixed;inset:0;z-index:60;background:var(--tinte);padding:24px 48px 48px;overflow:auto;animation:fade 120ms linear">
   <div style="display:flex;align-items:center;justify-content:space-between;height:52px;margin-bottom:48px">
     <dc-import name="logo" kind="wort" h="32" fg="#F6F5F1" cut="#11131A" hint-size="152px,32px"></dc-import>
     <button type="button" onClick="{{ toggleMenu }}" aria-label="Menü schliessen" style="width:48px;height:48px;background:none;border:1px solid rgba(246,245,241,0.18);border-radius:999px;color:var(--grund);font-size:26px;line-height:1;cursor:pointer">×</button>
@@ -1441,6 +1599,23 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
   <div style="height:1px;background:rgba(246,245,241,0.15);margin:32px 0"></div>
   <a href="{{ mailKontakt }}" style="font-size:20px;color:var(--auf-dunkel);display:inline-block;padding:12px 0">kontakt@odera.ch</a>
   <a href="/projekt-check/" onClick="{{ closeMenu }}" style="margin-top:32px;display:flex;align-items:center;justify-content:center;min-height:64px;border-radius:999px;background:var(--akzent);color:var(--tinte);font-size:16px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
+</div>
+<div id="menue" class="menue" data-zu="{{ menuZuAttr }}" role="dialog" aria-label="Menü">
+  <div class="menue-innen">
+    <nav class="menue-nav" aria-label="Hauptnavigation">
+      <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="4">
+        <a class="menue-link" href="{{ l.href }}" aria-current="{{ l.cur }}" onClick="{{ closeMenu }}" style="--i:{{ l.i }}"><span class="menue-link-t">{{ l.label }}</span><span class="menue-pfeil" aria-hidden="true"></span></a>
+      </sc-for>
+      <button type="button" class="menue-frage" onClick="{{ menueFrage }}" aria-haspopup="dialog" style="display:{{ chatDisplay }}"><span class="menue-frage-i" aria-hidden="true"></span>Frage stellen</button>
+    </nav>
+    <div class="menue-unten">
+      <a class="menue-cta" href="/projekt-check/" onClick="{{ closeMenu }}">Projekt-Check starten</a>
+      <a class="menue-mail" href="{{ mailKontakt }}">kontakt@odera.ch</a>
+      <p class="menue-status"><span class="ausl-balken" aria-hidden="true"><sc-for list="{{ auslPlaetze }}" as="pl" hint-placeholder-count="2"><i data-frei="{{ pl.frei }}"></i></sc-for></span><span>{{ heroAuslText }}</span></p>
+      <p class="menue-status"><span class="menue-punkt {{ availPuls }}" aria-hidden="true" style="background:{{ availDot }}"></span><span>{{ availability }}</span></p>
+      <p class="menue-recht"><a href="/impressum/" onClick="{{ closeMenu }}">Impressum</a><a href="/datenschutz/" onClick="{{ closeMenu }}">Datenschutz</a><a href="/agb/" onClick="{{ closeMenu }}">AGB</a></p>
+    </div>
+  </div>
 </div>
 </sc-if>
 
@@ -1456,6 +1631,15 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
         <p class="label hero-ort" style="animation:{{ heroAnim0 }}">Nico Bodmer · Webseiten aus Berikon AG</p>
         <h1 id="hero-t" tabindex="-1" class="t-h1 hero-h1" style="animation:{{ heroAnim1 }}">Sie sehen Ihre neue Website, <span class="leuchtstift" style="animation-delay:450ms">bevor </span><span class="leuchtstift" style="animation-delay:560ms">Sie </span><span class="leuchtstift" style="animation-delay:670ms">bezahlen.</span></h1>
         <p class="t-lead hero-lead" style="animation:{{ heroAnim2 }}">Für Handwerk, Gastro, Praxen und Läden. Ich zeige Ihnen den fertigen Entwurf, Sie entscheiden danach.</p>
+        <div class="hero-handy-chips">
+          <p class="hero-frage-t" id="hero-frage-oben">Was sollen Besucher auf Ihrer neuen Website tun?</p>
+          <div class="hero-chips" role="group" aria-labelledby="hero-frage-oben">
+            <sc-for list="{{ heroChips }}" as="c" hint-placeholder-count="4">
+              <button type="button" class="hero-chip" data-v="{{ c.v }}" onClick="{{ onHeroChip }}" aria-describedby="chip-hinweis-oben">{{ c.label }}</button>
+            </sc-for>
+          </div>
+          <p id="chip-hinweis-oben" class="rechner-sr">Ein Tipp startet den Projekt-Check mit dieser Antwort.</p>
+        </div>
         <div class="hero-aktion" style="animation:{{ heroAnim3 }}">
           <a href="/projekt-check/" class="btn btn-primaer" data-quelle="hero" onClick="{{ onEinstieg }}">Projekt-Check starten</a>
           <a href="/angebot/" class="btn btn-sekundaer">Preise ansehen</a>
@@ -1507,7 +1691,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
     <p class="label abschnitt-nr">02 · Preise</p>
     <h2 id="pakete-t" class="t-h2" style="margin:0 0 12px">Drei Pakete, feste Preise</h2>
     <p class="t-lead" style="margin:0 0 48px">Einmalig bezahlt, ohne Abo. Hosting können Sie nach dem Livegang dazunehmen, müssen aber nicht.</p>
-    <div class="g-pkg pk-kurz">
+    <div class="g-pkg pk-kurz wisch">
       <div class="card pk-start">
         <p class="label" style="margin:0 0 12px">Website</p>
         <p class="preis" style="margin:0 0 4px">{{ price1 }}</p>
@@ -1530,6 +1714,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
         <a href="/projekt-check/" class="btn btn-sekundaer pk-link" data-quelle="paket-pro" onClick="{{ onEinstieg }}">Mit Pro starten</a>
       </div>
     </div>
+    <div class="pk-punkte-nav" aria-hidden="true"><i></i><i></i><i></i></div>
     <p style="margin:32px 0 0"><a href="/angebot/" class="einstieg">Alle Leistungen und Zusätze im Angebot<span aria-hidden="true">→</span></a></p>
   </div></div>
 </section>
@@ -1553,7 +1738,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
     <p class="label abschnitt-nr">04 · Einordnung</p>
     <h2 id="vergleich-t" class="t-h2" style="margin:0 0 12px">Baukasten, Agentur oder ich?</h2>
     <p class="t-lead" style="margin:0 0 48px">Alle drei Wege führen zu einer Website. Sie unterscheiden sich darin, wer die Arbeit macht und wann Sie etwas sehen.</p>
-    <div class="wahl" role="table" aria-label="Vergleich Baukasten, Agentur und ODERA">
+    <div class="wahl" role="table" aria-label="Vergleich Baukasten, Agentur und ODERA" data-offen="{{ wahlOffenAttr }}">
       <div class="wahl-kopf" role="row"><span role="columnheader"><span class="rechner-sr">Frage</span></span><span role="columnheader">Baukasten</span><span role="columnheader">Agentur</span><span role="columnheader" class="wahl-ich">ODERA</span></div>
       <sc-for list="{{ wahlZeilen }}" as="z" hint-placeholder-count="4">
         <div class="wahl-zeile" role="row">
@@ -1564,6 +1749,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
         </div>
       </sc-for>
     </div>
+    <button type="button" class="wahl-mehr" onClick="{{ wahlUmschalten }}" aria-expanded="{{ wahlOffen }}">{{ wahlMehrText }}</button>
     <p class="t-klein" style="margin:16px 0 0">Allgemeine Einordnung. Einzelne Anbieter arbeiten anders.</p>
   </div></div>
 </section>
@@ -1815,7 +2001,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
 
       <p class="label abschnitt-nr" style="margin-top:var(--a-5)">02 · Pakete</p>
       <h2 class="t-h2" style="margin:0 0 var(--a-4)">Was in jedem Paket steckt</h2>
-      <div class="g-pkg" style="align-items:stretch">
+      <div class="g-pkg wisch" style="align-items:stretch">
         <div class="card pk-karte pk-start" data-passt="{{ passtWebsite }}">
           <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-2);margin:0 0 12px">Website</p>
           <p class="preis" style="margin:0 0 8px">{{ price1 }}</p>
@@ -1876,6 +2062,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
           <a class="btn btn-sekundaer" href="/projekt-check/?paket=pro" data-quelle="paket-pro" onClick="{{ onEinstieg }}">Mit Paket Pro starten</a>
         </div>
       </div>
+    <div class="pk-punkte-nav" aria-hidden="true"><i></i><i></i><i></i></div>
 
       <div class="card logo-add">
         <div class="logo-add-head">
@@ -1917,7 +2104,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
         <p class="label abschnitt-nr">03 · Betrieb, optional nach dem Livegang</p>
         <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;color:var(--tinte);margin:0 0 20px;text-wrap:balance">Wer betreibt Ihre Website danach?</h2>
         <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:var(--text-2);margin:0 0 48px;max-width:760px;text-wrap:pretty">Nach der Übergabe gehört die Website Ihnen. Sie können sie selbst betreiben oder den Betrieb mir überlassen. Beides ist möglich, Sie entscheiden erst am Schluss.</p>
-        <div class="g-host">
+        <div class="g-host wisch">
         <div class="host-card">
           <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.2;letter-spacing:-0.02em;color:var(--tinte);margin:0 0 20px">Sie hosten selbst</h3>
           <p class="mono" style="font-size:clamp(30px,3.2vw,42px);line-height:1.05;color:var(--tinte);margin:0 0 8px;font-variant-numeric:tabular-nums;white-space:nowrap">CHF 0</p>
@@ -1959,6 +2146,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
           </ul>
         </div>
         </div>
+    <div class="pk-punkte-nav" aria-hidden="true"><i></i><i></i><i></i></div>
         <p style="font-size:16px;line-height:1.65;color:var(--tinte);margin:40px 0 12px;max-width:760px;text-wrap:pretty">Die Einrichtung ist in beiden Betriebsvarianten im Projektpreis enthalten. Abgerechnet wird einmal jährlich im Voraus, kündbar mit 30 Tagen auf Monatsende.</p>
         <p style="font-size:13px;line-height:1.7;color:var(--text-2);margin:0;max-width:760px">Nicht enthalten: Textänderungen, neue Seiten, neue Bilder, Suchmaschinenoptimierung und Domainkosten. Änderungen nach Aufwand zu {{ stundensatzTxt }}.</p>
       </div>
@@ -2560,7 +2748,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
               </span>
             </a>
             <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px">
-              <a href="{{ mailKontakt }}" style="font-size:16px;color:var(--auf-dunkel)">Oder direkt schreiben: kontakt@odera.ch</a>
+              <a class="link-44" href="{{ mailKontakt }}" style="font-size:16px;color:var(--auf-dunkel)">Oder direkt schreiben: kontakt@odera.ch</a>
             </div>
           </div>
           <div>
@@ -2895,7 +3083,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
       </div>
     </div>
     <div style="position:relative;z-index:1">
-      <div role="progressbar" aria-valuenow="{{ qNum }}" aria-valuemin="1" aria-valuemax="{{ qTotal }}" aria-label="Fortschritt" style="height:2px;background:rgba(17,19,26,0.10)">
+      <div class="q-prog" role="progressbar" aria-valuenow="{{ qNum }}" aria-valuemin="1" aria-valuemax="{{ qTotal }}" aria-label="Fortschritt" style="height:2px;background:rgba(17,19,26,0.10)">
         <div style="height:2px;background:var(--akzent);box-shadow:0 1px 0 rgba(17,19,26,0.45);width:{{ progress }};transition:width 300ms ease-in-out"></div>
       </div>
       <div class="wrap" style="padding-top:16px;padding-bottom:120px">
@@ -2970,7 +3158,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
               <sc-for list="{{ fields }}" as="f" hint-placeholder-count="2">
                 <div class="fline" data-fehler="{{ f.fehlerAttr }}" style="animation-name:{{ f.anim }}">
                   <label class="f-label" for="{{ f.id }}"><span>{{ f.label }}</span><span class="f-tag" data-pflicht="{{ f.pflichtAttr }}" style="animation-name:{{ f.tagAnim }}">{{ f.tag }}</span></label>
-                  <input id="{{ f.id }}" type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" autocomplete="{{ f.auto }}" required="{{ f.pflicht }}" aria-required="{{ f.ariaReq }}" aria-invalid="{{ f.ariaInv }}" aria-describedby="{{ f.fehlerId }}" onChange="{{ onField }}" onBlur="{{ onFieldBlur }}" onKeyDown="{{ onFieldKey }}">
+                  <input id="{{ f.id }}" type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" autocomplete="{{ f.auto }}" enterkeyhint="{{ f.enter }}" required="{{ f.pflicht }}" aria-required="{{ f.ariaReq }}" aria-invalid="{{ f.ariaInv }}" aria-describedby="{{ f.fehlerId }}" onChange="{{ onField }}" onBlur="{{ onFieldBlur }}" onKeyDown="{{ onFieldKey }}">
                   <span class="ulx" aria-hidden="true"></span>
                   <span class="f-ok" aria-hidden="true" style="display:{{ f.okDisplay }};animation-name:{{ f.okAnim }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
                   <p class="f-fehler" id="{{ f.fehlerId }}" data-an="{{ f.fehlerAttr }}" aria-live="polite"><span class="f-fehler-i" aria-hidden="true" style="display:{{ f.iconDisplay }}">!</span>{{ f.meldung }}</p>
@@ -2982,7 +3170,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
               <sc-for list="{{ fields2 }}" as="f" hint-placeholder-count="1">
                 <div class="fline" data-fehler="{{ f.fehlerAttr }}" style="animation-name:{{ f.anim }}">
                   <label class="f-label" for="{{ f.id }}"><span>{{ f.label }}</span><span class="f-tag" data-pflicht="{{ f.pflichtAttr }}" style="animation-name:{{ f.tagAnim }}">{{ f.tag }}</span></label>
-                  <input id="{{ f.id }}" type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" autocomplete="{{ f.auto }}" required="{{ f.pflicht }}" aria-required="{{ f.ariaReq }}" aria-invalid="{{ f.ariaInv }}" aria-describedby="{{ f.fehlerId }}" onChange="{{ onField }}" onBlur="{{ onFieldBlur }}" onKeyDown="{{ onFieldKey }}">
+                  <input id="{{ f.id }}" type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" autocomplete="{{ f.auto }}" enterkeyhint="{{ f.enter }}" required="{{ f.pflicht }}" aria-required="{{ f.ariaReq }}" aria-invalid="{{ f.ariaInv }}" aria-describedby="{{ f.fehlerId }}" onChange="{{ onField }}" onBlur="{{ onFieldBlur }}" onKeyDown="{{ onFieldKey }}">
                   <span class="ulx" aria-hidden="true"></span>
                   <span class="f-ok" aria-hidden="true" style="display:{{ f.okDisplay }};animation-name:{{ f.okAnim }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
                   <p class="f-fehler" id="{{ f.fehlerId }}" data-an="{{ f.fehlerAttr }}" aria-live="polite"><span class="f-fehler-i" aria-hidden="true" style="display:{{ f.iconDisplay }}">!</span>{{ f.meldung }}</p>
@@ -2998,11 +3186,13 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
               </sc-if>
             </div>
 
+            <div class="q-leiste">
             <div class="row" style="justify-content:space-between;margin-top:32px;gap:16px;order:6">
               <button type="button" onClick="{{ onBack }}" style="min-height:56px;padding:0 24px;background:none;border:1px solid var(--tinte);border-radius:999px;font-size:16px;font-weight:600;color:var(--tinte);cursor:pointer;visibility:{{ backVis }}">Zurück</button>
               <button type="button" class="q-weiter-knopf" onClick="{{ onNext }}" aria-describedby="q-offen">{{ nextLabel }}</button>
             </div>
             <p id="q-offen" class="mono q-offen" style="order:6">{{ offenText }}</p>
+            </div>
             <p style="display:{{ editDisplay }};margin:16px 0 0;text-align:right;order:7"><button type="button" data-own-enter="1" onClick="{{ onEditToReview }}" style="background:none;border:none;padding:0;min-height:44px;color:var(--tinte);font-size:16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer">Zurück zur Übersicht</button></p>
             <p style="display:{{ quickLinkDisplay }};font-size:13px;line-height:1.5;margin:16px 0 0;order:8"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
           </div>
@@ -3083,7 +3273,7 @@ ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
           <span class="mf-w" style="display:{{ vonTextDisplay }}">{{ vonText }}</span>
           <span class="mf-von" style="display:{{ vonEingabeDisplay }}">
             <label class="mf-eingabe"><span class="mf-sr">Ihr Name, optional</span><input id="mf-name" type="text" autocomplete="name" placeholder="Ihr Name, optional" maxlength="120" value="{{ vonName }}" data-k="name" onChange="{{ onField }}"></label>
-            <label class="mf-eingabe" data-fehler="{{ mfMailFehlerAttr }}"><span class="mf-sr">Ihre E-Mail-Adresse, Pflichtfeld</span><input id="mf-email" type="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse (Pflichtfeld)" maxlength="200" value="{{ vonMail }}" data-k="email" required="{{ true }}" aria-required="true" aria-invalid="{{ mfMailAriaInv }}" aria-describedby="mf-email-fehler" onChange="{{ onField }}"></label>
+            <label class="mf-eingabe" data-fehler="{{ mfMailFehlerAttr }}"><span class="mf-sr">Ihre E-Mail-Adresse, Pflichtfeld</span><input id="mf-email" type="email" autocomplete="email" enterkeyhint="send" placeholder="Ihre E-Mail-Adresse (Pflichtfeld)" maxlength="200" value="{{ vonMail }}" data-k="email" required="{{ true }}" aria-required="true" aria-invalid="{{ mfMailAriaInv }}" aria-describedby="mf-email-fehler" onChange="{{ onField }}"></label>
             <span class="f-fehler mf-feldfehler" id="mf-email-fehler" data-an="{{ mfMailFehlerAttr }}" aria-live="polite"><span class="f-fehler-i" aria-hidden="true" style="display:{{ mfMailIcon }}">!</span>{{ mfMailMeldung }}</span>
             <label class="mf-eingabe"><span class="mf-sr">Betrieb, optional</span><input type="text" autocomplete="organization" placeholder="Betrieb, optional" maxlength="120" value="{{ vonFirma }}" data-k="firma" onChange="{{ onField }}"></label>
           </span>
@@ -3542,7 +3732,7 @@ class Component extends DCLogic {
   ];
 
   state = {
-    path: '/', scrolled: false, menu: false, barOn: false, pageKey: 0,
+    path: '/', scrolled: false, menu: false, barOn: false, pageKey: 0, kopfWeg: false, menuZu: false, pkAktiv: 0, wahlOffen: false,
 
     faq: (typeof window !== 'undefined' && window.innerWidth <= 560) ? -1 : 0, priceOpen: false, off: {}, reqMin: this.zeitSumme(true), optMin: this.zeitSumme(false), totMin: this.zeitSumme(true) + this.zeitSumme(false),
     device: 'desktop', muster: null, closeHover: false,
@@ -3574,6 +3764,7 @@ class Component extends DCLogic {
     this.fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     this.onRoute = () => {
+      if (document.documentElement.dataset.menue) this.menueAufraeumen(null);
       const path = this.pathOf(location.pathname);
       const known = this.PAGES[path] ? path : '/404';
       const query = location.search.replace(/^\?/, '');
@@ -3683,9 +3874,15 @@ class Component extends DCLogic {
       const near = (stop ? stop.getBoundingClientRect().top < window.innerHeight : false) || (fuss ? fuss.getBoundingClientRect().top < window.innerHeight : false);
       const isCheck = this.state.path === '/projekt-check';
       const small = window.innerWidth <= 560;
-      const threshold = small ? Math.round(window.innerHeight * 0.9) : 1400;
+      const hero = small ? document.querySelector('main .hero, main section') : null;
+      const threshold = small ? (hero ? Math.max(200, hero.offsetTop + hero.offsetHeight - 120) : Math.round(window.innerHeight * 0.9)) : 1400;
       const barOn = this.props.showStickyBar === false ? false : (y > threshold && !near && !isCheck);
-      if (barOn !== this.state.barOn || (y > 40) !== this.state.scrolled) this.setState({ barOn: barOn, scrolled: y > 40 });
+      const dy = y - (this.letztesY || 0); this.letztesY = y;
+      let weg = this.state.kopfWeg;
+      if (window.innerWidth >= 1024 || this.state.menu || y < 80) weg = false;
+      else if (dy > 6) weg = true;
+      else if (dy < -4) weg = false;
+      if (barOn !== this.state.barOn || (y > 40) !== this.state.scrolled || weg !== this.state.kopfWeg) this.setState({ barOn: barOn, scrolled: y > 40, kopfWeg: weg });
       const cb = document.querySelector('.chat-btn');
       if (cb) {
         const r = cb.getBoundingClientRect();
@@ -3713,6 +3910,14 @@ class Component extends DCLogic {
       const tag = (e.target.tagName || '').toLowerCase();
       const typing = tag === 'input' || tag === 'textarea';
       if (e.key === 'Escape' && this.state.muster) { this.setState({ muster: null }); e.preventDefault(); return; }
+      if (this.state.menu && e.key === 'Escape') { this.menueZu(true); e.preventDefault(); return; }
+      if (this.state.menu && e.key === 'Tab' && window.innerWidth < 1024) {
+        // Fokus bleibt im Menü: Menü-Knopf im Kopf und alle Einträge
+        const ziele = [this.sichtbar('.kopf .burger-knopf'), ...document.querySelectorAll('#menue a[href], #menue button')].filter((x) => x && x.getClientRects().length);
+        const i = ziele.indexOf(document.activeElement);
+        const n = e.shiftKey ? (i <= 0 ? ziele.length - 1 : i - 1) : (i === -1 || i === ziele.length - 1 ? 0 : i + 1);
+        if (ziele[n]) { ziele[n].focus(); e.preventDefault(); return; }
+      }
       if (!typing && (e.key === 'f' || e.key === 'F') && !e.metaKey && !e.ctrlKey && !e.altKey && this.CHAT_ENDPOINT
         && this.state.path !== '/projekt-check' && !this.state.muster && !this.state.menu) {
         this.chatOeffnen(); e.preventDefault(); return;
@@ -3735,6 +3940,47 @@ class Component extends DCLogic {
       else if (e.key === 'Backspace') { this.back(); e.preventDefault(); }
     };
     window.addEventListener('keydown', this.onKey);
+    // Menü nach unten wischen schliesst es (ab 80 px), das Menü folgt dem Finger
+    let wischY = null, wischD = 0;
+    document.addEventListener('touchstart', (e) => {
+      const m = e.target.closest && e.target.closest('#menue');
+      wischY = m && m.scrollTop <= 0 && this.state.menu && !this.state.menuZu ? e.touches[0].clientY : null; wischD = 0;
+    }, { passive: true });
+    document.addEventListener('touchmove', (e) => {
+      if (wischY === null) return;
+      wischD = e.touches[0].clientY - wischY;
+      const m = this.sichtbar('#menue');
+      if (m && wischD > 0) { m.style.animation = 'none'; m.style.transform = 'translateY(' + Math.round(wischD * 0.6) + 'px)'; }
+    }, { passive: true });
+    document.addEventListener('touchend', () => {
+      if (wischY === null) return;
+      const m = this.sichtbar('#menue');
+      if (m) { m.style.transition = 'transform 200ms ease-out'; m.style.transform = ''; setTimeout(() => { if (m) { m.style.transition = ''; m.style.animation = ''; } }, 220); }
+      if (wischD > 80) this.menueZu(true);
+      wischY = null;
+    }, { passive: true });
+    // Bildschirmtastatur: Höhe als --tastatur, damit Leisten direkt darüber sitzen
+    if (window.visualViewport) {
+      const vv = window.visualViewport;
+      this.onViewport = () => {
+        const h = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
+        document.documentElement.style.setProperty('--tastatur', h + 'px');
+        const offen = h > 120 ? '1' : '';
+        if ((document.documentElement.dataset.tastatur || '') !== offen) { if (offen) document.documentElement.dataset.tastatur = '1'; else delete document.documentElement.dataset.tastatur; }
+      };
+      vv.addEventListener('resize', this.onViewport); vv.addEventListener('scroll', this.onViewport);
+    }
+    // Wischbare Karten: Punkt der sichtbaren Karte hervorheben (direkt im DOM, mehrere Karussells)
+    document.addEventListener('scroll', (e) => {
+      const t = e.target;
+      if (!t || !t.classList || !t.classList.contains('wisch') || !t.children.length) return;
+      const nav = t.nextElementSibling && t.nextElementSibling.classList.contains('pk-punkte-nav') ? t.nextElementSibling : null;
+      if (!nav) return;
+      const breite = t.children[0].getBoundingClientRect().width + 12;
+      nav.dataset.aktiv = String(Math.max(0, Math.min(t.children.length - 1, Math.round(t.scrollLeft / breite))));
+    }, { capture: true, passive: true });
+    // Musterprojekte: auf dem Handy startet die Vorschau in der Handy-Ansicht
+    if (window.innerWidth < 768 && this.state.device !== 'mobile') this.setState({ device: 'mobile' });
     this.onNetz = () => this.setState({ offline: navigator.onLine === false });
     window.addEventListener('online', this.onNetz);
     window.addEventListener('offline', this.onNetz);
@@ -4054,6 +4300,49 @@ class Component extends DCLogic {
       return firma || branche ? { firma, branche } : null;
     } catch (err) { return null; }
   }
+
+  // ---------- Menü auf dem Handy ----------
+  // Scroll-Sperre für iOS: body fest, Position merken und beim Schliessen genau wiederherstellen.
+  menueAuf() {
+    if (this.state.menu) return;
+    if (window.innerWidth < 1024) {
+      this.menueY = window.scrollY || 0;
+      const b = document.body.style;
+      b.position = 'fixed'; b.top = -this.menueY + 'px'; b.left = '0'; b.right = '0'; b.width = '100%';
+      document.documentElement.dataset.menue = '1';
+      this.themaFarbe('#2D4CF0');
+      document.querySelectorAll('main, footer, .mobbar, .chat-btn').forEach((x) => { x.inert = true; });
+    }
+    this.setState({ menu: true, menuZu: false, kopfWeg: false }, () => {
+      setTimeout(() => { const l = this.sichtbar('#menue .menue-link'); if (l && window.innerWidth < 1024) l.focus({ preventScroll: true }); }, 60);
+    });
+  }
+  // scrollZiel: Zahl = dorthin zurück, null = nicht scrollen (neue Seite)
+  menueAufraeumen(scrollZiel) {
+    if (!document.documentElement.dataset.menue) return;
+    const b = document.body.style;
+    b.position = ''; b.top = ''; b.left = ''; b.right = ''; b.width = '';
+    delete document.documentElement.dataset.menue;
+    this.themaFarbe('#F6F5F1');
+    document.querySelectorAll('main, footer, .mobbar, .chat-btn').forEach((x) => { x.inert = false; });
+    if (typeof scrollZiel === 'number') { window.scrollTo({ top: scrollZiel, behavior: 'instant' }); this.letztesY = scrollZiel; }
+  }
+  menueZu(fokusZurueck = true, scrollZiel = this.menueY, danach = null) {
+    if (!this.state.menu) return;
+    const fertig = () => {
+      this.menueAufraeumen(scrollZiel);
+      this.setState({ menu: false, menuZu: false }, () => {
+        if (fokusZurueck) { const k = this.sichtbar('.kopf .burger-knopf'); if (k) k.focus({ preventScroll: true }); }
+        if (danach) danach();
+      });
+    };
+    if (window.innerWidth >= 1024) { fertig(); return; }
+    this.setState({ menuZu: true });
+    setTimeout(fertig, this.reduce ? 120 : 220);
+  }
+  // Die rohe Vorlage enthält dieselben Elemente unsichtbar: immer das sichtbare nehmen
+  sichtbar(sel) { return [...document.querySelectorAll(sel)].find((x) => x.getClientRects().length) || null; }
+  themaFarbe(farbe) { const m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute('content', farbe); }
 
   vergessen() { try { sessionStorage.removeItem('odera-check'); } catch (err) { /* nichts */ } }
   gemerkt() { try { return JSON.parse(sessionStorage.getItem('odera-check') || 'null'); } catch (err) { return null; } }
@@ -4479,6 +4768,7 @@ class Component extends DCLogic {
       const r = this.pruefeFeld(f, s.txt[f.k]);
       const ok = !!s.okPuls[f.k] && !e && !r.vorschlag;
       return { k: f.k, id: 'f-' + f.k, fehlerId: 'f-' + f.k + '-fehler', label: f.label, ph: f.ph, type: f.typ, auto: f.auto, value: s.txt[f.k] || '', max: eMax[f.k] || 200,
+        enter: s.step >= total - 1 ? 'send' : 'next',
         pflicht: f.pflicht, pflichtAttr: f.pflicht ? '1' : '0', ariaReq: f.pflicht ? 'true' : 'false', tag: f.pflicht ? 'Pflichtfeld' : 'optional',
         tagAnim: f.pflicht ? 'tagRein' : 'tagRein2',
         fehlerAttr: e ? '1' : '0', ariaInv: e ? 'true' : 'false', meldung: e ? e.meldung : '', iconDisplay: e ? 'inline-flex' : 'none',
@@ -4497,7 +4787,7 @@ class Component extends DCLogic {
 
     return {
       mailKontakt: mailKontakt,
-      navLinks: this.NAV.map(n => ({ label: n.label, href: n.href, cur: s.path === n.path ? 'page' : undefined, dot: s.path === n.path ? 1 : 0 })),
+      navLinks: this.NAV.map((n, i) => ({ label: n.label, href: n.href, cur: s.path === n.path ? 'page' : undefined, dot: s.path === n.path ? 1 : 0, i })),
       showChrome: !isCheck,
       isStart: page === 'start', isAngebot: page === 'angebot', isAblauf: page === 'ablauf',
       isMuster: page === 'muster', isUeber: page === 'ueber', isCheck: isCheck,
@@ -4527,8 +4817,24 @@ class Component extends DCLogic {
       openChat: this.chatOeffnen,
       pageAnim: this.reduce ? 'none' : 'pageIn 220ms ease-out',
       menuOpen: s.menu,
-      toggleMenu: () => this.setState({ menu: !s.menu }),
-      closeMenu: () => this.setState({ menu: false }),
+      toggleMenu: () => { if (this.state.menu) this.menueZu(true); else this.menueAuf(); },
+      // Link im Menü: andere Seite ohne Zurückscrollen, dieselbe Seite an die alte Stelle
+      closeMenu: (e) => {
+        if (window.innerWidth >= 1024) { this.setState({ menu: false }); return; }
+        const href = e && e.currentTarget ? e.currentTarget.getAttribute('href') : '';
+        const gleich = href && this.pathOf(href.split('?')[0]) === this.state.path;
+        if (gleich) { e.preventDefault(); this.menueZu(false); return; }
+        this.menueAufraeumen(null); this.setState({ menu: false, menuZu: false });
+      },
+      menueFrage: () => { this.menueZu(false, this.menueY, () => this.chatOeffnen({ currentTarget: this.sichtbar('.kopf .burger-knopf') })); },
+      menuAttr: s.menu ? '1' : '0',
+      menuZuAttr: s.menuZu ? '1' : '0',
+      menuLabel: s.menu ? 'Menü schliessen' : 'Menü öffnen',
+      kopfWeg: s.kopfWeg && !s.menu ? '1' : '0',
+      wahlOffen: s.wahlOffen ? 'true' : 'false',
+      wahlOffenAttr: s.wahlOffen ? '1' : '0',
+      wahlMehrText: s.wahlOffen ? 'Vergleich ausblenden' : 'Mit Baukasten und Agentur vergleichen',
+      wahlUmschalten: () => this.setState({ wahlOffen: !this.state.wahlOffen }),
       headScroll: s.scrolled ? '1' : '0',
       uLeft: s.uLeft, uWidth: s.uWidth, uOpacity: s.uWidth === '0px' ? 0 : 1,
       availability: this.availability().text,
@@ -4626,7 +4932,7 @@ class Component extends DCLogic {
       musterTitle: s.muster ? s.muster.title : '',
       // Auf dem Handy und mit gedrückter Taste (neuer Tab) öffnet der Link die Seite direkt, sonst das Overlay.
       openMuster: (e) => {
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button > 0 || window.innerWidth <= 700) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button > 0 || window.innerWidth < 768) return;
         e.preventDefault();
         const src = e.currentTarget.getAttribute('href');
         this.setState({ muster: { src, title: e.currentTarget.dataset.title, geladen: false } });
