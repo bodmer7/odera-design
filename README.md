@@ -233,6 +233,25 @@ für jede der fünf Seiten; angezeigt wird der langsamste Wert, aufgerundet.
 Nach einer Änderung neu messen, `LADEZEIT` anpassen und
 `node tools/seo-build.mjs` ausführen.
 
+## Handy und Tablet
+
+Alles für Breiten unter 1024 px steht im Block `<style id="mobil">` am Ende des `<head>` von `index.html`.
+Die Ansicht ab 1024 px bleibt davon unberührt (geprüft mit Pixelvergleich bei 1024 und 1440 px).
+
+- **Kopf:** 56 px hoch plus sichere Zone oben (`viewport-fit=cover`), gleitet beim Runterscrollen weg
+  und kommt beim Hochscrollen zurück (`kopfWeg` im Scroll-Handler).
+- **Menü:** eigenes blaues Vollbild-Menü (`#menue`), nur unter 1024 px. Darüber gilt weiter das alte
+  Menü (`.menue-alt`). Öffnen und Schliessen über `menueAuf()` und `menueZu()`: Die Seite dahinter wird
+  iOS-sicher gesperrt (body fest), die Scroll-Position beim Schliessen genau wiederhergestellt, Fokus
+  bleibt im Menü, `theme-color` wird blau. Schliessen mit X, Esc, Link oder Wisch nach unten ab 80 px.
+- **Wischbare Karten:** Elemente mit der Klasse `wisch` werden unter 768 px zu waagrechten Karten mit
+  Einrasten; die Punkte darunter (`.pk-punkte-nav`) setzt ein Scroll-Handler direkt im DOM.
+- **Tastatur:** `visualViewport` liefert die Höhe der Bildschirmtastatur als `--tastatur` und setzt
+  `data-tastatur` auf `<html>`. Die Weiter-Leiste im Projekt-Check sitzt damit direkt über der Tastatur,
+  die untere Startleiste wird ausgeblendet.
+- **Chat:** unter 768 px ein Blatt von unten mit Griff (`assets/js/chat.js`), Wisch nach unten schliesst.
+- **Hover** nur bei `@media (hover:hover)`, auf Touch gibt es `:active`-Zustände.
+
 ## Rechtliche Seiten
 
 Alle drei stehen in `index.html`:
