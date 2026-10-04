@@ -233,6 +233,22 @@ für jede der fünf Seiten; angezeigt wird der langsamste Wert, aufgerundet.
 Nach einer Änderung neu messen, `LADEZEIT` anpassen und
 `node tools/seo-build.mjs` ausführen.
 
+## Generator «Sehen Sie Ihren Betrieb in zehn Sekunden»
+
+Der Abschnitt auf der Musterprojekte-Seite ist ein eigenes Modul: `assets/js/generator.js`. `index.html`
+lädt es erst, wenn der Abschnitt in die Nähe des Bildschirms kommt (`generatorBeobachten`), und
+übergibt beim Klick auf «Projekt-Check starten» Name, Ort und Branche an `generatorCheck` (nur
+vorausfüllen). Alles läuft im Browser, nichts wird gespeichert oder gesendet.
+
+- **Branchen** stehen in `BRANCHEN` im Modul: sechs Chips (Handwerk, Praxis, Beratung, Gastronomie,
+  Verkauf, Verein) mit Beispielname, Akzentfarbe, Navigation, Texten, drei Karten, Info-Streifen und der
+  passenden Antwort im Projekt-Check. Text in `[eckigen Klammern]` erscheint nur mit Ort.
+- **Fotos** in `assets/img/generator/<branche>.webp` (von Nico geliefert, je unter 200 KB). Geladen wird
+  nur das Foto der gewählten Branche. Fehlt eines, steht ein Verlauf in der Akzentfarbe da.
+- **Domain** aus dem Firmennamen: `domain()` (Umlaute zu ae/oe/ue, GmbH, AG und & weg, Endung .ch).
+- Ist die Vorschau schmaler als 560 px, zeichnet sie die Handy-Fassung der Mini-Seite (Burger, Karten
+  untereinander).
+
 ## Handy und Tablet
 
 Alles für Breiten unter 1024 px steht im Block `<style id="mobil">` am Ende des `<head>` von `index.html`.
