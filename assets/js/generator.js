@@ -43,7 +43,15 @@ const BRANCHEN = [
     nav: ['Verein', 'Agenda', 'Mitglied werden', 'Kontakt'], head: 'Gemeinsam mehr erleben.',
     unter: '{Name}[ aus {Ort}] freut sich auf neue Gesichter.', cta: 'Mitglied werden',
     karten: [['Agenda', 'Alle Anlässe auf einen Blick.'], ['Mitmachen', 'Training, Proben, Helfen.'], ['Vorstand', 'Ansprechpersonen und Kontakt.']],
-    info: 'Nächster Anlass: Samstag, 14 Uhr', alt: 'Junge Fussballer bei einem Spiel', check: 'Andere', checkText: 'Verein' },
+    info: 'Nächster Anlass: Samstag, 14 Uhr', alt: 'Fussball auf einem Rasenplatz', check: 'Andere', checkText: 'Verein' },
+];
+
+// Für «Beispiel zeigen»: erfundene Betriebe [Name, Ort, Branche]
+const BEISPIELE = [
+  ['Schreinerei Huber', 'Berikon', 'handwerk'], ['Malerei Keller', 'Villmergen', 'handwerk'], ['Physio Seeblick', 'Zug', 'praxis'],
+  ['Praxis am Bach', 'Dietikon', 'praxis'], ['Keller Beratung', 'Aarau', 'beratung'], ['Treuhand Meier', 'Baden', 'beratung'],
+  ['Restaurant Linde', 'Bremgarten', 'gastronomie'], ['Gasthof Sonne', 'Muri', 'gastronomie'], ['Laden am Platz', 'Lenzburg', 'verkauf'],
+  ['Papeterie Graf', 'Wohlen', 'verkauf'], ['Turnverein Linde', 'Wohlen', 'verein'], ['FC Rotenberg', 'Sursee', 'verein'],
 ];
 
 // ---------- Hilfen ----------
@@ -95,10 +103,29 @@ const STIL = `
 .gen-adresse span{overflow:hidden;text-overflow:ellipsis}
 .gen-blick{position:relative;overflow:hidden;background:#FFFFFF}
 .gen-blick>.ms-rahmen{position:absolute;left:0;top:0;transform-origin:0 0}
-.gen-hinweis{margin:0;font-size:13px;line-height:1.5;color:var(--text-2,#565D6B)}
+.gen-hinweis{margin:0;font-size:13px;line-height:1.55;color:#4A4F5A;max-width:70ch}
+.gen-klein{margin:-10px 0 0;font-size:13px;color:#4A4F5A}
+.gen-beispiel{align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;margin:-6px 0 0;padding:0;border:0;background:none;color:var(--primaer-dunkel,#1E34B8);font:inherit;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.gen-beispiel:focus{outline:none}
+.gen-beispiel:focus-visible{outline:3px solid var(--tinte,#11131A);outline-offset:3px;border-radius:4px}
+.gen-vorschau-kopf{display:flex;justify-content:flex-end}
+.gen-seg{display:inline-flex;padding:4px;border:1px solid var(--linie-feld,#80879A);border-radius:999px;background:var(--flaeche,#FFFFFF)}
+.gen-seg button{min-height:40px;padding:0 18px;border:0;border-radius:999px;background:none;color:var(--tinte,#11131A);font:inherit;font-size:15px;font-weight:600;cursor:pointer;outline:none}
+.gen-seg button[aria-checked="true"]{background:var(--tinte,#11131A);color:#FFFFFF}
+.gen-seg button:focus-visible{outline:3px solid var(--primaer,#2D4CF0);outline-offset:2px}
+.gen-handy{box-sizing:border-box;width:min(100%,300px);margin:0 auto;padding:9px;border-radius:44px;background:#0B0D12;box-shadow:0 60px 100px -40px rgba(17,19,26,0.5),0 20px 40px -24px rgba(17,19,26,0.3)}
+.gen-handy-schirm{overflow:hidden;border-radius:35px;background:#FFFFFF}
+.gen-handy-oben{display:flex;align-items:center;justify-content:center;height:38px;background:#EDEEF0}
+.gen-handy-oben .gen-adresse{max-width:82%;height:22px;font-size:11px}
+.gen-such{padding:18px 20px;border:1px solid var(--linie,#E2DFD8);border-radius:12px;background:#FFFFFF}
+.gen-such-ueber{margin:0 0 10px;font-size:13px;color:#4A4F5A}
+.gen-such-titel{margin:0 0 2px;font-size:19px;line-height:1.3;font-weight:500;color:#1E34B8;overflow-wrap:anywhere}
+.gen-such-url{margin:0 0 4px;font-size:14px;color:#1E6B34;overflow-wrap:anywhere}
+.gen-such-text{margin:0;font-size:14px;line-height:1.5;color:#3C4049}
+.gen-such-fuss{margin:8px 0 0;font-size:12px;color:#4A4F5A}
 .gen-sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 @media(max-width:1023px){.gen{grid-template-columns:minmax(0,1fr);gap:36px}}
-@media(max-width:767px){.gen-chip{padding:0 16px}.gen-feld input{max-width:none}}
+@media(max-width:767px){.gen-chip{padding:0 16px}.gen-feld input{max-width:none}.gen-vorschau-kopf{justify-content:center}}
 
 /* Mini-Seite, gezeichnet in Entwurfsgrösse und auf die Vorschau skaliert */
 .ms{--a:#B4541F;box-sizing:border-box;background:#FFFFFF;color:#1D2027;font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -154,6 +181,7 @@ const TITEL = { desktop: [50, 26, 3], handy: [31, 20, 4] };
 
 // Zustand nur im Arbeitsspeicher, damit er einen Seitenwechsel überlebt
 const zustand = { name: '', ort: '', branche: 'handwerk' };
+let geraetGewaehlt = false;
 let wurzel = null, opts = {}, ro = null, geraet = 'desktop', gezeigt = null, liveZeit = null, wechselZeit = null;
 const $ = (s) => wurzel.querySelector(s);
 const $$ = (s) => [...wurzel.querySelectorAll(s)];
@@ -167,13 +195,17 @@ function geruest() {
     <div class="gen-feld"><label for="gen-name">Firmenname</label><input id="gen-name" type="text" maxlength="40" autocomplete="organization" enterkeyhint="next"></div>
     <div class="gen-feld"><label for="gen-ort">Ort (optional)</label><input id="gen-ort" type="text" maxlength="40" autocomplete="address-level2" placeholder="z.B. Berikon" enterkeyhint="done"></div>
     <div><p id="gen-branche-t" class="gen-sr">Branche</p><div class="gen-chips" role="radiogroup" aria-labelledby="gen-branche-t">${chips}</div></div>
+    <button type="button" class="gen-beispiel">Beispiel zeigen</button>
     <p class="gen-skizze">Eine Skizze, kein Entwurf. Ihre echte Seite bauen wir zusammen.</p>
     <a class="btn btn-primaer gen-start" href="/projekt-check/">So weitermachen: Projekt-Check starten</a>
+    <p class="gen-klein">Unverbindlich und kostenlos.</p>
     <p class="gen-sr" id="gen-live" aria-live="polite"></p>
   </div>
   <div class="gen-vorschau" role="group" aria-label="Vorschau Ihrer Startseite">
-    <div class="gen-fenster"><div class="gen-leiste"><i></i><i></i><i></i><div class="gen-adresse">${svg('schloss')}<span class="gen-domain"></span></div></div><div class="gen-blick"><div class="ms-rahmen"></div></div></div>
-    <p class="gen-hinweis">Beispielbilder. Auf Ihrer Seite verwenden wir Ihre eigenen Fotos.</p>
+    <div class="gen-vorschau-kopf"><div class="gen-seg" role="radiogroup" aria-label="Ansicht der Vorschau"><button type="button" role="radio" data-geraet="desktop">Desktop</button><button type="button" role="radio" data-geraet="handy">Handy</button></div></div>
+    <div class="gen-rahmen"></div>
+    <p class="gen-hinweis">Eine Skizze, kein Angebot. Bilder, Texte und Farben sind Beispiele, auf Ihrer Seite verwenden wir Ihre eigenen Inhalte. Die angezeigte Adresse wird automatisch erzeugt, ob sie frei ist, wird nicht geprüft. Ihre Eingaben bleiben in Ihrem Browser und werden nicht gespeichert.</p>
+    <div class="gen-such"><p class="gen-such-ueber">So könnte Ihr Eintrag in den Suchergebnissen aussehen</p><p class="gen-such-titel"></p><p class="gen-such-url"></p><p class="gen-such-text"></p><p class="gen-such-fuss">Beispiel. Eine bestimmte Platzierung in Suchmaschinen kann niemand garantieren.</p></div>
   </div>
 </div>`;
 }
@@ -188,6 +220,12 @@ function miniSeite() {
 }
 
 function bauen() {
+  const adresse = `<div class="gen-adresse">${svg('schloss')}<span class="gen-domain"></span></div>`;
+  $('.gen-rahmen').innerHTML = geraet === 'handy'
+    ? `<div class="gen-handy"><div class="gen-handy-schirm"><div class="gen-handy-oben">${adresse}</div><div class="gen-blick"><div class="ms-rahmen"></div></div></div></div>`
+    : `<div class="gen-fenster"><div class="gen-leiste"><i></i><i></i><i></i>${adresse}</div><div class="gen-blick"><div class="ms-rahmen"></div></div></div>`;
+  $$('.gen-seg [data-geraet]').forEach((x) => { const an = x.dataset.geraet === geraet; x.setAttribute('aria-checked', an); x.tabIndex = an ? 0 : -1; });
+  if (ro) { ro.disconnect(); ro.observe($('.gen-blick')); }
   $('.ms-rahmen').innerHTML = miniSeite();
   gezeigt = null;
   texte(); bild(); skalieren();
@@ -222,6 +260,9 @@ function texte() {
   const o = $('.ms-info-o'); o.innerHTML = ort ? svg('pin') + esc(ort) : ''; o.style.display = ort ? '' : 'none';
   $('.ms-info-m').innerHTML = svg('mail') + esc('kontakt@' + d);
   $('.gen-domain').textContent = d;
+  $('.gen-such-titel').textContent = `${n} | ${b.label}${ort ? ' in ' + ort : ''}`;
+  $('.gen-such-url').textContent = 'https://' + d;
+  $('.gen-such-text').textContent = unter;
   $('#gen-name').placeholder = 'z. B. ' + b.beispiel;
   clearTimeout(liveZeit);
   liveZeit = setTimeout(() => { const l = $('#gen-live'); if (l) l.textContent = `Vorschau: ${head} ${unter}`; }, 700);
@@ -255,7 +296,24 @@ function branche(k, fokus) {
   wechselZeit = setTimeout(() => { texte(); ms.dataset.wechsel = ''; }, 175);
 }
 
+let letztesBeispiel = -1;
+function beispiel() {
+  let i; do { i = Math.floor(Math.random() * BEISPIELE.length); } while (i === letztesBeispiel || BEISPIELE[i][0] === zustand.name.trim());
+  letztesBeispiel = i;
+  const [n, o, k] = BEISPIELE[i];
+  zustand.name = n; zustand.ort = o; $('#gen-name').value = n; $('#gen-ort').value = o;
+  if (k !== zustand.branche) branche(k, false); else texte();
+}
+
+function ansicht(g, fokus) {
+  if (g === geraet) return;
+  geraet = g; bauen();
+  if (fokus) { const b = $(`.gen-seg [data-geraet="${g}"]`); if (b) b.focus(); }
+}
+
 function tasten(e) {
+  const s = e.target.closest('.gen-seg [data-geraet]');
+  if (s && ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(e.key)) { e.preventDefault(); ansicht(geraet === 'desktop' ? 'handy' : 'desktop', true); return; }
   const t = e.target.closest('.gen-chip'); if (!t) return;
   const alle = $$('.gen-chip'); const i = alle.indexOf(t); let n = null;
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % alle.length;
@@ -276,14 +334,15 @@ export function starten(ziel, o = {}) {
   wurzel.addEventListener('keydown', tasten);
   wurzel.addEventListener('click', (e) => {
     const c = e.target.closest('.gen-chip'); if (c) { branche(c.dataset.branche, false); return; }
+    const a = e.target.closest('.gen-seg [data-geraet]'); if (a) { ansicht(a.dataset.geraet, false); return; }
+    if (e.target.closest('.gen-beispiel')) { beispiel(); return; }
     if (e.target.closest('.gen-start') && opts.weiter) { const b = br(); opts.weiter({ name: zustand.name.trim(), ort: zustand.ort.trim(), branche: b.check, brancheText: b.checkText || '' }); }
   });
-  // Ist die Vorschau schmaler als 560 px, zeichnet sie die Handy-Fassung der Mini-Seite
-  const passend = () => ($('.gen-blick').clientWidth < 560 ? 'handy' : 'desktop');
-  geraet = passend();
+  // Ansicht: auf echten Handys startet die Vorschau auf «Handy», sonst auf «Desktop». Der Umschalter wechselt.
+  if (!geraetGewaehlt) geraet = window.matchMedia('(max-width: 767px)').matches ? 'handy' : 'desktop';
+  geraetGewaehlt = true;
   if (ro) ro.disconnect();
-  ro = new ResizeObserver(() => { const g = passend(); if (g !== geraet) { geraet = g; bauen(); } else skalieren(); });
-  ro.observe($('.gen-blick'));
+  ro = new ResizeObserver(() => skalieren());
   bauen();
   wurzel.dataset.bereit = '1';
 }
