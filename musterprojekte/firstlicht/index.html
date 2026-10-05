@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sraybxdT4iY2q8aa3ciJJ+1px5AFdnOq6Fddu62ObhE='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Firstlicht Solartechnik | Solaranlagen im Freiamt, Reusstal und Limmattal</title>
   <meta name="description" content="Beispielseite von ODERA Design. Die erfundene Firstlicht Solartechnik plant und montiert Solaranlagen, Speicher und Ladestationen. Mit Solarrechner und ehrlichen Zahlen.">
   <!-- Beispielseite mit erfundenem Betrieb: nicht in Suchmaschinen -->
@@ -93,7 +95,7 @@
           <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
       </nav>
-      <button class="theme-schalter nur-js" type="button" data-theme-schalter aria-label="Dunkles Design einschalten">
+      <button class="theme-schalter nur-js" type="button" data-theme-schalter data-erklaeren="theme" aria-label="Dunkles Design einschalten">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <g class="ts-strahlen"><path d="M12 1.5v2.2M12 20.3v2.2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M1.5 12h2.2M20.3 12h2.2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></g>
           <circle class="ts-kern" cx="12" cy="12" r="5.5"/>
@@ -219,7 +221,7 @@
               <div class="wert-chip"><dt data-wert="netz-label">Einspeisung</dt><dd><span data-wert="netz">3.4</span> kW</dd></div>
             </dl>
 
-            <div class="szene__steuerung nur-js">
+            <div class="szene__steuerung nur-js" data-erklaeren="barrierefrei">
               <button class="knopf knopf--icon szene__play" type="button" data-szene-play aria-label="Tagesverlauf abspielen">
                 <svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg>
               </button>
@@ -398,7 +400,7 @@
           <p class="vorzeile">Häufige Fragen</p>
           <h2 id="fragen-titel">Was Hausbesitzer uns am häufigsten fragen.</h2>
         </div>
-        <div class="fragen">
+        <div class="fragen" data-erklaeren="glossar">
           <details class="frage" id="frage-lohnt">
   <summary>Lohnt sich Solarstrom 2026 noch, obwohl die Rückliefertarife gesunken sind?</summary>
   <div class="frage__antwort"><p>Ja, wenn die Anlage zu Ihrem Verbrauch passt. Am meisten bringt der Strom, den Sie selbst nutzen: Er ersetzt Netzstrom, der 2027 im Schweizer Median 26.5 Rappen pro kWh kostet (ElCom, Profil H4). Für eingespeisten Strom erhalten Sie seit 2026 den Marktpreis, den der Bund jedes Quartal festlegt, bei Anlagen bis 30 kW aber mindestens 6 Rappen pro kWh.</p><p>Mit Wärmepumpe, Elektroauto oder Speicher steigt Ihr <button class="glossar" type="button" popovertarget="g-eigenverbrauch">Eigenverbrauch</button>. Wir rechnen die Amortisation offen vor, auch wenn sie länger dauert als in mancher Werbung. Probieren Sie es im <a href="rechner.html">Solarrechner</a> aus.</p></div>

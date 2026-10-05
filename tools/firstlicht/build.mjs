@@ -19,6 +19,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { gebaeude, baukasten, SYMBOLE } from './illustrationen.mjs';
 import { berechnen } from '../../musterprojekte/firstlicht/assets/js/rechner-logik.js';
 
@@ -131,6 +132,12 @@ function seiteBauen(datei, zielOrdner) {
   text = einsetzen(text);
   text = text.replace(/\{\{nav:([\w-]+)\}\}/g, (_, n) => (meta.nav === n ? ' aria-current="page"' : ''));
   text = text.replace(/\{\{(firma|meta|mini)\.([\w.]+)\}\}/g, (_, wo, pfad) => wert(pfad, { firma, meta, mini }[wo]));
+  // Content-Security-Policy: nur eigene Dateien, Inline-Skripte per Hash erlaubt
+  const hashes = [...text.matchAll(/<script(?![^>]*type="application\/json")(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/g)]
+    .map((m) => `'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`);
+  const csp = ["default-src 'self'", `script-src 'self' ${hashes.join(' ')}`.trim(), `style-src 'self'${meta.csp === 'locker' ? " 'unsafe-inline'" : ''}`,
+    "img-src 'self' data:", "font-src 'self'", "connect-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'self'"].join('; ');
+  text = text.replace('{{csp}}', csp);
   if (/\{\{/.test(text)) throw new Error(`${datei}: nicht ersetzter Platzhalter ${text.match(/\{\{[^}]*\}\}/)[0]}`);
   writeFileSync(join(zielOrdner, datei.replace(/^proto-/, 'hero-')), text);
   return datei;

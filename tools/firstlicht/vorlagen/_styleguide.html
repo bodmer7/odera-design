@@ -1,0 +1,121 @@
+<!-- @meta {"titel": "Styleguide (intern) | Firstlicht", "beschreibung": "Interne Komponentenübersicht des Musterprojekts Firstlicht. Nicht verlinkt.", "pfad": "_styleguide.html", "nav": "", "csp": "locker"} -->
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <!-- @teil kopf-meta -->
+  <style>
+    .sg h2 { font-size: var(--text-xl); margin-block: 48px 16px; }
+    .sg__reihe { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .sg__farben { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+    .sg__farbe { border-radius: 12px; border: var(--rahmen); overflow: hidden; font-size: var(--text-xs); }
+    .sg__farbe span { display: block; height: 64px; }
+    .sg__farbe p { padding: 8px 10px; }
+    .sg__abstand { display: flex; align-items: flex-end; gap: 10px; }
+    .sg__abstand span { display: block; background: var(--color-accent); border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <!-- @teil symbole -->
+  <!-- @teil leiste -->
+  <!-- @teil kopf -->
+  <main id="inhalt" class="huelle sg sektion">
+    <p class="vorzeile">Intern</p>
+    <h1>Styleguide Firstlicht</h1>
+    <p class="lead">Alle Tokens und Komponenten. Mit dem Sonne-Mond-Schalter oben rechts zwischen hellem und dunklem Design wechseln. Diese Seite ist nicht verlinkt, noindex und wird von GitHub Pages nicht veröffentlicht (Dateiname mit Unterstrich).</p>
+
+    <h2>Farben</h2>
+    <div class="sg__farben" data-sg-farben></div>
+
+    <h2>Schrift</h2>
+    <div class="stapel">
+      <p class="h1-muster" style="font: 800 var(--text-3xl)/1.05 var(--font-titel); letter-spacing: -0.035em">Titel 3XL, Schibsted Grotesk 800</p>
+      <h2 style="margin: 0">Titel 2XL, Schibsted Grotesk 750</h2>
+      <h3>Titel L, Schibsted Grotesk 750</h3>
+      <p class="lead">Lead, Manrope 450, für Einleitungen und Untertitel.</p>
+      <p>Fliesstext, Manrope 450 mit Silbentrennung für lange Wörter wie Eigenverbrauchsoptimierung und Zusammenschluss.</p>
+      <p class="feld__hilfe">Hilfetext, klein und gedämpft.</p>
+      <p class="zahl" style="font-size: var(--text-xl); font-weight: 800">1'234.5 kWh · 26.5 Rp./kWh · CHF 17'300</p>
+    </div>
+
+    <h2>Abstände</h2>
+    <div class="sg__abstand" data-sg-abstand></div>
+
+    <h2>Knöpfe</h2>
+    <div class="sg__reihe">
+      <button class="knopf" type="button">Primär</button>
+      <button class="knopf knopf--sekundaer" type="button">Sekundär</button>
+      <button class="knopf knopf--ghost" type="button">Ghost</button>
+      <button class="knopf knopf--icon" type="button" aria-label="Abspielen"><svg class="symbol" aria-hidden="true"><use href="#i-play"></use></svg></button>
+      <button class="knopf ist-laedt" type="button">Lädt</button>
+      <button class="knopf" type="button" disabled>Deaktiviert</button>
+      <a class="pfeil-link" href="#"><span>Pfeil-Link</span><svg class="symbol" aria-hidden="true"><use href="#i-pfeil"></use></svg></a>
+    </div>
+
+    <h2>Badges und Vorzeile</h2>
+    <div class="sg__reihe"><span class="badge">Badge</span><span class="badge badge--ok">verifiziert</span><span class="badge badge--beispiel">Beispielprojekt</span><span class="badge badge--licht">Licht</span><span class="vorzeile">Vorzeile</span></div>
+
+    <h2>Karten, Bento und Kennzahlen</h2>
+    <div class="bento">
+      <article class="karte karte--hover schein bento__breit"><span class="bento__icon"><svg class="symbol" aria-hidden="true"><use href="#i-speicher"></use></svg></span><h3><a class="stretch" href="#">Bento-Kachel breit</a></h3><p>Mit Lichtschein, der dem Zeiger folgt.</p></article>
+      <article class="karte"><h3>Karte</h3><p>Ohne Hover.</p></article>
+      <article class="karte karte--hover"><h3>Karte mit Hover</h3><p>Hebt sich leicht.</p></article>
+    </div>
+    <ul class="kennzahlen" role="list" style="margin-top: 24px"><li class="kennzahl"><span class="kennzahl__wert">640</span><span class="kennzahl__text">Kennzahl</span></li><li class="kennzahl"><span class="kennzahl__wert">18</span><span class="kennzahl__text">Kennzahl</span></li></ul>
+
+    <h2>Formular</h2>
+    <form class="formular" novalidate>
+      <div class="formular__paar">
+        <div class="feld"><label class="feld__label" for="sg-a">Textfeld <span class="feld__zusatz">Pflichtfeld</span></label><input class="eingabe" id="sg-a"></div>
+        <div class="feld"><label class="feld__label" for="sg-b">Mit Fehler <span class="feld__zusatz">Pflichtfeld</span></label><input class="eingabe" id="sg-b" aria-invalid="true" aria-describedby="sg-b-f"><p class="fehler" id="sg-b-f">So sieht eine Fehlermeldung aus.</p></div>
+        <div class="feld"><label class="feld__label" for="sg-c">Auswahl</label><select class="eingabe" id="sg-c"><option>Mittelland</option><option>Alpen</option></select></div>
+        <div class="feld"><label class="feld__label" for="sg-d">Deaktiviert</label><input class="eingabe" id="sg-d" disabled value="nicht änderbar"></div>
+      </div>
+      <label class="wahl"><input type="checkbox" checked><span>Checkbox</span></label>
+      <label class="wahl"><input type="radio" name="sg-r" checked><span>Radio</span></label>
+      <div class="wahl-karten"><label class="wahl-karte"><input type="radio" name="sg-k" checked><span class="wahl-karte__inhalt"><strong>Radio als Karte</strong><small>Mit Beschreibung</small></span></label><label class="wahl-karte"><input type="radio" name="sg-k"><span class="wahl-karte__inhalt"><strong>Zweite Karte</strong><small>Nicht gewählt</small></span></label></div>
+      <label class="schalter"><span>Toggle</span><input type="checkbox" role="switch" checked></label>
+      <div class="segment" role="radiogroup" aria-label="Segment"><label><input type="radio" name="sg-s" checked><span>Segment</span></label><label><input type="radio" name="sg-s"><span>Control</span></label></div>
+      <div class="feld"><label class="feld__label" for="sg-r1">Range-Slider <output>40 %</output></label><input class="regler" id="sg-r1" type="range" value="40" style="--fuellung: 40%"></div>
+      <div class="fortschritt"><ol class="fortschritt__schritte"><li class="ist-fertig">Eins</li><li aria-current="step">Zwei</li><li>Drei</li></ol></div>
+    </form>
+
+    <h2>Akkordeon, Hinweis, Tabelle</h2>
+    <div class="fragen"><details class="frage" open><summary>Akkordeon offen</summary><div class="frage__antwort"><p>Inhalt mit <button class="glossar" type="button" popovertarget="g-kwp">Glossar-Begriff</button>.</p></div></details><details class="frage"><summary>Akkordeon zu</summary><div class="frage__antwort"><p>Inhalt.</p></div></details></div>
+    <div class="hinweis" style="margin-top: 16px"><p><strong>Hinweis.</strong> So sieht eine Hinweisbox aus.</p></div>
+    <table class="tabelle" style="margin-top: 16px"><caption>Tabelle</caption><thead><tr><th scope="col">Zeile</th><th scope="col" class="zahl">Wert</th></tr></thead><tbody><tr><th scope="row">Autarkiegrad</th><td class="zahl">36 %</td></tr><tr><th scope="row">Ersparnis</th><td class="zahl">CHF 700</td></tr></tbody></table>
+
+    <h2>Dialog und Toast</h2>
+    <div class="sg__reihe">
+      <button class="knopf knopf--sekundaer" type="button" data-sg-dialog>Dialog öffnen</button>
+    </div>
+    <dialog class="dialog" id="sg-dialog" aria-labelledby="sg-d-t"><div class="dialog__kopf"><h2 id="sg-d-t">Dialog</h2><button class="knopf knopf--icon" type="button" aria-label="Schliessen" data-sg-zu><svg class="symbol" aria-hidden="true"><use href="#i-schliessen"></use></svg></button></div><div class="dialog__inhalt"><p>Inhalt des Dialogs.</p></div></dialog>
+
+    <h2>Illustrationen</h2>
+    <div class="projekte">
+      <div class="projekt__bild"><!-- @illu efh {"variante": "morgen"} --></div>
+      <div class="projekt__bild"><!-- @illu mfh {"variante": "mittag"} --></div>
+      <div class="projekt__bild"><!-- @illu gewerbe {"variante": "abend", "ladepunkte": true} --></div>
+      <div class="projekt__bild"><!-- @illu hof {"variante": "mittag"} --></div>
+    </div>
+
+    <h2>Symbole</h2>
+    <div class="sg__reihe" data-sg-symbole></div>
+  </main>
+  <!-- @teil glossar -->
+  <!-- @teil skripte -->
+  <script type="module">
+    const tokens = ['--color-bg', '--color-bg-tief', '--color-surface', '--color-surface-2', '--color-text', '--color-text-muted', '--color-border', '--color-border-feld', '--color-accent', '--color-accent-text', '--color-focus', '--color-success', '--color-error', '--color-chart', '--nacht', '--schiefer', '--morgenrot', '--sonne', '--himmel', '--papier', '--tinte'];
+    const box = document.querySelector('[data-sg-farben]');
+    const zeichnen = () => {
+      const cs = getComputedStyle(document.documentElement);
+      box.innerHTML = tokens.map((t) => `<div class="sg__farbe"><span style="background: var(${t})"></span><p><strong>${t}</strong><br>${cs.getPropertyValue(t).trim()}</p></div>`).join('');
+    };
+    zeichnen();
+    new MutationObserver(zeichnen).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    document.querySelector('[data-sg-abstand]').innerHTML = [4, 8, 12, 16, 24, 32, 48, 64, 96, 128].map((s) => `<div><span style="width:${s}px;height:${s}px"></span><small>${s}</small></div>`).join('');
+    document.querySelector('[data-sg-dialog]').addEventListener('click', () => document.getElementById('sg-dialog').showModal());
+    document.querySelector('[data-sg-zu]').addEventListener('click', (e) => e.target.closest('dialog').close());
+    document.querySelector('[data-sg-symbole]').innerHTML = [...document.querySelectorAll('symbol[id^="i-"]')].map((s) => `<span class="badge"><svg class="symbol" aria-hidden="true"><use href="#${s.id}"></use></svg>${s.id}</span>`).join('');
+  </script>
+</body>
+</html>
