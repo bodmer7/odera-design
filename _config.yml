@@ -4,6 +4,7 @@ exclude:
   - chat-proxy
   - anfrage-proxy
   - node_modules
+  - CLAUDE.md
   # Entwicklungswerkzeuge und Notizen des Musterprojekts Firstlicht (siehe tools/firstlicht/)
   - package.json
   - package-lock.json

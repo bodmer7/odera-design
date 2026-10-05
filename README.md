@@ -96,6 +96,10 @@ logo.dc.html                Komponente: Logo (Zeichen und Wortmarke)
 kapazitaet.dc.html          Komponente: Auslastungsanzeige
 musterprojekte/doppelmeter/ Musterprojekt Schreinerei Doppelmeter, fünf statische Seiten (siehe „Musterprojekt Doppelmeter“)
 tools/screenshots-doppelmeter.mjs  Erzeugt die Aufnahmen der Doppelmeter-Seite für Startseite und Musterprojekte
+musterprojekte/firstlicht/  Musterprojekt Solarbetrieb Firstlicht, sechs erzeugte Seiten (siehe „Musterprojekt Firstlicht“)
+tools/firstlicht/           Vorlagen, Build, Tests und Prüfungen für Firstlicht (nicht veröffentlicht)
+package.json                Nur Entwicklungswerkzeuge für Firstlicht (nicht veröffentlicht)
+CLAUDE.md                   Kurzregeln für die Arbeit mit Claude
 muster/
   doppelmeter.html          Weiterleitung auf /musterprojekte/doppelmeter/ (alte Adresse)
   portfolio.html            Rahmen für das Musterprojekt Portfolio
@@ -232,6 +236,23 @@ Contentful Paint mit Lighthouse im Profil Desktop, Median aus drei Läufen,
 für jede der fünf Seiten; angezeigt wird der langsamste Wert, aufgerundet.
 Nach einer Änderung neu messen, `LADEZEIT` anpassen und
 `node tools/seo-build.mjs` ausführen.
+
+## Musterprojekt Firstlicht
+
+Die Seite des erfundenen Solarbetriebs (Paket Pro) liegt in
+`musterprojekte/firstlicht/` (Start, Solarrechner, Leistungen, Projekte, Über
+uns, Kontakt), `noindex`, nicht in der Sitemap. Anders als Doppelmeter sind die
+Seiten **erzeugt**: Vorlagen in `tools/firstlicht/vorlagen/`, bauen mit
+`npm run firstlicht:build`, prüfen mit `npm run firstlicht:qa`. Alles Weitere
+(Aufbau, Annahmen des Rechners jährlich prüfen, Aufnahmen, Ladezeit) steht in
+`musterprojekte/firstlicht/README.md`.
+
+- Auf odera.ch: Abschnitt `#mp-firstlicht` auf der Musterprojekte-Seite und
+  Kachel auf der Startseite. «Mit Erklärungen ansehen» öffnet das Muster mit
+  `?erklaeren=1`. Der Projekt-Check kennt den Einstieg `?quelle=firstlicht`.
+- Aufnahmen: `npm run firstlicht:screens` schreibt `assets/img/muster-firstlicht-*`
+  (hell und dunkel), danach `node tools/seo-build.mjs`.
+- Ladezeit: `LADEZEIT.firstlicht` und `firstlichtMessung` in `index.html`.
 
 ## Generator «Sehen Sie Ihren Betrieb in zehn Sekunden»
 
