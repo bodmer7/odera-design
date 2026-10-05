@@ -68,7 +68,7 @@ async function browserPruefen(name, typ) {
         const ueber = await p.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
         if (ueber > 0) melden(`${name} ${seite} ${b}px ${thema}: horizontal ${ueber}px zu breit`);
         if (!schnell && name === 'chromium') {
-          await p.addStyleTag({ content: '.unten-aus{content-visibility:visible!important}' });
+          await p.evaluate(() => document.querySelectorAll('.unten-aus').forEach((e) => { e.style.contentVisibility = 'visible'; }));
           await p.screenshot({ path: join(AUS, `${seite}-${b}-${thema === 'dark' ? 'dunkel' : 'hell'}.png`), fullPage: true });
         }
       }

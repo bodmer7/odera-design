@@ -2,7 +2,6 @@
 // Setzt die Seiten des Musterprojekts Firstlicht aus Vorlagen zusammen.
 //
 //   node tools/firstlicht/build.mjs            alle Seiten
-//   node tools/firstlicht/build.mjs --proto    nur die Hero-Prototypen (tools/firstlicht/prototypen/)
 //
 // Vorlagen:   tools/firstlicht/vorlagen/*.html         (eine Datei pro Seite)
 // Teile:      tools/firstlicht/vorlagen/teile/*.html   (Kopf, Fuss, Beispiel-Leiste, Szene ...)
@@ -20,6 +19,7 @@ import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from 
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { transform, browserslistToTargets } from 'lightningcss';
 import { gebaeude, baukasten, SYMBOLE } from './illustrationen.mjs';
 import { berechnen } from '../../musterprojekte/firstlicht/assets/js/rechner-logik.js';
 
@@ -125,14 +125,34 @@ function wert(pfad, daten) {
   return String(v);
 }
 
+// CSS: Kern und Seitenteile aus tools/firstlicht/css/ zu einer minifizierten Datei pro Seite bündeln.
+// Eine Datei statt zwei spart auf langsamen Verbindungen einen Umlauf vor dem ersten Zeichnen.
+const CSS_QUELLE = join(ROOT, 'tools/firstlicht/css');
+const ZIELE = { safari: (17 << 16), ios_saf: (17 << 16), chrome: (120 << 16), firefox: (120 << 16), samsung: (24 << 16) };
+const cssGebaut = new Map();
+function cssBauen(teile) {
+  const name = teile.length ? (teile.length > 2 ? 'firstlicht-alle.css' : `firstlicht-${teile.join('-')}.css`) : 'firstlicht.css';
+  if (cssGebaut.has(name)) return name;
+  const quelle = [join(CSS_QUELLE, 'firstlicht.css'), ...teile.map((t) => join(CSS_QUELLE, 'seiten', `${t}.css`))].map((p) => readFileSync(p, 'utf8')).join('\n');
+  const { code } = transform({ filename: name, code: Buffer.from(quelle), minify: true, targets: ZIELE });
+  writeFileSync(join(ZIEL, 'assets/css', name), code);
+  cssGebaut.set(name, code.length);
+  return name;
+}
+function zusatzCss() {
+  const { code } = transform({ filename: 'erklaeren.css', code: readFileSync(join(CSS_QUELLE, 'erklaeren.css')), minify: true, targets: ZIELE });
+  writeFileSync(join(ZIEL, 'assets/css/erklaeren.css'), code);
+}
+
 function seiteBauen(datei, zielOrdner) {
   let text = readFileSync(join(VORLAGEN, datei), 'utf8');
   const m = text.match(/^<!-- @meta (\{.*\}) -->\n/);
   const meta = m ? JSON.parse(m[1]) : {};
+  meta.cssdatei = cssBauen(meta.css || []);
   if (m) text = text.slice(m[0].length);
   text = einsetzen(text);
   text = text.replace(/\{\{nav:([\w-]+)\}\}/g, (_, n) => (meta.nav === n ? ' aria-current="page"' : ''));
-  text = text.replace(/\{\{(firma|meta|mini)\.([\w.]+)\}\}/g, (_, wo, pfad) => wert(pfad, { firma, meta, mini }[wo]));
+  text = text.replace(/\{\{cssdatei\}\}/g, meta.cssdatei).replace(/\{\{(firma|meta|mini)\.([\w.]+)\}\}/g, (_, wo, pfad) => wert(pfad, { firma, meta, mini }[wo]));
   // Content-Security-Policy: nur eigene Dateien, Inline-Skripte per Hash erlaubt
   const hashes = [...text.matchAll(/<script(?![^>]*type="application\/json")(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/g)]
     .map((m) => `'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`);
@@ -144,6 +164,8 @@ function seiteBauen(datei, zielOrdner) {
   return datei;
 }
 
+mkdirSync(join(ZIEL, 'assets/css'), { recursive: true });
+zusatzCss();
 const dateien = readdirSync(VORLAGEN).filter((d) => d.endsWith('.html'));
 const gebaut = [];
 for (const d of dateien) {
@@ -153,3 +175,4 @@ for (const d of dateien) {
   gebaut.push(seiteBauen(d, proto ? PROTO : ZIEL));
 }
 console.log('Gebaut:', gebaut.join(', '));
+console.log('CSS:', [...cssGebaut].map(([n, g]) => `${n} ${Math.round(g / 1024)} KB`).join(', '));

@@ -1,0 +1,107 @@
+/* Firstlicht: Zusatz-Stile der Seite leistungen. Wird nur auf dieser Seite geladen. Tokens und Ebenen: ../firstlicht.css */
+@layer seiten {
+  /* ---------- Energie-Baukasten ---------- */
+  .baukasten { display: grid; gap: var(--s-6); align-items: center; padding: clamp(20px, 3vw, 40px); border-radius: var(--radius-xl); background: var(--color-surface); border: var(--rahmen); }
+  @media (min-width: 64em) { .baukasten { grid-template-columns: 7fr 5fr; } }
+  .baukasten__bild { border-radius: var(--radius-l); background: linear-gradient(180deg, var(--himmel) 0%, color-mix(in srgb, var(--himmel) 40%, var(--color-surface)) 100%); padding: 8px; }
+  :root[data-theme='dunkel'] .baukasten__bild { background: linear-gradient(180deg, #1B2538, #222D43); }
+  .baukasten__svg { width: 100%; height: auto; }
+  .baukasten__steuerung { display: grid; gap: var(--s-4); }
+  .baukasten__schalter { display: grid; gap: 4px; }
+  .baukasten__schalter .schalter { padding: 6px 0; border-bottom: var(--rahmen); }
+  .baukasten__wert { padding: 18px 20px; border-radius: var(--radius-l); background: var(--nacht); color: #F2EFE8; display: grid; gap: 4px; }
+  .baukasten__wert strong { font-size: var(--text-2xl); font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .baukasten__balken { height: 10px; border-radius: 999px; background: rgb(255 255 255 / 0.14); overflow: hidden; margin-top: 8px; }
+  .baukasten__balken span { display: block; height: 100%; width: var(--anteil, 0%); background: linear-gradient(90deg, var(--morgenrot), var(--sonne)); border-radius: inherit; transition: width var(--dauer-l) var(--kurve); }
+  .baukasten__klein { font-size: var(--text-xs); color: #B7C0D0; }
+  .bk-boden { fill: var(--ib); }
+  .bk-haus.bk-front { fill: var(--iw); }
+  .bk-haus.bk-seite { fill: var(--iw2); }
+  .bk-haus.bk-oben { fill: var(--iw); }
+  .bk-dach { fill: var(--id); }
+  .bk-dach--hinten { fill: #1F2838; }
+  .bk-giebel { fill: var(--iw2); }
+  .bk-fenster { fill: var(--ifen); }
+  .bk-tuer { fill: var(--id); }
+  .bk-modul { fill: var(--im); stroke: var(--im-rand); stroke-width: 0.8; }
+  .bk-first { stroke: var(--sonne); stroke-width: 3; stroke-linecap: round; }
+  .bk-geraet.bk-front { fill: #E9E5DC; } .bk-geraet.bk-seite { fill: #CFC9BD; } .bk-geraet.bk-oben { fill: #F4F1EA; }
+  .bk-geraet { stroke: #2A3446; stroke-width: 0.8; stroke-linejoin: round; }
+  .bk-led { fill: #3FAE6A; }
+  .bk-luefter { fill: none; stroke: #2A3446; stroke-width: 1.5; }
+  .bk-auto.bk-front { fill: var(--morgenrot); } .bk-auto.bk-seite { fill: #D96F2A; } .bk-auto.bk-oben { fill: #FFA466; }
+  .bk-auto--dach.bk-front, .bk-auto--dach.bk-seite { fill: #7E93AE; }
+  .bk-kabel, .bk-draht { fill: none; stroke: #2A3446; stroke-width: 1.5; }
+  .bk-mast { fill: none; stroke: #2A3446; stroke-width: 4; stroke-linecap: round; }
+  .bk-mast--quer { stroke-width: 3; }
+  .bk-teil { transition: opacity var(--dauer-l) var(--kurve), transform var(--dauer-l) var(--kurve); }
+  .baukasten:not([data-an~='pv']) [data-teil='pv'],
+  .baukasten:not([data-an~='speicher']) [data-teil='speicher'],
+  .baukasten:not([data-an~='wallbox']) [data-teil='wallbox'],
+  .baukasten:not([data-an~='waermepumpe']) [data-teil='waermepumpe'] { opacity: 0; transform: translateY(-8px); }
+  .bk-fluss { stroke: var(--sonne); stroke-width: 3; stroke-dasharray: 1 9; stroke-linecap: round; opacity: 0; transition: opacity var(--dauer-m) var(--kurve), stroke-width var(--dauer-m) var(--kurve); }
+  .bk-fluss[data-fluss='netzHaus'] { stroke: #6E9BE0; }
+  .bk-fluss.ist-an { opacity: 1; }
+  @media (prefers-reduced-motion: no-preference) { .baukasten.ist-bewegt .bk-fluss.ist-an { animation: fliessen 1.2s linear 3; } }
+  @keyframes fliessen { to { stroke-dashoffset: -20; } }
+  @media (forced-colors: active) { .bk-fluss { stroke: Highlight; } }
+
+  /* ---------- Leistungen ---------- */
+  .sprungleiste { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; }
+  .sprungleiste a { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; border-radius: 999px; border: var(--rahmen); background: var(--color-surface); text-decoration: none; font-weight: 600; font-size: var(--text-s); }
+  @media (hover: hover) { .sprungleiste a:hover { border-color: var(--color-accent); } }
+  .leistung { display: grid; gap: var(--s-6); align-items: center; padding-block: clamp(32px, 5vw, 64px); border-top: var(--rahmen); }
+  @media (min-width: 56em) { .leistung { grid-template-columns: 7fr 5fr; } .leistung:nth-of-type(even) .leistung__bild { order: -1; } }
+  .leistung__text { display: grid; gap: var(--s-4); max-width: 40rem; }
+  .leistung__text h2 { font-size: var(--text-xl); }
+  .leistung__zeit { display: flex; gap: 10px; align-items: flex-start; font-size: var(--text-s); padding: 12px 14px; border-radius: var(--radius-m); background: var(--color-surface-2); }
+  .leistung__zeit .symbol { color: var(--color-accent-text); margin-top: 2px; }
+  .leistung__bild { border-radius: var(--radius-l); overflow: hidden; aspect-ratio: 4 / 3; background: var(--color-surface-2); display: grid; place-items: center; }
+  .leistung__bild:has(> .symbol) { background: radial-gradient(circle at 50% 120%, rgb(255 200 87 / 0.45), transparent 60%), radial-gradient(circle at 50% 120%, rgb(255 138 61 / 0.25), transparent 75%), var(--color-surface-2); }
+  .leistung__bild > .symbol { width: 112px; height: 112px; padding: 26px; border-radius: 50%; background: var(--color-surface); box-shadow: var(--schatten-2); color: var(--color-accent-text); stroke-width: 1.4; }
+  .vergleich-tabelle th[scope='col'] { font-size: var(--text-s); color: var(--color-text); }
+  .vergleich-tabelle td, .vergleich-tabelle th { vertical-align: top; padding: 12px; }
+
+  /* Monitoring-Demo */
+  .monitoring { display: grid; gap: var(--s-4); padding: clamp(16px, 2.4vw, 28px); border-radius: var(--radius-xl); background: var(--nacht); color: #F2EFE8;
+    --color-text: #F2EFE8; --color-text-muted: #B7C0D0; --color-surface: var(--schiefer); --color-surface-2: var(--schiefer-2); --color-border: #2E384B; --color-focus: var(--sonne); --color-chart: var(--morgenrot); --color-bg: var(--nacht); }
+  .monitoring__kopf { display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; align-items: center; }
+  .monitoring__tabs { display: inline-flex; gap: 2px; padding: 4px; border-radius: 999px; background: rgb(255 255 255 / 0.06); }
+  .monitoring__tabs [role='tab'] { min-height: 40px; padding: 6px 16px; border: 0; border-radius: 999px; background: transparent; color: #B7C0D0; font-weight: 700; font-size: var(--text-s); }
+  .monitoring__tabs [role='tab'][aria-selected='true'] { background: var(--schiefer-2); color: #F2EFE8; }
+  .monitoring__tabs [role='tab']:focus-visible { outline: 3px solid var(--sonne); outline-offset: 1px; }
+  .monitoring__werte { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .monitoring__werte > div { padding: 10px 12px; border-radius: var(--radius-m); background: rgb(255 255 255 / 0.05); }
+  .monitoring__werte dt { font-size: var(--text-xs); color: #B7C0D0; }
+  .monitoring__werte dd { font-weight: 800; font-variant-numeric: tabular-nums; }
+  @media (max-width: 30em) { .monitoring__werte { grid-template-columns: 1fr; } }
+
+
+
+  /* Abschluss-CTA */
+  .abschluss { border-radius: var(--radius-xl); padding: clamp(32px, 6vw, 80px); background: var(--nacht); color: #F2EFE8; position: relative; overflow: hidden; display: grid; gap: var(--s-5);
+    --color-text: #F2EFE8; --color-text-muted: #B7C0D0; --color-focus: var(--sonne); --color-accent-text: var(--morgenrot); }
+  .abschluss::after { content: ''; position: absolute; width: 520px; height: 520px; right: -160px; top: -200px; border-radius: 50%; background: radial-gradient(closest-side, rgb(255 200 87 / 0.35), transparent); pointer-events: none; }
+  .abschluss > * { position: relative; z-index: 1; }
+  .abschluss h2 { max-width: 18ch; }
+  .abschluss__ctas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .abschluss__tel { font-family: var(--font-titel); font-size: var(--text-xl); font-weight: 800; text-decoration: none; display: inline-flex; gap: 10px; align-items: center; min-height: 48px; }
+  .abschluss__zeiten { color: #B7C0D0; font-size: var(--text-s); }
+
+  /* Sanftes Einblenden beim Scrollen (Progressive Enhancement) */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .einblenden { animation: einblenden linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+    }
+    @supports not (animation-timeline: view()) {
+      .js .einblenden { opacity: 0; transform: translateY(18px); transition: opacity 600ms var(--kurve), transform 600ms var(--kurve); }
+      .js .einblenden.ist-da { opacity: 1; transform: none; }
+    }
+  }
+  @keyframes einblenden { from { opacity: 0; transform: translateY(24px); } }
+
+  /* Seitenübergänge */
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 250ms; }
+  @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+}
