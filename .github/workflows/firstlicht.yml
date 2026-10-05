@@ -1,0 +1,32 @@
+name: Musterprojekt Firstlicht prüfen
+
+# Läuft nur, wenn sich am Musterprojekt etwas ändert. Braucht keine Zugangsdaten und veröffentlicht nichts.
+on:
+  push:
+    paths:
+      - 'musterprojekte/firstlicht/**'
+      - 'tools/firstlicht/**'
+  pull_request:
+    paths:
+      - 'musterprojekte/firstlicht/**'
+      - 'tools/firstlicht/**'
+
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Seiten neu bauen und vergleichen
+        run: |
+          node tools/firstlicht/build.mjs
+          git diff --exit-code musterprojekte/firstlicht || { echo "::error::Erzeugte Seiten sind nicht aktuell. node tools/firstlicht/build.mjs ausführen und einchecken."; exit 1; }
+      - name: Unit-Tests
+        run: node --test tools/firstlicht/tests/*.test.mjs
+      - name: Prüfskript
+        run: node tools/firstlicht/check.mjs

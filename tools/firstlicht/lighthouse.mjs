@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Lighthouse mobil für alle Firstlicht-Seiten, Median aus drei Läufen.
 //   CHROME_PATH=/pfad/zu/chrome node tools/firstlicht/lighthouse.mjs [läufe]
+//   PROFIL=desktop ...   wie die Ladezeit-Angabe auf odera.ch (Lighthouse Desktop)
 // Ergebnis: Konsole und _lokal/firstlicht-qa/lighthouse.json
 
 import { createServer } from 'node:http';
@@ -9,6 +10,7 @@ import { join, extname, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 import lighthouse from 'lighthouse';
+import desktopConfig from 'lighthouse/core/config/desktop-config.js';
 import * as chromeLauncher from 'chrome-launcher';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -35,7 +37,10 @@ try {
   for (const s of SEITEN) {
     const laeufe = [];
     for (let i = 0; i < LAEUFE; i++) {
-      const r = await lighthouse(basis + s + '.html', { port: chrome.port, output: 'json', logLevel: 'error', formFactor: 'mobile', screenEmulation: { mobile: true, width: 412, height: 823, deviceScaleFactor: 1.75 } });
+      const desktop = process.env.PROFIL === 'desktop';
+      const r = desktop
+        ? await lighthouse(basis + s + '.html', { port: chrome.port, output: 'json', logLevel: 'error' }, desktopConfig)
+        : await lighthouse(basis + s + '.html', { port: chrome.port, output: 'json', logLevel: 'error', formFactor: 'mobile', screenEmulation: { mobile: true, width: 412, height: 823, deviceScaleFactor: 1.75 } });
       const c = r.lhr.categories;
       const a = r.lhr.audits;
       const fehlgeschlagen = Object.values(c.seo.auditRefs).map((x) => a[x.id]).filter((x) => x && x.score === 0).map((x) => x.id);
@@ -56,4 +61,4 @@ try {
   server.close();
 }
 mkdirSync(join(ROOT, '_lokal/firstlicht-qa'), { recursive: true });
-writeFileSync(join(ROOT, '_lokal/firstlicht-qa/lighthouse.json'), JSON.stringify({ datum: new Date().toISOString(), laeufe: LAEUFE, ergebnis }, null, 2));
+writeFileSync(join(ROOT, `_lokal/firstlicht-qa/lighthouse${process.env.PROFIL === 'desktop' ? '-desktop' : ''}.json`), JSON.stringify({ datum: new Date().toISOString(), laeufe: LAEUFE, ergebnis }, null, 2));

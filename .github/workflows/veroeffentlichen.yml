@@ -64,6 +64,9 @@ jobs:
               --exclude-glob tools/ \
               --exclude-glob .DS_Store \
               --exclude README.md \
+              --exclude-glob node_modules/ \
+              --exclude '^package(-lock)?\.json$' \
+              --exclude '^musterprojekte/firstlicht/[^/]*\.md$' \
               ./ \"$SFTP_PATH\";
             bye
           "

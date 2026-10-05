@@ -1081,7 +1081,18 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <p class="label" style="margin:0 0 8px">Eigenprojekt · Einzelseite</p>
         <h3 class="t-h3" style="margin:0 0 8px">Portfolio Nico Bodmer</h3>
         <p class="t-text" style="margin:0 0 16px;color:var(--text-2)">Ziel ist, im Kopf zu bleiben. Darum bricht der Aufbau bewusst mit den Regeln für Firmenseiten.</p>
-        <a href="/musterprojekte/" class="einstieg">Beide Seiten ansehen<span aria-hidden="true">→</span></a>
+        <a href="/musterprojekte/" class="einstieg">Alle Musterprojekte ansehen<span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="g-two" style="margin-top:56px;align-items:center">
+      <div>
+        <a href="/musterprojekte/#mp-firstlicht" class="muster-bild"><span class="bild" role="img" aria-label="Musterprojekt Firstlicht, Solarrechner" style="aspect-ratio:960/495;background-image:url(assets/img/muster-firstlicht-rechner.webp)"></span></a>
+      </div>
+      <div>
+        <p class="label" style="margin:0 0 8px">Beispiel-Firmenseite · Paket Pro</p>
+        <h3 class="t-h3" style="margin:0 0 8px">Firstlicht Solartechnik</h3>
+        <p class="t-text" style="margin:0 0 16px;color:var(--text-2)">Ziel ist die vorbereitete Anfrage. Darum rechnet ein ehrlicher Solarrechner vor, und das Ergebnis wandert direkt ins Formular.</p>
+        <a href="/musterprojekte/#mp-firstlicht" class="einstieg">Firstlicht ansehen<span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div></div>
@@ -1788,8 +1799,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
     <div class="g3 mp-g3" aria-hidden="true" style="position:absolute;inset:0"></div>
     <div class="mp-head" style="position:relative;z-index:2;width:100%;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:center;padding:96px 120px">
       <div style="max-width:62%">
-        <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.06;letter-spacing:-0.03em;color:var(--grund);margin:0 0 24px">Zwei Seiten, zwei Welten.</h1>
-        <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:rgba(246,245,241,0.88);margin:0;max-width:640px;text-wrap:pretty">Die eine ist ein erfundener Schreinereibetrieb, die andere mein eigenes Portfolio. Sie sollen zeigen, dass ich nicht eine Vorlage in verschiedenen Farben ausliefere.</p>
+        <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.06;letter-spacing:-0.03em;color:var(--grund);margin:0 0 24px">Drei Seiten, drei Welten.</h1>
+        <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:rgba(246,245,241,0.88);margin:0;max-width:640px;text-wrap:pretty">Eine Schreinerei und ein Solarinstallateur, beide frei erfunden, dazu mein eigenes Portfolio. Sie sollen zeigen, dass ich nicht eine Vorlage in verschiedenen Farben ausliefere.</p>
       </div>
       <div onClick="{{ jumpToSection }}" style="display:flex;flex-direction:column;gap:20px;align-items:flex-start;justify-content:center;height:100%;width:calc(100% - 68px);max-width:420px;margin-left:20px;margin-right:48px;box-sizing:border-box">
         <a class="mp-jump" href="#mp-1">
@@ -1800,8 +1811,16 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           </span>
           <span class="mp-jump-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v14M5 12l7 7 7-7"></path></svg></span>
         </a>
-        <a class="mp-jump" href="#mp-2">
+        <a class="mp-jump" href="#mp-firstlicht">
           <span class="mp-jump-num" aria-hidden="true">02</span>
+          <span class="mp-jump-body">
+            <span class="mp-jump-name">Firstlicht</span>
+            <span class="mp-jump-sub">Firmenseite Pro, Betrieb erfunden</span>
+          </span>
+          <span class="mp-jump-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v14M5 12l7 7 7-7"></path></svg></span>
+        </a>
+        <a class="mp-jump" href="#mp-2">
+          <span class="mp-jump-num" aria-hidden="true">03</span>
           <span class="mp-jump-body">
             <span class="mp-jump-name">Portfolio</span>
             <span class="mp-jump-sub">Mein eigenes Projekt</span>
@@ -1859,6 +1878,65 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
     </div>
   </section>
 
+  <section class="mp-firstlicht" aria-labelledby="mp-firstlicht-titel" style="background:var(--tinte);color:var(--grund)">
+    <div class="wrap sect">
+    <div class="inner">
+      <p class="label" style="margin:0 0 16px;color:var(--akzent)">Firmenseite Pro, Betrieb erfunden</p>
+      <p style="font-size:16px;line-height:1.55;color:rgba(246,245,241,0.88);margin:0 0 48px;max-width:640px;text-wrap:pretty">Technisch, interaktiv, auf die vorbereitete Anfrage ausgerichtet. So sieht eine Seite aus, die ein erklärungsbedürftiges Angebot verkauft.</p>
+      <div style="display:flex;flex-direction:column;gap:64px">
+        <div id="mp-firstlicht" class="g-proj mp-desk">
+          <div>
+            <p class="mono" style="font-size:13px;color:rgba(246,245,241,0.7);margin:0 0 16px">02</p>
+            <h2 id="mp-firstlicht-titel" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 24px;color:var(--grund)">Firstlicht</h2>
+            <p style="font-size:16px;line-height:1.65;color:rgba(246,245,241,0.88);margin:0 0 16px;max-width:680px;text-wrap:pretty">Ausgangslage, erfunden: Ein Solarinstallateur mit vier Montageteams beantwortet am Telefon immer wieder dieselben Fragen und offeriert Dächer, auf denen sich Solar kaum lohnt. Ziel: weniger Leerlauf, mehr vorbereitete Anfragen. Lösung: Ein Rechner mit offenen Annahmen und Quellen, dessen Ergebnis direkt in die Anfrage wandert, dazu belegte Antworten auf die häufigsten Fragen.</p>
+            <ul class="mp-merkmale" style="margin:0 0 20px;padding:0 0 0 20px;font-size:16px;line-height:1.6;color:rgba(246,245,241,0.88);max-width:680px">
+              <li>Tagesverlauf-Szene, die zeigt, was eine Solaranlage den ganzen Tag tut</li>
+              <li>Solarrechner mit Quellen, Ergebnis als Link, PDF oder direkt in der Anfrage</li>
+              <li>Energie-Baukasten: Speicher, Wallbox und Wärmepumpe zuschalten</li>
+              <li>Projekte mit Filter, Detailansicht und Vorher-Nachher-Regler</li>
+              <li>Anfrage in drei Schritten mit Wunschtermin für den Dach-Check</li>
+              <li>Hell und dunkel, ganz mit Tastatur und Screenreader bedienbar</li>
+            </ul>
+            <p style="font-size:13px;line-height:1.6;color:var(--grund);margin:0 0 8px"><span style="white-space:nowrap">Ladezeit {{ ladezeitFl }}</span> · <span style="white-space:nowrap">6 Seiten</span> · <span style="white-space:nowrap">Paket Pro</span></p>
+            <p style="font-size:13px;line-height:1.6;color:rgba(246,245,241,0.75);margin:0 0 24px;max-width:680px">{{ firstlichtMessung }} Rechner, Szene, Baukasten und Monitoring gehen über das Paket Pro hinaus und sind individuelle Erweiterungen, Preis nach Aufwand.</p>
+            <a class="btn btn-primaer" href="/musterprojekte/firstlicht/" data-title="Firstlicht" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
+            <p style="margin:12px 0 0"><a href="/musterprojekte/firstlicht/?erklaeren=1" data-title="Firstlicht mit Erklärungen" onClick="{{ openMuster }}" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--akzent)">Mit Erklärungen ansehen</a></p>
+            <a href="/projekt-check/" class="einstieg" data-quelle="firstlicht" onClick="{{ onEinstieg }}" style="color:var(--akzent)">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
+          </div>
+          <div class="dev">
+            <div role="radiogroup" aria-label="Ansicht Firstlicht" class="mp-switch" style="position:relative;display:inline-flex;padding:4px;border:1px solid rgba(246,245,241,0.3);border-radius:999px;background:var(--tinte);margin-bottom:24px">
+              <span aria-hidden="true" style="position:absolute;top:4px;bottom:4px;width:calc(50% - 4px);left:{{ devLeft }};border-radius:999px;background:var(--primaer);transition:left 240ms cubic-bezier(0.2,0,0,1)"></span>
+              <button type="button" role="radio" aria-checked="{{ devDeskSel }}" onClick="{{ setDevDesk }}" style="position:relative;min-height:48px;padding:0 24px;background:none;border:none;border-radius:999px;font-size:16px;font-weight:600;color:{{ devDeskColorDunkel }};cursor:pointer">Desktop</button>
+              <button type="button" role="radio" aria-checked="{{ devMobSel }}" onClick="{{ setDevMob }}" style="position:relative;min-height:48px;padding:0 24px;background:none;border:none;border-radius:999px;font-size:16px;font-weight:600;color:{{ devMobColorDunkel }};cursor:pointer">Handy</button>
+            </div>
+            <div style="position:relative;margin:0 auto;max-width:{{ devMax }};border:8px solid #2a2d38;border-radius:24px;background:var(--tinte);overflow:hidden;aspect-ratio:{{ devAR }};transition:aspect-ratio 320ms ease-in-out,max-width 320ms ease-in-out">
+<span class="bild" role="img" aria-label="Musterprojekt Firstlicht Solartechnik, {{ mpGeraet }}" style="position:absolute;inset:0;background-image:url({{ mpBildFl }})"></span>
+            </div>
+          </div>
+        </div>
+        <div class="mp-card">
+          <div role="radiogroup" aria-label="Ansicht Firstlicht" class="mp-switch" style="position:relative;display:inline-flex;padding:4px;border:1px solid rgba(246,245,241,0.3);border-radius:999px;background:var(--tinte);margin-bottom:16px">
+            <span aria-hidden="true" style="position:absolute;top:4px;bottom:4px;width:calc(50% - 4px);left:{{ devLeft }};border-radius:999px;background:var(--primaer);transition:left 240ms cubic-bezier(0.2,0,0,1)"></span>
+            <button type="button" role="radio" aria-checked="{{ devDeskSel }}" onClick="{{ setDevDesk }}" style="position:relative;min-height:44px;padding:0 20px;background:none;border:none;border-radius:999px;font-size:16px;font-weight:600;color:{{ devDeskColorDunkel }};cursor:pointer">Desktop</button>
+            <button type="button" role="radio" aria-checked="{{ devMobSel }}" onClick="{{ setDevMob }}" style="position:relative;min-height:44px;padding:0 20px;background:none;border:none;border-radius:999px;font-size:16px;font-weight:600;color:{{ devMobColorDunkel }};cursor:pointer">Handy</button>
+          </div>
+          <div style="position:relative;aspect-ratio:{{ cardAR }};max-width:{{ cardBoxMax }};margin:0 auto;overflow:hidden;border:1px solid rgba(246,245,241,0.2);border-radius:16px;background:var(--tinte);transition:aspect-ratio 320ms ease-in-out">
+<span class="bild" role="img" aria-label="Musterprojekt Firstlicht Solartechnik, {{ mpGeraet }}" style="position:absolute;inset:0;background-image:url({{ mpBildFl }})"></span>
+          </div>
+          <p class="mono" style="font-size:13px;color:rgba(246,245,241,0.7);margin:20px 0 8px">02</p>
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;line-height:1.12;letter-spacing:-0.02em;margin:0 0 16px;color:var(--grund)">Firstlicht</h2>
+          <p style="font-size:16px;line-height:1.6;color:rgba(246,245,241,0.88);margin:0 0 16px;text-wrap:pretty">Ausgangslage, erfunden: Ein Solarinstallateur beantwortet am Telefon immer wieder dieselben Fragen. Lösung: Ein Rechner mit offenen Annahmen und Quellen, dessen Ergebnis direkt in die Anfrage wandert.</p>
+          <p style="font-size:13px;line-height:1.7;color:var(--grund);margin:0 0 8px"><span style="white-space:nowrap">Ladezeit {{ ladezeitFl }}</span> · <span style="white-space:nowrap">6 Seiten</span> · <span style="white-space:nowrap">Paket Pro</span></p>
+          <p style="font-size:13px;line-height:1.6;color:rgba(246,245,241,0.75);margin:0 0 20px">{{ firstlichtMessung }} Rechner, Szene, Baukasten und Monitoring sind individuelle Erweiterungen.</p>
+          <a class="btn btn-primaer" href="/musterprojekte/firstlicht/" data-title="Firstlicht" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
+          <p style="margin:12px 0 0"><a href="/musterprojekte/firstlicht/?erklaeren=1" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--akzent)">Mit Erklärungen ansehen</a></p>
+          <a href="/projekt-check/" class="einstieg" data-quelle="firstlicht" onClick="{{ onEinstieg }}" style="color:var(--akzent)">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
     <section class="mp-block2" style="background:var(--flaeche)">
     <div class="wrap sect">
     <div class="inner">
@@ -1867,7 +1945,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <div style="display:flex;flex-direction:column;gap:64px">
         <div id="mp-2" class="g-proj rev mp-desk">
           <div>
-            <p class="mono" style="font-size:13px;color:var(--text-2);margin:0 0 16px">02</p>
+            <p class="mono" style="font-size:13px;color:var(--text-2);margin:0 0 16px">03</p>
             <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 24px">Portfolio</h2>
             <p style="font-size:16px;line-height:1.65;color:var(--text-2);margin:0 0 24px;max-width:680px;text-wrap:pretty">Ausgangslage: Ein persönlicher Auftritt, der auffallen darf. Ziel: Im Kopf bleiben. Entscheidung: Farbe, Bewegung und ein Aufbau, der bewusst mit den Regeln bricht, die für Firmenseiten gelten.</p>
             <p style="font-size:13px;line-height:1.6;color:var(--tinte);margin:0 0 12px"><span style="white-space:nowrap">Ladezeit {{ ladezeitPf }}</span> · <span style="white-space:nowrap">Einzelseite</span> · <span style="white-space:nowrap">Eigenprojekt</span> · <span style="white-space:nowrap">live auf nico-bodmer.ch</span></p>
@@ -1894,7 +1972,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <div style="position:relative;aspect-ratio:{{ cardAR }};max-width:{{ cardBoxMax }};margin:0 auto;overflow:hidden;border:1px solid var(--linie);border-radius:16px;background:var(--flaeche);transition:aspect-ratio 320ms ease-in-out">
             <span class="bild" role="img" aria-label="Musterprojekt Portfolio Nico Bodmer, {{ mpGeraet }}" style="position:absolute;inset:0;background-image:url({{ mpBildPf }})"></span>
           </div>
-          <p class="mono" style="font-size:13px;color:var(--text-2);margin:20px 0 8px">02</p>
+          <p class="mono" style="font-size:13px;color:var(--text-2);margin:20px 0 8px">03</p>
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;line-height:1.12;letter-spacing:-0.02em;margin:0 0 16px">Portfolio</h2>
           <p style="font-size:16px;line-height:1.6;color:var(--text-2);margin:0 0 16px;text-wrap:pretty">Ausgangslage: Ein persönlicher Auftritt, der auffallen darf. Ziel: Im Kopf bleiben. Entscheidung: Farbe, Bewegung und ein Aufbau, der bewusst mit den Regeln bricht, die für Firmenseiten gelten.</p>
           <p style="font-size:13px;line-height:1.7;color:var(--tinte);margin:0 0 20px"><span style="white-space:nowrap">Ladezeit {{ ladezeitPf }}</span> · <span style="white-space:nowrap">Einzelseite</span> · <span style="white-space:nowrap">Eigenprojekt</span> · <span style="white-space:nowrap">live auf nico-bodmer.ch</span></p>
@@ -2847,7 +2925,10 @@ class Component extends DCLogic {
   LADEZEIT = {
     doppelmeter: '0,5 s',
     portfolio: '0,5 s',
-    notiz: 'Ladezeit: bis der grösste Inhalt sichtbar ist, gemessen mit Google Lighthouse im Profil Desktop, Median aus drei Läufen. Doppelmeter am 1. Oktober 2026 (langsamste der fünf Seiten), Portfolio am 29. September 2026.',
+    firstlicht: '0,4 s',
+    notiz: 'Ladezeit: bis der grösste Inhalt sichtbar ist, gemessen mit Google Lighthouse im Profil Desktop, Median aus drei Läufen. Doppelmeter am 1. Oktober 2026 (langsamste der fünf Seiten), Firstlicht am 5. Oktober 2026 (langsamste der sechs Seiten), Portfolio am 29. September 2026.',
+    // Messung Firstlicht mit Google Lighthouse im Profil Mobil, Median aus drei Läufen, alle sechs Seiten. Nur gemessene Werte eintragen.
+    firstlichtMessung: 'Gemessen am 5. Oktober 2026 mit Google Lighthouse im Profil Mobil: 100 Punkte für Leistung, Barrierefreiheit und Best Practices auf allen sechs Seiten, 83 bis 105 KB pro Seite.',
   };
   ANFRAGE_ENDPOINT = 'https://odera-anfrage.odera-chat-proxy.workers.dev/';
   TURNSTILE_SITEKEY = '0x4AAAAAAFG5UB1RNyRsDksT';
@@ -2932,7 +3013,7 @@ class Component extends DCLogic {
     '/ablauf': { key: 'ablauf', title: 'So läuft ein Projekt ab | ODERA Design',
       desc: 'Sie zahlen erst, wenn Ihnen der Entwurf gefällt. So läuft ein Projekt ab: Formular, kostenloser Entwurf, Rückmeldung, Umsetzung, Übergabe.' },
     '/musterprojekte': { key: 'muster', title: 'Musterprojekte | ODERA Design',
-      desc: 'Zwei Musterprojekte: eine erfundene Schreinerei als Firmenseite und mein eigenes Portfolio. Ich liefere keine Vorlage in anderen Farben aus.' },
+      desc: 'Drei Musterprojekte: eine erfundene Schreinerei, ein erfundener Solarinstallateur mit Rechner und mein eigenes Portfolio. Ich liefere keine Vorlage in anderen Farben aus.' },
     '/ueber-mich': { key: 'ueber', title: 'Über mich und Kontakt | ODERA Design',
       desc: 'Nico Bodmer baut Webseiten für Betriebe in der ganzen Schweiz. Lehre als Platform Developer EFZ, seit 2021 in der IT. Erreichbarkeit und Kontakt.' },
     '/projekt-check': { key: 'check', title: 'Projekt-Check: Ihre Anfrage in 6 Minuten | ODERA Design', noindex: true },
@@ -2961,6 +3042,7 @@ class Component extends DCLogic {
     'paket-standard': { label: 'Paketkarte Standard', ans: { SEITENZAHL: 'Bis 5 Seiten' }, skip: ['SEITENZAHL'] },
     'paket-pro': { label: 'Paketkarte Pro', ans: { SEITENZAHL: 'Bis 10 Seiten' }, skip: ['SEITENZAHL'] },
     doppelmeter: { label: 'Musterprojekt Doppelmeter', ans: { BRANCHE: 'Handwerk und Bau', SEITENZAHL: 'Bis 5 Seiten', ZIEL: 'Anrufen' }, skip: ['BRANCHE', 'SEITENZAHL', 'ZIEL'] },
+    firstlicht: { label: 'Musterprojekt Firstlicht', ans: { SEITENZAHL: 'Bis 10 Seiten' }, skip: ['SEITENZAHL'] },
     ablauf: { label: 'Ablauf, Schritt 1' },
     faq: { label: 'Häufige Fragen' },
     chat: { label: 'Chat-Assistent' },
@@ -3157,13 +3239,13 @@ class Component extends DCLogic {
       }
       if (known === '/projekt-check') { next.quick = kurz; if (kurz) next.step = 0; if (this.chatModul) this.chatModul.schliessen(false); if (!this.startZeit) this.startZeit = Date.now(); this.anfrageVorladen(); }
       next.gesendet = null; next.senden = 'bereit'; next.sendFehler = '';
-      // Einstieg von der Musterseite Doppelmeter (/musterprojekte/doppelmeter/): dieselbe Vorbelegung wie «So etwas für meinen Betrieb»
+      // Einstieg von den Musterseiten (/musterprojekte/doppelmeter/, /musterprojekte/firstlicht/): dieselbe Vorbelegung wie «So etwas für meinen Betrieb»
       const quelleUrl = (query.split('&').map(p => p.split('=')).find(p => p[0] === 'quelle') || [])[1];
-      if (known === '/projekt-check' && quelleUrl === 'doppelmeter') {
-        const e = this.EINSTIEGE.doppelmeter;
+      if (known === '/projekt-check' && (quelleUrl === 'doppelmeter' || quelleUrl === 'firstlicht')) {
+        const e = this.EINSTIEGE[quelleUrl];
         next.ans = Object.assign({}, this.state.ans, e.ans);
         next.ueberspringen = Array.from(new Set((this.state.ueberspringen || []).concat(e.skip)));
-        next.quelle = this.state.quelle || 'doppelmeter';
+        next.quelle = this.state.quelle || quelleUrl;
         history.replaceState(null, '', '/projekt-check/');
       }
       if (known === '/projekt-check' && paket && this.PAKET[paket]) {
@@ -4284,6 +4366,7 @@ class Component extends DCLogic {
 
       mpBildDm: s.device === 'mobile' ? 'assets/img/muster-doppelmeter-handy.webp' : 'assets/img/muster-doppelmeter-desktop.webp',
       mpBildPf: s.device === 'mobile' ? 'assets/img/muster-portfolio-handy.webp' : 'assets/img/muster-portfolio-desktop-16x9.webp',
+      mpBildFl: s.device === 'mobile' ? 'assets/img/muster-firstlicht-handy.webp' : 'assets/img/muster-firstlicht-desktop.webp',
       mpGeraet: s.device === 'mobile' ? 'Ansicht Handy' : 'Ansicht Computer',
       devAR: s.device === 'mobile' ? '9 / 16' : '16 / 9',
       devMax: s.device === 'mobile' ? '320px' : '640px',
@@ -4317,6 +4400,8 @@ class Component extends DCLogic {
       musterLaedt: !!s.muster && !s.muster.geladen,
       ladezeitDm: this.LADEZEIT.doppelmeter,
       ladezeitPf: this.LADEZEIT.portfolio,
+      ladezeitFl: this.LADEZEIT.firstlicht,
+      firstlichtMessung: this.LADEZEIT.firstlichtMessung,
       ladezeitNotiz: this.LADEZEIT.notiz,
       closeMuster: () => this.setState({ muster: null }),
       device: s.device,
@@ -4324,6 +4409,8 @@ class Component extends DCLogic {
       devMobSel: s.device === 'mobile', devDeskSel: s.device === 'desktop',
       devMobColor: s.device === 'mobile' ? '#FFFFFF' : '#11131A',
       devDeskColor: s.device === 'desktop' ? '#FFFFFF' : '#11131A',
+      devMobColorDunkel: s.device === 'mobile' ? '#FFFFFF' : '#C9CCD6',
+      devDeskColorDunkel: s.device === 'desktop' ? '#FFFFFF' : '#C9CCD6',
       setDevMob: () => this.setState({ device: 'mobile' }), setDevDesk: () => this.setState({ device: 'desktop' }),
 
 

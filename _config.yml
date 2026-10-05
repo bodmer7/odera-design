@@ -4,3 +4,10 @@ exclude:
   - chat-proxy
   - anfrage-proxy
   - node_modules
+  # Entwicklungswerkzeuge und Notizen des Musterprojekts Firstlicht (siehe tools/firstlicht/)
+  - package.json
+  - package-lock.json
+  - tools/firstlicht
+  - musterprojekte/firstlicht/README.md
+  - musterprojekte/firstlicht/faktencheck.md
+  - musterprojekte/firstlicht/bilder.md
