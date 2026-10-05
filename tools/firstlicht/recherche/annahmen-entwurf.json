@@ -1,0 +1,405 @@
+{
+  "_meta": {
+    "zweck": "Rechner-Annahmen fuer Demo-Website eines fiktiven Schweizer Solarinstallateurs",
+    "stand": "2026-10-05",
+    "methode": "Nur WebSearch (WebFetch fuer fedlex.admin.ch, energieschweiz.ch, re.jrc.ec.europa.eu vom Proxy gesperrt, getestet 2026-10-05). Werte stammen aus Suchergebnis-Auszuegen; Original-PDFs konnten nicht geoeffnet werden.",
+    "statusregel": "verifiziert = offizielle Stelle (Bund, ElCom, BFE/Pronovo, EnergieSchweiz, Kanton, Netzbetreiber, Swissolar) nennt den Wert direkt im Suchergebnis, idealerweise durch zweite Quelle bestaetigt. Alles andere = nicht verifiziert."
+  },
+
+  "strompreis_haushalt_rp": {
+    "wert": 26.5,
+    "einheit": "Rp./kWh (Median Gesamttarif Grundversorgung, Profil H4, Tarifjahr 2027, inkl. MWST)",
+    "quelle": "https://www.admin.ch/de/newnsb/1miE201yRzoA",
+    "quellen_weitere": [
+      "https://www.admin.ch/de/stromtarife-in-der-grundversorgung-2027",
+      "https://ee-news.ch/a/elcom-2027-bringt-leicht-sinkende-strompreise",
+      "https://www.swissinfo.ch/ger/strompreise-sinken-im-kommenden-jahr-um-rund-4-prozent/92021243"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "verifiziert",
+    "hinweis": "ElCom-Medienmitteilung 'Leicht sinkende Strompreise 2027' (laut Suchergebnis vom 8.9.2026). 2027: Energie 11.35, Netz 10.94, Netzzuschlag 2.3 Rp./kWh; Jahresrechnung H4 1'194 CHF (-53 CHF). Vorjahr 2026: 27.7 Rp./kWh, 1'247 CHF (https://www.elcom.admin.ch/de/newnsb/8nuE_fvwnfqCu8OHNOwKu). Regionale Spannweite gross; im Rechner 2027-Wert verwenden und Hinweis 'Median Schweiz' anzeigen.",
+    "vorjahr_2026": 27.7
+  },
+
+  "rueckliefer_minimal_rp": {
+    "wert": 6.0,
+    "einheit": "Rp./kWh (Minimalverguetung Energie, ohne HKN, Anlagen bis 30 kW)",
+    "quelle": "https://www.ekz.ch/de/blue/wissen/2025/rueckliefertarife-2026.html",
+    "quellen_weitere": [
+      "https://www.swissolar.ch/de/news/detail/2026-was-gilt-neu-fuer-photovoltaikanlagen-80786",
+      "https://www.swissolar.ch/de/wissen/wirtschaftlichkeit/abnahmeverguetung",
+      "https://ewu.ch/referenz-marktpreis-q2-2026/",
+      "https://www.ekz.ch/de/blue/wissen/2025/rueckliefertarife-2027.html"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "verifiziert",
+    "hinweis": "Gilt seit 1.1.2026 (Stromgesetz/EnV). Bis 30 kW: 6.0 Rp./kWh unabhaengig vom Eigenverbrauch. Ab 30 kW mit Eigenverbrauch: 180 / Leistung[kW] Rp./kWh (bei 150 kW = 1.2 Rp.). Ab 30 kW ohne Eigenverbrauch: 6.2 Rp./kWh. Ab 150 kW keine Minimalverguetung. Ausbezahlt wird der hoehere Wert von Referenzmarktpreis und Minimalverguetung. HKN wird separat verguetet (EKZ: Minimum inkl. HKN 9 Rp.). Ab 1.1.2027 Wechsel auf Spotpreis zum Einspeisezeitpunkt, Minimalverguetung bleibt als Praemie (Uebergangsfrist 1 Jahr, einzelne Netzbetreiber erst 2028).",
+    "leistungsklassen": {
+      "bis_30_kw": "6.0 Rp./kWh",
+      "30_bis_150_kw_mit_eigenverbrauch": "180 / P[kW] Rp./kWh",
+      "30_bis_150_kw_ohne_eigenverbrauch": "6.2 Rp./kWh",
+      "ab_150_kw": "keine Minimalverguetung"
+    }
+  },
+
+  "referenzmarktpreis_pv_rp": {
+    "wert": { "2026_Q1": 10.266, "2026_Q2": 3.896, "2026_Q3": null },
+    "einheit": "Rp./kWh (BFE, Referenz-Marktpreis Photovoltaik gem. Art. 15 EnFV, vierteljaehrlich)",
+    "quelle": "https://pubdb.bfe.admin.ch/de/publication/download/11515",
+    "quellen_weitere": [
+      "https://www.bfe.admin.ch/bfe/de/home/foerderung/erneuerbare-energien/referenz-marktpreise.html",
+      "https://ewu.ch/referenz-marktpreis-q2-2026/",
+      "https://werkezuerichsee.ch/pv-referenzmarktpreis-fuer-das-zweite-quartal-2026-steht-fest/",
+      "https://www.esb.ch/de/angebote/photovoltaik/solarstromruecklieferung"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "verifiziert",
+    "hinweis": "Q2/2026 vom BFE am 14.07.2026 publiziert; Werte durch mehrere Netzbetreiber (EW Uznach, Werke am Zuerichsee, ESB) uebereinstimmend zitiert. Q3/2026 war am 5.10.2026 noch NICHT publiziert (BFE publiziert ca. am 10. Arbeitstag nach Quartalsende); Prognose leg-app.ch 4.70 Rp. ist keine amtliche Zahl. Ein Suchauszug nannte faelschlich 59.40 CHF/MWh fuer Q2 (vermutlich andere Spalte/Technologie) - verworfen. Fuer den Rechner: effektive Verguetung = max(Referenzmarktpreis, Minimalverguetung) + ggf. HKN."
+  },
+
+  "hkn_verguetung_rp": {
+    "wert": { "typisch_min": 0, "typisch_max": 3 },
+    "einheit": "Rp./kWh (zusaetzlich zur Energieverguetung, netzbetreiberabhaengig)",
+    "quelle": "https://www.ekz.ch/de/blue/wissen/2025/rueckliefertarife-2026.html",
+    "quellen_weitere": [
+      "https://www.bkw.ch/de/ueber-uns/aktuell/blog/energie-fuer-morgen/2025/wissenswertes-zur-einfuehrung-der-garantierten-mindestverguetung",
+      "https://www.aew.ch/sites/default/files/2025-11/AEW_Ruecklieferung_Fixpreis_2026.pdf",
+      "https://www.aew.ch/news/aew-senkt-2026-erneut-die-strompreise-und-fuehrt-einheitstarif-ein"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "verifiziert",
+    "hinweis": "EKZ 2026: HKN hoechstens 3 Rp. (Minimum inkl. HKN 9 Rp.). BKW ab 1.4.2026: 2 Rp. fuer naturemade-star-HKN. AEW (Aargau) 2026: HKN-Zuschlag abgeschafft, stattdessen Fixpreis 8.2 Rp./kWh inkl. HKN fuer 2-30 kW (alternativ Referenzmarktpreis/Minimalverguetung). Kein schweizweiter Wert - im Rechner als einstellbarer Parameter (Default 0-2 Rp.) fuehren."
+  },
+
+  "kleiv_leistungsbeitrag_chf_kwp": {
+    "wert": {
+      "angebaut_freistehend_bis_30kw": 360,
+      "angebaut_freistehend_30_bis_100kw": 300,
+      "integriert_bis_30kw": 400,
+      "integriert_30_bis_100kw": 330,
+      "ab_100kw": 250
+    },
+    "einheit": "CHF pro kW (Leistungsbeitrag Einmalverguetung, Inbetriebnahme ab 1.4.2025, 2026 unveraendert)",
+    "quelle": "https://pronovo.ch/de/foerderinstrumente/neuerungen-einmalverguetung-photovoltaik/",
+    "quellen_weitere": [
+      "https://www.ckw.ch/energie/photovoltaik/foerderung-photovoltaik-schweiz/einmalverguetung",
+      "https://www.swissolar.ch/de/news/detail/2026-was-gilt-neu-fuer-photovoltaikanlagen-80786",
+      "https://pronovo.ch/de/foerderung/photovoltaik/haeufige-fragen/"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "verifiziert",
+    "hinweis": "Satz ist gestaffelt: die ersten 30 kW zum hoeheren Satz, Anteile darueber zum tieferen (ueblich gem. Anhang 2.1 EnFV; Staffelungslogik selbst nicht im Suchauszug bestaetigt). Swissolar: 2026 keine Senkung. GEPLANT (nicht in Kraft): Vernehmlassung UVEK vom 15.4.2026 sieht +40 CHF/kW fuer < 30 kW vor (400 angebaut / 440 integriert), gemaess Erlaeuterungsentwurf ab 1.4.2027 (https://pubdb.bfe.admin.ch/de/publication/download/12571). Bis Bundesratsbeschluss nur als 'geplant' kommunizieren. Mindestleistung KLEIV: 2 kW."
+  },
+
+  "kleiv_grundbeitrag_chf": {
+    "wert": 0,
+    "einheit": "CHF pro Anlage",
+    "quelle": "https://www.ckw.ch/energie/photovoltaik/foerderung-photovoltaik-schweiz/einmalverguetung",
+    "quellen_weitere": [
+      "https://www.otovo.ch/de-ch/blog/ratgeber/pronovo-einmalverguetung/",
+      "https://www.buildigo.ch/de/article/einmalverguetung"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "CKW (Netzbetreiber) schreibt, ein separater Grundbeitrag werde fuer Standardanlagen nicht mehr ausbezahlt; Sekundaerquellen nennen Abschaffung per April 2024. Gleichzeitig schreiben aeltere Swissolar-/Pronovo-Seiten und einzelne Ratgeber noch von 'Grundbeitrag plus Leistungsbeitrag' bzw. ~350 CHF. Pronovo-Tarifrechner/Anhang 2.1 EnFV konnten nicht direkt geprueft werden. Empfehlung: im Rechner 0 CHF verwenden und vor Livegang im Pronovo-Tarifrechner pruefen."
+  },
+
+  "kleiv_neigungswinkelbonus_chf_kwp": {
+    "wert": { "integriert": 400, "angebaut_freistehend": 200 },
+    "einheit": "CHF pro kW (nur Anlagenteile mit Neigung >= 75 Grad, Inbetriebnahme ab 1.1.2025)",
+    "quelle": "https://pronovo.ch/de/foerderung/photovoltaik/haeufige-fragen/",
+    "quellen_weitere": [],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "Nur eine (offizielle) Quelle im Suchauszug; kein Bonus bei Bezug Winterstrombonus. Fuer Fassadenanlagen relevant, fuer Standard-Dachanlagen nicht."
+  },
+
+  "heiv_ohne_eigenverbrauch_chf_kwp": {
+    "wert": 450,
+    "einheit": "CHF pro kW (hohe Einmalverguetung, 2 bis 149.99 kW, ohne Eigenverbrauch)",
+    "quelle": "https://www.swissolar.ch/de/news/detail/neu-ab-januar-2023-die-hohe-einmalverguetung-heiv-44593",
+    "quellen_weitere": [
+      "https://www.ckw.ch/energie/photovoltaik/foerderung-photovoltaik-schweiz/einmalverguetung",
+      "https://pronovo.ch/de/foerderung/photovoltaik/haeufige-fragen/"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "450 CHF/kW fuer 2023 bzw. 2025 belegt (Swissolar, CKW); fuer 2026 nur indirekt (Swissolar: 'Verguetungssaetze werden 2026 nicht gesenkt'). Bedingung laut Pronovo-FAQ: Volleinspeisung, 20 Jahre ohne Eigenverbrauch (CKW nennt 15 Jahre - widerspruechlich), Inbetriebnahme ab 1.1.2023. HEIV deckt bis 60 % der Investitionskosten von Referenzanlagen. Ab 150 kW: Auktionen. Fuer EFH-Rechner nicht relevant."
+  },
+
+  "eiv_obergrenze_prozent_invest": {
+    "wert": 30,
+    "einheit": "% der massgeblichen Investitionskosten von Referenzanlagen",
+    "quelle": "https://pronovo.ch/de/foerderung/photovoltaik/haeufige-fragen/",
+    "quellen_weitere": ["https://www.swissolar.ch/de/wissen/wirtschaftlichkeit/foerderung/pv-foerderung"],
+    "abgerufen": "2026-10-05",
+    "status": "verifiziert",
+    "hinweis": "Gesetzliche Obergrenze (EnG) fuer KLEIV/GREIV; HEIV bis 60 %. Bezieht sich auf Referenzanlagen, nicht auf die individuelle Offerte."
+  },
+
+  "kosten_staffel": {
+    "wert": {
+      "belegte_ankerwerte": {
+        "2023_2_bis_10kw_chf_kwp": 3141,
+        "2023_10_bis_30kw_chf_kwp": 2384,
+        "2024_aenderung_median": "-12 bis -26 %",
+        "2025_aenderung_2_bis_10kw": "-9 %"
+      },
+      "arbeitswert_vorschlag_chf_kwp": { "5": 3000, "10": 2600, "15": 2300, "30": 1800 }
+    },
+    "einheit": "CHF pro kWp, schluesselfertig, inkl. MWST, vor Foerderung",
+    "quelle": "https://pubdb.bfe.admin.ch/de/publication/download/12226",
+    "quellen_weitere": [
+      "https://pubdb.bfe.admin.ch/de/publication/download/12694",
+      "https://avendo.ch/blog/photovoltaik-was-kostet-eine-solaranlage-in-der-schweiz",
+      "https://www.ckw.ch/energie/photovoltaik/photovoltaik-kosten"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "Ankerwerte aus BFE-Preisbeobachtungsstudien (2023-Werte via Suchauszug; Studie 2024 publiziert 10.7.2025, Studie 2025 publiziert 3.8.2026 mit -9 % fuer 2-10 kW). Die exakten Median-Tabellen 2024/2025 nach Groesse waren im Suchauszug NICHT lesbar (widerspruechliche Angaben 2'756 bzw. 2'817 CHF/kWp fuer 10 kWp). Die 'arbeitswert_vorschlag'-Zahlen sind eigene, gerundete Ableitungen aus diesen Ankern und Sekundaerquellen (2026: 2'400-3'200 CHF/kWp EFH) - KEINE Quellenwerte. Vor Livegang mit der PDF der Studie 2025 abgleichen."
+  },
+
+  "speicher_chf_kwh": {
+    "wert": { "heimspeicher_15kwh_total_chf": 8800, "abgeleitet_chf_kwh_15kwh": 590, "klein_unter_10kwh_chf_kwh": 690 },
+    "einheit": "CHF (installiert, inkl. Installation)",
+    "quelle": "https://www.swissolar.ch/de/news/detail/batteriemonitor-schweiz-2026-batteriespeicher-gewinnen-stark-an-bedeutung-fuer-das-energiesystem-82334",
+    "quellen_weitere": [
+      "https://www.swissolar.ch/02_markt-politik/batteriesmonitor/sws_batteriemonitor_2026.pdf",
+      "https://www.photon.info/news/swissolar-schweizer-markt-fuer-batteriespeicher-entwickelt-sich-rasant/",
+      "https://www.swissolar.ch/02_markt-politik/batteriesmonitor/130525_batteriespeicher_bericht_sws.pdf",
+      "https://www.galaxus.ch/de/page/batterie-boom-immer-mehr-solaranlagen-bekommen-einen-speicher-42078"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "Swissolar Batteriemonitor 2026: typischer 15-kWh-Heimspeicher rund 8'800 CHF inkl. Installation (~25 % unter Vorjahr) => ~590 CHF/kWh (eigene Division). Swissolar-Umfrage Dez. 2024: ~800 CHF/kWh. Preisbeobachtungsstudie 2025 (via Sekundaerquelle): Median 686 CHF/kWh fuer < 10 kWh (Vorjahr 847), 504 CHF/kWh fuer 20-30 kWh - Zuordnung der Groessenklassen in Suchauszuegen widerspruechlich. Empfehlung Rechner: 650 CHF/kWh fuer 8-12 kWh, 600 fuer >= 15 kWh. Typische EFH-Groesse 10-15 kWh (EnergieSchweiz: 4-6 kWh fuer 4500 kWh/3-6 kWp)."
+  },
+
+  "ertrag_region": {
+    "wert": { "mittelland": 950, "jura_voralpen": 1000, "wallis_tessin": 1150, "alpen_ueber_1200m": 1300 },
+    "einheit": "kWh pro kWp und Jahr (Sued, ~30 Grad, ohne Verschattung)",
+    "quelle": "https://www.swissolar.ch/01_wissen/fachwissen/photovoltaik/merkblaetter/21001d_merkblatt_informationenzahlen.pdf",
+    "quellen_weitere": [
+      "https://digitalcollection.zhaw.ch/server/api/core/bitstreams/8e608b25-66a0-42dc-aa0e-4c2c3973c53d/content",
+      "https://www.zhaw.ch/de/lsfm/institute-zentren/iunr/oekotechnologien-energiesysteme/erneuerbare-energien/solarenergie/alpenstrom-davos",
+      "https://www.ekz.ch/blue/de/innovation/2020/Totalp.html",
+      "https://pubdb.bfe.admin.ch/de/publication/download/10343"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "Belegt: Swissolar-Merkblatt 850-1100 kWh/kWp (Netzverbund, Schweiz); ZHAW: CH-Durchschnittsanlage knapp 1000 kWh/kWp; Sekundaerquellen Mittelland 900-1100. Hoehere Werte im Wallis/Tessin/Graubuenden qualitativ belegt (Einstrahlung > 1325 kWh/m2 horizontal), Zahl 1150 ist Arbeitswert. Alpen: ZHAW Davos bifazial/steil 1690-1837 kWh/kWp (Spezialanlagen, nicht EFH); EKZ: alpine Anlagen bis doppelter Jahresertrag. Regionale Punktwerte ausser Mittelland sind Arbeitswerte, nicht Quellenwerte. sonnendach.ch liefert pro Dach den Ertrag - im Rechner darauf verweisen."
+  },
+
+  "ausrichtung_faktor": {
+    "wert": { "sued": 1.0, "suedost_suedwest": 0.95, "ost_west": 0.8, "flachdach_ost_west_aufgestaendert": 0.85, "nord_30grad": 0.6 },
+    "einheit": "Faktor relativ zu Sued (Neigung ~30 Grad)",
+    "quelle": "https://www.swissolar.ch/de/wissen/solartechnologien/photovoltaik/anwendung",
+    "quellen_weitere": ["https://www.wienenergie.at/blog/platzbedarf-photovoltaikanlage/"],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "Keine offizielle Schweizer Quelle mit Prozentfaktoren gefunden. Sekundaerquelle: SO/SW 90-95 %, O/W 75-85 %, NO/NW 50-70 %, N 40-60 % von Sued. Swissolar 'Anwendung': Maximum bei Sued/30 Grad. Werte sind Faustwerte - mit sonnendach.ch oder PVGIS pruefen."
+  },
+
+  "monatsverteilung_mittelland": {
+    "wert": null,
+    "einheit": "% der Jahresproduktion pro Monat",
+    "quelle": "https://www.swissolar.ch/02_markt-politik/positionen/230307_arbeitspapier-winterstrom-1-.pdf",
+    "quellen_weitere": [
+      "https://www.swissolar.ch/01_wissen/fachwissen/photovoltaik/merkblaetter/21001d_merkblatt_informationenzahlen.pdf",
+      "https://balconysolar.ch/balkonkraftwerk-ertragsrechner"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "PVGIS (re.jrc.ec.europa.eu) war gesperrt, keine offizielle Monatstabelle gefunden. Belegte Anker: Swissolar 2023 - Winterhalbjahr (Okt-Maerz) des heutigen Anlagenbestands ca. 26 % der Jahresproduktion, Fassaden ca. 45 %; aelteres Swissolar-Merkblatt nennt 65 % Sommer / 35 % Winter. Sekundaer: Januar/Dezember je ca. 2-3 %, Juli ca. 14-16 %. Monatsprofil vor Livegang per PVGIS (z.B. 47.4 N / 8.5 E, 1 kWp, 14 % Verluste) erzeugen."
+  },
+
+  "flaeche_pro_kwp_m2": {
+    "wert": 5.0,
+    "einheit": "m2 Dachflaeche pro kWp (inkl. Randabstaende/Fugen, Schraegdach)",
+    "quelle": "https://www.swissolar.ch/01_wissen/fachwissen/photovoltaik/merkblaetter/21001d_merkblatt_informationenzahlen.pdf",
+    "quellen_weitere": ["https://www.energie-solar-erfahrungen.de/photovoltaik/pv-modul-groesse"],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "Swissolar-Merkblatt (aeltere Modulgeneration): 6 m2/kWp. Aktuelle Module ca. 1.95 m2 bei 440-465 Wp (Sekundaerquelle) => reine Modulflaeche ca. 4.3-4.5 m2/kWp (eigene Rechnung 1.95/0.44). Mit Abstaenden ca. 5 m2/kWp als Arbeitswert. Ein Suchauszug nannte faelschlich 2.2 m2/kWp - verworfen."
+  },
+
+  "modulleistung_wp": {
+    "wert": 440,
+    "einheit": "Wp pro Modul (ca. 1.95 m2, Wirkungsgrad ca. 22-23 %)",
+    "quelle": "https://www.energie-solar-erfahrungen.de/photovoltaik/pv-modul-groesse",
+    "quellen_weitere": ["https://42watt.de/magazin/solar-panel-leistung"],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "Nur Sekundaerquellen (DE): Standardformat 1722 x 1134 mm = 1.95 m2, 440-465 Wp; Serienmodule 20-24 % Wirkungsgrad."
+  },
+
+  "unterhalt_chf_jahr": {
+    "wert": 300,
+    "einheit": "CHF pro Jahr (EFH ca. 10 kWp, inkl. Rueckstellung Wechselrichterersatz, Versicherung, Kontrolle)",
+    "quelle": "https://pubdb.bfe.admin.ch/de/publication/download/8665",
+    "quellen_weitere": [
+      "https://pubdb.bfe.admin.ch/de/publication/download/12458",
+      "https://www.swissolar.ch/de/wissen/anlagenbetrieb/wartung"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "EnergieSchweiz-Publikation 'Betriebskosten von PV-Anlagen': 10-kW-Anlagen ca. 4.0 Rp./kWh, 15 kW ca. 3.1 Rp./kWh (inkl. Wartung, Reinigung, Versicherung, einmaliger WR-Ersatz); Publikationsjahr unbekannt (eher aelter). 4.0 Rp. x 9'500 kWh = ca. 380 CHF/Jahr; Faustregel '1 % der Investition' (~250 CHF) nur aus Sekundaerquelle. 300 CHF ist gerundeter Arbeitswert."
+  },
+
+  "betriebskosten_rp_kwh": {
+    "wert": 4.0,
+    "einheit": "Rp./kWh (Anlagen ca. 10 kW)",
+    "quelle": "https://pubdb.bfe.admin.ch/de/publication/download/8665",
+    "quellen_weitere": [],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "Offizielle Quelle (EnergieSchweiz/BFE), aber nur eine Quelle, Stand unklar. Spannweite gut betriebener Anlagen 2-6 Rp./kWh."
+  },
+
+  "verbrauch_haushalt_kwh": {
+    "wert": {
+      "elcom_profile": {
+        "H1": { "kwh": 1600, "beschreibung": "2-Zimmerwohnung mit Elektroherd" },
+        "H2": { "kwh": 2500, "beschreibung": "4-Zimmerwohnung mit Elektroherd" },
+        "H3": { "kwh": 4500, "beschreibung": "4-Zimmerwohnung mit Elektroherd und Elektroboiler" },
+        "H4": { "kwh": 4500, "beschreibung": "5-Zimmerwohnung mit Elektroherd und Tumbler (ohne Elektroboiler)" },
+        "H5": { "kwh": 7500, "beschreibung": "5-Zimmer-EFH mit Elektroherd, Elektroboiler und Tumbler" },
+        "H6": { "kwh": 25000, "beschreibung": "5-Zimmer-EFH mit Elektroherd, Elektroboiler, Tumbler und Elektro-Widerstandsheizung" },
+        "H7": { "kwh": 13000, "beschreibung": "5-Zimmer-EFH mit Elektroherd, Elektroboiler, Tumbler, Waermepumpe 5 kW" },
+        "H8": { "kwh": 7500, "beschreibung": "Grosse, hoch elektrifizierte Eigentumswohnung" }
+      },
+      "nach_personen_ohne_elektroboiler": {
+        "1": { "wohnung": 2200, "efh": 2700 },
+        "2": { "wohnung": 2190, "efh": 2860 },
+        "3": { "wohnung": 2650, "efh": 3450 },
+        "4": { "wohnung": 3065, "efh": 4050 },
+        "5": { "wohnung": 3450, "efh": 4600 },
+        "6": { "wohnung": null, "efh": null }
+      }
+    },
+    "einheit": "kWh pro Jahr",
+    "quelle": "https://www.elcom.admin.ch/dam/elcom/de/dokumente/2025/wegleitung-tarife-2026.pdf.download.pdf/Wegleitung%20zur%20Tarifdeklaration%20f%C3%BCr%20Tarife%202026%20-%20DE.pdf",
+    "quellen_weitere": [
+      "https://www.tgb.swiss/_docn/142396/ElCom_Verbrauchsprofile_H1_bis_C7.pdf",
+      "https://pubdb.bfe.admin.ch/de/publication/download/10559",
+      "https://www.energieinside.ch/e-leben/stromsparmassnahmen/der-typische-haushalt-stromverbrauch",
+      "https://www.energieeffizienz.ch/dam/studien/2013_typischer_haushalt_stromverbrauch_d/pdf_de/SAFE_typischer_Haushaltstromverbrauch_12_2013/Der%20typische%20Haushalt-SV-SAFE-Dez-2013.pdf"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "H4-Definition (5-Zimmerwohnung, Elektroherd + Tumbler, ohne Elektroboiler, 4'500 kWh) ist VERIFIZIERT (ElCom). Uebrige Profile H1-H8 via Netzbetreiber-Dokument (TGB Bischofszell, gibt ElCom-Liste wieder). Personenwerte: 2 und 4 Personen aus BFE-Studie (via energieinside.ch); 1, 3 und 5 Personen nur aus Suchauszuegen unklarer Herkunft (vermutlich S.A.F.E./Nipkow 2007/2013) - Werte stammen evtl. aus unterschiedlichen Studienjahren (Inkonsistenz: 1 P. Wohnung 2200 > 2 P. Wohnung 2190). 6 Personen nicht gefunden. EnergieSchweiz: Schweizer Durchschnitt ca. 5000 kWh (verzerrt durch Elektroheizungen/-boiler); EFH bis 30 % mehr als Wohnung."
+  },
+
+  "eauto_kwh_100km": {
+    "wert": 20,
+    "einheit": "kWh pro 100 km ab Steckdose (inkl. Ladeverluste)",
+    "quelle": "https://www.energieschweiz.ch/programme/fahr-mit-dem-strom/energieeffizienz/",
+    "quellen_weitere": [
+      "https://www.ekz.ch/de/blue/wissen/2021/wie-viel-strom-braucht-ein-elektroauto-auf-100-km.html",
+      "https://www.tcs.ch/de/testberichte-ratgeber/ratgeber/elektromobilitaet/elektroauto-ladezeit.php"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "EnergieSchweiz: 10-20 kWh/100 km je Fahrzeug, Ladeverluste 10-20 %, Beispiel 18 kWh fuer 100 km. 20 kWh inkl. Verluste ist ein gaengiger Arbeitswert (mehrere Quellen), aber kein exakter Amtswert."
+  },
+
+  "fahrleistung_km_jahr": {
+    "wert": 10256,
+    "einheit": "km pro Personenwagen und Jahr (Mittel aller PW, MZMV 2021)",
+    "quelle": "https://www.gr.ch/DE/institutionen/verwaltung/dvs/are/publikationen/Mikrozensus%20Mobilit%C3%A4t%20und%20Verkehr%202021%20GR.pdf",
+    "quellen_weitere": [
+      "https://www.streetlife.ch/artikel/10256-kilometer-legt-ein-personenwagen-in-der-schweiz-pro-jahr-durchschnittlich-zurueck",
+      "https://www.bfs.admin.ch/asset/de/24165261"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "verifiziert",
+    "hinweis": "Mikrozensus Mobilitaet und Verkehr 2021 (BFS/ARE), zitiert u.a. in Kantonspublikation GR und Sekundaerquelle. Benzin ca. 9'010 km, Diesel ca. 12'782 km. Aeltere Werte (ARE/PEFA 2000) ca. 13'500 km. Rechner-Default 10'000 bis 12'000 km; 10'256 km x 20 kWh/100 km = ca. 2'050 kWh/Jahr."
+  },
+
+  "waermepumpe_kwh_jahr": {
+    "wert": { "luft_wasser": 5330, "erdsonde": 4000 },
+    "einheit": "kWh Strom pro Jahr (EFH 200 m2, Energiebedarf 80 kWh/m2a)",
+    "quelle": "https://www.energieschweiz.ch/stories/haeufig-gestellte-fragen-zu-waermepumpen/",
+    "quellen_weitere": ["https://www.heat365.ch/blog/stromverbrauch-waermepumpe"],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "EnergieSchweiz nennt die Werte direkt (Suchauszug, genaue Unterseite nicht eindeutig zuordenbar), zweite unabhaengige offizielle Quelle fehlt. Saisonal: stark winterlastig; Sekundaerquelle: Winter 15-35 kWh/Tag, Sommer 3-5 kWh/Tag (nur Warmwasser). Keine offizielle Monatsverteilung gefunden. ElCom-Profil H7 (EFH mit WP 5 kW) = 13'000 kWh Gesamtverbrauch inkl. Haushalt."
+  },
+
+  "eigenverbrauch_quote": {
+    "wert": { "ohne_speicher": 0.30, "mit_speicher_max": 0.70 },
+    "einheit": "Anteil der PV-Produktion, der im Haus verbraucht wird",
+    "quelle": "https://www.energieschweiz.ch/stories/batterien/",
+    "quellen_weitere": [
+      "https://www.energieschweiz.ch/stories/energiespeicher/",
+      "https://pubdb.bfe.admin.ch/de/publication/download/9323",
+      "https://www.ckw.ch/energie/photovoltaik/eigenverbrauch-steigern"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "verifiziert",
+    "hinweis": "EnergieSchweiz: 4-Personen-Haushalt 4'500 kWh, PV 3-6 kWp, Speicher 4-6 kWh -> Eigenverbrauch von 30 % auf bis 70 %; mit WP-/E-Auto-Steuerung ohne Batterie ca. 50 %. ACHTUNG: gilt fuer KLEINE Anlagen (3-6 kWp). Bei 10+ kWp sinkt die Quote deutlich (Faustregel 20-35 % ohne Speicher plausibel, aber nicht offiziell belegt). Rechner sollte Quote aus Verhaeltnis Produktion/Verbrauch ableiten (Methode HTW Berlin Unabhaengigkeitsrechner)."
+  },
+
+  "autarkie_quote": {
+    "wert": { "ohne_speicher": 0.30, "mit_speicher": 0.60 },
+    "einheit": "Anteil des Verbrauchs, der mit eigenem Solarstrom gedeckt wird",
+    "quelle": "https://solar.htw-berlin.de/rechner/unabhaengigkeitsrechner/",
+    "quellen_weitere": [
+      "https://solar.htw-berlin.de/faq-unabhaengigkeitsrechner/",
+      "https://www.energieschweiz.ch/stories/energiespeicher/"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "Keine offizielle Schweizer Zahl gefunden. EnergieSchweiz: EFH deckt ohne Massnahmen rund 30 % 'seines Eigenverbrauchs' (Formulierung im Auszug unklar, ob Autarkie oder EV-Quote). HTW Berlin: EFH koennen mit PV-Speicher 'bis 70 % und mehr' des Jahresbedarfs decken; Methode: Autarkie und EV-Anteil aus Jahresverbrauch, PV-Leistung (kWp/MWh) und nutzbarer Speicherkapazitaet (kWh/MWh), 90 % der nutzbaren Kapazitaet angesetzt. Faustregel 60-75 % mit Speicher nur fuer gut dimensionierte Systeme."
+  },
+
+  "degradation_prozent_jahr": {
+    "wert": 0.5,
+    "einheit": "% Leistungsverlust pro Jahr",
+    "quelle": "https://www.swissolar.ch/services/medien/news/detail/n-n/wie-verlaesslich-produzieren-pv-anlagen/",
+    "quellen_weitere": [
+      "https://www.swissolar.ch/services/medien/news/detail/n-n/photovoltaikanlagen-funktionieren-30-jahre-und-laenger-einwandfrei/",
+      "https://pubdb.bfe.admin.ch/de/publication/download/12458"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "verifiziert",
+    "hinweis": "Swissolar/BFE: gemessene Degradation teils nur 0.2-0.3 %/Jahr (7-Jahres-Studie) bzw. 0.05 %/Jahr (Langzeit); ueblicherweise werden 0.5 %/Jahr eingerechnet; Performance-Loss-Rate sank von 0.8 %/Jahr (2016) auf 0.5 %/Jahr (2023). 0.5 % ist konservativer Rechenwert."
+  },
+
+  "lebensdauer_jahre": {
+    "wert": { "anlage_module": 30, "wechselrichter": 12 },
+    "einheit": "Jahre",
+    "quelle": "https://www.swissolar.ch/services/medien/news/detail/n-n/photovoltaikanlagen-funktionieren-30-jahre-und-laenger-einwandfrei/",
+    "quellen_weitere": [
+      "https://www.swissolar.ch/02_markt-politik/faktenblatt/de_2025_faktenblatt_pv_schweiz_sws.pdf",
+      "https://pubdb.bfe.admin.ch/de/publication/download/9943"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "verifiziert",
+    "hinweis": "Swissolar: Lebensdauer mindestens 30 Jahre; Faktenblatt 2025: mittlere Lebensdauer 33 Jahre. EnergieSchweiz (Solar-Offerte-Check): Wechselrichter 10-15 Jahre, 1-2 Ersatz pro Anlagenleben; empfohlene WR-Produktgarantie mind. 5 Jahre. Modul-Leistungsgarantien (25-30 Jahre) sind herstellerspezifisch, nicht amtlich."
+  },
+
+  "co2_strommix_g_kwh": {
+    "wert": 127,
+    "einheit": "g CO2-eq pro kWh (Schweizer Verbraucherstrommix 2021-2023, Lebenszyklus)",
+    "quelle": "https://pubdb.bfe.admin.ch/de/publication/download/12224",
+    "quellen_weitere": [
+      "https://www.bafu.admin.ch/dam/bafu/de/dokumente/klima/fachinfo-daten/Umweltbilanz-Strommix-Schweiz-2018-v2.01.pdf.download.pdf/Umweltbilanz-Strommix-Schweiz-2018-v2.01.pdf"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "Offizielle BFE-Publikation nennt 127 g (Verbrauchermix inkl. Importe) vs. 29 g (Lieferantenmix HKN 2023) - Faktor 4.4. Wahl der Bezugsgroesse ist methodisch umstritten und fuer eine Werbe-Website heikel. EMPFEHLUNG: WEGLASSEN oder nur mit klarer Erklaerung."
+  },
+
+  "sonnenhoehe_zuerich_grad": {
+    "wert": { "mittag_21_dez": 19.2, "mittag_21_jun": 66.1, "tageslaenge_21_dez": "8 h 27 min", "tageslaenge_21_jun": "15 h 57 min" },
+    "einheit": "Grad ueber Horizont (wahrer Mittag) bzw. Stunden",
+    "quelle": "https://www.timeanddate.de/sonne/schweiz/zuerich?monat=6",
+    "quellen_weitere": [
+      "https://sonnenzeiten.org/ch/zurich",
+      "https://meteonews.ch/de/Astronomie/G2657896/Z%C3%BCrich"
+    ],
+    "abgerufen": "2026-10-05",
+    "status": "nicht verifiziert",
+    "hinweis": "Sonnenhoehe eigene Rechnung: 90 - 47.37 (Breite Zuerich) -/+ 23.44 (Ekliptikschiefe) = 19.2 bzw. 66.1 Grad (Refraktion vernachlaessigt). Tageslaengen aus Astronomie-Portalen (keine MeteoSchweiz-Quelle gefunden). Fuer Website runden: 'knapp 20 Grad' / 'rund 66 Grad', 'rund 8 1/2 bzw. 16 Stunden'."
+  }
+}

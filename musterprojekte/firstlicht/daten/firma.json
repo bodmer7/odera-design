@@ -1,0 +1,22 @@
+{
+  "_hinweis": "Einzige Quelle für die Firmendaten der erfundenen Firstlicht Solartechnik GmbH. Alle Angaben sind frei erfunden. Nach einer Änderung: node tools/firstlicht/build.mjs",
+  "name": "Firstlicht Solartechnik GmbH",
+  "kurz": "Firstlicht",
+  "strasse": "Werkhofstrasse 11",
+  "plz": "5998",
+  "ort": "Lichtwil",
+  "telefon": "056 000 18 18",
+  "telefonLink": "+41560001818",
+  "email": "hallo@firstlicht.example",
+  "gegruendet": 2011,
+  "mitarbeitende": 18,
+  "montageteams": 4,
+  "anlagen": 640,
+  "region": "Freiamt, Reusstal und Limmattal",
+  "regionen": ["Freiamt", "Reusstal", "Limmattal"],
+  "zeiten": {
+    "tage": "Montag bis Freitag",
+    "vormittag": "7.30 bis 12.00 Uhr",
+    "nachmittag": "13.00 bis 17.00 Uhr"
+  }
+}

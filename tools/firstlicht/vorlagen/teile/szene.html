@@ -1,0 +1,117 @@
+<figure class="szene" data-szene aria-labelledby="szene-legende">
+  <div class="szene__bild">
+    <svg class="szene__svg" viewBox="0 0 960 600" role="img" aria-labelledby="szene-titel szene-text" focusable="false">
+      <title id="szene-titel">Beispieltag an einem Haus mit Solaranlage</title>
+      <desc id="szene-text">Einfamilienhaus mit Solarmodulen auf dem Dach, Batteriespeicher, Ladestation mit Auto und Anschluss ans Stromnetz. Die Sonne wandert über den Himmel. Linien zeigen, wohin der Strom gerade fliesst.</desc>
+      <defs>
+        <linearGradient id="fl-himmel" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="szene__himmel-oben"/>
+          <stop offset="1" class="szene__himmel-unten"/>
+        </linearGradient>
+        <radialGradient id="fl-schein">
+          <stop offset="0" stop-color="#FFC857" stop-opacity=".55"/>
+          <stop offset="1" stop-color="#FFC857" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="fl-modul" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" class="szene__modul-hell"/>
+          <stop offset="1" class="szene__modul-dunkel"/>
+        </linearGradient>
+      </defs>
+
+      <rect class="szene__himmel" x="-400" width="1760" height="600" fill="url(#fl-himmel)"/>
+      <g class="szene__sterne" fill="#F7F5F0">
+        <circle cx="90" cy="70" r="1.6"/><circle cx="210" cy="140" r="1.2"/><circle cx="320" cy="60" r="1.8"/>
+        <circle cx="450" cy="120" r="1.1"/><circle cx="560" cy="50" r="1.5"/><circle cx="660" cy="150" r="1.2"/>
+        <circle cx="760" cy="80" r="1.7"/><circle cx="880" cy="170" r="1.2"/><circle cx="150" cy="210" r="1"/>
+        <circle cx="610" cy="230" r="1"/><circle cx="400" cy="200" r="1.3"/><circle cx="910" cy="60" r="1.1"/><circle cx="-60" cy="110" r="1.4"/><circle cx="-180" cy="40" r="1.1"/><circle cx="1040" cy="120" r="1.5"/><circle cx="1150" cy="50" r="1.2"/>
+      </g>
+      <path class="szene__mond" d="M842 92a34 34 0 1 0 34 46 28 28 0 1 1-34-46z" fill="#F2EBD9"/>
+      <g class="szene__sonne" transform="translate(480 70)">
+        <circle r="78" fill="url(#fl-schein)"/>
+        <circle r="26" fill="#FFC857"/>
+      </g>
+
+      <path class="szene__huegel-hinten" d="M-400 452C-250 440-120 476 0 468C150 428 300 452 460 438S770 446 960 426C1080 414 1220 446 1360 440V600H-400Z"/>
+      <path class="szene__huegel-vorne" d="M-400 496C-220 506-120 488 0 500C200 486 380 508 560 498S860 502 960 494C1100 486 1240 506 1360 498V600H-400Z"/>
+      <rect class="szene__boden" x="-400" y="518" width="1760" height="82"/>
+
+      <!-- Netzanschluss: Mast mit Leitung -->
+      <g class="szene__mast" fill="none" stroke-linecap="round">
+        <path d="M150 322V520M122 340H178" stroke-width="6"/>
+        <path d="M122 342Q-120 372-400 352M178 342Q240 372 300 452" stroke-width="2"/>
+      </g>
+
+      <!-- Haus -->
+      <g class="szene__haus" stroke-linejoin="round">
+        <path class="szene__wand-seite" d="M300 520V410L370 300L440 410V520Z"/>
+        <rect class="szene__wand" x="440" y="410" width="260" height="110"/>
+        <path class="szene__dach" d="M370 300H630L700 410H440Z"/>
+        <g class="szene__module" transform="matrix(260 0 70 110 370 300)" fill="url(#fl-modul)">
+          <rect x=".04" y=".07" width=".143" height=".263"/><rect x=".195" y=".07" width=".143" height=".263"/><rect x=".351" y=".07" width=".143" height=".263"/><rect x=".506" y=".07" width=".143" height=".263"/><rect x=".661" y=".07" width=".143" height=".263"/><rect x=".817" y=".07" width=".143" height=".263"/>
+          <rect x=".04" y=".368" width=".143" height=".263"/><rect x=".195" y=".368" width=".143" height=".263"/><rect x=".351" y=".368" width=".143" height=".263"/><rect x=".506" y=".368" width=".143" height=".263"/><rect x=".661" y=".368" width=".143" height=".263"/><rect x=".817" y=".368" width=".143" height=".263"/>
+          <rect x=".04" y=".667" width=".143" height=".263"/><rect x=".195" y=".667" width=".143" height=".263"/><rect x=".351" y=".667" width=".143" height=".263"/><rect x=".506" y=".667" width=".143" height=".263"/><rect x=".661" y=".667" width=".143" height=".263"/><rect x=".817" y=".667" width=".143" height=".263"/>
+        </g>
+        <path class="szene__first" d="M370 300H630"/>
+        <g class="szene__fenster">
+          <rect x="470" y="432" width="48" height="44" rx="3"/>
+          <rect x="548" y="432" width="48" height="44" rx="3"/>
+          <rect x="342" y="440" width="56" height="40" rx="3"/>
+          <circle cx="370" cy="372" r="11"/>
+        </g>
+        <rect class="szene__tuer" x="628" y="448" width="42" height="72" rx="3"/>
+      </g>
+
+      <!-- Speicher mit Ladestand -->
+      <g class="szene__speicher">
+        <rect x="716" y="448" width="40" height="72" rx="6"/>
+        <rect class="szene__speicher-stand" x="723" y="456" width="26" height="56" rx="3"/>
+      </g>
+
+      <!-- Wallbox und Auto -->
+      <g class="szene__wallbox">
+        <rect x="805" y="440" width="7" height="80"/>
+        <rect x="794" y="430" width="29" height="38" rx="5"/>
+        <path class="szene__kabel" d="M808 468C812 492 830 500 846 490" fill="none" stroke-width="3" stroke-linecap="round"/>
+      </g>
+      <g class="szene__auto">
+        <path d="M832 512V486C832 478 838 474 846 472L866 452C870 448 876 446 882 446H914C922 446 928 450 932 456L944 474C950 476 954 482 954 490V512Z"/>
+        <path class="szene__auto-glas" d="M872 470L886 456H912L922 470Z"/>
+        <circle cx="858" cy="514" r="12"/><circle cx="928" cy="514" r="12"/>
+      </g>
+
+      <!-- Energieflüsse: Breite und Sichtbarkeit setzt szene.js -->
+      <g class="szene__fluesse" fill="none" stroke-linecap="round">
+        <path data-fluss="netzHaus" class="szene__fluss szene__fluss--netz" d="M172 352C230 376 268 420 300 462"/>
+        <path data-fluss="dachNetz" class="szene__fluss" d="M430 346C340 252 220 292 160 336"/>
+        <path data-fluss="dachHaus" class="szene__fluss" d="M560 362V474"/>
+        <path data-fluss="dachSpeicher" class="szene__fluss" d="M690 405C712 418 736 428 736 448"/>
+        <path data-fluss="speicherHaus" class="szene__fluss szene__fluss--speicher" d="M716 490H674"/>
+        <path data-fluss="dachAuto" class="szene__fluss" d="M700 410C760 394 800 404 808 428"/>
+      </g>
+    </svg>
+  </div>
+
+  <dl class="szene__werte" aria-label="Werte zur gewählten Uhrzeit">
+    <div class="wert-chip"><dt>Produktion</dt><dd><span data-wert="produktion">6.7</span> kW</dd></div>
+    <div class="wert-chip"><dt>Verbrauch</dt><dd><span data-wert="verbrauch">3.3</span> kW</dd></div>
+    <div class="wert-chip"><dt>Speicher</dt><dd><span data-wert="speicher">100</span> %</dd></div>
+    <div class="wert-chip"><dt data-wert="netz-label">Einspeisung</dt><dd><span data-wert="netz">3.4</span> kW</dd></div>
+  </dl>
+
+  <div class="szene__steuerung nur-js">
+    <button class="knopf knopf--icon szene__play" type="button" data-szene-play aria-label="Tagesverlauf abspielen">
+      <svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg>
+    </button>
+    <div class="szene__regler">
+      <label class="szene__label" for="szene-zeit">Tageszeit <output data-wert="uhrzeit" for="szene-zeit">12.00</output> Uhr</label>
+      <input class="regler" id="szene-zeit" type="range" min="5" max="22" step="0.25" value="12" data-szene-zeit aria-valuetext="12 Uhr">
+    </div>
+    <fieldset class="segment" data-szene-saison>
+      <legend class="nur-sr">Jahreszeit</legend>
+      <label><input type="radio" name="saison" value="sommer" checked><span>Sommer</span></label>
+      <label><input type="radio" name="saison" value="winter"><span>Winter</span></label>
+    </fieldset>
+  </div>
+  <figcaption class="szene__legende" id="szene-legende">Beispieltag, vereinfacht: Einfamilienhaus mit 10 kWp und 10 kWh Speicher.</figcaption>
+  <p class="nur-sr" aria-live="polite" data-szene-ansage></p>
+</figure>
