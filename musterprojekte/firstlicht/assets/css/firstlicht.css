@@ -977,6 +977,57 @@
 
   .nur-druck { display: none; }
 
+  /* ---------- Über uns ---------- */
+  .werte { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+  .jahre { list-style: none; padding: 0; display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
+  .jahre li { padding-top: var(--s-4); border-top: 2px solid var(--color-border); display: grid; gap: 6px; }
+  .jahre__jahr { font-family: var(--font-titel); font-weight: 800; font-size: var(--text-xl); color: var(--color-accent-text); }
+  .jahre p { color: var(--color-text-muted); font-size: var(--text-s); }
+
+  .zeitleiste { --linie: 3px; list-style: none; padding: 0 0 0 44px; position: relative; display: grid; gap: var(--s-6); counter-reset: z; max-width: 46rem; }
+  .zeitleiste::before { content: ''; position: absolute; left: 15px; top: 8px; bottom: 8px; width: var(--linie); border-radius: 3px; background: var(--color-border); }
+  .zeitleiste::after { content: ''; position: absolute; left: 15px; top: 8px; bottom: 8px; width: var(--linie); border-radius: 3px; background: linear-gradient(var(--sonne), var(--morgenrot)); transform-origin: top; }
+  .zeitleiste__schritt { position: relative; counter-increment: z; display: grid; gap: 6px; }
+  .zeitleiste__schritt::before { content: counter(z); position: absolute; left: -44px; top: 0; z-index: 1; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: var(--text-s); background: var(--color-accent); color: var(--color-on-accent); box-shadow: 0 0 0 4px var(--color-bg); }
+  .zeitleiste__schritt h3 { padding-top: 4px; }
+  .zeitleiste__schritt p { color: var(--color-text-muted); }
+  .zeitleiste__schritt a { color: var(--color-accent-text); }
+  .zeitleiste__dauer { display: inline-flex; width: fit-content; gap: 6px; align-items: center; font-size: var(--text-xs); font-weight: 700; color: var(--color-text) !important; background: var(--color-surface-2); padding: 4px 10px; border-radius: 999px; }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .zeitleiste { view-timeline-name: --zeitleiste; }
+      .zeitleiste::after { animation: linie-fuellen linear both; animation-timeline: --zeitleiste; animation-range: entry 30% exit 60%; }
+      .zeitleiste__schritt::before { animation: punkt-an linear both; animation-timeline: view(); animation-range: entry 60% cover 45%; }
+    }
+  }
+  @keyframes linie-fuellen { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes punkt-an { from { background: var(--color-surface-2); color: var(--color-text-muted); } }
+
+  .team { list-style: none; padding: 0; display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+  .team__karte { display: grid; gap: 8px; align-content: start; padding: 20px; border-radius: var(--radius-l); background: var(--color-surface); border: var(--rahmen); }
+  .team__karte p { color: var(--color-text-muted); font-size: var(--text-s); }
+  .team__avatar { width: 64px; height: 64px; border-radius: 22px; display: grid; place-items: center; font-family: var(--font-titel); font-weight: 800; font-size: 1.25rem; color: var(--tinte); background: linear-gradient(160deg, var(--sonne), var(--morgenrot)); position: relative; overflow: hidden; }
+  .team__avatar::after { content: ''; position: absolute; inset: auto -10% -46% -10%; height: 70%; background: rgb(255 255 255 / 0.28); clip-path: polygon(0 100%, 50% 0, 100% 100%); }
+  .team__avatar--2 { background: linear-gradient(160deg, var(--himmel), #9DB8D3); }
+  .team__avatar--3 { background: linear-gradient(160deg, #FFD9B8, var(--morgenrot)); }
+  .team__avatar--4 { background: linear-gradient(160deg, #C9E8D3, #6FC38F); }
+  .team__avatar--5 { background: linear-gradient(160deg, #E6DFF2, #B4A6D6); }
+
+  .gebiet { display: grid; gap: var(--s-6); align-items: center; }
+  @media (min-width: 56em) { .gebiet { grid-template-columns: 5fr 7fr; } }
+  .gebiet__karte { width: 100%; height: auto; }
+  .gebiet__flaeche { stroke: var(--color-surface); stroke-width: 3; }
+  .gebiet__flaeche--1 { fill: color-mix(in srgb, var(--morgenrot) 28%, var(--color-surface)); }
+  .gebiet__flaeche--2 { fill: color-mix(in srgb, var(--sonne) 36%, var(--color-surface)); }
+  .gebiet__flaeche--3 { fill: color-mix(in srgb, var(--himmel) 70%, var(--color-surface)); }
+  .gebiet__fluss { fill: none; stroke: #6E9BE0; stroke-width: 4; stroke-linecap: round; }
+  .gebiet__ring { fill: none; stroke: var(--color-text-muted); stroke-width: 1.5; stroke-dasharray: 4 6; }
+  .gebiet__sitz circle { fill: var(--color-text); stroke: var(--sonne); stroke-width: 4; }
+  .gebiet__text { fill: var(--color-text); font: 700 14px var(--font-text); text-anchor: middle; }
+  .gebiet__text--sitz { text-anchor: start; font-weight: 800; }
+  .stelle summary > span { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+
   /* ---------- Projekte ---------- */
   .filterleiste { display: flex; flex-wrap: wrap; gap: 8px; }
   .filter { min-height: 44px; padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--color-border-feld); background: var(--color-surface); font-weight: 700; font-size: var(--text-s); touch-action: manipulation; }

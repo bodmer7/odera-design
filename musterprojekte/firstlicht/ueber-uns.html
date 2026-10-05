@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Über uns und Ablauf | Firstlicht Solartechnik</title>
+  <meta name="description" content="Beispielseite von ODERA Design. Haltung, Geschichte, Team und Ablauf der erfundenen Firstlicht Solartechnik: vom Erstgespräch bis zum Monitoring.">
+  <!-- Beispielseite mit erfundenem Betrieb: nicht in Suchmaschinen -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://odera.ch/musterprojekte/firstlicht/ueber-uns.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:site_name" content="Firstlicht Solartechnik (Beispielseite von ODERA Design)">
+  <meta property="og:title" content="Über uns und Ablauf | Firstlicht Solartechnik">
+  <meta property="og:description" content="Beispielseite von ODERA Design. Haltung, Geschichte, Team und Ablauf der erfundenen Firstlicht Solartechnik: vom Erstgespräch bis zum Monitoring.">
+  <meta property="og:url" content="https://odera.ch/musterprojekte/firstlicht/ueber-uns.html">
+  <meta property="og:image" content="https://odera.ch/musterprojekte/firstlicht/assets/logo/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="theme-color" content="#F7F5F0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E1420" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/logo/favicon.ico" sizes="32x32">
+  <link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+  <!-- Theme vor dem ersten Zeichnen setzen, damit nichts flackert -->
+  <script>(function(){var d=document.documentElement,t;d.className+=' js';try{t=localStorage.getItem('firstlicht-theme')}catch(e){}if(t!=='hell'&&t!=='dunkel')t=matchMedia('(prefers-color-scheme: dark)').matches?'dunkel':'hell';d.setAttribute('data-theme',t)})();</script>
+  <link rel="preload" href="assets/fonts/schibsted-grotesk-600-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/firstlicht.css">
+</head>
+<body>
+  <!-- Symbol-Vorrat: Logo und Icons, eingebunden über <use> -->
+  <svg class="nur-sr" aria-hidden="true" focusable="false">
+    <defs>
+      <mask id="fl-signet-maske" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+        <rect width="48" height="48" fill="#fff"/>
+        <path d="M5 38L24 19L43 38" fill="none" stroke="#000" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+      </mask>
+      <symbol id="fl-signet" viewBox="0 0 48 48">
+        <circle cx="24" cy="15.5" r="9" fill="var(--morgenrot, #FF8A3D)" mask="url(#fl-signet-maske)"/>
+        <path d="M5 38L24 19L43 38" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5.5v13M16 5.5v13" stroke-width="3"/></symbol>
+      <symbol id="i-telefon" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+      <symbol id="i-pfeil" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-rechner" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7h7M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01M8.5 18h.01M12 18h3.5"/></symbol>
+      <symbol id="i-menue" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+      <symbol id="i-schliessen" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+      <symbol id="i-haus" viewBox="0 0 24 24"><path d="M3 11.5L12 4l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M9.5 20v-5h5v5"/></symbol>
+  <symbol id="i-mfh" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2M11 21v-3h2v3"/></symbol>
+  <symbol id="i-gewerbe" viewBox="0 0 24 24"><path d="M3 20V10l5 3V10l5 3V10l5 3V5h3v15z"/><path d="M7 20v-3h3v3M14 20v-3h3v3"/></symbol>
+  <symbol id="i-speicher" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M10 2h4M12.5 8l-2.5 4h4l-2.5 4"/></symbol>
+  <symbol id="i-wallbox" viewBox="0 0 24 24"><rect x="5" y="3" width="10" height="13" rx="2"/><path d="M10 6.5l-1.5 3h3L10 12.5M10 16v5M15 8h2a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2"/></symbol>
+  <symbol id="i-wp" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="9" cy="12.5" r="3.5"/><path d="M9 9v7M5.5 12.5h7M15 10h3M15 13h3M15 16h3"/></symbol>
+  <symbol id="i-wartung" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3.5 17.5a1.8 1.8 0 1 0 2.5 2.5l5.8-5.8a4 4 0 0 0 5.4-5.4l-2.3 2.3-2.2-.4-.4-2.2z"/></symbol>
+  <symbol id="i-erweitern" viewBox="0 0 24 24"><rect x="3" y="11" width="8" height="8" rx="1"/><rect x="13" y="11" width="8" height="8" rx="1" stroke-dasharray="2.5 2.5"/><path d="M17 4v5M14.5 6.5h5"/></symbol>
+  <symbol id="i-sonne" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  <symbol id="i-druck" viewBox="0 0 24 24"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5h16l-6 7.5V19l-4 2v-8.5z"/></symbol>
+  <symbol id="i-kalender" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></symbol>
+  <symbol id="i-karte" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></symbol>
+  <symbol id="i-uhr" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-zurueck" viewBox="0 0 24 24"><path d="M20 12H5M11 6l-6 6 6 6"/></symbol>
+    </defs>
+  </svg>
+  <a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
+  <!-- Hinweis: Beispielseite. Muss auf jeder Seite bleiben. -->
+  <aside class="beispiel-leiste" aria-label="Hinweis zur Beispielseite">
+    <div class="huelle beispiel-leiste__innen">
+      <p class="beispiel-leiste__text"><strong>Beispielseite von ODERA Design.</strong> Der Betrieb ist frei erfunden.</p>
+      <p class="beispiel-leiste__links">
+        <a href="/musterprojekte/" target="_top">Zurück zu odera.ch</a>
+        <a href="/projekt-check/?quelle=firstlicht" target="_top">Projekt-Check</a>
+        <button class="erklaer-schalter nur-js" type="button" aria-pressed="false" data-erklaeren-schalter><span class="erklaer-schalter__spur" aria-hidden="true"></span><span class="erklaer-schalter__lang">Was ist hier besonders?</span><span class="erklaer-schalter__kurz">Erklärungen</span></button>
+      </p>
+    </div>
+  </aside>
+  <header class="kopf" data-kopf>
+    <div class="huelle kopf__innen">
+      <a class="logo" href="index.html" aria-label="Firstlicht Solartechnik, zur Startseite">
+        <svg class="logo__signet" aria-hidden="true" focusable="false"><use href="#fl-signet"></use></svg>
+        <span class="logo__wort" aria-hidden="true">Firstlicht</span>
+      </a>
+      <nav class="hauptnav" aria-label="Hauptnavigation">
+        <ul class="hauptnav__liste">
+          <li><a href="index.html">Start</a></li>
+          <li><a href="leistungen.html">Leistungen</a></li>
+          <li><a href="projekte.html">Projekte</a></li>
+          <li><a href="ueber-uns.html" aria-current="page">Über uns</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </nav>
+      <button class="theme-schalter nur-js" type="button" data-theme-schalter aria-label="Dunkles Design einschalten">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <g class="ts-strahlen"><path d="M12 1.5v2.2M12 20.3v2.2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M1.5 12h2.2M20.3 12h2.2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></g>
+          <circle class="ts-kern" cx="12" cy="12" r="5.5"/>
+          <circle class="ts-schatten" cx="12" cy="12" r="5.5"/>
+        </svg>
+      </button>
+      <a class="knopf knopf--klein kopf__cta" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Solarrechner</a>
+      <a class="knopf knopf--ghost knopf--klein menue-knopf" href="#fussnavigation" data-menue-knopf><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-menue"></use></svg>Menü</a>
+    </div>
+  </header>
+
+  <main id="inhalt" tabindex="-1">
+    <section class="seitenkopf" aria-labelledby="seiten-titel">
+      <div class="huelle stapel">
+        <p class="vorzeile">Über uns</p>
+        <h1 id="seiten-titel">Wir sagen, was sich rechnet. Auch wenn es weniger ist.</h1>
+        <p class="lead">Firstlicht gibt es seit 2011. Heute arbeiten 18 Leute bei uns, alle fest angestellt. Wer bei uns eine Anlage bestellt, hat vom ersten Anruf bis zum Monitoring dieselben Ansprechpersonen.</p>
+      </div>
+    </section>
+
+    <section class="sektion sektion--kompakt" aria-labelledby="werte-titel">
+      <div class="huelle">
+        <h2 class="nur-sr" id="werte-titel">Unsere Haltung</h2>
+        <div class="werte">
+          <article class="karte einblenden"><span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg></span><h3>Ehrliche Zahlen statt Werbeversprechen</h3><p>Wir rechnen mit offenen Annahmen und zeigen Spannen. Lohnt sich ein Speicher für Sie nicht, sagen wir das.</p></article>
+          <article class="karte einblenden"><span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-haus"></use></svg></span><h3>Eigene Leute auf Ihrem Dach</h3><p>4 Montageteams und unsere Elektriker sind bei uns angestellt. Subunternehmer setzen wir nicht ein.</p></article>
+          <article class="karte einblenden"><span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg></span><h3>Alles aus einer Hand</h3><p>Planung, Meldung, Montage, Netzanmeldung, Fördergesuch und Service. Sie haben eine Telefonnummer für alles.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sektion sektion--tief" aria-labelledby="geschichte-titel">
+      <div class="huelle geschichte">
+        <div class="kopfzeile">
+          <p class="vorzeile">Geschichte</p>
+          <h2 id="geschichte-titel">Von zwei Elektrikern zu vier Montageteams.</h2>
+        </div>
+        <ol class="jahre" role="list">
+          <li><span class="jahre__jahr">2011</span><p>Zwei Elektriker gründen Firstlicht in Lichtwil. Die erste Anlage steht auf dem eigenen Werkstattdach.</p></li>
+          <li><span class="jahre__jahr">2016</span><p>Das erste grosse Stalldach im Freiamt. Seither bauen wir regelmässig für Landwirtschaft und Gewerbe.</p></li>
+          <li><span class="jahre__jahr">2020</span><p>Speicher und Wallboxen werden fester Teil unserer Arbeit. Wir bilden unsere Teams dafür intern weiter.</p></li>
+          <li><span class="jahre__jahr">2023</span><p>Das vierte Montageteam startet. Wir bleiben bewusst regional.</p></li>
+          <li><span class="jahre__jahr">2026</span><p>640 Anlagen, 18 Mitarbeitende, und weiterhin keine Subunternehmer auf dem Dach.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sektion" id="ablauf" aria-labelledby="ablauf-titel">
+      <div class="huelle">
+        <div class="kopfzeile">
+          <p class="vorzeile">Ablauf</p>
+          <h2 id="ablauf-titel">So kommen Sie zu Ihrem eigenen Strom.</h2>
+          <p>Acht Schritte, typische Dauern ehrlich angegeben. Die Formalitäten übernehmen wir, Sie entscheiden.</p>
+        </div>
+        <ol class="zeitleiste" role="list" data-erklaeren="zeitleiste">
+          <li class="zeitleiste__schritt"><h3>Erstgespräch</h3><p>Am Telefon oder über das Formular. Wir klären Ihre Ziele und werfen einen ersten Blick auf Ihr Dach in <a href="https://www.sonnendach.ch/" target="_blank" rel="noopener">sonnendach.ch</a>.</p><p class="zeitleiste__dauer">15 bis 30 Minuten</p></li>
+          <li class="zeitleiste__schritt"><h3>Dach-Check vor Ort</h3><p>Wir prüfen Dach, Ausrichtung, Schatten, Hausanschluss und Zählerkasten. Kostenlos und unverbindlich.</p><p class="zeitleiste__dauer">Rund eine Stunde, meist innert zwei Wochen</p></li>
+          <li class="zeitleiste__schritt"><h3>Festpreis-Offerte</h3><p>Sie erhalten einen Festpreis mit allen Posten, eine Ertragsschätzung mit offenen Annahmen und die zu erwartende Förderung.</p><p class="zeitleiste__dauer">Wenige Tage nach dem Dach-Check</p></li>
+          <li class="zeitleiste__schritt"><h3>Bewilligung oder Meldeverfahren</h3><p>Meist reicht eine Meldung an die Gemeinde. Gleichzeitig stellen wir beim Netzbetreiber das Anschlussgesuch. Bei geschützten Gebäuden braucht es eine Baubewilligung.</p><p class="zeitleiste__dauer">Im Aargau mindestens 30 Tage</p></li>
+          <li class="zeitleiste__schritt"><h3>Montage</h3><p>Gerüst, Montage der Module und Elektroinstallation, alles mit eigenen Teams.</p><p class="zeitleiste__dauer">Einfamilienhaus meist zwei bis drei Tage</p></li>
+          <li class="zeitleiste__schritt"><h3>Inbetriebnahme und Netzanmeldung</h3><p>Schlusskontrolle mit Sicherheitsnachweis, Meldung an den Netzbetreiber, neuer Zähler und Beglaubigung der Anlagedaten.</p><p class="zeitleiste__dauer">Einige Tage bis wenige Wochen, je nach Netzbetreiber</p></li>
+          <li class="zeitleiste__schritt"><h3>Fördergesuch</h3><p>Wir melden die Anlage bei Pronovo an und stellen das Gesuch um die <button class="glossar" type="button" popovertarget="g-einmalverguetung">Einmalvergütung</button>. Die Bearbeitungszeit schwankt, wir halten Sie auf dem Laufenden.</p><p class="zeitleiste__dauer">Gesuch wenige Tage nach der Inbetriebnahme</p></li>
+          <li class="zeitleiste__schritt"><h3>Monitoring</h3><p>Sie sehen Ihre Anlage jederzeit auf dem Handy. Wir prüfen sie regelmässig und melden uns, wenn etwas auffällt.</p><p class="zeitleiste__dauer">Ab dem ersten Tag, über die ganze Lebensdauer</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sektion sektion--tief unten-aus" aria-labelledby="team-titel">
+      <div class="huelle">
+        <div class="kopfzeile">
+          <p class="vorzeile">Team</p>
+          <h2 id="team-titel">18 Leute, alle aus der Region.</h2>
+          <p>Die Personen auf dieser Beispielseite sind erfunden. Deshalb zeigen wir keine Gesichter, sondern Rollen.</p>
+        </div>
+        <ul class="team" role="list">
+          <li class="team__karte"><span class="team__avatar team__avatar--1" aria-hidden="true">GL</span><h3>Geschäftsleitung</h3><p>2 Personen, beide Elektroinstallateure mit Meisterprüfung</p></li>
+          <li class="team__karte"><span class="team__avatar team__avatar--2" aria-hidden="true">PL</span><h3>Planung und Offerten</h3><p>2 Personen, machen jeden Dach-Check selbst</p></li>
+          <li class="team__karte"><span class="team__avatar team__avatar--3" aria-hidden="true">MT</span><h3>Montage</h3><p>4 Teams mit 10 Personen, alle mit Absturzsicherungs-Ausbildung</p></li>
+          <li class="team__karte"><span class="team__avatar team__avatar--4" aria-hidden="true">EL</span><h3>Elektro</h3><p>2 Personen, schliessen jede Anlage an und machen die Schlusskontrolle</p></li>
+          <li class="team__karte"><span class="team__avatar team__avatar--5" aria-hidden="true">AD</span><h3>Administration und Förderung</h3><p>2 Personen, kümmern sich um Meldungen, Netzbetreiber und Pronovo</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sektion unten-aus" aria-labelledby="gebiet-titel">
+      <div class="huelle gebiet">
+        <div class="stapel">
+          <p class="vorzeile">Arbeitsgebiet</p>
+          <h2 id="gebiet-titel">Kurze Wege im Freiamt, Reusstal und Limmattal.</h2>
+          <p class="lead">Unsere Teams fahren jeden Morgen in Lichtwil los. Kurze Wege heissen: Wir sind schnell bei Ihnen, auch wenn später einmal etwas zu tun ist.</p>
+          <p class="feld__hilfe">Schematische Darstellung, nicht massstabsgetreu. Lichtwil ist ein erfundener Ort.</p>
+        </div>
+        <svg class="gebiet__karte" viewBox="0 0 480 360" role="img" aria-label="Schematische Karte des Arbeitsgebiets: Freiamt im Westen, Reusstal in der Mitte entlang der Reuss, Limmattal im Nordosten, Firmensitz Lichtwil im Zentrum." focusable="false">
+          <path class="gebiet__flaeche gebiet__flaeche--1" d="M40 210C40 150 90 110 150 118S230 170 214 230 150 318 100 300 40 270 40 210Z"/>
+          <path class="gebiet__flaeche gebiet__flaeche--2" d="M190 120C230 96 286 110 300 160S290 270 248 296 180 300 176 250 160 140 190 120Z"/>
+          <path class="gebiet__flaeche gebiet__flaeche--3" d="M290 70C340 40 430 50 446 100S420 190 368 196 286 170 280 130 270 82 290 70Z"/>
+          <path class="gebiet__fluss" d="M250 340C236 290 262 250 240 210S226 140 268 110 340 92 360 40"/>
+          <text class="gebiet__text" x="100" y="214">Freiamt</text>
+          <text class="gebiet__text" x="236" y="270">Reusstal</text>
+          <text class="gebiet__text" x="364" y="128">Limmattal</text>
+          <circle class="gebiet__ring" cx="226" cy="186" r="90"/>
+          <g class="gebiet__sitz"><circle cx="226" cy="186" r="9"/><text class="gebiet__text gebiet__text--sitz" x="242" y="180">Lichtwil</text></g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="sektion sektion--tief" id="stellen" aria-labelledby="stellen-titel">
+      <div class="huelle">
+        <div class="kopfzeile">
+          <p class="vorzeile">Offene Stellen</p>
+          <h2 id="stellen-titel">Arbeiten, wo das erste Licht ankommt.</h2>
+          <p>Feste Anstellung, eigene Teams, moderne Ausrüstung. Wir freuen uns auf Ihre Bewerbung.</p>
+        </div>
+        <div class="fragen" data-erklaeren="stellen">
+          <details class="frage stelle">
+            <summary><span><span class="badge badge--beispiel">Beispielinserat</span> Solarmonteurin oder Solarmonteur, 100 %</span></summary>
+            <div class="frage__antwort">
+              <p><strong>Ihre Aufgaben:</strong> Sie montieren im Team Solaranlagen auf Einfamilienhäusern, Mehrfamilienhäusern und Gewerbebauten in der Region. Sie sorgen für saubere Arbeit und einen guten Eindruck bei der Kundschaft.</p>
+              <p><strong>Ihr Profil:</strong> Abgeschlossene Lehre im Bau oder Handwerk, zum Beispiel als Dachdeckerin, Zimmermann oder Polymechaniker. Schwindelfrei, Führerausweis Kategorie B.</p>
+              <p><strong>Wir bieten:</strong> Feste Anstellung, Arbeitsbeginn in Lichtwil, Ausbildung in Absturzsicherung, fünf Wochen Ferien.</p>
+              <p>Bewerbung an <a href="mailto:hallo@firstlicht.example">hallo@firstlicht.example</a></p>
+            </div>
+          </details>
+          <details class="frage stelle">
+            <summary><span><span class="badge badge--beispiel">Beispielinserat</span> Elektroinstallateurin oder Elektroinstallateur EFZ, 80 bis 100 %</span></summary>
+            <div class="frage__antwort">
+              <p><strong>Ihre Aufgaben:</strong> Sie schliessen Solaranlagen, Speicher und Wallboxen an, machen Messungen und erstellen den Sicherheitsnachweis.</p>
+              <p><strong>Ihr Profil:</strong> Lehre als Elektroinstallateurin oder Elektroinstallateur EFZ, Freude an neuer Technik, selbständige Arbeitsweise.</p>
+              <p><strong>Wir bieten:</strong> Abwechslungsreiche Einsätze in der Region, Weiterbildung zur Elektro-Sicherheitsberaterin oder zum Elektro-Sicherheitsberater möglich.</p>
+              <p>Bewerbung an <a href="mailto:hallo@firstlicht.example">hallo@firstlicht.example</a></p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="sektion" aria-labelledby="abschluss-titel">
+      <div class="huelle">
+        <div class="abschluss">
+          <p class="vorzeile">Kennenlernen</p>
+          <h2 id="abschluss-titel">Am besten lernen wir uns auf Ihrem Dach kennen.</h2>
+          <div class="abschluss__ctas">
+            <a class="knopf" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
+            <a class="abschluss__tel" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg><span class="zahl">056 000 18 18</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fuss">
+    <div class="huelle">
+      <div class="fuss__raster">
+        <div class="fuss__marke">
+          <a class="logo" href="index.html" aria-label="Firstlicht Solartechnik, zur Startseite">
+            <svg class="logo__signet" aria-hidden="true" focusable="false"><use href="#fl-signet"></use></svg>
+            <span class="logo__wort" aria-hidden="true">Firstlicht</span>
+          </a>
+          <p>Solaranlagen, Speicher und Ladestationen aus einer Hand. Mit eigenen Montageteams im Freiamt, Reusstal und Limmattal.</p>
+        </div>
+        <div>
+          <h2>Kontakt</h2>
+          <address>
+            <span>Firstlicht Solartechnik GmbH</span>
+            <span>Werkhofstrasse 11</span>
+            <span>5998 Lichtwil</span>
+            <a href="tel:+41560001818"><span class="zahl" data-firma="telefon">056 000 18 18</span></a>
+            <a href="mailto:hallo@firstlicht.example">hallo@firstlicht.example</a>
+          </address>
+        </div>
+        <div>
+          <h2>Erreichbar</h2>
+          <p data-firma="zeiten"><strong>Montag bis Freitag</strong><br>7.30 bis 12.00 Uhr<br>13.00 bis 17.00 Uhr</p>
+        </div>
+        <nav aria-labelledby="fussnavigation">
+          <h2 id="fussnavigation" tabindex="-1">Seiten</h2>
+          <ul>
+            <li><a href="index.html">Start</a></li>
+            <li><a href="rechner.html">Solarrechner</a></li>
+            <li><a href="leistungen.html">Leistungen</a></li>
+            <li><a href="projekte.html">Projekte</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="fuss__beispiel">
+        <p><strong>Beispielseite von ODERA Design.</strong> Firstlicht ist frei erfunden, ebenso Adresse, Telefonnummer, Personen und Projekte.</p>
+        <p><a href="/musterprojekte/" target="_top">Zurück zu odera.ch</a> · <a href="/projekt-check/?quelle=firstlicht" target="_top">So eine Seite für Ihren Betrieb</a></p>
+      </div>
+
+      <div class="fuss__unten">
+        <p>© 2026 Firstlicht Solartechnik GmbH (fiktiv)</p>
+        <ul>
+          <li><a href="kontakt.html#impressum">Impressum</a></li>
+          <li><a href="kontakt.html#datenschutz">Datenschutz</a></li>
+          <li><a href="kontakt.html#bildnachweise">Bildnachweise</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <div class="handyleiste" data-handyleiste>
+    <a class="knopf knopf--sekundaer" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>Anrufen</a>
+    <a class="knopf" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Rechner</a>
+  </div>
+  <dialog class="menue" id="menue" aria-label="Menü">
+    <div class="menue__kopf">
+      <a class="logo" href="index.html" aria-label="Firstlicht Solartechnik, zur Startseite">
+        <svg class="logo__signet" aria-hidden="true" focusable="false"><use href="#fl-signet"></use></svg>
+        <span class="logo__wort" aria-hidden="true">Firstlicht</span>
+      </a>
+      <button class="knopf knopf--icon" type="button" data-menue-zu aria-label="Menü schliessen"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-schliessen"></use></svg></button>
+    </div>
+    <nav aria-label="Hauptnavigation, Handy">
+      <ul class="menue__liste">
+        <li><a href="index.html">Start</a></li>
+        <li><a href="rechner.html">Solarrechner</a></li>
+        <li><a href="leistungen.html">Leistungen</a></li>
+        <li><a href="projekte.html">Projekte</a></li>
+        <li><a href="ueber-uns.html" aria-current="page">Über uns</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </nav>
+    <div class="menue__fuss">
+      <a class="knopf" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
+      <a class="knopf knopf--sekundaer" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>056 000 18 18</a>
+    </div>
+  </dialog>
+  <!-- Glossar: Erklärungen zu Fachbegriffen, geöffnet über Knöpfe mit popovertarget -->
+  <div class="glossar-vorrat">
+    <div class="glossar-pop" id="g-kwp" popover role="note"><strong>kWp, Kilowatt-Peak</strong>Die Spitzenleistung einer Solaranlage unter genormten Testbedingungen. Eine Anlage mit 10 kWp liefert im Mittelland rund 9'000 bis 10'000 kWh pro Jahr.</div>
+    <div class="glossar-pop" id="g-eigenverbrauch" popover role="note"><strong>Eigenverbrauch</strong>Der Teil Ihres Solarstroms, den Sie selbst im Haus nutzen, statt ihn ins Netz einzuspeisen. Jede selbst genutzte Kilowattstunde ersetzt Strom, den Sie sonst teurer einkaufen.</div>
+    <div class="glossar-pop" id="g-autarkie" popover role="note"><strong>Autarkiegrad</strong>Der Anteil Ihres Jahresverbrauchs, den Sie mit eigenem Solarstrom decken. 40 Prozent heisst: 40 von 100 Kilowattstunden kommen vom eigenen Dach.</div>
+    <div class="glossar-pop" id="g-einmalverguetung" popover role="note"><strong>Einmalvergütung</strong>Förderbeitrag des Bundes, ausbezahlt durch Pronovo. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026). Das Gesuch stellen wir für Sie.</div>
+    <div class="glossar-pop" id="g-hkn" popover role="note"><strong>HKN, Herkunftsnachweis</strong>Ein Zertifikat, das belegt, woher Strom stammt. Manche Netzbetreiber vergüten den Nachweis für Ihren Solarstrom zusätzlich zur Einspeisung.</div>
+    <div class="glossar-pop" id="g-zev" popover role="note"><strong>ZEV, Zusammenschluss zum Eigenverbrauch</strong>Mehrere Parteien nutzen gemeinsam den Solarstrom vom eigenen Dach. Gegenüber dem Netzbetreiber tritt der ZEV als ein einziger Kunde auf.</div>
+  </div>
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
