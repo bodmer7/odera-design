@@ -138,7 +138,7 @@ function zaehlerEinrichten() {
       const schritt = (jetzt) => {
         const p = Math.min(1, (jetzt - start) / dauer);
         const w = 1 - (1 - p) ** 3;
-        el.textContent = fmt.format(Math.round(ziel * w));
+        el.textContent = fmt.format(Math.round(ziel * w)).replace(/'/g, '’');
         if (p < 1) requestAnimationFrame(schritt);
       };
       requestAnimationFrame(schritt);

@@ -1,7 +1,8 @@
 /* Firstlicht: kleine gemeinsame Hilfen */
 
+// Tausendertrenner fest ’: je nach ICU-Version liefert Intl für de-CH ' oder ’
 export const zahl = (wert, stellen = 0) =>
-  new Intl.NumberFormat('de-CH', { minimumFractionDigits: stellen, maximumFractionDigits: stellen }).format(wert);
+  new Intl.NumberFormat('de-CH', { minimumFractionDigits: stellen, maximumFractionDigits: stellen }).format(wert).replace(/'/g, '’');
 export const chf = (wert) => 'CHF ' + zahl(wert);
 // Spanne «von bis bis», bei gleichen Grenzen nur ein Wert
 export const spanne = (von, bis) => (von === bis ? zahl(von) : `${zahl(von)} bis ${zahl(bis)}`);

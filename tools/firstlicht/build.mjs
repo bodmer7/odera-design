@@ -33,7 +33,8 @@ const projekte = JSON.parse(readFileSync(join(ZIEL, 'daten/projekte.json'), 'utf
 const fragen = JSON.parse(readFileSync(join(VORLAGEN, 'fragen.json'), 'utf8')).fragen;
 const annahmen = JSON.parse(readFileSync(join(ZIEL, 'daten/annahmen.json'), 'utf8'));
 const nurProto = process.argv.includes('--proto');
-const zahl = (n, stellen = 0) => new Intl.NumberFormat('de-CH', { minimumFractionDigits: stellen, maximumFractionDigits: stellen }).format(n);
+// Tausendertrenner fest ’ wie in hilfen.js: je nach ICU-Version liefert Intl für de-CH ' oder ’ (sonst weicht der Build in der CI ab)
+const zahl = (n, stellen = 0) => new Intl.NumberFormat('de-CH', { minimumFractionDigits: stellen, maximumFractionDigits: stellen }).format(n).replace(/'/g, '’');
 const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 
 // Kennzahlen eines Projekts, einmal gerechnet
