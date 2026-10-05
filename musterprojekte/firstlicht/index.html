@@ -95,7 +95,7 @@
           <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
       </nav>
-      <button class="theme-schalter nur-js" type="button" data-theme-schalter data-erklaeren="theme" aria-label="Dunkles Design einschalten">
+      <button class="theme-schalter nur-js" type="button" data-theme-schalter data-erklaeren="theme" aria-label="Dunkles Design" aria-pressed="false">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <g class="ts-strahlen"><path d="M12 1.5v2.2M12 20.3v2.2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M1.5 12h2.2M20.3 12h2.2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></g>
           <circle class="ts-kern" cx="12" cy="12" r="5.5"/>
@@ -103,7 +103,7 @@
         </svg>
       </button>
       <a class="knopf knopf--klein kopf__cta" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Solarrechner</a>
-      <a class="knopf knopf--ghost knopf--klein menue-knopf" href="#fussnavigation" data-menue-knopf><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-menue"></use></svg>Menü</a>
+      <a class="knopf knopf--ghost knopf--klein menue-knopf" href="#fussnavigation" data-menue-knopf><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-menue"></use></svg><span class="menue-knopf__text">Menü</span></a>
     </div>
   </header>
 
@@ -271,11 +271,12 @@
             <div class="feld__kopf"><label for="mini-preis">Strompreis</label><span class="feld__wert" data-mini-aus="strompreis" aria-hidden="true">26.5 Rp./kWh</span></div>
             <input class="regler" id="mini-preis" name="sp" type="range" min="10" max="45" step="0.5" value="26.5">
           </div>
-          <dl class="mini__ergebnis" aria-live="polite">
+          <dl class="mini__ergebnis">
             <div><dt>Anlage</dt><dd data-mini="kwp">8.4 kWp</dd></div>
             <div><dt>Strom pro Jahr</dt><dd data-mini="ertrag">rund 7’900 kWh</dd></div>
             <div><dt>Ersparnis pro Jahr</dt><dd data-mini="ersparnis">CHF 650 bis 750</dd></div>
           </dl>
+          <p class="nur-sr" aria-live="polite" data-mini-ansage></p>
           <p class="feld__hilfe">Annahmen: Mittelland, Süddach mit 30 Grad, Haushalt mit 4 Personen, ohne Speicher. Unverbindliche Schätzung, Stand 5. Oktober 2026.</p>
           <button class="knopf" type="submit">Genauer rechnen<svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-pfeil"></use></svg></button>
         </form>
@@ -403,7 +404,7 @@
         <div class="fragen" data-erklaeren="glossar">
           <details class="frage" id="frage-lohnt">
   <summary>Lohnt sich Solarstrom 2026 noch, obwohl die Rückliefertarife gesunken sind?</summary>
-  <div class="frage__antwort"><p>Ja, wenn die Anlage zu Ihrem Verbrauch passt. Am meisten bringt der Strom, den Sie selbst nutzen: Er ersetzt Netzstrom, der 2027 im Schweizer Median 26.5 Rappen pro kWh kostet (ElCom, Profil H4). Für eingespeisten Strom erhalten Sie seit 2026 den Marktpreis, den der Bund jedes Quartal festlegt, bei Anlagen bis 30 kW aber mindestens 6 Rappen pro kWh.</p><p>Mit Wärmepumpe, Elektroauto oder Speicher steigt Ihr <button class="glossar" type="button" popovertarget="g-eigenverbrauch">Eigenverbrauch</button>. Wir rechnen die Amortisation offen vor, auch wenn sie länger dauert als in mancher Werbung. Probieren Sie es im <a href="rechner.html">Solarrechner</a> aus.</p></div>
+  <div class="frage__antwort"><p>Oft ja, vor allem wenn die Anlage zu Ihrem Verbrauch passt. Am meisten bringt der Strom, den Sie selbst nutzen: Er ersetzt Netzstrom, der 2027 im Schweizer Median 26.5 Rappen pro kWh kostet (ElCom, Profil H4). Für eingespeisten Strom erhalten Sie seit 2026 den Marktpreis, den der Bund jedes Quartal festlegt, bei Anlagen bis 30 kW aber mindestens 6 Rappen pro kWh.</p><p>Mit Wärmepumpe, Elektroauto oder Speicher steigt Ihr <button class="glossar" type="button" popovertarget="g-eigenverbrauch">Eigenverbrauch</button>. Wir rechnen die Amortisation offen vor, auch wenn sie länger dauert als in mancher Werbung. Probieren Sie es im <a href="rechner.html">Solarrechner</a> aus.</p></div>
 </details>
 <details class="frage" id="frage-bewilligung">
   <summary>Brauche ich eine Baubewilligung, oder reicht eine Meldung?</summary>
@@ -415,7 +416,7 @@
 </details>
 <details class="frage" id="frage-foerderung">
   <summary>Welche Förderung gibt es, und wer stellt das Gesuch?</summary>
-  <div class="frage__antwort"><p>Der Bund zahlt über Pronovo eine <button class="glossar" type="button" popovertarget="g-einmalverguetung">Einmalvergütung</button>. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026), bei 10 kWp also 3'600 Franken. Dazu kommen je nach Kanton und Gemeinde weitere Beiträge. Sie finden sie auf <a href="https://www.energiefranken.ch/" target="_blank" rel="noopener">energiefranken.ch</a> nach Postleitzahl.</p><p>Bei bestehenden Gebäuden lässt sich die Investition in den meisten Kantonen von den Steuern abziehen. Bei der Bundessteuer fällt dieser Abzug ab 2029 weg. Das Gesuch bei Pronovo stellen wir nach der Inbetriebnahme für Sie.</p></div>
+  <div class="frage__antwort"><p>Der Bund zahlt über Pronovo eine <button class="glossar" type="button" popovertarget="g-einmalverguetung">Einmalvergütung</button>. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026), bei 10 kWp also 3’600 Franken. Dazu kommen je nach Kanton und Gemeinde weitere Beiträge. Sie finden sie auf <a href="https://www.energiefranken.ch/" target="_blank" rel="noopener">energiefranken.ch</a> nach Postleitzahl.</p><p>Bei bestehenden Gebäuden lässt sich die Investition in den meisten Kantonen von den Steuern abziehen. Bei der Bundessteuer fällt dieser Abzug ab 2029 weg. Das Gesuch bei Pronovo stellen wir nach der Inbetriebnahme für Sie.</p></div>
 </details>
 <details class="frage" id="frage-dauer">
   <summary>Wie lange dauert es von der Anfrage bis zum eigenen Solarstrom?</summary>
@@ -494,10 +495,10 @@
       </div>
     </div>
   </footer>
-  <div class="handyleiste" data-handyleiste>
+  <aside class="handyleiste" data-handyleiste aria-label="Schnellzugriff">
     <a class="knopf knopf--sekundaer" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>Anrufen</a>
     <a class="knopf" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Rechner</a>
-  </div>
+  </aside>
   <dialog class="menue" id="menue" aria-label="Menü">
     <div class="menue__kopf">
       <a class="logo" href="index.html" aria-label="Firstlicht Solartechnik, zur Startseite">
@@ -523,7 +524,7 @@
   </dialog>
   <!-- Glossar: Erklärungen zu Fachbegriffen, geöffnet über Knöpfe mit popovertarget -->
   <div class="glossar-vorrat">
-    <div class="glossar-pop" id="g-kwp" popover role="note"><strong>kWp, Kilowatt-Peak</strong>Die Spitzenleistung einer Solaranlage unter genormten Testbedingungen. Eine Anlage mit 10 kWp liefert im Mittelland rund 9'000 bis 10'000 kWh pro Jahr.</div>
+    <div class="glossar-pop" id="g-kwp" popover role="note"><strong>kWp, Kilowatt-Peak</strong>Die Spitzenleistung einer Solaranlage unter genormten Testbedingungen. Eine Anlage mit 10 kWp liefert im Mittelland rund 9’000 bis 10’000 kWh pro Jahr.</div>
     <div class="glossar-pop" id="g-eigenverbrauch" popover role="note"><strong>Eigenverbrauch</strong>Der Teil Ihres Solarstroms, den Sie selbst im Haus nutzen, statt ihn ins Netz einzuspeisen. Jede selbst genutzte Kilowattstunde ersetzt Strom, den Sie sonst teurer einkaufen.</div>
     <div class="glossar-pop" id="g-autarkie" popover role="note"><strong>Autarkiegrad</strong>Der Anteil Ihres Jahresverbrauchs, den Sie mit eigenem Solarstrom decken. 40 Prozent heisst: 40 von 100 Kilowattstunden kommen vom eigenen Dach.</div>
     <div class="glossar-pop" id="g-einmalverguetung" popover role="note"><strong>Einmalvergütung</strong>Förderbeitrag des Bundes, ausbezahlt durch Pronovo. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026). Das Gesuch stellen wir für Sie.</div>

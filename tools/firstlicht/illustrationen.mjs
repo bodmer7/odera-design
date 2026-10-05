@@ -69,7 +69,35 @@ const GEBAEUDE = {
     (mitModulen ? `<g class="im" transform="matrix(210 0 40 78 110 92)">${raster(8, 3, 0.04)}</g>` : '') +
     `<path class="ifirst" d="M110 92H320"/>` +
     `<rect class="id" x="232" y="196" width="64" height="56" rx="2"/><path class="il" d="M232 196L296 252M296 196L232 252"/>` +
-    `<path class="il il--fein" d="M180 178V252M200 178V252M316 178V252M336 178V252"/>`
+    `<path class="il il--fein" d="M180 178V252M200 178V252M316 178V252M336 178V252"/>`,
+
+  // Nahansichten für Speicher, Wallbox und Energiemanagement: Hauswand mit Vordach und Modulen
+  speicher: () =>
+    `<rect class="iw" x="40" y="96" width="270" height="156"/>` +
+    `<path class="id" d="M24 96H326L306 64H44Z"/>` +
+    `<g class="im" transform="matrix(250 0 -20 32 54 64)">${raster(7, 1, 0.04)}</g>` +
+    `<rect class="ifen" x="64" y="122" width="44" height="40" rx="2"/>` +
+    `<rect class="iw2" x="128" y="160" width="50" height="40" rx="4"/><path class="il il--fein" d="M136 172H170M136 182H162"/>` +
+    `<rect class="id" x="206" y="148" width="64" height="104" rx="6"/>` +
+    `<rect class="is" x="220" y="210" width="36" height="10" rx="2"/><rect class="is" x="220" y="194" width="36" height="10" rx="2"/><rect class="is" x="220" y="178" width="36" height="10" rx="2" opacity="0.35"/>` +
+    `<path class="il" d="M153 160V108M178 180H206"/>`,
+  wallbox: () =>
+    `<rect class="iw" x="210" y="112" width="160" height="140"/>` +
+    `<path class="id" d="M196 112H384L370 86H210Z"/>` +
+    `<g class="im" transform="matrix(156 0 -12 22 214 88)">${raster(5, 1, 0.04)}</g>` +
+    `<rect class="id" x="246" y="160" width="30" height="42" rx="5"/><circle class="is" cx="261" cy="174" r="4"/>` +
+    `<path class="il" d="M261 202C261 236 214 236 196 220"/>` +
+    `<path class="iw2" d="M28 236V214C28 206 34 202 42 200L74 194L100 172C106 167 112 165 120 165H164C172 165 178 168 182 174L196 196C202 198 206 204 206 212V236Z"/>` +
+    `<path class="ifen" d="M108 176C111 173 114 172 118 172H136V194H88Z"/><path class="ifen" d="M144 172H164C168 172 171 174 173 177L184 194H144Z"/>` +
+    `<circle class="id" cx="68" cy="238" r="16"/><circle class="id" cx="170" cy="238" r="16"/><circle class="iw" cx="68" cy="238" r="6"/><circle class="iw" cx="170" cy="238" r="6"/>`,
+  wp: () =>
+    `<rect class="iw" x="30" y="104" width="250" height="148"/>` +
+    `<path class="id" d="M14 104H296L276 70H34Z"/>` +
+    `<g class="im" transform="matrix(232 0 -20 34 44 70)">${raster(6, 1, 0.04)}</g>` +
+    `<rect class="ifen" x="56" y="130" width="46" height="42" rx="2"/><rect class="ifen" x="194" y="130" width="46" height="42" rx="2"/>` +
+    `<rect class="id" x="126" y="140" width="40" height="30" rx="4"/><rect class="is" x="133" y="157" width="6" height="7" rx="1"/><rect class="is" x="143" y="151" width="6" height="13" rx="1"/><rect class="is" x="153" y="147" width="6" height="17" rx="1"/>` +
+    `<rect class="iw2" x="296" y="196" width="78" height="56" rx="5"/><circle class="ifen" cx="324" cy="224" r="18"/><path class="il il--fein" d="M324 208V240M308 224H340M352 210V238M362 210V238"/>` +
+    `<path class="il" d="M146 104V140M166 156H232C250 156 262 180 296 206"/>`
 };
 
 export function gebaeude(typ, { module = true, variante = 'mittag', spiegeln = false, titel = '', halb = false, wallbox = false, ladepunkte = false } = {}) {

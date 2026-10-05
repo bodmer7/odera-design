@@ -58,11 +58,12 @@
             <div class="feld__kopf"><label for="mini-preis">Strompreis</label><span class="feld__wert" data-mini-aus="strompreis" aria-hidden="true">{{mini.strompreis}} Rp./kWh</span></div>
             <input class="regler" id="mini-preis" name="sp" type="range" min="10" max="45" step="0.5" value="{{mini.strompreisRoh}}">
           </div>
-          <dl class="mini__ergebnis" aria-live="polite">
+          <dl class="mini__ergebnis">
             <div><dt>Anlage</dt><dd data-mini="kwp">{{mini.kwp}} kWp</dd></div>
             <div><dt>Strom pro Jahr</dt><dd data-mini="ertrag">rund {{mini.ertrag}} kWh</dd></div>
             <div><dt>Ersparnis pro Jahr</dt><dd data-mini="ersparnis">CHF {{mini.ersparnisVon}} bis {{mini.ersparnisBis}}</dd></div>
           </dl>
+          <p class="nur-sr" aria-live="polite" data-mini-ansage></p>
           <p class="feld__hilfe">Annahmen: Mittelland, Süddach mit 30 Grad, Haushalt mit 4 Personen, ohne Speicher. Unverbindliche Schätzung, Stand {{mini.stand}}.</p>
           <button class="knopf" type="submit">Genauer rechnen<svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-pfeil"></use></svg></button>
         </form>

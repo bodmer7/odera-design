@@ -124,7 +124,7 @@ export function szeneStarten(wurzel) {
       const e = p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2;
       zeit = ziel.von + (ziel.bis - ziel.von) * e;
       flussBis = jetzt + 2500;
-      if (p >= 1) { ziel = null; ansagen(); }
+      if (p >= 1) ziel = null; // Startsequenz: keine Ansage, niemand hat etwas ausgelöst
       zeichnen();
     } else if (laeuft) {
       zeit += dt * 1.4; // 1.4 Stunden pro Sekunde, ganzer Tag in rund 12 s
@@ -160,7 +160,7 @@ export function szeneStarten(wurzel) {
     flussBis = performance.now() + 2500;
     zeichnen();
     anstossen();
-    ansagen();
+    // Keine Live-Ansage: der Regler meldet seinen Wert selbst über aria-valuetext
   });
 
   play.addEventListener('click', () => {

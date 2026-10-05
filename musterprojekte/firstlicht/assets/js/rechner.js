@@ -3,7 +3,7 @@
    Ergebnis zeichnen, Adresse aktualisieren, Kompass, Wizard auf dem Handy, Diagramme. */
 
 import * as L from './rechner-logik.js';
-import { annahmenLaden, zahl, chf, prozent, entprellen, toast, speicher } from './hilfen.js';
+import { annahmenLaden, zahl, chf, prozent, spanne, entprellen, toast, speicher } from './hilfen.js';
 import { balken, linie } from './diagramme.js';
 
 const wurzel = document.querySelector('[data-rechner]');
@@ -18,6 +18,8 @@ const MONATE_LANG = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli
 let A = null;        // Annahmen
 let e = null;        // aktuelle Eingaben (geprüft)
 let ergebnis = null;
+// Gewünschte Anlagegrösse: getrennt vom Regler, weil der Browser den Wert beim Verkleinern von max kappt.
+let wunschKwp = null;
 
 /* ---------- Eingaben ---------- */
 function ausFormular() {
@@ -27,7 +29,7 @@ function ausFormular() {
     azimut: e ? e.azimut : 180, verschattung: fd.get('verschattung'), verbrauchArt: fd.get('verbrauchArt'),
     personen: fd.get('personen'), verbrauch: fd.get('verbrauch'), waermepumpe: form.waermepumpe.checked,
     eauto: form.eauto.checked, km: fd.get('km'), strompreis: fd.get('strompreis'), rueckliefer: fd.get('rueckliefer'),
-    speicher: form.speicher.checked, speicherKwh: fd.get('speicherKwh'), groesseArt: fd.get('groesseArt'), kwp: fd.get('kwp')
+    speicher: form.speicher.checked, speicherKwh: fd.get('speicherKwh'), groesseArt: fd.get('groesseArt'), kwp: wunschKwp ?? fd.get('kwp')
   };
 }
 
@@ -38,9 +40,17 @@ function insFormular(x) {
   form.neigung.value = x.neigung; form.personen.value = x.personen; form.verbrauch.value = zahl(x.verbrauch);
   form.waermepumpe.checked = x.waermepumpe; form.eauto.checked = x.eauto; form.km.value = x.km;
   form.strompreis.value = x.strompreis; form.rueckliefer.value = x.rueckliefer; form.speicher.checked = x.speicher;
-  form.speicherKwh.value = x.speicherKwh; form.kwp.value = x.kwp;
+  form.speicherKwh.value = x.speicherKwh; form.kwp.value = x.kwp; wunschKwp = Number(x.kwp);
   $$('[data-paar="flaeche"]', form).forEach((el) => { el.value = el.type === 'range' ? Math.min(300, x.flaeche) : zahl(x.flaeche); });
   kompassSetzen(x.azimut, false);
+}
+
+/* ---------- Texte für Spannen ---------- */
+function amortisationText(am) {
+  if (!am) return 'nicht absehbar';
+  if (am.von === null) return `länger als ${am.jahre} Jahre`;
+  if (am.bis === null) return `${am.von} bis über ${am.jahre} Jahre`;
+  return am.von === am.bis ? `rund ${am.von} Jahre` : `${am.von} bis ${am.bis} Jahre`;
 }
 
 /* ---------- Sichtbarkeit abhängiger Felder ---------- */
@@ -169,7 +179,7 @@ function kompassEinrichten() {
 /* ---------- Ergebnis zeichnen ---------- */
 const HINWEISE = {
   nord: 'Ihre Dachseite zeigt eher nach Norden. Das kostet viel Ertrag. Oft lohnt sich die andere Dachseite oder ein Flachdach mehr.',
-  klein: 'Auf dieser Fläche hat eine Anlage unter 2 kWp Platz. Dafür gibt es keine Einmalvergütung des Bundes.',
+  klein: () => `Auf dieser Fläche hat eine Anlage unter ${zahl(A.einmalverguetungMinKwp.wert)} kWp Platz. Dafür gibt es keine Einmalvergütung des Bundes.`,
   leer: 'Geben Sie die Dachfläche ein, die belegt werden soll.',
   keineErsparnis: 'Mit diesen Angaben deckt die Ersparnis den Unterhalt nicht. Beim Dach-Check schauen wir, was sich besser rechnet.',
   gross: 'Ab 30 kWp gelten andere Vergütungssätze und oft andere Anschlussbedingungen. Wir beraten Sie gerne persönlich.',
@@ -179,10 +189,10 @@ const HINWEISE = {
 function zeichnen() {
   const x = ergebnis;
   setzeText('stand', new Date(A._stand).toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' }));
-  const ersparnis = x.leer ? 'CHF 0' : x.ersparnis.wert > 0 ? `CHF ${zahl(x.ersparnis.von)} bis ${zahl(x.ersparnis.bis)}` : 'keine';
+  const ersparnis = x.leer ? 'CHF 0' : x.ersparnis.wert > 0 ? `CHF ${spanne(x.ersparnis.von, x.ersparnis.bis)}` : 'keine';
   setzeText('ersparnis', ersparnis);
   setzeText('ersparnisKurz', ersparnis);
-  const amort = x.amortisation ? `${x.amortisation.von} bis ${x.amortisation.bis} Jahre` : 'nicht absehbar';
+  const amort = amortisationText(x.amortisation);
   setzeText('amortisation', amort);
   setzeText('amortisationKurz', amort);
   setzeText('kwp', `${zahl(x.kwp, 1)} kWp`);
@@ -190,7 +200,7 @@ function zeichnen() {
   setzeText('module', `${x.module} Module, ${zahl(Math.round(x.belegt))} m²`);
   setzeText('ertrag', `${zahl(x.ertrag.wert)} kWh`);
   setzeText('ertragKurz', `${zahl(x.ertrag.wert)} kWh`);
-  setzeText('ertragSpanne', `Spanne ${zahl(x.ertrag.von)} bis ${zahl(x.ertrag.bis)} kWh`);
+  setzeText('ertragSpanne', `Spanne ${spanne(x.ertrag.von, x.ertrag.bis)} kWh`);
   setzeText('eigenverbrauch', prozent(x.eigenverbrauchQuote));
   setzeText('autarkie', prozent(x.autarkie));
   setzeText('autarkieKurz', prozent(x.autarkie));
@@ -202,6 +212,7 @@ function zeichnen() {
   setzeText('unterhalt', chf(x.unterhalt));
   setzeText('jahre', String(A.jahre.wert));
   form.kwp.max = String(Math.max(1, Math.floor(x.maxKwp * 2) / 2));
+  if (wunschKwp !== null) form.kwp.value = String(wunschKwp);
   $('[data-aus="kwpMax"]', form).textContent = `Auf dieser Fläche haben höchstens ${zahl(x.maxKwp, 1)} kWp Platz.`;
   const be = x.verlauf.breakEven;
   setzeText('breakEvenText', x.leer ? '' : be !== null
@@ -213,7 +224,7 @@ function zeichnen() {
   for (const h of x.hinweise) {
     const li = document.createElement('li');
     li.className = 'hinweis';
-    li.textContent = HINWEISE[h];
+    li.textContent = typeof HINWEISE[h] === 'function' ? HINWEISE[h]() : HINWEISE[h];
     liste.append(li);
   }
 
@@ -253,7 +264,7 @@ function tabelle(huelle, kopf, zeilen) {
 const ansagen = entprellen(() => {
   const x = ergebnis;
   $('[data-rechner-ansage]').textContent = x.leer ? 'Keine Anlage berechnet.'
-    : `Anlage ${zahl(x.kwp, 1)} kWp, rund ${zahl(x.ertrag.wert)} kWh pro Jahr, Ersparnis ${zahl(x.ersparnis.von)} bis ${zahl(x.ersparnis.bis)} Franken pro Jahr.`;
+    : `Anlage ${zahl(x.kwp, 1)} kWp, rund ${zahl(x.ertrag.wert)} kWh pro Jahr, Ersparnis ${spanne(x.ersparnis.von, x.ersparnis.bis)} Franken pro Jahr.`;
 }, 1200);
 
 /* ---------- Adresse und Übergabe ---------- */
@@ -270,7 +281,7 @@ function zusammenfassung() {
   const x = ergebnis;
   return {
     kwp: zahl(x.kwp, 1), module: x.module, ertrag: zahl(x.ertrag.wert), autarkie: prozent(x.autarkie),
-    ersparnis: x.ersparnis.wert > 0 ? `CHF ${zahl(x.ersparnis.von)} bis ${zahl(x.ersparnis.bis)}` : 'keine',
+    ersparnis: x.ersparnis.wert > 0 ? `CHF ${spanne(x.ersparnis.von, x.ersparnis.bis)}` : 'keine',
     netto: chf(x.netto), speicher: e.speicher ? `${e.speicherKwh} kWh` : 'ohne', dach: e.dach === 'flach' ? 'Flachdach' : 'Schrägdach',
     flaeche: e.flaeche, richtung: e.dach === 'flach' ? '' : L.richtungName(e.azimut), waermepumpe: e.waermepumpe, eauto: e.eauto
   };
@@ -292,6 +303,17 @@ function aenderung() {
   rechnenEntprellt();
 }
 
+function flaechePruefen(feld) {
+  const fehler = $('#r-flaeche-fehler');
+  const roh = feld.value.trim();
+  const n = Number(roh.replace(/['’\s]/g, '').replace(',', '.'));
+  const text = !roh ? 'Bitte geben Sie die Dachfläche ein.' : !Number.isFinite(n) ? 'Bitte nur Zahlen eingeben, zum Beispiel 60.'
+    : n < 0 || n > 2000 ? `Bitte einen Wert zwischen 0 und ${zahl(2000)} m² eingeben.` : '';
+  fehler.hidden = !text;
+  fehler.textContent = text;
+  feld.setAttribute('aria-invalid', String(!!text));
+}
+
 function verbrauchPruefen() {
   const feld = form.verbrauch;
   const fehler = $('#r-verbrauch-fehler');
@@ -311,13 +333,16 @@ function ereignisse() {
   form.addEventListener('input', (ev) => {
     const t = ev.target;
     if (t.dataset.paar === 'flaeche') {
+      if (t.type === 'text') flaechePruefen(t);
       const n = L.begrenzen(t.value, 0, 2000, NaN);
       if (Number.isFinite(n)) {
         e.flaeche = Math.round(n);
         $$('[data-paar="flaeche"]', form).forEach((el) => { if (el !== t) el.value = el.type === 'range' ? Math.min(300, e.flaeche) : zahl(e.flaeche); });
+        if (t.type === 'range') flaechePruefen($('#r-flaeche-zahl'));
       }
     }
     if (t.name === 'verbrauch') verbrauchPruefen();
+    if (t.name === 'kwp') wunschKwp = Number(t.value);
     aenderung();
   });
   form.addEventListener('change', (ev) => {

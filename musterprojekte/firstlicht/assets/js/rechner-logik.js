@@ -138,10 +138,10 @@ export function autarkie(r, s, a) {
   const p = a.eigenverbrauch.wert;
   if (!(r > 0)) return 0;
   const ohne = p.autarkieBei1 * (1 - Math.exp(-p.krumm * r)) / (1 - Math.exp(-p.krumm));
-  if (!(s > 0)) return Math.min(ohne, 0.95);
+  if (!(s > 0)) return Math.min(ohne, p.autarkieDeckel);
   const max = p.autarkieMax * (1 - Math.exp(-p.maxKrumm * r));
   const mit = ohne + Math.max(0, max - ohne) * (1 - Math.exp(-p.speicherWirkung * s));
-  return Math.min(mit, 0.95);
+  return Math.min(mit, p.autarkieDeckel);
 }
 
 export function eigenverbrauch(ertragKwh, v, speicherKwh, a) {
@@ -222,11 +222,20 @@ export function berechnen(roh, a) {
   const kwp = sz.anlage.kwp;
   const leer = kwp <= 0;
 
-  // Amortisation als Spanne: günstiger Fall (mehr Ertrag, tiefere Kosten) bis ungünstiger Fall
+  // Amortisation als Spanne: günstiger Fall (mehr Ertrag, tiefere Kosten) bis ungünstiger Fall.
+  // Gleiche Methode wie der Verlauf (Degradation pro Jahr), nur innerhalb der Betrachtungsdauer.
   const amort = (nettoFaktor, ertragFaktor) => {
-    const ers = ((sz.eigenverbrauch.kwh * ertragFaktor) * e.strompreis + (sz.einspeisung * ertragFaktor) * e.rueckliefer) / 100 - sz.unterhalt;
     const netto = sz.investition.total * nettoFaktor - einmalverguetung(kwp, sz.investition.total * nettoFaktor, a);
-    return ers > 0 ? netto / ers : Infinity;
+    if (netto <= 0) return 0;
+    let summe = -netto;
+    for (let j = 1; j <= a.jahre.wert; j++) {
+      const f = ertragFaktor * (1 - a.degradation.wert) ** (j - 1);
+      const ers = ((sz.eigenverbrauch.kwh * f) * e.strompreis + (sz.einspeisung * f) * e.rueckliefer) / 100 - sz.unterhalt;
+      const vorher = summe;
+      summe += ers;
+      if (summe >= 0) return j - 1 + (-vorher) / ers;
+    }
+    return Infinity;
   };
   const jahreVon = amort(1 - spK, 1 + spE);
   const jahreBis = amort(1 + spK, 1 - spE);
@@ -264,7 +273,12 @@ export function berechnen(roh, a) {
     eiv: chfRunden(sz.eiv),
     netto: chfRunden(sz.netto),
     unterhalt: chfRunden(sz.unterhalt),
-    amortisation: leer || !Number.isFinite(jahreBis) ? null : { von: Math.max(1, Math.floor(jahreVon)), bis: Math.ceil(jahreBis) },
+    // null: keine Ersparnis. von/bis null: nicht innerhalb der Betrachtungsdauer (jahre).
+    amortisation: leer || sz.ersparnis <= 0 ? null : {
+      von: Number.isFinite(jahreVon) ? Math.max(1, Math.floor(jahreVon)) : null,
+      bis: Number.isFinite(jahreBis) ? Math.max(1, Math.ceil(jahreBis)) : null,
+      jahre: a.jahre.wert
+    },
     verlauf: verlauf(sz, e, a),
     vergleich: {
       ohne: { autarkie: ohne.eigenverbrauch.autarkie, quote: ohne.eigenverbrauch.quote, ersparnis: chfRunden(ohne.ersparnis), netto: chfRunden(ohne.netto) },

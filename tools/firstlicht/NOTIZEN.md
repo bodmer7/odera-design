@@ -26,6 +26,7 @@ Stand und Entscheide, damit eine neue Session nahtlos weitermachen kann.
 
 ## Entscheide
 - Branch: Session-Branch `claude/practical-planck-c2raa9` statt `musterprojekt-firstlicht` (Session-Vorgabe).
+- Amortisation: Spanne und Verlauf nach derselben Methode (Degradation, Betrachtungsdauer 30 Jahre). Liegt der ungünstige Fall darüber, steht «X bis über 30 Jahre» (Standardfall: 20 bis über 30 Jahre, ohne Steuerabzug).
 - Rechner: Horizont 30 Jahre (Swissolar: Lebensdauer 30 Jahre und mehr), Degradation 0,5 % pro Jahr, keine Steuerersparnis eingerechnet. Dadurch Amortisation im Standardfall deutlich länger als die 10 bis 14 Jahre, die Branchenseiten nennen. Bewusst so gelassen und auf der Seite erklärt.
 - CSP als Meta-Tag (GitHub Pages erlaubt keine eigenen Header). `frame-ancestors` geht so nicht, ist für das Overlay auf odera.ch auch nicht gewollt.
 - Keine strukturierten Daten (`LocalBusiness`), weil der Betrieb erfunden ist. Beispiel in der README.

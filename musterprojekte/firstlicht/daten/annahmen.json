@@ -42,7 +42,7 @@
     "wert": [[2, 3200], [5, 2700], [10, 2300], [15, 2100], [30, 1700], [100, 1350]], "einheit": "CHF pro kWp, schlüsselfertig, inkl. MWST",
     "quelle": "https://pubdb.bfe.admin.ch/de/publication/download/12226",
     "abgerufen": "2026-10-05", "status": "nicht verifiziert",
-    "hinweis": "Eigene, gerundete Staffel. Anker aus der BFE-Preisbeobachtungsstudie: 2023 Median 3'141 CHF/kWp (2 bis 10 kW) und 2'384 CHF/kWp (10 bis 30 kW), 2024 minus 12 bis 26 %, 2025 nochmals minus 9 % bei 2 bis 10 kW. Ergibt für 10 kWp rund 2'300 CHF/kWp. Werte dazwischen linear. Vor dem Livegang mit der Studie 2025 abgleichen."
+    "hinweis": "Eigene, gerundete Staffel. Anker aus der BFE-Preisbeobachtungsstudie: 2023 Median 3’141 CHF/kWp (2 bis 10 kW) und 2’384 CHF/kWp (10 bis 30 kW), 2024 minus 12 bis 26 %, 2025 nochmals minus 9 % bei 2 bis 10 kW. Ergibt für 10 kWp rund 2’300 CHF/kWp. Werte dazwischen linear. Vor dem Livegang mit der Studie 2025 abgleichen."
   },
   "kostenSpanne": {
     "wert": 0.12, "einheit": "Anteil plus/minus",
@@ -54,7 +54,7 @@
     "wert": { "fix": 2000, "proKwh": 450 }, "einheit": "CHF, installiert",
     "quelle": "https://www.swissolar.ch/de/news/detail/batteriemonitor-schweiz-2026-batteriespeicher-gewinnen-stark-an-bedeutung-fuer-das-energiesystem-82334",
     "abgerufen": "2026-10-05", "status": "nicht verifiziert",
-    "hinweis": "Eigene Ableitung: Fixanteil plus Preis pro kWh. Ergibt für 15 kWh rund 8'750 CHF (Swissolar Batteriemonitor 2026: rund 8'800 CHF) und für 10 kWh 6'500 CHF (Preisbeobachtung 2025: Median 686 CHF/kWh unter 10 kWh)."
+    "hinweis": "Eigene Ableitung: Fixanteil plus Preis pro kWh. Ergibt für 15 kWh rund 8’750 CHF (Swissolar Batteriemonitor 2026: rund 8’800 CHF) und für 10 kWh 6’500 CHF (Preisbeobachtung 2025: Median 686 CHF/kWh unter 10 kWh)."
   },
   "speicherGroesse": {
     "wert": 10, "min": 4, "max": 30, "einheit": "kWh",
@@ -66,7 +66,7 @@
     "wert": { "mittelland": 950, "jura": 1000, "wallis": 1150, "alpen": 1250 }, "einheit": "kWh pro kWp und Jahr (Süd, 30 Grad, ohne Verschattung)",
     "quelle": "https://www.swissolar.ch/01_wissen/fachwissen/photovoltaik/merkblaetter/21001d_merkblatt_informationenzahlen.pdf",
     "abgerufen": "2026-10-05", "status": "nicht verifiziert",
-    "hinweis": "Belegt ist die Spanne 850 bis 1'100 kWh/kWp für Netzverbundanlagen in der Schweiz (Swissolar). Mittelland 950 ist ein mittlerer Wert. Jura und Voralpen, Wallis und Tessin sowie Alpen sind Arbeitswerte (höhere Einstrahlung, weniger Nebel). Den Wert für das eigene Dach zeigt sonnendach.ch."
+    "hinweis": "Belegt ist die Spanne 850 bis 1’100 kWh/kWp für Netzverbundanlagen in der Schweiz (Swissolar). Mittelland 950 ist ein mittlerer Wert. Jura und Voralpen, Wallis und Tessin sowie Alpen sind Arbeitswerte (höhere Einstrahlung, weniger Nebel). Den Wert für das eigene Dach zeigt sonnendach.ch."
   },
   "ertragSpanne": {
     "wert": 0.08, "einheit": "Anteil plus/minus",
@@ -143,7 +143,7 @@
     "wert": { "1": 2200, "2": 2900, "3": 3500, "4": 4100, "5": 4600, "6": 5100 }, "einheit": "kWh pro Jahr, Einfamilienhaus ohne Elektroboiler",
     "quelle": "https://www.energieinside.ch/e-leben/stromsparmassnahmen/der-typische-haushalt-stromverbrauch",
     "abgerufen": "2026-10-05", "status": "nicht verifiziert",
-    "hinweis": "Gerundet nach Studien zum typischen Haushaltstromverbrauch (2 Personen rund 2'860, 4 Personen rund 4'050, 5 Personen rund 4'600 kWh im EFH). Wert für 6 Personen extrapoliert. Ihr echter Verbrauch steht auf der Stromrechnung."
+    "hinweis": "Gerundet nach Studien zum typischen Haushaltstromverbrauch (2 Personen rund 2’860, 4 Personen rund 4’050, 5 Personen rund 4’600 kWh im EFH). Wert für 6 Personen extrapoliert. Ihr echter Verbrauch steht auf der Stromrechnung."
   },
   "verbrauchGrenzen": {
     "wert": { "min": 500, "max": 100000 }, "einheit": "kWh pro Jahr",
@@ -161,19 +161,19 @@
     "wert": { "kwhPro100km": 20, "kmStart": 10000, "kmMax": 40000 }, "einheit": "kWh pro 100 km, km pro Jahr",
     "quelle": "https://www.energieschweiz.ch/programme/fahr-mit-dem-strom/energieeffizienz/",
     "abgerufen": "2026-10-05", "status": "nicht verifiziert",
-    "hinweis": "Inklusive Ladeverlusten. EnergieSchweiz nennt 10 bis 20 kWh pro 100 km plus 10 bis 20 % Ladeverluste. Fahrleistung im Mittel 10'256 km pro Jahr (Mikrozensus 2021, verifiziert)."
+    "hinweis": "Inklusive Ladeverlusten. EnergieSchweiz nennt 10 bis 20 kWh pro 100 km plus 10 bis 20 % Ladeverluste. Fahrleistung im Mittel 10’256 km pro Jahr (Mikrozensus 2021, verifiziert)."
   },
   "eigenverbrauch": {
     "wert": {
       "autarkieBei1": 0.30, "krumm": 1.6,
       "autarkieMax": 0.85, "maxKrumm": 1.4,
-      "speicherWirkung": 0.9,
+      "speicherWirkung": 0.9, "autarkieDeckel": 0.95,
       "faktorAuto": 0.85, "faktorWaermepumpe": 0.5
     },
     "einheit": "Modellparameter",
     "quelle": "https://solar.htw-berlin.de/rechner/unabhaengigkeitsrechner/",
     "abgerufen": "2026-10-05", "status": "nicht verifiziert",
-    "hinweis": "Faustregel des Rechners, angelehnt an die Methode des Unabhängigkeitsrechners der HTW Berlin: Der Autarkiegrad hängt vom Verhältnis Jahresproduktion zu Jahresverbrauch und von der Speichergrösse pro MWh Verbrauch ab. Kalibriert auf EnergieSchweiz: ohne Speicher rund 30 %, mit Speicher bis 70 %. Wärmepumpe (Winter) und E-Auto (tagsüber oft weg) werden schwächer gedeckt."
+    "hinweis": "Faustregel des Rechners, angelehnt an die Methode des Unabhängigkeitsrechners der HTW Berlin: Der Autarkiegrad hängt vom Verhältnis Jahresproduktion zu Jahresverbrauch und von der Speichergrösse pro MWh Verbrauch ab. Kalibriert auf EnergieSchweiz: ohne Speicher rund 30 %, mit Speicher bis 70 %. Der Autarkiegrad wird bei 95 % gedeckelt (autarkieDeckel), weil auch eine grosse Anlage mit Speicher im Winter Netzstrom braucht. Wärmepumpe (Winter) und E-Auto (tagsüber oft weg) werden schwächer gedeckt."
   },
   "sonnenhoehe": {
     "wert": { "dezember": 19, "juni": 66 }, "einheit": "Grad über dem Horizont am Mittag, Zürich",

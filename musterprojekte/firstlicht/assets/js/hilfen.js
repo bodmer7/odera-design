@@ -3,6 +3,8 @@
 export const zahl = (wert, stellen = 0) =>
   new Intl.NumberFormat('de-CH', { minimumFractionDigits: stellen, maximumFractionDigits: stellen }).format(wert);
 export const chf = (wert) => 'CHF ' + zahl(wert);
+// Spanne «von bis bis», bei gleichen Grenzen nur ein Wert
+export const spanne = (von, bis) => (von === bis ? zahl(von) : `${zahl(von)} bis ${zahl(bis)}`);
 export const prozent = (anteil) => zahl(Math.round(anteil * 100)) + ' %';
 
 export const bewegungAus = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -48,7 +48,7 @@
 
   /* ---------- Leistungen ---------- */
   .sprungleiste { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; }
-  .sprungleiste a { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; border-radius: 999px; border: var(--rahmen); background: var(--color-surface); text-decoration: none; font-weight: 600; font-size: var(--text-s); }
+  .sprungleiste a { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; border-radius: 999px; border: var(--rahmen); background: var(--color-surface); text-decoration: none; font-weight: 700; font-size: var(--text-s); }
   @media (hover: hover) { .sprungleiste a:hover { border-color: var(--color-accent); } }
   .leistung { display: grid; gap: var(--s-6); align-items: center; padding-block: clamp(32px, 5vw, 64px); border-top: var(--rahmen); }
   @media (min-width: 56em) { .leistung { grid-template-columns: 7fr 5fr; } .leistung:nth-of-type(even) .leistung__bild { order: -1; } }
@@ -75,33 +75,4 @@
   .monitoring__werte dt { font-size: var(--text-xs); color: #B7C0D0; }
   .monitoring__werte dd { font-weight: 800; font-variant-numeric: tabular-nums; }
   @media (max-width: 30em) { .monitoring__werte { grid-template-columns: 1fr; } }
-
-
-
-  /* Abschluss-CTA */
-  .abschluss { border-radius: var(--radius-xl); padding: clamp(32px, 6vw, 80px); background: var(--nacht); color: #F2EFE8; position: relative; overflow: hidden; display: grid; gap: var(--s-5);
-    --color-text: #F2EFE8; --color-text-muted: #B7C0D0; --color-focus: var(--sonne); --color-accent-text: var(--morgenrot); }
-  .abschluss::after { content: ''; position: absolute; width: 520px; height: 520px; right: -160px; top: -200px; border-radius: 50%; background: radial-gradient(closest-side, rgb(255 200 87 / 0.35), transparent); pointer-events: none; }
-  .abschluss > * { position: relative; z-index: 1; }
-  .abschluss h2 { max-width: 18ch; }
-  .abschluss__ctas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .abschluss__tel { font-family: var(--font-titel); font-size: var(--text-xl); font-weight: 800; text-decoration: none; display: inline-flex; gap: 10px; align-items: center; min-height: 48px; }
-  .abschluss__zeiten { color: #B7C0D0; font-size: var(--text-s); }
-
-  /* Sanftes Einblenden beim Scrollen (Progressive Enhancement) */
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      .einblenden { animation: einblenden linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
-    }
-    @supports not (animation-timeline: view()) {
-      .js .einblenden { opacity: 0; transform: translateY(18px); transition: opacity 600ms var(--kurve), transform 600ms var(--kurve); }
-      .js .einblenden.ist-da { opacity: 1; transform: none; }
-    }
-  }
-  @keyframes einblenden { from { opacity: 0; transform: translateY(24px); } }
-
-  /* Seitenübergänge */
-  @view-transition { navigation: auto; }
-  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 250ms; }
-  @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
 }

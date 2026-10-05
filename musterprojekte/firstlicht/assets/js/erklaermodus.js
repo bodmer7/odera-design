@@ -71,6 +71,7 @@ function blaseZu(fokusZurueck = true) {
   const z = ziele[aktiv];
   blase.remove();
   blase = null;
+  if (ebene) ebene.classList.remove('hat-blase');
   if (z) z.marke.setAttribute('aria-expanded', 'false');
   if (fokusZurueck && z) z.marke.focus();
   aktiv = -1;
@@ -96,10 +97,13 @@ function blaseAuf(i) {
   blase.querySelector('h2').textContent = titel;
   blase.querySelector('.erklaer-blase__text').textContent = text;
   ebene.append(blase);
+  ebene.classList.add('hat-blase');
   z.marke.setAttribute('aria-expanded', 'true');
   blasePlatzieren(z);
   const reduziert = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  z.el.scrollIntoView({ block: 'center', behavior: reduziert ? 'auto' : 'smooth' });
+  // Auf dem Handy steht die Blase unten fest, darum das Element nach oben holen
+  const schmal = matchMedia('(max-width: 47.99em)').matches;
+  z.el.scrollIntoView({ block: schmal ? 'start' : 'center', behavior: reduziert ? 'auto' : 'smooth' });
   setTimeout(() => { if (blase) { blasePlatzieren(z); blase.querySelector('h2').tabIndex = -1; blase.querySelector('h2').focus({ preventScroll: true }); } }, reduziert ? 0 : 450);
   blase.addEventListener('click', (e) => {
     if (e.target.closest('[data-weiter]')) blaseAuf(i + 1);
@@ -114,6 +118,7 @@ function panelBauen() {
   panel.innerHTML = `<p class="erklaer-panel__marke">ODERA Design</p>
     <h2 id="erklaer-panel-titel">Was ist hier besonders?</h2>
     <p>${ziele.length} Stellen auf dieser Seite sind nummeriert.</p>
+    <p class="erklaer-panel__klein">Ebenfalls im Paket Pro, hier nicht gezeigt: zweite Sprache und Texte, die Sie selbst bearbeiten.</p>
     <div class="erklaer-panel__knoepfe">
       <button type="button" class="erklaer-knopf erklaer-knopf--lime" data-rundgang>Rundgang starten</button>
       <button type="button" class="erklaer-knopf" data-liste aria-expanded="false" aria-controls="erklaer-liste">Alle Stellen</button>
@@ -166,7 +171,10 @@ export function einschalten({ start = false } = {}) {
   cssLaden();
   ebene = document.createElement('div');
   ebene.className = 'erklaer-ebene';
-  ziele = [...document.querySelectorAll('[data-erklaeren]')].filter((el) => TEXTE[el.dataset.erklaeren]).map((el, i) => {
+  // Reihenfolge: Inhalt der Seite zuerst, Kopfzeile (z. B. Tag und Nacht) zuletzt
+  const imKopf = (el) => (el.closest('.kopf, .beispiel-leiste') ? 1 : 0);
+  const kandidaten = [...document.querySelectorAll('[data-erklaeren]')].filter((el) => TEXTE[el.dataset.erklaeren]);
+  ziele = kandidaten.sort((a, b) => imKopf(a) - imKopf(b)).map((el, i) => {
     const marke = document.createElement('button');
     marke.type = 'button';
     marke.className = 'erklaer-marke';
@@ -178,7 +186,9 @@ export function einschalten({ start = false } = {}) {
     return { id: el.dataset.erklaeren, el, marke };
   });
   ziele.forEach((z, i) => z.marke.addEventListener('click', () => (aktiv === i ? blaseZu() : blaseAuf(i))));
-  document.body.append(ebene);
+  // Direkt nach der Beispiel-Leiste einfügen: Panel und Marken folgen in der Tab-Reihenfolge auf den Schalter
+  const leiste = document.querySelector('.beispiel-leiste');
+  if (leiste) leiste.after(ebene); else document.body.prepend(ebene);
   panelBauen();
   platzieren();
   window.addEventListener('resize', neuPlatzieren);
@@ -188,7 +198,10 @@ export function einschalten({ start = false } = {}) {
   document.addEventListener('keydown', taste);
   linksSetzen(true);
   adresseSetzen(true);
-  if (start) panel.querySelector('h2').setAttribute('tabindex', '-1');
+  const titel = panel.querySelector('h2');
+  titel.setAttribute('tabindex', '-1');
+  // Per Schalter eingeschaltet: Fokus ins Panel, Screenreader lesen Titel und Anzahl der Stellen
+  if (!start) titel.focus({ preventScroll: true });
 }
 
 function taste(e) {

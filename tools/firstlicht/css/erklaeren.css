@@ -34,8 +34,14 @@
 .erklaer-panel__liste button { all: unset; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; min-height: 28px; display: inline-flex; align-items: center; color: var(--e-blau); font-weight: 600; }
 .erklaer-panel .erklaer-knopf { color: var(--e-tinte); border-color: var(--e-tinte); }
 .erklaer-panel .erklaer-knopf--lime { border-color: var(--e-lime); box-shadow: inset 0 0 0 1.5px var(--e-tinte); }
-@media (max-width: 47.99em) { .erklaer-panel { left: 8px; right: 8px; width: auto; max-height: 45dvh; } }
+@media (max-width: 47.99em) {
+  .erklaer-panel { left: 8px; right: 8px; width: auto; max-height: 45dvh; }
+  /* Handy: Blase unten fest statt neben der Marke, Panel solange ausgeblendet. So verdecken sich die beiden nicht. */
+  .erklaer-ebene.hat-blase .erklaer-panel { display: none; }
+  .erklaer-blase { position: fixed; left: 8px !important; right: 8px; top: auto !important; bottom: calc(8px + var(--handyleiste, 0px)); width: auto; max-height: 50dvh; overflow: auto; }
+}
 @media (forced-colors: active) { .erklaer-marke { border: 2px solid CanvasText; } }
-.erklaer-panel__fuss { font-size: 0.8125rem; }
+.erklaer-panel__fuss, .erklaer-panel__klein { font-size: 0.8125rem; }
+.erklaer-panel__klein { color: #3A3F4D; }
 .erklaer-panel__fuss a, .erklaer-panel__fuss button { all: unset; cursor: pointer; color: var(--e-blau); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .erklaer-panel__fuss a:focus-visible, .erklaer-panel__fuss button:focus-visible { outline: 3px solid var(--e-blau); outline-offset: 2px; }

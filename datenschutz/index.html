@@ -1992,7 +1992,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               <li>Hell und dunkel, ganz mit Tastatur und Screenreader bedienbar</li>
             </ul>
             <p style="font-size:13px;line-height:1.6;color:var(--grund);margin:0 0 8px"><span style="white-space:nowrap">Ladezeit {{ ladezeitFl }}</span> · <span style="white-space:nowrap">6 Seiten</span> · <span style="white-space:nowrap">Paket Pro</span></p>
-            <p style="font-size:13px;line-height:1.6;color:rgba(246,245,241,0.75);margin:0 0 24px;max-width:680px">{{ firstlichtMessung }} Rechner, Szene, Baukasten und Monitoring gehen über das Paket Pro hinaus und sind individuelle Erweiterungen, Preis nach Aufwand.</p>
+            <p style="font-size:13px;line-height:1.6;color:rgba(246,245,241,0.75);margin:0 0 24px;max-width:680px">{{ firstlichtMessung }} Rechner, Szene, Baukasten und Monitoring gehen über das Paket Pro hinaus und sind individuelle Erweiterungen, Preis nach Aufwand. Zweite Sprache und selbst bearbeitbare Texte gehören zum Paket Pro, sind im Muster aber nicht gezeigt.</p>
             <a class="btn btn-primaer" href="/musterprojekte/firstlicht/" data-title="Firstlicht" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
             <p style="margin:12px 0 0"><a href="/musterprojekte/firstlicht/?erklaeren=1" data-title="Firstlicht mit Erklärungen" onClick="{{ openMuster }}" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--akzent)">Mit Erklärungen ansehen</a></p>
             <a href="/projekt-check/" class="einstieg" data-quelle="firstlicht" onClick="{{ onEinstieg }}" style="color:var(--akzent)">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
@@ -2021,7 +2021,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;line-height:1.12;letter-spacing:-0.02em;margin:0 0 16px;color:var(--grund)">Firstlicht</h2>
           <p style="font-size:16px;line-height:1.6;color:rgba(246,245,241,0.88);margin:0 0 16px;text-wrap:pretty">Ausgangslage, erfunden: Ein Solarinstallateur beantwortet am Telefon immer wieder dieselben Fragen. Lösung: Ein Rechner mit offenen Annahmen und Quellen, dessen Ergebnis direkt in die Anfrage wandert.</p>
           <p style="font-size:13px;line-height:1.7;color:var(--grund);margin:0 0 8px"><span style="white-space:nowrap">Ladezeit {{ ladezeitFl }}</span> · <span style="white-space:nowrap">6 Seiten</span> · <span style="white-space:nowrap">Paket Pro</span></p>
-          <p style="font-size:13px;line-height:1.6;color:rgba(246,245,241,0.75);margin:0 0 20px">{{ firstlichtMessung }} Rechner, Szene, Baukasten und Monitoring sind individuelle Erweiterungen.</p>
+          <p style="font-size:13px;line-height:1.6;color:rgba(246,245,241,0.75);margin:0 0 20px">{{ firstlichtMessung }} Rechner, Szene, Baukasten und Monitoring sind individuelle Erweiterungen. Zweite Sprache und selbst bearbeitbare Texte gehören zu Pro, sind hier nicht gezeigt.</p>
           <a class="btn btn-primaer" href="/musterprojekte/firstlicht/" data-title="Firstlicht" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
           <p style="margin:12px 0 0"><a href="/musterprojekte/firstlicht/?erklaeren=1" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--akzent)">Mit Erklärungen ansehen</a></p>
           <a href="/projekt-check/" class="einstieg" data-quelle="firstlicht" onClick="{{ onEinstieg }}" style="color:var(--akzent)">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
@@ -3022,7 +3022,7 @@ class Component extends DCLogic {
     firstlicht: '0,4 s',
     notiz: 'Ladezeit: bis der grösste Inhalt sichtbar ist, gemessen mit Google Lighthouse im Profil Desktop, Median aus drei Läufen. Doppelmeter am 1. Oktober 2026 (langsamste der fünf Seiten), Firstlicht am 5. Oktober 2026 (langsamste der sechs Seiten), Portfolio am 29. September 2026.',
     // Messung Firstlicht mit Google Lighthouse im Profil Mobil, Median aus drei Läufen, alle sechs Seiten. Nur gemessene Werte eintragen.
-    firstlichtMessung: 'Gemessen am 5. Oktober 2026 mit Google Lighthouse im Profil Mobil: 100 Punkte für Leistung, Barrierefreiheit und Best Practices auf allen sechs Seiten, 83 bis 105 KB pro Seite.',
+    firstlichtMessung: 'Gemessen am 5. Oktober 2026 mit Google Lighthouse im Profil Mobil: 100 Punkte für Leistung, Barrierefreiheit und Best Practices auf allen sechs Seiten, 84 bis 107 KB pro Seite.',
   };
   ANFRAGE_ENDPOINT = 'https://odera-anfrage.odera-chat-proxy.workers.dev/';
   TURNSTILE_SITEKEY = '0x4AAAAAAFG5UB1RNyRsDksT';

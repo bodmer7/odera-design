@@ -14,7 +14,7 @@ function themeEinrichten() {
   const metas = document.querySelectorAll('meta[name="theme-color"]');
   const setzen = (t, merken) => {
     html.setAttribute('data-theme', t);
-    knopf.setAttribute('aria-label', t === 'dunkel' ? 'Helles Design einschalten' : 'Dunkles Design einschalten');
+    // Fester Name, Zustand über aria-pressed («Dunkles Design, gedrückt»)
     knopf.setAttribute('aria-pressed', String(t === 'dunkel'));
     metas.forEach((m) => m.setAttribute('content', t === 'dunkel' ? '#0E1420' : '#F7F5F0'));
     if (merken) speicher.schreiben('firstlicht-theme', t);
@@ -103,7 +103,19 @@ function glossarEinrichten() {
         document.querySelectorAll(`.glossar[popovertarget="${pop.id}"]`).forEach((b) => b.setAttribute('aria-expanded', String(offen && b === ausloeser)));
       });
     });
-    window.addEventListener('scroll', () => document.querySelectorAll('.glossar-pop:popover-open').forEach((p) => p.hidePopover()), { passive: true });
+    // Beim Scrollen mitführen statt schliessen (auch Fokus und Touch scrollen), erst zu, wenn der Begriff aus dem Bild ist
+    let geplant = false;
+    window.addEventListener('scroll', () => {
+      if (geplant) return;
+      geplant = true;
+      requestAnimationFrame(() => {
+        geplant = false;
+        document.querySelectorAll('.glossar-pop:popover-open').forEach((p) => {
+          const r = ausloeser?.getBoundingClientRect();
+          if (!r || r.bottom < 0 || r.top > window.innerHeight) p.hidePopover(); else platzieren(p, ausloeser);
+        });
+      });
+    }, { passive: true });
   } else {
     document.addEventListener('click', () => document.querySelectorAll('.glossar-pop.ist-offen').forEach((p) => p.classList.remove('ist-offen')));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.glossar-pop.ist-offen').forEach((p) => p.classList.remove('ist-offen')); });

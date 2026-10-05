@@ -2,7 +2,7 @@
    Zwei Regler, sofortiges Ergebnis. Rechnet mit derselben Logik wie der volle Rechner. */
 
 import { berechnen } from './rechner-logik.js';
-import { annahmenLaden, zahl } from './hilfen.js';
+import { annahmenLaden, zahl, spanne, entprellen } from './hilfen.js';
 
 const form = document.querySelector('[data-mini-rechner]');
 
@@ -21,11 +21,16 @@ async function starten() {
     preis.setAttribute('aria-valuetext', `${zahl(r.eingaben.strompreis, 1)} Rappen pro Kilowattstunde`);
     aus('kwp').textContent = r.leer ? 'zu klein' : `${zahl(r.kwp, 1)} kWp`;
     aus('ertrag').textContent = `rund ${zahl(r.ertrag.wert)} kWh`;
-    aus('ersparnis').textContent = r.ersparnis.wert > 0 ? `CHF ${zahl(r.ersparnis.von)} bis ${zahl(r.ersparnis.bis)}` : 'kaum Ersparnis';
+    aus('ersparnis').textContent = r.ersparnis.wert > 0 ? `CHF ${spanne(r.ersparnis.von, r.ersparnis.bis)}` : 'kaum Ersparnis';
     fuellen(flaeche);
     fuellen(preis);
   }
-  form.addEventListener('input', rechnen);
+  // Ergebnis gesammelt ansagen, wenn der Regler ruht (die Regler melden ihren Wert selbst)
+  const ansage = form.querySelector('[data-mini-ansage]');
+  const ansagen = entprellen(() => {
+    ansage.textContent = `Ergebnis: Anlage ${aus('kwp').textContent}, Strom pro Jahr ${aus('ertrag').textContent}, Ersparnis pro Jahr ${aus('ersparnis').textContent}.`;
+  }, 900);
+  form.addEventListener('input', () => { rechnen(); ansagen(); });
   rechnen();
 }
 

@@ -95,7 +95,7 @@
           <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
       </nav>
-      <button class="theme-schalter nur-js" type="button" data-theme-schalter data-erklaeren="theme" aria-label="Dunkles Design einschalten">
+      <button class="theme-schalter nur-js" type="button" data-theme-schalter data-erklaeren="theme" aria-label="Dunkles Design" aria-pressed="false">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <g class="ts-strahlen"><path d="M12 1.5v2.2M12 20.3v2.2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M1.5 12h2.2M20.3 12h2.2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></g>
           <circle class="ts-kern" cx="12" cy="12" r="5.5"/>
@@ -103,7 +103,7 @@
         </svg>
       </button>
       <a class="knopf knopf--klein kopf__cta" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Solarrechner</a>
-      <a class="knopf knopf--ghost knopf--klein menue-knopf" href="#fussnavigation" data-menue-knopf><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-menue"></use></svg>Menü</a>
+      <a class="knopf knopf--ghost knopf--klein menue-knopf" href="#fussnavigation" data-menue-knopf><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-menue"></use></svg><span class="menue-knopf__text">Menü</span></a>
     </div>
   </header>
 
@@ -174,9 +174,9 @@
               <span>Anteil Solarstrom im eigenen Haus</span>
               <strong data-bk="autarkie">36 %</strong>
               <div class="baukasten__balken" aria-hidden="true"><span data-bk="balken"></span></div>
-              <span class="baukasten__klein" data-bk="detail">Verbrauch 4'100 kWh pro Jahr, davon rund 1'500 kWh vom eigenen Dach.</span>
+              <span class="baukasten__klein" data-bk="detail">Verbrauch 4’100 kWh pro Jahr, davon rund 1’500 kWh vom eigenen Dach.</span>
             </div>
-            <p class="feld__hilfe">Beispielhaus: 60 m² Süddach mit 30 Grad im Mittelland, 4 Personen, Elektroauto mit 10'000 km pro Jahr. Unverbindliche Schätzung mit den <a href="rechner.html">Annahmen des Solarrechners</a>.</p>
+            <p class="feld__hilfe">Beispielhaus: 60 m² Süddach mit 30 Grad im Mittelland, 4 Personen, Elektroauto mit 10’000 km pro Jahr. Unverbindliche Schätzung mit den <a href="rechner.html">Annahmen des Solarrechners</a>.</p>
           </div>
         </div>
       </div>
@@ -246,7 +246,7 @@
           <p>Auf Wunsch planen wir eine Notstrom- oder Ersatzstromlösung mit ein. Ohne sie liefert eine Solaranlage bei einem Stromausfall keinen Strom.</p>
           <p class="leistung__zeit"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-uhr"></use></svg><span>Einbau meist an einem Tag, auch nachträglich.</span></p>
         </div>
-        <div class="leistung__bild"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-speicher"></use></svg></div>
+        <div class="leistung__bild"><svg class="illu illu--abend" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><rect class="ih" width="400" height="300"/><rect class="ih2" y="170" width="400" height="130"/><circle class="is" cx="352" cy="60" r="20"/><path class="ib" d="M0 238C80 228 160 242 240 234S360 230 400 232V300H0Z"/><g><rect class="iw" x="40" y="96" width="270" height="156"/><path class="id" d="M24 96H326L306 64H44Z"/><g class="im" transform="matrix(250 0 -20 32 54 64)"><rect x="0.04" y="0.04" width="0.119" height="0.92"/><rect x="0.173" y="0.04" width="0.119" height="0.92"/><rect x="0.307" y="0.04" width="0.119" height="0.92"/><rect x="0.44" y="0.04" width="0.119" height="0.92"/><rect x="0.574" y="0.04" width="0.119" height="0.92"/><rect x="0.707" y="0.04" width="0.119" height="0.92"/><rect x="0.841" y="0.04" width="0.119" height="0.92"/></g><rect class="ifen" x="64" y="122" width="44" height="40" rx="2"/><rect class="iw2" x="128" y="160" width="50" height="40" rx="4"/><path class="il il--fein" d="M136 172H170M136 182H162"/><rect class="id" x="206" y="148" width="64" height="104" rx="6"/><rect class="is" x="220" y="210" width="36" height="10" rx="2"/><rect class="is" x="220" y="194" width="36" height="10" rx="2"/><rect class="is" x="220" y="178" width="36" height="10" rx="2" opacity="0.35"/><path class="il" d="M153 160V108M178 180H206"/></g></svg></div>
       </section>
 
       <section class="leistung" id="wallbox" aria-labelledby="l-wallbox">
@@ -256,7 +256,7 @@
           <p>Die Wallbox misst laufend, wie viel Strom das Haus gerade nicht braucht, und lädt Ihr Auto mit diesem Überschuss. Wenn es schnell gehen muss, laden Sie per Knopfdruck auch aus dem Netz.</p>
           <p class="leistung__zeit"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-uhr"></use></svg><span>Montage an einem Tag. Die Meldung an den Netzbetreiber übernehmen wir.</span></p>
         </div>
-        <div class="leistung__bild"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-wallbox"></use></svg></div>
+        <div class="leistung__bild"><svg class="illu illu--morgen" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><rect class="ih" width="400" height="300"/><rect class="ih2" y="170" width="400" height="130"/><circle class="is" cx="64" cy="84" r="20"/><path class="ib" d="M0 238C80 228 160 242 240 234S360 230 400 232V300H0Z"/><g><rect class="iw" x="210" y="112" width="160" height="140"/><path class="id" d="M196 112H384L370 86H210Z"/><g class="im" transform="matrix(156 0 -12 22 214 88)"><rect x="0.04" y="0.04" width="0.173" height="0.92"/><rect x="0.227" y="0.04" width="0.173" height="0.92"/><rect x="0.414" y="0.04" width="0.173" height="0.92"/><rect x="0.6" y="0.04" width="0.173" height="0.92"/><rect x="0.787" y="0.04" width="0.173" height="0.92"/></g><rect class="id" x="246" y="160" width="30" height="42" rx="5"/><circle class="is" cx="261" cy="174" r="4"/><path class="il" d="M261 202C261 236 214 236 196 220"/><path class="iw2" d="M28 236V214C28 206 34 202 42 200L74 194L100 172C106 167 112 165 120 165H164C172 165 178 168 182 174L196 196C202 198 206 204 206 212V236Z"/><path class="ifen" d="M108 176C111 173 114 172 118 172H136V194H88Z"/><path class="ifen" d="M144 172H164C168 172 171 174 173 177L184 194H144Z"/><circle class="id" cx="68" cy="238" r="16"/><circle class="id" cx="170" cy="238" r="16"/><circle class="iw" cx="68" cy="238" r="6"/><circle class="iw" cx="170" cy="238" r="6"/></g></svg></div>
       </section>
 
       <section class="leistung" id="energiemanagement" aria-labelledby="l-wp">
@@ -266,7 +266,7 @@
           <p>Ein Energiemanager schiebt Warmwasser, Waschmaschine und Auto in die Mittagsstunden. Die Wärmepumpe braucht aber vor allem im Winter Strom, wenn die Anlage wenig liefert. Deshalb versprechen wir keine Heizung zum Nulltarif, sondern rechnen ehrlich.</p>
           <p class="leistung__zeit"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-uhr"></use></svg><span>Einrichtung meist zusammen mit der Anlage, nachträglich in einem halben Tag.</span></p>
         </div>
-        <div class="leistung__bild"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-wp"></use></svg></div>
+        <div class="leistung__bild"><svg class="illu illu--mittag" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><rect class="ih" width="400" height="300"/><rect class="ih2" y="170" width="400" height="130"/><circle class="is" cx="204" cy="46" r="20"/><path class="ib" d="M0 238C80 228 160 242 240 234S360 230 400 232V300H0Z"/><g><rect class="iw" x="30" y="104" width="250" height="148"/><path class="id" d="M14 104H296L276 70H34Z"/><g class="im" transform="matrix(232 0 -20 34 44 70)"><rect x="0.04" y="0.04" width="0.142" height="0.92"/><rect x="0.196" y="0.04" width="0.142" height="0.92"/><rect x="0.351" y="0.04" width="0.142" height="0.92"/><rect x="0.507" y="0.04" width="0.142" height="0.92"/><rect x="0.663" y="0.04" width="0.142" height="0.92"/><rect x="0.818" y="0.04" width="0.142" height="0.92"/></g><rect class="ifen" x="56" y="130" width="46" height="42" rx="2"/><rect class="ifen" x="194" y="130" width="46" height="42" rx="2"/><rect class="id" x="126" y="140" width="40" height="30" rx="4"/><rect class="is" x="133" y="157" width="6" height="7" rx="1"/><rect class="is" x="143" y="151" width="6" height="13" rx="1"/><rect class="is" x="153" y="147" width="6" height="17" rx="1"/><rect class="iw2" x="296" y="196" width="78" height="56" rx="5"/><circle class="ifen" cx="324" cy="224" r="18"/><path class="il il--fein" d="M324 208V240M308 224H340M352 210V238M362 210V238"/><path class="il" d="M146 104V140M166 156H232C250 156 262 180 296 206"/></g></svg></div>
       </section>
 
       <section class="leistung" id="wartung" aria-labelledby="l-wartung">
@@ -320,7 +320,7 @@
         <div class="fragen">
           <details class="frage" id="frage-lohnt">
   <summary>Lohnt sich Solarstrom 2026 noch, obwohl die Rückliefertarife gesunken sind?</summary>
-  <div class="frage__antwort"><p>Ja, wenn die Anlage zu Ihrem Verbrauch passt. Am meisten bringt der Strom, den Sie selbst nutzen: Er ersetzt Netzstrom, der 2027 im Schweizer Median 26.5 Rappen pro kWh kostet (ElCom, Profil H4). Für eingespeisten Strom erhalten Sie seit 2026 den Marktpreis, den der Bund jedes Quartal festlegt, bei Anlagen bis 30 kW aber mindestens 6 Rappen pro kWh.</p><p>Mit Wärmepumpe, Elektroauto oder Speicher steigt Ihr <button class="glossar" type="button" popovertarget="g-eigenverbrauch">Eigenverbrauch</button>. Wir rechnen die Amortisation offen vor, auch wenn sie länger dauert als in mancher Werbung. Probieren Sie es im <a href="rechner.html">Solarrechner</a> aus.</p></div>
+  <div class="frage__antwort"><p>Oft ja, vor allem wenn die Anlage zu Ihrem Verbrauch passt. Am meisten bringt der Strom, den Sie selbst nutzen: Er ersetzt Netzstrom, der 2027 im Schweizer Median 26.5 Rappen pro kWh kostet (ElCom, Profil H4). Für eingespeisten Strom erhalten Sie seit 2026 den Marktpreis, den der Bund jedes Quartal festlegt, bei Anlagen bis 30 kW aber mindestens 6 Rappen pro kWh.</p><p>Mit Wärmepumpe, Elektroauto oder Speicher steigt Ihr <button class="glossar" type="button" popovertarget="g-eigenverbrauch">Eigenverbrauch</button>. Wir rechnen die Amortisation offen vor, auch wenn sie länger dauert als in mancher Werbung. Probieren Sie es im <a href="rechner.html">Solarrechner</a> aus.</p></div>
 </details>
 <details class="frage" id="frage-bewilligung">
   <summary>Brauche ich eine Baubewilligung, oder reicht eine Meldung?</summary>
@@ -348,7 +348,7 @@
 </details>
 <details class="frage" id="frage-foerderung">
   <summary>Welche Förderung gibt es, und wer stellt das Gesuch?</summary>
-  <div class="frage__antwort"><p>Der Bund zahlt über Pronovo eine <button class="glossar" type="button" popovertarget="g-einmalverguetung">Einmalvergütung</button>. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026), bei 10 kWp also 3'600 Franken. Dazu kommen je nach Kanton und Gemeinde weitere Beiträge. Sie finden sie auf <a href="https://www.energiefranken.ch/" target="_blank" rel="noopener">energiefranken.ch</a> nach Postleitzahl.</p><p>Bei bestehenden Gebäuden lässt sich die Investition in den meisten Kantonen von den Steuern abziehen. Bei der Bundessteuer fällt dieser Abzug ab 2029 weg. Das Gesuch bei Pronovo stellen wir nach der Inbetriebnahme für Sie.</p></div>
+  <div class="frage__antwort"><p>Der Bund zahlt über Pronovo eine <button class="glossar" type="button" popovertarget="g-einmalverguetung">Einmalvergütung</button>. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026), bei 10 kWp also 3’600 Franken. Dazu kommen je nach Kanton und Gemeinde weitere Beiträge. Sie finden sie auf <a href="https://www.energiefranken.ch/" target="_blank" rel="noopener">energiefranken.ch</a> nach Postleitzahl.</p><p>Bei bestehenden Gebäuden lässt sich die Investition in den meisten Kantonen von den Steuern abziehen. Bei der Bundessteuer fällt dieser Abzug ab 2029 weg. Das Gesuch bei Pronovo stellen wir nach der Inbetriebnahme für Sie.</p></div>
 </details>
 <details class="frage" id="frage-dauer">
   <summary>Wie lange dauert es von der Anfrage bis zum eigenen Solarstrom?</summary>
@@ -437,10 +437,10 @@
       </div>
     </div>
   </footer>
-  <div class="handyleiste" data-handyleiste>
+  <aside class="handyleiste" data-handyleiste aria-label="Schnellzugriff">
     <a class="knopf knopf--sekundaer" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>Anrufen</a>
     <a class="knopf" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Rechner</a>
-  </div>
+  </aside>
   <dialog class="menue" id="menue" aria-label="Menü">
     <div class="menue__kopf">
       <a class="logo" href="index.html" aria-label="Firstlicht Solartechnik, zur Startseite">
@@ -466,7 +466,7 @@
   </dialog>
   <!-- Glossar: Erklärungen zu Fachbegriffen, geöffnet über Knöpfe mit popovertarget -->
   <div class="glossar-vorrat">
-    <div class="glossar-pop" id="g-kwp" popover role="note"><strong>kWp, Kilowatt-Peak</strong>Die Spitzenleistung einer Solaranlage unter genormten Testbedingungen. Eine Anlage mit 10 kWp liefert im Mittelland rund 9'000 bis 10'000 kWh pro Jahr.</div>
+    <div class="glossar-pop" id="g-kwp" popover role="note"><strong>kWp, Kilowatt-Peak</strong>Die Spitzenleistung einer Solaranlage unter genormten Testbedingungen. Eine Anlage mit 10 kWp liefert im Mittelland rund 9’000 bis 10’000 kWh pro Jahr.</div>
     <div class="glossar-pop" id="g-eigenverbrauch" popover role="note"><strong>Eigenverbrauch</strong>Der Teil Ihres Solarstroms, den Sie selbst im Haus nutzen, statt ihn ins Netz einzuspeisen. Jede selbst genutzte Kilowattstunde ersetzt Strom, den Sie sonst teurer einkaufen.</div>
     <div class="glossar-pop" id="g-autarkie" popover role="note"><strong>Autarkiegrad</strong>Der Anteil Ihres Jahresverbrauchs, den Sie mit eigenem Solarstrom decken. 40 Prozent heisst: 40 von 100 Kilowattstunden kommen vom eigenen Dach.</div>
     <div class="glossar-pop" id="g-einmalverguetung" popover role="note"><strong>Einmalvergütung</strong>Förderbeitrag des Bundes, ausbezahlt durch Pronovo. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026). Das Gesuch stellen wir für Sie.</div>

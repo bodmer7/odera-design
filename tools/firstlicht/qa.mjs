@@ -83,6 +83,15 @@ async function browserPruefen(name, typ) {
         });
         ergebnis[`axe-${thema}`] = axe.length;
         for (const v of axe) melden(`axe ${seite} ${thema}: ${v}`);
+        // Zweiter Lauf in Handybreite (Handyleiste, Ergebnisleiste, Menü-Knopf)
+        await p.setViewportSize({ width: 390, height: 844 });
+        await p.waitForTimeout(150);
+        const axeHandy = await p.evaluate(async () => {
+          const r = await window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'] } });
+          return r.violations.map((v) => `${v.id} (${v.impact}): ${v.nodes.slice(0, 3).map((n) => n.target.join(' ')).join(' | ')}`);
+        });
+        ergebnis[`axe-handy-${thema}`] = axeHandy.length;
+        for (const v of axeHandy) melden(`axe Handy ${seite} ${thema}: ${v}`);
       }
       await ctx.close();
     }

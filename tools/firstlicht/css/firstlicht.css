@@ -195,6 +195,8 @@
 @layer basis {
   html {
     scroll-padding-top: calc(var(--kopf-hoehe) + 24px);
+    /* Fixe Leisten unten auf dem Handy: fokussierte Elemente nicht darunter verstecken (WCAG 2.4.11) */
+    scroll-padding-bottom: calc(var(--handyleiste, 0px) + 16px);
     hanging-punctuation: first last;
   }
   @media (prefers-reduced-motion: no-preference) {
@@ -433,7 +435,19 @@
   .kopf__innen { display: flex; align-items: center; gap: var(--s-4); min-height: var(--kopf-hoehe); transition: min-height var(--dauer-m) var(--kurve); }
   .kopf.ist-kompakt .kopf__innen { min-height: 56px; }
   .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-text); margin-inline-end: auto; min-height: 44px; }
-  .logo__signet { width: 36px; height: 36px; }
+  .logo__signet { width: 36px; height: 36px; flex: none; }
+  /* Enge Breite mit grösseren Textabständen (WCAG 1.4.12): Wortmarke darf umbrechen, Knöpfe bleiben rund */
+  .logo__wort { white-space: nowrap; }
+  .theme-schalter, .menue-knopf { flex: none; }
+  @media (max-width: 22.49em) {
+    .kopf__innen { gap: var(--s-2); }
+    .logo { gap: 6px; }
+    .logo__signet { width: 30px; height: 30px; }
+    .logo__wort { font-size: 1.2rem; }
+    /* Unter 360 px nur das Symbol, der Name bleibt für Screenreader */
+    .menue-knopf { padding-inline: 10px; min-width: 44px; justify-content: center; }
+    .menue-knopf__text { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  }
   .logo__wort { font-family: var(--font-titel); font-weight: 800; font-size: 1.375rem; letter-spacing: -0.035em; }
   .hauptnav__liste { display: flex; gap: var(--s-1); list-style: none; padding: 0; }
   .hauptnav a {
@@ -770,8 +784,8 @@
   .handyleiste .knopf { min-height: 48px; padding-inline: 12px; }
   .handyleiste.ist-weg { transform: translateY(110%); }
   @media (min-width: 64em) { .handyleiste { display: none; } }
-  @media (max-width: 63.99em) { body { --handyleiste: calc(64px + env(safe-area-inset-bottom)); padding-bottom: var(--handyleiste); } }
-  @media (max-width: 63.99em) and (max-height: 30em) { .handyleiste { display: none; } body { --handyleiste: 0px; padding-bottom: 0; } }
+  @media (max-width: 63.99em) { :root { --handyleiste: calc(64px + env(safe-area-inset-bottom)); } body { padding-bottom: var(--handyleiste); } }
+  @media (max-width: 63.99em) and (max-height: 30em) { .handyleiste { display: none; } :root { --handyleiste: 0px; } body { padding-bottom: 0; } }
 
   /* Handy: Vollbild-Menü als Dialog */
   .menue {
@@ -895,6 +909,33 @@
   .projekt__kennzahlen dt { font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 700; }
   .projekt__kennzahlen dd { font-weight: 700; font-variant-numeric: tabular-nums; }
 
+
+  /* Abschluss-CTA */
+  .abschluss { border-radius: var(--radius-xl); padding: clamp(32px, 6vw, 80px); background: var(--nacht); color: #F2EFE8; position: relative; overflow: hidden; display: grid; gap: var(--s-5);
+    --color-text: #F2EFE8; --color-text-muted: #B7C0D0; --color-focus: var(--sonne); --color-accent-text: var(--morgenrot); }
+  .abschluss::after { content: ''; position: absolute; width: 520px; height: 520px; right: -160px; top: -200px; border-radius: 50%; background: radial-gradient(closest-side, rgb(255 200 87 / 0.35), transparent); pointer-events: none; }
+  .abschluss > * { position: relative; z-index: 1; }
+  .abschluss h2 { max-width: 18ch; }
+  .abschluss__ctas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .abschluss__tel { font-family: var(--font-titel); font-size: var(--text-xl); font-weight: 800; text-decoration: none; display: inline-flex; gap: 10px; align-items: center; min-height: 48px; }
+  .abschluss__zeiten { color: #B7C0D0; font-size: var(--text-s); }
+
+  /* Sanftes Einblenden beim Scrollen (Progressive Enhancement) */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .einblenden { animation: einblenden linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+    }
+    @supports not (animation-timeline: view()) {
+      .js .einblenden { opacity: 0; transform: translateY(18px); transition: opacity 600ms var(--kurve), transform 600ms var(--kurve); }
+      .js .einblenden.ist-da { opacity: 1; transform: none; }
+    }
+  }
+  @keyframes einblenden { from { opacity: 0; transform: translateY(24px); } }
+
+  /* Seitenübergänge */
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 250ms; }
+  @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
 }
 
 
@@ -908,5 +949,33 @@
   .js .ohne-js { display: none !important; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+
+  /* Touch: Bedienelemente mindestens 44 px hoch (Maus und Desktop bleiben kompakt) */
+  @media (pointer: coarse) {
+    .beispiel-leiste a, .erklaer-schalter, .fuss a, .tabelle-knopf, .segment span, .monitoring__tabs [role='tab'] { min-height: 44px; }
+  }
+
+  /* Mehr Kontrast gewünscht: Nebentexte und Feldrahmen in voller Textfarbe */
+  @media (prefers-contrast: more) {
+    :root { --color-text-muted: var(--color-text); --color-border-feld: var(--color-text); }
+  }
+
+  /* Kontrastmodus (Windows): Auswahlzustände mit Systemfarben, sonst gehen sie mit den Hintergründen verloren */
+  @media (forced-colors: active) {
+    .segment span, .filter, .kompass__knopf, .termin span, .monitoring__tabs [role='tab'], .wahl-karte__inhalt { border: 1px solid ButtonText; }
+    .segment input:checked + span, .termin input:checked + span, .filter[aria-pressed='true'], .kompass__knopf[aria-pressed='true'],
+    .monitoring__tabs [role='tab'][aria-selected='true'] { forced-color-adjust: none; background: Highlight; color: HighlightText; border-color: Highlight; }
+    .wahl-karte input:checked + .wahl-karte__inhalt { border: 3px solid Highlight; }
+    .wahl input, .schalter input, .erklaer-schalter__spur { forced-color-adjust: none; background: Canvas; border: 1px solid ButtonText; }
+    .wahl input::after, .schalter input::after, .erklaer-schalter__spur::after { background: ButtonText; }
+    .wahl input:checked, .schalter input:checked, .erklaer-schalter[aria-pressed='true'] .erklaer-schalter__spur { background: Highlight; border-color: Highlight; }
+    .wahl input:checked::after, .schalter input:checked::after, .erklaer-schalter[aria-pressed='true'] .erklaer-schalter__spur::after { background: HighlightText; }
+    .regler { forced-color-adjust: none; }
+    .regler::-webkit-slider-runnable-track { background: linear-gradient(to right, Highlight var(--fuellung), ButtonText var(--fuellung)); }
+    .regler::-moz-range-track { background: ButtonText; }
+    .regler::-moz-range-progress { background: Highlight; }
+    .regler::-webkit-slider-thumb { background: Canvas; border-color: Highlight; }
+    .regler::-moz-range-thumb { background: Canvas; border-color: Highlight; }
   }
 }

@@ -4,7 +4,7 @@
     {
       "id": "lohnt", "start": true, "fakten": ["F01", "F02", "F03", "F04"],
       "frage": "Lohnt sich Solarstrom 2026 noch, obwohl die Rückliefertarife gesunken sind?",
-      "antwort": "<p>Ja, wenn die Anlage zu Ihrem Verbrauch passt. Am meisten bringt der Strom, den Sie selbst nutzen: Er ersetzt Netzstrom, der 2027 im Schweizer Median 26.5 Rappen pro kWh kostet (ElCom, Profil H4). Für eingespeisten Strom erhalten Sie seit 2026 den Marktpreis, den der Bund jedes Quartal festlegt, bei Anlagen bis 30 kW aber mindestens 6 Rappen pro kWh.</p><p>Mit Wärmepumpe, Elektroauto oder Speicher steigt Ihr <button class=\"glossar\" type=\"button\" popovertarget=\"g-eigenverbrauch\">Eigenverbrauch</button>. Wir rechnen die Amortisation offen vor, auch wenn sie länger dauert als in mancher Werbung. Probieren Sie es im <a href=\"rechner.html\">Solarrechner</a> aus.</p>"
+      "antwort": "<p>Oft ja, vor allem wenn die Anlage zu Ihrem Verbrauch passt. Am meisten bringt der Strom, den Sie selbst nutzen: Er ersetzt Netzstrom, der 2027 im Schweizer Median 26.5 Rappen pro kWh kostet (ElCom, Profil H4). Für eingespeisten Strom erhalten Sie seit 2026 den Marktpreis, den der Bund jedes Quartal festlegt, bei Anlagen bis 30 kW aber mindestens 6 Rappen pro kWh.</p><p>Mit Wärmepumpe, Elektroauto oder Speicher steigt Ihr <button class=\"glossar\" type=\"button\" popovertarget=\"g-eigenverbrauch\">Eigenverbrauch</button>. Wir rechnen die Amortisation offen vor, auch wenn sie länger dauert als in mancher Werbung. Probieren Sie es im <a href=\"rechner.html\">Solarrechner</a> aus.</p>"
     },
     {
       "id": "bewilligung", "start": true, "fakten": ["F05", "F06", "F07"],
@@ -39,7 +39,7 @@
     {
       "id": "foerderung", "start": true, "fakten": ["F17", "F18", "F19", "F20"],
       "frage": "Welche Förderung gibt es, und wer stellt das Gesuch?",
-      "antwort": "<p>Der Bund zahlt über Pronovo eine <button class=\"glossar\" type=\"button\" popovertarget=\"g-einmalverguetung\">Einmalvergütung</button>. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026), bei 10 kWp also 3'600 Franken. Dazu kommen je nach Kanton und Gemeinde weitere Beiträge. Sie finden sie auf <a href=\"https://www.energiefranken.ch/\" target=\"_blank\" rel=\"noopener\">energiefranken.ch</a> nach Postleitzahl.</p><p>Bei bestehenden Gebäuden lässt sich die Investition in den meisten Kantonen von den Steuern abziehen. Bei der Bundessteuer fällt dieser Abzug ab 2029 weg. Das Gesuch bei Pronovo stellen wir nach der Inbetriebnahme für Sie.</p>"
+      "antwort": "<p>Der Bund zahlt über Pronovo eine <button class=\"glossar\" type=\"button\" popovertarget=\"g-einmalverguetung\">Einmalvergütung</button>. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026), bei 10 kWp also 3’600 Franken. Dazu kommen je nach Kanton und Gemeinde weitere Beiträge. Sie finden sie auf <a href=\"https://www.energiefranken.ch/\" target=\"_blank\" rel=\"noopener\">energiefranken.ch</a> nach Postleitzahl.</p><p>Bei bestehenden Gebäuden lässt sich die Investition in den meisten Kantonen von den Steuern abziehen. Bei der Bundessteuer fällt dieser Abzug ab 2029 weg. Das Gesuch bei Pronovo stellen wir nach der Inbetriebnahme für Sie.</p>"
     },
     {
       "id": "dauer", "start": true, "fakten": ["F21"],

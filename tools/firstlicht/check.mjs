@@ -61,6 +61,7 @@ for (const datei of seiten) {
 
   if (/[–—]/.test(text)) melden(datei, `Gedankenstrich im Text: «${text.match(/.{0,30}[–—].{0,30}/)[0].trim()}»`);
   if (/ß/.test(text)) melden(datei, 'ß im Text');
+  if (/\d'\d{3}/.test(text)) melden(datei, `Tausendertrenner ' statt ’ (wie Intl de-CH): «${text.match(/.{0,20}\d'\d{3}.{0,10}/)[0].trim()}»`);
   const tief = text.toLowerCase();
   for (const f of FLOSKELN) if (tief.includes(f)) melden(datei, `Floskel «${f}»`);
   if (!datei.startsWith('_')) ausrufe += (text.match(/!/g) || []).length;
@@ -112,6 +113,22 @@ for (const datei of seiten) {
     } else ziel = ohneSuche;
     if (!inhalt[ziel]) { melden(datei, `Seite fehlt: ${href}`); continue; }
     if (anker && !new RegExp(`id="${anker}"`).test(inhalt[ziel]) && !/^projekt-/.test(anker)) melden(datei, `Anker fehlt: ${href}`);
+  }
+}
+// Jede Klasse im HTML muss im CSS-Bündel der Seite stehen (sonst fehlt ein Stil nach dem Aufteilen).
+// Ausnahmen: reine Haken für Skripte und Illustrationen.
+const NUR_HAKEN = new Set(['szene__himmel', 'szene__haus', 'szene__fluesse', 'szene__play', 'illu--mittag', 'glossar-vorrat', 'vergleich', 'annahmen',
+  'bk-fluesse', 'vn__vorher', 'geschichte', 'team__avatar--1']);
+const erklaerCss = readFileSync(join(ORDNER, 'assets/css/erklaeren.css'), 'utf8');
+for (const datei of oeffentlich) {
+  const html = inhalt[datei];
+  const bundel = html.match(/assets\/css\/(firstlicht[\w-]*\.css)/)?.[1];
+  if (!bundel) { melden(datei, 'CSS-Bündel nicht gefunden'); continue; }
+  const css = readFileSync(join(ORDNER, 'assets/css', bundel), 'utf8') + erklaerCss;
+  const klassen = new Set([...html.matchAll(/class="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/)).filter((k) => k && !k.includes('$')));
+  for (const k of klassen) {
+    if (NUR_HAKEN.has(k)) continue;
+    if (!new RegExp(`\\.${k.replace(/[-_]/g, (z) => `\\${z}`)}(?![\\w-])`).test(css)) melden(datei, `Klasse «${k}» fehlt in ${bundel}`);
   }
 }
 if (ausrufe > 1) melden('alle Seiten', `${ausrufe} Ausrufezeichen, höchstens eines erlaubt`);

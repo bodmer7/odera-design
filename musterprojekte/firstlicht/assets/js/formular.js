@@ -3,7 +3,7 @@
    gesperrt, Fehler am Feld mit Text, Fokus ins erste fehlerhafte Feld, Zusammenfassung ab zwei Fehlern,
    Zeile «Noch offen» unter dem Knopf, Tippfehler-Vorschlag bei der E-Mail. */
 
-import { speicher, annahmenLaden, zahl, chf, prozent } from './hilfen.js';
+import { speicher, annahmenLaden, zahl, chf, prozent, spanne } from './hilfen.js';
 
 const form = document.querySelector('[data-formular]');
 const $ = (s, el = document) => el.querySelector(s);
@@ -212,7 +212,7 @@ async function uebernahme() {
     const e = L.eingabenPruefen(L.ausParametern(p), a);
     const r = L.berechnen(e, a);
     werte = { kwp: zahl(r.kwp, 1), module: r.module, ertrag: zahl(r.ertrag.wert), autarkie: prozent(r.autarkie),
-      ersparnis: r.ersparnis.wert > 0 ? `CHF ${zahl(r.ersparnis.von)} bis ${zahl(r.ersparnis.bis)}` : 'keine', netto: chf(r.netto),
+      ersparnis: r.ersparnis.wert > 0 ? `CHF ${spanne(r.ersparnis.von, r.ersparnis.bis)}` : 'keine', netto: chf(r.netto),
       speicher: e.speicher ? `${e.speicherKwh} kWh` : 'ohne', dach: e.dach === 'flach' ? 'Flachdach' : 'Schrägdach', flaeche: e.flaeche,
       richtung: e.dach === 'flach' ? '' : L.richtungName(e.azimut), waermepumpe: e.waermepumpe, eauto: e.eauto };
   }

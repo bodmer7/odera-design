@@ -8,7 +8,9 @@ const NS = 'http://www.w3.org/2000/svg';
 
 /* Saubere Achsenschritte: 1, 2, 2.5, 5 × 10^n */
 export function achsenSchritte(min, max, anzahl = 4) {
-  const spanne = Math.max(1, max - min);
+  // Alle Werte gleich (z. B. leere Anlage): feste Skala bis 1000, sonst teilt die Skala durch null
+  if (max - min <= 0) max = min + 1000;
+  const spanne = max - min;
   const roh = spanne / anzahl;
   const basis = 10 ** Math.floor(Math.log10(roh));
   const schritt = [1, 2, 2.5, 5, 10].map((f) => f * basis).find((s) => s >= roh);

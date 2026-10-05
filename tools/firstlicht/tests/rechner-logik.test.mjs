@@ -39,8 +39,9 @@ test('Standard: plausible Ergebnisse', () => {
   assert.ok(r.autarkie > 0.25 && r.autarkie < 0.45, 'Autarkie ohne Speicher ' + r.autarkie);
   assert.ok(r.eigenverbrauchQuote > 0.1 && r.eigenverbrauchQuote < 0.4);
   assert.ok(r.ersparnis.wert > 0);
-  assert.ok(r.amortisation && r.amortisation.von < r.amortisation.bis);
-  assert.ok(r.amortisation.von >= 8 && r.amortisation.bis <= 40, JSON.stringify(r.amortisation));
+  // Amortisation: günstiger Fall innerhalb der Betrachtungsdauer, ungünstiger Fall darf darüber liegen (bis = null)
+  assert.ok(r.amortisation && r.amortisation.von >= 8 && r.amortisation.von <= A.jahre.wert, JSON.stringify(r.amortisation));
+  assert.ok(r.amortisation.bis === null || r.amortisation.bis > r.amortisation.von);
   assert.equal(r.investition.brutto % 50, 0);
   assert.equal(r.monate.length, 12);
   assert.ok(Math.abs(r.monate.reduce((s, x) => s + x, 0) - r.ertrag.roh) < 1);
@@ -163,7 +164,7 @@ test('Verlauf über die Betrachtungsdauer mit Break-even', () => {
   assert.ok(v.punkte[0].kumuliert < 0);
   assert.ok(v.breakEven > 5 && v.breakEven < A.jahre.wert, 'Break-even ' + v.breakEven);
   // Break-even liegt innerhalb der Amortisationsspanne
-  assert.ok(v.breakEven >= r.amortisation.von - 1 && v.breakEven <= r.amortisation.bis + 1);
+  assert.ok(v.breakEven >= r.amortisation.von && (r.amortisation.bis === null || v.breakEven <= r.amortisation.bis));
   // Degradation: Zuwachs nimmt ab
   const d1 = v.punkte[2].kumuliert - v.punkte[1].kumuliert;
   const d20 = v.punkte[21].kumuliert - v.punkte[20].kumuliert;
@@ -176,4 +177,21 @@ test('Adresse: Hin- und Rückweg ergibt dieselben Eingaben', () => {
   assert.ok(!p.has('n'), 'Standardwerte stehen nicht in der Adresse');
   const zurueck = R.eingabenPruefen(R.ausParametern(p.toString()), A);
   assert.deepEqual(zurueck, e);
+});
+
+test('Amortisation und Verlauf nach derselben Methode', () => {
+  for (const x of [{}, { speicher: true }, { eauto: true, waermepumpe: true }, { flaeche: 100 }]) {
+    const r = rechne(x);
+    const be = r.verlauf.breakEven;
+    if (be === null) assert.equal(r.amortisation.bis, null);
+    else {
+      assert.ok(r.amortisation.von !== null && be >= r.amortisation.von, JSON.stringify([x, be, r.amortisation]));
+      assert.ok(r.amortisation.bis === null || be <= r.amortisation.bis);
+    }
+  }
+});
+
+test('Kleinstanlage ohne Einmalvergütung zahlt sich innerhalb der Betrachtungsdauer nicht aus', () => {
+  const r = rechne({ flaeche: 12 });
+  assert.ok(r.amortisation === null || (r.amortisation.von === null && r.amortisation.bis === null), JSON.stringify(r.amortisation));
 });

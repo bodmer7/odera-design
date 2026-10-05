@@ -29,7 +29,7 @@
   .rechner__paar { display: grid; gap: var(--s-5); }
   @container (min-width: 40rem) { .rechner__paar { grid-template-columns: 1fr 1fr; } }
   .rechner__schritt { container-type: inline-size; }
-  .rechner__nav { position: sticky; bottom: calc(76px + env(safe-area-inset-bottom)); z-index: 5; display: grid; grid-template-columns: 1fr 2fr; gap: 8px; padding: 8px; border-radius: 999px; background: color-mix(in srgb, var(--color-bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .rechner__nav { display: grid; grid-template-columns: 1fr 2fr; gap: 8px; margin-top: var(--s-5); }
   .regler-zahl { display: grid; grid-template-columns: 1fr auto; gap: var(--s-4); align-items: center; }
   .neigung { display: grid; grid-template-columns: 1fr 120px; gap: var(--s-4); align-items: center; }
   .neigung__skizze { width: 120px; height: auto; }
@@ -70,6 +70,7 @@
   .ergebnis__label { font-size: var(--text-s); font-weight: 700; color: var(--color-text-muted); }
   .ergebnis__wert { font-family: var(--font-text); font-weight: 800; font-size: var(--text-xl); line-height: 1.1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
   .ergebnis__sub { margin-top: 6px; }
+  .ergebnis__fein { margin-top: 4px; font-size: var(--text-xs); color: var(--color-text-muted); }
   .ergebnis__hinweise { list-style: none; padding: 0; display: grid; gap: 8px; }
   .ergebnis__hinweise .hinweis { background: rgb(255 255 255 / 0.06); }
   .ergebnis__raster { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -101,8 +102,8 @@
   .ergebnis-leiste__blatt dl { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
   .ergebnis-leiste__blatt dt { font-size: var(--text-xs); color: #B7C0D0; }
   .ergebnis-leiste__blatt dd { font-weight: 800; font-variant-numeric: tabular-nums; }
-  .seite-rechner { --handyleiste: calc(68px + env(safe-area-inset-bottom)); }
-  @media (min-width: 64em) { .ergebnis-leiste { display: none; } .seite-rechner { --handyleiste: 0px; } }
+  :root:has(.seite-rechner) { --handyleiste: calc(68px + env(safe-area-inset-bottom)); }
+  @media (min-width: 64em) { .ergebnis-leiste { display: none; } :root:has(.seite-rechner) { --handyleiste: 0px; } }
   @media (max-width: 63.99em) { .seite-rechner { padding-bottom: var(--handyleiste); } }
 
   .nur-druck { display: none; }
