@@ -1,0 +1,224 @@
+<!-- @meta {"titel": "Dach-Check anfragen | Firstlicht Solartechnik", "beschreibung": "Beispielseite von ODERA Design. Kostenlosen Dach-Check bei der erfundenen Firstlicht Solartechnik anfragen. Demo-Formular, es wird nichts gesendet.", "pfad": "kontakt.html", "nav": "kontakt"} -->
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <!-- @teil kopf-meta -->
+</head>
+<body>
+  <!-- @teil symbole -->
+  <a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
+  <!-- @teil leiste -->
+  <!-- @teil kopf -->
+
+  <main id="inhalt" tabindex="-1">
+    <section class="seitenkopf" aria-labelledby="seiten-titel">
+      <div class="huelle stapel">
+        <p class="vorzeile">Kontakt</p>
+        <h1 id="seiten-titel">Kostenlosen Dach-Check anfragen.</h1>
+        <p class="lead">Drei kurze Schritte, rund zwei Minuten. Wir rufen Sie innert eines Arbeitstags zurück und vereinbaren einen Termin vor Ort.</p>
+      </div>
+    </section>
+
+    <div class="huelle kontakt">
+      <div class="kontakt__formular" data-erklaeren="formular">
+        <div class="hinweis hinweis--beispiel">
+          <p><strong>Beispielformular.</strong> Dieses Formular gehört zu einer Beispielseite. Es prüft Ihre Eingaben, sendet aber nichts.</p>
+        </div>
+
+        <section class="rechner-uebernahme" data-uebernahme hidden aria-labelledby="uebernahme-titel">
+          <div class="rechner-uebernahme__kopf">
+            <h2 id="uebernahme-titel">Ihre Werte aus dem Solarrechner</h2>
+            <button class="tabelle-knopf" type="button" data-uebernahme-weg>Nicht mitsenden</button>
+          </div>
+          <dl class="projekt__kennzahlen" data-uebernahme-werte></dl>
+        </section>
+
+        <form class="formular" method="dialog" novalidate data-formular aria-describedby="formular-pflicht">
+          <div class="fortschritt">
+            <ol class="fortschritt__schritte" data-schritte>
+              <li aria-current="step">Objekt</li><li>Wünsche</li><li>Kontakt</li>
+            </ol>
+            <p class="nur-sr" aria-live="polite" data-schritt-ansage></p>
+          </div>
+          <p class="feld__hilfe" id="formular-pflicht">Felder mit «Pflichtfeld» brauchen wir, um Sie zurückzurufen. Alles andere ist optional.</p>
+          <div class="formular__zusammen" id="formular-zusammen" role="alert" hidden></div>
+
+          <fieldset class="formular__schritt" data-schritt="1">
+            <legend>Um welches Gebäude geht es?</legend>
+            <div class="feld" data-feld="gebaeude">
+              <p class="feld__label" id="gebaeude-label">Gebäude <span class="feld__zusatz">Pflichtfeld</span></p>
+              <div class="wahl-karten" role="radiogroup" aria-labelledby="gebaeude-label" aria-describedby="gebaeude-fehler" data-pruefen="gebaeude">
+                <label class="wahl-karte"><input type="radio" name="gebaeude" value="Einfamilienhaus"><span class="wahl-karte__inhalt"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-haus"></use></svg><strong>Einfamilienhaus</strong></span></label>
+                <label class="wahl-karte"><input type="radio" name="gebaeude" value="Mehrfamilienhaus oder Stockwerkeigentum"><span class="wahl-karte__inhalt"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-mfh"></use></svg><strong>Mehrfamilienhaus oder Stockwerkeigentum</strong></span></label>
+                <label class="wahl-karte"><input type="radio" name="gebaeude" value="Gewerbe"><span class="wahl-karte__inhalt"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-gewerbe"></use></svg><strong>Gewerbe</strong></span></label>
+                <label class="wahl-karte"><input type="radio" name="gebaeude" value="Landwirtschaft"><span class="wahl-karte__inhalt"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-sonne"></use></svg><strong>Landwirtschaft</strong></span></label>
+              </div>
+              <p class="fehler" id="gebaeude-fehler" hidden></p>
+            </div>
+            <div class="feld" data-feld="dach">
+              <p class="feld__label" id="dach-label">Dach <span class="feld__zusatz">Pflichtfeld</span></p>
+              <div class="segment" role="radiogroup" aria-labelledby="dach-label" aria-describedby="dach-fehler" data-pruefen="dach">
+                <label><input type="radio" name="dach" value="Schrägdach"><span>Schrägdach</span></label>
+                <label><input type="radio" name="dach" value="Flachdach"><span>Flachdach</span></label>
+                <label><input type="radio" name="dach" value="Weiss nicht"><span>Weiss nicht</span></label>
+              </div>
+              <p class="fehler" id="dach-fehler" hidden></p>
+            </div>
+            <div class="feld">
+              <label class="feld__label" for="f-flaeche">Ungefähre Dachfläche in m² <span class="feld__zusatz">optional</span></label>
+              <input class="eingabe eingabe--kurz" id="f-flaeche" name="flaeche" type="text" inputmode="numeric" autocomplete="off" aria-describedby="f-flaeche-hilfe">
+              <p class="feld__hilfe" id="f-flaeche-hilfe">Eine Schätzung genügt. Wir messen beim Dach-Check nach.</p>
+            </div>
+          </fieldset>
+
+          <fieldset class="formular__schritt" data-schritt="2">
+            <legend>Was wünschen Sie sich?</legend>
+            <div class="feld">
+              <p class="feld__label" id="wuensche-label">Zusätzlich interessiert mich <span class="feld__zusatz">optional</span></p>
+              <div class="wahl-liste" role="group" aria-labelledby="wuensche-label">
+                <label class="wahl"><input type="checkbox" name="wuensche" value="Batteriespeicher"><span>Batteriespeicher</span></label>
+                <label class="wahl"><input type="checkbox" name="wuensche" value="Wallbox"><span>Wallbox für ein Elektroauto</span></label>
+                <label class="wahl"><input type="checkbox" name="wuensche" value="Wärmepumpe"><span>Wärmepumpe einbinden</span></label>
+                <label class="wahl"><input type="checkbox" name="wuensche" value="Erweiterung"><span>Bestehende Anlage erweitern</span></label>
+              </div>
+            </div>
+            <div class="feld" data-feld="zeitrahmen">
+              <p class="feld__label" id="zeit-label">Wann möchten Sie bauen? <span class="feld__zusatz">Pflichtfeld</span></p>
+              <div class="wahl-liste" role="radiogroup" aria-labelledby="zeit-label" aria-describedby="zeitrahmen-fehler" data-pruefen="zeitrahmen">
+                <label class="wahl"><input type="radio" name="zeitrahmen" value="So bald wie möglich"><span>So bald wie möglich</span></label>
+                <label class="wahl"><input type="radio" name="zeitrahmen" value="In den nächsten 6 Monaten"><span>In den nächsten 6 Monaten</span></label>
+                <label class="wahl"><input type="radio" name="zeitrahmen" value="Später, ich informiere mich"><span>Später, ich informiere mich erst</span></label>
+              </div>
+              <p class="fehler" id="zeitrahmen-fehler" hidden></p>
+            </div>
+            <div class="feld" data-termin-feld>
+              <p class="feld__label" id="termin-label">Wunschtermin für den Dach-Check <span class="feld__zusatz">optional</span></p>
+              <div class="termine nur-js" role="radiogroup" aria-labelledby="termin-label" data-termine></div>
+              <p class="feld__hilfe">Wir bestätigen den Termin am Telefon. Samstags auf Anfrage.</p>
+            </div>
+          </fieldset>
+
+          <fieldset class="formular__schritt" data-schritt="3">
+            <legend>Wie erreichen wir Sie?</legend>
+            <div class="feld" data-feld="name">
+              <label class="feld__label" for="f-name">Vor- und Nachname <span class="feld__zusatz">Pflichtfeld</span></label>
+              <input class="eingabe" id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-fehler" data-pruefen="name">
+              <p class="fehler" id="f-name-fehler" hidden></p>
+            </div>
+            <div class="formular__paar">
+              <div class="feld" data-feld="telefon">
+                <label class="feld__label" for="f-telefon">Telefon <span class="feld__zusatz">Pflichtfeld</span></label>
+                <input class="eingabe" id="f-telefon" name="telefon" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="f-telefon-fehler" data-pruefen="telefon">
+                <p class="fehler" id="f-telefon-fehler" hidden></p>
+              </div>
+              <div class="feld" data-feld="email">
+                <label class="feld__label" for="f-email">E-Mail <span class="feld__zusatz">optional</span></label>
+                <input class="eingabe" id="f-email" name="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" aria-describedby="f-email-fehler f-email-vorschlag" data-pruefen="email">
+                <p class="fehler" id="f-email-fehler" hidden></p>
+                <p class="feld__hilfe" id="f-email-vorschlag" aria-live="polite" hidden></p>
+              </div>
+            </div>
+            <div class="formular__paar formular__paar--plz">
+              <div class="feld" data-feld="plz">
+                <label class="feld__label" for="f-plz">PLZ <span class="feld__zusatz">Pflichtfeld</span></label>
+                <input class="eingabe eingabe--kurz" id="f-plz" name="plz" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="4" required aria-describedby="f-plz-fehler" data-pruefen="plz">
+                <p class="fehler" id="f-plz-fehler" hidden></p>
+              </div>
+              <div class="feld" data-feld="ort">
+                <label class="feld__label" for="f-ort">Ort <span class="feld__zusatz">Pflichtfeld</span></label>
+                <input class="eingabe" id="f-ort" name="ort" type="text" autocomplete="address-level2" required aria-describedby="f-ort-fehler" data-pruefen="ort">
+                <p class="fehler" id="f-ort-fehler" hidden></p>
+              </div>
+            </div>
+            <div class="feld">
+              <p class="feld__label" id="rueckruf-label">Rückruf am liebsten <span class="feld__zusatz">optional</span></p>
+              <div class="segment segment--umbruch" role="radiogroup" aria-labelledby="rueckruf-label">
+                <label><input type="radio" name="rueckruf" value="Vormittag"><span>Vormittag</span></label>
+                <label><input type="radio" name="rueckruf" value="Nachmittag"><span>Nachmittag</span></label>
+                <label><input type="radio" name="rueckruf" value="Egal" checked><span>Egal</span></label>
+              </div>
+            </div>
+            <div class="feld">
+              <label class="feld__label" for="f-nachricht">Nachricht <span class="feld__zusatz">optional</span></label>
+              <textarea class="eingabe" id="f-nachricht" name="nachricht" rows="4" autocomplete="off"></textarea>
+            </div>
+            <p class="feld__hilfe">Wir verwenden Ihre Angaben nur für den Rückruf und den Dach-Check. Mehr dazu im <a href="#datenschutz">Datenschutz</a>.</p>
+          </fieldset>
+
+          <div class="formular__nav">
+            <button class="knopf knopf--sekundaer" type="button" data-zurueck hidden>Zurück</button>
+            <button class="knopf" type="submit" data-weiter>Weiter</button>
+          </div>
+          <p class="feld__hilfe formular__offen" id="formular-offen" aria-live="polite"></p>
+        </form>
+
+        <div class="erfolg" data-erfolg hidden tabindex="-1" role="status">
+          <span class="erfolg__icon" aria-hidden="true"><svg class="symbol"><use href="#i-check"></use></svg></span>
+          <h2 data-erfolg-titel>Danke für Ihre Anfrage.</h2>
+          <p><strong>Demo: Es wurde nichts gesendet.</strong> Bei einem echten Betrieb käme Ihre Anfrage jetzt an, und wir würden Sie innert eines Arbeitstags zurückrufen.</p>
+          <dl class="projekt__kennzahlen" data-erfolg-werte></dl>
+          <p><button class="knopf knopf--sekundaer" type="button" data-neu>Neue Anfrage schreiben</button></p>
+        </div>
+      </div>
+
+      <aside class="kontakt__info" aria-labelledby="direkt-titel">
+        <div class="karte">
+          <h2 id="direkt-titel">Lieber direkt?</h2>
+          <a class="kontakt__tel" href="tel:{{firma.telefonLink}}"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg><span class="zahl" data-firma="telefon">{{firma.telefon}}</span></a>
+          <p data-firma="zeiten"><strong>{{firma.zeiten.tage}}</strong><br>{{firma.zeiten.vormittag}}<br>{{firma.zeiten.nachmittag}}</p>
+          <p><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg> <a href="mailto:{{firma.email}}">{{firma.email}}</a></p>
+          <address>{{firma.name}}<br>{{firma.strasse}}<br>{{firma.plz}} {{firma.ort}}</address>
+        </div>
+        <figure class="anfahrt">
+          <svg viewBox="0 0 400 260" role="img" aria-label="Anfahrtsskizze: Werkhofstrasse mit Firstlicht-Gebäude, Parkplätze vor dem Haus, Bushaltestelle Werkhof drei Minuten zu Fuss entfernt." focusable="false">
+            <rect class="anfahrt__grund" width="400" height="260" rx="20"/>
+            <path class="anfahrt__strasse" d="M-10 170H410M200 170V-10"/>
+            <path class="anfahrt__strasse anfahrt__strasse--klein" d="M80 170V270M320 40H410"/>
+            <rect class="anfahrt__haus" x="226" y="92" width="96" height="58" rx="6"/>
+            <path class="anfahrt__dach" d="M226 104L274 78L322 104"/>
+            <g class="anfahrt__parkplatz"><rect x="226" y="184" width="96" height="44" rx="6"/><path d="M250 190V222M274 190V222M298 190V222"/></g>
+            <circle class="anfahrt__bus" cx="110" cy="152" r="12"/><text class="anfahrt__text anfahrt__text--bus" x="110" y="157">B</text>
+            <text class="anfahrt__text" x="274" y="126">Firstlicht</text>
+            <text class="anfahrt__text anfahrt__text--klein" x="274" y="248">Parkplätze</text>
+            <text class="anfahrt__text anfahrt__text--klein" x="110" y="136">Bus Werkhof</text>
+            <text class="anfahrt__text anfahrt__text--strasse" x="60" y="186">Werkhofstrasse</text>
+          </svg>
+          <figcaption>Parkplätze direkt vor dem Haus. Die Bushaltestelle Werkhof liegt drei Minuten zu Fuss entfernt. Skizze, nicht massstabsgetreu.</figcaption>
+        </figure>
+      </aside>
+    </div>
+
+    <!-- Impressum, Datenschutz und Bildnachweise: Beispieltexte -->
+    <section class="sektion sektion--tief" aria-label="Rechtliches">
+      <div class="huelle rechtstexte">
+        <div class="rechtstext" id="impressum">
+          <p class="badge badge--beispiel">Beispieltext</p>
+          <h2>Impressum</h2>
+          <p><strong>Betreiber dieser Beispielseite:</strong> ODERA Design, Nico Bodmer. Die vollständigen Angaben stehen im <a href="/impressum/" target="_top">Impressum von odera.ch</a>.</p>
+          <p><strong>Firstlicht Solartechnik GmbH ist frei erfunden.</strong> Firmenname, Adresse ({{firma.strasse}}, {{firma.plz}} {{firma.ort}}), Telefonnummer, E-Mail, Personen, Kennzahlen und Projekte gibt es nicht. Handelsregister und UID: keine. Auf einer echten Seite stehen hier Firmenname, Rechtsform, Sitz, UID-Nummer und die vertretungsberechtigte Person.</p>
+          <p>Gestaltung und Umsetzung: <a href="/" target="_top">ODERA Design</a></p>
+        </div>
+        <div class="rechtstext" id="datenschutz">
+          <p class="badge badge--beispiel">Beispieltext</p>
+          <h2>Datenschutz</h2>
+          <p>Diese Beispielseite setzt keine Cookies, keine Tracker und keine Analysedienste ein. Schriften, Bilder und Programme liegen auf demselben Server. Beim Besuch werden keine Daten an Dritte übertragen.</p>
+          <p>Das Formular sendet nichts. Ihre Wahl zwischen hellem und dunklem Design speichert Ihr Browser lokal, damit sie beim nächsten Besuch gleich bleibt. Werte aus dem Solarrechner bleiben nur im geöffneten Tab, bis Sie ihn schliessen.</p>
+          <p>Ein echter Betrieb nennt hier, welche Daten er wofür bearbeitet, wie lange er sie aufbewahrt und wie man Auskunft verlangt. Es gilt das Schweizer Datenschutzgesetz (DSG). Der Text wird vor der Veröffentlichung geprüft.</p>
+        </div>
+        <div class="rechtstext" id="bildnachweise">
+          <p class="badge badge--beispiel">Beispieltext</p>
+          <h2>Bildnachweise</h2>
+          <p>Diese Seite verwendet keine Fotos. Logo, Illustrationen, Szene und Symbole hat ODERA Design für dieses Beispiel gezeichnet. Das Telefon-Symbol folgt der Form von Feather Icons (MIT-Lizenz).</p>
+          <p>Schriften: Schibsted Grotesk und Manrope, beide unter der SIL Open Font License, lokal eingebunden.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- @teil fuss -->
+  <!-- @teil handyleiste -->
+  <!-- @teil menue -->
+  <!-- @teil glossar -->
+  <!-- @teil skripte -->
+</body>
+</html>

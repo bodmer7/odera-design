@@ -477,6 +477,7 @@ async function starten() {
   zeichnen();
   reglerAnzeigen();
   annahmenZeigen();
+  adresseAktualisieren();
   ereignisse();
   wizardEinrichten();
   wurzel.classList.add('ist-bereit');

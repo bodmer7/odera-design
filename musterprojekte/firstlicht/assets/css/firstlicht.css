@@ -977,6 +977,68 @@
 
   .nur-druck { display: none; }
 
+  /* ---------- Kontakt ---------- */
+  .kontakt { display: grid; gap: var(--s-6); padding-bottom: var(--sektion); align-items: start; }
+  @media (min-width: 64em) { .kontakt { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); } .kontakt__info { position: sticky; top: calc(var(--kopf-hoehe) + 16px); } }
+  .kontakt__formular { display: grid; gap: var(--s-5); }
+  .formular { display: grid; gap: var(--s-5); padding: clamp(20px, 3vw, 36px); border-radius: var(--radius-xl); background: var(--color-surface); border: var(--rahmen); }
+  .formular__schritt { display: grid; gap: var(--s-5); }
+  .formular__schritt legend { float: left; width: 100%; font-family: var(--font-titel); font-weight: 750; font-size: var(--text-xl); letter-spacing: -0.02em; line-height: 1.2; }
+  .formular__schritt legend + * { clear: both; }
+  .formular__schritt legend:focus { outline: none; }
+  .formular__paar { display: grid; gap: var(--s-4); align-items: start; }
+  @media (min-width: 40em) { .formular__paar { grid-template-columns: 1fr 1fr; } .formular__paar--plz { grid-template-columns: 9rem 1fr; } }
+  .formular__nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
+  .formular__nav [data-weiter] { margin-inline-start: auto; }
+  .formular__offen:empty { display: none; }
+  .formular__zusammen { padding: 14px 16px; border-radius: var(--radius-m); background: var(--color-error-bg); color: var(--color-text); border-inline-start: 4px solid var(--color-error); }
+  .formular__zusammen a { color: var(--color-error); font-weight: 700; }
+  .formular__zusammen ul { margin-top: 6px; padding-inline-start: 18px; }
+  .wahl-liste { display: grid; gap: 2px; }
+  .segment--umbruch { flex-wrap: wrap; }
+  .termine { display: flex; flex-wrap: wrap; gap: 8px; }
+  .termin { position: relative; }
+  .termin input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .termin span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 14px; border-radius: var(--radius-m); border: 1.5px solid var(--color-border-feld); background: var(--color-surface); font-weight: 700; font-size: var(--text-s); }
+  .termin input:checked + span { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-on-accent); }
+  .termin input:focus-visible + span { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+  .feld.ist-ok .eingabe { animation: ok-blitz 900ms var(--kurve); }
+  @keyframes ok-blitz { 30% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-success) 35%, transparent); } }
+  .rechner-uebernahme { padding: 18px 20px; border-radius: var(--radius-l); background: color-mix(in srgb, var(--sonne) 18%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--sonne) 50%, transparent); display: grid; gap: 12px; }
+  .rechner-uebernahme__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .rechner-uebernahme h2 { font-size: var(--text-l); }
+  .rechner-uebernahme .projekt__kennzahlen > div { background: var(--color-surface); }
+  .erfolg { display: grid; gap: var(--s-4); padding: clamp(24px, 4vw, 48px); border-radius: var(--radius-xl); background: var(--color-surface); border: 2px solid var(--color-success); }
+  .erfolg:focus { outline: none; }
+  .erfolg__icon { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--color-success); color: var(--color-surface); }
+  .erfolg__icon .symbol { width: 28px; height: 28px; stroke-width: 3; }
+  .kontakt__info { display: grid; gap: var(--s-4); }
+  .kontakt__info .karte p, .kontakt__info address { color: var(--color-text); font-style: normal; }
+  .kontakt__info h2 { font-size: var(--text-xl); }
+  .kontakt__info .karte p:has(.symbol) { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .kontakt__tel { display: inline-flex; gap: 10px; align-items: center; font-family: var(--font-titel); font-weight: 800; font-size: var(--text-xl); text-decoration: none; min-height: 48px; }
+  .anfahrt { display: grid; gap: 8px; }
+  .anfahrt svg { width: 100%; height: auto; }
+  .anfahrt figcaption { font-size: var(--text-xs); color: var(--color-text-muted); }
+  .anfahrt__grund { fill: color-mix(in srgb, var(--himmel) 50%, var(--color-surface)); }
+  .anfahrt__strasse { fill: none; stroke: var(--color-surface); stroke-width: 26; stroke-linecap: round; }
+  .anfahrt__strasse--klein { stroke-width: 14; }
+  .anfahrt__haus { fill: var(--nacht); }
+  .anfahrt__dach { fill: none; stroke: var(--sonne); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .anfahrt__parkplatz rect { fill: var(--color-surface-2); stroke: var(--color-border-feld); }
+  .anfahrt__parkplatz path { stroke: var(--color-border-feld); stroke-width: 2; }
+  .anfahrt__bus { fill: var(--odera-blau); }
+  .anfahrt__text { fill: #F2EFE8; font: 800 14px var(--font-titel); text-anchor: middle; }
+  .anfahrt__text--bus { fill: #fff; font-size: 13px; }
+  .anfahrt__text--klein, .anfahrt__text--strasse { fill: var(--color-text); font: 700 12px var(--font-text); }
+  .anfahrt__text--strasse { text-anchor: start; }
+  .rechtstexte { display: grid; gap: var(--s-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+  .rechtstext { display: grid; gap: var(--s-3); align-content: start; font-size: var(--text-s); }
+  .rechtstext h2 { font-size: var(--text-xl); }
+  .rechtstext a { color: var(--color-accent-text); }
+  .rechtstext .badge { width: fit-content; }
+
+
   /* ---------- Über uns ---------- */
   .werte { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
   .jahre { list-style: none; padding: 0; display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
