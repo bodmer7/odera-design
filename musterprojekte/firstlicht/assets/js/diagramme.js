@@ -69,7 +69,9 @@ export function balken(flaeche, daten, opt = {}) {
       : '';
     s += `<path class="balken" data-i="${i}" d="${pfad}"/>`;
     s += `<rect class="treffer" data-i="${i}" x="${links + band * i}" y="${oben}" width="${band}" height="${H - oben - unten}" fill="transparent"/>`;
-    s += `<text class="achse-text" x="${x + breite / 2}" y="${H - 6}" text-anchor="middle">${band < 34 ? d.label.slice(0, 1) : d.label}</text>`;
+    const zahlLabel = /^\d+$/.test(d.label);
+    const zeigen = !zahlLabel || band >= 22 || i % Math.ceil(22 / band) === 0;
+    if (zeigen) s += `<text class="achse-text" x="${x + breite / 2}" y="${H - 6}" text-anchor="middle">${!zahlLabel && band < 34 ? d.label.slice(0, 1) : d.label}</text>`;
   });
   // Grösster Wert direkt beschriftet
   const iMax = daten.findIndex((d) => d.wert === max);

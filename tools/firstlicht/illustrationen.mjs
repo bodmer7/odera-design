@@ -98,3 +98,53 @@ export const SYMBOLE = {
   'i-uhr': '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   'i-zurueck': '<path d="M20 12H5M11 6l-6 6 6 6"/>'
 };
+
+// Isometrisches Haus für den Energie-Baukasten. Teile mit data-teil werden per Schalter ein- und ausgeblendet.
+export function baukasten() {
+  const S = 14, OX = 250, OY = 180;
+  const p = (x, y, z) => `${(OX + (x - y) * 0.866 * S).toFixed(1)} ${(OY + (x + y) * 0.5 * S - z * S).toFixed(1)}`;
+  const poly = (cls, pts, extra = '') => `<path class="${cls}" d="M${pts.map((q) => p(...q)).join('L')}Z"${extra}/>`;
+  const box = (x0, x1, y0, y1, z0, z1, cls = 'bk-box') =>
+    poly(`${cls} bk-seite`, [[x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [x1, y0, z1]]) +
+    poly(`${cls} bk-front`, [[x0, y1, z0], [x1, y1, z0], [x1, y1, z1], [x0, y1, z1]]) +
+    poly(`${cls} bk-oben`, [[x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]]);
+  const linie = (cls, ...pts) => `<path class="${cls}" d="M${pts.map((q) => p(...q)).join('L')}"/>`;
+  const kurve = (teil, a, b, c) => `<path class="bk-fluss" data-fluss="${teil}" d="M${p(...a)}Q${p(...b)} ${p(...c)}"/>`;
+
+  // Module auf der vorderen Dachfläche: von First (y=4, z=10) bis Traufe (y=8, z=6)
+  let module = '';
+  const spalten = 5, zeilen = 2;
+  for (let j = 0; j < zeilen; j++) {
+    for (let i = 0; i < spalten; i++) {
+      const u0 = 0.6 + i * 1.8, u1 = u0 + 1.65;
+      const t0 = 0.08 + j * 0.45, t1 = t0 + 0.41;
+      const q = (u, t) => [u, 4 + 4 * t, 10 - 4 * t];
+      module += poly('bk-modul', [q(u0, t0), q(u1, t0), q(u1, t1), q(u0, t1)]);
+    }
+  }
+
+  return `<svg class="illu baukasten__svg" viewBox="0 0 520 380" role="img" aria-labelledby="bk-titel" focusable="false">
+<title id="bk-titel" data-bk-beschreibung>Einfamilienhaus mit Solaranlage</title>
+${poly('bk-boden', [[-4, -3, 0], [14.5, -3, 0], [14.5, 14, 0], [-4, 14, 0]])}
+<g data-teil="netz">${linie('bk-mast', [-3, 11, 0], [-3, 11, 11])}${linie('bk-mast bk-mast--quer', [-3, 10, 10.5], [-3, 12, 10.5])}${linie('bk-draht', [-3, 11, 10.5], [0, 8, 5.5])}</g>
+${box(0, 10, 0, 8, 0, 6, 'bk-haus')}
+${poly('bk-dach bk-dach--hinten', [[0, 0, 6], [10, 0, 6], [10, 4, 10], [0, 4, 10]])}
+${poly('bk-giebel', [[10, 0, 6], [10, 8, 6], [10, 4, 10]])}
+${poly('bk-dach', [[0, 4, 10], [10, 4, 10], [10, 8, 6], [0, 8, 6]])}
+<g class="bk-teil" data-teil="pv">${module}${linie('bk-first', [0, 4, 10], [10, 4, 10])}</g>
+${poly('bk-fenster', [[1.5, 8, 2.5], [3.5, 8, 2.5], [3.5, 8, 4.5], [1.5, 8, 4.5]])}
+${poly('bk-fenster', [[5, 8, 2.5], [7, 8, 2.5], [7, 8, 4.5], [5, 8, 4.5]])}
+${poly('bk-tuer', [[8, 8, 0], [9.3, 8, 0], [9.3, 8, 3.4], [8, 8, 3.4]])}
+${poly('bk-fenster', [[10, 2, 2.5], [10, 4.5, 2.5], [10, 4.5, 4.5], [10, 2, 4.5]])}
+<g class="bk-teil" data-teil="speicher">${box(10, 11.2, 5.4, 7, 0, 3.2, 'bk-geraet')}${poly('bk-led', [[11.2, 6, 2], [11.2, 6.6, 2], [11.2, 6.6, 2.5], [11.2, 6, 2.5]])}</g>
+<g class="bk-teil" data-teil="waermepumpe">${box(11.6, 13.6, 1, 3, 0, 1.8, 'bk-geraet')}<circle class="bk-luefter" cx="${p(13.6, 2, 0.9).split(' ')[0]}" cy="${p(13.6, 2, 0.9).split(' ')[1]}" r="9"/></g>
+<g class="bk-teil" data-teil="wallbox">${box(1, 1.5, 9.6, 10, 0, 3.4, 'bk-geraet')}${box(3, 9, 10.2, 13, 0, 1.4, 'bk-auto')}${box(4.3, 7.6, 10.5, 12.7, 1.4, 2.6, 'bk-auto bk-auto--dach')}${linie('bk-kabel', [1.5, 10, 2.2], [3, 11.5, 1])}</g>
+<g class="bk-fluesse" fill="none">
+${kurve('netzHaus', [-3, 11, 10], [-1.5, 9.5, 8], [0, 8, 4])}
+${kurve('dachHaus', [5, 6, 8], [5, 7.5, 7], [5, 8, 3.2])}
+${kurve('dachSpeicher', [9.5, 7.5, 6.4], [10.6, 7.6, 5.2], [10.6, 6.2, 3.3])}
+${kurve('dachWp', [10, 6.4, 7], [12.6, 4.5, 6], [12.6, 2, 1.9])}
+${kurve('dachAuto', [1.5, 7.8, 6.4], [1.2, 9, 5.2], [1.25, 9.8, 3.5])}
+</g>
+</svg>`;
+}

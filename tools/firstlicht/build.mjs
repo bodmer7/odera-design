@@ -19,7 +19,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { gebaeude, SYMBOLE } from './illustrationen.mjs';
+import { gebaeude, baukasten, SYMBOLE } from './illustrationen.mjs';
 import { berechnen } from '../../musterprojekte/firstlicht/assets/js/rechner-logik.js';
 
 const ROOT = dirname(dirname(dirname(fileURLToPath(import.meta.url))));
@@ -96,6 +96,7 @@ const ANWEISUNGEN = {
   'projekte start': () => ['efh-reusstal', 'stwe-limmattal', 'hof-freiamt'].map((id) => projektKarte(projekte.find((p) => p.id === id), { verlinkt: true })).join('\n'),
   'projekte alle': () => projekte.map((p) => projektKarte(p, { verlinkt: false })).join('\n'),
   'projektdaten': projektDaten,
+  'baukasten': baukasten,
   'filter': filterLeiste,
   'projektzahl': () => String(projekte.length),
   'symbole-extra': () => Object.entries(SYMBOLE).map(([id, d]) => `<symbol id="${id}" viewBox="0 0 24 24">${d}</symbol>`).join('\n')
