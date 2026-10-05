@@ -1,0 +1,65 @@
+{
+  "_hinweis": "Häufige Fragen, einzige Quelle für Startseite (start: true) und Leistungen. Jede Sachaussage ist in musterprojekte/firstlicht/faktencheck.md belegt (Nummern in fakten).",
+  "fragen": [
+    {
+      "id": "lohnt", "start": true, "fakten": ["F01", "F02", "F03", "F04"],
+      "frage": "Lohnt sich Solarstrom 2026 noch, obwohl die Rückliefertarife gesunken sind?",
+      "antwort": "<p>Ja, wenn die Anlage zu Ihrem Verbrauch passt. Am meisten bringt der Strom, den Sie selbst nutzen: Er ersetzt Netzstrom, der 2027 im Schweizer Median 26.5 Rappen pro kWh kostet (ElCom, Profil H4). Für eingespeisten Strom erhalten Sie seit 2026 den Marktpreis, den der Bund jedes Quartal festlegt, bei Anlagen bis 30 kW aber mindestens 6 Rappen pro kWh.</p><p>Mit Wärmepumpe, Elektroauto oder Speicher steigt Ihr <button class=\"glossar\" type=\"button\" popovertarget=\"g-eigenverbrauch\">Eigenverbrauch</button>. Wir rechnen die Amortisation offen vor, auch wenn sie länger dauert als in mancher Werbung. Probieren Sie es im <a href=\"rechner.html\">Solarrechner</a> aus.</p>"
+    },
+    {
+      "id": "bewilligung", "start": true, "fakten": ["F05", "F06", "F07"],
+      "frage": "Brauche ich eine Baubewilligung, oder reicht eine Meldung?",
+      "antwort": "<p>Meist reicht eine Meldung. Solaranlagen, die gut aufs Dach angepasst sind, brauchen in Bau- und Landwirtschaftszonen keine Baubewilligung (Art. 18a Raumplanungsgesetz). Eine Bewilligung braucht es bei geschützten Kultur- und Naturdenkmälern, im Aargau zum Beispiel auch in Kern-, Dorf- und Altstadtzonen.</p><p>Die Meldung an die Gemeinde übernehmen wir. Im Aargau darf frühestens 30 Tage nach der Meldung gebaut werden, wenn die Gemeinde nichts einwendet.</p>"
+    },
+    {
+      "id": "lebensdauer", "start": false, "fakten": ["F08", "F09"],
+      "frage": "Wie lange halten Module und Wechselrichter?",
+      "antwort": "<p>Solaranlagen halten laut Swissolar mindestens 30 Jahre, im Mittel 33 Jahre. Die Leistung der Module nimmt dabei langsam ab. Gerechnet wird meist mit 0.5 Prozent pro Jahr.</p><p>Der Wechselrichter hält 10 bis 15 Jahre und wird im Lauf der Zeit einmal ersetzt. Diesen Ersatz haben wir im Unterhalt des Rechners eingeplant.</p>"
+    },
+    {
+      "id": "speicher", "start": true, "fakten": ["F10"],
+      "frage": "Lohnt sich ein Speicher für mich?",
+      "antwort": "<p>Ein Speicher hebt den Anteil Ihres eigenen Solarstroms deutlich. Laut EnergieSchweiz steigt der Eigenverbrauch bei kleineren Anlagen von rund 30 auf bis zu 70 Prozent. Der Speicher kostet aber mehrere tausend Franken und verkürzt die Amortisation selten.</p><p>Sinnvoll ist er vor allem, wenn Sie abends viel Strom brauchen oder Unabhängigkeit wichtig ist. Im <a href=\"rechner.html\">Solarrechner</a> sehen Sie beide Varianten nebeneinander.</p>"
+    },
+    {
+      "id": "hagel", "start": false, "fakten": ["F11", "F12", "F13"],
+      "frage": "Was passiert bei Hagel oder Schnee?",
+      "antwort": "<p>Module werden im Hagelregister der kantonalen Gebäudeversicherungen in Widerstandsklassen eingeteilt. HW3 heisst: Das Modul hält Hagelkörnern von 3 cm stand. Wir verbauen nur Module, die mindestens HW3 erreichen.</p><p>Im Aargau ist eine fest montierte Anlage über die Gebäudeversicherung gegen Elementarschäden mitversichert, wenn Sie sie melden. Die nötigen Unterlagen erhalten Sie von uns. Schnee rutscht meist von selbst ab. Steigen Sie dafür bitte nicht aufs Dach.</p>"
+    },
+    {
+      "id": "winter", "start": false, "fakten": ["F14", "F15"],
+      "frage": "Produziert die Anlage auch im Winter und bei Nebel?",
+      "antwort": "<p>Ja, aber deutlich weniger als im Sommer. Im Mittelland fällt rund ein Viertel bis ein Drittel der Jahresproduktion ins Winterhalbjahr, Nebel drückt den Ertrag zusätzlich. In den Alpen gibt es im Winter weniger Nebeltage, dort ist der Winterertrag höher.</p><p>Am kürzesten Tag steht die Sonne über Zürich mittags nur knapp 20 Grad hoch, im Hochsommer sind es rund 66 Grad. Die Szene oben auf der Startseite zeigt beide Tage.</p>"
+    },
+    {
+      "id": "stromausfall", "start": false, "fakten": ["F16"],
+      "frage": "Habe ich bei einem Stromausfall Strom?",
+      "antwort": "<p>Nicht automatisch. Aus Sicherheitsgründen trennt sich der Wechselrichter bei einem Netzausfall sofort vom Netz, und die Anlage liefert keinen Strom mehr. Weiter Strom gibt es nur mit einer Notstrom- oder Ersatzstromlösung. Für eine Versorgung des ganzen Hauses braucht es dafür einen Speicher. Das planen wir auf Wunsch mit ein.</p>"
+    },
+    {
+      "id": "foerderung", "start": true, "fakten": ["F17", "F18", "F19", "F20"],
+      "frage": "Welche Förderung gibt es, und wer stellt das Gesuch?",
+      "antwort": "<p>Der Bund zahlt über Pronovo eine <button class=\"glossar\" type=\"button\" popovertarget=\"g-einmalverguetung\">Einmalvergütung</button>. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026), bei 10 kWp also 3'600 Franken. Dazu kommen je nach Kanton und Gemeinde weitere Beiträge. Sie finden sie auf <a href=\"https://www.energiefranken.ch/\" target=\"_blank\" rel=\"noopener\">energiefranken.ch</a> nach Postleitzahl.</p><p>Bei bestehenden Gebäuden lässt sich die Investition in den meisten Kantonen von den Steuern abziehen. Bei der Bundessteuer fällt dieser Abzug ab 2029 weg. Das Gesuch bei Pronovo stellen wir nach der Inbetriebnahme für Sie.</p>"
+    },
+    {
+      "id": "dauer", "start": true, "fakten": ["F21"],
+      "frage": "Wie lange dauert es von der Anfrage bis zum eigenen Solarstrom?",
+      "antwort": "<p>Meist einige Wochen bis wenige Monate. Den Dach-Check machen wir in der Regel innert zwei Wochen, die Festpreis-Offerte folgt wenige Tage danach. Allein das Meldeverfahren dauert mindestens 30 Tage. Dazu kommen die Antwort des Netzbetreibers und die Lieferzeit.</p><p>Die Montage selbst dauert bei einem Einfamilienhaus meist zwei bis drei Tage. Den ganzen <a href=\"ueber-uns.html#ablauf\">Ablauf mit typischen Dauern</a> finden Sie auf der Seite Über uns.</p>"
+    },
+    {
+      "id": "reinigung", "start": false, "fakten": ["F22"],
+      "frage": "Muss ich die Module reinigen?",
+      "antwort": "<p>In der Regel nicht, der Regen erledigt das. Eine Reinigung lohnt sich vor allem bei sehr flachen Anlagen unter 10 Grad Neigung, auf Ställen oder in staubiger Umgebung. Swissolar empfiehlt alle zwei bis drei Jahre eine Sichtkontrolle. Gereinigt wird nur mit Regenwasser oder entmineralisiertem Wasser.</p>"
+    },
+    {
+      "id": "verkauf", "start": false, "fakten": ["F23", "F24"],
+      "frage": "Was passiert, wenn ich das Haus verkaufe?",
+      "antwort": "<p>Eine fest montierte Anlage gehört rechtlich in der Regel zum Gebäude und geht an die neuen Eigentümer über. Der Wechsel der Betreiberin oder des Betreibers muss aber bei Pronovo und beim Netzbetreiber gemeldet werden. Wir helfen Ihnen dabei.</p>"
+    },
+    {
+      "id": "mehrfamilienhaus", "start": false, "fakten": ["F25", "F26", "F27"],
+      "frage": "Geht Solar auch im Mehrfamilienhaus oder im Stockwerkeigentum?",
+      "antwort": "<p>Ja. Im <button class=\"glossar\" type=\"button\" popovertarget=\"g-zev\">Zusammenschluss zum Eigenverbrauch</button> (ZEV) teilen sich die Parteien den Solarstrom hinter einem gemeinsamen Netzanschluss. Seit 2025 geht das auch virtuell über bestehende Anschlussleitungen (vZEV). Seit 2026 können Nachbarn in derselben Gemeinde zudem eine lokale Elektrizitätsgemeinschaft (LEG) bilden und zahlen dabei weniger Netzentgelt.</p><p>Welche Form zu Ihrem Haus passt, erklären wir im Abschnitt <a href=\"leistungen.html#mehrfamilienhaus\">Mehrfamilienhaus</a>.</p>"
+    }
+  ]
+}

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Firstlicht Solartechnik | Solaranlagen im Freiamt, Reusstal und Limmattal</title>
+  <meta name="description" content="Beispielseite von ODERA Design. Die erfundene Firstlicht Solartechnik plant und montiert Solaranlagen, Speicher und Ladestationen. Mit Solarrechner und ehrlichen Zahlen.">
+  <!-- Beispielseite mit erfundenem Betrieb: nicht in Suchmaschinen -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://odera.ch/musterprojekte/firstlicht/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:site_name" content="Firstlicht Solartechnik (Beispielseite von ODERA Design)">
+  <meta property="og:title" content="Firstlicht Solartechnik | Solaranlagen im Freiamt, Reusstal und Limmattal">
+  <meta property="og:description" content="Beispielseite von ODERA Design. Die erfundene Firstlicht Solartechnik plant und montiert Solaranlagen, Speicher und Ladestationen. Mit Solarrechner und ehrlichen Zahlen.">
+  <meta property="og:url" content="https://odera.ch/musterprojekte/firstlicht/">
+  <meta property="og:image" content="https://odera.ch/musterprojekte/firstlicht/assets/logo/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="theme-color" content="#F7F5F0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E1420" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/logo/favicon.ico" sizes="32x32">
+  <link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+  <!-- Theme vor dem ersten Zeichnen setzen, damit nichts flackert -->
+  <script>(function(){var d=document.documentElement,t;d.className+=' js';try{t=localStorage.getItem('firstlicht-theme')}catch(e){}if(t!=='hell'&&t!=='dunkel')t=matchMedia('(prefers-color-scheme: dark)').matches?'dunkel':'hell';d.setAttribute('data-theme',t)})();</script>
+  <link rel="preload" href="assets/fonts/schibsted-grotesk-600-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/firstlicht.css">
+</head>
+<body class="dunkler-kopf">
+  <!-- Symbol-Vorrat: Logo und Icons, eingebunden über <use> -->
+  <svg class="nur-sr" aria-hidden="true" focusable="false">
+    <defs>
+      <mask id="fl-signet-maske" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+        <rect width="48" height="48" fill="#fff"/>
+        <path d="M5 38L24 19L43 38" fill="none" stroke="#000" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+      </mask>
+      <symbol id="fl-signet" viewBox="0 0 48 48">
+        <circle cx="24" cy="15.5" r="9" fill="var(--morgenrot, #FF8A3D)" mask="url(#fl-signet-maske)"/>
+        <path d="M5 38L24 19L43 38" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5.5v13M16 5.5v13" stroke-width="3"/></symbol>
+      <symbol id="i-telefon" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+      <symbol id="i-pfeil" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-rechner" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7h7M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01M8.5 18h.01M12 18h3.5"/></symbol>
+      <symbol id="i-menue" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+      <symbol id="i-schliessen" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+      <symbol id="i-haus" viewBox="0 0 24 24"><path d="M3 11.5L12 4l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M9.5 20v-5h5v5"/></symbol>
+  <symbol id="i-mfh" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2M11 21v-3h2v3"/></symbol>
+  <symbol id="i-gewerbe" viewBox="0 0 24 24"><path d="M3 20V10l5 3V10l5 3V10l5 3V5h3v15z"/><path d="M7 20v-3h3v3M14 20v-3h3v3"/></symbol>
+  <symbol id="i-speicher" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M10 2h4M12.5 8l-2.5 4h4l-2.5 4"/></symbol>
+  <symbol id="i-wallbox" viewBox="0 0 24 24"><rect x="5" y="3" width="10" height="13" rx="2"/><path d="M10 6.5l-1.5 3h3L10 12.5M10 16v5M15 8h2a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2"/></symbol>
+  <symbol id="i-wp" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="9" cy="12.5" r="3.5"/><path d="M9 9v7M5.5 12.5h7M15 10h3M15 13h3M15 16h3"/></symbol>
+  <symbol id="i-wartung" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3.5 17.5a1.8 1.8 0 1 0 2.5 2.5l5.8-5.8a4 4 0 0 0 5.4-5.4l-2.3 2.3-2.2-.4-.4-2.2z"/></symbol>
+  <symbol id="i-erweitern" viewBox="0 0 24 24"><rect x="3" y="11" width="8" height="8" rx="1"/><rect x="13" y="11" width="8" height="8" rx="1" stroke-dasharray="2.5 2.5"/><path d="M17 4v5M14.5 6.5h5"/></symbol>
+  <symbol id="i-sonne" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  <symbol id="i-druck" viewBox="0 0 24 24"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5h16l-6 7.5V19l-4 2v-8.5z"/></symbol>
+  <symbol id="i-kalender" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></symbol>
+  <symbol id="i-karte" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></symbol>
+  <symbol id="i-uhr" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-zurueck" viewBox="0 0 24 24"><path d="M20 12H5M11 6l-6 6 6 6"/></symbol>
+    </defs>
+  </svg>
+  <a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
+  <!-- Hinweis: Beispielseite. Muss auf jeder Seite bleiben. -->
+  <aside class="beispiel-leiste" aria-label="Hinweis zur Beispielseite">
+    <div class="huelle beispiel-leiste__innen">
+      <p class="beispiel-leiste__text"><strong>Beispielseite von ODERA Design.</strong> Der Betrieb ist frei erfunden.</p>
+      <p class="beispiel-leiste__links">
+        <a href="/musterprojekte/" target="_top">Zurück zu odera.ch</a>
+        <a href="/projekt-check/?quelle=firstlicht" target="_top">Projekt-Check</a>
+        <button class="erklaer-schalter nur-js" type="button" aria-pressed="false" data-erklaeren-schalter><span class="erklaer-schalter__spur" aria-hidden="true"></span><span class="erklaer-schalter__lang">Was ist hier besonders?</span><span class="erklaer-schalter__kurz">Erklärungen</span></button>
+      </p>
+    </div>
+  </aside>
+  <header class="kopf" data-kopf>
+    <div class="huelle kopf__innen">
+      <a class="logo" href="index.html" aria-label="Firstlicht Solartechnik, zur Startseite">
+        <svg class="logo__signet" aria-hidden="true" focusable="false"><use href="#fl-signet"></use></svg>
+        <span class="logo__wort" aria-hidden="true">Firstlicht</span>
+      </a>
+      <nav class="hauptnav" aria-label="Hauptnavigation">
+        <ul class="hauptnav__liste">
+          <li><a href="index.html" aria-current="page">Start</a></li>
+          <li><a href="leistungen.html">Leistungen</a></li>
+          <li><a href="projekte.html">Projekte</a></li>
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </nav>
+      <button class="theme-schalter nur-js" type="button" data-theme-schalter aria-label="Dunkles Design einschalten">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <g class="ts-strahlen"><path d="M12 1.5v2.2M12 20.3v2.2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M1.5 12h2.2M20.3 12h2.2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></g>
+          <circle class="ts-kern" cx="12" cy="12" r="5.5"/>
+          <circle class="ts-schatten" cx="12" cy="12" r="5.5"/>
+        </svg>
+      </button>
+      <a class="knopf knopf--klein kopf__cta" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Solarrechner</a>
+      <a class="knopf knopf--ghost knopf--klein menue-knopf" href="#fussnavigation" data-menue-knopf><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-menue"></use></svg>Menü</a>
+    </div>
+  </header>
+
+  <main id="inhalt" tabindex="-1">
+    <section class="hero sektion--dunkel" aria-labelledby="hero-titel">
+      <div class="huelle hero__raster">
+        <div data-erklaeren="ladezeit">
+          <p class="vorzeile">Solartechnik seit 2011</p>
+          <h1 id="hero-titel">Solarstrom vom eigenen Dach. <em>Ehrlich gerechnet.</em></h1>
+          <p class="hero__unter">Firstlicht plant und montiert Solaranlagen, Speicher und Ladestationen für Häuser und Betriebe im Freiamt, Reusstal und Limmattal. Mit eigenen Teams.</p>
+          <div class="hero__ctas">
+            <a class="knopf" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Solarrechner starten</a>
+            <a class="knopf knopf--sekundaer" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
+          </div>
+          <a class="hero__tel" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>Jetzt anrufen <span class="zahl" data-firma="telefon">056 000 18 18</span></a>
+        </div>
+        <div data-erklaeren="szene">
+          <figure class="szene" data-szene aria-labelledby="szene-legende">
+            <div class="szene__bild">
+              <svg class="szene__svg" viewBox="0 0 960 600" role="img" aria-labelledby="szene-titel szene-text" focusable="false">
+                <title id="szene-titel">Beispieltag an einem Haus mit Solaranlage</title>
+                <desc id="szene-text">Einfamilienhaus mit Solarmodulen auf dem Dach, Batteriespeicher, Ladestation mit Auto und Anschluss ans Stromnetz. Die Sonne wandert über den Himmel. Linien zeigen, wohin der Strom gerade fliesst.</desc>
+                <defs>
+                  <linearGradient id="fl-himmel" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" class="szene__himmel-oben"/>
+                    <stop offset="1" class="szene__himmel-unten"/>
+                  </linearGradient>
+                  <radialGradient id="fl-schein">
+                    <stop offset="0" stop-color="#FFC857" stop-opacity=".55"/>
+                    <stop offset="1" stop-color="#FFC857" stop-opacity="0"/>
+                  </radialGradient>
+                  <linearGradient id="fl-modul" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" class="szene__modul-hell"/>
+                    <stop offset="1" class="szene__modul-dunkel"/>
+                  </linearGradient>
+                </defs>
+
+                <rect class="szene__himmel" x="-400" width="1760" height="600" fill="url(#fl-himmel)"/>
+                <g class="szene__sterne" fill="#F7F5F0">
+                  <circle cx="90" cy="70" r="1.6"/><circle cx="210" cy="140" r="1.2"/><circle cx="320" cy="60" r="1.8"/>
+                  <circle cx="450" cy="120" r="1.1"/><circle cx="560" cy="50" r="1.5"/><circle cx="660" cy="150" r="1.2"/>
+                  <circle cx="760" cy="80" r="1.7"/><circle cx="880" cy="170" r="1.2"/><circle cx="150" cy="210" r="1"/>
+                  <circle cx="610" cy="230" r="1"/><circle cx="400" cy="200" r="1.3"/><circle cx="910" cy="60" r="1.1"/><circle cx="-60" cy="110" r="1.4"/><circle cx="-180" cy="40" r="1.1"/><circle cx="1040" cy="120" r="1.5"/><circle cx="1150" cy="50" r="1.2"/>
+                </g>
+                <path class="szene__mond" d="M842 92a34 34 0 1 0 34 46 28 28 0 1 1-34-46z" fill="#F2EBD9"/>
+                <g class="szene__sonne" transform="translate(480 70)">
+                  <circle r="78" fill="url(#fl-schein)"/>
+                  <circle r="26" fill="#FFC857"/>
+                </g>
+
+                <path class="szene__huegel-hinten" d="M-400 452C-250 440-120 476 0 468C150 428 300 452 460 438S770 446 960 426C1080 414 1220 446 1360 440V600H-400Z"/>
+                <path class="szene__huegel-vorne" d="M-400 496C-220 506-120 488 0 500C200 486 380 508 560 498S860 502 960 494C1100 486 1240 506 1360 498V600H-400Z"/>
+                <rect class="szene__boden" x="-400" y="518" width="1760" height="82"/>
+
+                <!-- Netzanschluss: Mast mit Leitung -->
+                <g class="szene__mast" fill="none" stroke-linecap="round">
+                  <path d="M150 322V520M122 340H178" stroke-width="6"/>
+                  <path d="M122 342Q-120 372-400 352M178 342Q240 372 300 452" stroke-width="2"/>
+                </g>
+
+                <!-- Haus -->
+                <g class="szene__haus" stroke-linejoin="round">
+                  <path class="szene__wand-seite" d="M300 520V410L370 300L440 410V520Z"/>
+                  <rect class="szene__wand" x="440" y="410" width="260" height="110"/>
+                  <path class="szene__dach" d="M370 300H630L700 410H440Z"/>
+                  <g class="szene__module" transform="matrix(260 0 70 110 370 300)" fill="url(#fl-modul)">
+                    <rect x=".04" y=".07" width=".143" height=".263"/><rect x=".195" y=".07" width=".143" height=".263"/><rect x=".351" y=".07" width=".143" height=".263"/><rect x=".506" y=".07" width=".143" height=".263"/><rect x=".661" y=".07" width=".143" height=".263"/><rect x=".817" y=".07" width=".143" height=".263"/>
+                    <rect x=".04" y=".368" width=".143" height=".263"/><rect x=".195" y=".368" width=".143" height=".263"/><rect x=".351" y=".368" width=".143" height=".263"/><rect x=".506" y=".368" width=".143" height=".263"/><rect x=".661" y=".368" width=".143" height=".263"/><rect x=".817" y=".368" width=".143" height=".263"/>
+                    <rect x=".04" y=".667" width=".143" height=".263"/><rect x=".195" y=".667" width=".143" height=".263"/><rect x=".351" y=".667" width=".143" height=".263"/><rect x=".506" y=".667" width=".143" height=".263"/><rect x=".661" y=".667" width=".143" height=".263"/><rect x=".817" y=".667" width=".143" height=".263"/>
+                  </g>
+                  <path class="szene__first" d="M370 300H630"/>
+                  <g class="szene__fenster">
+                    <rect x="470" y="432" width="48" height="44" rx="3"/>
+                    <rect x="548" y="432" width="48" height="44" rx="3"/>
+                    <rect x="342" y="440" width="56" height="40" rx="3"/>
+                    <circle cx="370" cy="372" r="11"/>
+                  </g>
+                  <rect class="szene__tuer" x="628" y="448" width="42" height="72" rx="3"/>
+                </g>
+
+                <!-- Speicher mit Ladestand -->
+                <g class="szene__speicher">
+                  <rect x="716" y="448" width="40" height="72" rx="6"/>
+                  <rect class="szene__speicher-stand" x="723" y="456" width="26" height="56" rx="3"/>
+                </g>
+
+                <!-- Wallbox und Auto -->
+                <g class="szene__wallbox">
+                  <rect x="805" y="440" width="7" height="80"/>
+                  <rect x="794" y="430" width="29" height="38" rx="5"/>
+                  <path class="szene__kabel" d="M808 468C812 492 830 500 846 490" fill="none" stroke-width="3" stroke-linecap="round"/>
+                </g>
+                <g class="szene__auto">
+                  <path d="M832 512V486C832 478 838 474 846 472L866 452C870 448 876 446 882 446H914C922 446 928 450 932 456L944 474C950 476 954 482 954 490V512Z"/>
+                  <path class="szene__auto-glas" d="M872 470L886 456H912L922 470Z"/>
+                  <circle cx="858" cy="514" r="12"/><circle cx="928" cy="514" r="12"/>
+                </g>
+
+                <!-- Energieflüsse: Breite und Sichtbarkeit setzt szene.js -->
+                <g class="szene__fluesse" fill="none" stroke-linecap="round">
+                  <path data-fluss="netzHaus" class="szene__fluss szene__fluss--netz" d="M172 352C230 376 268 420 300 462"/>
+                  <path data-fluss="dachNetz" class="szene__fluss" d="M430 346C340 252 220 292 160 336"/>
+                  <path data-fluss="dachHaus" class="szene__fluss" d="M560 362V474"/>
+                  <path data-fluss="dachSpeicher" class="szene__fluss" d="M690 405C712 418 736 428 736 448"/>
+                  <path data-fluss="speicherHaus" class="szene__fluss szene__fluss--speicher" d="M716 490H674"/>
+                  <path data-fluss="dachAuto" class="szene__fluss" d="M700 410C760 394 800 404 808 428"/>
+                </g>
+              </svg>
+            </div>
+
+            <dl class="szene__werte" aria-label="Werte zur gewählten Uhrzeit">
+              <div class="wert-chip"><dt>Produktion</dt><dd><span data-wert="produktion">6.7</span> kW</dd></div>
+              <div class="wert-chip"><dt>Verbrauch</dt><dd><span data-wert="verbrauch">3.3</span> kW</dd></div>
+              <div class="wert-chip"><dt>Speicher</dt><dd><span data-wert="speicher">100</span> %</dd></div>
+              <div class="wert-chip"><dt data-wert="netz-label">Einspeisung</dt><dd><span data-wert="netz">3.4</span> kW</dd></div>
+            </dl>
+
+            <div class="szene__steuerung nur-js">
+              <button class="knopf knopf--icon szene__play" type="button" data-szene-play aria-label="Tagesverlauf abspielen">
+                <svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg>
+              </button>
+              <div class="szene__regler">
+                <label class="szene__label" for="szene-zeit">Tageszeit <output data-wert="uhrzeit" for="szene-zeit">12.00</output> Uhr</label>
+                <input class="regler" id="szene-zeit" type="range" min="5" max="22" step="0.25" value="12" data-szene-zeit aria-valuetext="12 Uhr">
+              </div>
+              <fieldset class="segment" data-szene-saison>
+                <legend class="nur-sr">Jahreszeit</legend>
+                <label><input type="radio" name="saison" value="sommer" checked><span>Sommer</span></label>
+                <label><input type="radio" name="saison" value="winter"><span>Winter</span></label>
+              </fieldset>
+            </div>
+            <figcaption class="szene__legende" id="szene-legende">Beispieltag, vereinfacht: Einfamilienhaus mit 10 kWp und 10 kWh Speicher.</figcaption>
+            <p class="nur-sr" aria-live="polite" data-szene-ansage></p>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="sektion sektion--kompakt" aria-labelledby="zahlen-titel">
+      <div class="huelle">
+        <h2 class="nur-sr" id="zahlen-titel">Firstlicht in Zahlen</h2>
+        <ul class="kennzahlen" role="list" data-erklaeren="zaehler">
+          <li class="kennzahl"><span class="kennzahl__wert"><span data-zaehler="640">640</span></span><span class="kennzahl__text">Anlagen gebaut seit 2011</span></li>
+          <li class="kennzahl"><span class="kennzahl__wert"><span data-zaehler="18">18</span></span><span class="kennzahl__text">Mitarbeitende in Lichtwil</span></li>
+          <li class="kennzahl"><span class="kennzahl__wert"><span data-zaehler="4">4</span></span><span class="kennzahl__text">eigene Montageteams mit Elektrikern</span></li>
+          <li class="kennzahl"><span class="kennzahl__wert">0</span><span class="kennzahl__text">Subunternehmer auf Ihrem Dach</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sektion sektion--tief" aria-labelledby="mini-titel">
+      <div class="huelle mini">
+        <div class="stapel einblenden">
+          <p class="vorzeile">Erste Schätzung</p>
+          <h2 id="mini-titel">Was bringt Ihr Dach? Zwei Regler genügen.</h2>
+          <p class="lead">Wir rechnen mit offenen Annahmen und zeigen Spannen statt Versprechen. Ausrichtung, Speicher und Ihren Verbrauch berücksichtigt der ausführliche Rechner.</p>
+          <p>Wie gut sich Ihr Dach eignet, zeigt auch die Karte <a href="https://www.sonnendach.ch/" target="_blank" rel="noopener">sonnendach.ch</a> des Bundes.</p>
+        </div>
+        <form class="mini__karte einblenden" data-mini-rechner data-erklaeren="minirechner" action="rechner.html" method="get" aria-labelledby="mini-titel">
+          <div class="mini__regler">
+            <label for="mini-flaeche">Dachfläche <output for="mini-flaeche" data-mini-aus="flaeche">60 m²</output></label>
+            <input class="regler" id="mini-flaeche" name="f" type="range" min="10" max="200" step="5" value="60">
+          </div>
+          <div class="mini__regler">
+            <label for="mini-preis">Strompreis <output for="mini-preis" data-mini-aus="strompreis">26.5 Rp./kWh</output></label>
+            <input class="regler" id="mini-preis" name="sp" type="range" min="10" max="45" step="0.5" value="26.5">
+          </div>
+          <dl class="mini__ergebnis" aria-live="polite">
+            <div><dt>Anlage</dt><dd data-mini="kwp">8.4 kWp</dd></div>
+            <div><dt>Strom pro Jahr</dt><dd data-mini="ertrag">rund 7’900 kWh</dd></div>
+            <div><dt>Ersparnis pro Jahr</dt><dd data-mini="ersparnis">CHF 650 bis 750</dd></div>
+          </dl>
+          <p class="feld__hilfe">Annahmen: Mittelland, Süddach mit 30 Grad, Haushalt mit 4 Personen, ohne Speicher. Unverbindliche Schätzung, Stand 5. Oktober 2026.</p>
+          <button class="knopf" type="submit">Genauer rechnen<svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-pfeil"></use></svg></button>
+        </form>
+      </div>
+    </section>
+
+    <section class="sektion unten-aus" aria-labelledby="leistungen-titel">
+      <div class="huelle">
+        <div class="kopfzeile einblenden">
+          <p class="vorzeile">Leistungen</p>
+          <h2 id="leistungen-titel">Ihr Dach arbeitet ab dem ersten Licht.</h2>
+          <p>Planung, Montage, Anmeldung und Service aus einer Hand. Mit eigenen Leuten statt Subunternehmern.</p>
+        </div>
+        <div class="bento">
+          <article class="karte karte--hover schein bento__gross einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-haus"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#einfamilienhaus">Photovoltaik fürs Einfamilienhaus</a></h3>
+            <p>Wir belegen Ihr Dach so, dass sich die Anlage für Ihren Verbrauch rechnet. Nicht so, dass möglichst viele Module draufpassen.</p>
+            <div class="bento__bild"><svg class="illu illu--morgen" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><rect class="ih" width="400" height="300"/><rect class="ih2" y="170" width="400" height="130"/><circle class="is" cx="64" cy="84" r="20"/><path class="ib" d="M0 238C80 228 160 242 240 234S360 230 400 232V300H0Z"/><g><path class="iw2" d="M80 252V178L130 108L180 178V252Z"/><rect class="iw" x="180" y="178" width="160" height="74"/><path class="id" d="M130 108H300L340 178H180Z"/><g class="im" transform="matrix(170 0 40 70 130 108)"><rect x="0.05" y="0.05" width="0.138" height="0.433"/><rect x="0.202" y="0.05" width="0.138" height="0.433"/><rect x="0.355" y="0.05" width="0.138" height="0.433"/><rect x="0.507" y="0.05" width="0.138" height="0.433"/><rect x="0.659" y="0.05" width="0.138" height="0.433"/><rect x="0.812" y="0.05" width="0.138" height="0.433"/><rect x="0.05" y="0.517" width="0.138" height="0.433"/><rect x="0.202" y="0.517" width="0.138" height="0.433"/><rect x="0.355" y="0.517" width="0.138" height="0.433"/><rect x="0.507" y="0.517" width="0.138" height="0.433"/><rect x="0.659" y="0.517" width="0.138" height="0.433"/><rect x="0.812" y="0.517" width="0.138" height="0.433"/></g><path class="ifirst" d="M130 108H300"/><rect class="ifen" x="200" y="196" width="30" height="26" rx="2"/><rect class="ifen" x="248" y="196" width="30" height="26" rx="2"/><rect class="id" x="300" y="206" width="24" height="46" rx="2"/><rect class="ifen" x="112" y="200" width="36" height="26" rx="2"/></g></svg></div>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-mfh"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#mehrfamilienhaus">Mehrfamilienhaus und Stockwerkeigentum</a></h3>
+            <p>Gemeinsam Solarstrom nutzen, im ZEV, vZEV oder in einer LEG.</p>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-gewerbe"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#gewerbe">Gewerbe und Landwirtschaft</a></h3>
+            <p>Grosse Dächer und Verbrauch am Tag passen gut zusammen.</p>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-speicher"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#speicher">Batteriespeicher</a></h3>
+            <p>Strom vom Mittag für den Abend. Ob sich das für Sie lohnt, rechnen wir offen vor.</p>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-wp"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#energiemanagement">Energiemanagement und Wärmepumpe</a></h3>
+            <p>Warmwasser über Mittag, Heizung zur richtigen Zeit.</p>
+          </article>
+          <article class="karte karte--hover schein bento__breit einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-wallbox"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#wallbox">Wallbox und Laden mit Solarstrom</a></h3>
+            <p>Ihr Auto lädt, wenn die Sonne scheint. Die Wallbox nimmt nur, was das Haus gerade nicht braucht.</p>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-wartung"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#wartung">Wartung und Monitoring</a></h3>
+            <p>Sie sehen jederzeit, was Ihre Anlage leistet. Wir prüfen sie regelmässig.</p>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-erweitern"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#erweiterung">Erweiterung bestehender Anlagen</a></h3>
+            <p>Mehr Module, neuer Wechselrichter, Speicher dazu. Auch wenn wir die Anlage nicht gebaut haben.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sektion sektion--tief unten-aus" aria-labelledby="ablauf-titel">
+      <div class="huelle">
+        <div class="kopfzeile einblenden">
+          <p class="vorzeile">Ablauf</p>
+          <h2 id="ablauf-titel">Von der Anfrage zum eigenen Strom, ohne Papierkram für Sie.</h2>
+        </div>
+        <ol class="schritte" role="list">
+          <li class="einblenden"><h3>Dach-Check vor Ort</h3><p>Wir prüfen Dach, Ausrichtung, Schatten und Hausanschluss. Kostenlos und unverbindlich.</p></li>
+          <li class="einblenden"><h3>Festpreis-Offerte</h3><p>Sie erhalten einen Festpreis mit allen Posten und eine Ertragsschätzung mit offenen Annahmen.</p></li>
+          <li class="einblenden"><h3>Montage mit eigenen Teams</h3><p>Ein Einfamilienhaus montieren wir meist in zwei bis drei Tagen. Angeschlossen wird von unseren Elektrikern.</p></li>
+          <li class="einblenden"><h3>Anmeldung und Förderung</h3><p>Meldung an die Gemeinde, Netzanmeldung und Fördergesuch übernehmen wir. Sie unterschreiben nur.</p></li>
+        </ol>
+        <p><a class="pfeil-link" href="ueber-uns.html#ablauf"><span>Ganzer Ablauf mit typischen Dauern</span><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-pfeil"></use></svg></a></p>
+      </div>
+    </section>
+
+    <section class="sektion unten-aus" aria-labelledby="projekte-titel">
+      <div class="huelle">
+        <div class="kopfzeile einblenden">
+          <p class="vorzeile">Projekte</p>
+          <h2 id="projekte-titel">Drei Dächer aus der Region.</h2>
+          <p>Alle Projekte auf dieser Seite sind Beispiele eines erfundenen Betriebs. Die Zahlen sind trotzdem realistisch gerechnet.</p>
+        </div>
+        <div class="projekte">
+          <article class="karte karte--hover projekt schein" id="start-projekt-efh-reusstal" data-kategorien="efh speicher">
+  <div class="projekt__bild"><svg class="illu illu--mittag" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><rect class="ih" width="400" height="300"/><rect class="ih2" y="170" width="400" height="130"/><circle class="is" cx="204" cy="46" r="20"/><path class="ib" d="M0 238C80 228 160 242 240 234S360 230 400 232V300H0Z"/><g><path class="iw2" d="M80 252V178L130 108L180 178V252Z"/><rect class="iw" x="180" y="178" width="160" height="74"/><path class="id" d="M130 108H300L340 178H180Z"/><g class="im" transform="matrix(170 0 40 70 130 108)"><rect x="0.05" y="0.05" width="0.138" height="0.433"/><rect x="0.202" y="0.05" width="0.138" height="0.433"/><rect x="0.355" y="0.05" width="0.138" height="0.433"/><rect x="0.507" y="0.05" width="0.138" height="0.433"/><rect x="0.659" y="0.05" width="0.138" height="0.433"/><rect x="0.812" y="0.05" width="0.138" height="0.433"/><rect x="0.05" y="0.517" width="0.138" height="0.433"/><rect x="0.202" y="0.517" width="0.138" height="0.433"/><rect x="0.355" y="0.517" width="0.138" height="0.433"/><rect x="0.507" y="0.517" width="0.138" height="0.433"/><rect x="0.659" y="0.517" width="0.138" height="0.433"/><rect x="0.812" y="0.517" width="0.138" height="0.433"/></g><path class="ifirst" d="M130 108H300"/><rect class="ifen" x="200" y="196" width="30" height="26" rx="2"/><rect class="ifen" x="248" y="196" width="30" height="26" rx="2"/><rect class="id" x="300" y="206" width="24" height="46" rx="2"/><rect class="ifen" x="112" y="200" width="36" height="26" rx="2"/></g></svg></div>
+  <div class="projekt__text">
+    <p><span class="badge badge--beispiel">Beispielprojekt, 2025</span></p>
+    <h3 class="projekt__titel"><a class="stretch" href="projekte.html#projekt-efh-reusstal">Einfamilienhaus im Reusstal</a></h3>
+    <p>Speicher und Wärmepumpe arbeiten zusammen.</p>
+    <ul class="projekt__werte" role="list"><li class="badge">11.4 kWp</li><li class="badge">10’900 kWh pro Jahr</li><li class="badge">Speicher 10 kWh</li></ul>
+    
+  </div>
+</article>
+<article class="karte karte--hover projekt schein" id="start-projekt-stwe-limmattal" data-kategorien="mfh speicher">
+  <div class="projekt__bild"><svg class="illu illu--mittag" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><rect class="ih" width="400" height="300"/><rect class="ih2" y="170" width="400" height="130"/><circle class="is" cx="196" cy="46" r="20"/><path class="ib" d="M0 238C80 228 160 242 240 234S360 230 400 232V300H0Z"/><g transform="matrix(-1 0 0 1 400 0)"><path class="iw2" d="M300 252V112L340 96V236Z"/><rect class="iw" x="80" y="112" width="220" height="140"/><path class="id" d="M80 112H300L340 96H120Z"/><path class="im" d="M96 108H288L292 101H100Z"/><path class="im" d="M105 104H297L301 97H109Z"/><path class="im" d="M114 100H306L310 93H118Z"/><path class="im" d="M123 96H315L319 89H127Z"/><rect class="ifen" x="96" y="126" width="22" height="18" rx="2"/><rect class="ifen" x="138" y="126" width="22" height="18" rx="2"/><rect class="ifen" x="180" y="126" width="22" height="18" rx="2"/><rect class="ifen" x="222" y="126" width="22" height="18" rx="2"/><rect class="ifen" x="264" y="126" width="22" height="18" rx="2"/><rect class="ifen" x="96" y="156" width="22" height="18" rx="2"/><rect class="ifen" x="138" y="156" width="22" height="18" rx="2"/><rect class="ifen" x="180" y="156" width="22" height="18" rx="2"/><rect class="ifen" x="222" y="156" width="22" height="18" rx="2"/><rect class="ifen" x="264" y="156" width="22" height="18" rx="2"/><rect class="ifen" x="96" y="186" width="22" height="18" rx="2"/><rect class="ifen" x="138" y="186" width="22" height="18" rx="2"/><rect class="ifen" x="180" y="186" width="22" height="18" rx="2"/><rect class="ifen" x="222" y="186" width="22" height="18" rx="2"/><rect class="ifen" x="264" y="186" width="22" height="18" rx="2"/><rect class="ifen" x="96" y="216" width="22" height="18" rx="2"/><rect class="ifen" x="138" y="216" width="22" height="18" rx="2"/><rect class="ifen" x="222" y="216" width="22" height="18" rx="2"/><rect class="ifen" x="264" y="216" width="22" height="18" rx="2"/><rect class="id" x="178" y="218" width="26" height="34" rx="2"/></g></svg></div>
+  <div class="projekt__text">
+    <p><span class="badge badge--beispiel">Beispielprojekt, 2025</span></p>
+    <h3 class="projekt__titel"><a class="stretch" href="projekte.html#projekt-stwe-limmattal">Stockwerkeigentum im Limmattal</a></h3>
+    <p>Sechs Einheiten, ein gemeinsamer Speicher.</p>
+    <ul class="projekt__werte" role="list"><li class="badge">24.6 kWp</li><li class="badge">22’900 kWh pro Jahr</li><li class="badge">Speicher 20 kWh</li></ul>
+    
+  </div>
+</article>
+<article class="karte karte--hover projekt schein" id="start-projekt-hof-freiamt" data-kategorien="landwirtschaft">
+  <div class="projekt__bild"><svg class="illu illu--abend" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><rect class="ih" width="400" height="300"/><rect class="ih2" y="170" width="400" height="130"/><circle class="is" cx="352" cy="60" r="20"/><path class="ib" d="M0 238C80 228 160 242 240 234S360 230 400 232V300H0Z"/><g><rect class="iw2" x="22" y="140" width="34" height="112" rx="16"/><path class="iholz" d="M60 252V170L110 92L160 170V252Z"/><rect class="iholz2" x="160" y="170" width="200" height="82"/><path class="id" d="M110 92H320L360 170H160Z"/><g class="im" transform="matrix(210 0 40 78 110 92)"><rect x="0.04" y="0.04" width="0.103" height="0.284"/><rect x="0.157" y="0.04" width="0.103" height="0.284"/><rect x="0.274" y="0.04" width="0.103" height="0.284"/><rect x="0.39" y="0.04" width="0.103" height="0.284"/><rect x="0.507" y="0.04" width="0.103" height="0.284"/><rect x="0.624" y="0.04" width="0.103" height="0.284"/><rect x="0.741" y="0.04" width="0.103" height="0.284"/><rect x="0.857" y="0.04" width="0.103" height="0.284"/><rect x="0.04" y="0.358" width="0.103" height="0.284"/><rect x="0.157" y="0.358" width="0.103" height="0.284"/><rect x="0.274" y="0.358" width="0.103" height="0.284"/><rect x="0.39" y="0.358" width="0.103" height="0.284"/><rect x="0.507" y="0.358" width="0.103" height="0.284"/><rect x="0.624" y="0.358" width="0.103" height="0.284"/><rect x="0.741" y="0.358" width="0.103" height="0.284"/><rect x="0.857" y="0.358" width="0.103" height="0.284"/><rect x="0.04" y="0.676" width="0.103" height="0.284"/><rect x="0.157" y="0.676" width="0.103" height="0.284"/><rect x="0.274" y="0.676" width="0.103" height="0.284"/><rect x="0.39" y="0.676" width="0.103" height="0.284"/><rect x="0.507" y="0.676" width="0.103" height="0.284"/><rect x="0.624" y="0.676" width="0.103" height="0.284"/><rect x="0.741" y="0.676" width="0.103" height="0.284"/><rect x="0.857" y="0.676" width="0.103" height="0.284"/></g><path class="ifirst" d="M110 92H320"/><rect class="id" x="232" y="196" width="64" height="56" rx="2"/><path class="il" d="M232 196L296 252M296 196L232 252"/><path class="il il--fein" d="M180 178V252M200 178V252M316 178V252M336 178V252"/></g></svg></div>
+  <div class="projekt__text">
+    <p><span class="badge badge--beispiel">Beispielprojekt, 2023</span></p>
+    <h3 class="projekt__titel"><a class="stretch" href="projekte.html#projekt-hof-freiamt">Landwirtschaftsbetrieb im Freiamt</a></h3>
+    <p>Ost-West-Dach für Melkroboter und Milchkühlung.</p>
+    <ul class="projekt__werte" role="list"><li class="badge">99.0 kWp</li><li class="badge">87’100 kWh pro Jahr</li></ul>
+    
+  </div>
+</article>
+        </div>
+        <p class="mehr"><a class="pfeil-link" href="projekte.html"><span>Alle 8 Beispielprojekte ansehen</span><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-pfeil"></use></svg></a></p>
+      </div>
+    </section>
+
+    <section class="sektion sektion--tief unten-aus" aria-labelledby="fragen-titel">
+      <div class="huelle">
+        <div class="kopfzeile">
+          <p class="vorzeile">Häufige Fragen</p>
+          <h2 id="fragen-titel">Was Hausbesitzer uns am häufigsten fragen.</h2>
+        </div>
+        <div class="fragen">
+          <details class="frage" id="frage-lohnt">
+  <summary>Lohnt sich Solarstrom 2026 noch, obwohl die Rückliefertarife gesunken sind?</summary>
+  <div class="frage__antwort"><p>Ja, wenn die Anlage zu Ihrem Verbrauch passt. Am meisten bringt der Strom, den Sie selbst nutzen: Er ersetzt Netzstrom, der 2027 im Schweizer Median 26.5 Rappen pro kWh kostet (ElCom, Profil H4). Für eingespeisten Strom erhalten Sie seit 2026 den Marktpreis, den der Bund jedes Quartal festlegt, bei Anlagen bis 30 kW aber mindestens 6 Rappen pro kWh.</p><p>Mit Wärmepumpe, Elektroauto oder Speicher steigt Ihr <button class="glossar" type="button" popovertarget="g-eigenverbrauch">Eigenverbrauch</button>. Wir rechnen die Amortisation offen vor, auch wenn sie länger dauert als in mancher Werbung. Probieren Sie es im <a href="rechner.html">Solarrechner</a> aus.</p></div>
+</details>
+<details class="frage" id="frage-bewilligung">
+  <summary>Brauche ich eine Baubewilligung, oder reicht eine Meldung?</summary>
+  <div class="frage__antwort"><p>Meist reicht eine Meldung. Solaranlagen, die gut aufs Dach angepasst sind, brauchen in Bau- und Landwirtschaftszonen keine Baubewilligung (Art. 18a Raumplanungsgesetz). Eine Bewilligung braucht es bei geschützten Kultur- und Naturdenkmälern, im Aargau zum Beispiel auch in Kern-, Dorf- und Altstadtzonen.</p><p>Die Meldung an die Gemeinde übernehmen wir. Im Aargau darf frühestens 30 Tage nach der Meldung gebaut werden, wenn die Gemeinde nichts einwendet.</p></div>
+</details>
+<details class="frage" id="frage-speicher">
+  <summary>Lohnt sich ein Speicher für mich?</summary>
+  <div class="frage__antwort"><p>Ein Speicher hebt den Anteil Ihres eigenen Solarstroms deutlich. Laut EnergieSchweiz steigt der Eigenverbrauch bei kleineren Anlagen von rund 30 auf bis zu 70 Prozent. Der Speicher kostet aber mehrere tausend Franken und verkürzt die Amortisation selten.</p><p>Sinnvoll ist er vor allem, wenn Sie abends viel Strom brauchen oder Unabhängigkeit wichtig ist. Im <a href="rechner.html">Solarrechner</a> sehen Sie beide Varianten nebeneinander.</p></div>
+</details>
+<details class="frage" id="frage-foerderung">
+  <summary>Welche Förderung gibt es, und wer stellt das Gesuch?</summary>
+  <div class="frage__antwort"><p>Der Bund zahlt über Pronovo eine <button class="glossar" type="button" popovertarget="g-einmalverguetung">Einmalvergütung</button>. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026), bei 10 kWp also 3'600 Franken. Dazu kommen je nach Kanton und Gemeinde weitere Beiträge. Sie finden sie auf <a href="https://www.energiefranken.ch/" target="_blank" rel="noopener">energiefranken.ch</a> nach Postleitzahl.</p><p>Bei bestehenden Gebäuden lässt sich die Investition in den meisten Kantonen von den Steuern abziehen. Bei der Bundessteuer fällt dieser Abzug ab 2029 weg. Das Gesuch bei Pronovo stellen wir nach der Inbetriebnahme für Sie.</p></div>
+</details>
+<details class="frage" id="frage-dauer">
+  <summary>Wie lange dauert es von der Anfrage bis zum eigenen Solarstrom?</summary>
+  <div class="frage__antwort"><p>Meist einige Wochen bis wenige Monate. Den Dach-Check machen wir in der Regel innert zwei Wochen, die Festpreis-Offerte folgt wenige Tage danach. Allein das Meldeverfahren dauert mindestens 30 Tage. Dazu kommen die Antwort des Netzbetreibers und die Lieferzeit.</p><p>Die Montage selbst dauert bei einem Einfamilienhaus meist zwei bis drei Tage. Den ganzen <a href="ueber-uns.html#ablauf">Ablauf mit typischen Dauern</a> finden Sie auf der Seite Über uns.</p></div>
+</details>
+        </div>
+        <p class="mehr"><a class="pfeil-link" href="leistungen.html#fragen"><span>Alle Fragen und Antworten</span><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-pfeil"></use></svg></a></p>
+      </div>
+    </section>
+
+    <section class="sektion" aria-labelledby="abschluss-titel">
+      <div class="huelle">
+        <div class="abschluss">
+          <p class="vorzeile">Dach-Check</p>
+          <h2 id="abschluss-titel">Wir schauen uns Ihr Dach an. Kostenlos.</h2>
+          <p class="lead">Beim Dach-Check prüfen wir vor Ort, was auf Ihrem Dach möglich ist, und rechnen es offen vor. Danach entscheiden Sie in Ruhe.</p>
+          <div class="abschluss__ctas">
+            <a class="knopf" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
+            <a class="abschluss__tel" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg><span class="zahl">056 000 18 18</span></a>
+          </div>
+          <p class="abschluss__zeiten">Montag bis Freitag, 7.30 bis 12.00 Uhr und 13.00 bis 17.00 Uhr</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fuss">
+    <div class="huelle">
+      <div class="fuss__raster">
+        <div class="fuss__marke">
+          <a class="logo" href="index.html" aria-label="Firstlicht Solartechnik, zur Startseite">
+            <svg class="logo__signet" aria-hidden="true" focusable="false"><use href="#fl-signet"></use></svg>
+            <span class="logo__wort" aria-hidden="true">Firstlicht</span>
+          </a>
+          <p>Solaranlagen, Speicher und Ladestationen aus einer Hand. Mit eigenen Montageteams im Freiamt, Reusstal und Limmattal.</p>
+        </div>
+        <div>
+          <h2>Kontakt</h2>
+          <address>
+            <span>Firstlicht Solartechnik GmbH</span>
+            <span>Werkhofstrasse 11</span>
+            <span>5998 Lichtwil</span>
+            <a href="tel:+41560001818"><span class="zahl" data-firma="telefon">056 000 18 18</span></a>
+            <a href="mailto:hallo@firstlicht.example">hallo@firstlicht.example</a>
+          </address>
+        </div>
+        <div>
+          <h2>Erreichbar</h2>
+          <p data-firma="zeiten"><strong>Montag bis Freitag</strong><br>7.30 bis 12.00 Uhr<br>13.00 bis 17.00 Uhr</p>
+        </div>
+        <nav aria-labelledby="fussnavigation">
+          <h2 id="fussnavigation" tabindex="-1">Seiten</h2>
+          <ul>
+            <li><a href="index.html">Start</a></li>
+            <li><a href="rechner.html">Solarrechner</a></li>
+            <li><a href="leistungen.html">Leistungen</a></li>
+            <li><a href="projekte.html">Projekte</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="fuss__beispiel">
+        <p><strong>Beispielseite von ODERA Design.</strong> Firstlicht ist frei erfunden, ebenso Adresse, Telefonnummer, Personen und Projekte.</p>
+        <p><a href="/musterprojekte/" target="_top">Zurück zu odera.ch</a> · <a href="/projekt-check/?quelle=firstlicht" target="_top">So eine Seite für Ihren Betrieb</a></p>
+      </div>
+
+      <div class="fuss__unten">
+        <p>© 2026 Firstlicht Solartechnik GmbH (fiktiv)</p>
+        <ul>
+          <li><a href="kontakt.html#impressum">Impressum</a></li>
+          <li><a href="kontakt.html#datenschutz">Datenschutz</a></li>
+          <li><a href="kontakt.html#bildnachweise">Bildnachweise</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <div class="handyleiste" data-handyleiste>
+    <a class="knopf knopf--sekundaer" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>Anrufen</a>
+    <a class="knopf" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Rechner</a>
+  </div>
+  <dialog class="menue" id="menue" aria-label="Menü">
+    <div class="menue__kopf">
+      <a class="logo" href="index.html" aria-label="Firstlicht Solartechnik, zur Startseite">
+        <svg class="logo__signet" aria-hidden="true" focusable="false"><use href="#fl-signet"></use></svg>
+        <span class="logo__wort" aria-hidden="true">Firstlicht</span>
+      </a>
+      <button class="knopf knopf--icon" type="button" data-menue-zu aria-label="Menü schliessen"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-schliessen"></use></svg></button>
+    </div>
+    <nav aria-label="Hauptnavigation, Handy">
+      <ul class="menue__liste">
+        <li><a href="index.html" aria-current="page">Start</a></li>
+        <li><a href="rechner.html">Solarrechner</a></li>
+        <li><a href="leistungen.html">Leistungen</a></li>
+        <li><a href="projekte.html">Projekte</a></li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </nav>
+    <div class="menue__fuss">
+      <a class="knopf" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
+      <a class="knopf knopf--sekundaer" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>056 000 18 18</a>
+    </div>
+  </dialog>
+  <!-- Glossar: Erklärungen zu Fachbegriffen, geöffnet über Knöpfe mit popovertarget -->
+  <div class="glossar-vorrat">
+    <div class="glossar-pop" id="g-kwp" popover role="note"><strong>kWp, Kilowatt-Peak</strong>Die Spitzenleistung einer Solaranlage unter genormten Testbedingungen. Eine Anlage mit 10 kWp liefert im Mittelland rund 9'000 bis 10'000 kWh pro Jahr.</div>
+    <div class="glossar-pop" id="g-eigenverbrauch" popover role="note"><strong>Eigenverbrauch</strong>Der Teil Ihres Solarstroms, den Sie selbst im Haus nutzen, statt ihn ins Netz einzuspeisen. Jede selbst genutzte Kilowattstunde ersetzt Strom, den Sie sonst teurer einkaufen.</div>
+    <div class="glossar-pop" id="g-autarkie" popover role="note"><strong>Autarkiegrad</strong>Der Anteil Ihres Jahresverbrauchs, den Sie mit eigenem Solarstrom decken. 40 Prozent heisst: 40 von 100 Kilowattstunden kommen vom eigenen Dach.</div>
+    <div class="glossar-pop" id="g-einmalverguetung" popover role="note"><strong>Einmalvergütung</strong>Förderbeitrag des Bundes, ausbezahlt durch Pronovo. Für angebaute Anlagen bis 30 kWp sind es 360 Franken pro kWp (Stand Oktober 2026). Das Gesuch stellen wir für Sie.</div>
+    <div class="glossar-pop" id="g-hkn" popover role="note"><strong>HKN, Herkunftsnachweis</strong>Ein Zertifikat, das belegt, woher Strom stammt. Manche Netzbetreiber vergüten den Nachweis für Ihren Solarstrom zusätzlich zur Einspeisung.</div>
+    <div class="glossar-pop" id="g-zev" popover role="note"><strong>ZEV, Zusammenschluss zum Eigenverbrauch</strong>Mehrere Parteien nutzen gemeinsam den Solarstrom vom eigenen Dach. Gegenüber dem Netzbetreiber tritt der ZEV als ein einziger Kunde auf.</div>
+  </div>
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

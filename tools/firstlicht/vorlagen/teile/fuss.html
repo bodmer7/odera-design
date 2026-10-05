@@ -1,0 +1,52 @@
+<footer class="fuss">
+  <div class="huelle">
+    <div class="fuss__raster">
+      <div class="fuss__marke">
+        <a class="logo" href="index.html" aria-label="Firstlicht Solartechnik, zur Startseite">
+          <svg class="logo__signet" aria-hidden="true" focusable="false"><use href="#fl-signet"></use></svg>
+          <span class="logo__wort" aria-hidden="true">Firstlicht</span>
+        </a>
+        <p>Solaranlagen, Speicher und Ladestationen aus einer Hand. Mit eigenen Montageteams im {{firma.region}}.</p>
+      </div>
+      <div>
+        <h2>Kontakt</h2>
+        <address>
+          <span>{{firma.name}}</span>
+          <span>{{firma.strasse}}</span>
+          <span>{{firma.plz}} {{firma.ort}}</span>
+          <a href="tel:{{firma.telefonLink}}"><span class="zahl" data-firma="telefon">{{firma.telefon}}</span></a>
+          <a href="mailto:{{firma.email}}">{{firma.email}}</a>
+        </address>
+      </div>
+      <div>
+        <h2>Erreichbar</h2>
+        <p data-firma="zeiten"><strong>{{firma.zeiten.tage}}</strong><br>{{firma.zeiten.vormittag}}<br>{{firma.zeiten.nachmittag}}</p>
+      </div>
+      <nav aria-labelledby="fussnavigation">
+        <h2 id="fussnavigation" tabindex="-1">Seiten</h2>
+        <ul>
+          <li><a href="index.html">Start</a></li>
+          <li><a href="rechner.html">Solarrechner</a></li>
+          <li><a href="leistungen.html">Leistungen</a></li>
+          <li><a href="projekte.html">Projekte</a></li>
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="fuss__beispiel">
+      <p><strong>Beispielseite von ODERA Design.</strong> Firstlicht ist frei erfunden, ebenso Adresse, Telefonnummer, Personen und Projekte.</p>
+      <p><a href="/musterprojekte/" target="_top">Zurück zu odera.ch</a> · <a href="/projekt-check/?quelle=firstlicht" target="_top">So eine Seite für Ihren Betrieb</a></p>
+    </div>
+
+    <div class="fuss__unten">
+      <p>© 2026 {{firma.name}} (fiktiv)</p>
+      <ul>
+        <li><a href="kontakt.html#impressum">Impressum</a></li>
+        <li><a href="kontakt.html#datenschutz">Datenschutz</a></li>
+        <li><a href="kontakt.html#bildnachweise">Bildnachweise</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

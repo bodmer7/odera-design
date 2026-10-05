@@ -1,0 +1,23 @@
+<dialog class="menue" id="menue" aria-label="Menü">
+  <div class="menue__kopf">
+    <a class="logo" href="index.html" aria-label="Firstlicht Solartechnik, zur Startseite">
+      <svg class="logo__signet" aria-hidden="true" focusable="false"><use href="#fl-signet"></use></svg>
+      <span class="logo__wort" aria-hidden="true">Firstlicht</span>
+    </a>
+    <button class="knopf knopf--icon" type="button" data-menue-zu aria-label="Menü schliessen"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-schliessen"></use></svg></button>
+  </div>
+  <nav aria-label="Hauptnavigation, Handy">
+    <ul class="menue__liste">
+      <li><a href="index.html"{{nav:start}}>Start</a></li>
+      <li><a href="rechner.html"{{nav:rechner}}>Solarrechner</a></li>
+      <li><a href="leistungen.html"{{nav:leistungen}}>Leistungen</a></li>
+      <li><a href="projekte.html"{{nav:projekte}}>Projekte</a></li>
+      <li><a href="ueber-uns.html"{{nav:ueber-uns}}>Über uns</a></li>
+      <li><a href="kontakt.html"{{nav:kontakt}}>Kontakt</a></li>
+    </ul>
+  </nav>
+  <div class="menue__fuss">
+    <a class="knopf" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
+    <a class="knopf knopf--sekundaer" href="tel:{{firma.telefonLink}}"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>{{firma.telefon}}</a>
+  </div>
+</dialog>

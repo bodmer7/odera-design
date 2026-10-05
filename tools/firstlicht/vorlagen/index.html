@@ -1,0 +1,190 @@
+<!-- @meta {"titel": "Firstlicht Solartechnik | Solaranlagen im Freiamt, Reusstal und Limmattal", "beschreibung": "Beispielseite von ODERA Design. Die erfundene Firstlicht Solartechnik plant und montiert Solaranlagen, Speicher und Ladestationen. Mit Solarrechner und ehrlichen Zahlen.", "pfad": "", "nav": "start"} -->
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <!-- @teil kopf-meta -->
+</head>
+<body class="dunkler-kopf">
+  <!-- @teil symbole -->
+  <a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
+  <!-- @teil leiste -->
+  <!-- @teil kopf -->
+
+  <main id="inhalt" tabindex="-1">
+    <section class="hero sektion--dunkel" aria-labelledby="hero-titel">
+      <div class="huelle hero__raster">
+        <div data-erklaeren="ladezeit">
+          <p class="vorzeile">Solartechnik seit {{firma.gegruendet}}</p>
+          <h1 id="hero-titel">Solarstrom vom eigenen Dach. <em>Ehrlich gerechnet.</em></h1>
+          <p class="hero__unter">Firstlicht plant und montiert Solaranlagen, Speicher und Ladestationen für Häuser und Betriebe im Freiamt, Reusstal und Limmattal. Mit eigenen Teams.</p>
+          <div class="hero__ctas">
+            <a class="knopf" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Solarrechner starten</a>
+            <a class="knopf knopf--sekundaer" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
+          </div>
+          <a class="hero__tel" href="tel:{{firma.telefonLink}}"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>Jetzt anrufen <span class="zahl" data-firma="telefon">{{firma.telefon}}</span></a>
+        </div>
+        <div data-erklaeren="szene">
+          <!-- @teil szene -->
+        </div>
+      </div>
+    </section>
+
+    <section class="sektion sektion--kompakt" aria-labelledby="zahlen-titel">
+      <div class="huelle">
+        <h2 class="nur-sr" id="zahlen-titel">Firstlicht in Zahlen</h2>
+        <ul class="kennzahlen" role="list" data-erklaeren="zaehler">
+          <li class="kennzahl"><span class="kennzahl__wert"><span data-zaehler="{{firma.anlagen}}">{{firma.anlagen}}</span></span><span class="kennzahl__text">Anlagen gebaut seit {{firma.gegruendet}}</span></li>
+          <li class="kennzahl"><span class="kennzahl__wert"><span data-zaehler="{{firma.mitarbeitende}}">{{firma.mitarbeitende}}</span></span><span class="kennzahl__text">Mitarbeitende in {{firma.ort}}</span></li>
+          <li class="kennzahl"><span class="kennzahl__wert"><span data-zaehler="{{firma.montageteams}}">{{firma.montageteams}}</span></span><span class="kennzahl__text">eigene Montageteams mit Elektrikern</span></li>
+          <li class="kennzahl"><span class="kennzahl__wert">0</span><span class="kennzahl__text">Subunternehmer auf Ihrem Dach</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sektion sektion--tief" aria-labelledby="mini-titel">
+      <div class="huelle mini">
+        <div class="stapel einblenden">
+          <p class="vorzeile">Erste Schätzung</p>
+          <h2 id="mini-titel">Was bringt Ihr Dach? Zwei Regler genügen.</h2>
+          <p class="lead">Wir rechnen mit offenen Annahmen und zeigen Spannen statt Versprechen. Ausrichtung, Speicher und Ihren Verbrauch berücksichtigt der ausführliche Rechner.</p>
+          <p>Wie gut sich Ihr Dach eignet, zeigt auch die Karte <a href="https://www.sonnendach.ch/" target="_blank" rel="noopener">sonnendach.ch</a> des Bundes.</p>
+        </div>
+        <form class="mini__karte einblenden" data-mini-rechner data-erklaeren="minirechner" action="rechner.html" method="get" aria-labelledby="mini-titel">
+          <div class="mini__regler">
+            <label for="mini-flaeche">Dachfläche <output for="mini-flaeche" data-mini-aus="flaeche">{{mini.flaeche}} m²</output></label>
+            <input class="regler" id="mini-flaeche" name="f" type="range" min="10" max="200" step="5" value="{{mini.flaeche}}">
+          </div>
+          <div class="mini__regler">
+            <label for="mini-preis">Strompreis <output for="mini-preis" data-mini-aus="strompreis">{{mini.strompreis}} Rp./kWh</output></label>
+            <input class="regler" id="mini-preis" name="sp" type="range" min="10" max="45" step="0.5" value="{{mini.strompreisRoh}}">
+          </div>
+          <dl class="mini__ergebnis" aria-live="polite">
+            <div><dt>Anlage</dt><dd data-mini="kwp">{{mini.kwp}} kWp</dd></div>
+            <div><dt>Strom pro Jahr</dt><dd data-mini="ertrag">rund {{mini.ertrag}} kWh</dd></div>
+            <div><dt>Ersparnis pro Jahr</dt><dd data-mini="ersparnis">CHF {{mini.ersparnisVon}} bis {{mini.ersparnisBis}}</dd></div>
+          </dl>
+          <p class="feld__hilfe">Annahmen: Mittelland, Süddach mit 30 Grad, Haushalt mit 4 Personen, ohne Speicher. Unverbindliche Schätzung, Stand {{mini.stand}}.</p>
+          <button class="knopf" type="submit">Genauer rechnen<svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-pfeil"></use></svg></button>
+        </form>
+      </div>
+    </section>
+
+    <section class="sektion unten-aus" aria-labelledby="leistungen-titel">
+      <div class="huelle">
+        <div class="kopfzeile einblenden">
+          <p class="vorzeile">Leistungen</p>
+          <h2 id="leistungen-titel">Ihr Dach arbeitet ab dem ersten Licht.</h2>
+          <p>Planung, Montage, Anmeldung und Service aus einer Hand. Mit eigenen Leuten statt Subunternehmern.</p>
+        </div>
+        <div class="bento">
+          <article class="karte karte--hover schein bento__gross einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-haus"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#einfamilienhaus">Photovoltaik fürs Einfamilienhaus</a></h3>
+            <p>Wir belegen Ihr Dach so, dass sich die Anlage für Ihren Verbrauch rechnet. Nicht so, dass möglichst viele Module draufpassen.</p>
+            <div class="bento__bild"><!-- @illu efh {"variante": "morgen"} --></div>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-mfh"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#mehrfamilienhaus">Mehrfamilienhaus und Stockwerkeigentum</a></h3>
+            <p>Gemeinsam Solarstrom nutzen, im ZEV, vZEV oder in einer LEG.</p>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-gewerbe"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#gewerbe">Gewerbe und Landwirtschaft</a></h3>
+            <p>Grosse Dächer und Verbrauch am Tag passen gut zusammen.</p>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-speicher"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#speicher">Batteriespeicher</a></h3>
+            <p>Strom vom Mittag für den Abend. Ob sich das für Sie lohnt, rechnen wir offen vor.</p>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-wp"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#energiemanagement">Energiemanagement und Wärmepumpe</a></h3>
+            <p>Warmwasser über Mittag, Heizung zur richtigen Zeit.</p>
+          </article>
+          <article class="karte karte--hover schein bento__breit einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-wallbox"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#wallbox">Wallbox und Laden mit Solarstrom</a></h3>
+            <p>Ihr Auto lädt, wenn die Sonne scheint. Die Wallbox nimmt nur, was das Haus gerade nicht braucht.</p>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-wartung"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#wartung">Wartung und Monitoring</a></h3>
+            <p>Sie sehen jederzeit, was Ihre Anlage leistet. Wir prüfen sie regelmässig.</p>
+          </article>
+          <article class="karte karte--hover schein einblenden">
+            <span class="bento__icon"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-erweitern"></use></svg></span>
+            <h3><a class="stretch" href="leistungen.html#erweiterung">Erweiterung bestehender Anlagen</a></h3>
+            <p>Mehr Module, neuer Wechselrichter, Speicher dazu. Auch wenn wir die Anlage nicht gebaut haben.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sektion sektion--tief unten-aus" aria-labelledby="ablauf-titel">
+      <div class="huelle">
+        <div class="kopfzeile einblenden">
+          <p class="vorzeile">Ablauf</p>
+          <h2 id="ablauf-titel">Von der Anfrage zum eigenen Strom, ohne Papierkram für Sie.</h2>
+        </div>
+        <ol class="schritte" role="list">
+          <li class="einblenden"><h3>Dach-Check vor Ort</h3><p>Wir prüfen Dach, Ausrichtung, Schatten und Hausanschluss. Kostenlos und unverbindlich.</p></li>
+          <li class="einblenden"><h3>Festpreis-Offerte</h3><p>Sie erhalten einen Festpreis mit allen Posten und eine Ertragsschätzung mit offenen Annahmen.</p></li>
+          <li class="einblenden"><h3>Montage mit eigenen Teams</h3><p>Ein Einfamilienhaus montieren wir meist in zwei bis drei Tagen. Angeschlossen wird von unseren Elektrikern.</p></li>
+          <li class="einblenden"><h3>Anmeldung und Förderung</h3><p>Meldung an die Gemeinde, Netzanmeldung und Fördergesuch übernehmen wir. Sie unterschreiben nur.</p></li>
+        </ol>
+        <p><a class="pfeil-link" href="ueber-uns.html#ablauf"><span>Ganzer Ablauf mit typischen Dauern</span><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-pfeil"></use></svg></a></p>
+      </div>
+    </section>
+
+    <section class="sektion unten-aus" aria-labelledby="projekte-titel">
+      <div class="huelle">
+        <div class="kopfzeile einblenden">
+          <p class="vorzeile">Projekte</p>
+          <h2 id="projekte-titel">Drei Dächer aus der Region.</h2>
+          <p>Alle Projekte auf dieser Seite sind Beispiele eines erfundenen Betriebs. Die Zahlen sind trotzdem realistisch gerechnet.</p>
+        </div>
+        <div class="projekte">
+          <!-- @projekte start -->
+        </div>
+        <p class="mehr"><a class="pfeil-link" href="projekte.html"><span>Alle <!-- @projektzahl --> Beispielprojekte ansehen</span><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-pfeil"></use></svg></a></p>
+      </div>
+    </section>
+
+    <section class="sektion sektion--tief unten-aus" aria-labelledby="fragen-titel">
+      <div class="huelle">
+        <div class="kopfzeile">
+          <p class="vorzeile">Häufige Fragen</p>
+          <h2 id="fragen-titel">Was Hausbesitzer uns am häufigsten fragen.</h2>
+        </div>
+        <div class="fragen">
+          <!-- @fragen start -->
+        </div>
+        <p class="mehr"><a class="pfeil-link" href="leistungen.html#fragen"><span>Alle Fragen und Antworten</span><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-pfeil"></use></svg></a></p>
+      </div>
+    </section>
+
+    <section class="sektion" aria-labelledby="abschluss-titel">
+      <div class="huelle">
+        <div class="abschluss">
+          <p class="vorzeile">Dach-Check</p>
+          <h2 id="abschluss-titel">Wir schauen uns Ihr Dach an. Kostenlos.</h2>
+          <p class="lead">Beim Dach-Check prüfen wir vor Ort, was auf Ihrem Dach möglich ist, und rechnen es offen vor. Danach entscheiden Sie in Ruhe.</p>
+          <div class="abschluss__ctas">
+            <a class="knopf" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
+            <a class="abschluss__tel" href="tel:{{firma.telefonLink}}"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg><span class="zahl">{{firma.telefon}}</span></a>
+          </div>
+          <p class="abschluss__zeiten">{{firma.zeiten.tage}}, {{firma.zeiten.vormittag}} und {{firma.zeiten.nachmittag}}</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- @teil fuss -->
+  <!-- @teil handyleiste -->
+  <!-- @teil menue -->
+  <!-- @teil glossar -->
+  <!-- @teil skripte -->
+</body>
+</html>

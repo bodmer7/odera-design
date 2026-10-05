@@ -1,0 +1,21 @@
+{
+  "name": "odera-design",
+  "private": true,
+  "description": "Website von ODERA Design. Die Website selbst braucht keinen Build; diese Datei enthält nur Entwicklungswerkzeuge (Musterprojekt Firstlicht).",
+  "type": "module",
+  "scripts": {
+    "firstlicht:build": "node tools/firstlicht/build.mjs",
+    "firstlicht:test": "node --test tools/firstlicht/tests/*.test.mjs",
+    "firstlicht:check": "node tools/firstlicht/check.mjs",
+    "firstlicht:screens": "node tools/firstlicht/screenshots.mjs",
+    "firstlicht:qa": "npm run firstlicht:build && npm run firstlicht:test && npm run firstlicht:check && node tools/firstlicht/qa.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "^4.14.0",
+    "html-validate": "^11.16.2",
+    "lighthouse": "^13.5.0",
+    "playwright": "^1.56.1",
+    "sharp": "^0.35.5",
+    "svgo": "^4.1.0"
+  }
+}

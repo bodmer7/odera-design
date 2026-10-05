@@ -1,0 +1,53 @@
+{
+  "_hinweis": "Beispielprojekte des erfundenen Betriebs. Jahresertrag = Leistung × spezifischer Ertrag, auf 100 kWh gerundet. Leistung = Module × 0.44 kWp. Nach einer Änderung: node tools/firstlicht/build.mjs",
+  "projekte": [
+    {
+      "id": "efh-reusstal", "titel": "Einfamilienhaus im Reusstal", "typ": "efh", "kategorien": ["efh", "speicher"],
+      "module": 26, "spezifisch": 960, "speicherKwh": 10, "jahr": 2025, "montageTage": 3, "variante": "mittag",
+      "besonderheit": "Speicher und Wärmepumpe arbeiten zusammen",
+      "geschichte": "Die Familie wollte ihre neue Wärmepumpe möglichst mit eigenem Strom betreiben. Wir haben die Südseite voll belegt und die Steuerung so eingestellt, dass das Warmwasser über Mittag aufgeheizt wird. Am Abend übernimmt der Speicher."
+    },
+    {
+      "id": "mfh-limmattal", "titel": "Mehrfamilienhaus im Limmattal", "typ": "mfh", "kategorien": ["mfh"],
+      "module": 87, "spezifisch": 900, "speicherKwh": 0, "jahr": 2024, "montageTage": 5, "variante": "morgen",
+      "besonderheit": "Acht Wohnungen teilen sich den Solarstrom",
+      "geschichte": "Acht Parteien nutzen den Strom vom Flachdach gemeinsam. Wir haben den Zusammenschluss zum Eigenverbrauch aufgesetzt, die Messung eingerichtet und die Verwaltung in die Abrechnung eingeführt."
+    },
+    {
+      "id": "hof-freiamt", "titel": "Landwirtschaftsbetrieb im Freiamt", "typ": "hof", "kategorien": ["landwirtschaft"],
+      "module": 225, "spezifisch": 880, "speicherKwh": 0, "jahr": 2023, "montageTage": 9, "variante": "abend",
+      "besonderheit": "Ost-West-Dach für Melkroboter und Milchkühlung",
+      "geschichte": "Das grosse Stalldach zeigt nach Osten und Westen. So verteilt sich die Produktion über den ganzen Tag, genau dann, wenn Melkroboter und Milchkühlung laufen. Wegen des Stallstaubs reinigen wir die Module einmal im Jahr."
+    },
+    {
+      "id": "werkstatt-reusstal", "titel": "Metallbau-Werkstatt im Reusstal", "typ": "gewerbe", "kategorien": ["gewerbe"],
+      "module": 120, "spezifisch": 870, "speicherKwh": 0, "jahr": 2024, "montageTage": 8, "variante": "mittag",
+      "besonderheit": "Maschinen laufen tagsüber, viel Eigenverbrauch",
+      "geschichte": "Sägen, Schweissgeräte und Druckluft laufen vor allem tagsüber. Deshalb nutzt der Betrieb einen grossen Teil des Solarstroms selbst. Wir haben in zwei Etappen gebaut, damit die Werkstatt nie stillstand."
+    },
+    {
+      "id": "efh-freiamt", "titel": "Einfamilienhaus im Freiamt, erweitert", "typ": "efh", "kategorien": ["efh"],
+      "module": 12, "bestandKwp": 6.0, "spezifisch": 940, "speicherKwh": 0, "jahr": 2026, "montageTage": 2, "variante": "abend", "spiegeln": true,
+      "besonderheit": "Anlage von 2012 erweitert, Wallbox mit Überschussladen",
+      "geschichte": "Die Anlage von 2012 lief zuverlässig, war aber zu klein für das neue Elektroauto. Wir haben die freie Dachhälfte belegt, den Wechselrichter ersetzt und eine Wallbox montiert, die nur mit Überschuss lädt."
+    },
+    {
+      "id": "stwe-limmattal", "titel": "Stockwerkeigentum im Limmattal", "typ": "mfh", "kategorien": ["mfh", "speicher"],
+      "module": 56, "spezifisch": 930, "speicherKwh": 20, "jahr": 2025, "montageTage": 4, "variante": "mittag", "spiegeln": true,
+      "besonderheit": "Sechs Einheiten, ein gemeinsamer Speicher",
+      "geschichte": "Die Eigentümerversammlung hat zugestimmt, nachdem wir die Zahlen für jede Einheit offen dargelegt hatten. Der gemeinsame Speicher deckt einen Teil der Abendspitze der sechs Wohnungen."
+    },
+    {
+      "id": "reihenhaus-reusstal", "titel": "Reiheneinfamilienhaus im Reusstal", "typ": "efh", "kategorien": ["efh", "speicher"],
+      "module": 18, "spezifisch": 850, "speicherKwh": 8, "jahr": 2026, "montageTage": 2, "variante": "morgen",
+      "besonderheit": "Ost-West-Dach: Strom am Morgen und am Abend",
+      "geschichte": "Ein Dach ohne Südseite ist kein Hindernis. Die Ostseite liefert zum Frühstück, die Westseite am Feierabend. Zusammen mit dem Speicher passt das gut zum Alltag einer berufstätigen Familie."
+    },
+    {
+      "id": "halle-freiamt", "titel": "Gewerbehalle mit Ladestationen im Freiamt", "typ": "gewerbe", "kategorien": ["gewerbe", "speicher"],
+      "module": 72, "spezifisch": 910, "speicherKwh": 30, "jahr": 2025, "montageTage": 6, "variante": "morgen", "spiegeln": true,
+      "besonderheit": "Vier Ladepunkte für die Lieferwagen",
+      "geschichte": "Die Lieferwagen laden tagsüber mit Solarstrom, wenn sie zwischen zwei Touren auf dem Platz stehen. Der Speicher fängt Ladespitzen ab, so reicht der bestehende Netzanschluss."
+    }
+  ]
+}
