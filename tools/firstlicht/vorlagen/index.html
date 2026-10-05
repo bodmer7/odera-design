@@ -21,7 +21,7 @@
             <a class="knopf" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Solarrechner starten</a>
             <a class="knopf knopf--sekundaer" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
           </div>
-          <a class="hero__tel" href="tel:{{firma.telefonLink}}"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>Jetzt anrufen <span class="zahl" data-firma="telefon">{{firma.telefon}}</span></a>
+          <a class="hero__tel" href="tel:{{firma.telefonLink}}"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>Jetzt&nbsp;anrufen <span class="zahl" data-firma="telefon">{{firma.telefonAnzeige}}</span></a>
         </div>
         <div data-erklaeren="szene">
           <!-- @teil szene -->
@@ -51,11 +51,11 @@
         </div>
         <form class="mini__karte einblenden" data-mini-rechner data-erklaeren="minirechner" action="rechner.html" method="get" aria-labelledby="mini-titel">
           <div class="mini__regler">
-            <label for="mini-flaeche">Dachfläche <output for="mini-flaeche" data-mini-aus="flaeche">{{mini.flaeche}} m²</output></label>
+            <div class="feld__kopf"><label for="mini-flaeche">Dachfläche</label><span class="feld__wert" data-mini-aus="flaeche" aria-hidden="true">{{mini.flaeche}} m²</span></div>
             <input class="regler" id="mini-flaeche" name="f" type="range" min="10" max="200" step="5" value="{{mini.flaeche}}">
           </div>
           <div class="mini__regler">
-            <label for="mini-preis">Strompreis <output for="mini-preis" data-mini-aus="strompreis">{{mini.strompreis}} Rp./kWh</output></label>
+            <div class="feld__kopf"><label for="mini-preis">Strompreis</label><span class="feld__wert" data-mini-aus="strompreis" aria-hidden="true">{{mini.strompreis}} Rp./kWh</span></div>
             <input class="regler" id="mini-preis" name="sp" type="range" min="10" max="45" step="0.5" value="{{mini.strompreisRoh}}">
           </div>
           <dl class="mini__ergebnis" aria-live="polite">
@@ -173,7 +173,7 @@
           <p class="lead">Beim Dach-Check prüfen wir vor Ort, was auf Ihrem Dach möglich ist, und rechnen es offen vor. Danach entscheiden Sie in Ruhe.</p>
           <div class="abschluss__ctas">
             <a class="knopf" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
-            <a class="abschluss__tel" href="tel:{{firma.telefonLink}}"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg><span class="zahl">{{firma.telefon}}</span></a>
+            <a class="abschluss__tel" href="tel:{{firma.telefonLink}}"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg><span class="zahl">{{firma.telefonAnzeige}}</span></a>
           </div>
           <p class="abschluss__zeiten">{{firma.zeiten.tage}}, {{firma.zeiten.vormittag}} und {{firma.zeiten.nachmittag}}</p>
         </div>

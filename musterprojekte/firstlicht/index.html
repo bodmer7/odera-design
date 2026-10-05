@@ -118,7 +118,7 @@
             <a class="knopf" href="rechner.html"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-rechner"></use></svg>Solarrechner starten</a>
             <a class="knopf knopf--sekundaer" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
           </div>
-          <a class="hero__tel" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>Jetzt anrufen <span class="zahl" data-firma="telefon">056 000 18 18</span></a>
+          <a class="hero__tel" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>Jetzt&nbsp;anrufen <span class="zahl" data-firma="telefon">056&nbsp;000&nbsp;18&nbsp;18</span></a>
         </div>
         <div data-erklaeren="szene">
           <figure class="szene" data-szene aria-labelledby="szene-legende">
@@ -214,7 +214,7 @@
               </svg>
             </div>
 
-            <dl class="szene__werte" aria-label="Werte zur gewählten Uhrzeit">
+            <dl class="szene__werte">
               <div class="wert-chip"><dt>Produktion</dt><dd><span data-wert="produktion">6.7</span> kW</dd></div>
               <div class="wert-chip"><dt>Verbrauch</dt><dd><span data-wert="verbrauch">3.3</span> kW</dd></div>
               <div class="wert-chip"><dt>Speicher</dt><dd><span data-wert="speicher">100</span> %</dd></div>
@@ -226,7 +226,7 @@
                 <svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg>
               </button>
               <div class="szene__regler">
-                <label class="szene__label" for="szene-zeit">Tageszeit <output data-wert="uhrzeit" for="szene-zeit">12.00</output> Uhr</label>
+                <p class="szene__label"><label for="szene-zeit">Tageszeit</label> <span class="feld__wert" data-wert="uhrzeit" aria-hidden="true">12.00</span> <span aria-hidden="true">Uhr</span></p>
                 <input class="regler" id="szene-zeit" type="range" min="5" max="22" step="0.25" value="12" data-szene-zeit aria-valuetext="12 Uhr">
               </div>
               <fieldset class="segment" data-szene-saison>
@@ -235,8 +235,8 @@
                 <label><input type="radio" name="saison" value="winter"><span>Winter</span></label>
               </fieldset>
             </div>
-            <figcaption class="szene__legende" id="szene-legende">Beispieltag, vereinfacht: Einfamilienhaus mit 10 kWp und 10 kWh Speicher.</figcaption>
             <p class="nur-sr" aria-live="polite" data-szene-ansage></p>
+            <figcaption class="szene__legende" id="szene-legende">Beispieltag, vereinfacht: Einfamilienhaus mit 10 kWp und 10 kWh Speicher.</figcaption>
           </figure>
         </div>
       </div>
@@ -264,11 +264,11 @@
         </div>
         <form class="mini__karte einblenden" data-mini-rechner data-erklaeren="minirechner" action="rechner.html" method="get" aria-labelledby="mini-titel">
           <div class="mini__regler">
-            <label for="mini-flaeche">Dachfläche <output for="mini-flaeche" data-mini-aus="flaeche">60 m²</output></label>
+            <div class="feld__kopf"><label for="mini-flaeche">Dachfläche</label><span class="feld__wert" data-mini-aus="flaeche" aria-hidden="true">60 m²</span></div>
             <input class="regler" id="mini-flaeche" name="f" type="range" min="10" max="200" step="5" value="60">
           </div>
           <div class="mini__regler">
-            <label for="mini-preis">Strompreis <output for="mini-preis" data-mini-aus="strompreis">26.5 Rp./kWh</output></label>
+            <div class="feld__kopf"><label for="mini-preis">Strompreis</label><span class="feld__wert" data-mini-aus="strompreis" aria-hidden="true">26.5 Rp./kWh</span></div>
             <input class="regler" id="mini-preis" name="sp" type="range" min="10" max="45" step="0.5" value="26.5">
           </div>
           <dl class="mini__ergebnis" aria-live="polite">
@@ -434,7 +434,7 @@
           <p class="lead">Beim Dach-Check prüfen wir vor Ort, was auf Ihrem Dach möglich ist, und rechnen es offen vor. Danach entscheiden Sie in Ruhe.</p>
           <div class="abschluss__ctas">
             <a class="knopf" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
-            <a class="abschluss__tel" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg><span class="zahl">056 000 18 18</span></a>
+            <a class="abschluss__tel" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg><span class="zahl">056&nbsp;000&nbsp;18&nbsp;18</span></a>
           </div>
           <p class="abschluss__zeiten">Montag bis Freitag, 7.30 bis 12.00 Uhr und 13.00 bis 17.00 Uhr</p>
         </div>
@@ -458,7 +458,7 @@
             <span>Firstlicht Solartechnik GmbH</span>
             <span>Werkhofstrasse 11</span>
             <span>5998 Lichtwil</span>
-            <a href="tel:+41560001818"><span class="zahl" data-firma="telefon">056 000 18 18</span></a>
+            <a href="tel:+41560001818"><span class="zahl" data-firma="telefon">056&nbsp;000&nbsp;18&nbsp;18</span></a>
             <a href="mailto:hallo@firstlicht.example">hallo@firstlicht.example</a>
           </address>
         </div>
@@ -518,7 +518,7 @@
     </nav>
     <div class="menue__fuss">
       <a class="knopf" href="kontakt.html">Kostenlosen Dach-Check anfragen</a>
-      <a class="knopf knopf--sekundaer" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>056 000 18 18</a>
+      <a class="knopf knopf--sekundaer" href="tel:+41560001818"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-telefon"></use></svg>056&nbsp;000&nbsp;18&nbsp;18</a>
     </div>
   </dialog>
   <!-- Glossar: Erklärungen zu Fachbegriffen, geöffnet über Knöpfe mit popovertarget -->

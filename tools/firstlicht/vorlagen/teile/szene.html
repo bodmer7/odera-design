@@ -91,7 +91,7 @@
     </svg>
   </div>
 
-  <dl class="szene__werte" aria-label="Werte zur gewählten Uhrzeit">
+  <dl class="szene__werte">
     <div class="wert-chip"><dt>Produktion</dt><dd><span data-wert="produktion">6.7</span> kW</dd></div>
     <div class="wert-chip"><dt>Verbrauch</dt><dd><span data-wert="verbrauch">3.3</span> kW</dd></div>
     <div class="wert-chip"><dt>Speicher</dt><dd><span data-wert="speicher">100</span> %</dd></div>
@@ -103,7 +103,7 @@
       <svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg>
     </button>
     <div class="szene__regler">
-      <label class="szene__label" for="szene-zeit">Tageszeit <output data-wert="uhrzeit" for="szene-zeit">12.00</output> Uhr</label>
+      <p class="szene__label"><label for="szene-zeit">Tageszeit</label> <span class="feld__wert" data-wert="uhrzeit" aria-hidden="true">12.00</span> <span aria-hidden="true">Uhr</span></p>
       <input class="regler" id="szene-zeit" type="range" min="5" max="22" step="0.25" value="12" data-szene-zeit aria-valuetext="12 Uhr">
     </div>
     <fieldset class="segment" data-szene-saison>
@@ -112,6 +112,6 @@
       <label><input type="radio" name="saison" value="winter"><span>Winter</span></label>
     </fieldset>
   </div>
-  <figcaption class="szene__legende" id="szene-legende">Beispieltag, vereinfacht: Einfamilienhaus mit 10 kWp und 10 kWh Speicher.</figcaption>
   <p class="nur-sr" aria-live="polite" data-szene-ansage></p>
+  <figcaption class="szene__legende" id="szene-legende">Beispieltag, vereinfacht: Einfamilienhaus mit 10 kWp und 10 kWh Speicher.</figcaption>
 </figure>

@@ -160,19 +160,20 @@
     <ul class="kennzahlen" role="list" style="margin-top: 24px"><li class="kennzahl"><span class="kennzahl__wert">640</span><span class="kennzahl__text">Kennzahl</span></li><li class="kennzahl"><span class="kennzahl__wert">18</span><span class="kennzahl__text">Kennzahl</span></li></ul>
 
     <h2>Formular</h2>
+    <!-- [html-validate-disable-next wcag/h32: Muster ohne Absenden] -->
     <form class="formular" novalidate>
       <div class="formular__paar">
-        <div class="feld"><label class="feld__label" for="sg-a">Textfeld <span class="feld__zusatz">Pflichtfeld</span></label><input class="eingabe" id="sg-a"></div>
-        <div class="feld"><label class="feld__label" for="sg-b">Mit Fehler <span class="feld__zusatz">Pflichtfeld</span></label><input class="eingabe" id="sg-b" aria-invalid="true" aria-describedby="sg-b-f"><p class="fehler" id="sg-b-f">So sieht eine Fehlermeldung aus.</p></div>
+        <div class="feld"><label class="feld__label" for="sg-a">Textfeld <span class="feld__zusatz">Pflichtfeld</span></label><input class="eingabe" id="sg-a" type="text"></div>
+        <div class="feld"><label class="feld__label" for="sg-b">Mit Fehler <span class="feld__zusatz">Pflichtfeld</span></label><input class="eingabe" id="sg-b" aria-invalid="true" aria-describedby="sg-b-f" type="text"><p class="fehler" id="sg-b-f">So sieht eine Fehlermeldung aus.</p></div>
         <div class="feld"><label class="feld__label" for="sg-c">Auswahl</label><select class="eingabe" id="sg-c"><option>Mittelland</option><option>Alpen</option></select></div>
-        <div class="feld"><label class="feld__label" for="sg-d">Deaktiviert</label><input class="eingabe" id="sg-d" disabled value="nicht änderbar"></div>
+        <div class="feld"><label class="feld__label" for="sg-d">Deaktiviert</label><input class="eingabe" id="sg-d" type="text" disabled value="nicht änderbar"></div>
       </div>
       <label class="wahl"><input type="checkbox" checked><span>Checkbox</span></label>
       <label class="wahl"><input type="radio" name="sg-r" checked><span>Radio</span></label>
       <div class="wahl-karten"><label class="wahl-karte"><input type="radio" name="sg-k" checked><span class="wahl-karte__inhalt"><strong>Radio als Karte</strong><small>Mit Beschreibung</small></span></label><label class="wahl-karte"><input type="radio" name="sg-k"><span class="wahl-karte__inhalt"><strong>Zweite Karte</strong><small>Nicht gewählt</small></span></label></div>
       <label class="schalter"><span>Toggle</span><input type="checkbox" role="switch" checked></label>
       <div class="segment" role="radiogroup" aria-label="Segment"><label><input type="radio" name="sg-s" checked><span>Segment</span></label><label><input type="radio" name="sg-s"><span>Control</span></label></div>
-      <div class="feld"><label class="feld__label" for="sg-r1">Range-Slider <output>40 %</output></label><input class="regler" id="sg-r1" type="range" value="40" style="--fuellung: 40%"></div>
+      <div class="feld"><div class="feld__kopf"><label class="feld__label" for="sg-r1">Range-Slider</label><span class="feld__wert">40 %</span></div><input class="regler" id="sg-r1" type="range" value="40" style="--fuellung: 40%"></div>
       <div class="fortschritt"><ol class="fortschritt__schritte"><li class="ist-fertig">Eins</li><li aria-current="step">Zwei</li><li>Drei</li></ol></div>
     </form>
 
@@ -198,6 +199,58 @@
     <h2>Symbole</h2>
     <div class="sg__reihe" data-sg-symbole></div>
   </main>
+  <footer class="fuss">
+    <div class="huelle">
+      <div class="fuss__raster">
+        <div class="fuss__marke">
+          <a class="logo" href="index.html" aria-label="Firstlicht Solartechnik, zur Startseite">
+            <svg class="logo__signet" aria-hidden="true" focusable="false"><use href="#fl-signet"></use></svg>
+            <span class="logo__wort" aria-hidden="true">Firstlicht</span>
+          </a>
+          <p>Solaranlagen, Speicher und Ladestationen aus einer Hand. Mit eigenen Montageteams im Freiamt, Reusstal und Limmattal.</p>
+        </div>
+        <div>
+          <h2>Kontakt</h2>
+          <address>
+            <span>Firstlicht Solartechnik GmbH</span>
+            <span>Werkhofstrasse 11</span>
+            <span>5998 Lichtwil</span>
+            <a href="tel:+41560001818"><span class="zahl" data-firma="telefon">056&nbsp;000&nbsp;18&nbsp;18</span></a>
+            <a href="mailto:hallo@firstlicht.example">hallo@firstlicht.example</a>
+          </address>
+        </div>
+        <div>
+          <h2>Erreichbar</h2>
+          <p data-firma="zeiten"><strong>Montag bis Freitag</strong><br>7.30 bis 12.00 Uhr<br>13.00 bis 17.00 Uhr</p>
+        </div>
+        <nav aria-labelledby="fussnavigation">
+          <h2 id="fussnavigation" tabindex="-1">Seiten</h2>
+          <ul>
+            <li><a href="index.html">Start</a></li>
+            <li><a href="rechner.html">Solarrechner</a></li>
+            <li><a href="leistungen.html">Leistungen</a></li>
+            <li><a href="projekte.html">Projekte</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="fuss__beispiel">
+        <p><strong>Beispielseite von ODERA Design.</strong> Firstlicht ist frei erfunden, ebenso Adresse, Telefonnummer, Personen und Projekte.</p>
+        <p><a href="/musterprojekte/" target="_top">Zurück zu odera.ch</a> · <a href="/projekt-check/?quelle=firstlicht" target="_top">So eine Seite für Ihren Betrieb</a></p>
+      </div>
+
+      <div class="fuss__unten">
+        <p>© 2026 Firstlicht Solartechnik GmbH (fiktiv)</p>
+        <ul>
+          <li><a href="kontakt.html#impressum">Impressum</a></li>
+          <li><a href="kontakt.html#datenschutz">Datenschutz</a></li>
+          <li><a href="kontakt.html#bildnachweise">Bildnachweise</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
   <!-- Glossar: Erklärungen zu Fachbegriffen, geöffnet über Knöpfe mit popovertarget -->
   <div class="glossar-vorrat">
     <div class="glossar-pop" id="g-kwp" popover role="note"><strong>kWp, Kilowatt-Peak</strong>Die Spitzenleistung einer Solaranlage unter genormten Testbedingungen. Eine Anlage mit 10 kWp liefert im Mittelland rund 9'000 bis 10'000 kWh pro Jahr.</div>

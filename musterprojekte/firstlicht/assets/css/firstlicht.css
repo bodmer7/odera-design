@@ -356,7 +356,7 @@
 
   /* Segmented Control */
   .segment {
-    display: inline-flex; padding: 4px; gap: 2px; border-radius: var(--radius-rund);
+    display: inline-flex; flex-wrap: wrap; max-width: 100%; justify-self: start; padding: 4px; gap: 2px; border-radius: 26px;
     background: var(--color-surface-2); border: var(--rahmen);
   }
   .segment label { position: relative; display: flex; }
@@ -497,7 +497,7 @@
   .szene__steuerung { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-4); }
   .szene__regler { flex: 1 1 14rem; display: grid; }
   .szene__label { font-size: var(--text-s); font-weight: 700; display: flex; gap: 6px; align-items: baseline; }
-  .szene__label output { font-size: var(--text-l); font-weight: 750; }
+  .szene__label .feld__wert { font-size: var(--text-l); font-weight: 750; color: inherit; }
   .szene__legende { font-size: var(--text-xs); color: var(--color-text-muted); }
 
   @media (forced-colors: active) {
@@ -601,7 +601,7 @@
   }
 
   /* Formular */
-  .feld { display: grid; gap: 6px; }
+  .feld { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; min-width: 0; }
   .feld__label { font-weight: 700; font-size: var(--text-s); display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
   .feld__zusatz { font-weight: 500; color: var(--color-text-muted); font-size: var(--text-xs); }
   .feld__hilfe { font-size: var(--text-xs); color: var(--color-text-muted); }
@@ -640,7 +640,7 @@
     border: 1.5px solid var(--color-border-feld); background: var(--color-surface); min-height: 56px;
     transition: border-color var(--dauer-s) var(--kurve), background var(--dauer-s) var(--kurve), box-shadow var(--dauer-s) var(--kurve);
   }
-  .wahl-karte__inhalt strong { font-size: var(--text-s); }
+  .wahl-karte__inhalt strong { font-size: var(--text-s); hyphens: auto; overflow-wrap: anywhere; }
   .wahl-karte__inhalt small { color: var(--color-text-muted); font-size: var(--text-xs); line-height: 1.4; }
   .wahl-karte__inhalt svg { width: 32px; height: 32px; color: var(--color-accent-text); }
   .wahl-karte input:checked + .wahl-karte__inhalt { border-color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)); box-shadow: inset 0 0 0 1px var(--color-accent); }
@@ -844,8 +844,8 @@
   @media (min-width: 64em) { .mini { grid-template-columns: 5fr 7fr; } }
   .mini__karte { display: grid; gap: var(--s-5); padding: clamp(20px, 3vw, 40px); border-radius: var(--radius-xl); background: var(--color-surface); border: var(--rahmen); box-shadow: var(--schatten-2); }
   .mini__regler { display: grid; gap: 4px; }
-  .mini__regler label { display: flex; justify-content: space-between; gap: 12px; font-weight: 700; }
-  .mini__regler output { font-variant-numeric: tabular-nums; color: var(--color-accent-text); }
+  .mini__regler .feld__kopf { font-weight: 700; }
+  .mini__regler .feld__wert { font-size: var(--text-m); }
   .mini__ergebnis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-3); padding-top: var(--s-4); border-top: var(--rahmen); }
   .mini__ergebnis dt { font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 600; }
   .mini__ergebnis dd { font-weight: 800; font-size: var(--text-l); font-variant-numeric: tabular-nums; line-height: 1.2; }
@@ -885,10 +885,11 @@
     .rechner__details { grid-column: 1; }
     .rechner > .hinweis { grid-column: 1 / -1; }
   }
+  .rechner > *, .kontakt > *, .rechner__form > *, .kontakt__formular > * { min-width: 0; }
   .rechner__form { display: grid; gap: var(--s-5); }
   .rechner__fortschritt { display: none; }
   .rechner__form.ist-wizard .rechner__fortschritt { display: grid; }
-  .rechner__schritt { display: grid; gap: var(--s-5); padding: clamp(20px, 3vw, 32px); border-radius: var(--radius-xl); background: var(--color-surface); border: var(--rahmen); }
+  .rechner__schritt { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-5); padding: clamp(20px, 3vw, 32px); border-radius: var(--radius-xl); background: var(--color-surface); border: var(--rahmen); }
   .rechner__schritt legend { float: left; width: 100%; display: flex; align-items: center; gap: 12px; font-family: var(--font-titel); font-weight: 750; font-size: var(--text-xl); letter-spacing: -0.02em; line-height: 1.2; }
   .rechner__schritt legend + * { clear: both; }
   .rechner__schritt legend:focus { outline: none; }
@@ -898,8 +899,8 @@
   @container (min-width: 40rem) { .rechner__paar { grid-template-columns: 1fr 1fr; } }
   .rechner__schritt { container-type: inline-size; }
   .rechner__nav { position: sticky; bottom: calc(76px + env(safe-area-inset-bottom)); z-index: 5; display: grid; grid-template-columns: 1fr 2fr; gap: 8px; padding: 8px; border-radius: 999px; background: color-mix(in srgb, var(--color-bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-  .feld__label output { color: var(--color-accent-text); font-variant-numeric: tabular-nums; margin-inline-start: auto; }
-  .feld__label:has(output) { justify-content: space-between; }
+  .feld__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .feld__wert { color: var(--color-accent-text); font-weight: 700; font-size: var(--text-s); font-variant-numeric: tabular-nums; }
   .regler-zahl { display: grid; grid-template-columns: 1fr auto; gap: var(--s-4); align-items: center; }
   .neigung { display: grid; grid-template-columns: 1fr 120px; gap: var(--s-4); align-items: center; }
   .neigung__skizze { width: 120px; height: auto; }
@@ -952,7 +953,7 @@
   .ergebnis__fest { font-size: var(--text-s); padding: 12px 14px; border-radius: var(--radius-m); border: 1px dashed #4A5468; }
   .ergebnis__aktionen { display: flex; flex-wrap: wrap; gap: 8px; }
   .ergebnis__aktionen .knopf--klein { flex: 1 1 auto; }
-  .ergebnis a { color: inherit; }
+  .ergebnis a:not(.knopf) { color: inherit; }
   #ergebnis:focus { outline: none; }
   .rechner__details { display: grid; gap: var(--s-5); }
   .rechner__details h2 { font-size: var(--text-xl); }
@@ -982,7 +983,7 @@
   @media (min-width: 64em) { .kontakt { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); } .kontakt__info { position: sticky; top: calc(var(--kopf-hoehe) + 16px); } }
   .kontakt__formular { display: grid; gap: var(--s-5); }
   .formular { display: grid; gap: var(--s-5); padding: clamp(20px, 3vw, 36px); border-radius: var(--radius-xl); background: var(--color-surface); border: var(--rahmen); }
-  .formular__schritt { display: grid; gap: var(--s-5); }
+  .formular__schritt { display: grid; gap: var(--s-5); grid-template-columns: minmax(0, 1fr); }
   .formular__schritt legend { float: left; width: 100%; font-family: var(--font-titel); font-weight: 750; font-size: var(--text-xl); letter-spacing: -0.02em; line-height: 1.2; }
   .formular__schritt legend + * { clear: both; }
   .formular__schritt legend:focus { outline: none; }

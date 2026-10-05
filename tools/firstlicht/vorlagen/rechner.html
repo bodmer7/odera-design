@@ -26,12 +26,13 @@
 
     <div class="huelle rechner" data-rechner data-erklaeren="rechner">
       <div class="hinweis ohne-js">
-        <p><strong>Der Rechner braucht JavaScript.</strong> Ohne JavaScript rechnen wir gerne persönlich mit Ihnen: <a href="tel:{{firma.telefonLink}}">{{firma.telefon}}</a> oder über die <a href="kontakt.html">Anfrage für einen Dach-Check</a>.</p>
+        <p><strong>Der Rechner braucht JavaScript.</strong> Ohne JavaScript rechnen wir gerne persönlich mit Ihnen: <a href="tel:{{firma.telefonLink}}">{{firma.telefonAnzeige}}</a> oder über die <a href="kontakt.html">Anfrage für einen Dach-Check</a>.</p>
       </div>
       <div class="hinweis" data-rechner-fehler hidden role="alert">
-        <p><strong>Die Rechengrundlagen lassen sich gerade nicht laden.</strong> Bitte laden Sie die Seite neu. Oder rufen Sie uns an, wir rechnen gerne mit Ihnen: <a href="tel:{{firma.telefonLink}}">{{firma.telefon}}</a>.</p>
+        <p><strong>Die Rechengrundlagen lassen sich gerade nicht laden.</strong> Bitte laden Sie die Seite neu. Oder rufen Sie uns an, wir rechnen gerne mit Ihnen: <a href="tel:{{firma.telefonLink}}">{{firma.telefonAnzeige}}</a>.</p>
       </div>
 
+      <!-- [html-validate-disable-next wcag/h32: Der Rechner rechnet live, es gibt nichts abzusenden] -->
       <form class="rechner__form nur-js" data-rechner-form novalidate aria-label="Angaben zu Ihrem Dach und Verbrauch">
         <div class="fortschritt rechner__fortschritt" data-wizard-fortschritt>
           <p class="nur-sr" aria-live="polite" data-wizard-ansage></p>
@@ -63,7 +64,7 @@
 
           <div class="rechner__paar">
             <div class="feld" data-nur-schraeg>
-              <label class="feld__label" for="r-neigung">Neigung <output for="r-neigung" data-aus="neigung">30°</output></label>
+              <div class="feld__kopf"><label class="feld__label" for="r-neigung">Neigung</label><span class="feld__wert" data-aus="neigung" aria-hidden="true">30°</span></div>
               <div class="neigung">
                 <input class="regler" id="r-neigung" name="neigung" type="range" min="0" max="60" step="1" value="30">
                 <svg class="neigung__skizze" viewBox="0 0 160 90" aria-hidden="true" focusable="false">
@@ -124,7 +125,7 @@
             <label><input type="radio" name="verbrauchArt" value="kwh"><span>Ich kenne meinen Verbrauch</span></label>
           </div>
           <div class="feld" data-nur-personen>
-            <label class="feld__label" for="r-personen">Personen im Haushalt <output for="r-personen" data-aus="personen">4</output></label>
+            <div class="feld__kopf"><label class="feld__label" for="r-personen">Personen im Haushalt</label><span class="feld__wert" data-aus="personen" aria-hidden="true">4</span></div>
             <input class="regler" id="r-personen" name="personen" type="range" min="1" max="6" step="1" value="4">
             <p class="feld__hilfe" data-aus="personenKwh"></p>
           </div>
@@ -136,16 +137,16 @@
           <label class="schalter"><span>Wärmepumpe im Haus <span class="feld__zusatz">rund <span data-aus="wpKwh"></span> kWh pro Jahr, vor allem im Winter</span></span><input type="checkbox" name="waermepumpe" role="switch"></label>
           <label class="schalter"><span>Elektroauto</span><input type="checkbox" name="eauto" role="switch"></label>
           <div class="feld" data-nur-eauto hidden>
-            <label class="feld__label" for="r-km">Kilometer pro Jahr <output for="r-km" data-aus="km">10'000</output></label>
+            <div class="feld__kopf"><label class="feld__label" for="r-km">Kilometer pro Jahr</label><span class="feld__wert" data-aus="km" aria-hidden="true">10'000</span></div>
             <input class="regler" id="r-km" name="km" type="range" min="0" max="40000" step="1000" value="10000">
           </div>
           <div class="feld">
-            <label class="feld__label" for="r-strompreis">Ihr Strompreis <output for="r-strompreis" data-aus="strompreis">26.5 Rp./kWh</output></label>
+            <div class="feld__kopf"><label class="feld__label" for="r-strompreis">Ihr Strompreis</label><span class="feld__wert" data-aus="strompreis" aria-hidden="true">26.5 Rp./kWh</span></div>
             <input class="regler" id="r-strompreis" name="strompreis" type="range" min="10" max="45" step="0.5" value="26.5">
             <p class="feld__hilfe">Startwert: Median 2027 der Schweiz laut ElCom.</p>
           </div>
           <div class="feld">
-            <label class="feld__label" for="r-rueckliefer">Vergütung für eingespeisten Strom <output for="r-rueckliefer" data-aus="rueckliefer">8.0 Rp./kWh</output></label>
+            <div class="feld__kopf"><label class="feld__label" for="r-rueckliefer">Vergütung für eingespeisten Strom</label><span class="feld__wert" data-aus="rueckliefer" aria-hidden="true">8.0 Rp./kWh</span></div>
             <input class="regler" id="r-rueckliefer" name="rueckliefer" type="range" min="4" max="15" step="0.5" value="8">
             <p class="feld__hilfe">Mindestens 6 Rappen bei Anlagen bis 30 kW, dazu je nach Netzbetreiber der <button class="glossar" type="button" popovertarget="g-hkn">Herkunftsnachweis</button>.</p>
           </div>
@@ -155,7 +156,7 @@
           <legend><span class="rechner__nr">4</span>Wie soll die Anlage aussehen?</legend>
           <label class="schalter"><span>Batteriespeicher</span><input type="checkbox" name="speicher" role="switch"></label>
           <div class="feld" data-nur-speicher hidden>
-            <label class="feld__label" for="r-speicher">Speichergrösse <output for="r-speicher" data-aus="speicherKwh">10 kWh</output></label>
+            <div class="feld__kopf"><label class="feld__label" for="r-speicher">Speichergrösse</label><span class="feld__wert" data-aus="speicherKwh" aria-hidden="true">10 kWh</span></div>
             <input class="regler" id="r-speicher" name="speicherKwh" type="range" min="4" max="30" step="1" value="10">
           </div>
           <div class="segment" role="radiogroup" aria-label="Anlagengrösse">
@@ -163,7 +164,7 @@
             <label><input type="radio" name="groesseArt" value="manuell"><span>Grösse selbst wählen</span></label>
           </div>
           <div class="feld" data-nur-manuell hidden>
-            <label class="feld__label" for="r-kwp">Anlagengrösse <output for="r-kwp" data-aus="kwp">8.0 kWp</output></label>
+            <div class="feld__kopf"><label class="feld__label" for="r-kwp">Anlagengrösse</label><span class="feld__wert" data-aus="kwp" aria-hidden="true">8.0 kWp</span></div>
             <input class="regler" id="r-kwp" name="kwp" type="range" min="1" max="40" step="0.5" value="8">
             <p class="feld__hilfe" data-aus="kwpMax"></p>
           </div>

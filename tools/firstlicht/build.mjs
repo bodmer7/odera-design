@@ -28,6 +28,7 @@ const VORLAGEN = join(ROOT, 'tools/firstlicht/vorlagen');
 const ZIEL = join(ROOT, 'musterprojekte/firstlicht');
 const PROTO = join(ROOT, 'tools/firstlicht/prototypen');
 const firma = JSON.parse(readFileSync(join(ZIEL, 'daten/firma.json'), 'utf8'));
+firma.telefonAnzeige = firma.telefon.replace(/ /g, '&nbsp;'); // Nummer bricht nicht um
 const projekte = JSON.parse(readFileSync(join(ZIEL, 'daten/projekte.json'), 'utf8')).projekte;
 const fragen = JSON.parse(readFileSync(join(VORLAGEN, 'fragen.json'), 'utf8')).fragen;
 const annahmen = JSON.parse(readFileSync(join(ZIEL, 'daten/annahmen.json'), 'utf8'));

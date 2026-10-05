@@ -63,19 +63,20 @@
     <ul class="kennzahlen" role="list" style="margin-top: 24px"><li class="kennzahl"><span class="kennzahl__wert">640</span><span class="kennzahl__text">Kennzahl</span></li><li class="kennzahl"><span class="kennzahl__wert">18</span><span class="kennzahl__text">Kennzahl</span></li></ul>
 
     <h2>Formular</h2>
+    <!-- [html-validate-disable-next wcag/h32: Muster ohne Absenden] -->
     <form class="formular" novalidate>
       <div class="formular__paar">
-        <div class="feld"><label class="feld__label" for="sg-a">Textfeld <span class="feld__zusatz">Pflichtfeld</span></label><input class="eingabe" id="sg-a"></div>
-        <div class="feld"><label class="feld__label" for="sg-b">Mit Fehler <span class="feld__zusatz">Pflichtfeld</span></label><input class="eingabe" id="sg-b" aria-invalid="true" aria-describedby="sg-b-f"><p class="fehler" id="sg-b-f">So sieht eine Fehlermeldung aus.</p></div>
+        <div class="feld"><label class="feld__label" for="sg-a">Textfeld <span class="feld__zusatz">Pflichtfeld</span></label><input class="eingabe" id="sg-a" type="text"></div>
+        <div class="feld"><label class="feld__label" for="sg-b">Mit Fehler <span class="feld__zusatz">Pflichtfeld</span></label><input class="eingabe" id="sg-b" aria-invalid="true" aria-describedby="sg-b-f" type="text"><p class="fehler" id="sg-b-f">So sieht eine Fehlermeldung aus.</p></div>
         <div class="feld"><label class="feld__label" for="sg-c">Auswahl</label><select class="eingabe" id="sg-c"><option>Mittelland</option><option>Alpen</option></select></div>
-        <div class="feld"><label class="feld__label" for="sg-d">Deaktiviert</label><input class="eingabe" id="sg-d" disabled value="nicht änderbar"></div>
+        <div class="feld"><label class="feld__label" for="sg-d">Deaktiviert</label><input class="eingabe" id="sg-d" type="text" disabled value="nicht änderbar"></div>
       </div>
       <label class="wahl"><input type="checkbox" checked><span>Checkbox</span></label>
       <label class="wahl"><input type="radio" name="sg-r" checked><span>Radio</span></label>
       <div class="wahl-karten"><label class="wahl-karte"><input type="radio" name="sg-k" checked><span class="wahl-karte__inhalt"><strong>Radio als Karte</strong><small>Mit Beschreibung</small></span></label><label class="wahl-karte"><input type="radio" name="sg-k"><span class="wahl-karte__inhalt"><strong>Zweite Karte</strong><small>Nicht gewählt</small></span></label></div>
       <label class="schalter"><span>Toggle</span><input type="checkbox" role="switch" checked></label>
       <div class="segment" role="radiogroup" aria-label="Segment"><label><input type="radio" name="sg-s" checked><span>Segment</span></label><label><input type="radio" name="sg-s"><span>Control</span></label></div>
-      <div class="feld"><label class="feld__label" for="sg-r1">Range-Slider <output>40 %</output></label><input class="regler" id="sg-r1" type="range" value="40" style="--fuellung: 40%"></div>
+      <div class="feld"><div class="feld__kopf"><label class="feld__label" for="sg-r1">Range-Slider</label><span class="feld__wert">40 %</span></div><input class="regler" id="sg-r1" type="range" value="40" style="--fuellung: 40%"></div>
       <div class="fortschritt"><ol class="fortschritt__schritte"><li class="ist-fertig">Eins</li><li aria-current="step">Zwei</li><li>Drei</li></ol></div>
     </form>
 
@@ -101,6 +102,7 @@
     <h2>Symbole</h2>
     <div class="sg__reihe" data-sg-symbole></div>
   </main>
+  <!-- @teil fuss -->
   <!-- @teil glossar -->
   <!-- @teil skripte -->
   <script type="module">
