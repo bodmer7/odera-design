@@ -1,0 +1,279 @@
+<!-- @meta {"titel": "Solarrechner | Firstlicht Solartechnik", "beschreibung": "Beispielseite von ODERA Design. Solarrechner der erfundenen Firstlicht Solartechnik: Anlagengrösse, Ertrag, Eigenverbrauch, Kosten und Amortisation, mit offenen Annahmen und Quellen.", "pfad": "rechner.html", "nav": "rechner"} -->
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <!-- @teil kopf-meta -->
+</head>
+<body class="seite-rechner">
+  <!-- @teil symbole -->
+  <a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
+  <!-- @teil leiste -->
+  <!-- @teil kopf -->
+
+  <main id="inhalt" tabindex="-1">
+    <div class="nur-druck druck-kopf" aria-hidden="true">
+      <p class="logo"><svg class="logo__signet" focusable="false"><use href="#fl-signet"></use></svg><span class="logo__wort">Firstlicht</span></p>
+      <p>Solarrechner, unverbindliche Schätzung vom <span data-druck-datum></span>. Beispielseite von ODERA Design, der Betrieb ist frei erfunden.</p>
+    </div>
+
+    <section class="seitenkopf" aria-labelledby="seiten-titel">
+      <div class="huelle">
+        <p class="vorzeile">Solarrechner</p>
+        <h1 id="seiten-titel">Was bringt Solarstrom auf Ihrem Dach?</h1>
+        <p class="lead">Vier kurze Schritte, ein ehrliches Ergebnis. Wir zeigen Spannen statt Versprechen und legen jede Annahme offen. Ihre Angaben bleiben in Ihrem Browser.</p>
+      </div>
+    </section>
+
+    <div class="huelle rechner" data-rechner data-erklaeren="rechner">
+      <div class="hinweis ohne-js">
+        <p><strong>Der Rechner braucht JavaScript.</strong> Ohne JavaScript rechnen wir gerne persönlich mit Ihnen: <a href="tel:{{firma.telefonLink}}">{{firma.telefon}}</a> oder über die <a href="kontakt.html">Anfrage für einen Dach-Check</a>.</p>
+      </div>
+      <div class="hinweis" data-rechner-fehler hidden role="alert">
+        <p><strong>Die Rechengrundlagen lassen sich gerade nicht laden.</strong> Bitte laden Sie die Seite neu. Oder rufen Sie uns an, wir rechnen gerne mit Ihnen: <a href="tel:{{firma.telefonLink}}">{{firma.telefon}}</a>.</p>
+      </div>
+
+      <form class="rechner__form nur-js" data-rechner-form novalidate aria-label="Angaben zu Ihrem Dach und Verbrauch">
+        <div class="fortschritt rechner__fortschritt" data-wizard-fortschritt>
+          <p class="nur-sr" aria-live="polite" data-wizard-ansage></p>
+          <ol class="fortschritt__schritte fortschritt__schritte--4">
+            <li>Standort</li><li>Dach</li><li>Verbrauch</li><li>Ausbau</li>
+          </ol>
+        </div>
+
+        <fieldset class="rechner__schritt" data-schritt="1">
+          <legend><span class="rechner__nr">1</span>Wo steht das Haus?</legend>
+          <div class="wahl-karten">
+            <label class="wahl-karte"><input type="radio" name="region" value="mittelland" checked><span class="wahl-karte__inhalt"><strong>Mittelland</strong><small>Zum Beispiel Freiamt, Reusstal, Limmattal</small></span></label>
+            <label class="wahl-karte"><input type="radio" name="region" value="jura"><span class="wahl-karte__inhalt"><strong>Jura und Voralpen</strong><small>Etwas mehr Sonne, weniger Nebel</small></span></label>
+            <label class="wahl-karte"><input type="radio" name="region" value="wallis"><span class="wahl-karte__inhalt"><strong>Wallis und Tessin</strong><small>Viel Sonne über das ganze Jahr</small></span></label>
+            <label class="wahl-karte"><input type="radio" name="region" value="alpen"><span class="wahl-karte__inhalt"><strong>Alpen über 1'200 m</strong><small>Hoher Winterertrag</small></span></label>
+          </div>
+          <p class="feld__hilfe">Den genauen Wert für Ihr Dach zeigt <a href="https://www.sonnendach.ch/" target="_blank" rel="noopener">sonnendach.ch</a> des Bundes.</p>
+        </fieldset>
+
+        <fieldset class="rechner__schritt" data-schritt="2">
+          <legend><span class="rechner__nr">2</span>Wie sieht Ihr Dach aus?</legend>
+          <div class="feld">
+            <span class="feld__label" id="dach-label">Dachform</span>
+            <div class="wahl-karten wahl-karten--zwei" role="radiogroup" aria-labelledby="dach-label">
+              <label class="wahl-karte"><input type="radio" name="dach" value="schraeg" checked><span class="wahl-karte__inhalt"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-haus"></use></svg><strong>Schrägdach</strong></span></label>
+              <label class="wahl-karte"><input type="radio" name="dach" value="flach"><span class="wahl-karte__inhalt"><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-gewerbe"></use></svg><strong>Flachdach</strong></span></label>
+            </div>
+          </div>
+
+          <div class="rechner__paar">
+            <div class="feld" data-nur-schraeg>
+              <label class="feld__label" for="r-neigung">Neigung <output for="r-neigung" data-aus="neigung">30°</output></label>
+              <div class="neigung">
+                <input class="regler" id="r-neigung" name="neigung" type="range" min="0" max="60" step="1" value="30">
+                <svg class="neigung__skizze" viewBox="0 0 160 90" aria-hidden="true" focusable="false">
+                  <path class="neigung__boden" d="M4 84H156"/>
+                  <path class="neigung__wand" d="M30 84V56H130V84"/>
+                  <path class="neigung__dach" data-neigung-dach d="M22 56L80 22L138 56"/>
+                  <path class="neigung__bogen" data-neigung-bogen d=""/>
+                </svg>
+              </div>
+            </div>
+            <div class="feld">
+              <label class="feld__label" for="r-flaeche-zahl">Dachfläche in m² <span class="feld__zusatz">Fläche der Dachseite, die belegt werden soll</span></label>
+              <div class="regler-zahl">
+                <input class="regler" id="r-flaeche" name="flaeche" type="range" min="0" max="300" step="1" value="60" aria-label="Dachfläche, Regler" data-paar="flaeche">
+                <input class="eingabe eingabe--kurz" id="r-flaeche-zahl" type="text" inputmode="numeric" autocomplete="off" value="60" data-paar="flaeche" aria-describedby="r-flaeche-hilfe">
+              </div>
+              <p class="feld__hilfe" id="r-flaeche-hilfe">Bis 2'000 m² über das Eingabefeld.</p>
+            </div>
+          </div>
+
+          <div class="feld" data-nur-schraeg>
+            <span class="feld__label" id="kompass-label">Ausrichtung der Dachseite</span>
+            <div class="kompass" data-kompass>
+              <div class="kompass__rose" role="slider" tabindex="0" aria-labelledby="kompass-label" aria-describedby="kompass-hilfe" aria-valuemin="0" aria-valuemax="359" aria-valuenow="180" aria-valuetext="Süd, 180 Grad" data-kompass-regler>
+                <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+                  <circle class="kompass__ring" cx="100" cy="100" r="88"/>
+                  <path class="kompass__sonne" d="M100 100L37.8 162.2A88 88 0 0 0 162.2 162.2Z"/>
+                  <g class="kompass__striche"></g>
+                  <text class="kompass__text" x="100" y="46">N</text><text class="kompass__text" x="158" y="105">O</text>
+                  <text class="kompass__text kompass__text--sued" x="100" y="164">S</text><text class="kompass__text" x="42" y="105">W</text>
+                  <g class="kompass__zeiger" data-kompass-zeiger transform="rotate(180 100 100)">
+                    <path class="kompass__nadel" d="M100 100V66"/>
+                    <rect class="kompass__modul" x="86" y="52" width="28" height="14" rx="3"/>
+                    <circle class="kompass__mitte" cx="100" cy="100" r="7"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="kompass__knoepfe" role="group" aria-label="Richtung direkt wählen" data-kompass-knoepfe></div>
+            </div>
+            <p class="feld__hilfe" id="kompass-hilfe">Ziehen oder Pfeiltasten: 15 Grad pro Schritt, mit Umschalttaste 45 Grad.</p>
+          </div>
+          <p class="hinweis" data-nur-flach hidden>Auf Flachdächern stellen wir die Module meist flach nach Osten und Westen auf. Neigung und Ausrichtung spielen deshalb kaum eine Rolle.</p>
+
+          <div class="feld">
+            <span class="feld__label" id="schatten-label">Verschattung durch Bäume, Kamine oder Nachbarhäuser</span>
+            <div class="segment" role="radiogroup" aria-labelledby="schatten-label">
+              <label><input type="radio" name="verschattung" value="keine" checked><span>Keine</span></label>
+              <label><input type="radio" name="verschattung" value="leicht"><span>Leicht</span></label>
+              <label><input type="radio" name="verschattung" value="mittel"><span>Mittel</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="rechner__schritt" data-schritt="3">
+          <legend><span class="rechner__nr">3</span>Wie viel Strom brauchen Sie?</legend>
+          <div class="segment" role="radiogroup" aria-label="Verbrauch angeben">
+            <label><input type="radio" name="verbrauchArt" value="personen" checked><span>Nach Personen</span></label>
+            <label><input type="radio" name="verbrauchArt" value="kwh"><span>Ich kenne meinen Verbrauch</span></label>
+          </div>
+          <div class="feld" data-nur-personen>
+            <label class="feld__label" for="r-personen">Personen im Haushalt <output for="r-personen" data-aus="personen">4</output></label>
+            <input class="regler" id="r-personen" name="personen" type="range" min="1" max="6" step="1" value="4">
+            <p class="feld__hilfe" data-aus="personenKwh"></p>
+          </div>
+          <div class="feld" data-nur-kwh hidden>
+            <label class="feld__label" for="r-verbrauch">Jahresverbrauch in kWh <span class="feld__zusatz">steht auf Ihrer Stromrechnung</span></label>
+            <input class="eingabe eingabe--kurz" id="r-verbrauch" name="verbrauch" type="text" inputmode="numeric" autocomplete="off" value="4100" aria-describedby="r-verbrauch-fehler">
+            <p class="fehler" id="r-verbrauch-fehler" hidden></p>
+          </div>
+          <label class="schalter"><span>Wärmepumpe im Haus <span class="feld__zusatz">rund <span data-aus="wpKwh"></span> kWh pro Jahr, vor allem im Winter</span></span><input type="checkbox" name="waermepumpe" role="switch"></label>
+          <label class="schalter"><span>Elektroauto</span><input type="checkbox" name="eauto" role="switch"></label>
+          <div class="feld" data-nur-eauto hidden>
+            <label class="feld__label" for="r-km">Kilometer pro Jahr <output for="r-km" data-aus="km">10'000</output></label>
+            <input class="regler" id="r-km" name="km" type="range" min="0" max="40000" step="1000" value="10000">
+          </div>
+          <div class="feld">
+            <label class="feld__label" for="r-strompreis">Ihr Strompreis <output for="r-strompreis" data-aus="strompreis">26.5 Rp./kWh</output></label>
+            <input class="regler" id="r-strompreis" name="strompreis" type="range" min="10" max="45" step="0.5" value="26.5">
+            <p class="feld__hilfe">Startwert: Median 2027 der Schweiz laut ElCom.</p>
+          </div>
+          <div class="feld">
+            <label class="feld__label" for="r-rueckliefer">Vergütung für eingespeisten Strom <output for="r-rueckliefer" data-aus="rueckliefer">8.0 Rp./kWh</output></label>
+            <input class="regler" id="r-rueckliefer" name="rueckliefer" type="range" min="4" max="15" step="0.5" value="8">
+            <p class="feld__hilfe">Mindestens 6 Rappen bei Anlagen bis 30 kW, dazu je nach Netzbetreiber der <button class="glossar" type="button" popovertarget="g-hkn">Herkunftsnachweis</button>.</p>
+          </div>
+        </fieldset>
+
+        <fieldset class="rechner__schritt" data-schritt="4">
+          <legend><span class="rechner__nr">4</span>Wie soll die Anlage aussehen?</legend>
+          <label class="schalter"><span>Batteriespeicher</span><input type="checkbox" name="speicher" role="switch"></label>
+          <div class="feld" data-nur-speicher hidden>
+            <label class="feld__label" for="r-speicher">Speichergrösse <output for="r-speicher" data-aus="speicherKwh">10 kWh</output></label>
+            <input class="regler" id="r-speicher" name="speicherKwh" type="range" min="4" max="30" step="1" value="10">
+          </div>
+          <div class="segment" role="radiogroup" aria-label="Anlagengrösse">
+            <label><input type="radio" name="groesseArt" value="auto" checked><span>Dach optimal nutzen</span></label>
+            <label><input type="radio" name="groesseArt" value="manuell"><span>Grösse selbst wählen</span></label>
+          </div>
+          <div class="feld" data-nur-manuell hidden>
+            <label class="feld__label" for="r-kwp">Anlagengrösse <output for="r-kwp" data-aus="kwp">8.0 kWp</output></label>
+            <input class="regler" id="r-kwp" name="kwp" type="range" min="1" max="40" step="0.5" value="8">
+            <p class="feld__hilfe" data-aus="kwpMax"></p>
+          </div>
+        </fieldset>
+
+        <div class="rechner__nav" data-wizard-nav hidden>
+          <button class="knopf knopf--sekundaer" type="button" data-wizard-zurueck>Zurück</button>
+          <button class="knopf" type="button" data-wizard-weiter>Weiter</button>
+        </div>
+      </form>
+
+      <aside class="rechner__ergebnis nur-js" id="ergebnis" aria-labelledby="ergebnis-titel" tabindex="-1">
+        <div class="ergebnis">
+          <div class="ergebnis__kopf">
+            <h2 id="ergebnis-titel">Ihre Schätzung</h2>
+            <p class="ergebnis__stand">Stand der Annahmen: <span data-r="stand"></span></p>
+          </div>
+          <div class="ergebnis__haupt">
+            <p class="ergebnis__label">Ersparnis pro Jahr</p>
+            <p class="ergebnis__wert" data-r="ersparnis">CHF 0</p>
+            <p class="ergebnis__sub">Amortisation: <strong data-r="amortisation"></strong></p>
+          </div>
+          <div class="ergebnis__aktionen">
+            <a class="knopf knopf--voll" href="kontakt.html" data-uebernehmen>In Anfrage übernehmen<svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-pfeil"></use></svg></a>
+            <button class="knopf knopf--sekundaer knopf--klein" type="button" data-link-kopieren><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-link"></use></svg>Link kopieren</button>
+            <button class="knopf knopf--sekundaer knopf--klein" type="button" data-drucken><svg class="symbol" aria-hidden="true" focusable="false"><use href="#i-druck"></use></svg>Als PDF</button>
+          </div>
+          <ul class="ergebnis__hinweise" data-r="hinweise" role="list"></ul>
+          <dl class="ergebnis__raster">
+            <div><dt><button class="glossar" type="button" popovertarget="g-kwp">Anlage</button></dt><dd data-r="kwp"></dd><dd class="klein" data-r="module"></dd></div>
+            <div><dt>Strom pro Jahr</dt><dd data-r="ertrag"></dd><dd class="klein" data-r="ertragSpanne"></dd></div>
+            <div><dt><button class="glossar" type="button" popovertarget="g-eigenverbrauch">Eigenverbrauch</button></dt><dd data-r="eigenverbrauch"></dd><dd class="klein">des Solarstroms nutzen Sie selbst</dd></div>
+            <div><dt><button class="glossar" type="button" popovertarget="g-autarkie">Autarkiegrad</button></dt><dd data-r="autarkie"></dd><dd class="klein">Ihres Verbrauchs deckt das Dach</dd></div>
+          </dl>
+          <table class="tabelle ergebnis__kosten">
+            <caption>Investition</caption>
+            <tbody>
+              <tr><th scope="row">Anlage schlüsselfertig<span data-r="speicherZeile"></span></th><td class="zahl" data-r="brutto"></td></tr>
+              <tr><th scope="row">Minus <button class="glossar" type="button" popovertarget="g-einmalverguetung">Einmalvergütung</button></th><td class="zahl" data-r="eiv"></td></tr>
+              <tr class="ergebnis__summe"><th scope="row">Investition netto</th><td class="zahl" data-r="netto"></td></tr>
+            </tbody>
+          </table>
+          <p class="feld__hilfe">Investition als Spanne: <span data-r="bruttoSpanne"></span>. Unterhalt eingerechnet: <span data-r="unterhalt"></span> pro Jahr. Der Steuerabzug ist kantonal verschieden und nicht eingerechnet. Er verkürzt die Amortisation.</p>
+          <p class="ergebnis__fest"><strong>Unverbindliche Schätzung.</strong> Für eine verbindliche Offerte prüfen wir Ihr Dach vor Ort.</p>
+
+        </div>
+      </aside>
+
+      <div class="rechner__details nur-js">
+        <section class="diagramm karte" aria-labelledby="monate-titel" data-diagramm="monate">
+          <div class="diagramm__kopf">
+            <h2 id="monate-titel">Strom pro Monat</h2>
+            <button class="tabelle-knopf" type="button" aria-expanded="false" data-tabelle-schalter>Als Tabelle anzeigen</button>
+          </div>
+          <p class="feld__hilfe">In kWh. Im Winterhalbjahr fällt rund ein Viertel bis ein Drittel des Jahresertrags an.</p>
+          <div class="diagramm__flaeche" data-diagramm-flaeche></div>
+          <div class="tabelle-huelle" data-diagramm-tabelle hidden></div>
+        </section>
+        <section class="diagramm karte" aria-labelledby="verlauf-titel" data-diagramm="verlauf">
+          <div class="diagramm__kopf">
+            <h2 id="verlauf-titel">Kumulierter Ertrag über <span data-r="jahre">30</span> Jahre</h2>
+            <button class="tabelle-knopf" type="button" aria-expanded="false" data-tabelle-schalter>Als Tabelle anzeigen</button>
+          </div>
+          <p class="feld__hilfe" data-r="breakEvenText"></p>
+          <div class="diagramm__flaeche" data-diagramm-flaeche></div>
+          <div class="tabelle-huelle" data-diagramm-tabelle hidden></div>
+        </section>
+        <section class="karte vergleich" aria-labelledby="vergleich-titel">
+          <h2 id="vergleich-titel">Mit oder ohne Speicher?</h2>
+          <div class="tabelle-huelle">
+            <table class="tabelle">
+              <thead><tr><th scope="col">Pro Jahr</th><th scope="col" class="zahl">Ohne Speicher</th><th scope="col" class="zahl">Mit <span data-r="vergleichKwh"></span></th></tr></thead>
+              <tbody data-r="vergleich"></tbody>
+            </table>
+          </div>
+        </section>
+        <details class="frage annahmen" data-annahmen-box>
+          <summary>So rechnen wir: alle Annahmen und Quellen</summary>
+          <div class="frage__antwort">
+            <p>Jede Zahl stammt aus einer offenen Datei mit Quelle, Abrufdatum und Status. «Verifiziert» heisst: Eine offizielle Stelle nennt den Wert direkt. Faustwerte und eigene Ableitungen sind als «nicht verifiziert» markiert.</p>
+            <p>Der Eigenverbrauch folgt einer Faustregel nach der Methode des Unabhängigkeitsrechners der HTW Berlin: Er hängt vom Verhältnis zwischen Jahresproduktion und Verbrauch sowie von der Speichergrösse ab. Strompreise rechnen wir über die ganze Dauer gleich hoch, ohne Teuerung.</p>
+            <div class="tabelle-huelle"><table class="tabelle annahmen__tabelle"><thead><tr><th scope="col">Annahme</th><th scope="col">Wert</th><th scope="col">Status</th><th scope="col">Quelle</th></tr></thead><tbody data-annahmen></tbody></table></div>
+            <p>Förderprogramme von Kanton und Gemeinde finden Sie auf <a href="https://www.energiefranken.ch/" target="_blank" rel="noopener">energiefranken.ch</a>.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="ergebnis-leiste nur-js" data-ergebnis-leiste>
+      <button class="ergebnis-leiste__knopf" type="button" aria-expanded="false" aria-controls="ergebnis-blatt" data-blatt-schalter>
+        <span class="ergebnis-leiste__label">Ersparnis pro Jahr</span>
+        <span class="ergebnis-leiste__wert" data-r="ersparnisKurz">CHF 0</span>
+        <span class="ergebnis-leiste__pfeil" aria-hidden="true"></span>
+      </button>
+      <div class="ergebnis-leiste__blatt" id="ergebnis-blatt" hidden>
+        <dl>
+          <div><dt>Anlage</dt><dd data-r="kwpKurz"></dd></div>
+          <div><dt>Strom pro Jahr</dt><dd data-r="ertragKurz"></dd></div>
+          <div><dt>Autarkiegrad</dt><dd data-r="autarkieKurz"></dd></div>
+          <div><dt>Amortisation</dt><dd data-r="amortisationKurz"></dd></div>
+        </dl>
+        <a class="knopf knopf--voll knopf--klein" href="#ergebnis" data-blatt-zum-ergebnis>Ganzes Ergebnis ansehen</a>
+      </div>
+    </div>
+    <p class="nur-sr" aria-live="polite" data-rechner-ansage></p>
+  </main>
+
+  <!-- @teil fuss -->
+  <!-- @teil menue -->
+  <!-- @teil glossar -->
+  <!-- @teil skripte -->
+</body>
+</html>
