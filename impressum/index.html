@@ -336,6 +336,23 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .mp-laden-punkt{width:20px;height:20px;border-radius:50%;border:2px solid var(--linie);border-top-color:var(--tinte);animation:mpDreh 800ms linear infinite}
 @keyframes mpDreh{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.mp-laden-punkt{animation:none}}
+.mp-ovbar{flex:none;height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 12px 0 20px;background:var(--tinte);color:var(--grund);border-bottom:1px solid rgba(246,245,241,0.12)}
+.mp-ovinfo{min-width:0;display:flex;flex-direction:column;gap:2px;line-height:1.3}
+.mp-ovtitel{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp-ovtxt{font-size:12px;color:rgba(246,245,241,0.72)}
+.mp-ovaktionen{flex:none;display:flex;align-items:center;gap:4px}
+.mp-ovknopf{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid transparent;background:none;color:var(--grund);font:inherit;font-size:14px;font-weight:500;line-height:1;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background 160ms linear,border-color 160ms linear}
+.mp-ovknopf:hover{background:rgba(246,245,241,0.1)}
+.mp-ovknopf:focus-visible{outline:2px solid var(--akzent);outline-offset:2px}
+.mp-ovknopf--rand{border-color:rgba(246,245,241,0.32);margin-left:4px}
+.mp-ovicon{width:40px;padding:0;justify-content:center}
+.mp-ovspur{position:relative;flex:none;width:30px;height:18px;border-radius:999px;background:rgba(246,245,241,0.28);transition:background 160ms linear}
+.mp-ovspur::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:var(--grund);transition:transform 160ms ease-out}
+.mp-ovknopf[aria-pressed="true"] .mp-ovspur{background:var(--akzent)}
+.mp-ovknopf[aria-pressed="true"] .mp-ovspur::after{transform:translateX(12px);background:var(--tinte)}
+.mp-ovkbd{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;line-height:1;padding:3px 6px;border-radius:6px;border:1px solid rgba(246,245,241,0.3);color:rgba(246,245,241,0.75)}
+@media(max-width:960px){.mp-ovcheck,.mp-ovkbd{display:none}}
+@media(forced-colors:active){.mp-ovspur{border:1px solid ButtonText}.mp-ovknopf[aria-pressed="true"] .mp-ovspur{background:Highlight}}
 .mp-jump-arrow{flex:none;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,0.45);display:flex;align-items:center;justify-content:center;transition:background 160ms linear}
 .mp-jump-arrow svg{transition:stroke 160ms linear}
 .mp-jump:focus-visible{outline:3px solid var(--akzent);outline-offset:2px}
@@ -386,11 +403,30 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .fakten dt{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:var(--fs-lead);line-height:1.2;white-space:nowrap;font-variant-numeric:tabular-nums}
 .fakten dd{margin:4px 0 0;font-size:var(--fs-klein);color:var(--text-2);white-space:nowrap}
 .werk{position:relative;margin:0;padding-bottom:var(--a-4)}
-.werk-browser{background:var(--flaeche);border:1px solid var(--linie);border-radius:12px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(17,19,26,0.35)}
-.werk-leiste{display:flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-bottom:1px solid var(--linie)}
-.werk-leiste i{width:8px;height:8px;border-radius:999px;background:var(--linie)}
-.werk-leiste span{margin-left:12px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-klein);color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.werk-handy{position:absolute;right:-12px;bottom:0;width:26%;border:6px solid var(--tinte);border-radius:22px;overflow:hidden;background:var(--tinte);box-shadow:0 20px 40px -24px rgba(17,19,26,0.5)}
+/* Geräterahmen: Browserfenster und Handy für Musterprojekt-Aufnahmen (Startseite, Musterprojekte) */
+.werk-link{display:block;color:inherit;text-decoration:none;border-radius:14px}
+.werk-link:focus-visible{outline:3px solid var(--primaer);outline-offset:8px}
+.rahmen-browser{background:var(--flaeche);border:1px solid rgba(17,19,26,0.12);border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(17,19,26,0.06),0 24px 48px -28px rgba(17,19,26,0.30),0 56px 96px -56px rgba(17,19,26,0.28);transition:transform var(--dauer) var(--kurve),box-shadow var(--dauer) var(--kurve)}
+.rahmen-leiste{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;align-items:center;gap:8px;height:36px;padding:0 14px;background:#F3F2EE;border-bottom:1px solid rgba(17,19,26,0.08)}
+.rahmen-punkte{display:flex;gap:6px}
+.rahmen-punkte i{width:10px;height:10px;border-radius:999px;background:#D7D4CC}
+.rahmen-adresse{justify-self:center;display:flex;align-items:center;gap:6px;min-width:0;max-width:100%;height:22px;padding:0 12px;border-radius:999px;background:#FFFFFF;border:1px solid rgba(17,19,26,0.08);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;line-height:1;color:var(--text-2)}
+.rahmen-adresse span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rahmen-adresse svg{flex:none;width:11px;height:11px}
+.rahmen-handy{background:#0B0C10;border-radius:34px;padding:7px;box-shadow:0 0 0 1px rgba(17,19,26,0.4),0 2px 4px rgba(17,19,26,0.12),0 28px 56px -24px rgba(17,19,26,0.5);transition:transform var(--dauer) var(--kurve),box-shadow var(--dauer) var(--kurve)}
+.rahmen-schirm{position:relative;overflow:hidden;border-radius:27px;background:#0B0C10;padding-top:10%}
+.rahmen-insel{position:absolute;top:2.6%;left:50%;width:28%;height:0;padding-top:7%;border-radius:999px;background:#000;transform:translateX(-50%)}
+/* Auf dunklem Grund (Firstlicht-Abschnitt): heller Rand, damit sich der Rahmen abhebt */
+.rahmen-browser.rahmen--dunkel{background:#1B1E27;border-color:rgba(246,245,241,0.18);box-shadow:0 24px 48px -28px rgba(0,0,0,0.6)}
+.rahmen--dunkel .rahmen-leiste{background:#21242E;border-bottom-color:rgba(246,245,241,0.1)}
+.rahmen--dunkel .rahmen-punkte i{background:rgba(246,245,241,0.22)}
+.rahmen--dunkel .rahmen-adresse{background:rgba(246,245,241,0.06);border-color:rgba(246,245,241,0.12);color:rgba(246,245,241,0.72)}
+.rahmen-handy.rahmen--dunkel{background:#2A2D38;box-shadow:0 0 0 1px rgba(246,245,241,0.22),0 28px 56px -24px rgba(0,0,0,0.7)}
+.rahmen-handy.rahmen--dunkel .rahmen-schirm{background:#0B0C10}
+@media(hover:hover){.werk-link:hover .rahmen-browser{transform:translateY(-3px);box-shadow:0 1px 2px rgba(17,19,26,0.06),0 32px 56px -28px rgba(17,19,26,0.36),0 64px 104px -56px rgba(17,19,26,0.32)}.werk-link:hover .rahmen-handy{transform:translateY(-6px)}}
+@media(prefers-reduced-motion:reduce){.rahmen-browser,.rahmen-handy{transition:none}.werk-link:hover .rahmen-browser,.werk-link:hover .rahmen-handy{transform:none}}
+@media(forced-colors:active){.rahmen-browser,.rahmen-handy{border:1px solid CanvasText}}
+.werk .rahmen-handy{position:absolute;right:-16px;bottom:0;width:25%}
 .werk figcaption{margin-top:var(--a-2);max-width:70%;font-size:var(--fs-klein);line-height:1.5;color:var(--text-2)}
 .abschnitt-nr{margin:0 0 var(--a-2)}
 /* Formularfelder: Kennzeichnung, Fehler, Häkchen. Rot nur für Fehler, Lime nur für Bestätigung. */
@@ -547,10 +583,6 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
  .blob{display:none!important}
  .f-legal{display:none!important}
  .f-legal-row{display:flex!important}
- .mp-ovbar{height:40px!important;padding:0 12px!important}
- .mp-ovtxt{font-size:13px!important}
- .mp-ovbar button{min-height:32px!important;padding:0 12px!important;font-size:13px!important}
- .mp-ovbar a{min-height:32px!important;padding:0 8px!important;font-size:13px!important}
  .card .card{border:none!important;padding:0!important;background:none!important}
  h1{font-size:var(--fs-h1)!important;line-height:1.06!important}
  h2{font-size:clamp(28px,7.6vw,32px)!important}
@@ -692,8 +724,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .fakten dt{font-size:14px!important;white-space:nowrap}
  .fakten dd{font-size:13px!important;white-space:normal;line-height:1.3}
  .werk{padding-bottom:0;margin-top:8px;display:flex;flex-direction:column;align-items:center}
- .werk-browser{display:none}
- .werk-handy{position:static;width:min(62%,240px);border-width:7px;border-radius:30px;box-shadow:0 24px 48px -28px rgba(17,19,26,0.55)}
+ .werk-link{display:flex;flex-direction:column;align-items:center;width:100%}
+ .werk .rahmen-browser{display:none}
+ .werk .rahmen-handy{position:static;width:min(62%,240px)}
  .werk figcaption{max-width:32ch;text-align:center;margin-top:16px}
  /* Pakete: wischbare Karten, Standard zuerst */
  .wisch{display:flex!important;gap:12px!important;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:6px 20px 14px;scroll-padding:0 20px;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:stretch!important}
@@ -1052,12 +1085,14 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </dl>
       </div>
       <figure class="werk" style="animation:{{ heroAnim4 }}">
-        <div class="werk-browser">
-          <div class="werk-leiste" aria-hidden="true"><i></i><i></i><i></i><span>doppelmeter, Musterprojekt</span></div>
-          <div class="bild" role="img" aria-label="Startseite des Musterprojekts Schreinerei Doppelmeter am Computer" style="aspect-ratio:1120/658;background-image:url(assets/img/muster-doppelmeter-desktop.webp)"></div>
-        </div>
-        <div class="werk-handy"><div class="bild" role="img" aria-label="Dieselbe Seite auf dem Handy" style="aspect-ratio:300/585;background-image:url(assets/img/muster-doppelmeter-handy.webp)"></div></div>
-        <figcaption>Musterprojekt Schreinerei Doppelmeter. Der Betrieb ist erfunden, die Seite ist echt. <a href="/musterprojekte/doppelmeter/">Ganze Seite ansehen</a></figcaption>
+        <a class="werk-link" href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}" aria-label="Musterprojekt Firstlicht Solartechnik ansehen">
+          <div class="rahmen-browser">
+            <div class="rahmen-leiste" aria-hidden="true"><span class="rahmen-punkte"><i></i><i></i><i></i></span><span class="rahmen-adresse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>odera.ch/musterprojekte/firstlicht</span></span><span></span></div>
+            <div class="bild" role="img" aria-label="Startseite des Musterprojekts Firstlicht Solartechnik am Computer" style="aspect-ratio:1120/630;background-image:url(assets/img/muster-firstlicht-desktop.webp)"></div>
+          </div>
+          <div class="rahmen-handy"><div class="rahmen-schirm"><span class="rahmen-insel" aria-hidden="true"></span><div class="bild" role="img" aria-label="Dieselbe Seite auf dem Handy" style="aspect-ratio:300/585;background-image:url(assets/img/muster-firstlicht-handy.webp)"></div></div></div>
+        </a>
+        <figcaption>Musterprojekt Firstlicht Solartechnik. Der Betrieb ist erfunden, die Seite ist echt. <a href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}">Ganze Seite ansehen</a></figcaption>
       </figure>
     </div>
   </div>
@@ -1843,7 +1878,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 24px">Doppelmeter</h2>
             <p style="font-size:16px;line-height:1.65;color:var(--text-2);margin:0 0 24px;max-width:680px;text-wrap:pretty">Ausgangslage: Schreinerei mit eigener Werkstatt, bisher ohne Website, Anfragen nur über Empfehlung. Ziel: Der Besucher soll anrufen. Entscheidung: Die Telefonnummer steht in jedem Bildschirm sichtbar, Küchen, Schränke und Werkstatt haben je eine eigene Seite, alles andere ordnet sich darunter.</p>
             <p style="font-size:13px;line-height:1.6;color:var(--tinte);margin:0 0 24px"><span style="white-space:nowrap">Ladezeit {{ ladezeitDm }}</span> · <span style="white-space:nowrap">5 Seiten</span> · <span style="white-space:nowrap">Paket Standard</span></p>
-            <a class="btn btn-primaer" href="/musterprojekte/doppelmeter/" data-title="Doppelmeter" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
+            <a class="btn btn-primaer" href="/musterprojekte/doppelmeter/" data-title="Schreinerei Doppelmeter" data-muster="doppelmeter" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
             <a href="/projekt-check/" class="einstieg" data-quelle="doppelmeter" onClick="{{ onEinstieg }}">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
           </div>
           <div class="dev">
@@ -1870,7 +1905,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;line-height:1.12;letter-spacing:-0.02em;margin:0 0 16px">Doppelmeter</h2>
           <p style="font-size:16px;line-height:1.6;color:var(--text-2);margin:0 0 16px;text-wrap:pretty">Ausgangslage: Schreinerei mit eigener Werkstatt, bisher ohne Website, Anfragen nur über Empfehlung. Ziel: Der Besucher soll anrufen. Entscheidung: Die Telefonnummer steht in jedem Bildschirm sichtbar, Küchen, Schränke und Werkstatt haben je eine eigene Seite, alles andere ordnet sich darunter.</p>
           <p style="font-size:13px;line-height:1.7;color:var(--tinte);margin:0 0 20px"><span style="white-space:nowrap">Ladezeit {{ ladezeitDm }}</span> · <span style="white-space:nowrap">5 Seiten</span> · <span style="white-space:nowrap">Paket Standard</span></p>
-          <a class="btn btn-primaer" href="/musterprojekte/doppelmeter/" data-title="Doppelmeter" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
+          <a class="btn btn-primaer" href="/musterprojekte/doppelmeter/" data-title="Schreinerei Doppelmeter" data-muster="doppelmeter" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
             <a href="/projekt-check/" class="einstieg" data-quelle="doppelmeter" onClick="{{ onEinstieg }}">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
         </div>
       </div>
@@ -1899,8 +1934,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             </ul>
             <p style="font-size:13px;line-height:1.6;color:var(--grund);margin:0 0 8px"><span style="white-space:nowrap">Ladezeit {{ ladezeitFl }}</span> · <span style="white-space:nowrap">6 Seiten</span> · <span style="white-space:nowrap">Paket Pro</span></p>
             <p style="font-size:13px;line-height:1.6;color:rgba(246,245,241,0.75);margin:0 0 24px;max-width:680px">{{ firstlichtMessung }} Rechner, Szene, Baukasten und Monitoring gehen über das Paket Pro hinaus und sind individuelle Erweiterungen, Preis nach Aufwand. Zweite Sprache und selbst bearbeitbare Texte gehören zum Paket Pro, sind im Muster aber nicht gezeigt.</p>
-            <a class="btn btn-primaer" href="/musterprojekte/firstlicht/" data-title="Firstlicht" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
-            <p style="margin:12px 0 0"><a href="/musterprojekte/firstlicht/?erklaeren=1" data-title="Firstlicht mit Erklärungen" onClick="{{ openMuster }}" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--akzent)">Mit Erklärungen ansehen</a></p>
+            <a class="btn btn-primaer" href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
+            <p style="margin:12px 0 0"><a href="/musterprojekte/firstlicht/?erklaeren=1" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--akzent)">Mit Erklärungen ansehen</a></p>
             <a href="/projekt-check/" class="einstieg" data-quelle="firstlicht" onClick="{{ onEinstieg }}" style="color:var(--akzent)">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
           </div>
           <div class="dev">
@@ -1909,9 +1944,17 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               <button type="button" role="radio" aria-checked="{{ devDeskSel }}" onClick="{{ setDevDesk }}" style="position:relative;min-height:48px;padding:0 24px;background:none;border:none;border-radius:999px;font-size:16px;font-weight:600;color:{{ devDeskColorDunkel }};cursor:pointer">Desktop</button>
               <button type="button" role="radio" aria-checked="{{ devMobSel }}" onClick="{{ setDevMob }}" style="position:relative;min-height:48px;padding:0 24px;background:none;border:none;border-radius:999px;font-size:16px;font-weight:600;color:{{ devMobColorDunkel }};cursor:pointer">Handy</button>
             </div>
-            <div style="position:relative;margin:0 auto;max-width:{{ devMax }};border:8px solid #2a2d38;border-radius:24px;background:var(--tinte);overflow:hidden;aspect-ratio:{{ devAR }};transition:aspect-ratio 320ms ease-in-out,max-width 320ms ease-in-out">
-<span class="bild" role="img" aria-label="Musterprojekt Firstlicht Solartechnik, {{ mpGeraet }}" style="position:absolute;inset:0;background-image:url({{ mpBildFl }})"></span>
-            </div>
+            <a class="werk-link" href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}" aria-label="Musterprojekt Firstlicht Solartechnik ansehen, {{ mpGeraet }}">
+<sc-if value="{{ devDeskSel }}" hint-placeholder-val="{{ true }}">
+              <div class="rahmen-browser rahmen--dunkel">
+                <div class="rahmen-leiste" aria-hidden="true"><span class="rahmen-punkte"><i></i><i></i><i></i></span><span class="rahmen-adresse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>odera.ch/musterprojekte/firstlicht</span></span><span></span></div>
+                <span class="bild" role="img" aria-label="Musterprojekt Firstlicht Solartechnik, Ansicht Computer" style="aspect-ratio:1120/630;background-image:url(assets/img/muster-firstlicht-desktop.webp)"></span>
+              </div>
+</sc-if>
+<sc-if value="{{ devMobSel }}" hint-placeholder-val="{{ false }}">
+              <div class="rahmen-handy rahmen--dunkel" style="max-width:280px;margin:0 auto"><div class="rahmen-schirm"><span class="rahmen-insel" aria-hidden="true"></span><span class="bild" role="img" aria-label="Musterprojekt Firstlicht Solartechnik, Ansicht Handy" style="aspect-ratio:300/585;background-image:url(assets/img/muster-firstlicht-handy.webp)"></span></div></div>
+</sc-if>
+            </a>
           </div>
         </div>
         <div class="mp-card">
@@ -1920,16 +1963,22 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <button type="button" role="radio" aria-checked="{{ devDeskSel }}" onClick="{{ setDevDesk }}" style="position:relative;min-height:44px;padding:0 20px;background:none;border:none;border-radius:999px;font-size:16px;font-weight:600;color:{{ devDeskColorDunkel }};cursor:pointer">Desktop</button>
             <button type="button" role="radio" aria-checked="{{ devMobSel }}" onClick="{{ setDevMob }}" style="position:relative;min-height:44px;padding:0 20px;background:none;border:none;border-radius:999px;font-size:16px;font-weight:600;color:{{ devMobColorDunkel }};cursor:pointer">Handy</button>
           </div>
-          <div style="position:relative;aspect-ratio:{{ cardAR }};max-width:{{ cardBoxMax }};margin:0 auto;overflow:hidden;border:1px solid rgba(246,245,241,0.2);border-radius:16px;background:var(--tinte);transition:aspect-ratio 320ms ease-in-out">
-<span class="bild" role="img" aria-label="Musterprojekt Firstlicht Solartechnik, {{ mpGeraet }}" style="position:absolute;inset:0;background-image:url({{ mpBildFl }})"></span>
+<sc-if value="{{ devDeskSel }}" hint-placeholder-val="{{ true }}">
+          <div class="rahmen-browser rahmen--dunkel">
+            <div class="rahmen-leiste" aria-hidden="true"><span class="rahmen-punkte"><i></i><i></i><i></i></span><span class="rahmen-adresse"><span>odera.ch/…/firstlicht</span></span><span></span></div>
+            <span class="bild" role="img" aria-label="Musterprojekt Firstlicht Solartechnik, Ansicht Computer" style="aspect-ratio:1120/630;background-image:url(assets/img/muster-firstlicht-desktop.webp)"></span>
           </div>
+</sc-if>
+<sc-if value="{{ devMobSel }}" hint-placeholder-val="{{ false }}">
+          <div class="rahmen-handy rahmen--dunkel" style="max-width:240px;margin:0 auto"><div class="rahmen-schirm"><span class="rahmen-insel" aria-hidden="true"></span><span class="bild" role="img" aria-label="Musterprojekt Firstlicht Solartechnik, Ansicht Handy" style="aspect-ratio:300/585;background-image:url(assets/img/muster-firstlicht-handy.webp)"></span></div></div>
+</sc-if>
           <p class="mono" style="font-size:13px;color:rgba(246,245,241,0.7);margin:20px 0 8px">02</p>
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;line-height:1.12;letter-spacing:-0.02em;margin:0 0 16px;color:var(--grund)">Firstlicht</h2>
           <p style="font-size:16px;line-height:1.6;color:rgba(246,245,241,0.88);margin:0 0 16px;text-wrap:pretty">Ausgangslage, erfunden: Ein Solarinstallateur beantwortet am Telefon immer wieder dieselben Fragen. Lösung: Ein Rechner mit offenen Annahmen und Quellen, dessen Ergebnis direkt in die Anfrage wandert.</p>
           <p style="font-size:13px;line-height:1.7;color:var(--grund);margin:0 0 8px"><span style="white-space:nowrap">Ladezeit {{ ladezeitFl }}</span> · <span style="white-space:nowrap">6 Seiten</span> · <span style="white-space:nowrap">Paket Pro</span></p>
           <p style="font-size:13px;line-height:1.6;color:rgba(246,245,241,0.75);margin:0 0 20px">{{ firstlichtMessung }} Rechner, Szene, Baukasten und Monitoring sind individuelle Erweiterungen. Zweite Sprache und selbst bearbeitbare Texte gehören zu Pro, sind hier nicht gezeigt.</p>
-          <a class="btn btn-primaer" href="/musterprojekte/firstlicht/" data-title="Firstlicht" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
-          <p style="margin:12px 0 0"><a href="/musterprojekte/firstlicht/?erklaeren=1" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--akzent)">Mit Erklärungen ansehen</a></p>
+          <a class="btn btn-primaer" href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
+          <p style="margin:12px 0 0"><a href="/musterprojekte/firstlicht/?erklaeren=1" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--akzent)">Mit Erklärungen ansehen</a></p>
           <a href="/projekt-check/" class="einstieg" data-quelle="firstlicht" onClick="{{ onEinstieg }}" style="color:var(--akzent)">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
         </div>
       </div>
@@ -1949,7 +1998,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 24px">Portfolio</h2>
             <p style="font-size:16px;line-height:1.65;color:var(--text-2);margin:0 0 24px;max-width:680px;text-wrap:pretty">Ausgangslage: Ein persönlicher Auftritt, der auffallen darf. Ziel: Im Kopf bleiben. Entscheidung: Farbe, Bewegung und ein Aufbau, der bewusst mit den Regeln bricht, die für Firmenseiten gelten.</p>
             <p style="font-size:13px;line-height:1.6;color:var(--tinte);margin:0 0 12px"><span style="white-space:nowrap">Ladezeit {{ ladezeitPf }}</span> · <span style="white-space:nowrap">Einzelseite</span> · <span style="white-space:nowrap">Eigenprojekt</span> · <span style="white-space:nowrap">live auf nico-bodmer.ch</span></p>
-            <a class="btn btn-primaer" href="/muster/portfolio.html" data-title="Portfolio" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
+            <a class="btn btn-primaer" href="/muster/portfolio.html" data-title="Portfolio Nico Bodmer" data-muster="portfolio" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
             <p style="margin:0"><a href="https://nico-bodmer.ch" target="_blank" rel="noopener" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--primaer-dunkel)">Oder direkt zur Originalseite: nico-bodmer.ch</a></p>
           </div>
           <div class="dev">
@@ -1976,7 +2025,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;line-height:1.12;letter-spacing:-0.02em;margin:0 0 16px">Portfolio</h2>
           <p style="font-size:16px;line-height:1.6;color:var(--text-2);margin:0 0 16px;text-wrap:pretty">Ausgangslage: Ein persönlicher Auftritt, der auffallen darf. Ziel: Im Kopf bleiben. Entscheidung: Farbe, Bewegung und ein Aufbau, der bewusst mit den Regeln bricht, die für Firmenseiten gelten.</p>
           <p style="font-size:13px;line-height:1.7;color:var(--tinte);margin:0 0 20px"><span style="white-space:nowrap">Ladezeit {{ ladezeitPf }}</span> · <span style="white-space:nowrap">Einzelseite</span> · <span style="white-space:nowrap">Eigenprojekt</span> · <span style="white-space:nowrap">live auf nico-bodmer.ch</span></p>
-          <a class="btn btn-primaer" href="/muster/portfolio.html" data-title="Portfolio" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
+          <a class="btn btn-primaer" href="/muster/portfolio.html" data-title="Portfolio Nico Bodmer" data-muster="portfolio" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
             <p style="margin:12px 0 0"><a href="https://nico-bodmer.ch" target="_blank" rel="noopener" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--primaer-dunkel)">Oder direkt zur Originalseite: nico-bodmer.ch</a></p>
         </div>
       </div>
@@ -2833,12 +2882,17 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 
 <sc-if value="{{ musterOpen }}" hint-placeholder-val="{{ false }}">
 <div role="dialog" aria-modal="true" aria-label="{{ musterTitle }}" style="position:fixed;inset:0;z-index:90;background:var(--tinte);display:flex;flex-direction:column;animation:fade 160ms linear">
-  <div class="mp-ovbar" style="flex:none;height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 16px;background:var(--tinte)">
-    <span class="mp-ovtxt" style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;color:var(--linie-stark)">{{ musterTitle }} · schliessen mit Escape</span>
-    <span style="flex:none;display:flex;align-items:center;gap:8px">
-      <a href="{{ musterSrc }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:44px;padding:0 14px;color:var(--grund);font-size:16px">In neuem Tab öffnen</a>
-      <button type="button" onClick="{{ closeMuster }}" style="flex:none;min-height:44px;padding:0 18px;background:none;border:1px solid rgba(246,245,241,0.35);border-radius:999px;color:var(--grund);font-size:16px;cursor:pointer">Schliessen</button>
-    </span>
+  <div class="mp-ovbar">
+    <div class="mp-ovinfo">
+      <span class="mp-ovtitel">{{ musterTitle }}</span>
+      <sc-if value="{{ musterHinweis }}" hint-placeholder-val="{{ true }}"><span class="mp-ovtxt">Beispielseite von ODERA Design. Der Betrieb ist frei erfunden.</span></sc-if>
+    </div>
+    <div class="mp-ovaktionen">
+      <sc-if value="{{ musterErklaeren }}" hint-placeholder-val="{{ false }}"><button type="button" class="mp-ovknopf" aria-pressed="{{ musterErklaertAn }}" onClick="{{ toggleErklaeren }}"><span class="mp-ovspur" aria-hidden="true"></span>Erklärungen</button></sc-if>
+      <sc-if value="{{ musterHinweis }}" hint-placeholder-val="{{ true }}"><a class="mp-ovknopf mp-ovcheck" href="{{ musterCheckHref }}" onClick="{{ onMusterCheck }}">Projekt-Check</a></sc-if>
+      <a class="mp-ovknopf mp-ovicon" href="{{ musterSrc }}" target="_blank" rel="noopener" aria-label="In neuem Tab öffnen" title="In neuem Tab öffnen"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+      <button type="button" class="mp-ovknopf mp-ovknopf--rand mp-ovzu" onClick="{{ closeMuster }}">Schliessen<kbd class="mp-ovkbd" aria-hidden="true">Esc</kbd></button>
+    </div>
   </div>
   <div style="flex:1;position:relative;background:var(--flaeche)">
     <div class="mp-rahmen" style="position:absolute;inset:0"></div>
@@ -3364,7 +3418,7 @@ class Component extends DCLogic {
     this.onKey = (e) => {
       const tag = (e.target.tagName || '').toLowerCase();
       const typing = tag === 'input' || tag === 'textarea';
-      if (e.key === 'Escape' && this.state.muster) { this.setState({ muster: null }); e.preventDefault(); return; }
+      if (e.key === 'Escape' && this.state.muster) { this.musterZu(); e.preventDefault(); return; }
       if (this.state.menu && e.key === 'Escape') { this.menueZu(true); e.preventDefault(); return; }
       if (this.state.menu && e.key === 'Tab' && window.innerWidth < 1024) {
         // Fokus bleibt im Menü: Menü-Knopf im Kopf und alle Einträge
@@ -3717,6 +3771,68 @@ class Component extends DCLogic {
       t.finished.catch(() => {}).finally(() => { ausloeser.style.viewTransitionName = ''; this.setState({ vtAktiv: false }); });
     } else los();
   }
+
+  // Musterprojekt-Overlay schliessen, Fokus zurück auf den Link, der es geöffnet hat
+  musterZu = () => {
+    const a = this.musterAusloeser;
+    this.musterAusloeser = null;
+    this.setState({ muster: null }, () => { if (a && a.isConnected) a.focus({ preventScroll: true }); });
+  };
+
+  // Escape im Muster: Der Fokus liegt im iframe, darum hört odera.ch dort mit (gleiche Herkunft).
+  // Regel «innen zuerst»: Ist im Muster etwas offen (Dialog, Menü, Popover, Erklär-Blase, Ergebnisblatt),
+  // schliesst Escape zuerst das. Erst das nächste Escape schliesst das Overlay.
+  musterRahmenVerbinden(f) {
+    let w, d;
+    try { w = f.contentWindow; d = w.document; } catch (err) { return; }
+    if (!w || !d || w.__oderaRahmen) return;
+    w.__oderaRahmen = true;
+    const OFFEN = 'dialog[open], .glossar-pop.ist-offen, .erklaer-blase, #ergebnis-blatt:not([hidden]), [aria-controls="hauptnav"][aria-expanded="true"]';
+    let offen = false;
+    w.addEventListener('keydown', (ev) => {
+      if (ev.key !== 'Escape') return;
+      let pop = false;
+      try { pop = !!d.querySelector(':popover-open'); } catch (err) { pop = false; }
+      offen = pop || !!d.querySelector(OFFEN);
+    }, true);
+    w.addEventListener('keydown', (ev) => {
+      if (ev.key !== 'Escape' || offen || ev.defaultPrevented || !this.state.muster) return;
+      ev.preventDefault();
+      this.musterZu();
+    });
+    // Erklär-Schalter: Zustand nach jedem Klick im Muster übernehmen (z. B. «Ausblenden» im Panel)
+    d.addEventListener('click', () => setTimeout(() => this.musterErklaerLesen(), 0), true);
+    this.musterErklaerLesen();
+    // Verschachtelte Rahmen derselben Herkunft (Portfolio-Muster). Sie entstehen teils erst nach dem Laden.
+    const innen = (i) => {
+      if (i.__oderaInnen) return;
+      i.__oderaInnen = true;
+      i.addEventListener('load', () => this.musterRahmenVerbinden(i));
+      try { if (i.contentDocument && i.contentDocument.readyState === 'complete') this.musterRahmenVerbinden(i); } catch (err) { /* fremde Herkunft */ }
+    };
+    d.querySelectorAll('iframe').forEach(innen);
+    if (w.MutationObserver && d.body) new w.MutationObserver(() => d.querySelectorAll('iframe').forEach(innen)).observe(d.body, { childList: true, subtree: true });
+  }
+
+  musterSchalter() {
+    const f = [...document.querySelectorAll('[role=dialog] .mp-rahmen iframe')].find((x) => x.getClientRects().length);
+    try { return f ? f.contentDocument.querySelector('[data-erklaeren-schalter]') : null; } catch (err) { return null; }
+  }
+
+  musterErklaerLesen() {
+    const b = this.musterSchalter();
+    const m = this.state.muster;
+    if (!b || !m) return;
+    const an = b.getAttribute('aria-pressed') === 'true';
+    if (m.erklaert !== an) this.setState({ muster: { ...m, erklaert: an } });
+  }
+
+  // Schalter «Erklärungen» in der Overlay-Leiste bedient den Schalter im Muster
+  musterErklaeren = () => {
+    const b = this.musterSchalter();
+    if (b) b.click();
+    this.musterErklaerLesen();
+  };
 
   // Link mit data-quelle: startet den Check mit der passenden Vorbelegung (Strg/Cmd-Klick öffnet normal)
   onEinstieg = (e) => {
@@ -4366,7 +4482,6 @@ class Component extends DCLogic {
 
       mpBildDm: s.device === 'mobile' ? 'assets/img/muster-doppelmeter-handy.webp' : 'assets/img/muster-doppelmeter-desktop.webp',
       mpBildPf: s.device === 'mobile' ? 'assets/img/muster-portfolio-handy.webp' : 'assets/img/muster-portfolio-desktop-16x9.webp',
-      mpBildFl: s.device === 'mobile' ? 'assets/img/muster-firstlicht-handy.webp' : 'assets/img/muster-firstlicht-desktop.webp',
       mpGeraet: s.device === 'mobile' ? 'Ansicht Handy' : 'Ansicht Computer',
       devAR: s.device === 'mobile' ? '9 / 16' : '16 / 9',
       devMax: s.device === 'mobile' ? '320px' : '640px',
@@ -4379,8 +4494,11 @@ class Component extends DCLogic {
       openMuster: (e) => {
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button > 0 || window.innerWidth < 768) return;
         e.preventDefault();
-        const src = e.currentTarget.getAttribute('href');
-        this.setState({ muster: { src, title: e.currentTarget.dataset.title, geladen: false } });
+        const a = e.currentTarget;
+        const src = a.getAttribute('href');
+        this.musterAusloeser = a;
+        this.setState({ muster: { src, title: a.dataset.title, art: a.dataset.muster || '', erklaert: /[?&]erklaeren=1/.test(src), geladen: false } },
+          () => requestAnimationFrame(() => { const zu = [...document.querySelectorAll('[role=dialog] .mp-ovzu')].find((b) => b.getClientRects().length); if (zu) zu.focus(); }));
         // Das iframe entsteht erst hier, sonst lädt die rohe Vorlage ihre unaufgelöste Adresse. Der load-Listener hängt vor src.
         const fertig = () => { if (this.state.muster && this.state.muster.src === src && !this.state.muster.geladen) this.setState({ muster: { ...this.state.muster, geladen: true } }); };
         const titel = e.currentTarget.dataset.title;
@@ -4390,7 +4508,8 @@ class Component extends DCLogic {
           const f = document.createElement('iframe');
           f.title = titel;
           f.style.cssText = 'width:100%;height:100%;border:0;background:var(--flaeche);opacity:0;transition:opacity 160ms linear';
-          f.addEventListener('load', () => { f.style.opacity = '1'; fertig(); }, { once: true });
+          // Bei jedem Laden (auch Navigation im Muster): Escape und Erklär-Schalter neu verbinden
+          f.addEventListener('load', () => { f.style.opacity = '1'; fertig(); this.musterRahmenVerbinden(f); });
           f.src = src;
           rahmen.replaceChildren(f);
         };
@@ -4403,7 +4522,18 @@ class Component extends DCLogic {
       ladezeitFl: this.LADEZEIT.firstlicht,
       firstlichtMessung: this.LADEZEIT.firstlichtMessung,
       ladezeitNotiz: this.LADEZEIT.notiz,
-      closeMuster: () => this.setState({ muster: null }),
+      closeMuster: this.musterZu,
+      musterHinweis: !!s.muster && (s.muster.art === 'doppelmeter' || s.muster.art === 'firstlicht'),
+      musterErklaeren: !!s.muster && s.muster.art === 'firstlicht',
+      musterErklaertAn: s.muster && s.muster.erklaert ? 'true' : 'false',
+      toggleErklaeren: this.musterErklaeren,
+      musterCheckHref: '/projekt-check/?quelle=' + (s.muster ? s.muster.art : ''),
+      onMusterCheck: (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return;
+        e.preventDefault();
+        const quelle = s.muster ? s.muster.art : '';
+        this.setState({ muster: null }, () => this.checkStarten(quelle));
+      },
       device: s.device,
       devLeft: s.device === 'desktop' ? '4px' : '50%',
       devMobSel: s.device === 'mobile', devDeskSel: s.device === 'desktop',

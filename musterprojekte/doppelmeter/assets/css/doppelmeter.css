@@ -300,6 +300,9 @@ abbr[title] {
    ========================================================================== */
 
 /* Schmale Leiste ganz oben: klar als Beispiel erkennbar */
+/* Im Overlay von odera.ch zeigt die Overlay-Leiste den Hinweis, die eigene Leiste entfällt dort */
+.im-rahmen .beispiel-leiste { display: none; }
+
 .beispiel-leiste {
   background: var(--farbe-tinte);
   color: var(--farbe-grund);

@@ -219,8 +219,8 @@ alte Adresse `/muster/doppelmeter.html` leitet dorthin weiter.
 - Auf odera.ch öffnet «Ganze Seite ansehen» die Seite im Overlay, auf dem Handy
   (bis 700 px Breite) und mit gedrückter Befehls- oder Umschalttaste direkt.
 
-**Aufnahmen neu erzeugen**, wenn sich die Seite ändert (Startseite,
-Musterprojekte und Vorschaubild für geteilte Links zeigen sie):
+**Aufnahmen neu erzeugen**, wenn sich die Seite ändert (Kachel auf der
+Startseite, Musterprojekte und Vorschaubild für geteilte Links zeigen sie):
 
 ```bash
 node tools/screenshots-doppelmeter.mjs
@@ -247,11 +247,33 @@ Seiten **erzeugt**: Vorlagen in `tools/firstlicht/vorlagen/`, bauen mit
 (Aufbau, Annahmen des Rechners jährlich prüfen, Aufnahmen, Ladezeit) steht in
 `musterprojekte/firstlicht/README.md`.
 
-- Auf odera.ch: Abschnitt `#mp-firstlicht` auf der Musterprojekte-Seite und
-  Kachel auf der Startseite. «Mit Erklärungen ansehen» öffnet das Muster mit
-  `?erklaeren=1`. Der Projekt-Check kennt den Einstieg `?quelle=firstlicht`.
-- Aufnahmen: `npm run firstlicht:screens` schreibt `assets/img/muster-firstlicht-*`
-  (hell und dunkel), danach `node tools/seo-build.mjs`.
+- Auf odera.ch: **Hero der Startseite** (Browser- und Handyrahmen, der ganze
+  Rahmen ist ein Link auf das Muster), Abschnitt `#mp-firstlicht` auf der
+  Musterprojekte-Seite und Kachel auf der Startseite. «Mit Erklärungen ansehen»
+  öffnet das Muster mit `?erklaeren=1`. Der Projekt-Check kennt den Einstieg
+  `?quelle=firstlicht`.
+- Aufnahmen: `npm run firstlicht:screens` schreibt `assets/img/muster-firstlicht-desktop`,
+  `-handy` und `-rechner`, danach `node tools/seo-build.mjs`.
+- Geräterahmen: CSS-Klassen `.rahmen-browser` und `.rahmen-handy` in `index.html`,
+  auf dunklem Grund zusätzlich `.rahmen--dunkel`.
+
+## Overlay für Musterprojekte
+
+Links mit `onClick="{{ openMuster }}"` öffnen ein Muster ab 768 px Breite im
+Overlay (iframe), darunter und mit gedrückter Taste direkt. Jeder Link trägt
+`data-title` (Titel in der Leiste) und `data-muster` (`doppelmeter`, `firstlicht`
+oder `portfolio`). Daraus ergibt sich die Leiste: Bei Doppelmeter und Firstlicht
+steht dort der Hinweis «Beispielseite von ODERA Design. Der Betrieb ist frei
+erfunden.» und ein Link zum Projekt-Check, bei Firstlicht zusätzlich der Schalter
+«Erklärungen».
+
+- **Beispiel-Leiste im Overlay:** Die Musterseiten setzen `html.im-rahmen`, wenn
+  sie in diesem Overlay laufen (gleiche Herkunft und `.mp-ovbar` im Elternfenster),
+  und blenden ihre eigene Leiste aus. Direkt aufgerufen oder fremd eingebettet
+  bleibt sie sichtbar.
+- **Escape:** odera.ch hört im iframe mit (`musterRahmenVerbinden`). Ist im Muster
+  etwas offen (Dialog, Menü, Popover, Erklär-Blase), schliesst Escape zuerst das,
+  das nächste Escape das Overlay. Der Fokus geht danach zurück auf den Link.
 - Ladezeit: `LADEZEIT.firstlicht` und `firstlichtMessung` in `index.html`.
 
 ## Generator «Sehen Sie Ihren Betrieb in zehn Sekunden»

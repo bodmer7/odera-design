@@ -8,6 +8,16 @@
 (function () {
   'use strict';
 
+  /* 0. Im Overlay von odera.ch: Die Overlay-Leiste zeigt den Hinweis auf die
+     Beispielseite, die eigene Leiste entfällt dort. Nur bei gleicher Herkunft
+     und vorhandener Overlay-Leiste, sonst bleibt alles wie es ist. */
+  try {
+    if (window.self !== window.top && window.parent.location.origin === location.origin &&
+        window.parent.document.querySelector('.mp-ovbar')) {
+      document.documentElement.classList.add('im-rahmen');
+    }
+  } catch (e) { /* fremde Herkunft: Leiste bleibt sichtbar */ }
+
   /* 1. Menü
      ------------------------------------------------------------------ */
   function menuEinrichten() {

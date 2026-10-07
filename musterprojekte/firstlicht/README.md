@@ -38,7 +38,7 @@ tools/firstlicht/
   check.mjs            Regelprüfung (Leiste, noindex, Striche, ß, Links, Kontaktdaten ...)
   qa.mjs               Browserprüfung (Überlauf 320 bis 1920 px, hell/dunkel, axe, ohne JS, Netzwerk, html-validate)
   lighthouse.mjs       Lighthouse, Median aus drei Läufen
-  screenshots.mjs      Aufnahmen für odera.ch (assets/img/muster-firstlicht-*)
+  screenshots.mjs      Aufnahmen für odera.ch (assets/img/muster-firstlicht-desktop, -handy, -rechner)
   tests/               Unit-Tests für Rechner und Szene
   recherche/           Rohmaterial der Recherche, Namensprüfung
   NOTIZEN.md           Arbeitsnotizen und Entscheide

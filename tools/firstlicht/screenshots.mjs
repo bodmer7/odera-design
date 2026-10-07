@@ -4,11 +4,12 @@
 //
 // Startet einen kleinen Server und Chromium (Playwright), fotografiert die echte Seite und schreibt
 // AVIF und WebP mit festen Grössen nach assets/img/:
-//   muster-firstlicht-desktop[-dunkel]   1120 × 630  Startbildschirm am Computer
-//   muster-firstlicht-handy[-dunkel]      300 × 585  Startbildschirm auf dem Handy
-//   muster-firstlicht-rechner             960 × 495  Solarrechner (Karte auf der Startseite)
-// Die Beispiel-Leiste oben wird abgeschnitten, sie gehört nicht zum Entwurf. Die Szene steht auf
-// Sonnenaufgang im Sommer, damit das erste Licht auf dem First zu sehen ist.
+//   muster-firstlicht-desktop   1120 × 630  Startbildschirm am Computer (Viewport 1536 × 864, doppelt aufgelöst)
+//   muster-firstlicht-handy      300 × 585  Startbildschirm auf dem Handy (Viewport 390 × 760, dreifach aufgelöst)
+//   muster-firstlicht-rechner    960 × 495  Solarrechner (Karte auf der Startseite)
+// Aufgenommen wird nur der sichtbare Bereich, so sitzen Kopf und Handyleiste wie auf einem echten Gerät.
+// Die Beispiel-Leiste wird ausgeblendet, sie gehört nicht zum Entwurf. Die Szene steht auf Sommer, 12 Uhr:
+// volle Produktion, Speicher geladen, Einspeisung.
 
 import { createServer } from 'node:http';
 import { readFileSync, existsSync, statSync } from 'node:fs';
@@ -31,36 +32,39 @@ await new Promise((r) => server.listen(0, '127.0.0.1', r));
 const basis = `http://127.0.0.1:${server.address().port}/musterprojekte/firstlicht/`;
 const browser = await chromium.launch();
 
-async function aufnahme({ pfad, breite, hoehe, faktor, handy, dunkel, zielB, zielH, datei, ausschnittH, morgen, abElement }) {
+async function aufnahme({ pfad, breite, hoehe, faktor, handy, zielB, zielH, datei, mittag, abElement, ausschnittH }) {
   const ctx = await browser.newContext({ viewport: { width: breite, height: hoehe }, deviceScaleFactor: faktor, isMobile: handy, hasTouch: handy,
-    reducedMotion: 'reduce', colorScheme: dunkel ? 'dark' : 'light' });
+    reducedMotion: 'reduce', colorScheme: 'light' });
   const p = await ctx.newPage();
   await p.goto(basis + pfad, { waitUntil: 'networkidle' });
   await p.evaluate(() => document.fonts.ready);
-  if (morgen) {
+  // Beispiel-Leiste per CSSOM ausblenden (addStyleTag blockiert die CSP der Seite)
+  await p.evaluate(() => { const l = document.querySelector('.beispiel-leiste'); if (l) l.style.display = 'none'; });
+  if (mittag) {
     await p.evaluate(() => {
       const r = document.querySelector('[data-szene-zeit]');
-      if (r) { r.value = '6.25'; r.dispatchEvent(new Event('input', { bubbles: true })); }
+      if (r) { r.value = '12'; r.dispatchEvent(new Event('input', { bubbles: true })); }
     });
   }
-  await p.waitForTimeout(500);
-  const leiste = await p.evaluate(() => Math.round(document.querySelector('.beispiel-leiste').getBoundingClientRect().height));
-  const start = abElement ? await p.evaluate((s) => Math.round(document.querySelector(s).getBoundingClientRect().top + scrollY - 24), abElement) : leiste;
-  const png = await p.screenshot({ clip: { x: 0, y: start, width: breite, height: ausschnittH }, type: 'png', fullPage: true });
+  await p.waitForTimeout(600);
+  let png;
+  if (abElement) {
+    const start = await p.evaluate((s) => Math.round(document.querySelector(s).getBoundingClientRect().top + scrollY - 24), abElement);
+    png = await p.screenshot({ clip: { x: 0, y: start, width: breite, height: ausschnittH }, type: 'png', fullPage: true });
+  } else {
+    png = await p.screenshot({ type: 'png' });
+  }
   await ctx.close();
   const bild = sharp(png).resize(zielB, zielH, { fit: 'cover', position: 'top' });
-  const webp = await bild.clone().webp({ quality: 72, effort: 6 }).toFile(join(ZIEL, `${datei}.webp`));
-  const avif = await bild.clone().avif({ quality: 52, effort: 6 }).toFile(join(ZIEL, `${datei}.avif`));
+  const webp = await bild.clone().webp({ quality: 78, effort: 6 }).toFile(join(ZIEL, `${datei}.webp`));
+  const avif = await bild.clone().avif({ quality: 56, effort: 6 }).toFile(join(ZIEL, `${datei}.avif`));
   console.log(`assets/img/${datei}`.padEnd(46), `${zielB} × ${zielH}`, `webp ${Math.round(webp.size / 1024)} KB`, `avif ${Math.round(avif.size / 1024)} KB`);
 }
 
 try {
-  for (const dunkel of [false, true]) {
-    const s = dunkel ? '-dunkel' : '';
-    await aufnahme({ pfad: 'index.html', breite: 1280, hoehe: 800, faktor: 1, handy: false, dunkel, zielB: 1120, zielH: 630, datei: `muster-firstlicht-desktop${s}`, ausschnittH: 720, morgen: true });
-    await aufnahme({ pfad: 'index.html', breite: 390, hoehe: 844, faktor: 2, handy: true, dunkel, zielB: 300, zielH: 585, datei: `muster-firstlicht-handy${s}`, ausschnittH: 760, morgen: true });
-  }
-  await aufnahme({ pfad: 'rechner.html?f=75&sk=1', breite: 1280, hoehe: 900, faktor: 1, handy: false, dunkel: false, zielB: 960, zielH: 495, datei: 'muster-firstlicht-rechner', ausschnittH: 660, abElement: '.rechner' });
+  await aufnahme({ pfad: 'index.html', breite: 1536, hoehe: 864, faktor: 2, handy: false, zielB: 1120, zielH: 630, datei: 'muster-firstlicht-desktop', mittag: true });
+  await aufnahme({ pfad: 'index.html', breite: 390, hoehe: 760, faktor: 3, handy: true, zielB: 300, zielH: 585, datei: 'muster-firstlicht-handy', mittag: true });
+  await aufnahme({ pfad: 'rechner.html?f=75&sk=1', breite: 1280, hoehe: 900, faktor: 1, handy: false, zielB: 960, zielH: 495, datei: 'muster-firstlicht-rechner', ausschnittH: 660, abElement: '.rechner' });
 } finally {
   await browser.close();
   server.close();

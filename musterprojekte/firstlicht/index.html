@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sraybxdT4iY2q8aa3ciJJ+1px5AFdnOq6Fddu62ObhE='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-fj3M5u+zBXDtvEYf53Md9IK5BKsrJtMLYrQGVM7zcCQ='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Firstlicht Solartechnik | Solaranlagen im Freiamt, Reusstal und Limmattal</title>
   <meta name="description" content="Beispielseite von ODERA Design. Die erfundene Firstlicht Solartechnik plant und montiert Solaranlagen, Speicher und Ladestationen. Mit Solarrechner und ehrlichen Zahlen.">
@@ -25,7 +25,7 @@
   <link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
   <!-- Theme vor dem ersten Zeichnen setzen, damit nichts flackert -->
-  <script>(function(){var d=document.documentElement,t;d.className+=' js';try{t=localStorage.getItem('firstlicht-theme')}catch(e){}if(t!=='hell'&&t!=='dunkel')t=matchMedia('(prefers-color-scheme: dark)').matches?'dunkel':'hell';d.setAttribute('data-theme',t)})();</script>
+  <script>(function(){var d=document.documentElement,t;d.className+=' js';try{t=localStorage.getItem('firstlicht-theme')}catch(e){}if(t!=='hell'&&t!=='dunkel')t=matchMedia('(prefers-color-scheme: dark)').matches?'dunkel':'hell';d.setAttribute('data-theme',t);try{if(window.self!==window.top&&window.parent.location.origin===location.origin&&window.parent.document.querySelector('.mp-ovbar'))d.className+=' im-rahmen'}catch(e){}})();</script>
   <link rel="preload" href="assets/fonts/schibsted-grotesk-600-800-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/firstlicht.css">
 </head>

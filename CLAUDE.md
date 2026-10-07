@@ -18,6 +18,8 @@ Beispielseiten erfundener Betriebe (Doppelmeter, Firstlicht). Für jedes Muster 
   ist frei erfunden.») mit Link zurück zu odera.ch und zum Projekt-Check
   (`?quelle=<muster>`, passender Eintrag in `EINSTIEGE` in `index.html`).
   Hinweis im Fuss wiederholen.
+- Im Overlay von odera.ch blenden die Muster ihre Beispiel-Leiste aus (`html.im-rahmen`),
+  die Overlay-Leiste zeigt dann den Hinweis. Neue Muster brauchen dieselbe Erkennung.
 - `noindex`, nicht in der Sitemap. `seo-build` lässt `musterprojekte/<name>/` stehen.
 - Nur erfundene Kontaktdaten. Keine Bewertungen, Sterne, Zitate, Labels,
   Zertifikate, Verbände oder Herstellermarken. Keine erkennbaren Gesichter,
