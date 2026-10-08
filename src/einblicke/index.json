@@ -1,26 +1,4 @@
 {
   "v": 1,
-  "artikel": [
-    {
-      "slug": "test-tel-oben",
-      "titel": "Telefonnummer ganz oben, zum Antippen",
-      "beschreibung": "Ihre Telefonnummer gehört ganz nach oben. Immer. Wer Ihre Website auf dem Handy öffnet, will meistens eines: Sie erreichen. Steht die Nummer erst ganz…",
-      "anriss": "Ihre Telefonnummer gehört ganz nach oben. Immer. Wer Ihre Website auf dem Handy öffnet, will meistens eines: Sie erreichen. Steht die Nummer erst ganz unten in der Fusszeile, scrollen viele gar nicht so weit.",
-      "datum": "2026-10-08",
-      "geaendert": "2026-10-08T16:21:01Z",
-      "rubrik": "Praxis-Tipp",
-      "bild": {
-        "datei": "titelbild.webp",
-        "typ": "image/webp",
-        "breite": 1080,
-        "hoehe": 1350,
-        "alt": "Bildkarte von ODERA Design mit der Aussage: Telefonnummer ganz oben, zum Antippen"
-      },
-      "vorschau": {
-        "datei": "vorschau.jpg",
-        "breite": 1200,
-        "hoehe": 630
-      }
-    }
-  ]
+  "artikel": []
 }
