@@ -5,6 +5,9 @@
 name = "odera-stats"
 main = "src/index.js"
 compatibility_date = "2026-09-01"
+# Erreichbar unter odera-stats.odera-chat-proxy.workers.dev, ohne Vorschau-Adressen für einzelne Versionen
+workers_dev = true
+preview_urls = false
 
 # Keine dauerhaften Protokolle. Live mitlesen: npx wrangler tail
 [observability]
