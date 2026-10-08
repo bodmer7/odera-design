@@ -1,0 +1,83 @@
+{
+  "v": 1,
+  "slug": "erst-der-entwurf-dann-die-entscheidung",
+  "titel": "Erst der Entwurf, dann die Entscheidung",
+  "beschreibung": "Warum ich zuerst arbeite und erst dann eine Rechnung schreibe. Bei mir sehen Sie den ersten Entwurf Ihrer Website, bevor Sie sich für irgendetwas…",
+  "anriss": "Warum ich zuerst arbeite und erst dann eine Rechnung schreibe. Bei mir sehen Sie den ersten Entwurf Ihrer Website, bevor Sie sich für irgendetwas entscheiden. Gefällt er Ihnen nicht, zahlen Sie nichts.",
+  "datum": "2026-10-09",
+  "geaendert": "2026-10-08T17:14:00Z",
+  "saeule": "haltung",
+  "rubrik": "Persönlich und Haltung",
+  "thema_id": "zuerst-arbeiten",
+  "kurz": [
+    "Entwurf innert 5 Arbeitstagen",
+    "Keine Anzahlung",
+    "Bezahlt wird erst nach der Freigabe"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Warum mir das wichtig ist",
+      "absaetze": [
+        "Bei mir sehen Sie den ersten Entwurf Ihrer Website, bevor Sie sich für irgendetwas entscheiden. Gefällt er Ihnen nicht, zahlen Sie nichts. Das ist ein bewusster Entscheid.",
+        "Kleine Betriebe sollen nicht im Voraus zahlen müssen, nur um zu sehen, ob die Zusammenarbeit passt. Das Risiko, dass mein Entwurf nicht trifft, trage ich, nicht Sie.",
+        "Für mich gehört das zu einem fairen Umgang mit kleinen Betrieben. Sie tragen schon genug Risiko, da soll die Website nicht noch eines dazu sein."
+      ]
+    },
+    {
+      "titel": "Was das konkret heisst",
+      "absaetze": [
+        "Diese Grundsätze gelten für jedes Projekt, unabhängig von Paket und Branche. So wissen Sie schon vor dem ersten Gespräch, woran Sie sind."
+      ],
+      "punkte": [
+        {
+          "titel": "Entwurf innert 5 Arbeitstagen",
+          "text": "Der Entwurf entsteht innert 5 Arbeitstagen nach Ihren Angaben. So sehen Sie schnell, ob die Richtung stimmt."
+        },
+        {
+          "titel": "Keine Anzahlung",
+          "text": "Es gibt keine Anzahlung. Sie gehen mit dem Projekt-Check keine Verpflichtung ein."
+        },
+        {
+          "titel": "Bezahlt wird erst nach der Freigabe",
+          "text": "Bezahlt wird erst nach Ihrer Freigabe, einmal und zum vereinbarten Fixpreis."
+        }
+      ],
+      "nach": [
+        "Ich teile solche Gedanken hier, weil sie meine Entscheidungen erklären. Und weil ich überzeugt bin, dass kleine Betriebe einen ehrlichen Partner verdienen."
+      ]
+    },
+    {
+      "titel": "Was das für eine Zusammenarbeit heisst",
+      "absaetze": [
+        "Wenn Sie mit mir arbeiten, sehen Sie den Entwurf Ihrer neuen Website, bevor Sie etwas bezahlen. Der Preis steht vorher fest, und Sie entscheiden in Ruhe. Passt es nicht, ist das in Ordnung. Mir ist wichtig, dass Sie diese Regeln kennen, bevor wir überhaupt miteinander sprechen."
+      ]
+    },
+    {
+      "titel": "Was Sie daraus mitnehmen können",
+      "absaetze": [
+        "Fragen Sie bei einem Angebot, wann Sie zum ersten Mal ein konkretes Ergebnis sehen und wann Sie zahlen müssen. Je früher Sie etwas sehen und je später Sie zahlen, desto kleiner ist Ihr Risiko.",
+        "Ich lerne bei jedem Projekt dazu. Manche Regeln habe ich erst nach einigen Aufträgen so klar formuliert, wie sie heute auf meiner Website stehen.",
+        "Wie sehen Sie das: Würden Sie lieber zuerst sehen und dann entscheiden?"
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 6 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Erst der Entwurf, dann die Entscheidung"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}

@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "erst-der-entwurf-dann-die-entscheidung",
+      "titel": "Erst der Entwurf, dann die Entscheidung",
+      "beschreibung": "Warum ich zuerst arbeite und erst dann eine Rechnung schreibe. Bei mir sehen Sie den ersten Entwurf Ihrer Website, bevor Sie sich für irgendetwas…",
+      "anriss": "Warum ich zuerst arbeite und erst dann eine Rechnung schreibe. Bei mir sehen Sie den ersten Entwurf Ihrer Website, bevor Sie sich für irgendetwas entscheiden. Gefällt er Ihnen nicht, zahlen Sie nichts.",
+      "datum": "2026-10-09",
+      "geaendert": "2026-10-08T17:14:00Z",
+      "rubrik": "Persönlich und Haltung",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: Erst der Entwurf, dann die Entscheidung"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "33-von-65-geprueften-websites-ohne-kontakt-knopf-im-ersten",
       "titel": "33 von 65 geprüften Websites ohne Kontakt-Knopf im ersten Handy-Bildschirm",
       "beschreibung": "Was ich auf 65 geprüften Websites gesehen habe. Bevor ich einem Betrieb schreibe, prüfe ich seine Website mit einer festen Checkliste, auf dem Handy und…",
