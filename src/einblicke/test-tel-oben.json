@@ -1,0 +1,84 @@
+{
+  "v": 1,
+  "slug": "test-tel-oben",
+  "titel": "Telefonnummer ganz oben, zum Antippen",
+  "beschreibung": "Ihre Telefonnummer gehört ganz nach oben. Immer. Wer Ihre Website auf dem Handy öffnet, will meistens eines: Sie erreichen. Steht die Nummer erst ganz…",
+  "anriss": "Ihre Telefonnummer gehört ganz nach oben. Immer. Wer Ihre Website auf dem Handy öffnet, will meistens eines: Sie erreichen. Steht die Nummer erst ganz unten in der Fusszeile, scrollen viele gar nicht so weit.",
+  "datum": "2026-10-08",
+  "geaendert": "2026-10-08T16:21:01Z",
+  "saeule": "praxis",
+  "rubrik": "Praxis-Tipp",
+  "thema_id": "tel-oben",
+  "kurz": [
+    "Nummer oben rechts, als Link zum Antippen",
+    "Auf dem Handy eine feste Leiste mit «Anrufen»",
+    "Daneben ein zweiter Weg, zum Beispiel ein kurzes Formular"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Warum das wichtig ist",
+      "absaetze": [
+        "Ich sehe das bei Handwerkern, Praxen und Restaurants immer wieder. Die Seite ist schön, aber der wichtigste Knopf fehlt im ersten Bildschirm.",
+        "Die meisten Anfragen bei kleinen Betrieben beginnen mit einem Anruf. Wer eine Website auf dem Handy öffnet, ist oft unterwegs, hat wenig Zeit und will eine Frage schnell klären. Muss er dafür erst suchen, scrollen oder die Nummer abschreiben, verlieren Sie genau die Menschen, die schon fast bei Ihnen waren.",
+        "Eine gut sichtbare Nummer wirkt ausserdem wie ein Versprechen: Hier ist jemand erreichbar. Das schafft Vertrauen, noch bevor jemand den ersten Satz über Ihren Betrieb gelesen hat.",
+        "Ich sehe diesen Punkt bei vielen kleinen Betrieben, ganz unabhängig von der Branche. Darum lohnt sich ein kurzer Blick, bevor Sie an grössere Änderungen denken."
+      ]
+    },
+    {
+      "titel": "So gehen Sie vor",
+      "absaetze": [
+        "Sie brauchen dafür in den meisten Fällen keine neue Website. Die folgenden Punkte lassen sich einzeln umsetzen. Beginnen Sie mit dem, der Ihrer Kundschaft heute am meisten fehlt."
+      ],
+      "punkte": [
+        {
+          "titel": "Nummer oben rechts, als Link zum Antippen",
+          "text": "Schreiben Sie die Nummer nicht als Bild, sondern als Text mit einem Telefon-Link. So genügt auf dem Handy ein Tippen, und niemand muss die Ziffern abschreiben."
+        },
+        {
+          "titel": "Auf dem Handy eine feste Leiste mit «Anrufen»",
+          "text": "Eine schmale Leiste am unteren Rand bleibt beim Scrollen stehen. Sie ist mit dem Daumen gut erreichbar und stört beim Lesen kaum."
+        },
+        {
+          "titel": "Daneben ein zweiter Weg, zum Beispiel ein kurzes Formular",
+          "text": "Nicht jeder möchte sofort telefonieren. Ein kurzes Formular oder ein Mail-Link daneben fängt auch die Menschen auf, die lieber schreiben oder ausserhalb der Öffnungszeiten anfragen."
+        }
+      ],
+      "nach": [
+        "Mehr braucht es oft nicht. Wenn Sie unsicher sind, wie das bei Ihrer Seite aussehen könnte, schauen Sie sich die Musterprojekte auf meiner Website an."
+      ]
+    },
+    {
+      "titel": "Kleine Schritte statt grosser Umbau",
+      "absaetze": [
+        "Viele Betriebe warten mit Verbesserungen, bis sie Zeit für eine ganz neue Website haben. Dieser Moment kommt selten. Wirksamer ist es, einen Punkt nach dem anderen anzugehen. Jede kleine Änderung hilft Ihrer Kundschaft sofort, und Sie sehen schnell, was sich lohnt. Erst wenn sich vieles auf einmal ändern muss, ist ein Neuanfang die bessere Wahl."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Öffnen Sie Ihre Startseite auf dem eigenen Handy und schauen Sie nur auf den ersten Bildschirm. Finden Sie eine Nummer, die sich antippen lässt? Wenn nicht, ist das die wichtigste Verbesserung, die Sie heute angehen können.",
+        "Ein Tipp aus der Praxis: Notieren Sie sich solche Punkte gleich im Kalender. Wer seine Website einmal im Monat kurz anschaut, muss sie selten ganz neu machen.",
+        "Öffnen Sie Ihre Website heute auf dem Handy. Finden Sie Ihre Nummer, ohne zu scrollen?"
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 6 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Telefonnummer ganz oben, zum Antippen"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}
