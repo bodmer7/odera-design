@@ -128,7 +128,11 @@ function kopf(pfad, teile = {}) {
   zeilen.push(
     `<meta name="robots" content="${p.noindex ? 'noindex,follow' : 'index,follow'}">`,
     `<link rel="canonical" href="${url}">`,
+    // Icon-Set aus tools/icons.mjs. Die Adressen bleiben dauerhaft gleich.
+    '<link rel="icon" href="/favicon.ico" sizes="48x48">',
     '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
+    '<link rel="apple-touch-icon" href="/apple-touch-icon.png">',
+    '<link rel="manifest" href="/site.webmanifest">',
     '<meta property="og:type" content="website">',
     `<meta property="og:site_name" content="${NAME}">`,
     '<meta property="og:locale" content="de_CH">',

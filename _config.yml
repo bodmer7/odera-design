@@ -5,6 +5,11 @@ exclude:
   - anfrage-proxy
   - node_modules
   - CLAUDE.md
+  - README.md
+  # Dokumentation, Werkzeuge und Worker gehören nicht auf die Website
+  - docs
+  - tools
+  - workers
   # Entwicklungswerkzeuge und Notizen des Musterprojekts Firstlicht (siehe tools/firstlicht/)
   - package.json
   - package-lock.json

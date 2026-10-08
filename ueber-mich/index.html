@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#F6F5F1">
+<meta name="theme-color" content="#2D4CF0">
 <meta name="format-detection" content="telephone=no">
-<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <!-- seo:start -->
 <base href="/">
 <title>Über mich und Kontakt | ODERA Design</title>
 <meta name="description" content="Nico Bodmer baut Webseiten für Betriebe in der ganzen Schweiz. Lehre als Platform Developer EFZ, seit 2021 in der IT. Erreichbarkeit und Kontakt.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://odera.ch/ueber-mich/">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ODERA Design">
 <meta property="og:locale" content="de_CH">
@@ -1108,7 +1110,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <div class="g-contact">
           <div>
             <p data-nosnap="1" class="mono" style="display: flex; align-items: center; gap: 12px; font-size: 16px; color: var(--grund); margin: 0px 0px 24px;">
-              <span style="width: 10px; height: 10px; border-radius: 999px; background: rgb(168, 176, 189); flex: 0 0 auto;"></span><span class="sc-interp">Heute im Büro. Antwort heute Abend.</span>
+              <span style="width: 10px; height: 10px; border-radius: 999px; background: rgb(214, 242, 75); flex: 0 0 auto;"></span><span class="sc-interp">Heute den ganzen Tag erreichbar. Antwort meist innert zwei Stunden.</span>
             </p>
             <a href="/projekt-check/" data-quelle="ueber" data-magnet="1" style="display: flex; align-items: center; gap: 24px; min-height: 88px; padding: 20px 32px; border-radius: 999px; background: var(--akzent); color: var(--tinte); text-decoration: none; box-shadow: rgba(17, 19, 26, 0.06) 0px 1px 2px; transition: box-shadow 200ms ease-out;">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#11131A" stroke-width="1.8" style="flex: 0 0 auto;">
@@ -1310,7 +1312,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
     <p class="t-lead" style="margin:0 0 48px">Zwei Seiten mit zwei verschiedenen Zielen. Die erste ist für einen erfundenen Betrieb gebaut, die zweite ist mein eigenes Portfolio.</p>
     <div class="g-two">
       <div>
-        <a href="/musterprojekte/doppelmeter/" class="muster-bild"><span class="bild" role="img" aria-label="Musterprojekt Doppelmeter, Abschnitt Werkstatt" style="aspect-ratio:960/495;background-image:url(assets/img/muster-doppelmeter-werkstatt.webp)"></span></a>
+        <a href="/musterprojekte/doppelmeter/" class="muster-bild" data-title="Schreinerei Doppelmeter" data-muster="doppelmeter" onClick="{{ openMuster }}"><span class="bild" role="img" aria-label="Musterprojekt Doppelmeter, Abschnitt Werkstatt" style="aspect-ratio:960/495;background-image:url(assets/img/muster-doppelmeter-werkstatt.webp)"></span></a>
         <p class="label" style="margin:0 0 8px">Beispiel-Firmenseite · Paket Standard</p>
         <h3 class="t-h3" style="margin:0 0 8px">Schreinerei Doppelmeter</h3>
         <p class="t-text" style="margin:0 0 16px;color:var(--text-2)">Ziel ist der Anruf. Darum steht die Telefonnummer in jedem Bildschirm, alles andere ordnet sich darunter.</p>
@@ -1326,13 +1328,13 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
     </div>
     <div class="g-two" style="margin-top:56px;align-items:center">
       <div>
-        <a href="/musterprojekte/#mp-firstlicht" class="muster-bild"><span class="bild" role="img" aria-label="Musterprojekt Firstlicht, Solarrechner" style="aspect-ratio:960/495;background-image:url(assets/img/muster-firstlicht-rechner.webp)"></span></a>
+        <a href="/musterprojekte/firstlicht/" class="muster-bild" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}"><span class="bild" role="img" aria-label="Musterprojekt Firstlicht, Solarrechner" style="aspect-ratio:960/495;background-image:url(assets/img/muster-firstlicht-rechner.webp)"></span></a>
       </div>
       <div>
         <p class="label" style="margin:0 0 8px">Beispiel-Firmenseite · Paket Pro</p>
         <h3 class="t-h3" style="margin:0 0 8px">Firstlicht Solartechnik</h3>
         <p class="t-text" style="margin:0 0 16px;color:var(--text-2)">Ziel ist die vorbereitete Anfrage. Darum rechnet ein ehrlicher Solarrechner vor, und das Ergebnis wandert direkt ins Formular.</p>
-        <a href="/musterprojekte/#mp-firstlicht" class="einstieg">Firstlicht ansehen<span aria-hidden="true">→</span></a>
+        <a href="/musterprojekte/firstlicht/" class="einstieg" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}">Firstlicht ansehen<span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div></div>
@@ -2077,7 +2079,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <p class="label" style="margin:0 0 16px">Firmenseite, Betrieb erfunden</p>
       <p style="font-size:16px;line-height:1.55;color:var(--tinte);margin:0 0 48px;max-width:640px;text-wrap:pretty">Zurückhaltend, klar, auf den Anruf ausgerichtet. So sieht eine Seite aus, die für einen Kunden arbeitet.</p>
       <div style="display:flex;flex-direction:column;gap:64px">
-        <div id="mp-1" class="g-proj mp-desk">
+        <div id="mp-1" class="mp-projekt">
+        <div class="g-proj mp-desk">
           <div>
             <p class="mono" style="font-size:13px;color:var(--text-2);margin:0 0 16px">01</p>
             <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 24px">Doppelmeter</h2>
@@ -2113,6 +2116,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <a class="btn btn-primaer" href="/musterprojekte/doppelmeter/" data-title="Schreinerei Doppelmeter" data-muster="doppelmeter" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
             <a href="/projekt-check/" class="einstieg" data-quelle="doppelmeter" onClick="{{ onEinstieg }}">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
         </div>
+        </div>
       </div>
     </div>
     </div>
@@ -2124,7 +2128,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <p class="label" style="margin:0 0 16px;color:var(--akzent)">Firmenseite Pro, Betrieb erfunden</p>
       <p style="font-size:16px;line-height:1.55;color:rgba(246,245,241,0.88);margin:0 0 48px;max-width:640px;text-wrap:pretty">Technisch, interaktiv, auf die vorbereitete Anfrage ausgerichtet. So sieht eine Seite aus, die ein erklärungsbedürftiges Angebot verkauft.</p>
       <div style="display:flex;flex-direction:column;gap:64px">
-        <div id="mp-firstlicht" class="g-proj mp-desk">
+        <div id="mp-firstlicht" class="mp-projekt">
+        <div class="g-proj mp-desk">
           <div>
             <p class="mono" style="font-size:13px;color:rgba(246,245,241,0.7);margin:0 0 16px">02</p>
             <h2 id="mp-firstlicht-titel" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 24px;color:var(--grund)">Firstlicht</h2>
@@ -2186,6 +2191,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p style="margin:12px 0 0"><a href="/musterprojekte/firstlicht/?erklaeren=1" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--akzent)">Mit Erklärungen ansehen</a></p>
           <a href="/projekt-check/" class="einstieg" data-quelle="firstlicht" onClick="{{ onEinstieg }}" style="color:var(--akzent)">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
         </div>
+        </div>
       </div>
     </div>
     </div>
@@ -2197,7 +2203,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <p class="label" style="margin:0 0 16px">Eigenprojekt</p>
       <p style="font-size:16px;line-height:1.55;color:var(--tinte);margin:0 0 48px;max-width:640px;text-wrap:pretty">Farbig, verspielt, persönlich. So sieht eine Seite aus, die auffallen darf.</p>
       <div style="display:flex;flex-direction:column;gap:64px">
-        <div id="mp-2" class="g-proj rev mp-desk">
+        <div id="mp-2" class="mp-projekt">
+        <div class="g-proj rev mp-desk">
           <div>
             <p class="mono" style="font-size:13px;color:var(--text-2);margin:0 0 16px">03</p>
             <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 24px">Portfolio</h2>
@@ -2232,6 +2239,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p style="font-size:13px;line-height:1.7;color:var(--tinte);margin:0 0 20px"><span style="white-space:nowrap">Ladezeit {{ ladezeitPf }}</span> · <span style="white-space:nowrap">Einzelseite</span> · <span style="white-space:nowrap">Eigenprojekt</span> · <span style="white-space:nowrap">live auf nico-bodmer.ch</span></p>
           <a class="btn btn-primaer" href="/muster/portfolio.html" data-title="Portfolio Nico Bodmer" data-muster="portfolio" onClick="{{ openMuster }}">Ganze Seite ansehen</a>
             <p style="margin:12px 0 0"><a href="https://nico-bodmer.ch" target="_blank" rel="noopener" style="display:inline-block;padding:4px 0;font-size:16px;color:var(--primaer-dunkel)">Oder direkt zur Originalseite: nico-bodmer.ch</a></p>
+        </div>
         </div>
       </div>
       <p class="t-klein" style="margin:40px 0 0">{{ ladezeitNotiz }}</p>
@@ -3531,7 +3539,7 @@ class Component extends DCLogic {
         if (h) h.focus({ preventScroll: true });
         this.generatorBeobachten();
         // Sprungmarke in der Adresse, z. B. /datenschutz/#ds-8
-        const marke = location.hash.length > 1 ? document.getElementById(location.hash.slice(1)) : null;
+        const marke = location.hash.length > 1 ? this.sprungziel(decodeURIComponent(location.hash.slice(1))) : null;
         if (marke) window.scrollTo(0, marke.getBoundingClientRect().top + window.pageYOffset - 104);
       }, 60);
     };
@@ -3546,7 +3554,7 @@ class Component extends DCLogic {
       if (href.charAt(0) === '#') {
         // Sprungmarke auf der Seite. Wegen <base href="/"> würde der Browser sonst zur Startseite springen.
         e.preventDefault();
-        const el = href.length > 1 ? document.getElementById(href.slice(1)) : null;
+        const el = href.length > 1 ? this.sprungziel(href.slice(1)) : null;
         if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 104, behavior: this.reduce ? 'auto' : 'smooth' });
         return;
       }
@@ -4091,7 +4099,7 @@ class Component extends DCLogic {
     const b = document.body.style;
     b.position = ''; b.top = ''; b.left = ''; b.right = ''; b.width = '';
     delete document.documentElement.dataset.menue;
-    this.themaFarbe('#F6F5F1');
+    this.themaFarbe('#2D4CF0');
     document.querySelectorAll('main, footer, .mobbar, .chat-btn').forEach((x) => { x.inert = false; });
     if (typeof scrollZiel === 'number') { window.scrollTo({ top: scrollZiel, behavior: 'instant' }); this.letztesY = scrollZiel; }
   }
@@ -4132,6 +4140,9 @@ class Component extends DCLogic {
   }
   // Die rohe Vorlage enthält dieselben Elemente unsichtbar: immer das sichtbare nehmen
   sichtbar(sel) { return [...document.querySelectorAll(sel)].find((x) => x.getClientRects().length) || null; }
+  // Sprungmarke: das sichtbare Element mit dieser ID. Ausgeblendete Fassungen (Handy/Desktop) und die rohe Vorlage
+  // können dieselbe ID tragen. getElementById fände sonst ein unsichtbares Element und der Sprung ginge ins Leere.
+  sprungziel(id) { return id ? this.sichtbar('[id="' + id.replace(/["\\]/g, '') + '"]') : null; }
   themaFarbe(farbe) { const m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute('content', farbe); }
 
   vergessen() { try { sessionStorage.removeItem('odera-check'); } catch (err) { /* nichts */ } }
@@ -4591,7 +4602,7 @@ class Component extends DCLogic {
         const href = a.getAttribute('href') || '';
         if (!href.startsWith('#')) return;
         e.preventDefault();
-        const el = document.getElementById(href.slice(1));
+        const el = this.sprungziel(href.slice(1));
         if (el) {
           const top = el.getBoundingClientRect().top + window.pageYOffset - 104;
           window.scrollTo({ top, behavior: this.reduce ? 'auto' : 'smooth' });

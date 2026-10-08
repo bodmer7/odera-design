@@ -62,6 +62,8 @@ jobs:
               --exclude-glob .github/ \
               --exclude-glob .claude/ \
               --exclude-glob tools/ \
+              --exclude-glob docs/ \
+              --exclude-glob workers/ \
               --exclude-glob .DS_Store \
               --exclude README.md \
               --exclude '^CLAUDE\.md$' \

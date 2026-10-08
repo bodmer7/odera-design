@@ -1,0 +1,437 @@
+{
+  "/": {
+    "kb": 415,
+    "h1Quelle": 12,
+    "platzhalter": 680,
+    "hoehe": 6977,
+    "woerter": 647,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Sie sehen Ihre neue Website, bevor Sie bezahlen.",
+        "woerter": 64,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "So sehen meine Seiten aus",
+        "woerter": 102,
+        "grund": "rgb(255, 255, 255)"
+      },
+      {
+        "nr": 3,
+        "titel": "Drei Pakete, feste Preise",
+        "woerter": 76,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 4,
+        "titel": "So läuft es",
+        "woerter": 73,
+        "grund": "rgb(255, 255, 255)"
+      },
+      {
+        "nr": 5,
+        "titel": "Baukasten, Agentur oder ich?",
+        "woerter": 108,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 6,
+        "titel": "Sie reden mit dem, der die Seite baut",
+        "woerter": 66,
+        "grund": "rgb(255, 255, 255)"
+      },
+      {
+        "nr": 7,
+        "titel": "Was Sie sich vielleicht fragen",
+        "woerter": 97,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 8,
+        "titel": "Fangen wir mit der ersten Frage an",
+        "woerter": 61,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(255, 255, 255)",
+      "rgb(246, 245, 241)",
+      "rgb(255, 255, 255)",
+      "rgb(246, 245, 241)",
+      "rgb(255, 255, 255)",
+      "rgb(246, 245, 241)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 8,
+    "bilder": 6,
+    "h1Gerendert": 1
+  },
+  "/angebot/": {
+    "kb": 446,
+    "h1Quelle": 12,
+    "platzhalter": 680,
+    "hoehe": 6741,
+    "woerter": 1055,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Was Ihre Website kostet.",
+        "woerter": 38,
+        "grund": "rgb(45, 76, 240)"
+      },
+      {
+        "nr": 2,
+        "titel": "",
+        "woerter": 35,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 3,
+        "titel": "Was soll Ihre Seite können?",
+        "woerter": 381,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 4,
+        "titel": "Wer betreibt Ihre Website danach?",
+        "woerter": 198,
+        "grund": "rgb(255, 255, 255)"
+      },
+      {
+        "nr": 5,
+        "titel": "",
+        "woerter": 176,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 6,
+        "titel": "Was nicht im Preis ist",
+        "woerter": 49,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 7,
+        "titel": "Was Sie sich jetzt vermutlich denken",
+        "woerter": 178,
+        "grund": "rgb(246, 245, 241)"
+      }
+    ],
+    "flaechen": [
+      "rgb(45, 76, 240)",
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(255, 255, 255)",
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 4,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/ablauf/": {
+    "kb": 422,
+    "h1Quelle": 12,
+    "platzhalter": 680,
+    "hoehe": 4655,
+    "woerter": 585,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "So entsteht Ihre Website.",
+        "woerter": 42,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "In vier Phasen",
+        "woerter": 151,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 3,
+        "titel": "Die Schritte im Einzelnen",
+        "woerter": 240,
+        "grund": "rgb(255, 255, 255)"
+      },
+      {
+        "nr": 4,
+        "titel": "Danach",
+        "woerter": 27,
+        "grund": "rgb(255, 255, 255)"
+      },
+      {
+        "nr": 5,
+        "titel": "Drei Dinge, an denen solche Projekte scheitern",
+        "woerter": 88,
+        "grund": "rgb(255, 255, 255)"
+      },
+      {
+        "nr": 6,
+        "titel": "Schritt 1 dauert rund 6 Minuten.",
+        "woerter": 37,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(255, 255, 255)",
+      "rgb(255, 255, 255)",
+      "rgb(255, 255, 255)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 3,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/musterprojekte/": {
+    "kb": 416,
+    "h1Quelle": 12,
+    "platzhalter": 680,
+    "hoehe": 5333,
+    "woerter": 471,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Drei Seiten, drei Welten.",
+        "woerter": 44,
+        "grund": "rgb(45, 76, 240)"
+      },
+      {
+        "nr": 2,
+        "titel": "Doppelmeter",
+        "woerter": 77,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 3,
+        "titel": "Firstlicht",
+        "woerter": 210,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 4,
+        "titel": "Portfolio",
+        "woerter": 100,
+        "grund": "rgb(255, 255, 255)"
+      },
+      {
+        "nr": 5,
+        "titel": "Sehen Sie Ihren Betrieb in zehn Sekunden",
+        "woerter": 28,
+        "grund": "rgb(236, 234, 228)"
+      },
+      {
+        "nr": 6,
+        "titel": "Ihr Betrieb würde hier anders aussehen. Erzählen Sie mir dav",
+        "woerter": 12,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(45, 76, 240)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)",
+      "rgb(255, 255, 255)",
+      "rgb(236, 234, 228)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 6,
+    "bilder": 3,
+    "h1Gerendert": 1
+  },
+  "/ueber-mich/": {
+    "kb": 409,
+    "h1Quelle": 12,
+    "platzhalter": 680,
+    "hoehe": 5459,
+    "woerter": 585,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Wer das macht",
+        "woerter": 84,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "Werdegang",
+        "woerter": 56,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 3,
+        "titel": "So arbeite ich",
+        "woerter": 67,
+        "grund": "rgb(255, 255, 255)"
+      },
+      {
+        "nr": 4,
+        "titel": "Hier stehen keine Kundenstimmen.",
+        "woerter": 70,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 5,
+        "titel": "Womit ich arbeite",
+        "woerter": 138,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 6,
+        "titel": "",
+        "woerter": 20,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 7,
+        "titel": "Wann Sie mich erreichen",
+        "woerter": 44,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 8,
+        "titel": "",
+        "woerter": 6,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 9,
+        "titel": "Schreiben Sie mir. Ich antworte spätestens am nächsten Abend",
+        "woerter": 100,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(255, 255, 255)",
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 4,
+    "bilder": 1,
+    "h1Gerendert": 1
+  },
+  "/projekt-check/": {
+    "kb": 374,
+    "h1Quelle": 11,
+    "platzhalter": 680,
+    "hoehe": 948,
+    "woerter": 94,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Projekt-Check von ODERA Design",
+        "woerter": 94,
+        "grund": "rgb(246, 245, 241)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)"
+    ],
+    "hintergrundwechsel": 0,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/datenschutz/": {
+    "kb": 417,
+    "h1Quelle": 12,
+    "platzhalter": 680,
+    "hoehe": 7277,
+    "woerter": 1621,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Datenschutz­erklärung",
+        "woerter": 2,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "1. Verantwortliche Person",
+        "woerter": 1619,
+        "grund": "rgb(246, 245, 241)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 1,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/impressum/": {
+    "kb": 392,
+    "h1Quelle": 12,
+    "platzhalter": 680,
+    "hoehe": 2717,
+    "woerter": 239,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Impressum",
+        "woerter": 2,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "1. Verantwortlich für diese Website",
+        "woerter": 237,
+        "grund": "rgb(246, 245, 241)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 1,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/agb/": {
+    "kb": 414,
+    "h1Quelle": 12,
+    "platzhalter": 680,
+    "hoehe": 7040,
+    "woerter": 1320,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Allgemeine Geschäfts­bedingungen",
+        "woerter": 3,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "1. Geltungsbereich und Vertragsschluss",
+        "woerter": 1317,
+        "grund": "rgb(246, 245, 241)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 1,
+    "bilder": 0,
+    "h1Gerendert": 1
+  }
+}
