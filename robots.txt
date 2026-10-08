@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://odera.ch/sitemap.xml
+Sitemap: https://odera.ch/einblicke/sitemap.xml

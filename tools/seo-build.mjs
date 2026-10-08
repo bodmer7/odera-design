@@ -10,6 +10,8 @@
 //     ersten Zeichnen und setzt sie ins Dokument, danach übernimmt React (Seitenwechsel ohne Neuladen).
 //   - 404.html für den Fehlerfall des Webservers
 //   - robots.txt und sitemap.xml (mit lastmod: Datum, an dem sich der Text der Seite zuletzt geändert hat)
+//   - src/einblicke-vorlage.html: Kopf, Menü und Fusszeile für die statischen Seiten unter /einblicke/. Das Akquise-Tool
+//     (Repo odera-akquise) liest sie über die GitHub-API und schreibt damit Übersicht und Artikel (ohne Vorlage und React).
 // In jeder Datei stehen im <head> eigener Titel, Beschreibung, canonical, robots und Vorschau-Angaben.
 //
 // Titel, Beschreibung, noindex und SITE liest das Skript aus der Quelle (Tabelle PAGES und Konstante SITE).
@@ -232,6 +234,74 @@ try {
 writeFileSync(join(ROOT, 'assets', 'js', 'vorlage.js'), vorlageJs);
 geschrieben.push('assets/js/vorlage.js'.padEnd(34) + ` ${String(Math.round(vorlageJs.length / 102.4) / 10).padStart(5)} KB, ${VORLAGE_URL.split('?')[1]}`);
 
+// ---------- 4b. Vorlage für die Einblicke (statische Seiten, die das Akquise-Tool schreibt) ----------
+// Grundlage ist die fertige Seite «Über mich»: gleicher Kopf, gleicher Stil, gleiche Fusszeile. Entfernt werden die
+// React-Laufzeit und der Lader der Vorlage; das Menü auf dem Handy kommt als festes HTML dazu (assets/js/einblicke.js).
+// Platzhalter: <!-- einblicke:kopf --> (Titel, Beschreibung, canonical, Vorschau, JSON-LD) und <!-- einblicke:inhalt -->.
+const NAV = new Function('return ' + ((quelle.match(/ {2}NAV = (\[[\s\S]*?\n {2}\]);/) || [])[1] || 'null'))();
+if (!NAV || !NAV.some((n) => n.href === '/einblicke/')) throw new Error('NAV mit «Einblicke» in src/seite.html nicht gefunden.');
+const version = (datei) => datei + '?v=' + createHash('sha256').update(readFileSync(join(ROOT, datei))).digest('hex').slice(0, 10);
+const EINBLICKE_CSS = version('assets/css/einblicke.css');
+const EINBLICKE_JS = version('assets/js/einblicke.js');
+
+// Beide Menüs aus der Vorlage (<sc-if value="{{ menuOpen }}">): das dunkle ab 1024 px und das blaue darunter.
+// Die Logo-Komponente im dunklen Menü ist dieselbe wie in der Fusszeile (hell auf Tinte) und kommt fertig von dort.
+function einblickeMenue(footer) {
+  const roh = (quelle.match(/<sc-if value="\{\{ menuOpen \}\}"[^>]*>\n([\s\S]*?)\n<\/sc-if>/) || [])[1];
+  if (!roh) throw new Error('Menü (sc-if menuOpen) in src/seite.html nicht gefunden.');
+  const logo = (footer.match(/<div class="sc-host" data-sc-name="logo"><span style="display: inline-flex;[\s\S]*?<\/span><\/span><\/div>/) || [])[0];
+  if (!logo) throw new Error('Wortmarke in der Fusszeile nicht gefunden.');
+  const html = roh
+    .replace(/<sc-for list="\{\{ navLinks \}\}"[^>]*>\n?([\s\S]*?)\n?\s*<\/sc-for>/g, (_, innen) => NAV.map((n, i) => {
+      const aktiv = n.href === '/einblicke/';
+      return innen.trim()
+        .replace(/ aria-current="\{\{ l\.cur \}\}"/, aktiv ? ' aria-current="page"' : '')
+        .replace(/\{\{ l\.href \}\}/g, escA(n.href)).replace(/\{\{ l\.label \}\}/g, esc(n.label))
+        .replace(/\{\{ l\.dot \}\}/g, aktiv ? '1' : '0').replace(/\{\{ l\.i \}\}/g, String(i));
+    }).join('\n      '))
+    .replace(/<dc-import name="logo" kind="wort"[^>]*><\/dc-import>/, () => logo)
+    // Chat und Auslastung brauchen die Laufzeit der Startseite: hier weglassen
+    .replace(/\s*<button type="button" class="menue-frage"[\s\S]*?<\/button>/, '')
+    .replace(/\s*<p class="menue-status">[\s\S]*?<\/p>(?=\s*<p class="menue-status">|\s*<p class="menue-recht">)/g, '')
+    .replace(/ onClick="\{\{ closeMenu \}\}"/g, '')
+    .replace(' onClick="{{ toggleMenu }}" aria-label="Menü schliessen"', ' class="menue-alt-zu" aria-label="Menü schliessen"')
+    .replace(/\{\{ mailKontakt \}\}/g, 'mailto:' + EMAIL)
+    .replace('<div class="menue-alt" style="', '<div class="menue-alt" hidden style="')
+    .replace(' data-zu="{{ menuZuAttr }}"', ' data-zu="0" hidden');
+  if (/\{\{|<sc-|<dc-/.test(html)) throw new Error('Menü der Einblicke enthält noch Platzhalter der Vorlage: ' + (html.match(/\{\{[^}]*\}\}|<sc-[a-z]+|<dc-[a-z]+/) || [])[0]);
+  return html;
+}
+
+function einblickeVorlage() {
+  const basis = readFileSync(join(ROOT, 'ueber-mich', 'index.html'), 'utf8');
+  const kopf = ['<!-- seo:start -->', '<base href="/">', '<!-- einblicke:kopf -->',
+    '<link rel="icon" href="/favicon.ico" sizes="48x48">', '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
+    '<link rel="apple-touch-icon" href="/apple-touch-icon.png">', '<link rel="manifest" href="/site.webmanifest">',
+    `<link rel="stylesheet" href="${EINBLICKE_CSS}">`, '<!-- seo:end -->'].join('\n');
+  let html = basis.replace(/<!-- seo:start -->[\s\S]*?<!-- seo:end -->/, () => kopf);
+  const vorher = html.length;
+  html = html
+    .replace(/<script>window\.__resources[^\n]*<\/script>\n/, '')
+    .replace(/<script defer src="assets\/js\/vendor\/react[^"]*"><\/script>\n/g, '')
+    .replace(/<script>\n\/\/ Laufzeit erst starten[\s\S]*?<\/script>\n/, `<script defer src="${EINBLICKE_JS}"></script>\n`);
+  if (html.length >= vorher || /react-|support\.js|vorlage\.js/.test(html)) throw new Error('React-Laufzeit liess sich aus der Vorlage der Einblicke nicht entfernen.');
+  const vorab = (html.match(/<div id="vorab">[\s\S]*?<!-- vorab:end -->/) || [])[0];
+  const header = vorab && (vorab.match(/<header class="kopf"[\s\S]*?<\/header>/) || [])[0];
+  const footer = vorab && (vorab.match(/<footer[\s\S]*?<\/footer>/) || [])[0];
+  if (!header || !footer) throw new Error('Kopf oder Fusszeile in ueber-mich/index.html nicht gefunden.');
+  const kopfzeile = header
+    .replace(/ aria-current="page"/g, '')
+    .replace('<a href="/einblicke/"', '<a href="/einblicke/" aria-current="page"')
+    // Unterstrich der aktiven Seite setzt assets/js/einblicke.js
+    .replace(/(<span aria-hidden="true" style="position: absolute; bottom: -2px;[^"]*?)left: [\d.]+px; width: [\d.]+px; opacity: [\d.]+;/, '$1left: 0px; width: 0px; opacity: 0;');
+  if (!kopfzeile.includes('<a href="/einblicke/" aria-current="page"')) throw new Error('Link «Einblicke» im Kopf nicht gefunden.');
+  const koerper = `<div id="vorab" class="einblicke">${kopfzeile}\n${einblickeMenue(footer)}\n<main id="inhalt">\n<!-- einblicke:inhalt -->\n</main>${footer}</div>\n`;
+  html = html.replace(/<!-- vorab:start -->[\s\S]*?<!-- vorab:end -->/, () => `<!-- vorab:start -->\n${koerper}<!-- vorab:end -->`);
+  return '<!-- Erzeugt mit tools/seo-build.mjs aus ueber-mich/index.html. Nicht von Hand ändern. Wird vom Akquise-Tool befüllt. -->\n' + html;
+}
+writeFileSync(join(ROOT, 'src', 'einblicke-vorlage.html'), einblickeVorlage());
+geschrieben.push('src/einblicke-vorlage.html'.padEnd(34) + ` ${EINBLICKE_CSS.split('?')[1]}, ${EINBLICKE_JS.split('?')[1]}`);
+
 // lastmod: Datum der letzten Textänderung je Seite. Fingerabdrücke in tools/sitemap-stand.json.
 const STAND_DATEI = join(ROOT, 'tools', 'sitemap-stand.json');
 const stand = existsSync(STAND_DATEI) ? JSON.parse(readFileSync(STAND_DATEI, 'utf8')) : {};
@@ -244,7 +314,8 @@ const indexierbar = Object.keys(PAGES).filter((p) => !PAGES[p].noindex);
 writeFileSync(join(ROOT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
   indexierbar.map((p) => `  <url><loc>${SITE}${urlOf(p)}</loc><lastmod>${(stand[p] || {}).lastmod || heute}</lastmod></url>`).join('\n') + '\n</urlset>\n');
-writeFileSync(join(ROOT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+// Die Einblicke haben eine eigene Sitemap (einblicke/sitemap.xml), geschrieben vom Akquise-Tool.
+writeFileSync(join(ROOT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\nSitemap: ${SITE}/einblicke/sitemap.xml\n`);
 geschrieben.push('sitemap.xml'.padEnd(34) + `${indexierbar.length} Adressen`, 'robots.txt');
 
 console.log(geschrieben.join('\n'));

@@ -549,16 +549,17 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
  .wrap{padding:0 48px}
  .g-hero{grid-template-columns:1fr}
 }
-/* Kopfzeile, gemessen:Logo 188 px (die Unterzeile ist gleich breit und kostet keinen Platz), Navigation 347 px, Button 245 px (kurz 137 px).
+/* Kopfzeile, gemessen am 8. Oktober 2026 mit fünf Menüpunkten (dazu «Einblicke»): Logo mit Unterzeile 253 px plus 32 px,
+   Navigation 534 px (mit 24 px Abstand 478 px), Button 226 px (kurz 165 px), dazu zweimal 40 px und 240 px Rand.
    Wird es eng, zuerst die Abstände in der Navigation auf 24 px, dann der kurze Buttontext, zuletzt das Menü. */
-@media(max-width:1327px){
+@media(max-width:1379px){
  .navmid{gap:24px}
 }
-@media(max-width:1271px){
+@media(max-width:1319px){
  .navcta-lg{display:none}
  .navcta-sm{display:inline}
 }
-@media(max-width:1167px){
+@media(max-width:1259px){
  .navmid{display:none}
  .navcta{display:none}
  .burger{display:flex}
@@ -2918,6 +2919,7 @@ class Component extends DCLogic {
     brief: { label: 'Brief oder QR-Code' },
     leiste: { label: 'Leiste unten' },
     kontakt: { label: 'Kontaktbereich' },
+    einblicke: { label: 'Einblicke (Blog)' },
   };
   // Branchen in Brief-Links (?branche=...)
   BRIEF_BRANCHEN = { handwerk: 'Handwerk und Bau', gastro: 'Gastronomie und Hotellerie', gesundheit: 'Gesundheit und Therapie',
@@ -2927,6 +2929,8 @@ class Component extends DCLogic {
     { label: 'Angebot', href: '/angebot/', path: '/angebot' },
     { label: 'Ablauf', href: '/ablauf/', path: '/ablauf' },
     { label: 'Musterprojekte', href: '/musterprojekte/', path: '/musterprojekte' },
+    // Statische Seiten ausserhalb der Vorlage (Blog aus dem Akquise-Tool, tools/seo-build.mjs erzeugt src/einblicke-vorlage.html)
+    { label: 'Einblicke', href: '/einblicke/', path: '/einblicke' },
     { label: 'Über mich', href: '/ueber-mich/', path: '/ueber-mich' }
   ];
 

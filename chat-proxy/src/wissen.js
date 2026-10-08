@@ -40,7 +40,7 @@ export const TEILE = [
   "id": "kontakt",
   "titel": "Kontakt",
   "immer": true,
-  "text": "Webseiten für Schweizer Betriebe\nBerikon AG\nkontakt@odera.ch\n© 2026 ODERA Design · Nico Bodmer\nKeine Cookies. Statistik nur mit Ihrer Einwilligung. Einstellungen"
+  "text": "Webseiten für Schweizer Betriebe\nBerikon AG\nEinblicke\nkontakt@odera.ch\n© 2026 ODERA Design · Nico Bodmer\nKeine Cookies. Statistik nur mit Ihrer Einwilligung. Einstellungen"
  },
  {
   "id": "/ueber-mich",

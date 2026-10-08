@@ -29,7 +29,7 @@
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://odera.ch/#website","url":"https://odera.ch/","name":"ODERA Design","inLanguage":"de-CH","publisher":{"@id":"https://odera.ch/#firma"}},{"@type":"ProfessionalService","@id":"https://odera.ch/#firma","name":"ODERA Design","url":"https://odera.ch/","email":"kontakt@odera.ch","description":"Sie sehen Ihre neue Website, bevor Sie einen Franken bezahlen. Fixpreis, kostenloser Entwurf in 5 Arbeitstagen, für Betriebe in der ganzen Schweiz.","image":"https://odera.ch/assets/img/vorschau-odera.jpg","logo":"https://odera.ch/favicon.svg","priceRange":"CHF 890 bis 3400","address":{"@type":"PostalAddress","streetAddress":"Gubelweg 23","postalCode":"8965","addressLocality":"Berikon","addressRegion":"AG","addressCountry":"CH"},"areaServed":{"@type":"Country","name":"Schweiz"},"founder":{"@type":"Person","name":"Nico Robin Bodmer"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Website-Pakete zum Fixpreis","itemListElement":[{"@type":"Offer","name":"Paket Website","description":"Eine Seite mit allen Abschnitten, Kontaktformular, eine Korrekturrunde","price":"890","priceCurrency":"CHF","url":"https://odera.ch/angebot/"},{"@type":"Offer","name":"Paket Standard","description":"Bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil, zwei Korrekturrunden","price":"1900","priceCurrency":"CHF","url":"https://odera.ch/angebot/"},{"@type":"Offer","name":"Paket Pro","description":"Bis 10 Seiten, Online-Terminbuchung, zweite Sprache, Texte selbst bearbeiten, drei Korrekturrunden","price":"3400","priceCurrency":"CHF","url":"https://odera.ch/angebot/"}]}},{"@type":"FAQPage","@id":"https://odera.ch/#fragen","mainEntity":[{"@type":"Question","name":"Das ist mir zu teuer.","acceptedAnswer":{"@type":"Answer","text":"Standard kostet CHF 1’900, einmalig. Danach zahlen Sie nur noch Hosting und Domain bei Ihrem Anbieter, üblicherweise CHF 120 bis 200 pro Jahr. Und Sie sehen den Entwurf, bevor Sie sich entscheiden."}},{"@type":"Question","name":"Ich habe keine Zeit dafür.","acceptedAnswer":{"@type":"Answer","text":"Ein Formular von rund 6 Minuten und Ihre Rückmeldungen. Erforderlich sind 81 Minuten, verteilt auf drei Wochen. Alles Übrige entscheiden Sie."}},{"@type":"Question","name":"Sie sind allein: was, wenn Sie ausfallen?","acceptedAnswer":{"@type":"Answer","text":"Ich verwende gängige Technik ohne Abhängigkeiten. Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag. Jede andere Fachperson kann übernehmen, ohne von vorne zu beginnen."}}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=670695ec6c" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=2a30de9052" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -550,16 +550,17 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
  .wrap{padding:0 48px}
  .g-hero{grid-template-columns:1fr}
 }
-/* Kopfzeile, gemessen:Logo 188 px (die Unterzeile ist gleich breit und kostet keinen Platz), Navigation 347 px, Button 245 px (kurz 137 px).
+/* Kopfzeile, gemessen am 8. Oktober 2026 mit fünf Menüpunkten (dazu «Einblicke»): Logo mit Unterzeile 253 px plus 32 px,
+   Navigation 534 px (mit 24 px Abstand 478 px), Button 226 px (kurz 165 px), dazu zweimal 40 px und 240 px Rand.
    Wird es eng, zuerst die Abstände in der Navigation auf 24 px, dann der kurze Buttontext, zuletzt das Menü. */
-@media(max-width:1327px){
+@media(max-width:1379px){
  .navmid{gap:24px}
 }
-@media(max-width:1271px){
+@media(max-width:1319px){
  .navcta-lg{display:none}
  .navcta-sm{display:inline}
 }
-@media(max-width:1167px){
+@media(max-width:1259px){
  .navmid{display:none}
  .navcta{display:none}
  .burger{display:flex}
@@ -619,7 +620,7 @@ if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=670695ec6c';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=2a30de9052';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -811,6 +812,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <a href="/ablauf/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Ablauf</span></a>
       
         <a href="/musterprojekte/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Musterprojekte</span></a>
+      
+        <a href="/einblicke/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Einblicke</span></a>
       
         <a href="/ueber-mich/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Über mich</span></a>
       
@@ -1058,7 +1061,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
     </div>
     <div class="abschluss-seite">
       <p data-nosnap="1" style="display: flex; align-items: flex-start; gap: 12px; margin: 0px 0px 20px;">
-        <span class="" style="width: 10px; height: 10px; margin-top: 7px; border-radius: 999px; background: rgb(214, 242, 75); flex: 0 0 auto;"></span><span><span class="sc-interp">Heute den ganzen Tag erreichbar. Antwort meist innert zwei Stunden.</span></span>
+        <span class="" style="width: 10px; height: 10px; margin-top: 7px; border-radius: 999px; background: rgb(168, 176, 189); flex: 0 0 auto;"></span><span><span class="sc-interp">Heute Abend im Studium. Antwort am Freitag.</span></span>
       </p>
       <p class="auslastung"><span class="label" style="color: var(--auf-dunkel);">Auslastung</span><span class="ausl-balken" aria-hidden="true"><i data-frei="0"></i><i data-frei="1"></i></span><strong><span class="sc-interp">1 von 2 Plätzen frei</span></strong></p>
       <p style="margin: 0px;">Lieber direkt schreiben: <a href="mailto:kontakt@odera.ch" style="color: var(--auf-dunkel);">kontakt@odera.ch</a></p>
@@ -1085,6 +1088,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <a href="/ablauf/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Ablauf</span></a>
           
             <a href="/musterprojekte/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Musterprojekte</span></a>
+          
+            <a href="/einblicke/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Einblicke</span></a>
           
             <a href="/ueber-mich/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Über mich</span></a>
           

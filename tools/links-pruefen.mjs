@@ -15,7 +15,7 @@ import { chromium, devices } from 'playwright';
 const args = process.argv.slice(2);
 const BASIS = (args.find((a) => !a.startsWith('--')) || 'https://odera.ch').replace(/\/$/, '');
 const MIT_BANNER = args.includes('--banner');
-const ROUTEN = (process.env.ROUTEN || '/,/angebot/,/ablauf/,/musterprojekte/,/ueber-mich/,/projekt-check/,/datenschutz/,/impressum/,/agb/,/website-fuer-handwerker/,/website-fuer-restaurants/,/website-fuer-praxen/,/website-fuer-laeden/').split(',');
+const ROUTEN = (process.env.ROUTEN || '/,/angebot/,/ablauf/,/musterprojekte/,/ueber-mich/,/projekt-check/,/datenschutz/,/impressum/,/agb/,/website-fuer-handwerker/,/website-fuer-restaurants/,/website-fuer-praxen/,/website-fuer-laeden/,/einblicke/').split(',');
 const GERAETE = { iphone: devices['iPhone 13'], android: devices['Pixel 7'] };
 
 const browser = await chromium.launch({ channel: process.env.PW_CHANNEL || 'chrome' });

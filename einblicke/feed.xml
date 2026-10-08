@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Einblicke | ODERA Design</title>
+  <link>https://odera.ch/einblicke/</link>
+  <description>Praxis-Tipps, Beobachtungen und Haltung rund um Websites für kleine Betriebe in der Schweiz. Von Nico Bodmer, ODERA Design.</description>
+  <language>de-CH</language>
+  <atom:link href="https://odera.ch/einblicke/feed.xml" rel="self" type="application/rss+xml"/>
+  <lastBuildDate>Thu, 08 Oct 2026 16:13:43 GMT</lastBuildDate>
+
+</channel>
+</rss>

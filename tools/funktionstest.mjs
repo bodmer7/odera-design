@@ -4,7 +4,9 @@
 //   node tools/funktionstest.mjs [basis-url] [teil,teil,...]
 //
 // Basis: Standard http://127.0.0.1:8792 (Server aus .claude/launch.json oder `python3 -m http.server 8792`).
-// Teile: routen, navigation, check, kurz, chat, generator, statistik (Standard: alle ausser statistik).
+// Teile: routen, navigation, check, kurz, chat, generator, einblicke, statistik (Standard: alle ausser statistik).
+// «einblicke» prüft die statischen Seiten unter /einblicke/ (Blog aus dem Akquise-Tool): Menüpunkt, Menü auf dem
+// Handy, Übersicht und, falls vorhanden, den neuesten Artikel mit Titelbild, JSON-LD und Projekt-Check.
 // Der Versand des Projekt-Checks wird abgefangen (kein E-Mail an Nico, kein Turnstile): geprüft wird, dass die
 // Seite korrekt sendet und den Dankesbildschirm zeigt. Der Worker selbst hat eigene Tests (anfrage-proxy/test/).
 // Der Chat nutzt nur die vier lokal beantworteten Vorschläge, damit keine Anfrage an das Sprachmodell geht.
@@ -13,7 +15,7 @@ import { chromium, devices } from 'playwright';
 
 const args = process.argv.slice(2);
 const BASIS = (args.find((a) => /^https?:/.test(a)) || 'http://127.0.0.1:8792').replace(/\/$/, '');
-const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,kurz,chat,generator').split(',');
+const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,kurz,chat,generator,einblicke').split(',');
 const ROUTEN = ['/', '/angebot/', '/ablauf/', '/musterprojekte/', '/ueber-mich/', '/projekt-check/', '/datenschutz/', '/impressum/', '/agb/',
   ...(process.env.ROUTEN_ZUSATZ ? process.env.ROUTEN_ZUSATZ.split(',') : [])];
 const BREITEN = [390, 834, 1440];
@@ -247,6 +249,86 @@ try {
     ok(!probleme.length, 'Vorschau-Werkzeug ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
     await ctx.close();
   }
+  if (TEILE.includes('einblicke')) {
+    // Desktop: Menüpunkt in der Kopfzeile, Übersicht, neuester Artikel
+    const ctx = await neuerKontext({ viewport: { width: 1440, height: 900 } });
+    const page = await ctx.newPage();
+    const probleme = beobachten(page);
+    await page.goto(BASIS + '/', { waitUntil: 'networkidle' });
+    await warte(500);
+    await page.locator('header nav a', { hasText: 'Einblicke' }).filter({ visible: true }).first().click();
+    await page.waitForURL('**/einblicke/');
+    await warte(500);
+    const ueb = await page.evaluate(() => ({
+      h1: [...document.querySelectorAll('main h1')].map((h) => h.textContent.trim()),
+      aktiv: (document.querySelector('.navmid a[aria-current="page"]') || {}).textContent,
+      strich: (() => { const u = document.querySelector('.navmid > span[aria-hidden="true"]'); return u ? { o: getComputedStyle(u).opacity, w: u.getBoundingClientRect().width } : null; })(),
+      react: !!document.getElementById('dc-root') || !!window.React,
+      karten: [...document.querySelectorAll('.eb-karte a')].map((a) => a.getAttribute('href')),
+      robots: (document.querySelector('meta[name="robots"]') || {}).content,
+      canonical: (document.querySelector('link[rel="canonical"]') || {}).href,
+      ueberlauf: document.documentElement.scrollWidth - window.innerWidth,
+    }));
+    ok(ueb.h1.length === 1 && ueb.h1[0] === 'Einblicke' && ueb.aktiv && ueb.aktiv.trim() === 'Einblicke' && ueb.strich && ueb.strich.o === '1' && ueb.strich.w > 20,
+      `Einblicke: Menüpunkt führt zur Übersicht, «Einblicke» markiert (h1 «${ueb.h1[0]}»)`);
+    ok(!ueb.react && ueb.canonical === 'https://odera.ch/einblicke/' && ueb.ueberlauf <= 0 && ueb.robots === (ueb.karten.length ? 'index,follow' : 'noindex,follow'),
+      `Einblicke: statisch ohne React, canonical, ${ueb.karten.length} Artikel, robots ${ueb.robots}`);
+    if (ueb.karten.length) {
+      await page.locator('.eb-karte a').first().click();
+      await page.waitForURL('**' + ueb.karten[0]);
+      await warte(500);
+      const art = await page.evaluate(async () => {
+        const img = document.querySelector('.eb-bild img');
+        if (img && !img.complete) await new Promise((r) => { img.onload = r; img.onerror = r; });
+        const ld = [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => JSON.parse(s.textContent));
+        return {
+          h1: [...document.querySelectorAll('main h1')].length,
+          h2: document.querySelectorAll('.eb-text h2').length,
+          bild: img ? img.naturalWidth : 0,
+          alt: img ? img.alt : '',
+          artikel: ld.some((d) => (d['@graph'] || [d]).some((x) => x['@type'] === 'Article')),
+          og: (document.querySelector('meta[property="og:image"]') || {}).content,
+          cta: (document.querySelector('.eb-cta a.btn') || {}).getAttribute ? document.querySelector('.eb-cta a.btn').getAttribute('href') : null,
+          worte: document.querySelector('.eb-text').innerText.split(/\s+/).length,
+        };
+      });
+      ok(art.h1 === 1 && art.h2 >= 3 && art.bild > 0 && art.alt.length > 10 && art.artikel && art.cta === '/projekt-check/?quelle=einblicke',
+        `Einblicke: Artikel ${ueb.karten[0]} mit Titelbild (${art.bild} px), Alt-Text, ${art.h2} Zwischentiteln, JSON-LD Article, ${art.worte} Wörter`);
+      const og = await page.request.get(BASIS + new URL(art.og).pathname);
+      ok(og.status() === 200, `Einblicke: Vorschaubild ${new URL(art.og).pathname} vorhanden`);
+      await page.locator('.eb-cta a.btn').click();
+      await page.waitForURL('**/projekt-check/**');
+      await warte(800);
+      ok(await page.locator('.q-weiter-knopf').filter({ visible: true }).count() > 0, 'Einblicke: Knopf führt in den Projekt-Check');
+    }
+    ok(!probleme.length, 'Einblicke (Desktop) ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
+    await ctx.close();
+
+    // Handy: blaues Menü öffnen, Einblicke markiert, Escape schliesst, Link führt weiter
+    const hctx = await neuerKontext({ ...devices['iPhone 13'] });
+    const h = await hctx.newPage();
+    const hprob = beobachten(h);
+    await h.goto(BASIS + '/einblicke/', { waitUntil: 'networkidle' });
+    await warte(500);
+    await h.locator('.kopf .burger-knopf').click();
+    await warte(700);
+    const offen = await h.evaluate(() => ({ menue: document.documentElement.dataset.menue, links: [...document.querySelectorAll('#menue .menue-link')].filter((a) => a.getClientRects().length).map((a) => a.textContent.trim()),
+      aktiv: (document.querySelector('#menue .menue-link[aria-current="page"]') || {}).textContent, fix: document.body.style.position }));
+    ok(offen.menue === '1' && offen.links.length === 5 && offen.links.includes('Einblicke') && offen.aktiv && offen.aktiv.trim() === 'Einblicke' && offen.fix === 'fixed',
+      `Einblicke (Handy): Menü offen mit ${offen.links.join(', ')}`);
+    await h.keyboard.press('Escape');
+    await warte(500);
+    const zu = await h.evaluate(() => ({ menue: document.documentElement.dataset.menue || null, sichtbar: !document.getElementById('menue').hidden, fix: document.body.style.position }));
+    ok(!zu.menue && !zu.sichtbar && !zu.fix, 'Einblicke (Handy): Escape schliesst das Menü und gibt das Scrollen frei');
+    await h.locator('.kopf .burger-knopf').click();
+    await warte(700);
+    await h.locator('#menue .menue-link', { hasText: 'Angebot' }).click();
+    await h.waitForURL('**/angebot/');
+    ok(true, 'Einblicke (Handy): Link im Menü führt zur Seite Angebot');
+    ok(!hprob.length, 'Einblicke (Handy) ohne Konsolenfehler' + (hprob.length ? ': ' + hprob.join(' | ') : ''));
+    await hctx.close();
+  }
+
   if (TEILE.includes('statistik')) {
     // Banner, Einwilligung, Widerruf und gesendete Ereignisse (an odera-stats, hier abgefangen)
     for (const [geraet, optionen] of [['Desktop', { viewport: { width: 1440, height: 900 } }], ['Handy', { ...devices['iPhone 13'] }]]) {

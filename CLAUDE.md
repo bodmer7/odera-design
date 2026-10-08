@@ -66,6 +66,20 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 8. Oktober 2
 - Tests: `node tools/funktionstest.mjs … statistik`. Die übrigen Teile und `links-pruefen` laufen wie bei
   einem Besucher, der abgelehnt hat.
 
+### Einblicke (Blog, seit 8. Oktober 2026)
+- `/einblicke/` mit Übersicht und Artikeln ist statisches HTML ohne React und ohne Nachladen. Geschrieben wird es
+  vom Akquise-Tool (Repo `odera-akquise`, Knopf «Gepostet» bei LinkedIn-Beiträgen) über die GitHub-API, ein
+  Commit pro Artikel, Token nur mit Contents-Recht auf dieses Repo. Nicht von Hand ändern.
+- Vorlage `src/einblicke-vorlage.html` erzeugt `tools/seo-build.mjs` aus «Über mich»: gleicher Kopf, gleiche
+  Fusszeile, beide Menüs fest im HTML, `assets/js/einblicke.js` für Menü, Kopf und Unterstrich, Stil in
+  `assets/css/einblicke.css`. Nach Änderungen an Kopf oder Stil im Akquise-Repo `scripts/einblicke.ts neu-erstellen`.
+- Menüpunkt «Einblicke» zwischen Musterprojekte und Über mich. Die Umbruchstellen des Kopfs sind dafür neu
+  gemessen (Abstand 24 px ab 1379 px, kurzer Knopf ab 1319 px, Menü ab 1259 px).
+- SEO: eigene Titel, Beschreibung, canonical, Open Graph mit Bildkarte, JSON-LD Article und BreadcrumbList,
+  eigene Sitemap `einblicke/sitemap.xml` (in `robots.txt`), RSS `einblicke/feed.xml`. Ohne Artikel ist die
+  Übersicht `noindex`.
+- Am Ende jedes Artikels der Projekt-Check (`?quelle=einblicke`). Tests: `node tools/funktionstest.mjs … einblicke`.
+
 ### Musterprojekt Doppelmeter
 - Eigene statische Seite unter `/musterprojekte/doppelmeter/`, `noindex`, nicht in der Sitemap.
   `/muster/doppelmeter.html` leitet weiter. Schriften lokal, Fotos von Unsplash, Nachweise im Impressum.

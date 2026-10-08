@@ -63,13 +63,24 @@ Andere Module melden über `window.dispatchEvent(new CustomEvent('odera:messung'
 | `fragen` | Häufige Fragen |
 | `abschluss` | Abschluss |
 
+**Einblicke** (Blog, statische Seiten unter `/einblicke/`, geschrieben vom
+Akquise-Tool, siehe unten):
+
+| Seite | ID | Bezeichnung |
+| --- | --- | --- |
+| `/einblicke/` | `einblicke-kopf` | Kopf der Übersicht |
+| `/einblicke/` | `artikel-liste` | Liste der Beiträge |
+| `/einblicke/<pfad>/` | `artikel` | Artikel |
+| beide | `abschluss` | Abschluss mit Projekt-Check |
+
 **Branchenseiten** (noch nicht gebaut, vorgesehen): `hero`, `inhalte`,
 `beispiel`, `preise`, `fragen`, `abschluss`. Neue Abschnitte bekommen ein
 `data-abschnitt` und werden hier und in `config/abschnitte.json` im
 Akquise-Repo nachgetragen.
 
 **Knöpfe (`cta_click`):** `data-quelle` des Links plus `-projekt-check`
-(z. B. `hero-projekt-check`, `leiste-projekt-check`, `faq-projekt-check`),
+(z. B. `hero-projekt-check`, `leiste-projekt-check`, `faq-projekt-check`,
+`einblicke-projekt-check` auf Übersicht und Artikeln der Einblicke),
 Paket-Knöpfe als `paket-website`, `paket-standard`, `paket-pro`. Ohne
 `data-quelle`: ID des umgebenden Abschnitts plus `-projekt-check`, sonst
 `seite-projekt-check`.
@@ -89,7 +100,7 @@ Frage, klein, ohne Akzente, mit Bindestrichen (z. B.
 | Präfix | Format | Herkunft |
 | --- | --- | --- |
 | `ak-` | `ak-2026-w41` | Akquise-Mails (derzeit nicht genutzt: Links in Mails ohne Parameter) |
-| `li-` | `li-2026-w41-mo` (Tag `mo`, `mi`, `fr`) | LinkedIn-Beiträge |
+| `li-` | `li-2026-w41-mo` (Tag `mo`, `mi`, `fr`) | LinkedIn-Beiträge (erster Kommentar verlinkt direkt den Artikel: `/einblicke/<pfad>/?k=li-…`) |
 | `gbp` | `gbp` | Google-Unternehmensprofil |
 
 Andere Werte von `k` werden verworfen.
@@ -97,6 +108,26 @@ Andere Werte von `k` werden verworfen.
 **Gerät:** Breite beim Start der Sitzung, unter 768 px `mobil`, unter
 1024 px `tablet`, sonst `desktop`. **Land:** aus `request.cf.country` im
 Worker.
+
+## Einblicke (Blog)
+
+Markiert Nico im Akquise-Tool einen LinkedIn-Beitrag als gepostet (Knopf
+«Gepostet»), schreibt das Tool den passenden Artikel in einem Commit in dieses
+Repo: `einblicke/<pfad>/index.html` mit `titelbild.webp` (Bildkarte, sonst
+`.jpg`) und `vorschau.jpg` (1200 × 630 für geteilte Links), dazu
+`einblicke/index.html`, `einblicke/feed.xml`, `einblicke/sitemap.xml` (in
+`robots.txt` eingetragen) und die Daten unter `src/einblicke/` (nicht
+veröffentlicht). Kopf, Menü und Fusszeile stammen aus
+`src/einblicke-vorlage.html`, die `tools/seo-build.mjs` aus «Über mich» erzeugt;
+das Skript `assets/js/einblicke.js` ersetzt dort die Laufzeit für Menü und Kopf.
+Die Seiten laden `statistik.js` wie alle anderen: Seitenaufrufe, Scrolltiefe,
+Abschnitte und `einblicke-projekt-check` werden nach Einwilligung gemessen. Der
+Projekt-Check kennt den Einstieg `?quelle=einblicke` (`EINSTIEGE` in
+`src/seite.html`).
+
+Ändern sich Kopf, Menü oder Stil, nach `seo-build` im Akquise-Repo
+`npx tsx scripts/einblicke.ts neu-erstellen` ausführen (schreibt alle Artikel
+mit der neuen Vorlage).
 
 ## Worker odera-stats
 

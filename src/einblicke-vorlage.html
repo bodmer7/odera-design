@@ -1,3 +1,4 @@
+<!-- Erzeugt mit tools/seo-build.mjs aus ueber-mich/index.html. Nicht von Hand ändern. Wird vom Akquise-Tool befüllt. -->
 <!DOCTYPE html>
 <html lang="de-CH">
 <head>
@@ -7,27 +8,12 @@
 <meta name="format-detection" content="telephone=no">
 <!-- seo:start -->
 <base href="/">
-<title>Impressum | ODERA Design</title>
-<meta name="robots" content="noindex,follow">
-<link rel="canonical" href="https://odera.ch/impressum/">
+<!-- einblicke:kopf -->
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="ODERA Design">
-<meta property="og:locale" content="de_CH">
-<meta property="og:title" content="Impressum | ODERA Design">
-<meta property="og:description" content="">
-<meta property="og:url" content="https://odera.ch/impressum/">
-<meta property="og:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="ODERA Design: Sie sehen Ihre neue Website, bevor Sie bezahlen. Ab CHF 890, Entwurf in 5 Arbeitstagen.">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
-<style>x-dc{display:none!important}</style>
-<link rel="preload" href="assets/js/vorlage.js?v=2a30de9052" as="script" fetchpriority="low">
+<link rel="stylesheet" href="assets/css/einblicke.css?v=b7ab72499a">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -609,23 +595,9 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 (function(){var h=document.documentElement,f=document.fonts,zeigen=function(){h.classList.add('schrift')};h.classList.add('js');
 if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1em Inter'),f.load('600 1em Inter'),f.load('500 1em "JetBrains Mono"')]).then(zeigen,zeigen)}else zeigen();setTimeout(zeigen,3000)})();
 </script>
-<script>window.__resources = {}; // Seite nicht ein zweites Mal laden (support.js), logo.dc.html liest auch kleingeschriebene Eigenschaften</script>
-<script defer src="assets/js/vendor/react-18.3.1.production.min.js"></script>
-<script defer src="assets/js/vendor/react-dom-18.3.1.production.min.js"></script>
 <!-- Statistik nur nach Einwilligung (Banner), ohne Cookies: assets/js/statistik.js, docs/tracking.md. Bei Änderungen v= erhöhen (Zwischenspeicher 1 Woche). -->
 <script defer src="assets/js/statistik.js?v=1"></script>
-<script>
-// Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
-// und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
-// Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=2a30de9052';
-var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
-var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
-var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
-try{new PerformanceObserver(gemeldet).observe({type:'largest-contentful-paint',buffered:true})}catch(e){}
-setTimeout(gemeldet,400);
-if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()});else start()})();
-</script>
+<script defer src="assets/js/einblicke.js?v=dfe9803fd1"></script>
 <style id="mobil">
 /* Handy und Tablet bis 1023 px. Die Ansicht ab 1024 px bleibt unverändert. */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -778,7 +750,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 
 <!-- seo-noscript:end -->
 <!-- vorab:start -->
-<div id="vorab"><div class="sc-host" data-sc-name="Root"><header class="kopf" data-scroll="0" data-weg="0" data-menue="0">
+<div id="vorab" class="einblicke"><header class="kopf" data-scroll="0" data-weg="0" data-menue="0">
   <div id="thread" aria-hidden="true" style="height: 2px; width: 0%; background: var(--akzent); box-shadow: rgba(17, 19, 26, 0.45) 0px 1px 0px; transition: width 80ms linear;"></div>
   <div class="wrap navbar">
     <a href="/" class="kopf-logo" style="text-decoration: none; color: var(--tinte); display: flex; align-items: center; gap: 12px;">
@@ -811,7 +783,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       
         <a href="/musterprojekte/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Musterprojekte</span></a>
       
-        <a href="/einblicke/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Einblicke</span></a>
+        <a href="/einblicke/" aria-current="page" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Einblicke</span></a>
       
         <a href="/ueber-mich/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Über mich</span></a>
       
@@ -827,65 +799,44 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </button>
       </div>
     </div>
-  </div></header><main style="animation: auto ease 0s 1 normal none running none;"><div>
-  <section style="background: var(--grund);">
-    <div class="wrap" style="padding-top: 88px; padding-bottom: 48px;">
-      <div class="inner txt" style="max-width: 65ch;">
-        <p class="mono" style="font-size: 13px; letter-spacing: 0.04em; color: var(--text-2); margin: 0px 0px 24px;">RECHTLICHES</p>
-        <h1 tabindex="-1" style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; font-size: var(--fs-h1); line-height: 1.06; letter-spacing: -0.03em; margin: 0px;">Impressum</h1>
-      </div>
+  </div></header>
+<div class="menue-alt" hidden style="position:fixed;inset:0;z-index:60;background:var(--tinte);padding:24px 48px 48px;overflow:auto;animation:fade 120ms linear">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:52px;margin-bottom:48px">
+    <div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(246, 245, 241);">
+  <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(17, 19, 26); transform: rotate(-19deg);"></span></span>DERA</span>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div>
+    <button type="button" class="menue-alt-zu" aria-label="Menü schliessen" style="width:48px;height:48px;background:none;border:1px solid rgba(246,245,241,0.18);border-radius:999px;color:var(--grund);font-size:26px;line-height:1;cursor:pointer">×</button>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <a href="/angebot/" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;color:var(--grund);text-decoration:none;display:flex;align-items:center;gap:12px"><span style="width:10px;height:10px;border-radius:999px;background:var(--primaer);opacity:0"></span>Angebot</a>
+      <a href="/ablauf/" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;color:var(--grund);text-decoration:none;display:flex;align-items:center;gap:12px"><span style="width:10px;height:10px;border-radius:999px;background:var(--primaer);opacity:0"></span>Ablauf</a>
+      <a href="/musterprojekte/" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;color:var(--grund);text-decoration:none;display:flex;align-items:center;gap:12px"><span style="width:10px;height:10px;border-radius:999px;background:var(--primaer);opacity:0"></span>Musterprojekte</a>
+      <a href="/einblicke/" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;color:var(--grund);text-decoration:none;display:flex;align-items:center;gap:12px"><span style="width:10px;height:10px;border-radius:999px;background:var(--primaer);opacity:1"></span>Einblicke</a>
+      <a href="/ueber-mich/" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;color:var(--grund);text-decoration:none;display:flex;align-items:center;gap:12px"><span style="width:10px;height:10px;border-radius:999px;background:var(--primaer);opacity:0"></span>Über mich</a>
+  </div>
+  <div style="height:1px;background:rgba(246,245,241,0.15);margin:32px 0"></div>
+  <a href="mailto:kontakt@odera.ch" style="font-size:20px;color:var(--auf-dunkel);display:inline-block;padding:12px 0">kontakt@odera.ch</a>
+  <a href="/projekt-check/" style="margin-top:32px;display:flex;align-items:center;justify-content:center;min-height:64px;border-radius:999px;background:var(--akzent);color:var(--tinte);font-size:16px;font-weight:600;text-decoration:none">Projekt-Check starten</a>
+</div>
+<div id="menue" class="menue" data-zu="0" hidden role="dialog" aria-label="Menü">
+  <div class="menue-innen">
+    <nav class="menue-nav" aria-label="Hauptnavigation">
+      <a class="menue-link" href="/angebot/" style="--i:0"><span class="menue-link-t">Angebot</span><span class="menue-pfeil" aria-hidden="true"></span></a>
+      <a class="menue-link" href="/ablauf/" style="--i:1"><span class="menue-link-t">Ablauf</span><span class="menue-pfeil" aria-hidden="true"></span></a>
+      <a class="menue-link" href="/musterprojekte/" style="--i:2"><span class="menue-link-t">Musterprojekte</span><span class="menue-pfeil" aria-hidden="true"></span></a>
+      <a class="menue-link" href="/einblicke/" aria-current="page" style="--i:3"><span class="menue-link-t">Einblicke</span><span class="menue-pfeil" aria-hidden="true"></span></a>
+      <a class="menue-link" href="/ueber-mich/" style="--i:4"><span class="menue-link-t">Über mich</span><span class="menue-pfeil" aria-hidden="true"></span></a>
+    </nav>
+    <div class="menue-unten">
+      <a class="menue-cta" href="/projekt-check/">Projekt-Check starten</a>
+      <a class="menue-mail" href="mailto:kontakt@odera.ch">kontakt@odera.ch</a>
+      <p class="menue-recht"><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a><a href="/agb/">AGB</a></p>
     </div>
-  </section>
-  <section class="wrap sect">
-    <div class="inner txt" style="max-width: 65ch;">
-      <p style="font-size: 16px; line-height: 1.7; margin: 0px 0px 32px;">Angaben nach Art. 3 Abs. 1 lit. s des Bundesgesetzes gegen den unlauteren Wettbewerb.</p>
-      <nav aria-label="Abschnitte" style="margin: 0px 0px 48px; padding: 20px; border: 1px solid var(--linie); border-radius: 14px;">
-        <p class="mono" style="font-size: 13px; letter-spacing: 0.04em; color: var(--text-2); margin: 0px 0px 12px;">INHALT</p>
-        <ul style="list-style: none; margin: 0px; padding: 0px; display: flex; flex-direction: column; gap: 8px;">
-          <li><a href="#im-1" style="font-size: 16px;">1. Verantwortlich für diese Website</a></li>
-          <li><a href="#im-2" style="font-size: 16px;">2. Kontakt</a></li>
-          <li><a href="#im-3" style="font-size: 16px;">3. Rechtsform und Mehrwertsteuer</a></li>
-          <li><a href="#im-4" style="font-size: 16px;">4. Verantwortlich für den Inhalt</a></li>
-          <li><a href="#im-5" style="font-size: 16px;">5. Bildnachweise</a></li>
-        </ul>
-      </nav>
-      <div style="display: flex; flex-direction: column;">
-        <div id="im-1" style="margin-top: 48px;">
-          <h2 style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 700; font-size: 26px; line-height: 1.12; margin: 0px 0px 16px;">1. Verantwortlich für diese Website</h2>
-          <p style="font-size: 16px; line-height: 1.7; margin: 0px 0px 16px;">Nico Robin Bodmer<br>ODERA Design, Einzelunternehmen ohne Handelsregistereintrag<br>Gubelweg 23<br><span class="mono" style="font-size: 16px; color: var(--text-2);">8965</span> Berikon, Schweiz</p>
-        </div>
-        <div id="im-2" style="margin-top: 48px;">
-          <h2 style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 700; font-size: 26px; line-height: 1.12; margin: 0px 0px 16px;">2. Kontakt</h2>
-          <p style="font-size: 16px; line-height: 1.7; margin: 0px 0px 16px;">E-Mail: <a href="mailto:kontakt@odera.ch">kontakt@odera.ch</a></p>
-        </div>
-        <div id="im-3" style="margin-top: 48px;">
-          <h2 style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 700; font-size: 26px; line-height: 1.12; margin: 0px 0px 16px;">3. Rechtsform und Mehrwertsteuer</h2>
-          <p style="font-size: 16px; line-height: 1.7; margin: 0px 0px 16px;">ODERA Design ist die Geschäftsbezeichnung einer selbstständigen Erwerbstätigkeit von Nico Robin Bodmer als natürliche Person. Es handelt sich nicht um eine GmbH, eine AG oder eine andere juristische Person. Es besteht kein Handelsregistereintrag. Es besteht keine Mehrwertsteuerpflicht, daher wird keine Mehrwertsteuer ausgewiesen.</p>
-        </div>
-        <div id="im-4" style="margin-top: 48px;">
-          <h2 style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 700; font-size: 26px; line-height: 1.12; margin: 0px 0px 16px;">4. Verantwortlich für den Inhalt</h2>
-          <p style="font-size: 16px; line-height: 1.7; margin: 0px 0px 16px;">Nico Robin Bodmer, Adresse wie oben.</p>
-        </div>
-        <div id="im-5" style="margin-top: 48px;">
-          <h2 style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 700; font-size: 26px; line-height: 1.12; margin: 0px 0px 16px;">5. Bildnachweise</h2>
-          <p style="font-size: 16px; line-height: 1.7; margin: 0px 0px 16px;">Die Fotos im Musterprojekt Schreinerei Doppelmeter stammen von Unsplash und werden unter der Unsplash-Lizenz verwendet. Sie zeigen nicht die Arbeit eines echten Betriebs. Urheberinnen und Urheber:</p>
-          <p style="font-size: 16px; line-height: 1.7; margin: 0px 0px 16px;">Adam Patterson, Alex Tyson, Anoop Surendran, Callum Hill, Cameron Roberson, Christina Radevich, Clay Banks, Craft Kitties, Decima Athens, Gabriel Rosenblut, Geon George, Jason Briscoe, Jason Gooljar, Jason Leung, Le Quan, Lisa Anna, Luisa Brimble, Marina Nazina, Maverick Frame, Michaela Murphy, Nico Smit, Patrick Robert Doyle, Pickawood, Ravi Sharma, Ryno Marais, Slaapwijsheid.nl, Stephan Coudassot, Valentina Giarre.</p>
-          <p style="font-size: 16px; line-height: 1.7; margin: 0px 0px 16px;">Beispielbilder in der Website-Vorschau:</p>
-          <ul style="font-size: 16px; line-height: 1.7; margin: 0px 0px 16px; padding-left: 20px;">
-            <li>Handwerk: Sparsh Paliwal, Unsplash</li>
-            <li>Praxis: Sincerely Media, Unsplash</li>
-            <li>Beratung: Vitaly Gariev, Unsplash</li>
-            <li>Gastronomie: Raymond Yeung, Unsplash</li>
-            <li>Verkauf: Ela De Pure, Unsplash</li>
-            <li>Verein: Wesley Tingey, Unsplash</li>
-          </ul>
-          <p style="font-size: 16px; line-height: 1.7; margin: 0px 0px 16px;">Verwendet unter der <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash-Lizenz</a>.</p>
-          <p style="font-size: 16px; line-height: 1.7; margin: 0px;">Die Musterprojekte zeigen frei erfundene Betriebe.</p>
-        </div>
-      </div>
-      <p class="mono" style="font-size: 13px; color: var(--text-2); margin: 64px 0px 0px;">Stand: <span class="sc-interp">Oktober 2026</span></p>
-    </div>
-  </section></div></main><footer class="footpad ink" style="background: var(--tinte);">
+  </div>
+</div>
+<main id="inhalt">
+<!-- einblicke:inhalt -->
+</main><footer class="footpad ink" style="background: var(--tinte);">
   <div class="wrap" style="padding-top: var(--a-5); padding-bottom: var(--a-5);">
     <div class="inner">
       <div class="g-foot">
@@ -935,9 +886,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </div>
       </div>
     </div>
-  </div></footer><button type="button" class="chat-btn" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten, Taste f" title="Fragen an den KI-Assistenten (Taste f)" data-bar="0" data-hell="0" style="display: inline-flex; animation: auto ease 0s 1 normal none running none;">
-  <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"></path><path d="M8.5 9.5h7M8.5 12.5h4"></path></svg>
-  <span class="chat-btn-l">Assistent fragen</span></button></div></div>
+  </div></footer></div>
 <!-- vorab:end -->
 </body>
 </html>

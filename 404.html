@@ -26,7 +26,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
-<link rel="preload" href="assets/js/vorlage.js?v=670695ec6c" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=2a30de9052" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -547,16 +547,17 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
  .wrap{padding:0 48px}
  .g-hero{grid-template-columns:1fr}
 }
-/* Kopfzeile, gemessen:Logo 188 px (die Unterzeile ist gleich breit und kostet keinen Platz), Navigation 347 px, Button 245 px (kurz 137 px).
+/* Kopfzeile, gemessen am 8. Oktober 2026 mit fünf Menüpunkten (dazu «Einblicke»): Logo mit Unterzeile 253 px plus 32 px,
+   Navigation 534 px (mit 24 px Abstand 478 px), Button 226 px (kurz 165 px), dazu zweimal 40 px und 240 px Rand.
    Wird es eng, zuerst die Abstände in der Navigation auf 24 px, dann der kurze Buttontext, zuletzt das Menü. */
-@media(max-width:1327px){
+@media(max-width:1379px){
  .navmid{gap:24px}
 }
-@media(max-width:1271px){
+@media(max-width:1319px){
  .navcta-lg{display:none}
  .navcta-sm{display:inline}
 }
-@media(max-width:1167px){
+@media(max-width:1259px){
  .navmid{display:none}
  .navcta{display:none}
  .burger{display:flex}
@@ -616,7 +617,7 @@ if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=670695ec6c';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=2a30de9052';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -809,6 +810,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       
         <a href="/musterprojekte/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Musterprojekte</span></a>
       
+        <a href="/einblicke/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Einblicke</span></a>
+      
         <a href="/ueber-mich/" style="font-size: 16px; font-weight: 500; color: var(--tinte); text-decoration: none; padding: 8px 0px; display: inline-block;"><span class="sc-interp">Über mich</span></a>
       
       <span aria-hidden="true" style="position: absolute; bottom: -2px; height: 3px; background: var(--primaer); left: 0px; width: 0px; opacity: 0; transition: left 220ms cubic-bezier(0.2, 0, 0, 1), width 220ms cubic-bezier(0.2, 0, 0, 1), opacity 150ms linear;"></span>
@@ -859,6 +862,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <a href="/ablauf/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Ablauf</span></a>
           
             <a href="/musterprojekte/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Musterprojekte</span></a>
+          
+            <a href="/einblicke/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Einblicke</span></a>
           
             <a href="/ueber-mich/" style="font-size: 16px; color: var(--grund); text-decoration: none;"><span class="sc-interp">Über mich</span></a>
           
