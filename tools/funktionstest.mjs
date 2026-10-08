@@ -15,7 +15,7 @@ import { chromium, devices } from 'playwright';
 
 const args = process.argv.slice(2);
 const BASIS = (args.find((a) => /^https?:/.test(a)) || 'http://127.0.0.1:8792').replace(/\/$/, '');
-const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,kurz,chat,generator,einblicke').split(',');
+const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,kurz,chat,generator,muster,einblicke').split(',');
 const ROUTEN = ['/', '/angebot/', '/ablauf/', '/musterprojekte/', '/ueber-mich/', '/projekt-check/', '/datenschutz/', '/impressum/', '/agb/',
   ...(process.env.ROUTEN_ZUSATZ ? process.env.ROUTEN_ZUSATZ.split(',') : [])];
 const BREITEN = [390, 834, 1440];
@@ -211,6 +211,33 @@ try {
       await page.keyboard.press('Escape'); await warte(400);
       ok(!(await sichtbar(page, '.oc-chip').count()), `${geraet}: Escape schliesst den Chat`);
       ok(!probleme.length, `${geraet}: Chat ohne Konsolenfehler` + (probleme.length ? ': ' + probleme.join(' | ') : ''));
+      await ctx.close();
+    }
+  }
+
+  if (TEILE.includes('muster')) {
+    // Musterprojekte: Umschalter Desktop/Handy pro Projekt, Bilder vollständig (Seitenverhältnis von Bild und Rahmen gleich)
+    for (const [geraet, opt] of [['desktop', { viewport: { width: 1440, height: 900 } }], ['handy', { ...devices['iPhone 13'] }]]) {
+      const ctx = await neuerKontext(opt);
+      const page = await ctx.newPage();
+      const probleme = beobachten(page);
+      await page.goto(BASIS + '/musterprojekte/', { waitUntil: 'networkidle' });
+      await warte(600);
+      const zustand = () => page.evaluate(() => ['doppelmeter', 'firstlicht'].map((x) => (document.querySelector('#mp-' + x + ' .mp2-geraet') || { dataset: {} }).dataset.geraet));
+      const start = await zustand();
+      const anders = start[0] === 'desktop' ? 'handy' : 'desktop';
+      await page.locator(`#mp-doppelmeter .mp2-schalter [data-g="${anders}"]`).click();
+      await warte(400);
+      const nachher = await zustand();
+      ok(nachher[0] === anders && nachher[1] === start[1], `${geraet}: Umschalter bei Doppelmeter wechselt nur Doppelmeter (${start.join('/')} → ${nachher.join('/')})`);
+      for (const id of ['doppelmeter', 'firstlicht']) {
+        await page.locator(`#mp-${id} .mp2-geraet img`).scrollIntoViewIfNeeded();
+        await page.waitForFunction((s) => { const i = document.querySelector(s); return i && i.complete && i.naturalWidth > 0; }, `#mp-${id} .mp2-geraet img`, { timeout: 8000 }).catch(() => {});
+        const m = await page.evaluate((s) => { const i = document.querySelector(s); const r = i.getBoundingClientRect();
+          return { anzeige: r.width / r.height, bild: i.naturalWidth / i.naturalHeight, breite: Math.round(r.width), dichte: i.naturalWidth && i.currentSrc ? Number((i.currentSrc.match(/-(\d+)\.(?:avif|webp)/) || [])[1]) / (r.width * devicePixelRatio) : 0 }; }, `#mp-${id} .mp2-geraet img`);
+        ok(Math.abs(m.anzeige - m.bild) < 0.02 && m.dichte >= 0.95, `${geraet}: Bild ${id} vollständig (Seitenverhältnis ${m.anzeige.toFixed(3)} zu ${m.bild.toFixed(3)}) und scharf (${m.dichte.toFixed(2)} Bildpunkte pro Gerätepixel)`);
+      }
+      ok(!probleme.length, `${geraet}: Musterprojekte ohne Konsolenfehler` + (probleme.length ? ': ' + probleme.join(' | ') : ''));
       await ctx.close();
     }
   }

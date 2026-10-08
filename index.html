@@ -29,7 +29,7 @@
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://odera.ch/#website","url":"https://odera.ch/","name":"ODERA Design","inLanguage":"de-CH","publisher":{"@id":"https://odera.ch/#firma"}},{"@type":"ProfessionalService","@id":"https://odera.ch/#firma","name":"ODERA Design","url":"https://odera.ch/","email":"kontakt@odera.ch","description":"Sie sehen Ihre neue Website, bevor Sie einen Franken bezahlen. Fixpreis, kostenloser Entwurf in 5 Arbeitstagen, für Betriebe in der ganzen Schweiz.","image":"https://odera.ch/assets/img/vorschau-odera.jpg","logo":"https://odera.ch/favicon.svg","priceRange":"CHF 890 bis 3400","address":{"@type":"PostalAddress","streetAddress":"Gubelweg 23","postalCode":"8965","addressLocality":"Berikon","addressRegion":"AG","addressCountry":"CH"},"areaServed":{"@type":"Country","name":"Schweiz"},"founder":{"@type":"Person","name":"Nico Robin Bodmer"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Website-Pakete zum Fixpreis","itemListElement":[{"@type":"Offer","name":"Paket Website","description":"Eine Seite mit allen Abschnitten, Kontaktformular, eine Korrekturrunde","price":"890","priceCurrency":"CHF","url":"https://odera.ch/angebot/"},{"@type":"Offer","name":"Paket Standard","description":"Bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil, zwei Korrekturrunden","price":"1900","priceCurrency":"CHF","url":"https://odera.ch/angebot/"},{"@type":"Offer","name":"Paket Pro","description":"Bis 10 Seiten, Online-Terminbuchung, zweite Sprache, Texte selbst bearbeiten, drei Korrekturrunden","price":"3400","priceCurrency":"CHF","url":"https://odera.ch/angebot/"}]}},{"@type":"FAQPage","@id":"https://odera.ch/#fragen","mainEntity":[{"@type":"Question","name":"Das ist mir zu teuer.","acceptedAnswer":{"@type":"Answer","text":"Standard kostet CHF 1’900, einmalig. Danach zahlen Sie nur noch Hosting und Domain bei Ihrem Anbieter, üblicherweise CHF 120 bis 200 pro Jahr. Und Sie sehen den Entwurf, bevor Sie sich entscheiden."}},{"@type":"Question","name":"Ich habe keine Zeit dafür.","acceptedAnswer":{"@type":"Answer","text":"Ein Formular von rund 6 Minuten und Ihre Rückmeldungen. Erforderlich sind 81 Minuten, verteilt auf drei Wochen. Alles Übrige entscheiden Sie."}},{"@type":"Question","name":"Sie sind allein: was, wenn Sie ausfallen?","acceptedAnswer":{"@type":"Answer","text":"Ich verwende gängige Technik ohne Abhängigkeiten. Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag. Jede andere Fachperson kann übernehmen, ohne von vorne zu beginnen."}}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=2a30de9052" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=202a0aeb1b" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -620,7 +620,7 @@ if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=2a30de9052';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=202a0aeb1b';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -628,6 +628,120 @@ try{new PerformanceObserver(gemeldet).observe({type:'largest-contentful-paint',b
 setTimeout(gemeldet,400);
 if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()});else start()})();
 </script>
+<style id="system">
+/* ===== Gestaltungssystem (Redesign Oktober 2026, docs/entscheidungen.md Teil 3) =====
+   Flächen: Papier, Papier tief, Tinte, Kobalt. Weiss nur für Karten, Felder und Gerätemockups.
+   Sieben Schriftgrössen, 8-px-Raster, zwei Schatten, drei Radien. */
+:root{
+ --bg-papier:#F6F5F1;--bg-papier-tief:#ECE9E1;--bg-tinte:#11131A;--bg-tinte-hell:#1B1E28;--bg-kobalt:#2D4CF0;
+ --akzent-limette:#D6F24B;--akzent-koralle:#FF5A3C;
+ --text-lese:#2B2E37;--auf-tinte:#ECEAE4;--auf-tinte-2:rgba(236,234,228,0.72);--auf-tinte-linie:rgba(236,234,228,0.12);
+ --fs-1:13px;--fs-2:15px;--fs-3:17px;--fs-4:20px;--fs-5:clamp(23px,1.2vw + 12px,28px);--fs-6:clamp(30px,2.2vw + 10px,40px);--fs-7:clamp(38px,3.6vw + 8px,60px);
+ --sektion-y:88px;--titel-abstand:40px;
+ --schatten-1:0 1px 2px rgba(17,19,26,0.06),0 10px 28px -16px rgba(17,19,26,0.22);
+ --schatten-2:0 2px 4px rgba(17,19,26,0.08),0 28px 56px -24px rgba(17,19,26,0.34);
+ --r-1:10px;--r-2:16px;--r-3:24px;
+ /* bisherige Namen auf die neue Skala */
+ --fs-klein:var(--fs-1);--fs-text:var(--fs-3);--fs-lead:var(--fs-4);--fs-h3:var(--fs-5);--fs-h2:var(--fs-6);--fs-h1:var(--fs-7);
+ --a-6:var(--sektion-y)}
+@media(max-width:1023px){:root{--sektion-y:64px}}
+@media(max-width:767px){:root{--sektion-y:56px;--titel-abstand:28px}}
+/* Bänder: ein Abschnitt, eine Fläche */
+.band{position:relative;padding:var(--sektion-y) 0;color:var(--tinte)}
+.band-papier{background-color:var(--bg-papier)}
+.band-tief{background-color:var(--bg-papier-tief)}
+.band-tinte{background-color:var(--bg-tinte);color:var(--auf-tinte)}
+.band-kobalt{background-color:var(--bg-kobalt);color:#FFFFFF}
+/* feines Raster (höchstens 4 % Deckkraft), damit Flächen nicht steril wirken */
+.band-raster{background-image:radial-gradient(rgba(17,19,26,0.045) 1px,transparent 1.2px);background-size:24px 24px}
+.band-tinte.band-raster{background-image:radial-gradient(rgba(236,234,228,0.04) 1px,transparent 1.2px)}
+.band-tinte a:not(.btn){color:var(--akzent-limette)}
+.band-tinte :focus-visible,.band-kobalt :focus-visible{outline-color:var(--akzent-limette)}
+.band-tinte ::selection{background:var(--akzent-limette);color:var(--tinte)}
+.band .wrap{padding-top:0;padding-bottom:0}
+/* Titelblock */
+.augenbraue{margin:0 0 16px;font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:var(--fs-1);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-2)}
+.band-tinte .augenbraue{color:var(--akzent-limette)}
+.band-kobalt .augenbraue{color:#DDE3FF}
+.titel-1,.titel-2,.titel-3{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-0.03em;text-wrap:balance;margin:0}
+.titel-1{font-size:var(--fs-7);line-height:1.04}
+.titel-2{font-size:var(--fs-6);line-height:1.1}
+.titel-3{font-size:var(--fs-5);font-weight:700;line-height:1.2;letter-spacing:-0.02em}
+.einleitung{margin:16px 0 0;max-width:56ch;font-size:var(--fs-4);line-height:1.5;color:var(--text-lese);text-wrap:pretty}
+.band-tinte .einleitung{color:var(--auf-tinte-2)}
+.band-kobalt .einleitung{color:#E7EBFF}
+.titelblock{margin:0 0 var(--titel-abstand)}
+.lesetext{font-size:var(--fs-3);line-height:1.6;color:var(--text-lese);max-width:64ch;text-wrap:pretty}
+.band-tinte .lesetext{color:var(--auf-tinte-2)}
+.klein{font-size:var(--fs-1);line-height:1.5;color:var(--text-2)}
+.band-tinte .klein{color:var(--auf-tinte-2)}
+/* Zahlen, die verkaufen */
+.kennzahl{display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-6);line-height:1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kennzahl-gross{font-size:var(--fs-7)}
+.band-tinte .kennzahl{color:var(--akzent-limette)}
+/* Karten mit Tiefe */
+.karte{position:relative;background:#FFFFFF;border-radius:var(--r-2);box-shadow:var(--schatten-1);color:var(--tinte)}
+.band-tinte .karte-dunkel{background:var(--bg-tinte-hell);box-shadow:none;border:1px solid var(--auf-tinte-linie);color:var(--auf-tinte)}
+.karte-heben{transition:transform var(--dauer) var(--kurve),box-shadow var(--dauer) var(--kurve)}
+@media(hover:hover){.karte-heben:hover{transform:translateY(-2px);box-shadow:var(--schatten-2)}}
+/* Ganze Karte antippbar: ein echter Link, dessen ::after die Karte abdeckt */
+.karte-link{color:inherit;text-decoration:none}
+.karte-link::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:1}
+.karte-link:focus-visible{outline:none}
+.karte:has(.karte-link:focus-visible){outline:3px solid var(--primaer);outline-offset:4px}
+.karte .ueber-link{position:relative;z-index:2}
+/* Linien-Icons (Inline-SVG, 1.75 px, runde Enden) */
+.ic{flex:none;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ic-20{width:20px;height:20px}.ic-32{width:32px;height:32px}
+/* Chips (ruhig, normale Schreibweise) */
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:4px 12px;border-radius:999px;background:var(--bg-papier-tief);font-size:var(--fs-2);line-height:1.3;color:var(--tinte)}
+.band-tief .chip{background:#FFFFFF}
+.band-tinte .chip{background:rgba(236,234,228,0.08);color:var(--auf-tinte)}
+/* Einblenden beim Scrollen: nur mit JavaScript und ohne reduzierte Bewegung, einmal pro Element */
+@media(prefers-reduced-motion:no-preference){
+ html.einblenden-an .einblenden:not(.ist-da){opacity:0;transform:translateY(12px)}
+ html.einblenden-an .einblenden{transition:opacity 400ms ease-out,transform 400ms var(--kurve)}}
+/* Knöpfe auf dunklem Grund */
+.band-tinte .btn-sekundaer,.band-kobalt .btn-sekundaer{border-color:rgba(236,234,228,0.6);color:var(--auf-tinte)}
+@media(hover:hover){.band-tinte .btn-sekundaer:hover,.band-kobalt .btn-sekundaer:hover{background:var(--auf-tinte);color:var(--tinte)}}
+.knopfreihe{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+/* Musterprojekte: zwei Projekte, je eine Bühne mit eigenem Umschalter Desktop/Handy */
+.mp2-hero{padding-top:calc(var(--sektion-y) + 8px)}
+.mp2-hero-raster{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:end}
+.mp2-sprung{display:flex;flex-direction:column;gap:12px}
+.mp2-sprung a{display:flex;align-items:center;gap:16px;min-height:72px;padding:12px 20px;border:1px solid var(--auf-tinte-linie);border-radius:var(--r-2);background:var(--bg-tinte-hell);color:var(--auf-tinte);text-decoration:none;transition:border-color var(--dauer) var(--kurve),transform var(--dauer) var(--kurve)}
+.mp2-sprung a>span:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.mp2-sprung strong{font-size:var(--fs-4);font-weight:600;line-height:1.25}
+.mp2-sprung a>span:nth-child(2)>span{font-size:var(--fs-2);color:var(--auf-tinte-2)}
+.mp2-sprung-n{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-1);color:var(--akzent-limette)}
+@media(hover:hover){.mp2-sprung a:hover{border-color:rgba(236,234,228,0.4);transform:translateY(-2px)}}
+.mp2{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:center}
+.mp2-rev{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.mp2-rev .mp2-text{order:2}
+.mp2-fakten{display:flex;flex-wrap:wrap;gap:8px 24px;list-style:none;margin:24px 0 32px;padding:0}
+.mp2-fakten li{display:flex;align-items:center;gap:8px;font-size:var(--fs-2);font-variant-numeric:tabular-nums}
+.band-tinte .mp2-fakten li{color:var(--auf-tinte)}
+.mp2-notiz{margin:-12px 0 28px;max-width:52ch}
+.mp2-weiter{margin:12px 0 0}
+.band-tinte .einstieg{color:var(--akzent-limette)}
+.mp2-buehne{display:flex;flex-direction:column;align-items:center;gap:24px;min-width:0}
+.mp2-schalter{display:inline-flex;padding:4px;border-radius:999px;background:var(--bg-papier-tief)}
+.band-tinte .mp2-schalter{background:var(--bg-tinte-hell);box-shadow:inset 0 0 0 1px var(--auf-tinte-linie)}
+.mp2-schalter button{min-height:44px;min-width:104px;padding:0 20px;border:0;border-radius:999px;background:none;font-size:var(--fs-2);font-weight:600;color:var(--tinte);cursor:pointer;transition:background var(--dauer) var(--kurve),color var(--dauer) var(--kurve)}
+.band-tinte .mp2-schalter button{color:var(--auf-tinte)}
+.mp2-schalter button[aria-checked="true"]{background:var(--primaer);color:#FFFFFF}
+.mp2-geraet{display:flex;justify-content:center;width:100%;color:inherit;text-decoration:none;border-radius:var(--r-2)}
+.mp2-geraet:focus-visible{outline-offset:8px}
+.mp2-browser{display:block;width:100%;max-width:720px;box-shadow:var(--schatten-2)}
+.mp2-browser picture,.mp2-handy picture{display:block}
+.mp2-browser img,.mp2-handy img{display:block;width:100%;height:auto}
+.mp2-handy{display:block;width:280px;max-width:72vw}
+.mp2-handy .rahmen-schirm{display:block;padding-top:9%}
+.mp2-handy .rahmen-insel{top:1.6%;padding-top:5.6%;width:26%}
+@media(hover:hover){.mp2-geraet:hover .rahmen-browser,.mp2-geraet:hover .rahmen-handy{transform:translateY(-2px)}}
+@media(max-width:1023px){.mp2-hero-raster,.mp2{grid-template-columns:minmax(0,1fr);gap:40px}.mp2-rev .mp2-text{order:0}}
+@media(max-width:767px){.mp2-schalter button{min-width:96px}.mp2-sprung a{min-height:64px}}
+</style>
 <style id="mobil">
 /* Handy und Tablet bis 1023 px. Die Ansicht ab 1024 px bleibt unverändert. */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -767,7 +881,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  @keyframes menueBlendeAus{from{opacity:1}to{opacity:0}}
 }
 
-.gen-sektion{background:#ECEAE4;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie)}
+.gen-sektion{background:var(--bg-papier-tief)}
 .gen-titel{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px;color:var(--tinte)}
 .gen-lead{font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:var(--text-2);margin:0 0 40px}
 .gen-platz{min-height:740px}
