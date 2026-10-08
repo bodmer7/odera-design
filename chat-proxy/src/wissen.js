@@ -1,4 +1,4 @@
-// Erzeugt mit tools/wissen-build.mjs aus index.html. Nicht von Hand ändern.
+// Erzeugt mit tools/wissen-build.mjs aus src/seite.html. Nicht von Hand ändern.
 export const TEILE = [
  {
   "id": "/",

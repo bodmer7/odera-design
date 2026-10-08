@@ -4,6 +4,8 @@
   "description": "Website von ODERA Design. Die Website selbst braucht keinen Build; diese Datei enthält nur Entwicklungswerkzeuge (Musterprojekt Firstlicht).",
   "type": "module",
   "scripts": {
+    "build": "node tools/seo-build.mjs",
+    "test": "node tools/funktionstest.mjs",
     "firstlicht:build": "node tools/firstlicht/build.mjs",
     "firstlicht:test": "node --test tools/firstlicht/tests/*.test.mjs",
     "firstlicht:check": "node tools/firstlicht/check.mjs",

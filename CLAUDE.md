@@ -22,7 +22,9 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 8. Oktober 2
 
 ## Arbeitsweise
 
-- Stack: eine `index.html` mit Claude-Design-Vorlagen (`<x-dc>`), kein Astro. Nach **jeder** Änderung
+- Stack: Quelle ist `src/seite.html` mit Claude-Design-Vorlagen (`<x-dc>`), kein Astro. `index.html` und alle
+  Routen sind erzeugt (nur eigener Inhalt, ohne Vorlage), die Vorlage liegt erzeugt in `assets/js/vorlage.js`.
+  Tests: `node tools/funktionstest.mjs`, `node tools/links-pruefen.mjs`. Nach **jeder** Änderung
   `node tools/seo-build.mjs` laufen lassen, er erzeugt Unterseiten, Vorab-Block, Sitemap und das
   Wissen des Chat-Assistenten.
 - Änderungen nur in der Vorlage ab `<x-dc>` und im `<head>`. Der Vorab-Block `<!-- vorab:… -->` wird

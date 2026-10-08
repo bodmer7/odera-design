@@ -3,32 +3,34 @@
 //
 //   node tools/seo-build.mjs
 //
-// Quelle ist index.html. Daraus entstehen:
-//   - je Seite eine eigene Datei mit echter Adresse (angebot/index.html, ablauf/index.html, ...)
+// Quelle ist src/seite.html (Kopf, Stil und die Vorlage <x-dc> mit allen Seiten). Daraus entstehen:
+//   - je Seite eine eigene Datei mit echter Adresse (index.html, angebot/index.html, ...). Sie enthält nur
+//     den Kopf und den fertig gerenderten Inhalt dieser einen Seite (Vorab-Block), ohne Vorlage und ohne {{ }}.
+//   - assets/js/vorlage.js: die Vorlage mit allen Seiten für die Laufzeit. Jede Seite lädt sie erst nach dem
+//     ersten Zeichnen und setzt sie ins Dokument, danach übernimmt React (Seitenwechsel ohne Neuladen).
 //   - 404.html für den Fehlerfall des Webservers
-//   - robots.txt und sitemap.xml
+//   - robots.txt und sitemap.xml (mit lastmod: Datum, an dem sich der Text der Seite zuletzt geändert hat)
 // In jeder Datei stehen im <head> eigener Titel, Beschreibung, canonical, robots und Vorschau-Angaben.
-// Im <body> steht ein <noscript>-Block mit dem sichtbaren Text der Seite. Er hilft Suchmaschinen und
-// Programmen, die kein JavaScript ausführen, und Besucherinnen und Besuchern ohne JavaScript.
 //
-// Titel, Beschreibung, noindex und SITE liest das Skript aus index.html (Tabelle PAGES und Konstante SITE).
+// Titel, Beschreibung, noindex und SITE liest das Skript aus der Quelle (Tabelle PAGES und Konstante SITE).
 // Braucht Node 22 oder neuer und Google Chrome. Ein anderer Chrome-Pfad geht über die Variable CHROME.
 // Nach jeder Änderung an Texten oder Seiten in index.html erneut ausführen und die Ergebnisse einchecken.
 // Am Schluss entsteht auch die Wissensbasis des Chat-Assistenten (tools/wissen-build.mjs).
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { ROOT, leseSeiten, startServer, startChrome } from './lib/browser.mjs';
+import { createHash } from 'node:crypto';
+import { ROOT, QUELLE, leseSeiten, startServer, startChrome } from './lib/browser.mjs';
 
-// ---------- 1. Angaben aus index.html lesen ----------
-const quelle = readFileSync(join(ROOT, 'index.html'), 'utf8');
+// ---------- 1. Angaben aus der Quelle lesen ----------
+const quelle = readFileSync(QUELLE, 'utf8');
 const PAGES = leseSeiten(quelle);
 const SITE = (quelle.match(/ {2}SITE = '([^']+)';/) || [])[1];
 const EMAIL = (quelle.match(/ {2}EMAIL = '([^']+)';/) || [])[1];
-if (!SITE || !EMAIL) throw new Error('SITE oder EMAIL in index.html nicht gefunden.');
+if (!SITE || !EMAIL) throw new Error('SITE oder EMAIL in src/seite.html nicht gefunden.');
 const NAME = 'ODERA Design';
 const PREISE = JSON.parse((quelle.match(/ {2}PAKET_PREIS = (\[[^\]]+\]);/) || [])[1] || 'null');
-if (!PREISE || PREISE.length !== 3) throw new Error('PAKET_PREIS in index.html nicht gefunden.');
+if (!PREISE || PREISE.length !== 3) throw new Error('PAKET_PREIS in src/seite.html nicht gefunden.');
 // Vorschaubild für geteilte Links (WhatsApp, Mail, soziale Netzwerke), 1200 x 630
 const VORSCHAU = { url: '/assets/img/vorschau-odera.jpg', breite: 1200, hoehe: 630, alt: 'ODERA Design: Sie sehen Ihre neue Website, bevor Sie bezahlen. Ab CHF 890, Entwurf in 5 Arbeitstagen.' };
 
@@ -127,7 +129,8 @@ function kopf(pfad, teile = {}) {
   if (p.desc) zeilen.push(`<meta name="description" content="${escA(p.desc)}">`);
   zeilen.push(
     `<meta name="robots" content="${p.noindex ? 'noindex,follow' : 'index,follow'}">`,
-    `<link rel="canonical" href="${url}">`,
+    // Die Fehlerseite hat keine eigene Adresse und darum kein canonical
+    ...(pfad === '/404' ? [] : [`<link rel="canonical" href="${url}">`]),
     // Icon-Set aus tools/icons.mjs. Die Adressen bleiben dauerhaft gleich.
     '<link rel="icon" href="/favicon.ico" sizes="48x48">',
     '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
@@ -167,16 +170,20 @@ function kopf(pfad, teile = {}) {
   return zeilen.join('\n');
 }
 
-function noscriptBlock(pfad, teile) {
-  const nav = teile.nav.map((n) => `<li><a href="${escA(n.href)}">${esc(n.label)}</a></li>`).join('');
-  const kopfzeile = `<header><p><a href="/">${NAME}</a></p><nav aria-label="Hauptnavigation"><ul>${nav}</ul></nav></header>`;
-  let haupt = teile.main;
-  if (pfad === '/projekt-check') {
-    haupt = `<h1>Projekt-Check</h1><p>Der Projekt-Check braucht JavaScript. Schreiben Sie mir stattdessen: <a href="mailto:${escA(EMAIL)}">${esc(EMAIL)}</a></p>`;
-  }
-  return '<noscript>\n' + formatiere(kopfzeile) + '\n<main>\n' + formatiere(haupt) + '\n</main>\n' +
-    (pfad === '/projekt-check' || !teile.footer ? '' : '<footer>\n' + formatiere(teile.footer) + '\n</footer>\n') + '</noscript>';
+// Der Vorab-Block ist auch ohne JavaScript sichtbar. Nur der Projekt-Check braucht JavaScript: Dort steht ein Hinweis.
+function noscriptBlock(pfad) {
+  if (pfad !== '/projekt-check') return '';
+  return `<noscript><p class="ohne-js">Der Projekt-Check braucht JavaScript. Schreiben Sie mir stattdessen: <a href="mailto:${escA(EMAIL)}">${esc(EMAIL)}</a></p></noscript>`;
 }
+
+// Vorlage (<x-dc> und Komponenten-Skript) aus der Quelle. Sie kommt nicht in die Seiten, sondern nach assets/js/vorlage.js.
+const VORLAGE_RE = /<x-dc>[\s\S]*<\/x-dc>\s*<script type="text\/x-dc"[\s\S]*?<\/script>\n?/;
+const vorlageHtml = (quelle.match(VORLAGE_RE) || [])[0];
+if (!vorlageHtml) throw new Error('Vorlage <x-dc> mit Komponenten-Skript in src/seite.html nicht gefunden.');
+const vorlageJs = '// Erzeugt mit tools/seo-build.mjs aus src/seite.html. Nicht von Hand ändern.\n' +
+  '// Setzt die Vorlage mit allen Seiten ins Dokument, bevor assets/js/support.js sie mit React aufbaut.\n' +
+  'document.body.insertAdjacentHTML(\'beforeend\', ' + JSON.stringify(vorlageHtml.trim()).replace(/<\/(script)/gi, '<\\/$1') + ');\n';
+const VORLAGE_URL = 'assets/js/vorlage.js?v=' + createHash('sha256').update(vorlageJs).digest('hex').slice(0, 10);
 
 function baueSeite(pfad, teile) {
   let html = quelle;
@@ -185,11 +192,17 @@ function baueSeite(pfad, teile) {
     if (!re.test(html)) throw new Error(`Marker ${von} fehlt in index.html`);
     html = html.replace(re, () => `${von}\n${inhalt}\n${bis}`);
   };
-  tausche('<!-- seo:start -->', '<!-- seo:end -->', kopf(pfad, teile));
-  tausche('<!-- seo-noscript:start -->', '<!-- seo-noscript:end -->', noscriptBlock(pfad, teile));
+  tausche('<!-- seo:start -->', '<!-- seo:end -->', kopf(pfad, teile) +
+    // Vorlage früh, aber nachrangig laden: Sie wird erst nach dem ersten Zeichnen gebraucht
+    `\n<link rel="preload" href="${VORLAGE_URL}" as="script" fetchpriority="low">`);
+  tausche('<!-- seo-noscript:start -->', '<!-- seo-noscript:end -->', noscriptBlock(pfad));
   // Vorab gerenderte Fassung: sichtbar ab dem ersten Zeichnen, React ersetzt sie beim Aufbau (componentDidMount)
   tausche('<!-- vorab:start -->', '<!-- vorab:end -->', teile.vorab ? `<div id="vorab">${teile.vorab}</div>` : '');
   html = html.replace(/<html(\s[^>]*)?>/, '<html lang="de-CH">');
+  // Ohne Vorlage: keine Inhalte anderer Seiten, keine {{ }} im ausgelieferten HTML
+  html = html.replace(VORLAGE_RE, '');
+  if (!html.includes("VORLAGE=/*vorlage*/''")) throw new Error('Lader für die Vorlage in src/seite.html nicht gefunden.');
+  html = html.replace("VORLAGE=/*vorlage*/''", `VORLAGE='${VORLAGE_URL}'`);
   return html;
 }
 
@@ -198,31 +211,39 @@ const server = await startServer(PAGES);
 const basis = `http://127.0.0.1:${server.address().port}`;
 const chrome = await startChrome();
 const geschrieben = [];
+const fingerabdruck = {};
 try {
   for (const pfad of Object.keys(PAGES)) {
     let teile;
-    if (pfad === '/projekt-check') {
-      teile = await chrome.ausfuehren(basis + '/', AUSZUG); // Navigation kommt von der Startseite
-      teile = { nav: teile.nav, main: '', footer: '', vorab: '' };
-    } else {
-      teile = await chrome.ausfuehren(basis + urlOf(pfad), AUSZUG);
-      if (!teile.main || teile.main.length < 80) throw new Error('Leerer Textauszug für ' + pfad);
-    }
+    teile = await chrome.ausfuehren(basis + urlOf(pfad), AUSZUG);
+    // Der Projekt-Check zeigt vorab die erste Frage. Er hat wenig Text, darum keine Mindestlänge.
+    if (pfad !== '/projekt-check' && (!teile.main || teile.main.length < 80)) throw new Error('Leerer Textauszug für ' + pfad);
     const ziel = pfad === '/' ? 'index.html' : pfad === '/404' ? '404.html' : join(pfad.slice(1), 'index.html');
     mkdirSync(dirname(join(ROOT, ziel)), { recursive: true });
     writeFileSync(join(ROOT, ziel), baueSeite(pfad, teile));
+    fingerabdruck[pfad] = createHash('sha256').update(teile.main + (teile.title || '') + (PAGES[pfad].desc || '')).digest('hex').slice(0, 16);
     geschrieben.push(`${ziel.padEnd(34)} ${String(Math.round(teile.main.length / 100) / 10).padStart(5)} KB Text`);
-    // Nach der Startseite liegt index.html neu vor. Quelle bleibt die zu Beginn gelesene Fassung.
   }
 } finally {
   chrome.schliessen();
   server.close();
 }
 
+writeFileSync(join(ROOT, 'assets', 'js', 'vorlage.js'), vorlageJs);
+geschrieben.push('assets/js/vorlage.js'.padEnd(34) + ` ${String(Math.round(vorlageJs.length / 102.4) / 10).padStart(5)} KB, ${VORLAGE_URL.split('?')[1]}`);
+
+// lastmod: Datum der letzten Textänderung je Seite. Fingerabdrücke in tools/sitemap-stand.json.
+const STAND_DATEI = join(ROOT, 'tools', 'sitemap-stand.json');
+const stand = existsSync(STAND_DATEI) ? JSON.parse(readFileSync(STAND_DATEI, 'utf8')) : {};
+const heute = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Zurich' }).format(new Date());
+for (const [p, fp] of Object.entries(fingerabdruck)) {
+  if (!stand[p] || stand[p].fp !== fp) stand[p] = { fp, lastmod: heute };
+}
+writeFileSync(STAND_DATEI, JSON.stringify(stand, null, 2) + '\n');
 const indexierbar = Object.keys(PAGES).filter((p) => !PAGES[p].noindex);
 writeFileSync(join(ROOT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  indexierbar.map((p) => `  <url><loc>${SITE}${urlOf(p)}</loc></url>`).join('\n') + '\n</urlset>\n');
+  indexierbar.map((p) => `  <url><loc>${SITE}${urlOf(p)}</loc><lastmod>${(stand[p] || {}).lastmod || heute}</lastmod></url>`).join('\n') + '\n</urlset>\n');
 writeFileSync(join(ROOT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 geschrieben.push('sitemap.xml'.padEnd(34) + `${indexierbar.length} Adressen`, 'robots.txt');
 

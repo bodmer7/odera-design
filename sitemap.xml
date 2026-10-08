@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://odera.ch/</loc></url>
-  <url><loc>https://odera.ch/angebot/</loc></url>
-  <url><loc>https://odera.ch/ablauf/</loc></url>
-  <url><loc>https://odera.ch/musterprojekte/</loc></url>
-  <url><loc>https://odera.ch/ueber-mich/</loc></url>
+  <url><loc>https://odera.ch/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://odera.ch/angebot/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://odera.ch/ablauf/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://odera.ch/musterprojekte/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://odera.ch/ueber-mich/</loc><lastmod>2026-10-08</lastmod></url>
 </urlset>

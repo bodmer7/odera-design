@@ -1,5 +1,5 @@
 // Gemeinsamer Teil von seo-build.mjs und wissen-build.mjs:
-// ein kleiner Webserver für index.html und ein Chrome ohne Fenster, der jede Seite rendert.
+// ein kleiner Webserver für die Quelle src/seite.html und ein Chrome ohne Fenster, der jede Seite rendert.
 
 import { readFileSync, existsSync, mkdtempSync, rmSync } from 'node:fs';
 import { createServer } from 'node:http';
@@ -9,9 +9,11 @@ import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 
 export const ROOT = dirname(dirname(dirname(fileURLToPath(import.meta.url))));
+// Quelle aller Seiten: Kopf, Stil und die Vorlage <x-dc> mit allen Seiten. Die Dateien index.html, angebot/index.html usw. sind erzeugt.
+export const QUELLE = join(ROOT, 'src', 'seite.html');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// Tabelle PAGES aus index.html
+// Tabelle PAGES aus der Quelle
 export function leseSeiten(quelle) {
   const pagesText = quelle.match(/ {2}PAGES = (\{[\s\S]*?\n {2}\});/);
   if (!pagesText) throw new Error('Tabelle PAGES in index.html nicht gefunden.');
@@ -26,7 +28,7 @@ export function startServer(PAGES) {
     const route = pfad.replace(/\/index\.html$/, '/').replace(/\/+$/, '') || '/';
     let datei = null;
     if (extname(pfad) && existsSync(join(ROOT, pfad)) && !pfad.endsWith('/index.html')) datei = join(ROOT, pfad);
-    else if (PAGES[route]) datei = join(ROOT, 'index.html');
+    else if (PAGES[route]) datei = QUELLE;
     if (!datei) { res.writeHead(404); res.end('nicht gefunden'); return; }
     res.writeHead(200, { 'content-type': TYPES[extname(datei)] || 'application/octet-stream', 'cache-control': 'no-store' });
     res.end(readFileSync(datei));

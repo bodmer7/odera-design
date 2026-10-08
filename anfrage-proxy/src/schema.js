@@ -1,4 +1,4 @@
-// Erzeugt mit tools/anfrage-schema.mjs aus index.html (Konstante ANFRAGE). Nicht von Hand ändern.
+// Erzeugt mit tools/anfrage-schema.mjs aus src/seite.html (Konstante ANFRAGE). Nicht von Hand ändern.
 export const ANFRAGE = {
  "gesamtMax": 20000,
  "abschnitte": [

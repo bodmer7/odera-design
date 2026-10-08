@@ -3,7 +3,7 @@
 //
 //   node tools/wissen-build.mjs      (läuft auch automatisch am Ende von tools/seo-build.mjs)
 //
-// Quelle ist dieselbe wie für die Website: index.html. Das Skript rendert jede öffentliche Seite in
+// Quelle ist dieselbe wie für die Website: src/seite.html. Das Skript rendert jede öffentliche Seite in
 // Chrome und übernimmt den sichtbaren Text wörtlich. Dazu kommen einige Angaben, die nur im Code
 // stehen (Wochenplan der Erreichbarkeit, Referenzpreise, Hinweis im Projekt-Check). Nichts wird von Hand ergänzt.
 //
@@ -17,10 +17,10 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { ROOT, leseSeiten, startServer, startChrome } from './lib/browser.mjs';
+import { ROOT, QUELLE, leseSeiten, startServer, startChrome } from './lib/browser.mjs';
 
 const ZIEL = join(ROOT, 'chat-proxy', 'src', 'wissen.js');
-const quelle = readFileSync(join(ROOT, 'index.html'), 'utf8');
+const quelle = readFileSync(QUELLE, 'utf8');
 const PAGES = leseSeiten(quelle);
 const SITE = (quelle.match(/ {2}SITE = '([^']+)';/) || [])[1];
 const urlOf = (p) => (p === '/' ? '/' : p + '/');
@@ -79,7 +79,7 @@ function verdichte(text, gesehen) {
 // ---------- Angaben, die nur im Code stehen ----------
 function wert(name) {
   const m = quelle.match(new RegExp(' {2}' + name + ' = (\\{[\\s\\S]*?\\n {2}\\});|' + ' {2}' + name + ' = ([^;\\n]+);'));
-  if (!m) throw new Error(name + ' in index.html nicht gefunden.');
+  if (!m) throw new Error(name + ' in src/seite.html nicht gefunden.');
   return new Function('return ' + (m[1] || m[2]))();
 }
 const TAGE = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
@@ -98,7 +98,7 @@ function wochenplan() {
 function referenz() {
   const preise = wert('PAKET_PREIS');
   const ref = quelle.match(/const refMap = (\{[^}]+\});/);
-  if (!ref) throw new Error('refMap in index.html nicht gefunden.');
+  if (!ref) throw new Error('refMap in src/seite.html nicht gefunden.');
   const map = new Function('return ' + ref[1])();
   const absatz = quelle.match(/REFERENZ_SATZ = '(Ich suche zwei Betriebe, deren Website ich zeigen darf\.[^']*)';/);
   if (!absatz) throw new Error('Text zum Referenzpreis nicht gefunden.');
@@ -167,19 +167,19 @@ for (const s of roh.filter((r) => !r.immer)) {
 const alles = TEILE.map((t) => t.text).join('\n');
 if (/[–—]/.test(alles)) console.warn('Hinweis: Die Wissensbasis enthält Gedankenstriche.');
 mkdirSync(dirname(ZIEL), { recursive: true });
-writeFileSync(ZIEL, `// Erzeugt mit tools/wissen-build.mjs aus index.html. Nicht von Hand ändern.\n` +
+writeFileSync(ZIEL, `// Erzeugt mit tools/wissen-build.mjs aus src/seite.html. Nicht von Hand ändern.\n` +
   `export const TEILE = ${JSON.stringify(TEILE, null, 1)};\n`);
 const kernZeichen = TEILE.filter((t) => t.immer).reduce((s, t) => s + t.text.length, 0);
 console.log(`chat-proxy/src/wissen.js: Kern ${kernZeichen} Zeichen, dazu je nach Frage ` +
   TEILE.filter((t) => !t.immer).map((t) => `${t.titel} ${t.text.length}`).join(', '));
 
 // ---------- Feste Antworten für die vier Vorschläge im Chat ----------
-// Kosten keine Anfrage an das Sprachmodell. Beträge und Texte kommen aus index.html, damit nichts veraltet.
+// Kosten keine Anfrage an das Sprachmodell. Beträge und Texte kommen aus src/seite.html, damit nichts veraltet.
 {
   const liste = (name) => new Function('return ' + (quelle.match(new RegExp(' {2}' + name + ' = (\\[[\\s\\S]*?\\n {2}\\]);')) || [])[1])();
   const chf = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '’');
   const preise = wert('PAKET_PREIS');
-  // Platzhalter wie in index.html (werte()): Zahlen kommen aus denselben Konstanten
+  // Platzhalter wie in src/seite.html (werte()): Zahlen kommen aus denselben Konstanten
   const zahlwort = wert('ZAHLWORT'), tage = wert('ENTWURF_TAGE');
   const platz = { MIN: String(wert('CHECK_MINUTEN')), TAGE: tage + ' Arbeitstagen', TAGE_WORT: (zahlwort[tage] || tage) + ' Arbeitstagen', PREIS_STD: chf(preise[1]) };
   const werte = (t) => String(t).replace(/\{([A-Z_]+)\}/g, (m, k) => { if (platz[k] === undefined) throw new Error('Platzhalter {' + k + '} in fester Chat-Antwort nicht auflösbar.'); return platz[k]; });
@@ -208,9 +208,9 @@ console.log(`chat-proxy/src/wissen.js: Kern ${kernZeichen} Zeichen, dazu je nach
     'Muss ich etwas anzahlen?': 'Nein. Der Entwurf ist kostenlos und unverbindlich. Die Rechnung über den Fixpreis kommt erst, wenn Sie den Entwurf annehmen, einmal und ohne Anzahlung.',
   };
   const erwartet = wert('CHAT_VORSCHLAEGE');
-  if (JSON.stringify(Object.keys(vorlagen)) !== JSON.stringify(erwartet)) throw new Error('CHAT_VORSCHLAEGE in index.html passt nicht zu den festen Antworten: ' + erwartet.join(' | '));
+  if (JSON.stringify(Object.keys(vorlagen)) !== JSON.stringify(erwartet)) throw new Error('CHAT_VORSCHLAEGE in src/seite.html passt nicht zu den festen Antworten: ' + erwartet.join(' | '));
   const ZIEL_V = join(ROOT, 'assets', 'js', 'chat-vorlagen.js');
-  writeFileSync(ZIEL_V, '// Erzeugt mit tools/wissen-build.mjs aus index.html. Nicht von Hand ändern.\n// Feste Antworten auf die Vorschläge im Chat, ohne Anfrage an das Sprachmodell.\n' +
+  writeFileSync(ZIEL_V, '// Erzeugt mit tools/wissen-build.mjs aus src/seite.html. Nicht von Hand ändern.\n// Feste Antworten auf die Vorschläge im Chat, ohne Anfrage an das Sprachmodell.\n' +
     `export const VORLAGEN = ${JSON.stringify(vorlagen, null, 1)};\n`);
   console.log(`assets/js/chat-vorlagen.js: ${Object.keys(vorlagen).length} feste Antworten`);
 }

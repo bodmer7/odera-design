@@ -8,6 +8,7 @@ exclude:
   - README.md
   # Dokumentation, Werkzeuge und Worker gehören nicht auf die Website
   - docs
+  - src
   - tools
   - workers
   # Entwicklungswerkzeuge und Notizen des Musterprojekts Firstlicht (siehe tools/firstlicht/)

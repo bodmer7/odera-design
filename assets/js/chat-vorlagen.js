@@ -1,4 +1,4 @@
-// Erzeugt mit tools/wissen-build.mjs aus index.html. Nicht von Hand ändern.
+// Erzeugt mit tools/wissen-build.mjs aus src/seite.html. Nicht von Hand ändern.
 // Feste Antworten auf die Vorschläge im Chat, ohne Anfrage an das Sprachmodell.
 export const VORLAGEN = {
  "Was kostet eine Website?": "Es gibt drei Pakete mit Fixpreis, einmalig und ohne Abonnement:\n- **Website** CHF 890: eine Seite mit allen Abschnitten und Kontaktformular\n- **Standard** CHF 1’900: bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil\n- **Pro** CHF 3’400: bis 10 Seiten, Online-Terminbuchung, zweite Sprache, Texte selbst bearbeiten\n\nDazu optional: ein Logo für CHF 390 zusammen mit der Website, Texte von Nico für CHF 150 pro Seite. Den Betrieb danach übernehmen Sie selbst oder Nico ab CHF 240 pro Jahr.\n\nWelches Paket zu Ihnen passt, zeigt der [Preis-Rechner](/angebot/#rechner).",
