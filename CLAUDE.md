@@ -53,6 +53,19 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 8. Oktober 2
 - Mindestdauer bis zum Senden: 20 s (voll), 6 s (Kurzversion). Schnellere Anfragen lehnt der Worker
   ab, auch in Tests.
 
+### Statistik (Teil 11, live seit 8. Oktober 2026)
+- Eigener Worker `odera-stats` in `workers/odera-stats/`, D1 `odera-stats` in der EU (Jurisdiktion eu),
+  Rohdaten nach 14 Monaten gelöscht. Referenz für Ereignisse, IDs und API: `docs/tracking.md`.
+- Skript `assets/js/statistik.js` (Version im Link `?v=` erhöhen), Banner mit gleichwertigem Zustimmen und
+  Ablehnen, erscheint nach der ersten Handlung oder nach 2,5 s. Wahl im localStorage, Widerruf über
+  «Einstellungen» in der Fusszeile und im Datenschutz Abschnitt 14.
+- Abschnitte der Startseite tragen `data-abschnitt`. Neue Abschnitte und Branchenseiten bekommen es auch und
+  werden in `docs/tracking.md` und in `config/abschnitte.json` im Akquise-Repo nachgetragen.
+- Datenschutz: Abschnitt 3 sagt neu «Statistik nur mit Einwilligung» (die alte Aussage «keine Statistik» wäre
+  falsch geworden), Abschnitt 14 neu. Fusszeile: «Keine Cookies. Statistik nur mit Ihrer Einwilligung.»
+- Tests: `node tools/funktionstest.mjs … statistik`. Die übrigen Teile und `links-pruefen` laufen wie bei
+  einem Besucher, der abgelehnt hat.
+
 ### Musterprojekt Doppelmeter
 - Eigene statische Seite unter `/musterprojekte/doppelmeter/`, `noindex`, nicht in der Sitemap.
   `/muster/doppelmeter.html` leitet weiter. Schriften lokal, Fotos von Unsplash, Nachweise im Impressum.

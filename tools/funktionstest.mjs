@@ -24,6 +24,13 @@ const warte = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const browser = await chromium.launch({ channel: process.env.PW_CHANNEL || 'chrome' });
 
+// Statistik-Banner: Die übrigen Teile laufen wie bei einem Besucher, der die Statistik abgelehnt hat.
+async function neuerKontext(optionen, wahl = 'nein') {
+  const ctx = await browser.newContext(optionen);
+  if (wahl) await ctx.addInitScript((w) => { try { localStorage.setItem('odera-statistik', w); } catch (e) { /* ohne Speicher */ } }, wahl);
+  return ctx;
+}
+
 // Konsolenfehler, Seitenfehler und fehlgeschlagene Anfragen eines Tabs sammeln
 function beobachten(page) {
   const probleme = [];
@@ -90,7 +97,7 @@ async function senden(page, gesendet, art) {
 try {
   if (TEILE.includes('routen')) {
     for (const breite of BREITEN) {
-      const ctx = await browser.newContext({ viewport: { width: breite, height: 900 }, reducedMotion: 'reduce', ...(breite < 768 ? { isMobile: true, hasTouch: true } : {}) });
+      const ctx = await neuerKontext({ viewport: { width: breite, height: 900 }, reducedMotion: 'reduce', ...(breite < 768 ? { isMobile: true, hasTouch: true } : {}) });
       for (const r of ROUTEN) {
         const page = await ctx.newPage();
         const probleme = beobachten(page);
@@ -107,7 +114,7 @@ try {
   }
 
   if (TEILE.includes('navigation')) {
-    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const ctx = await neuerKontext({ viewport: { width: 1440, height: 900 } });
     const page = await ctx.newPage();
     const probleme = beobachten(page);
     await page.goto(BASIS + '/', { waitUntil: 'networkidle' });
@@ -126,7 +133,7 @@ try {
 
   if (TEILE.includes('check')) {
     for (const geraet of ['desktop', 'handy']) {
-      const ctx = await browser.newContext(geraet === 'handy' ? { ...devices['iPhone 13'] } : { viewport: { width: 1440, height: 900 } });
+      const ctx = await neuerKontext(geraet === 'handy' ? { ...devices['iPhone 13'] } : { viewport: { width: 1440, height: 900 } });
       const gesendet = await versandAbfangen(ctx);
       const page = await ctx.newPage();
       const probleme = beobachten(page);
@@ -165,7 +172,7 @@ try {
   }
 
   if (TEILE.includes('kurz')) {
-    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const ctx = await neuerKontext({ viewport: { width: 1440, height: 900 } });
     const gesendet = await versandAbfangen(ctx);
     const page = await ctx.newPage();
     const probleme = beobachten(page);
@@ -180,7 +187,7 @@ try {
 
   if (TEILE.includes('chat')) {
     for (const geraet of ['desktop', 'handy']) {
-      const ctx = await browser.newContext(geraet === 'handy' ? { ...devices['iPhone 13'] } : { viewport: { width: 1440, height: 900 } });
+      const ctx = await neuerKontext(geraet === 'handy' ? { ...devices['iPhone 13'] } : { viewport: { width: 1440, height: 900 } });
       const anfragenKi = [];
       await ctx.route('https://odera-chat.odera-chat-proxy.workers.dev/**', (route) => { anfragenKi.push(route.request().url()); route.abort(); });
       const page = await ctx.newPage();
@@ -207,7 +214,7 @@ try {
   }
 
   if (TEILE.includes('generator')) {
-    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const ctx = await neuerKontext({ viewport: { width: 1440, height: 900 } });
     const page = await ctx.newPage();
     const probleme = beobachten(page);
     const fremd = [];
@@ -239,6 +246,74 @@ try {
     ok(!fremd.length, 'Vorschau-Werkzeug ohne Anfragen an fremde Server' + (fremd.length ? ': ' + fremd.join(', ') : ''));
     ok(!probleme.length, 'Vorschau-Werkzeug ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
     await ctx.close();
+  }
+  if (TEILE.includes('statistik')) {
+    // Banner, Einwilligung, Widerruf und gesendete Ereignisse (an odera-stats, hier abgefangen)
+    for (const [geraet, optionen] of [['Desktop', { viewport: { width: 1440, height: 900 } }], ['Handy', { ...devices['iPhone 13'] }]]) {
+      const ctx = await neuerKontext(optionen, null);
+      const gesendet = [];
+      await ctx.route('https://odera-stats.odera-chat-proxy.workers.dev/**', async (route) => {
+        try { gesendet.push(JSON.parse(route.request().postData() || '{}')); } catch (e) { gesendet.push({ fehler: true }); }
+        await route.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': BASIS } });
+      });
+      const page = await ctx.newPage();
+      const probleme = beobachten(page);
+      await page.goto(BASIS + '/', { waitUntil: 'networkidle' });
+      const banner = page.locator('.st-banner');
+      ok(!(await banner.isVisible().catch(() => false)), `${geraet}: Banner bremst das erste Zeichnen nicht (erscheint verzögert)`);
+      await warte(2800);
+      ok(await banner.isVisible(), `${geraet}: Banner erscheint ohne gespeicherte Wahl`);
+      const knoepfe = await banner.locator('button').evaluateAll((b) => b.map((x) => ({ t: x.textContent, k: x.className, w: Math.round(x.getBoundingClientRect().width) })));
+      ok(knoepfe.length === 2 && knoepfe[0].k === knoepfe[1].k && /Zustimmen/.test(knoepfe[0].t) && /Ablehnen/.test(knoepfe[1].t), `${geraet}: Zustimmen und Ablehnen gleichwertig`);
+      const breite = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
+      ok(breite, `${geraet}: Banner ohne seitliches Scrollen`);
+      await page.mouse.wheel(0, 2000); await warte(1500);
+      ok(!gesendet.length, `${geraet}: vor der Wahl wird nichts gesendet`);
+      await banner.getByRole('button', { name: 'Ablehnen' }).click();
+      await warte(300);
+      ok(!(await banner.isVisible().catch(() => false)), `${geraet}: Banner nach Ablehnen weg`);
+      await page.mouse.wheel(0, 3000); await warte(6000);
+      ok(!gesendet.length, `${geraet}: nach Ablehnen wird nichts gesendet`);
+      // Wahl ändern über die Fusszeile
+      await page.locator('[data-statistik-einstellungen]').filter({ visible: true }).first().click();
+      await warte(300);
+      ok(/Zurzeit ausgeschaltet/.test(await banner.textContent()), `${geraet}: Einstellungen öffnen den Banner mit der aktuellen Wahl`);
+      await banner.getByRole('button', { name: 'Zustimmen' }).click();
+      await page.evaluate(() => window.scrollTo(0, 0)); await warte(300);
+      for (let i = 0; i < 12; i++) { await page.mouse.wheel(0, 700); await warte(250); }
+      await warte(6000);
+      const ereignisse = gesendet.flatMap((g) => g.e || []);
+      const typen = new Set(ereignisse.map((e) => e.t));
+      ok(typen.has('consent_yes') && typen.has('page_view'), `${geraet}: nach Zustimmen kommen consent_yes und page_view`);
+      const abschnitte = new Set(ereignisse.filter((e) => e.t === 'section_view').map((e) => e.z));
+      ok(['hero', 'preise', 'abschluss'].every((x) => abschnitte.has(x)), `${geraet}: Abschnitte der Startseite gemessen (${[...abschnitte].join(', ')})`);
+      ok(ereignisse.some((e) => e.t === 'scroll' && e.n === 100), `${geraet}: Scrolltiefe gemessen`);
+      const erste = ereignisse.find((e) => e.t === 'page_view');
+      ok(erste && erste.erster === true && 'r' in erste, `${geraet}: erster Seitenaufruf mit Herkunft`);
+      ok(gesendet.every((g) => /^[A-Za-z0-9_-]{16,40}$/.test(g.s || '') && ['mobil', 'tablet', 'desktop'].includes(g.g)), `${geraet}: zufällige Sitzungs-ID und Gerätetyp`);
+      ok(!(await ctx.cookies()).length, `${geraet}: keine Cookies`);
+      // Seitenwechsel ohne Neuladen und Projekt-Check
+      const vorher = ereignisse.length;
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await sichtbar(page, 'a[href="/projekt-check/"]').first().click();
+      await warte(2500);
+      await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange')));
+      await warte(6000);
+      const neu = gesendet.flatMap((g) => g.e || []).slice(vorher);
+      ok(neu.some((e) => e.t === 'cta_click'), `${geraet}: Klick auf den Projekt-Check gemessen`);
+      ok(neu.some((e) => e.t === 'page_view' && e.p === '/projekt-check/') && neu.some((e) => e.t === 'projektcheck_start') && neu.some((e) => e.t === 'projektcheck_step' && e.n === 1), `${geraet}: Projekt-Check: Seitenaufruf, Start und Schritt 1`);
+      ok(!JSON.stringify(gesendet).match(/@|Testbetrieb/), `${geraet}: keine Eingaben in den gesendeten Daten`);
+      // Widerruf (Fusszeile auf der Startseite; der Projekt-Check hat keine Fusszeile)
+      await page.goto(BASIS + '/', { waitUntil: 'networkidle' }); await warte(800);
+      await page.locator('[data-statistik-einstellungen]').filter({ visible: true }).first().click();
+      await warte(300);
+      await banner.getByRole('button', { name: 'Ablehnen' }).click();
+      const nachWiderruf = gesendet.length;
+      await page.mouse.wheel(0, 2000); await warte(6000);
+      ok(gesendet.length === nachWiderruf, `${geraet}: nach dem Widerruf wird nichts mehr gesendet`);
+      ok(!probleme.length, `${geraet}: Statistik ohne Konsolenfehler` + (probleme.length ? ': ' + probleme.join(' | ') : ''));
+      await ctx.close();
+    }
   }
 } finally {
   await browser.close();

@@ -28,7 +28,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
-<link rel="preload" href="assets/js/vorlage.js?v=258a971ad7" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=670695ec6c" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -612,11 +612,13 @@ if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1
 <script>window.__resources = {}; // Seite nicht ein zweites Mal laden (support.js), logo.dc.html liest auch kleingeschriebene Eigenschaften</script>
 <script defer src="assets/js/vendor/react-18.3.1.production.min.js"></script>
 <script defer src="assets/js/vendor/react-dom-18.3.1.production.min.js"></script>
+<!-- Statistik nur nach Einwilligung (Banner), ohne Cookies: assets/js/statistik.js, docs/tracking.md. Bei Änderungen v= erhöhen (Zwischenspeicher 1 Woche). -->
+<script defer src="assets/js/statistik.js?v=1"></script>
 <script>
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=258a971ad7';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=670695ec6c';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -1222,7 +1224,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <div class="row" style="justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(246, 245, 241, 0.15); gap: 16px;">
         <p style="font-size: 16px; color: var(--linie-stark); margin: 0px;">© 2026 ODERA Design · Nico Bodmer</p>
         <div class="row f-tip" style="gap: 24px;">
-          <p style="font-size: 13px; color: var(--linie-stark); margin: 0px;">Keine Cookies, kein Tracking.</p>
+          <p style="font-size: 13px; color: var(--linie-stark); margin: 0px;">Keine Cookies. Statistik nur mit Ihrer Einwilligung. <a href="/datenschutz/#ds-14" data-statistik-einstellungen="" style="color: var(--linie-stark);">Einstellungen</a></p>
         </div>
       </div>
     </div>

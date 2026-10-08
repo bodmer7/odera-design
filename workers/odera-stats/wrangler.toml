@@ -1,0 +1,30 @@
+# Cloudflare Worker für die Besucherstatistik von odera.ch (Teil 11).
+# Erfasst Ereignisse nur nach Einwilligung, ohne IP-Adressen und ohne Cookies.
+# Liefert dem Akquise-Tool die Zusammenfassung (GET /api/summary, Bearer STATS_READ_TOKEN).
+# Läuft im Gratis-Plan, ohne Zahlungsmittel.
+name = "odera-stats"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# Keine dauerhaften Protokolle. Live mitlesen: npx wrangler tail
+[observability]
+enabled = false
+
+[vars]
+ERLAUBTE_URSPRUENGE = "https://odera.ch,https://www.odera.ch"
+# Schutz des Gratis-Kontingents von D1 (100'000 geschriebene Zeilen pro Tag)
+TAGESLIMIT_EREIGNISSE = "20000"
+
+# Datenbank in der EU (Jurisdiktion eu)
+[[d1_databases]]
+binding = "DB"
+database_name = "odera-stats"
+database_id = "47b954b2-20eb-44dd-9957-458259fdd405"
+migrations_dir = "migrations"
+
+# Täglich um 03:17 UTC: Rohdaten älter als 14 Monate löschen
+[triggers]
+crons = ["17 3 * * *"]
+
+# Secret (nie hier eintragen, sondern mit «npx wrangler secret put NAME»):
+#   STATS_READ_TOKEN   Lesezugriff für das Akquise-Tool (gleicher Wert wie im Worker odera-akquise)

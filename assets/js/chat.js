@@ -171,8 +171,12 @@ function checkAnbieten(text) {
 }
 
 // Feste Antwort auf einen Vorschlag, ohne Anfrage an das Sprachmodell
+// Statistik (nur nach Einwilligung, assets/js/statistik.js), ohne Inhalte der Nachrichten
+function melden(t, z) { window.dispatchEvent(new CustomEvent('odera:messung', { detail: z ? { t, z } : { t } })); }
+
 function vorlage(text) {
   if (laufend) return;
+  melden('chat_preset', text);
   if (intro) { const warImIntro = intro.contains(document.activeElement); intro.remove(); intro = null; if (warImIntro) eingabe.focus(); }
   blase('oc-ich', text);
   blase('oc-ki', VORLAGEN[text]);
@@ -195,6 +199,7 @@ async function frage(text) {
   if (text.length > 1000) { fehlermeldung('Bitte fassen Sie sich kürzer, höchstens 1000 Zeichen.'); return; }
   if (intro) { const warImIntro = intro.contains(document.activeElement); intro.remove(); intro = null; if (warImIntro) eingabe.focus(); }
   blase('oc-ich', text);
+  melden('chat_send');
   eingabe.value = ''; groesse();
   const antwort = blase('oc-ki', '');
   antwort.appendChild(el('span', { class: 'oc-tippt', 'aria-label': 'Antwort wird geschrieben' }, [el('span'), el('span'), el('span')]));
@@ -377,6 +382,7 @@ export function oeffnen(opts = {}) {
   if (!offen) {
     document.body.appendChild(root);
     offen = true;
+    melden('chat_open');
     window.addEventListener('popstate', beiNavigation);
     window.addEventListener('keydown', escSeite);
     document.documentElement.dataset.chat = '1';

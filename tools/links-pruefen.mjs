@@ -24,6 +24,8 @@ try {
   for (const [gname, geraet] of Object.entries(GERAETE)) {
     const ctx = await browser.newContext({ ...geraet, viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
     if (MIT_BANNER) await ctx.addInitScript(() => { try { localStorage.removeItem('odera-statistik'); } catch {} window.__bannerSofort = true; });
+    // Ohne --banner wie ein Besucher, der die Statistik abgelehnt hat (kein Banner über der Fusszeile)
+    else await ctx.addInitScript(() => { try { localStorage.setItem('odera-statistik', 'nein'); } catch {} });
     for (const r of ROUTEN) {
       const page = await ctx.newPage();
       const antwort = await page.goto(BASIS + r, { waitUntil: 'networkidle' }).catch(() => null);

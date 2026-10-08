@@ -612,6 +612,8 @@ if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1
 <script>window.__resources = {}; // Seite nicht ein zweites Mal laden (support.js), logo.dc.html liest auch kleingeschriebene Eigenschaften</script>
 <script defer src="assets/js/vendor/react-18.3.1.production.min.js"></script>
 <script defer src="assets/js/vendor/react-dom-18.3.1.production.min.js"></script>
+<!-- Statistik nur nach Einwilligung (Banner), ohne Cookies: assets/js/statistik.js, docs/tracking.md. Bei Änderungen v= erhöhen (Zwischenspeicher 1 Woche). -->
+<script defer src="assets/js/statistik.js?v=1"></script>
 <script>
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
@@ -853,7 +855,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 
 <sc-if value="{{ isStart }}" hint-placeholder-val="{{ true }}">
 <div>
-<section class="hero" aria-labelledby="hero-t">
+<section class="hero" aria-labelledby="hero-t" data-abschnitt="hero">
   <div class="wrap hero-pad">
     <div class="inner hero-raster">
       <div class="hero-text">
@@ -894,7 +896,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   </div>
 </section>
 
-<section class="sektion sektion-flaeche" aria-labelledby="muster-t" id="start-muster">
+<section class="sektion sektion-flaeche" aria-labelledby="muster-t" id="start-muster" data-abschnitt="musterprojekte">
   <div class="wrap"><div class="inner">
     <p class="label abschnitt-nr">01 · Musterprojekte</p>
     <h2 id="muster-t" class="t-h2" style="margin:0 0 12px">So sehen meine Seiten aus</h2>
@@ -929,7 +931,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   </div></div>
 </section>
 
-<section class="sektion" aria-labelledby="pakete-t">
+<section class="sektion" aria-labelledby="pakete-t" data-abschnitt="preise">
   <div class="wrap"><div class="inner">
     <p class="label abschnitt-nr">02 · Preise</p>
     <h2 id="pakete-t" class="t-h2" style="margin:0 0 12px">Drei Pakete, feste Preise</h2>
@@ -962,7 +964,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   </div></div>
 </section>
 
-<section class="sektion sektion-flaeche" aria-labelledby="ablauf-t">
+<section class="sektion sektion-flaeche" aria-labelledby="ablauf-t" data-abschnitt="ablauf">
   <div class="wrap"><div class="inner">
     <p class="label abschnitt-nr">03 · Ablauf</p>
     <h2 id="ablauf-t" class="t-h2" style="margin:0 0 48px">So läuft es</h2>
@@ -976,7 +978,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   </div></div>
 </section>
 
-<section class="sektion" aria-labelledby="vergleich-t">
+<section class="sektion" aria-labelledby="vergleich-t" data-abschnitt="vergleich">
   <div class="wrap"><div class="inner">
     <p class="label abschnitt-nr">04 · Einordnung</p>
     <h2 id="vergleich-t" class="t-h2" style="margin:0 0 12px">Baukasten, Agentur oder ich?</h2>
@@ -997,7 +999,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   </div></div>
 </section>
 
-<section class="sektion sektion-flaeche" aria-labelledby="person-t">
+<section class="sektion sektion-flaeche" aria-labelledby="person-t" data-abschnitt="ueber-mich">
   <div class="wrap"><div class="inner person">
     <img class="person-bild" src="assets/img/portrait-nico-bodmer.webp" alt="Nico Bodmer" width="160" height="160" loading="lazy" decoding="async">
     <div>
@@ -1014,7 +1016,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   </div></div>
 </section>
 
-<section class="sektion" aria-labelledby="fragen-t">
+<section class="sektion" aria-labelledby="fragen-t" data-abschnitt="fragen">
   <div class="wrap"><div class="inner">
     <p class="label abschnitt-nr">06 · Fragen</p>
     <h2 id="fragen-t" class="t-h2" style="margin:0 0 12px">Was Sie sich vielleicht fragen</h2>
@@ -1048,7 +1050,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   </div></div>
 </section>
 
-<section id="abschluss" class="sektion sektion-blau" data-flaeche="blau" aria-labelledby="abschluss-t">
+<section id="abschluss" class="sektion sektion-blau" data-flaeche="blau" aria-labelledby="abschluss-t" data-abschnitt="abschluss">
   <div class="wrap"><div class="inner abschluss">
     <div>
       <h2 id="abschluss-t" class="t-h2" style="color:var(--auf-dunkel);margin:0 0 16px">Fangen wir mit der ersten Frage an</h2>
@@ -2134,7 +2136,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <ul onClick="{{ jumpToSection }}" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px">
           <li><a href="#ds-1" style="font-size:16px">1. Verantwortliche Person</a></li>
           <li><a href="#ds-2" style="font-size:16px">2. Besuch dieser Website</a></li>
-          <li><a href="#ds-3" style="font-size:16px">3. Keine Cookies, keine Statistik</a></li>
+          <li><a href="#ds-3" style="font-size:16px">3. Keine Cookies, Statistik nur mit Einwilligung</a></li>
           <li><a href="#ds-4" style="font-size:16px">4. Schriften</a></li>
           <li><a href="#ds-5" style="font-size:16px">5. Projektanfrage über das Formular</a></li>
           <li><a href="#ds-6" style="font-size:16px">6. Welche Angaben Sie mir übermitteln</a></li>
@@ -2145,6 +2147,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <li><a href="#ds-11" style="font-size:16px">11. Externe Links</a></li>
           <li><a href="#ds-12" style="font-size:16px">12. Ihre Rechte</a></li>
           <li><a href="#ds-13" style="font-size:16px">13. Änderungen</a></li>
+<li><a href="#ds-14" style="font-size:16px">14. Statistik mit Ihrer Einwilligung</a></li>
         </ul>
       </nav>
       <div style="display:flex;flex-direction:column">
@@ -2157,8 +2160,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Diese Website wird über GitHub Pages bereitgestellt, einen Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. Beim Aufruf werden technisch notwendige Daten verarbeitet, insbesondere die IP-Adresse, Datum und Uhrzeit des Zugriffs, die aufgerufene Seite sowie Angaben zu Browser und Betriebssystem. Diese Daten fallen beim Betrieb eines Webservers zwangsläufig an und dienen der Bereitstellung und Sicherheit der Website. GitHub speichert die IP-Adresse aus Sicherheitsgründen. Die Daten werden auf Servern von GitHub bearbeitet, auch in den USA. GitHub ist nach dem Swiss-U.S. Data Privacy Framework zertifiziert. Ich habe keinen Zugriff auf diese Daten, werte sie nicht aus und führe sie nicht mit anderen Daten zusammen. Einzelheiten stehen in der <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Datenschutzerklärung von GitHub</a>.</p>
         </div>
         <div id="ds-3" style="margin-top:48px">
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">3. Keine Cookies, keine Statistik</h2>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Diese Website setzt keine Cookies. Es findet keine Reichweitenmessung, keine Statistik und kein Tracking statt. Es sind keine Analysedienste, Werbenetzwerke oder Social-Media-Plugins eingebunden. Die auf der Startseite angezeigte Ladezeit wird ausschliesslich im Browser des Besuchers gemessen und nirgendwohin übermittelt. Auch der Chat-Assistent setzt keine Cookies und speichert nichts in Ihrem Browser. Was er übermittelt, wenn Sie ihn nutzen, steht in Abschnitt 8.{{ ds3Zusatz }} Wenn Sie den Projekt-Check beginnen, merkt sich Ihr Browser Ihre Antworten im Sitzungsspeicher (sessionStorage) dieses Tabs, damit Sie nach einem Neuladen weitermachen können. Das ist kein Cookie: Die Angaben bleiben auf Ihrem Gerät und werden gelöscht, wenn Sie den Tab schliessen oder die Anfrage senden. Aus welchem Bereich der Website Sie den Projekt-Check gestartet haben, zum Beispiel über den Preis-Rechner, steht nur in der Anfrage an mich und wird nirgends sonst gespeichert.</p>
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">3. Keine Cookies, Statistik nur mit Einwilligung</h2>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Diese Website setzt keine Cookies. Ohne Ihre Einwilligung findet keine Reichweitenmessung, keine Statistik und kein Tracking statt. Was mit Ihrer Einwilligung gemessen wird, steht in Abschnitt 14. Es sind keine Analysedienste von Dritten, keine Werbenetzwerke und keine Social-Media-Plugins eingebunden. Die auf der Startseite angezeigte Ladezeit wird ausschliesslich im Browser des Besuchers gemessen und nirgendwohin übermittelt. Auch der Chat-Assistent setzt keine Cookies und speichert nichts in Ihrem Browser. Was er übermittelt, wenn Sie ihn nutzen, steht in Abschnitt 8.{{ ds3Zusatz }} Wenn Sie den Projekt-Check beginnen, merkt sich Ihr Browser Ihre Antworten im Sitzungsspeicher (sessionStorage) dieses Tabs, damit Sie nach einem Neuladen weitermachen können. Das ist kein Cookie: Die Angaben bleiben auf Ihrem Gerät und werden gelöscht, wenn Sie den Tab schliessen oder die Anfrage senden. Aus welchem Bereich der Website Sie den Projekt-Check gestartet haben, zum Beispiel über den Preis-Rechner, steht nur in der Anfrage an mich und wird nirgends sonst gespeichert.</p>
         </div>
         <div id="ds-4" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">4. Schriften</h2>
@@ -2247,6 +2250,15 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <div id="ds-13" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">13. Änderungen</h2>
           <p style="font-size:16px;line-height:1.7;margin:0">Diese Erklärung kann angepasst werden, wenn sich die Technik oder die Abläufe ändern. Massgebend ist die jeweils auf dieser Seite veröffentlichte Fassung.</p>
+        </div>
+        <div id="ds-14" style="margin-top:48px">
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">14. Statistik mit Ihrer Einwilligung</h2>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Wenn Sie im Hinweis «Statistik» auf «Zustimmen» klicken, zähle ich, wie diese Website genutzt wird. Zweck ist, die Website verständlicher und nützlicher zu machen, zum Beispiel zu sehen, welche Abschnitte gelesen werden und an welcher Stelle der Projekt-Check abgebrochen wird. Ohne Ihre Zustimmung wird nichts gemessen. Rechtsgrundlage ist Ihre Einwilligung.</p>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Erfasst werden: aufgerufene Seiten, gesehene Abschnitte, Scrolltiefe, aktive Zeit auf der Seite, Klicks auf Knöpfe, Pakete, Fragen, Musterprojekte und Links nach aussen, die erreichten Schritte im Projekt-Check und ob das Senden geklappt hat (ohne Ihre Antworten), die Nutzung von Vorschau-Werkzeug und Chat (ohne Inhalte), Ladezeiten, technische Fehlermeldungen, die Art des Geräts (Handy, Tablet oder Computer), das Land, der Name der Website, von der Sie gekommen sind, und ein allfälliges Kampagnenkürzel in der Adresse, zum Beispiel aus einem LinkedIn-Beitrag. Nicht erfasst werden Ihre IP-Adresse, Ihre Eingaben, Ihr Name und andere Angaben zu Ihrer Person. Es werden keine Cookies gesetzt.</p>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Damit Seitenaufrufe desselben Besuchs zusammengezählt werden können, legt Ihr Browser eine zufällige Kennung im Sitzungsspeicher (sessionStorage) dieses Tabs ab. Sie wird gelöscht, wenn Sie den Tab schliessen, und lässt keinen Rückschluss auf Ihre Person zu. Ihre Wahl («Zustimmen» oder «Ablehnen») speichert Ihr Browser im lokalen Speicher (localStorage), damit der Hinweis nicht bei jedem Besuch erscheint.</p>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Die Angaben gehen an einen eigenen Dienst bei Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA (Cloudflare Workers), und werden in einer Datenbank von Cloudflare gespeichert, deren Standort auf die EU festgelegt ist (Cloudflare D1, Jurisdiktion EU). Cloudflare bearbeitet die Angaben als Auftragsbearbeiterin in meinem Auftrag. Beim Übermitteln erhält Cloudflare technisch bedingt Ihre IP-Adresse. Sie dient nur dazu, das Land zu bestimmen und zu viele Anfragen in kurzer Zeit abzuweisen, und wird nicht gespeichert. Zur Zertifizierung von Cloudflare und zu den Standardvertragsklauseln gilt das in Abschnitt 8 Gesagte.</p>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Die einzelnen Angaben werden nach 14 Monaten automatisch gelöscht. Ausgewertet werden nur zusammengezählte Zahlen, zum Beispiel wie viele Besuche eine Seite hatte.</p>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Ihre Einwilligung ist freiwillig. Sie können sie jederzeit widerrufen, über den Link «Einstellungen» unten auf jeder Seite oder hier: <a href="/datenschutz/#ds-14" data-statistik-einstellungen>Statistik-Einstellungen öffnen</a>. Nach dem Widerruf wird nichts mehr erfasst.</p>
         </div>
       </div>
       <p class="mono" style="font-size:13px;color:var(--text-2);margin:64px 0 0">Stand: {{ standRechtstexte }}</p>
@@ -2743,7 +2755,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <div class="row" style="justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid rgba(246,245,241,0.15);gap:16px">
         <p style="font-size:16px;color:var(--linie-stark);margin:0">© 2026 ODERA Design · Nico Bodmer</p>
         <div class="row f-tip" style="gap:24px">
-          <p style="font-size:13px;color:var(--linie-stark);margin:0">Keine Cookies, kein Tracking.</p>
+          <p style="font-size:13px;color:var(--linie-stark);margin:0">Keine Cookies. Statistik nur mit Ihrer Einwilligung. <a href="/datenschutz/#ds-14" data-statistik-einstellungen style="color:var(--linie-stark)">Einstellungen</a></p>
         </div>
       </div>
     </div>

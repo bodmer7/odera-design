@@ -72,11 +72,15 @@ export async function senden(c) {
     c.zumFeldMitFehler(k, antwort.meldung || '');
     return;
   }
+  // Statistik (nur nach Einwilligung, assets/js/statistik.js): Ergebnis des Absendens, ohne Inhalte
+  const melden = (z) => window.dispatchEvent(new CustomEvent('odera:messung', { detail: { t: 'projektcheck_submit', z } }));
   if (!antwort || !antwort.ok) {
+    melden('fehler');
     const fehler = status === 429 ? 'limit' : (antwort && antwort.fehler === 'pruefung') ? 'pruefung' : status === 0 ? 'netz' : 'versand';
     c.setState({ senden: 'fehler', sendFehler: fehler });
     return;
   }
+  melden('ok');
   const vorname = (felder.KONTAKT_NAME || '').trim().split(/\s+/)[0];
   const fertig = () => {
     c.idem = null; c.startZeit = Date.now();
