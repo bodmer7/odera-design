@@ -1,0 +1,84 @@
+{
+  "v": 1,
+  "slug": "33-von-65-geprueften-websites-ohne-kontakt-knopf-im-ersten",
+  "titel": "33 von 65 geprüften Websites ohne Kontakt-Knopf im ersten Handy-Bildschirm",
+  "beschreibung": "Was ich auf 65 geprüften Websites gesehen habe. Bevor ich einem Betrieb schreibe, prüfe ich seine Website mit einer festen Checkliste, auf dem Handy und…",
+  "anriss": "Was ich auf 65 geprüften Websites gesehen habe. Bevor ich einem Betrieb schreibe, prüfe ich seine Website mit einer festen Checkliste, auf dem Handy und am Computer. Die Zahlen hier stammen aus diesen Prüfungen, zusammengezählt und ohne Firmennamen.",
+  "datum": "2026-10-07",
+  "geaendert": "2026-10-08T17:07:54Z",
+  "saeule": "einblick",
+  "rubrik": "Einblick und Beispiel",
+  "thema_id": "daten-kontakt_handy",
+  "kurz": [
+    "Telefonnummer oben, zum Antippen",
+    "Ein Knopf für Anfragen gleich daneben",
+    "Auf dem Handy eine feste Leiste unten"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Was ich dabei beobachte",
+      "absaetze": [
+        "Von 65 Websites hatten 33 im ersten Handy-Bildschirm weder einen Anruf-Knopf noch einen anderen direkten Weg zum Kontakt. Das ist kein Vorwurf. Meistens fehlt einfach die Zeit, die eigene Seite mit den Augen der Kundschaft anzuschauen.",
+        "Die meisten Menschen suchen einen Handwerker, ein Restaurant oder eine Praxis auf dem Handy. Sie wollen in diesem Moment etwas erledigen: anrufen, eine Frage stellen, einen Termin abmachen. Müssen sie dafür erst scrollen oder ein Menü öffnen, springen viele ab.",
+        "Der erste Bildschirm entscheidet darum oft, ob eine Anfrage entsteht. Ein gut sichtbarer Knopf zum Anrufen oder für eine Anfrage ist eine kleine Änderung, die Ihrer Kundschaft viel Weg erspart.",
+        "Mir ist wichtig, dass Sie verstehen, was hinter einem Entwurf steckt. So können Sie besser beurteilen, ob ein Angebot zu Ihrem Betrieb passt."
+      ]
+    },
+    {
+      "titel": "Worauf es ankommt",
+      "absaetze": [
+        "Aus meiner Arbeit kenne ich vor allem diese Punkte. Sie gelten für fast jede Branche und lassen sich meistens ohne grossen Umbau verbessern."
+      ],
+      "punkte": [
+        {
+          "titel": "Telefonnummer oben, zum Antippen",
+          "text": "Setzen Sie die Telefonnummer als Link, damit sie sich mit einem Tippen wählen lässt. Eine Nummer, die man abschreiben muss, kostet Anrufe."
+        },
+        {
+          "titel": "Ein Knopf für Anfragen gleich daneben",
+          "text": "Bieten Sie neben dem Anruf einen zweiten Weg an, zum Beispiel ein kurzes Formular oder eine Mail. Nicht alle möchten sofort telefonieren."
+        },
+        {
+          "titel": "Auf dem Handy eine feste Leiste unten",
+          "text": "Eine feste Leiste am unteren Rand hält den Kontakt beim Scrollen immer in Reichweite, ohne den Inhalt zu verdecken."
+        }
+      ],
+      "nach": [
+        "Das gilt für einen Coiffeur genauso wie für eine Schreinerei. Die Branche ändert die Bilder und Texte, aber selten die Grundregeln."
+      ]
+    },
+    {
+      "titel": "Wie ich Websites anschaue",
+      "absaetze": [
+        "Bevor ich einem Betrieb einen Vorschlag mache, schaue ich seine Website auf dem Handy und am Computer an, mit einer festen Checkliste. Dazu gehören der Weg zum Kontakt, die Lesbarkeit, die Öffnungszeiten und eigene Bilder. Ich schreibe nur über Punkte, die ich selbst geprüft habe, und nenne dabei keine Firmennamen."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Öffnen Sie Ihre Website auf dem Handy und schauen Sie nur auf den ersten Bildschirm, ohne zu scrollen. Sehen Sie einen Knopf, mit dem Sie anrufen oder eine Anfrage senden können? Wenn nicht, ist das der erste Punkt auf Ihrer Liste.",
+        "Gerade bei kleinen Betrieben entscheidet der erste Eindruck auf dem Handy oft darüber, ob jemand anruft oder weiterklickt. Darum schaue ich zuerst dorthin.",
+        "Wie sieht es bei Ihrer Website aus? Schauen Sie heute kurz nach."
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 6 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: 33 von 65 geprüften Websites ohne Kontakt-Knopf im ersten Handy-Bildschirm"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}

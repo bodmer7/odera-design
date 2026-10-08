@@ -1,4 +1,26 @@
 {
   "v": 1,
-  "artikel": []
+  "artikel": [
+    {
+      "slug": "33-von-65-geprueften-websites-ohne-kontakt-knopf-im-ersten",
+      "titel": "33 von 65 geprüften Websites ohne Kontakt-Knopf im ersten Handy-Bildschirm",
+      "beschreibung": "Was ich auf 65 geprüften Websites gesehen habe. Bevor ich einem Betrieb schreibe, prüfe ich seine Website mit einer festen Checkliste, auf dem Handy und…",
+      "anriss": "Was ich auf 65 geprüften Websites gesehen habe. Bevor ich einem Betrieb schreibe, prüfe ich seine Website mit einer festen Checkliste, auf dem Handy und am Computer. Die Zahlen hier stammen aus diesen Prüfungen, zusammengezählt und ohne Firmennamen.",
+      "datum": "2026-10-07",
+      "geaendert": "2026-10-08T17:07:54Z",
+      "rubrik": "Einblick und Beispiel",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: 33 von 65 geprüften Websites ohne Kontakt-Knopf im ersten Handy-Bildschirm"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    }
+  ]
 }
