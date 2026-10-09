@@ -67,7 +67,7 @@ LinkedIn-Adressen `ODERA_LINKEDIN_URL` und `LINKEDIN_PERSON_URL`, Branchenseiten
 
 Keine Bewertungen, keine Öffnungszeiten (kein Ladenlokal), FAQPage nur mit sichtbaren Fragen.
 
-**Prüfung:** Rich Results Test und Schema.org Validator nach dem Livegang mit den Live-Adressen (Ergebnis unten).
+**Prüfung:** Schema.org Validator am 9. Oktober 2026 mit der Live-Startseite: 0 Fehler, 0 Warnungen (WebSite, LocalBusiness, WebPage, FAQPage). Den Google Rich Results Test bitte nach der Einrichtung der Search Console für Startseite, Angebot und eine Branchenseite laufen lassen.
 
 ## Gliederung h1 bis h3 (aus dem ausgelieferten HTML)
 
