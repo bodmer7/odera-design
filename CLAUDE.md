@@ -79,6 +79,10 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 8. Oktober 2
   eigene Sitemap `einblicke/sitemap.xml` (in `robots.txt`), RSS `einblicke/feed.xml`. Ohne Artikel ist die
   Übersicht `noindex`.
 - Am Ende jedes Artikels der Projekt-Check (`?quelle=einblicke`). Tests: `node tools/funktionstest.mjs … einblicke`.
+- Seit 9. Oktober 2026: Übersicht und Artikel nutzen die Bänder des Gestaltungssystems (`.band`, `.wrap`, `.inner`,
+  `.augenbraue`, `.titel-1`, `.einleitung`, `.karte`, Abschluss als `band-kobalt`) und haben damit dieselben Abstände
+  wie /ablauf/. `einblicke.css` lädt als letztes vor `</head>` und setzt keine Abschnittsabstände. LinkedIn-Link auf die
+  Firmenseite aus `ODERA_LINKEDIN_URL` (Marke `einblicke:linkedin-firma` in der Vorlage), immer neuer Tab.
 
 ### Musterprojekt Doppelmeter
 - Eigene statische Seite unter `/musterprojekte/doppelmeter/`, `noindex`, nicht in der Sitemap.

@@ -77,6 +77,8 @@ ersetze('<!DOCTYPE html>\n', `<!DOCTYPE html>\n<!-- Kopie von github.com/${REPO}
 rmSync(ZIEL, { recursive: true, force: true });
 mkdirSync(ZIEL, { recursive: true });
 cpSync(join(quelle, 'assets'), join(ZIEL, 'assets'), { recursive: true });
+// Externe LinkedIn-Links wie auf odera.ch: neuer Tab, ohne Referrer
+html = html.replace(/(<a [^>]*href="https:\/\/www\.linkedin\.com\/[^"]*"[^>]*?) rel="noopener"/g, '$1 rel="noopener noreferrer"');
 writeFileSync(join(ZIEL, 'index.html'), html);
 if (aufraeumen) rmSync(aufraeumen, { recursive: true, force: true });
 

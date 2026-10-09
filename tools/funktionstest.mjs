@@ -312,17 +312,26 @@ try {
       aktiv: (document.querySelector('.navmid a[aria-current="page"]') || {}).textContent,
       strich: (() => { const u = document.querySelector('.navmid > span[aria-hidden="true"]'); return u ? { o: getComputedStyle(u).opacity, w: u.getBoundingClientRect().width } : null; })(),
       react: !!document.getElementById('dc-root') || !!window.React,
-      karten: [...document.querySelectorAll('.eb-karte a')].map((a) => a.getAttribute('href')),
+      karten: [...document.querySelectorAll('.eb-karte a.karte-link')].map((a) => a.getAttribute('href')),
       robots: (document.querySelector('meta[name="robots"]') || {}).content,
       canonical: (document.querySelector('link[rel="canonical"]') || {}).href,
       ueberlauf: document.documentElement.scrollWidth - window.innerWidth,
+      linkedin: [...document.querySelectorAll('main a[href*="linkedin.com"]')].map((a) => ({ href: a.href, target: a.target, rel: a.rel })),
+      abstand: (() => { const k = [...document.querySelectorAll('header.kopf')].find((x) => x.getClientRects().length); return Math.round(document.querySelector('main h1').getBoundingClientRect().top - k.getBoundingClientRect().bottom); })(),
     }));
+    ok(ueb.linkedin.length === 1 && ueb.linkedin.every((l) => /linkedin\.com\/company\/odera-design/.test(l.href) && l.target === '_blank' && l.rel === 'noopener noreferrer'),
+      `Einblicke: LinkedIn-Link zeigt auf die Firmenseite und öffnet einen neuen Tab (${ueb.linkedin.map((l) => l.href).join(', ')})`);
+    const ablauf = await ctx.newPage();
+    await ablauf.goto(BASIS + '/ablauf/', { waitUntil: 'networkidle' });
+    const abstandAblauf = await ablauf.evaluate(() => { const k = [...document.querySelectorAll('header.kopf')].find((x) => x.getClientRects().length); return Math.round([...document.querySelectorAll('main h1')].find((h) => h.getClientRects().length).getBoundingClientRect().top - k.getBoundingClientRect().bottom); });
+    await ablauf.close();
+    ok(ueb.abstand === abstandAblauf, `Einblicke: Abstand Navigation zu Titel ${ueb.abstand} px wie auf /ablauf/ (${abstandAblauf} px)`);
     ok(ueb.h1.length === 1 && ueb.h1[0] === 'Einblicke' && ueb.aktiv && ueb.aktiv.trim() === 'Einblicke' && ueb.strich && ueb.strich.o === '1' && ueb.strich.w > 20,
       `Einblicke: Menüpunkt führt zur Übersicht, «Einblicke» markiert (h1 «${ueb.h1[0]}»)`);
     ok(!ueb.react && ueb.canonical === 'https://odera.ch/einblicke/' && ueb.ueberlauf <= 0 && ueb.robots === (ueb.karten.length ? 'index,follow' : 'noindex,follow'),
       `Einblicke: statisch ohne React, canonical, ${ueb.karten.length} Artikel, robots ${ueb.robots}`);
     if (ueb.karten.length) {
-      await page.locator('.eb-karte a').first().click();
+      await page.locator('.eb-karte a.karte-link').first().click();
       await page.waitForURL('**' + ueb.karten[0]);
       await warte(500);
       const art = await page.evaluate(async () => {
@@ -336,7 +345,7 @@ try {
           alt: img ? img.alt : '',
           artikel: ld.some((d) => (d['@graph'] || [d]).some((x) => x['@type'] === 'Article')),
           og: (document.querySelector('meta[property="og:image"]') || {}).content,
-          cta: (document.querySelector('.eb-cta a.btn') || {}).getAttribute ? document.querySelector('.eb-cta a.btn').getAttribute('href') : null,
+          cta: (document.querySelector('#abschluss a.btn') || {}).getAttribute ? document.querySelector('#abschluss a.btn').getAttribute('href') : null,
           worte: document.querySelector('.eb-text').innerText.split(/\s+/).length,
         };
       });
@@ -344,7 +353,7 @@ try {
         `Einblicke: Artikel ${ueb.karten[0]} mit Titelbild (${art.bild} px), Alt-Text, ${art.h2} Zwischentiteln, JSON-LD Article, ${art.worte} Wörter`);
       const og = await page.request.get(BASIS + new URL(art.og).pathname);
       ok(og.status() === 200, `Einblicke: Vorschaubild ${new URL(art.og).pathname} vorhanden`);
-      await page.locator('.eb-cta a.btn').click();
+      await page.locator('#abschluss a.btn').click();
       await page.waitForURL('**/projekt-check/**');
       await warte(800);
       ok(await page.locator('.q-weiter-knopf').filter({ visible: true }).count() > 0, 'Einblicke: Knopf führt in den Projekt-Check');

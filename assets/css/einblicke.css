@@ -1,81 +1,64 @@
-/* Statische Seiten unter /einblicke/ (Blog aus dem Akquise-Tool). Nur Ergänzungen zum Seitenstil im Kopf:
-   gleiche Tokens, Schriften und Knöpfe wie auf odera.ch, keine Bibliotheken. Bei Änderungen tools/seo-build.mjs
-   laufen lassen (Version im Link der Vorlage). */
+/* Statische Seiten unter /einblicke/ (Blog aus dem Akquise-Tool). Abschnitte, Abstände, Ränder und Titel kommen
+   aus dem Gestaltungssystem der Seite (.band, .wrap, .inner, .augenbraue, .titel-1, .einleitung, .karte). Hier stehen
+   nur Ergänzungen für Karten, Artikeltext und Menü, ohne eigene Abschnittsabstände. Die Vorlage lädt diese Datei
+   nach allen Stilen der Seite (tools/seo-build.mjs). Bei Änderungen seo-build laufen lassen (Version im Link). */
 
 /* Menüs sind fest im HTML und erst nach dem Antippen sichtbar (assets/js/einblicke.js) */
-.menue[hidden],.menue-alt[hidden]{display:none!important}
+.menue[hidden],.menue-alt[hidden]{display:none}
 
-.eb-kopf{background:var(--grund)}
-.eb-kopf-wrap{padding-top:88px;padding-bottom:var(--a-4)}
-.eb-pfad,.eb-meta,.eb-kurz-t,.eb-karte-meta{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:var(--fs-klein);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-2)}
-.eb-pfad{display:flex;flex-wrap:wrap;gap:8px;margin:0}
-.eb-pfad a{color:var(--text-2)}
-.eb-meta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
-.eb-kopf .label{margin:0}
-.eb-h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.06;letter-spacing:-0.03em;margin:12px 0 0;max-width:22ch;text-wrap:balance}
-.eb-lead{font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:var(--tinte);margin:24px 0 0;max-width:65ch;text-wrap:pretty}
+/* Kopf: Pfad und Datum unter dem Titel */
+.eb-pfad{display:flex;flex-wrap:wrap;gap:8px}
+.eb-pfad a{color:inherit}
+.eb-meta{margin:20px 0 0}
+.einleitung a{white-space:nowrap}
+
+/* Übersicht: Karten wie die Musterprojekte (weiss, Schatten, ganz antippbar) */
+.eb-liste{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.eb-karte{display:flex;flex-direction:column;height:100%;overflow:hidden}
+.eb-karte .karte-link{text-decoration:none}
+@media(hover:hover){.eb-karte:hover .karte-link{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}}
+.eb-karte-bild{display:block;aspect-ratio:4/3;overflow:hidden;background:var(--bg-papier-tief)}
+.eb-karte-bild img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.eb-karte-text{display:flex;flex-direction:column;flex:1;gap:12px;padding:28px}
+.eb-karte-text .klein{margin:0}
+.eb-karte-text .titel-3{margin:0}
+.eb-karte-text .lesetext{flex:1;margin:0;font-size:var(--fs-2);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.eb-weiter{font-weight:600;color:var(--primaer-dunkel)}
+.eb-weiter::after{content:'\00a0\2192'}
+.eb-leer{margin:0}
 
 /* Artikel: Text links, Titelbild rechts (mitlaufend) */
-.eb-wrap{padding-bottom:var(--a-6)}
-.eb-raster{display:grid;grid-template-columns:minmax(0,720px) minmax(240px,340px);justify-content:space-between;gap:var(--a-5);align-items:start}
+.eb-raster{display:grid;grid-template-columns:minmax(0,720px) minmax(240px,340px);justify-content:space-between;gap:64px;align-items:start}
 .eb-bild{grid-column:2;grid-row:1;position:sticky;top:120px;margin:0}
-.eb-bild img{display:block;width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--linie)}
-.eb-text{grid-column:1;grid-row:1;font-size:17px;line-height:1.7}
-.eb-text p{margin:0 0 var(--a-2);max-width:65ch;text-wrap:pretty}
-.eb-text h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(26px,2.4vw,34px);line-height:1.15;letter-spacing:-0.02em;margin:var(--a-5) 0 var(--a-2);text-wrap:balance}
-.eb-kurz{background:var(--flaeche);border:1px solid var(--linie);border-radius:var(--radius);padding:var(--a-3)}
-.eb-kurz-t{margin:0 0 8px!important}
-.eb-kurz ul{margin:0;padding-left:20px;display:grid;gap:4px}
-.eb-punkte{list-style:none;counter-reset:punkt;margin:var(--a-3) 0;padding:0;display:grid;gap:var(--a-2)}
-.eb-punkte li{counter-increment:punkt;position:relative;padding:var(--a-3) var(--a-3) var(--a-3) 76px;background:var(--flaeche);border:1px solid var(--linie);border-radius:var(--radius)}
-.eb-punkte li::before{content:counter(punkt);position:absolute;left:24px;top:24px;width:32px;height:32px;border-radius:999px;background:var(--akzent);color:var(--tinte);font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:17px;line-height:32px;text-align:center}
-.eb-punkte h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;line-height:1.25;letter-spacing:-0.01em;margin:4px 0 6px}
-.eb-punkte p{margin:0;font-size:16px;line-height:1.6}
-
-/* Abschluss mit Projekt-Check: blaue Fläche, Lime-Knopf (wichtigste Handlung) */
-.eb-cta,.eb-band{background:var(--primaer);color:var(--auf-dunkel)}
-.eb-cta{margin:var(--a-5) 0 var(--a-4);padding:var(--a-4);border-radius:var(--radius)}
-.eb-text .eb-cta h2{margin-top:0;color:var(--auf-dunkel)}
-.eb-cta p,.eb-band p{color:#DDE3FF}
-.eb-cta .btn,.eb-band .btn{background:var(--akzent);color:var(--tinte);margin-top:8px}
-@media(hover:hover){.eb-cta .btn:hover,.eb-band .btn:hover{background:var(--akzent-hover)}}
-.eb-cta :focus-visible,.eb-band :focus-visible{outline-color:var(--akzent)}
-.eb-autor{border-top:1px solid var(--linie);padding-top:var(--a-3);font-size:15px!important;color:var(--text-2)}
-.eb-zurueck a,.eb-weiter{font-weight:600}
+.eb-bild img{display:block;width:100%;height:auto;border-radius:var(--r-2);box-shadow:var(--schatten-1)}
+.eb-text{grid-column:1;grid-row:1}
+.eb-text>p{margin:0 0 16px}
+.eb-text>h2{margin:48px 0 16px}
+.eb-kurz{padding:28px}
+.eb-kurz ul{margin:0;padding-left:20px;display:grid;gap:6px;font-size:var(--fs-3);line-height:1.5;color:var(--text-lese)}
+.eb-punkte{list-style:none;counter-reset:punkt;margin:24px 0;padding:0;display:grid;gap:16px}
+.eb-punkte li{counter-increment:punkt;position:relative;padding:28px 28px 28px 84px}
+.eb-punkte li::before{content:counter(punkt);position:absolute;left:28px;top:28px;width:36px;height:36px;border-radius:999px;background:var(--akzent-limette);color:var(--tinte);font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:17px;line-height:36px;text-align:center}
+.eb-punkte h3{margin:6px 0 8px}
+.eb-punkte p{margin:0}
+.eb-text>.eb-autor{margin-top:48px;padding-top:24px;border-top:1px solid var(--linie)}
+.eb-text>:last-child{margin-bottom:0}
+.eb-zurueck a{font-weight:600}
 .eb-zurueck a::before{content:'\2190\00a0'}
-
-/* Übersicht */
-.eb-liste{list-style:none;margin:0;padding:var(--a-2) 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--a-4)}
-.eb-karte a{display:flex;flex-direction:column;height:100%;background:var(--flaeche);border:1px solid var(--linie);border-radius:var(--radius);overflow:hidden;color:var(--tinte);text-decoration:none;transition:border-color var(--dauer) var(--kurve)}
-@media(hover:hover){.eb-karte a:hover{border-color:var(--tinte)}.eb-karte a:hover .eb-karte-t{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}}
-.eb-karte-bild{display:block;aspect-ratio:4/3;overflow:hidden;background:var(--linie)}
-.eb-karte-bild img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
-.eb-karte-meta{display:block;padding:var(--a-3) var(--a-3) 0}
-.eb-karte-t{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;line-height:1.2;letter-spacing:-0.02em;margin:8px var(--a-3) 0;text-wrap:balance}
-.eb-karte-text{flex:1;margin:12px var(--a-3) 0;font-size:16px;line-height:1.55;color:var(--text-2)}
-.eb-weiter{margin:var(--a-2) var(--a-3) var(--a-3);color:var(--primaer-dunkel)}
-.eb-weiter::after{content:'\00a0\2192'}
-.eb-leer{margin:0;font-size:18px;color:var(--text-2)}
-.eb-band-innen{padding:var(--a-5) 0;max-width:720px}
-.eb-band h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 var(--a-2)}
-.eb-band p{font-size:18px;line-height:1.55;margin:0 0 var(--a-3)}
-.eb-lead a{white-space:nowrap}
 
 @media(max-width:1100px){
  .eb-liste{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:900px){
- .eb-raster{grid-template-columns:minmax(0,1fr);gap:var(--a-3)}
+ .eb-raster{grid-template-columns:minmax(0,1fr);gap:32px}
  .eb-bild,.eb-text{grid-column:1;grid-row:auto;position:static}
  /* Auf schmalen Bildschirmen nur der obere Teil der Bildkarte, wie in der Übersicht */
  .eb-bild img{aspect-ratio:4/3;object-fit:cover;object-position:top}
 }
 @media(max-width:767px){
- .eb-kopf-wrap{padding-top:40px;padding-bottom:var(--a-3)}
- .eb-liste{grid-template-columns:minmax(0,1fr);gap:var(--a-3)}
- .eb-text{font-size:16px}
- .eb-punkte li{padding:var(--a-2) var(--a-2) var(--a-2) 60px}
- .eb-punkte li::before{left:16px;top:18px}
- .eb-cta{padding:var(--a-3)}
- .eb-cta .btn,.eb-band .btn{width:100%}
+ .eb-liste{grid-template-columns:minmax(0,1fr);gap:24px}
+ .eb-karte-text,.eb-kurz{padding:24px}
+ .eb-punkte li{padding:24px 24px 24px 72px}
+ .eb-punkte li::before{left:24px;top:24px}
+ .eb-text>h2{margin-top:40px}
 }

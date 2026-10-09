@@ -138,6 +138,10 @@ Abschnitte und `einblicke-projekt-check` werden nach Einwilligung gemessen. Der
 Projekt-Check kennt den Einstieg `?quelle=einblicke` (`EINSTIEGE` in
 `src/seite.html`).
 
+Die LinkedIn-Firmenseite steht nur in `ODERA_LINKEDIN_URL` (`src/seite.html`); `seo-build`
+schreibt sie als Marke `<!-- einblicke:linkedin-firma … -->` in die Vorlage, das Akquise-Tool liest
+und entfernt sie. Externe Links öffnen in einem neuen Tab (`rel="noopener noreferrer"`).
+
 Ändern sich Kopf, Menü oder Stil, nach `seo-build` im Akquise-Repo
 `npx tsx scripts/einblicke.ts neu-erstellen` ausführen (schreibt alle Artikel
 mit der neuen Vorlage).

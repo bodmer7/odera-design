@@ -287,6 +287,8 @@ geschrieben.push('assets/js/vorlage.js'.padEnd(34) + ` ${String(Math.round(vorla
 // Platzhalter: <!-- einblicke:kopf --> (Titel, Beschreibung, canonical, Vorschau, JSON-LD) und <!-- einblicke:inhalt -->.
 const NAV = new Function('return ' + ((quelle.match(/ {2}NAV = (\[[\s\S]*?\n {2}\]);/) || [])[1] || 'null'))();
 if (!NAV || !NAV.some((n) => n.href === '/einblicke/')) throw new Error('NAV mit «Einblicke» in src/seite.html nicht gefunden.');
+const ODERA_LINKEDIN_URL = (quelle.match(/ {2}ODERA_LINKEDIN_URL = '([^']+)';/) || [])[1];
+if (!ODERA_LINKEDIN_URL) throw new Error('ODERA_LINKEDIN_URL in src/seite.html nicht gefunden.');
 const version = (datei) => datei + '?v=' + createHash('sha256').update(readFileSync(join(ROOT, datei))).digest('hex').slice(0, 10);
 const EINBLICKE_CSS = version('assets/css/einblicke.css');
 const EINBLICKE_JS = version('assets/js/einblicke.js');
@@ -321,10 +323,12 @@ function einblickeMenue(footer) {
 
 function einblickeVorlage() {
   const basis = readFileSync(join(ROOT, 'ueber-mich', 'index.html'), 'utf8');
-  const kopf = ['<!-- seo:start -->', '<base href="/">', '<!-- einblicke:kopf -->',
+  // Die URL der LinkedIn-Firmenseite kommt aus src/seite.html (ODERA_LINKEDIN_URL); das Akquise-Tool liest sie aus
+  // dieser Marke und entfernt sie beim Befüllen. So steht sie nur an einer Stelle.
+  const kopf = ['<!-- seo:start -->', '<base href="/">', '<!-- einblicke:kopf -->', `<!-- einblicke:linkedin-firma ${ODERA_LINKEDIN_URL} -->`,
     '<link rel="icon" href="/favicon.ico" sizes="48x48">', '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
     '<link rel="apple-touch-icon" href="/apple-touch-icon.png">', '<link rel="manifest" href="/site.webmanifest">',
-    `<link rel="stylesheet" href="${EINBLICKE_CSS}">`, '<!-- seo:end -->'].join('\n');
+    '<!-- seo:end -->'].join('\n');
   let html = basis.replace(/<!-- seo:start -->[\s\S]*?<!-- seo:end -->/, () => kopf);
   const vorher = html.length;
   html = html
@@ -332,6 +336,9 @@ function einblickeVorlage() {
     .replace(/<script defer src="assets\/js\/vendor\/react[^"]*"><\/script>\n/g, '')
     .replace(/<script>\n\/\/ Laufzeit erst starten[\s\S]*?<\/script>\n/, `<script defer src="${EINBLICKE_JS}"></script>\n`);
   if (html.length >= vorher || /react-|support\.js|vorlage\.js/.test(html)) throw new Error('React-Laufzeit liess sich aus der Vorlage der Einblicke nicht entfernen.');
+  // Eigener Stil NACH allen Stilen der Seite, sonst überschreiben spätere Regeln (.wrap, Bänder) die Einblicke.
+  if (!html.includes('</head>')) throw new Error('</head> in ueber-mich/index.html nicht gefunden.');
+  html = html.replace('</head>', () => `<link rel="stylesheet" href="${EINBLICKE_CSS}">\n</head>`);
   const vorab = (html.match(/<div id="vorab">[\s\S]*?<!-- vorab:end -->/) || [])[0];
   const header = vorab && (vorab.match(/<header class="kopf"[\s\S]*?<\/header>/) || [])[0];
   const footer = vorab && (vorab.match(/<footer[\s\S]*?<\/footer>/) || [])[0];
