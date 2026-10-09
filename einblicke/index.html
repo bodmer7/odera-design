@@ -613,8 +613,343 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1em Inter'),f.load('600 1em Inter'),f.load('500 1em "JetBrains Mono"')]).then(zeigen,zeigen)}else zeigen();setTimeout(zeigen,3000)})();
 </script>
 <!-- Statistik nur nach Einwilligung (Banner), ohne Cookies: assets/js/statistik.js, docs/tracking.md. Bei Änderungen v= erhöhen (Zwischenspeicher 1 Woche). -->
-<script defer src="assets/js/statistik.js?v=1"></script>
+<script defer src="assets/js/statistik.js?v=2"></script>
 <script defer src="assets/js/einblicke.js?v=dfe9803fd1"></script>
+<style id="system">
+/* ===== Gestaltungssystem (Redesign Oktober 2026, docs/entscheidungen.md Teil 3) =====
+   Flächen: Papier, Papier tief, Tinte, Kobalt. Weiss nur für Karten, Felder und Gerätemockups.
+   Sieben Schriftgrössen, 8-px-Raster, zwei Schatten, drei Radien. */
+:root{
+ --bg-papier:#F6F5F1;--bg-papier-tief:#ECE9E1;--bg-tinte:#11131A;--bg-tinte-hell:#1B1E28;--bg-kobalt:#2D4CF0;
+ --akzent-limette:#D6F24B;--akzent-koralle:#FF5A3C;
+ --text-lese:#2B2E37;--auf-tinte:#ECEAE4;--auf-tinte-2:rgba(236,234,228,0.72);--auf-tinte-linie:rgba(236,234,228,0.12);
+ --fs-1:13px;--fs-2:15px;--fs-3:17px;--fs-4:20px;--fs-5:clamp(23px,1.2vw + 12px,28px);--fs-6:clamp(30px,2.2vw + 10px,40px);--fs-7:clamp(38px,3.6vw + 8px,60px);
+ --sektion-y:88px;--titel-abstand:40px;
+ --schatten-1:0 1px 2px rgba(17,19,26,0.06),0 10px 28px -16px rgba(17,19,26,0.22);
+ --schatten-2:0 2px 4px rgba(17,19,26,0.08),0 28px 56px -24px rgba(17,19,26,0.34);
+ --r-1:10px;--r-2:16px;--r-3:24px;
+ /* bisherige Namen auf die neue Skala */
+ --fs-klein:var(--fs-1);--fs-text:var(--fs-3);--fs-lead:var(--fs-4);--fs-h3:var(--fs-5);--fs-h2:var(--fs-6);--fs-h1:var(--fs-7);
+ --a-6:var(--sektion-y)}
+@media(max-width:1023px){:root{--sektion-y:64px}}
+@media(max-width:767px){:root{--sektion-y:56px;--titel-abstand:28px}}
+/* Bänder: ein Abschnitt, eine Fläche */
+.band{position:relative;padding:var(--sektion-y) 0;color:var(--tinte)}
+.band-papier{background-color:var(--bg-papier)}
+.band-tief{background-color:var(--bg-papier-tief)}
+.band-tinte{background-color:var(--bg-tinte);color:var(--auf-tinte)}
+.band-kobalt{background-color:var(--bg-kobalt);color:#FFFFFF}
+/* feines Raster (höchstens 4 % Deckkraft), damit Flächen nicht steril wirken */
+.band-raster{background-image:radial-gradient(rgba(17,19,26,0.045) 1px,transparent 1.2px);background-size:24px 24px}
+.band-tinte.band-raster{background-image:radial-gradient(rgba(236,234,228,0.04) 1px,transparent 1.2px)}
+.band-tinte a:not(.btn){color:var(--akzent-limette)}
+.band-tinte :focus-visible,.band-kobalt :focus-visible{outline-color:var(--akzent-limette)}
+.band-tinte ::selection{background:var(--akzent-limette);color:var(--tinte)}
+.band .wrap{padding-top:0;padding-bottom:0}
+/* Titelblock */
+.augenbraue{margin:0 0 16px;font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:var(--fs-1);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-2)}
+.band-tinte .augenbraue{color:var(--akzent-limette)}
+.band-kobalt .augenbraue{color:#DDE3FF}
+.titel-1,.titel-2,.titel-3{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-0.03em;text-wrap:balance;margin:0}
+.titel-1{font-size:var(--fs-7);line-height:1.04}
+.titel-2{font-size:var(--fs-6);line-height:1.1}
+.titel-3{font-size:var(--fs-5);font-weight:700;line-height:1.2;letter-spacing:-0.02em}
+.einleitung{margin:16px 0 0;max-width:56ch;font-size:var(--fs-4);line-height:1.5;color:var(--text-lese);text-wrap:pretty}
+.band-tinte .einleitung{color:var(--auf-tinte-2)}
+.band-kobalt .einleitung{color:#E7EBFF}
+.titelblock{margin:0 0 var(--titel-abstand)}
+.lesetext{font-size:var(--fs-3);line-height:1.6;color:var(--text-lese);max-width:64ch;text-wrap:pretty}
+.band-tinte .lesetext{color:var(--auf-tinte-2)}
+.klein{font-size:var(--fs-1);line-height:1.5;color:var(--text-2)}
+.band-tinte .klein{color:var(--auf-tinte-2)}
+/* Zahlen, die verkaufen */
+.kennzahl{display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-6);line-height:1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kennzahl-gross{font-size:var(--fs-7)}
+.band-tinte .kennzahl{color:var(--akzent-limette)}
+/* Karten mit Tiefe */
+.karte{position:relative;background:#FFFFFF;border-radius:var(--r-2);box-shadow:var(--schatten-1);color:var(--tinte)}
+.band-tinte .karte-dunkel{background:var(--bg-tinte-hell);box-shadow:none;border:1px solid var(--auf-tinte-linie);color:var(--auf-tinte)}
+.karte-heben{transition:transform var(--dauer) var(--kurve),box-shadow var(--dauer) var(--kurve)}
+@media(hover:hover){.karte-heben:hover{transform:translateY(-2px);box-shadow:var(--schatten-2)}}
+/* Ganze Karte antippbar: ein echter Link, dessen ::after die Karte abdeckt */
+.karte-link{color:inherit;text-decoration:none}
+.karte-link::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:1}
+.karte-link:focus-visible{outline:none}
+.karte:has(.karte-link:focus-visible){outline:3px solid var(--primaer);outline-offset:4px}
+.karte .ueber-link{position:relative;z-index:2}
+/* Linien-Icons (Inline-SVG, 1.75 px, runde Enden) */
+.ic{flex:none;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ic-20{width:20px;height:20px}.ic-32{width:32px;height:32px}
+/* Chips (ruhig, normale Schreibweise) */
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:4px 12px;border-radius:999px;background:var(--bg-papier-tief);font-size:var(--fs-2);line-height:1.3;color:var(--tinte)}
+.band-tief .chip{background:#FFFFFF}
+.band-tinte .chip{background:rgba(236,234,228,0.08);color:var(--auf-tinte)}
+/* Einblenden beim Scrollen: nur mit JavaScript und ohne reduzierte Bewegung, einmal pro Element */
+@media(prefers-reduced-motion:no-preference){
+ html.einblenden-an .einblenden:not(.ist-da){opacity:0;transform:translateY(12px)}
+ html.einblenden-an .einblenden{transition:opacity 400ms ease-out,transform 400ms var(--kurve)}}
+/* Knöpfe auf dunklem Grund */
+.band-tinte .btn-sekundaer,.band-kobalt .btn-sekundaer{border-color:rgba(236,234,228,0.6);color:var(--auf-tinte)}
+@media(hover:hover){.band-tinte .btn-sekundaer:hover,.band-kobalt .btn-sekundaer:hover{background:var(--auf-tinte);color:var(--tinte)}}
+.knopfreihe{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+/* Musterprojekte: zwei Projekte, je eine Bühne mit eigenem Umschalter Desktop/Handy */
+.mp2-hero{padding-top:calc(var(--sektion-y) + 8px)}
+.mp2-hero-raster{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:end}
+.mp2-sprung{display:flex;flex-direction:column;gap:12px}
+.mp2-sprung a{display:flex;align-items:center;gap:16px;min-height:72px;padding:12px 20px;border:1px solid var(--auf-tinte-linie);border-radius:var(--r-2);background:var(--bg-tinte-hell);color:var(--auf-tinte);text-decoration:none;transition:border-color var(--dauer) var(--kurve),transform var(--dauer) var(--kurve)}
+.mp2-sprung a>span:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.mp2-sprung strong{font-size:var(--fs-4);font-weight:600;line-height:1.25}
+.mp2-sprung a>span:nth-child(2)>span{font-size:var(--fs-2);color:var(--auf-tinte-2)}
+.mp2-sprung-n{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-1);color:var(--akzent-limette)}
+@media(hover:hover){.mp2-sprung a:hover{border-color:rgba(236,234,228,0.4);transform:translateY(-2px)}}
+.mp2{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:center}
+.mp2-rev{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.mp2-rev .mp2-text{order:2}
+.mp2-fakten{display:flex;flex-wrap:wrap;gap:8px 24px;list-style:none;margin:24px 0 32px;padding:0}
+.mp2-fakten li{display:flex;align-items:center;gap:8px;font-size:var(--fs-2);font-variant-numeric:tabular-nums}
+.band-tinte .mp2-fakten li{color:var(--auf-tinte)}
+.mp2-notiz{margin:-12px 0 28px;max-width:52ch}
+.mp2-weiter{margin:12px 0 0}
+.band-tinte .einstieg{color:var(--akzent-limette)}
+.mp2-buehne{display:flex;flex-direction:column;align-items:center;gap:24px;min-width:0}
+.mp2-schalter{display:inline-flex;padding:4px;border-radius:999px;background:var(--bg-papier-tief)}
+.band-tinte .mp2-schalter{background:var(--bg-tinte-hell);box-shadow:inset 0 0 0 1px var(--auf-tinte-linie)}
+.mp2-schalter button{min-height:44px;min-width:104px;padding:0 20px;border:0;border-radius:999px;background:none;font-size:var(--fs-2);font-weight:600;color:var(--tinte);cursor:pointer;transition:background var(--dauer) var(--kurve),color var(--dauer) var(--kurve)}
+.band-tinte .mp2-schalter button{color:var(--auf-tinte)}
+.mp2-schalter button[aria-checked="true"]{background:var(--primaer);color:#FFFFFF}
+.mp2-geraet{display:flex;justify-content:center;width:100%;color:inherit;text-decoration:none;border-radius:var(--r-2)}
+.mp2-geraet:focus-visible{outline-offset:8px}
+.mp2-browser{display:block;width:100%;max-width:720px;box-shadow:var(--schatten-2)}
+.mp2-browser picture,.mp2-handy picture{display:block}
+.mp2-browser img,.mp2-handy img{display:block;width:100%;height:auto}
+.mp2-handy{display:block;width:280px;max-width:72vw}
+.mp2-handy .rahmen-schirm{display:block;padding-top:9%}
+.mp2-handy .rahmen-insel{top:1.6%;padding-top:5.6%;width:26%}
+@media(hover:hover){.mp2-geraet:hover .rahmen-browser,.mp2-geraet:hover .rahmen-handy{transform:translateY(-2px)}}
+@media(max-width:1023px){.mp2-hero-raster,.mp2{grid-template-columns:minmax(0,1fr);gap:40px}.mp2-rev .mp2-text{order:0}}
+@media(max-width:767px){.mp2-schalter button{min-width:96px}.mp2-sprung a{min-height:64px}}
+/* Kennzahlen-Reihe (Hero Ablauf, Streifen Startseite) */
+.zahlen-reihe{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 48px;margin:48px 0 40px;padding:32px 0 0;border-top:1px solid var(--auf-tinte-linie)}
+.zahlen-reihe>div{display:flex;flex-direction:column;gap:8px;min-width:0}
+.zahlen-reihe dt{margin:0}.zahlen-reihe dd{margin:0;font-size:var(--fs-2);line-height:1.45;color:var(--auf-tinte-2)}
+.band-papier .zahlen-reihe,.band-tief .zahlen-reihe{border-top-color:var(--linie)}
+.band-papier .zahlen-reihe dd,.band-tief .zahlen-reihe dd{color:var(--text-lese)}
+/* Fahrplan: mitlaufende Phasen-Navigation links, Karten rechts */
+.fahrplan{display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px;align-items:start}
+.fahrplan-nav{position:sticky;top:112px;display:flex;flex-direction:column;gap:4px;padding-left:20px}
+.fahrplan-spur{position:absolute;left:0;top:8px;bottom:8px;width:2px;border-radius:2px;background:var(--linie)}
+.fahrplan-spur span{display:block;width:100%;border-radius:2px;background:var(--primaer);transition:height 120ms linear}
+.fahrplan-nav a{display:flex;align-items:center;gap:12px;min-height:44px;color:var(--tinte);text-decoration:none;font-size:var(--fs-3);font-weight:500}
+.fahrplan-nav-n{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-1);color:var(--text-2)}
+@media(hover:hover){.fahrplan-nav a:hover{color:var(--primaer-dunkel)}}
+.phasen{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:24px}
+.phase{padding:32px;scroll-margin-top:112px}
+.phase-kopf{display:flex;align-items:baseline;gap:16px;margin:0 0 16px}
+.phase-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-6);line-height:1;color:var(--primaer);font-variant-numeric:tabular-nums}
+.phase-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.phase-zeilen{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.phase-zeilen li{display:flex;gap:12px;align-items:flex-start;font-size:var(--fs-3);line-height:1.55;color:var(--text-lese)}
+.phase-zeilen li .ic{margin-top:1px;color:var(--primaer)}
+.phase-zeilen li[data-ich="1"] .ic-sie,.phase-zeilen li[data-ich="0"] .ic-ich{display:none}
+.phase-zeit{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--linie);text-align:right;font-size:var(--fs-2);color:var(--text-2)}
+.phase-zeit strong{color:var(--tinte);font-weight:600}
+.phase-details{margin:12px 0 0}
+.phase-details summary{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-size:var(--fs-2);font-weight:600;color:var(--primaer-dunkel);list-style:none}
+.phase-details summary::-webkit-details-marker{display:none}
+.phase-details summary::after{content:"";width:8px;height:8px;margin-top:-4px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform var(--dauer) var(--kurve)}
+.phase-details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+.phase-details ol{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid var(--linie)}
+.phase-details li{display:flex;flex-direction:column;gap:4px;padding:14px 0;border-bottom:1px solid var(--linie)}
+.phase-d-kopf{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.phase-d-kopf strong{font-weight:600;font-size:var(--fs-3)}
+.phase-opt{padding:2px 8px;border-radius:999px;background:var(--bg-papier-tief);font-size:var(--fs-1);color:var(--text-2)}
+.phase-d-min{margin-left:auto;font-size:var(--fs-2);color:var(--text-2);font-variant-numeric:tabular-nums}
+.phase-d-text{font-size:var(--fs-2);line-height:1.55;color:var(--text-lese)}
+/* Kompakte Variante (Startseite) */
+.phasen-kompakt{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.phasen-kompakt li{display:flex;flex-direction:column;gap:12px;padding:24px}
+.phasen-kompakt .phase-n{font-size:var(--fs-5)}
+.phasen-kompakt p{margin:0;font-size:var(--fs-2);line-height:1.55;color:var(--text-lese)}
+/* Aufwand auf einen Blick */
+.aufwand{padding:32px}
+.aufwand-wochen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.aufwand-woche{min-width:0}
+.aufwand-w{display:flex;justify-content:space-between;margin:0 0 12px;padding-bottom:8px;border-bottom:2px solid var(--tinte);font-size:var(--fs-2);font-weight:600;font-variant-numeric:tabular-nums}
+.aufwand-woche ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.aufwand-woche li{flex-grow:1;display:flex;flex-direction:column;gap:2px;min-width:0;padding:10px 12px;border-radius:var(--r-1);background:var(--primaer);color:#FFFFFF;font-size:var(--fs-1);line-height:1.35}
+.aufwand-woche li strong{font-size:var(--fs-2);font-variant-numeric:tabular-nums}
+.aufwand-woche li[data-opt="1"]{background:#DDE3FF;color:var(--tinte)}
+.aufwand-fuss{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;margin-top:32px;padding-top:24px;border-top:1px solid var(--linie)}
+.aufwand-total{display:flex;align-items:baseline;gap:12px;margin:0}
+.schalter{display:inline-flex;align-items:center;gap:12px;min-height:44px;padding:0;border:0;background:none;font:inherit;font-size:var(--fs-3);font-weight:500;color:var(--tinte);cursor:pointer;text-align:left}
+.schalter-spur{position:relative;flex:none;width:48px;height:28px;border-radius:999px;background:var(--linie-stark);transition:background var(--dauer) var(--kurve)}
+.schalter-spur::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(17,19,26,0.3);transition:transform var(--dauer) var(--kurve)}
+.schalter[aria-checked="true"] .schalter-spur{background:var(--primaer)}
+.schalter[aria-checked="true"] .schalter-spur::after{transform:translateX(20px)}
+/* Danach */
+.danach{display:flex;gap:24px;align-items:flex-start;max-width:760px;padding:32px}
+.danach>.ic{color:var(--primaer)}
+/* Drei Karten nebeneinander */
+.raster-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;list-style:none;margin:0;padding:0}
+.stein{padding:28px;display:flex;flex-direction:column;gap:12px}
+.stein .ic{color:var(--akzent-limette)}
+.stein p{margin:0;font-size:var(--fs-3);line-height:1.55;color:var(--auf-tinte-2)}
+@media(max-width:1023px){
+ .zahlen-reihe{grid-template-columns:minmax(0,1fr);gap:20px}
+ .fahrplan{grid-template-columns:minmax(0,1fr)}.fahrplan-nav{display:none}
+ .phasen{position:relative;padding-left:28px}
+ .phasen::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--linie)}
+ .phase::before{content:"";position:absolute;left:-27px;top:40px;width:14px;height:14px;border-radius:50%;background:var(--primaer);box-shadow:0 0 0 4px var(--bg-papier)}
+ .phasen-kompakt{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .raster-3{grid-template-columns:minmax(0,1fr)}
+ .aufwand-wochen{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:767px){.phase,.aufwand,.danach{padding:24px}.phasen-kompakt{grid-template-columns:minmax(0,1fr)}.danach{flex-direction:column;gap:12px}}
+/* Startseite */
+.hero.band-raster{background-color:var(--bg-papier)}
+.werk .werk-bild{display:block;width:100%;height:auto}
+.zahlen-streifen{display:none;padding:40px 0}
+.zahlen-streifen .zahlen-reihe{margin:0;padding:0;border:0}
+@media(min-width:1024px){.zahlen-streifen{display:block}.hero .fakten{display:none}}
+.raster-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.mk{display:flex;flex-direction:column;overflow:hidden}
+.mk-bild{position:relative;margin:24px 24px 0;border-radius:var(--r-1) var(--r-1) 0 0;overflow:hidden;background:#FFFFFF;aspect-ratio:16/9}
+.mk-bild img{display:block;width:100%;height:auto}
+.mk-handy{position:absolute;right:16px;bottom:-40px;width:22%;padding:4px;border-radius:18px;background:#0B0C10;box-shadow:0 12px 32px -12px rgba(0,0,0,0.6)}
+.mk-handy img{border-radius:14px}
+.mk-text{display:flex;flex-direction:column;gap:12px;padding:28px}
+.mk-text p{margin:0;font-size:var(--fs-3);line-height:1.55;color:var(--auf-tinte-2)}
+.mk-chips{display:flex;flex-wrap:wrap;gap:8px}
+.mk .karte-link{color:var(--auf-tinte)}
+.mk-mehr{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--akzent-limette)!important}
+.mk-mehr span{transition:transform var(--dauer) var(--kurve)}
+@media(hover:hover){.mk:hover .mk-mehr span{transform:translateX(4px)}}
+.pk-kurz .card{border-radius:var(--r-2);border:0;box-shadow:var(--schatten-1)}
+.pk-kurz .pk-std{border:0;box-shadow:inset 0 0 0 2px var(--primaer),var(--schatten-2)}
+.pk-name{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px;font-size:var(--fs-4);font-weight:600}
+.pk-preis{margin:0}
+.preise-fuss{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;margin:32px 0 0}
+.branchen-zeile{margin:0;font-size:var(--fs-2);color:var(--text-2)}
+.branchen-zeile a{color:var(--tinte)}
+/* Vergleich mit Symbolen */
+.vergleich{padding:8px 32px}
+.vg-zeile{display:grid;grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr));align-items:center;gap:16px;min-height:64px;border-bottom:1px solid var(--linie)}
+.vg-zeile:last-child{border-bottom:0}
+.vg-kopf{min-height:56px;font-size:var(--fs-2);font-weight:600}
+.vg-kopf span,.vg-zeile [role=cell]{text-align:center;justify-self:center}
+.vg-frage{font-size:var(--fs-3);font-weight:500}
+.vg-ich{color:var(--primaer-dunkel)}
+.vg-i{display:inline-block;width:28px;height:28px;border-radius:50%;vertical-align:middle;background-position:center;background-repeat:no-repeat;background-size:16px}
+[data-w="ja"] .vg-i{background-color:var(--primaer);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")}
+[data-w="teils"] .vg-i{background:linear-gradient(90deg,var(--linie-stark) 50%,transparent 50%);box-shadow:inset 0 0 0 2px var(--linie-stark)}
+[data-w="nein"] .vg-i{box-shadow:inset 0 0 0 2px var(--linie-stark);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23565D6B' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M7 7l10 10M17 7L7 17'/%3E%3C/svg%3E")}
+.vg-legende{display:flex;flex-wrap:wrap;gap:8px 24px;margin:16px 0 0}
+.vg-legende>span{display:inline-flex;align-items:center;gap:8px}
+.vg-legende .vg-i{width:20px;height:20px;background-size:12px}
+/* Person mit LinkedIn */
+.person2{display:grid;grid-template-columns:280px minmax(0,1fr);gap:64px;align-items:center}
+.portraet-link{position:relative;display:block;width:280px;border-radius:50%;transition:transform var(--dauer) var(--kurve)}
+.portraet{display:block;width:280px;height:280px;border-radius:50%;object-fit:cover;object-position:50% 22%;background:var(--bg-tinte-hell)}
+.li-abzeichen{position:absolute;right:16px;bottom:16px;display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:#FFFFFF;color:#0A66C2;box-shadow:var(--schatten-1);transition:opacity var(--dauer) var(--kurve),transform var(--dauer) var(--kurve)}
+.li-abzeichen svg{width:22px;height:22px}
+@media(hover:hover) and (pointer:fine){.li-abzeichen{opacity:0;transform:scale(0.9)}
+ .portraet-link:hover,.portraet-link:focus-visible{transform:translateY(-4px)}
+ .portraet-link:hover .li-abzeichen,.portraet-link:focus-visible .li-abzeichen{opacity:1;transform:none}}
+.portraet-link:focus-visible{outline-offset:6px}
+.person-fakten{list-style:none;margin:28px 0 32px;padding:0;display:flex;flex-direction:column;gap:14px}
+.person-fakten li{display:flex;gap:12px;align-items:center;font-size:var(--fs-3);color:var(--auf-tinte)}
+.person-fakten .ic{color:var(--akzent-limette)}
+.li-knopf svg{flex:none}
+@media(max-width:1023px){.raster-2{grid-template-columns:minmax(0,1fr)}.person2{grid-template-columns:minmax(0,1fr);gap:32px}.vergleich{padding:8px 20px}}
+@media(max-width:767px){.portraet-link:not(.portraet-gross),.portraet-link:not(.portraet-gross) .portraet{width:200px;height:200px}.vg-zeile{grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:8px}.vg-kopf{font-size:var(--fs-1)}.vg-frage{font-size:var(--fs-2)}.mk-bild{margin:16px 16px 0}.mk-text{padding:24px 20px}}
+/* Angebot */
+.hdr-price.band-kobalt{padding:var(--sektion-y) 0}
+.pk-detail{margin:32px 0 0;border-top:1px solid var(--linie)}
+.pk-detail summary{display:flex;align-items:center;gap:10px;min-height:56px;cursor:pointer;font-size:var(--fs-3);font-weight:600;list-style:none}
+.pk-detail summary::-webkit-details-marker{display:none}
+.pk-detail summary::after{content:"";width:8px;height:8px;margin-top:-4px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform var(--dauer) var(--kurve)}
+.pk-detail[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+.pk-detail-raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:8px 0 24px}
+.pk-detail-raster ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:var(--fs-2);line-height:1.5;color:var(--text-lese)}
+.betrieb-karte{display:flex;flex-direction:column;gap:8px;padding:28px}
+.betrieb-preis{margin:8px 0 0;display:flex;align-items:baseline;gap:6px}
+.betrieb-liste{margin:16px 0 0;padding:16px 0 0;border-top:1px solid var(--auf-tinte-linie);list-style:none;display:flex;flex-direction:column;gap:10px}
+.betrieb-liste li{position:relative;padding-left:22px;font-size:var(--fs-2);line-height:1.5;color:var(--auf-tinte-2)}
+.betrieb-liste li::before{content:"";position:absolute;left:2px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--akzent-limette)}
+.band-tinte .klein{color:var(--auf-tinte-2)}
+.nicht-liste{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 32px;list-style:none;margin:0;padding:0}
+.nicht-liste li{display:flex;gap:10px;align-items:flex-start;font-size:var(--fs-3);line-height:1.45;color:var(--text-lese)}
+.nicht-liste .ic{color:var(--text-2);margin-top:1px}
+@media(max-width:1023px){.pk-detail-raster,.nicht-liste{grid-template-columns:minmax(0,1fr)}}
+@media(min-width:768px) and (max-width:1023px){.nicht-liste{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.preis-herleitung{padding:0}
+.preis-herleitung summary{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px;padding:20px 32px;cursor:pointer;list-style:none}
+.preis-herleitung summary::-webkit-details-marker{display:none}
+.preis-herleitung summary::after{content:"";flex:none;width:10px;height:10px;margin-top:-5px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform var(--dauer) var(--kurve)}
+.preis-herleitung[open] summary::after{transform:rotate(-135deg);margin-top:5px}
+.preis-herleitung-inhalt{padding:0 32px 32px}
+/* Über mich */
+.ue-hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:center}
+.ue-bild{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.portraet-gross{width:100%;max-width:420px;border-radius:var(--r-3)}
+.portraet-gross .portraet{width:100%;height:auto;aspect-ratio:4/5;border-radius:var(--r-3);object-position:20% 50%;box-shadow:var(--schatten-2)}
+.portraet-gross .li-abzeichen{right:20px;bottom:20px}
+.zeitleiste2{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;position:relative}
+.zeitleiste2::before{content:"";position:absolute;left:0;right:0;top:7px;height:2px;background:var(--tinte)}
+.zeitleiste2 li{position:relative;display:flex;flex-direction:column;gap:8px;padding-top:32px}
+.zeitleiste2 li::before{content:"";position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:var(--primaer);box-shadow:0 0 0 4px var(--bg-papier-tief)}
+.zl2-jahr{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-1);color:var(--text-2)}
+.zl2-t{font-size:var(--fs-3);font-weight:600;line-height:1.4}
+.zusage{padding:28px;display:flex;flex-direction:column;gap:12px}
+.zusage .ic{color:var(--primaer)}
+.zusage p{margin:0;font-size:var(--fs-3);line-height:1.55;color:var(--text-lese)}
+.technik{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.technik li{display:flex;flex-direction:column;gap:8px;padding:24px;border:1px solid var(--auf-tinte-linie);border-radius:var(--r-2);background:var(--bg-tinte-hell)}
+.technik .ic{color:var(--akzent-limette);margin-bottom:8px}
+.technik strong{font-size:var(--fs-4);font-weight:600;color:var(--auf-tinte)}
+.technik span{font-size:var(--fs-2);color:var(--auf-tinte-2)}
+.ue-zeit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
+.ue-wochen{padding:28px}
+.ue-wochen dl{margin:16px 0 0}
+.ue-wochen dl>div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--linie);font-size:var(--fs-2)}
+.ue-wochen dt{font-weight:600}.ue-wochen dd{margin:0;color:var(--text-lese);text-align:right}
+.ue-status{display:flex;align-items:center;gap:12px;margin:20px 0 0;font-size:var(--fs-3)}
+.ue-portfolio{margin:32px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.25);font-size:var(--fs-2);color:#E7EBFF}
+.band-kobalt a:not(.btn){color:#FFFFFF}
+@media(max-width:1023px){.ue-hero,.ue-zeit{grid-template-columns:minmax(0,1fr);gap:40px}.zeitleiste2,.technik{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:767px){.zeitleiste2{grid-template-columns:minmax(0,1fr);padding-left:28px}.zeitleiste2::before{left:7px;right:auto;top:0;bottom:0;width:2px;height:auto}.zeitleiste2 li{padding-top:0}.zeitleiste2 li::before{left:-28px;top:3px}.technik{grid-template-columns:minmax(0,1fr)}.portraet-gross{max-width:320px}}
+/* Rechtstexte: Lesebreite 720 px, mitlaufendes Inhaltsverzeichnis links */
+.recht{display:grid;grid-template-columns:240px minmax(0,720px);column-gap:64px;align-items:start}
+.recht>*{grid-column:2}
+.recht>.recht-inhalt{grid-column:1;grid-row:1 / span 3;position:sticky;top:112px;max-height:calc(100vh - 140px);overflow:auto;margin:0;padding:0 0 0 16px;border-left:2px solid var(--linie)}
+.recht-inhalt ul{gap:0!important}
+.recht-inhalt a{display:block;padding:6px 0;font-size:var(--fs-2)!important;line-height:1.4;color:var(--text-lese);text-decoration:none}
+@media(hover:hover){.recht-inhalt a:hover{color:var(--primaer-dunkel);text-decoration:underline}}
+.recht p,.recht li{color:var(--text-lese)}
+.recht [id^="ds-"],.recht [id^="im-"],.recht [id^="agb-"]{scroll-margin-top:112px}
+@media(max-width:1023px){.recht{grid-template-columns:minmax(0,1fr)}.recht>*,.recht>.recht-inhalt{grid-column:1;grid-row:auto;position:static;max-height:none;margin:0 0 40px;padding:20px;border:1px solid var(--linie);border-radius:var(--r-2)}.recht-inhalt a{padding:10px 0}}
+/* Fusszeile */
+.fuss-ort{max-width:34ch;margin:8px 0 0;font-size:var(--fs-2);line-height:1.5;color:var(--linie-stark)}
+.fuss-li{display:flex;flex-wrap:wrap;gap:8px 20px;margin:20px 0 0}
+.fuss-li a{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:var(--fs-2);color:var(--grund);text-decoration:none}
+@media(hover:hover){.fuss-li a:hover span{text-decoration:underline}}
+.fuss-branchen{margin:40px 0 0;font-size:var(--fs-2);color:var(--linie-stark)}
+.fuss-branchen a{display:inline-block;padding:8px 0;color:var(--grund)}
+/* Branchenseiten */
+.br-inhalte{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;list-style:none;margin:0;padding:0}
+@media(min-width:1024px){.br-inhalte{grid-template-columns:repeat(4,minmax(0,1fr))}.br-inhalte:has(>li:nth-child(5)){grid-template-columns:repeat(6,minmax(0,1fr))}.br-inhalte:has(>li:nth-child(5))>li{grid-column:span 2}.br-inhalte:has(>li:nth-child(5))>li:nth-child(n+4){grid-column:span 3}}
+.br-inhalte li{display:flex;flex-direction:column;gap:12px;padding:28px}
+.br-inhalte p{margin:0;font-size:var(--fs-3);line-height:1.55;color:var(--text-lese)}
+.br-ico{display:block;width:32px;height:32px;background:var(--primaer);-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
+.br-muster{max-width:820px}
+.br-buehne{padding:24px;border-radius:var(--r-3);background:var(--bg-papier-tief);color:var(--tinte)}
+.br-preise{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:center}
+.br-pakete{margin:0;padding:8px 28px}
+.br-pakete>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.br-pakete>div:last-child{border-bottom:0}
+.br-pakete dt{font-size:var(--fs-4);font-weight:600}.br-pakete dd{margin:0;font-size:var(--fs-5)}
+@media(max-width:1023px){.br-preise{grid-template-columns:minmax(0,1fr);gap:32px}}
+@media(max-width:767px){.br-buehne{padding:12px}}
+</style>
 <style id="mobil">
 /* Handy und Tablet bis 1023 px. Die Ansicht ab 1024 px bleibt unverändert. */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -754,7 +1089,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  @keyframes menueBlendeAus{from{opacity:1}to{opacity:0}}
 }
 
-.gen-sektion{background:#ECEAE4;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie)}
+.gen-sektion{background:var(--bg-papier-tief)}
 .gen-titel{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px;color:var(--tinte)}
 .gen-lead{font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:var(--text-2);margin:0 0 40px}
 .gen-platz{min-height:740px}
@@ -857,7 +1192,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
     <div class="inner">
       <p class="label">Blog von Nico Bodmer</p>
       <h1 class="eb-h1">Einblicke</h1>
-      <p class="eb-lead">Praxis-Tipps, Beobachtungen aus meiner Arbeit und meine Haltung zu Websites für kleine Betriebe in der Schweiz. Jeder Beitrag erscheint zuerst auf LinkedIn. <a href="https://www.linkedin.com/company/odera-design/" rel="noopener">LinkedIn-Profil</a></p>
+      <p class="eb-lead">Praxis-Tipps, Beobachtungen aus meiner Arbeit und meine Haltung zu Websites für kleine Betriebe in der Schweiz. Jeder Beitrag erscheint zuerst auf LinkedIn. <a href="https://www.linkedin.com/in/nico-bodmer" rel="noopener">LinkedIn-Profil</a></p>
     </div>
   </div>
 </section>
@@ -907,7 +1242,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div>
           </div>
           <p style="font-size: 16px; line-height: 1.5; color: rgb(201, 206, 214); margin: 0px;">Webseiten für Schweizer Betriebe</p>
-          <p style="font-size: 16px; line-height: 1.5; color: var(--linie-stark); margin: 4px 0px 0px;">Berikon AG</p>
+          <p class="fuss-ort">Aus Berikon AG für Betriebe im Freiamt, am Mutschellen, im Kanton Aargau und in der ganzen Schweiz.</p>
+          <p class="fuss-li">
+            <a href="https://www.linkedin.com/company/odera-design" target="_blank" rel="noopener noreferrer" aria-label="ODERA Design auf LinkedIn, öffnet in neuem Tab"><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg><span>ODERA Design</span></a>
+            <a href="https://www.linkedin.com/in/nico-bodmer/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn-Profil von Nico Bodmer, öffnet in neuem Tab"><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg><span>Nico Bodmer</span></a>
+          </p>
         </div>
         <div style="display: flex; flex-direction: column; gap: 12px;">
           
@@ -937,10 +1276,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <a href="/datenschutz/" style="font-size: 16px; color: var(--linie-stark);">Datenschutz</a>
         <a href="/agb/" style="font-size: 16px; color: var(--linie-stark);">AGB</a>
       </div>
-      <div class="row" style="justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(246, 245, 241, 0.15); gap: 16px;">
+      <p class="fuss-branchen">Websites für: <a href="/website-fuer-handwerker/">Handwerk</a> · <a href="/website-fuer-restaurants/">Gastronomie</a> · <a href="/website-fuer-praxen/">Praxen</a> · <a href="/website-fuer-laeden/">Läden</a></p>
+      <div class="row" style="justify-content: space-between; margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(246, 245, 241, 0.15); gap: 16px;">
         <p style="font-size: 16px; color: var(--linie-stark); margin: 0px;">© 2026 ODERA Design · Nico Bodmer</p>
         <div class="row f-tip" style="gap: 24px;">
-          <p style="font-size: 13px; color: var(--linie-stark); margin: 0px;">Keine Cookies. Statistik nur mit Ihrer Einwilligung. <a href="/datenschutz/#ds-14" data-statistik-einstellungen="" style="color: var(--linie-stark);">Einstellungen</a></p>
+          <p style="font-size: 13px; color: var(--linie-stark); margin: 0px;">Keine Cookies. Statistik nur mit Ihrer Einwilligung. <a href="/datenschutz/#ds-14" data-statistik-einstellungen="" style="color: var(--linie-stark);">Statistik-Einstellungen</a></p>
         </div>
       </div>
     </div>
