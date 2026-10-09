@@ -36,6 +36,69 @@ if (!PREISE || PREISE.length !== 3) throw new Error('PAKET_PREIS in src/seite.ht
 // Vorschaubild für geteilte Links (WhatsApp, Mail, soziale Netzwerke), 1200 x 630
 const VORSCHAU = { url: '/assets/img/vorschau-odera.jpg', breite: 1200, hoehe: 630, alt: 'ODERA Design: Sie sehen Ihre neue Website, bevor Sie bezahlen. Ab CHF 890, Entwurf in 5 Arbeitstagen.' };
 
+// ---------- Firmenangaben für die strukturierten Daten (JSON-LD), eine Quelle für alle Seiten ----------
+// Alles muss mit dem sichtbaren Inhalt übereinstimmen. Keine Bewertungen, keine Öffnungszeiten (kein Ladenlokal),
+// keine Strassenadresse (Entscheid Nico, die Adresse im Impressum ist die Wohnadresse).
+const zahl = (name) => Number((quelle.match(new RegExp(' {2}' + name + ' = (\\d+);')) || [])[1]);
+const text = (name) => (quelle.match(new RegExp(' {2}' + name + " = '([^']+)';")) || [])[1];
+const FIRMA = {
+  linkedinFirma: text('ODERA_LINKEDIN_URL'), linkedinPerson: text('LINKEDIN_PERSON_URL'),
+  betrieb: [zahl('HOSTING_AUSLAND_CHF'), zahl('HOSTING_SCHWEIZ_CHF')],
+  claim: 'Digitale Auftritte für Unternehmen, die weiterkommen wollen.',
+};
+if (!FIRMA.linkedinFirma || !FIRMA.linkedinPerson || !FIRMA.betrieb[0] || !FIRMA.betrieb[1]) throw new Error('LinkedIn-Adressen oder Betriebspreise in src/seite.html nicht gefunden.');
+const BRANCHEN = new Function('return ' + ((quelle.match(/ {2}BRANCHEN_SEITEN = (\{[\s\S]*?\n {2}\});/) || [])[1] || '{}'))();
+const ORG = SITE + '/#organisation', PERSON = SITE + '/ueber-mich/#person', WEBSITE = SITE + '/#website';
+const PAKETE = [
+  ['Website', 'Eine Seite mit allen Abschnitten, Kontaktformular, eine Korrekturrunde'],
+  ['Standard', 'Bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil, zwei Korrekturrunden'],
+  ['Pro', 'Bis 10 Seiten, Online-Terminbuchung, zweite Sprache, Texte selbst bearbeiten, drei Korrekturrunden'],
+];
+const chf = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u2019');
+function angebotsKatalog(mitBetrieb) {
+  const liste = PAKETE.map(([n, d], i) => ({ '@type': 'Offer', name: 'Paket ' + n, description: d, price: String(PREISE[i]), priceCurrency: 'CHF', url: SITE + '/angebot/' }));
+  if (mitBetrieb) liste.push(
+    { '@type': 'Offer', name: 'Betrieb, Server in der EU oder den USA', description: 'Hosting, SSL, tägliche Sicherungen, Erreichbarkeitsprüfung', price: String(FIRMA.betrieb[0]), priceCurrency: 'CHF',
+      priceSpecification: { '@type': 'UnitPriceSpecification', price: String(FIRMA.betrieb[0]), priceCurrency: 'CHF', unitText: 'Jahr' }, url: SITE + '/angebot/#betrieb' },
+    { '@type': 'Offer', name: 'Betrieb, Server in der Schweiz', description: 'Wie oben, Website und Formulardaten bleiben in der Schweiz', price: String(FIRMA.betrieb[1]), priceCurrency: 'CHF',
+      priceSpecification: { '@type': 'UnitPriceSpecification', price: String(FIRMA.betrieb[1]), priceCurrency: 'CHF', unitText: 'Jahr' }, url: SITE + '/angebot/#betrieb' });
+  return { '@type': 'OfferCatalog', name: 'Websites zum Fixpreis', itemListElement: liste };
+}
+const GEBIET = [{ '@type': 'AdministrativeArea', name: 'Kanton Aargau' }, { '@type': 'AdministrativeArea', name: 'Kanton Zürich' }, { '@type': 'Country', name: 'Schweiz' }];
+function strukturDaten(pfad, p, teile) {
+  const url = SITE + urlOf(pfad);
+  const graph = [];
+  const name = (p.title || '').split(' · ')[0];
+  if (pfad === '/') {
+    graph.push(
+      { '@type': 'WebSite', '@id': WEBSITE, url: SITE + '/', name: NAME, inLanguage: 'de-CH', publisher: { '@id': ORG } },
+      { '@type': 'LocalBusiness', '@id': ORG, name: NAME, url: SITE + '/', email: EMAIL, description: FIRMA.claim + ' ' + p.desc,
+        logo: { '@type': 'ImageObject', url: SITE + '/assets/img/odera-logo-512.png', width: 512, height: 512 },
+        image: SITE + VORSCHAU.url, priceRange: chf(PREISE[0]) + ' bis ' + chf(PREISE[2]),
+        address: { '@type': 'PostalAddress', postalCode: '8965', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
+        areaServed: GEBIET, founder: { '@id': PERSON }, sameAs: [FIRMA.linkedinFirma],
+        contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: EMAIL, availableLanguage: 'de' },
+        hasOfferCatalog: angebotsKatalog(false) },
+      { '@type': 'WebPage', '@id': url + '#seite', url, name: p.title, inLanguage: 'de-CH', isPartOf: { '@id': WEBSITE }, about: { '@id': ORG } });
+  } else {
+    graph.push({ '@type': 'WebPage', '@id': url + '#seite', url, name: p.title, description: p.desc || undefined, inLanguage: 'de-CH', isPartOf: { '@id': WEBSITE },
+      breadcrumb: { '@id': url + '#brotkrumen' } },
+    { '@type': 'BreadcrumbList', '@id': url + '#brotkrumen', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Start', item: SITE + '/' },
+      { '@type': 'ListItem', position: 2, name: (BRANCHEN[pfad] && BRANCHEN[pfad].h1) || name, item: url }] });
+    if (pfad === '/angebot') graph.push({ '@type': 'Service', '@id': url + '#leistung', name: 'Website erstellen zum Fixpreis', provider: { '@id': ORG },
+      areaServed: GEBIET, hasOfferCatalog: angebotsKatalog(true) });
+    if (pfad === '/ueber-mich') graph.push({ '@type': 'Person', '@id': PERSON, name: 'Nico Bodmer', jobTitle: 'Webdesigner', worksFor: { '@id': ORG },
+      image: SITE + '/assets/img/portrait-nico-bodmer.webp', sameAs: [FIRMA.linkedinPerson],
+      address: { '@type': 'PostalAddress', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' } });
+    if (BRANCHEN[pfad]) graph.push({ '@type': 'Service', '@id': url + '#leistung', name: BRANCHEN[pfad].dienst, serviceType: BRANCHEN[pfad].dienst,
+      provider: { '@id': ORG }, areaServed: GEBIET, offers: { '@type': 'Offer', price: String(PREISE[0]), priceCurrency: 'CHF', url: SITE + '/angebot/' } });
+  }
+  // Fragen nur, wenn sie auf der Seite sichtbar sind (aufklappbar zählt)
+  if (teile.faq && teile.faq.length) graph.push({ '@type': 'FAQPage', '@id': url + '#fragen', mainEntity: teile.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
+  return JSON.parse(JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }));
+}
+
 const urlOf = (p) => (p === '/' ? '/' : p + '/');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const escA = (s) => esc(s).replace(/"/g, '&quot;');
@@ -152,23 +215,7 @@ function kopf(pfad, teile = {}) {
     `<meta name="twitter:image" content="${SITE}${VORSCHAU.url}">`,
     '<style>x-dc{display:none!important}</style>',
   );
-  if (pfad === '/') {
-    const ld = { '@context': 'https://schema.org', '@graph': [
-      { '@type': 'WebSite', '@id': SITE + '/#website', url: SITE + '/', name: NAME, inLanguage: 'de-CH', publisher: { '@id': SITE + '/#firma' } },
-      { '@type': 'ProfessionalService', '@id': SITE + '/#firma', name: NAME, url: SITE + '/', email: EMAIL, description: p.desc,
-        image: SITE + VORSCHAU.url, logo: SITE + '/favicon.svg', priceRange: 'CHF ' + PREISE[0] + ' bis ' + PREISE[2],
-        address: { '@type': 'PostalAddress', streetAddress: 'Gubelweg 23', postalCode: '8965', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
-        areaServed: { '@type': 'Country', name: 'Schweiz' }, founder: { '@type': 'Person', name: 'Nico Robin Bodmer' },
-        hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Website-Pakete zum Fixpreis', itemListElement: [
-          ['Website', 'Eine Seite mit allen Abschnitten, Kontaktformular, eine Korrekturrunde'],
-          ['Standard', 'Bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil, zwei Korrekturrunden'],
-          ['Pro', 'Bis 10 Seiten, Online-Terminbuchung, zweite Sprache, Texte selbst bearbeiten, drei Korrekturrunden'],
-        ].map(([n, d], i) => ({ '@type': 'Offer', name: 'Paket ' + n, description: d, price: String(PREISE[i]), priceCurrency: 'CHF', url: SITE + '/angebot/' })) } },
-    ] };
-    // Fragen nur, wenn sie auf der Seite sichtbar sind (aufklappbar zählt)
-    if (teile.faq && teile.faq.length) ld['@graph'].push({ '@type': 'FAQPage', '@id': SITE + '/#fragen', mainEntity: teile.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
-    zeilen.push(`<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`);
-  }
+  if (pfad !== '/404') zeilen.push(`<script type="application/ld+json">${JSON.stringify(strukturDaten(pfad, p, teile)).replace(/</g, '\\u003c')}</script>`);
   return zeilen.join('\n');
 }
 

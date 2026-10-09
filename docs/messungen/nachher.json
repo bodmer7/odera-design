@@ -1,0 +1,672 @@
+{
+  "/": {
+    "kb": 139,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 6105,
+    "woerter": 419,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Sie sehen Ihre neue Website, bevor Sie bezahlen.",
+        "woerter": 43,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "",
+        "woerter": 17,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 3,
+        "titel": "So arbeiten meine Seiten",
+        "woerter": 43,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 4,
+        "titel": "Drei Pakete, feste Preise",
+        "woerter": 67,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 5,
+        "titel": "So läuft es",
+        "woerter": 43,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 6,
+        "titel": "Baukasten, Agentur oder ich?",
+        "woerter": 56,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 7,
+        "titel": "Sie reden mit dem, der die Seite baut",
+        "woerter": 40,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 8,
+        "titel": "Was Sie sich vielleicht fragen",
+        "woerter": 66,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 9,
+        "titel": "Fangen wir mit der ersten Frage an",
+        "woerter": 44,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)",
+      "rgb(17, 19, 26)",
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)",
+      "rgb(236, 233, 225)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 8,
+    "bilder": 5,
+    "h1Gerendert": 1
+  },
+  "/angebot/": {
+    "kb": 154,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 6100,
+    "woerter": 652,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Was Ihre Website kostet.",
+        "woerter": 27,
+        "grund": "rgb(45, 76, 240)"
+      },
+      {
+        "nr": 2,
+        "titel": "",
+        "woerter": 35,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 3,
+        "titel": "Was soll Ihre Seite können?",
+        "woerter": 324,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 4,
+        "titel": "Wer betreibt Ihre Website danach?",
+        "woerter": 175,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 5,
+        "titel": "",
+        "woerter": 5,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 6,
+        "titel": "Was nicht im Preis ist",
+        "woerter": 43,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 7,
+        "titel": "Was Sie sich jetzt vermutlich denken",
+        "woerter": 43,
+        "grund": "rgb(246, 245, 241)"
+      }
+    ],
+    "flaechen": [
+      "rgb(45, 76, 240)",
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)",
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 6,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/ablauf/": {
+    "kb": 132,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 4961,
+    "woerter": 377,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "So entsteht Ihre Website.",
+        "woerter": 47,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 2,
+        "titel": "Vier Phasen bis zur fertigen Website",
+        "woerter": 180,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 3,
+        "titel": "Ihr Aufwand auf einen Blick",
+        "woerter": 52,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 4,
+        "titel": "Danach",
+        "woerter": 25,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 5,
+        "titel": "Drei Dinge, an denen Projekte scheitern",
+        "woerter": 50,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 6,
+        "titel": "Schritt 1 dauert rund 6 Minuten.",
+        "woerter": 23,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(17, 19, 26)",
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 6,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/musterprojekte/": {
+    "kb": 121,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 3863,
+    "woerter": 228,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Zwei Betriebe, zwei eigene Seiten.",
+        "woerter": 35,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 2,
+        "titel": "Schreinerei Doppelmeter",
+        "woerter": 39,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 3,
+        "titel": "Firstlicht Solartechnik",
+        "woerter": 82,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 4,
+        "titel": "Sehen Sie Ihren Betrieb in zehn Sekunden",
+        "woerter": 59,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 5,
+        "titel": "Ihr Betrieb sähe anders aus. Erzählen Sie mir davon.",
+        "woerter": 13,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(17, 19, 26)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)",
+      "rgb(236, 233, 225)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 5,
+    "bilder": 2,
+    "h1Gerendert": 1
+  },
+  "/ueber-mich/": {
+    "kb": 124,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 3887,
+    "woerter": 279,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Wer das macht",
+        "woerter": 60,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "Ausbildung und Beruf",
+        "woerter": 37,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 3,
+        "titel": "Zusagen statt Kundenstimmen",
+        "woerter": 51,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 4,
+        "titel": "Gängige Technik, keine Eigenbauten",
+        "woerter": 29,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 5,
+        "titel": "Höchstens zwei Projekte gleichzeitig",
+        "woerter": 48,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 6,
+        "titel": "Schreiben Sie mir. Antwort spätestens am nächsten Abend.",
+        "woerter": 54,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)",
+      "rgb(246, 245, 241)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 6,
+    "bilder": 1,
+    "h1Gerendert": 1
+  },
+  "/website-fuer-handwerker/": {
+    "kb": 125,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 4793,
+    "woerter": 318,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Website für Handwerksbetriebe",
+        "woerter": 43,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "Was auf Ihre Website gehört",
+        "woerter": 118,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 3,
+        "titel": "So sieht eine Handwerker-Website aus",
+        "woerter": 34,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 4,
+        "titel": "In vier Schritten online",
+        "woerter": 44,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 5,
+        "titel": "Fixpreis, einmalig",
+        "woerter": 31,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 6,
+        "titel": "Was Sie sich vielleicht fragen",
+        "woerter": 27,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 7,
+        "titel": "Sehen Sie Ihre Website, bevor Sie bezahlen.",
+        "woerter": 21,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(17, 19, 26)",
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(246, 245, 241)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 7,
+    "bilder": 1,
+    "h1Gerendert": 1
+  },
+  "/website-fuer-restaurants/": {
+    "kb": 124,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 4899,
+    "woerter": 300,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Website für Restaurants und Cafés",
+        "woerter": 45,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "Was auf Ihre Website gehört",
+        "woerter": 105,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 3,
+        "titel": "Sehen Sie Ihr Lokal in zehn Sekunden",
+        "woerter": 26,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 4,
+        "titel": "In vier Schritten online",
+        "woerter": 44,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 5,
+        "titel": "Fixpreis, einmalig",
+        "woerter": 38,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 6,
+        "titel": "Was Sie sich vielleicht fragen",
+        "woerter": 21,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 7,
+        "titel": "Sehen Sie Ihre Website, bevor Sie bezahlen.",
+        "woerter": 21,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(17, 19, 26)",
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(246, 245, 241)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 7,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/website-fuer-praxen/": {
+    "kb": 123,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 4807,
+    "woerter": 276,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Website für Praxen",
+        "woerter": 37,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "Was auf Ihre Website gehört",
+        "woerter": 90,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 3,
+        "titel": "Sehen Sie Ihre Praxis in zehn Sekunden",
+        "woerter": 26,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 4,
+        "titel": "In vier Schritten online",
+        "woerter": 44,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 5,
+        "titel": "Fixpreis, einmalig",
+        "woerter": 33,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 6,
+        "titel": "Was Sie sich vielleicht fragen",
+        "woerter": 25,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 7,
+        "titel": "Sehen Sie Ihre Website, bevor Sie bezahlen.",
+        "woerter": 21,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(17, 19, 26)",
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(246, 245, 241)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 7,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/website-fuer-laeden/": {
+    "kb": 124,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 4807,
+    "woerter": 280,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Website für Läden",
+        "woerter": 43,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "Was auf Ihre Website gehört",
+        "woerter": 95,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 3,
+        "titel": "Sehen Sie Ihren Laden in zehn Sekunden",
+        "woerter": 26,
+        "grund": "rgb(17, 19, 26)"
+      },
+      {
+        "nr": 4,
+        "titel": "In vier Schritten online",
+        "woerter": 44,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 5,
+        "titel": "Fixpreis, einmalig",
+        "woerter": 31,
+        "grund": "rgb(236, 233, 225)"
+      },
+      {
+        "nr": 6,
+        "titel": "Was Sie sich vielleicht fragen",
+        "woerter": 20,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 7,
+        "titel": "Sehen Sie Ihre Website, bevor Sie bezahlen.",
+        "woerter": 21,
+        "grund": "rgb(45, 76, 240)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(17, 19, 26)",
+      "rgb(246, 245, 241)",
+      "rgb(236, 233, 225)",
+      "rgb(246, 245, 241)",
+      "rgb(45, 76, 240)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 7,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/projekt-check/": {
+    "kb": 122,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 939,
+    "woerter": 94,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Projekt-Check von ODERA Design",
+        "woerter": 94,
+        "grund": "rgb(246, 245, 241)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)"
+    ],
+    "hintergrundwechsel": 0,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/datenschutz/": {
+    "kb": 135,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 7725,
+    "woerter": 2024,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Datenschutz­erklärung",
+        "woerter": 2,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "1. Verantwortliche Person",
+        "woerter": 2022,
+        "grund": "rgb(246, 245, 241)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 1,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/impressum/": {
+    "kb": 117,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 2478,
+    "woerter": 239,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Impressum",
+        "woerter": 2,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "1. Verantwortlich für diese Website",
+        "woerter": 237,
+        "grund": "rgb(246, 245, 241)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 1,
+    "bilder": 0,
+    "h1Gerendert": 1
+  },
+  "/agb/": {
+    "kb": 131,
+    "h1Quelle": 1,
+    "platzhalter": 0,
+    "hoehe": 6182,
+    "woerter": 1320,
+    "abschnitte": [
+      {
+        "nr": 1,
+        "titel": "Allgemeine Geschäfts­bedingungen",
+        "woerter": 3,
+        "grund": "rgb(246, 245, 241)"
+      },
+      {
+        "nr": 2,
+        "titel": "1. Geltungsbereich und Vertragsschluss",
+        "woerter": 1317,
+        "grund": "rgb(246, 245, 241)"
+      }
+    ],
+    "flaechen": [
+      "rgb(246, 245, 241)",
+      "rgb(246, 245, 241)",
+      "rgb(17, 19, 26)"
+    ],
+    "hintergrundwechsel": 1,
+    "bilder": 0,
+    "h1Gerendert": 1
+  }
+}

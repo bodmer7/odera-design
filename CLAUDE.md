@@ -108,8 +108,8 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 8. Oktober 2
 
 ### Rechtstexte
 - Datenschutz, AGB und Impressum teilen ein Stand-Datum: `STAND_RECHTSTEXTE` (zurzeit «Oktober 2026»).
-- Die Datenschutzerklärung hat zwei Varianten für die Abschnitte 5 bis 7 (`dsMail` und `dsDirekt`).
-  Live ist die Variante mit direktem Senden.
+- Die Datenschutzerklärung hat nur noch die Fassung mit direktem Senden. Die alte Variante (`dsMail`, Anfrage per
+  eigenem E-Mail-Programm) ist am 9. Oktober 2026 aus der Vorlage entfernt worden.
 - Neu im Oktober 2026: Datenschutz Abschnitt 9 «Website-Vorschau», AGB Paragrafen 16 bis 18
   (Online-Vorschau, Lizenzbilder, Domain), Bildnachweis der Vorschau im Impressum. Inhalte und
   Bildrechte der Kunden regelt der bestehende Paragraf 11, darum dort nichts ergänzt.
@@ -145,6 +145,18 @@ Beispielseiten erfundener Betriebe (Doppelmeter, Firstlicht). Für jedes Muster 
   In der Cloud `PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers` setzen.
 - Details, Annahmen-Pflege und Befehle: `musterprojekte/firstlicht/README.md`.
 
+### Redesign Oktober 2026 (Auftrag in 13 Teilen)
+- Gestaltungssystem im Block `<style id="system">` (Tokens, Bänder, Karten, Icons). Weiss nie als Abschnittsfläche.
+  Pro Hauptseite mindestens zwei Bänder auf Tinte oder Kobalt. Entscheidungen und Messwerte: `docs/entscheidungen.md`,
+  `docs/redesign-vorher-nachher.md`, `docs/seo.md`.
+- Musterprojekte: genau zwei (Doppelmeter, Firstlicht), je ein eigener Umschalter Desktop/Handy. Gerätebilder aus
+  `tools/screenshots-muster.mjs` (nach Änderungen an einem Muster neu erzeugen). Portfolio nur noch auf Über mich.
+- Phasen-Komponente (`PHASES`, `phasen`) für Ablauf und Startseite, Zeilen chronologisch (`zuerst`).
+- Branchenseiten aus `BRANCHEN_SEITEN`, Einstiege `branche-…` füllen die Branche im Projekt-Check vor.
+- LinkedIn nur als gewöhnliche Links, Adressen in `ODERA_LINKEDIN_URL` und `LINKEDIN_PERSON_URL`.
+- Impressum bleibt `noindex` (Wohnadresse). Titel-Trenner «·». Prüfskripte: `tools/gliederung.mjs`, `tools/messen.mjs`,
+  `tools/lighthouse.mjs`.
+
 ## Offene Punkte
 
 - [ ] **Ladezeit Doppelmeter auf dem Handy:** 1,65 bis 2,5 s mit gedrosseltem Netz, Ziel war 1 s.
@@ -157,8 +169,6 @@ Beispielseiten erfundener Betriebe (Doppelmeter, Firstlicht). Für jedes Muster 
       Chat, untere Leiste) steht aus. Echte Tastatur und VoiceOver wurden nur simuliert.
 - [ ] **Cloudflare im Datenschutz:** Registerstatus am 28. September 2026 «Active, Re-certification
       under Review». Status nachprüfen und Text bei Bedarf anpassen.
-- [ ] **Testskripte liegen nicht im Repo**, nur im Scratchpad einer Claude-Sitzung. macOS hat einen
-      Teil gelöscht, darunter den Test für den Preis-Rechner. Testreihe in `tools/` übernehmen.
 - [ ] **Unzuverlässiger Test:** `einstiege` bei 390 px scheitert manchmal beim Senden, wenn er direkt
       nach anderen Tests läuft. Einzeln grün.
 - [ ] **`README.md` ist öffentlich** unter odera.ch/README.md erreichbar (GitHub Pages). Prüfen, ob

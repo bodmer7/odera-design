@@ -73,10 +73,23 @@ Akquise-Tool, siehe unten):
 | `/einblicke/<pfad>/` | `artikel` | Artikel |
 | beide | `abschluss` | Abschluss mit Projekt-Check |
 
-**Branchenseiten** (noch nicht gebaut, vorgesehen): `hero`, `inhalte`,
-`beispiel`, `preise`, `fragen`, `abschluss`. Neue Abschnitte bekommen ein
-`data-abschnitt` und werden hier und in `config/abschnitte.json` im
-Akquise-Repo nachgetragen.
+**Branchenseiten** (`/website-fuer-handwerker/`, `/website-fuer-restaurants/`, `/website-fuer-praxen/`,
+`/website-fuer-laeden/`, seit 9. Oktober 2026): `hero` (Einstieg), `inhalte` (Was auf Ihre Website gehört),
+`beispiel` (Musterprojekt oder Vorschau-Werkzeug), `ablauf` (Ablauf kompakt), `preise` (Preise), `fragen`
+(Fragen), `abschluss` (Abschluss). Knöpfe: `branche-handwerk-projekt-check`, `branche-gastro-projekt-check`,
+`branche-praxis-projekt-check`, `branche-laden-projekt-check`.
+
+**Übrige Seiten** (seit dem Redesign vom 9. Oktober 2026 ebenfalls mit `data-abschnitt`):
+
+| Seite | IDs (Reihenfolge) |
+| --- | --- |
+| `/musterprojekte/` | `muster-kopf` (Kopf), `muster-doppelmeter` (Doppelmeter), `muster-firstlicht` (Firstlicht), `vorschau` (Vorschau-Werkzeug), `abschluss` |
+| `/ablauf/` | `ablauf-kopf` (Kopf mit Kennzahlen), `fahrplan` (vier Phasen), `aufwand` (Aufwand auf einen Blick), `danach` (Danach), `stolpersteine` (Drei Dinge, an denen Projekte scheitern), `abschluss` |
+| `/angebot/` | `angebot-kopf` (Kopf mit Preisen), `pakete` (Rechner und Pakete), `betrieb` (Betrieb), `preis-herleitung` (So kommt der Preis zustande), `nicht-im-preis` (Was nicht im Preis ist), `fragen` |
+| `/ueber-mich/` | `ueber-kopf` (Porträt), `werdegang`, `zusagen`, `technik` (Womit ich arbeite), `erreichbarkeit` (Kapazität und Erreichbarkeit), `abschluss` (Kontakt) |
+
+Neue Knöpfe: `ablauf-kopf-projekt-check`, `muster-abschluss-projekt-check`. Bitte in `config/abschnitte.json` im
+Akquise-Repo nachtragen.
 
 **Knöpfe (`cta_click`):** `data-quelle` des Links plus `-projekt-check`
 (z. B. `hero-projekt-check`, `leiste-projekt-check`, `faq-projekt-check`,

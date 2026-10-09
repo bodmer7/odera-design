@@ -67,3 +67,64 @@ erste Zeile. Ziel ist eine leere Liste. Ergebnis nach Teil 1: keine verdeckten L
 - `theme-color` ist jetzt immer Kobalt `#2D4CF0`, wie im Auftrag. Bisher war es Papier und wurde nur bei offenem
   Handy-Menü blau. Das Menü bleibt blau, nach dem Schliessen bleibt die Farbe Kobalt.
 - Das alte `assets/img/apple-touch-icon.png` bleibt liegen, damit gespeicherte Lesezeichen kein Bild verlieren.
+
+## Teil 2: Technisches SEO-Fundament
+
+- **Weg:** Kein neuer Build mit `react-dom/server`, sondern der bestehende Weg weitergedacht. `tools/seo-build.mjs`
+  rendert jede Route schon heute in Chrome (Vorab-Block). Neu ist nur, dass die Vorlage `<x-dc>` mit allen Seiten
+  nicht mehr in jede Route kopiert wird, sondern nach `assets/js/vorlage.js` kommt. Die Laufzeit setzt sie nach dem
+  ersten Zeichnen ins Dokument. So bleibt `support.js` unverändert, Seitenwechsel ohne Neuladen funktionieren weiter
+  und jede Route enthält nur ihren eigenen Inhalt. Quelle ist jetzt `src/seite.html`.
+- **React** wird weiterhin auf allen Seiten geladen, weil die Laufzeit auch Kopf, Menü, Chat und Seitenwechsel steuert.
+  Es kommt erst nach dem grössten Inhalt (LCP), darum ohne Einfluss auf die erste Darstellung.
+- **Ohne JavaScript** ist der Vorab-Block jetzt sichtbar (vorher versteckt, dafür ein zweiter Textblock in `<noscript>`).
+  So gibt es pro Route genau ein `h1`. Nur der Projekt-Check zeigt ohne JavaScript einen Hinweis mit der E-Mail-Adresse.
+- **Seitengewicht** (ausgeliefertes HTML): vorher 374 bis 446 KB, nachher 117 bis 154 KB. Die Vorlage (305 KB,
+  gzip rund 78 KB) wird einmal geladen und zwischengespeichert.
+- Kein CI-Build nötig: Die erzeugten Dateien werden wie bisher eingecheckt (`npm run build` = `node tools/seo-build.mjs`).
+
+## Teil 3 bis 9: Gestaltung
+
+- **Tokens** im Block `<style id="system">`: Flächen Papier `#F6F5F1`, Papier tief `#ECE9E1`, Tinte `#11131A`,
+  Tinte hell `#1B1E28`, Kobalt `#2D4CF0`; sieben Schriftgrössen (13, 15, 17, 20, 28, 40, 60 px, mobil per `clamp`);
+  Abschnitte 88/64/56 px; zwei Schatten; drei Radien (10, 16, 24 px). Die alten Namen (`--fs-text` usw.) zeigen auf
+  die neue Skala, darum wirken die Tokens auch in noch nicht umgebauten Teilen (Projekt-Check, Chat).
+- **Weiss** ist nirgends mehr Abschnittshintergrund. Jede Hauptseite hat mindestens zwei Bänder auf Tinte oder Kobalt.
+- **Einblenden** beim Scrollen nur mit JavaScript, ohne reduzierte Bewegung und nur für Elemente unterhalb des ersten
+  Bildschirms (LCP und Vorab-Block bleiben unberührt).
+- **Startseite:** Reihenfolge wie im Vorschlag. Der Kennzahlen-Streifen erscheint ab 1024 px. Darunter bleibt die
+  abgenommene Handy-Fassung (Titel, Satz, vier Antwort-Chips, Vertrauenszeile).
+- **Musterprojekte:** genau zwei Projekte, Doppelmeter auf Papier, Firstlicht auf Tinte (passt zur dunklen Firstlicht-Seite).
+  Jedes Projekt hat einen eigenen Umschalter Desktop/Handy (Wunsch Nico, vorher schaltete einer alle um). Die Bilder
+  waren abgeschnitten (`background-size: cover` in 4:3- und 9:16-Rahmen) und unscharf (1120 und 300 px Breite).
+  Neu: `tools/screenshots-muster.mjs`, Desktop 16:9 in 1280 und 2560 px, Handy 390 × 760 in 390 und 780 px,
+  AVIF und WebP mit `srcset`, als `<img>` im gleichen Seitenverhältnis wie der Rahmen.
+- **Ablauf:** Die Minuten stimmen mit dem Code überein (81 und 116 Minuten). Phase 3 zeigt «ohne Aufwand für Sie»
+  statt «0 Min». Die mitlaufende Fortschrittslinie nutzt die bestehende Berechnung `phFill`.
+- **Angebot:** Die vollständigen Paketlisten stehen wörtlich im aufklappbaren Teil, auf den Karten höchstens fünf
+  Punkte daraus. Keine Kreuztabelle, weil sie Leistungen zuordnen müsste, die nicht ausdrücklich in einem Paket stehen.
+- **Vergleich Startseite:** Symbole erfüllt, je nach Anbieter, nicht erfüllt. Die Zuordnung folgt den bisherigen Sätzen.
+- **LinkedIn:** gewöhnliche Links mit `target="_blank"` und `rel="noopener noreferrer"`, keine Skripte. Das Abzeichen
+  am Porträt erscheint bei Maus und Fokus, auf Touch-Geräten ist es immer sichtbar.
+- **Rechtstexte:** nur Layout geändert. Die alte Fassung der Datenschutz-Abschnitte 5 bis 7 (`dsMail`) ist aus der
+  Vorlage entfernt. Ergänzt: der LinkedIn-Satz unter «Externe Links» und der Linkname «Statistik-Einstellungen»
+  in Abschnitt 14 (der Link in der Fusszeile heisst jetzt so).
+- **theme-color** dauerhaft Kobalt (Teil 1).
+
+## Teil 10: SEO
+
+- Branchenseiten unter `/website-fuer-handwerker/`, `/website-fuer-restaurants/`, `/website-fuer-praxen/`,
+  `/website-fuer-laeden/`, eine Vorlage, Inhalt in `BRANCHEN_SEITEN`. Nur Aussagen aus Angebot und Paketen.
+  Restaurants, Praxen und Läden zeigen das Vorschau-Werkzeug mit vorgewählter Branche (neue Option `branche` in
+  `assets/js/generator.js`). Der Projekt-Check startet mit vorgewählter Branche (`EINSTIEGE` `branche-…`).
+- Indexierbar neu: Projekt-Check, Datenschutz, AGB.
+
+## Konflikte mit dem Auftrag (mit Vorschlag)
+
+| Punkt | Auftrag | Umgesetzt | Grund und Vorschlag |
+|---|---|---|---|
+| Impressum | Rechtsseiten indexierbar | Impressum bleibt `noindex` | Es nennt die Wohnadresse, und Nico wollte die Strasse nicht in den strukturierten Daten. Wenn das Impressum doch in die Suche soll: `noindex` in `PAGES` entfernen. |
+| Wortbudget Ablauf | höchstens 55 % (322 Wörter) | 377 Wörter (64 %) | Die im Auftrag wörtlich vorgegebenen Phasen-Zeilen, Kennzahlen und Sätze ergeben allein schon über 300 Wörter. Kürzer ginge nur, wenn die Phasen-Zeilen gekürzt werden dürfen. |
+| Abschnitt «Statistik» | nach «Website-Vorschau», Abschnitt 3 heisst «Cookies und Statistik» | Abschnitt 14 am Schluss, Titel von Abschnitt 3 «Keine Cookies, Statistik nur mit Einwilligung» | So hat es die Statistik-Sitzung am 8. Oktober veröffentlicht. Umnummerieren hätte bestehende Verweise (#ds-8 usw.) verschoben. Inhaltlich vollständig. |
+| Statistik-Banner | Desktop unten links, höchstens 380 px | jetzt so | War in der Statistik-Sitzung mittig und 520 px breit; angepasst, dazu Platz am Seitenende und Escape. |
+| Branchenseiten | 350 bis 500 Wörter | 276 bis 318 sichtbar, mit den aufklappbaren Antworten rund 340 bis 390 | Keine Füllwörter. Mehr Text nur mit weiteren belegbaren Aussagen. |

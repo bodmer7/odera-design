@@ -326,6 +326,8 @@ function tasten(e) {
 // Einstieg aus index.html
 export function starten(ziel, o = {}) {
   opts = o; wurzel = ziel;
+  // Vorauswahl der Branche (Branchenseiten), nur wenn es sie gibt
+  if (o.branche && BRANCHEN.some((b) => b.k === o.branche)) zustand.branche = o.branche;
   if (!document.getElementById('gen-stil')) { const st = document.createElement('style'); st.id = 'gen-stil'; st.textContent = STIL; document.head.appendChild(st); }
   wurzel.innerHTML = geruest();
   $('#gen-name').value = zustand.name; $('#gen-ort').value = zustand.ort;

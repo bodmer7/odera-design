@@ -1,46 +1,62 @@
 {
   "/": {
-    "fp": "d7d01368e3a53a37",
-    "lastmod": "2026-10-08"
+    "fp": "7b46275772556344",
+    "lastmod": "2026-10-09"
   },
   "/404": {
     "fp": "a6cfa667688714be",
     "lastmod": "2026-10-08"
   },
   "/start": {
-    "fp": "e7960710f1874fe1",
+    "fp": "fde5bf9192b67d08",
     "lastmod": "2026-10-08"
   },
   "/angebot": {
-    "fp": "bab8497cf0ec29bc",
-    "lastmod": "2026-10-08"
+    "fp": "7b1ec27b572257c6",
+    "lastmod": "2026-10-09"
   },
   "/ablauf": {
-    "fp": "aa93b0c3051a80a1",
-    "lastmod": "2026-10-08"
+    "fp": "218c8c2f222b7789",
+    "lastmod": "2026-10-09"
   },
   "/musterprojekte": {
-    "fp": "a425ae0c016e93b9",
-    "lastmod": "2026-10-08"
+    "fp": "5612220b108b7c67",
+    "lastmod": "2026-10-09"
   },
   "/ueber-mich": {
-    "fp": "b9a6fd3cdae1d3cc",
-    "lastmod": "2026-10-08"
+    "fp": "1615a7706def9cc0",
+    "lastmod": "2026-10-09"
   },
   "/projekt-check": {
-    "fp": "1fcfc856b48a5552",
-    "lastmod": "2026-10-08"
+    "fp": "76cd278fba478a68",
+    "lastmod": "2026-10-09"
   },
   "/impressum": {
-    "fp": "3f7be5af438d8fcd",
-    "lastmod": "2026-10-08"
+    "fp": "18e238ebeae06823",
+    "lastmod": "2026-10-09"
   },
   "/datenschutz": {
-    "fp": "545fc410c28dfa6e",
-    "lastmod": "2026-10-08"
+    "fp": "1c9e871115b349ed",
+    "lastmod": "2026-10-09"
   },
   "/agb": {
-    "fp": "7a806666dbf87756",
-    "lastmod": "2026-10-08"
+    "fp": "ebfa1a3e271dbdf3",
+    "lastmod": "2026-10-09"
+  },
+  "/website-fuer-handwerker": {
+    "fp": "2b2c389762e113f9",
+    "lastmod": "2026-10-09"
+  },
+  "/website-fuer-restaurants": {
+    "fp": "b89b8bb0b226462a",
+    "lastmod": "2026-10-09"
+  },
+  "/website-fuer-praxen": {
+    "fp": "429cf1567e4f07de",
+    "lastmod": "2026-10-09"
+  },
+  "/website-fuer-laeden": {
+    "fp": "239730bcc433f95f",
+    "lastmod": "2026-10-09"
   }
 }

@@ -31,9 +31,26 @@
     '.st-stand{font-size:13px;color:var(--text-2,#565D6B);margin:0 0 10px}' +
     '@media(max-width:1023px){.st-banner{bottom:calc(76px + env(safe-area-inset-bottom))}}' +
     '@media(max-width:767px){.st-banner{left:12px;right:12px;padding:16px;font-size:14px}.st-banner p{margin:0 0 12px}.st-knopf{min-height:44px}}' +
+    // Desktop: kleine Karte unten links (höchstens 380 px), der Chat-Knopf unten rechts bleibt frei
+    '@media(min-width:1024px){.st-banner{left:24px;right:auto;bottom:24px;max-width:380px;margin:0}}' +
     '@media print{.st-banner{display:none}}';
 
   var banner = null;
+  // Solange das Banner sichtbar ist, bekommt die Seite unten Platz in seiner Höhe. So verdeckt es keine Links
+  // am Seitenende. Der Platz kommt nur am Ende dazu, sichtbare Inhalte verschieben sich nicht (kein CLS).
+  function platzUnten() {
+    if (!banner) { document.body.style.paddingBottom = ''; return; }
+    var r = banner.getBoundingClientRect();
+    document.body.style.paddingBottom = Math.ceil(window.innerHeight - r.top + 16) + 'px';
+  }
+  function bannerWeg() {
+    if (banner) { banner.remove(); banner = null; }
+    platzUnten();
+  }
+  window.addEventListener('resize', function () { if (banner) platzUnten(); });
+  // Escape schliesst das Banner für diesen Seitenaufruf, ohne zu speichern
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && banner) bannerWeg(); });
+
   function bannerZeigen(nachfrage) {
     if (banner) { banner.remove(); banner = null; }
     if (!document.getElementById('st-stil')) {
@@ -46,7 +63,7 @@
     banner.innerHTML =
       '<p class="st-titel" id="st-titel">Statistik</p>' +
       (nachfrage && wahl ? '<p class="st-stand">Zurzeit ' + (wahl === 'ja' ? 'eingeschaltet' : 'ausgeschaltet') + '.</p>' : '') +
-      '<p>Darf ich zählen, wie diese Website genutzt wird? Gespeichert werden nur anonyme Angaben wie aufgerufene Seiten und Klicks, ohne Cookies und ohne IP-Adresse. ' +
+      '<p>Darf ich zählen, wie diese Website genutzt wird? Gespeichert werden nur Angaben wie aufgerufene Seiten und Klicks, ohne Cookies, ohne IP-Adresse und ohne Ihren Namen. ' +
       'Sie können Ihre Wahl jederzeit unten auf jeder Seite ändern. <a href="/datenschutz/#ds-14">Mehr im Datenschutz</a></p>' +
       '<div class="st-knoepfe"><button type="button" class="st-knopf" data-st="ja">Zustimmen</button><button type="button" class="st-knopf" data-st="nein">Ablehnen</button></div>';
     banner.addEventListener('click', function (e) {
@@ -54,11 +71,12 @@
       if (!b) return;
       var ja = b.getAttribute('data-st') === 'ja';
       schreiben('localStorage', WAHL, ja ? 'ja' : 'nein');
-      banner.remove(); banner = null;
+      bannerWeg();
       if (ja) { if (!aktiv) { starten(); merke({ t: 'consent_yes' }); senden(); } }
       else stoppen();
     });
     document.body.appendChild(banner);
+    platzUnten();
     if (nachfrage) { var k = banner.querySelector('[data-st]'); if (k) k.focus(); }
   }
 

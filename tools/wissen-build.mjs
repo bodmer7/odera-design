@@ -181,7 +181,10 @@ console.log(`chat-proxy/src/wissen.js: Kern ${kernZeichen} Zeichen, dazu je nach
   const preise = wert('PAKET_PREIS');
   // Platzhalter wie in src/seite.html (werte()): Zahlen kommen aus denselben Konstanten
   const zahlwort = wert('ZAHLWORT'), tage = wert('ENTWURF_TAGE');
-  const platz = { MIN: String(wert('CHECK_MINUTEN')), TAGE: tage + ' Arbeitstagen', TAGE_WORT: (zahlwort[tage] || tage) + ' Arbeitstagen', PREIS_STD: chf(preise[1]) };
+  // Fragenzahl wie fragenZahl() im Projekt-Check: ohne Folgefragen und ohne Frage nur für die Kurzversion
+  const fragenText = (quelle.match(/ {2}Q = \[([\s\S]*?)\n {2}\];/) || [])[1] || '';
+  const fragen = fragenText.split(/\n    \{ key: '/).slice(1).filter((f) => !/nurKurz: true|wenn: /.test(f)).length;
+  const platz = { MIN: String(wert('CHECK_MINUTEN')), FRAGEN: String(fragen), TAGE: tage + ' Arbeitstagen', TAGE_WORT: (zahlwort[tage] || tage) + ' Arbeitstagen', PREIS_STD: chf(preise[1]) };
   const werte = (t) => String(t).replace(/\{([A-Z_]+)\}/g, (m, k) => { if (platz[k] === undefined) throw new Error('Platzhalter {' + k + '} in fester Chat-Antwort nicht auflösbar.'); return platz[k]; });
   const phasen = liste('PHASES').map((p) => Object.assign({}, p, { sie: werte(p.sie), ich: werte(p.ich), dauer: werte(p.dauer) }));
   const nichtDrin = [...(quelle.match(/<p class="pr-h">Was nicht im Preis ist<\/p>\s*<ul class="pr-ul">([\s\S]*?)<\/ul>/) || ['', ''])[1].matchAll(/<li>([^<]+)<\/li>/g)].map((m) => m[1]);
@@ -200,7 +203,8 @@ console.log(`chat-proxy/src/wissen.js: Kern ${kernZeichen} Zeichen, dazu je nach
     ].join('\n'),
     'Wie läuft ein Projekt ab?': [
       'In vier Phasen:',
-      ...phasen.map((p, i) => `${i + 1}. **${p.t}** (${p.dauer}): ${p.sie}`),
+      // Handelt in einer Phase zuerst Nico (Entwurf), steht sein Satz vorne, sonst fehlt der Bezug («Sie sehen ihn an»)
+      ...phasen.map((p, i) => `${i + 1}. **${p.t}** (${p.dauer}): ${p.zuerst === 'ich' ? p.ich + ' ' + p.sie : p.sie}`),
       '',
       'Der Entwurf ist kostenlos. Bezahlt wird erst, wenn er Ihnen gefällt. Mehr dazu auf der Seite [Ablauf](/ablauf/).',
     ].join('\n'),

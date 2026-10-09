@@ -15,7 +15,7 @@ import { chromium, devices } from 'playwright';
 
 const args = process.argv.slice(2);
 const BASIS = (args.find((a) => /^https?:/.test(a)) || 'http://127.0.0.1:8792').replace(/\/$/, '');
-const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,kurz,chat,generator,muster,einblicke').split(',');
+const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,kurz,chat,generator,muster,rechner,einblicke').split(',');
 const ROUTEN = ['/', '/angebot/', '/ablauf/', '/musterprojekte/', '/ueber-mich/', '/projekt-check/', '/datenschutz/', '/impressum/', '/agb/',
   ...(process.env.ROUTEN_ZUSATZ ? process.env.ROUTEN_ZUSATZ.split(',') : [])];
 const BREITEN = [390, 834, 1440];
@@ -240,6 +240,27 @@ try {
       ok(!probleme.length, `${geraet}: Musterprojekte ohne Konsolenfehler` + (probleme.length ? ': ' + probleme.join(' | ') : ''));
       await ctx.close();
     }
+  }
+
+  if (TEILE.includes('rechner')) {
+    // Preis-Rechner auf der Angebotsseite: Funktionen anwählen, Paket und Richtwert passen sich an, Übergabe an den Projekt-Check
+    const ctx = await neuerKontext({ viewport: { width: 1440, height: 900 } });
+    const page = await ctx.newPage();
+    const probleme = beobachten(page);
+    await page.goto(BASIS + '/angebot/', { waitUntil: 'networkidle' });
+    await warte(600);
+    const paket = () => page.locator('.rechner-paket').filter({ visible: true }).first().textContent();
+    const vorher = (await paket()).trim();
+    const fn = page.locator('.rechner-fn .rfn[aria-disabled="false"]').filter({ visible: true });
+    const n = await fn.count();
+    for (let i = 0; i < n; i++) { await fn.nth(i).click(); await warte(120); }
+    const nachher = (await paket()).trim();
+    ok(/Paket Website/.test(vorher) && /Paket Pro/.test(nachher), `Rechner: ohne Auswahl «${vorher.split(',')[0]}», mit allen ${n} Funktionen «${nachher.split(',')[0]}»`);
+    await page.locator('.rechner-los').filter({ visible: true }).first().click();
+    await warte(800);
+    ok(new URL(page.url()).pathname === '/projekt-check/', 'Rechner: «Mit dieser Auswahl» führt in den Projekt-Check');
+    ok(!probleme.length, 'Rechner ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
+    await ctx.close();
   }
 
   if (TEILE.includes('generator')) {

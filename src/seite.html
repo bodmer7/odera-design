@@ -614,7 +614,7 @@ if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1
 <script defer src="assets/js/vendor/react-18.3.1.production.min.js"></script>
 <script defer src="assets/js/vendor/react-dom-18.3.1.production.min.js"></script>
 <!-- Statistik nur nach Einwilligung (Banner), ohne Cookies: assets/js/statistik.js, docs/tracking.md. Bei Änderungen v= erhöhen (Zwischenspeicher 1 Woche). -->
-<script defer src="assets/js/statistik.js?v=1"></script>
+<script defer src="assets/js/statistik.js?v=2"></script>
 <script>
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
@@ -740,6 +740,227 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 @media(hover:hover){.mp2-geraet:hover .rahmen-browser,.mp2-geraet:hover .rahmen-handy{transform:translateY(-2px)}}
 @media(max-width:1023px){.mp2-hero-raster,.mp2{grid-template-columns:minmax(0,1fr);gap:40px}.mp2-rev .mp2-text{order:0}}
 @media(max-width:767px){.mp2-schalter button{min-width:96px}.mp2-sprung a{min-height:64px}}
+/* Kennzahlen-Reihe (Hero Ablauf, Streifen Startseite) */
+.zahlen-reihe{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 48px;margin:48px 0 40px;padding:32px 0 0;border-top:1px solid var(--auf-tinte-linie)}
+.zahlen-reihe>div{display:flex;flex-direction:column;gap:8px;min-width:0}
+.zahlen-reihe dt{margin:0}.zahlen-reihe dd{margin:0;font-size:var(--fs-2);line-height:1.45;color:var(--auf-tinte-2)}
+.band-papier .zahlen-reihe,.band-tief .zahlen-reihe{border-top-color:var(--linie)}
+.band-papier .zahlen-reihe dd,.band-tief .zahlen-reihe dd{color:var(--text-lese)}
+/* Fahrplan: mitlaufende Phasen-Navigation links, Karten rechts */
+.fahrplan{display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px;align-items:start}
+.fahrplan-nav{position:sticky;top:112px;display:flex;flex-direction:column;gap:4px;padding-left:20px}
+.fahrplan-spur{position:absolute;left:0;top:8px;bottom:8px;width:2px;border-radius:2px;background:var(--linie)}
+.fahrplan-spur span{display:block;width:100%;border-radius:2px;background:var(--primaer);transition:height 120ms linear}
+.fahrplan-nav a{display:flex;align-items:center;gap:12px;min-height:44px;color:var(--tinte);text-decoration:none;font-size:var(--fs-3);font-weight:500}
+.fahrplan-nav-n{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-1);color:var(--text-2)}
+@media(hover:hover){.fahrplan-nav a:hover{color:var(--primaer-dunkel)}}
+.phasen{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:24px}
+.phase{padding:32px;scroll-margin-top:112px}
+.phase-kopf{display:flex;align-items:baseline;gap:16px;margin:0 0 16px}
+.phase-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-6);line-height:1;color:var(--primaer);font-variant-numeric:tabular-nums}
+.phase-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.phase-zeilen{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.phase-zeilen li{display:flex;gap:12px;align-items:flex-start;font-size:var(--fs-3);line-height:1.55;color:var(--text-lese)}
+.phase-zeilen li .ic{margin-top:1px;color:var(--primaer)}
+.phase-zeilen li[data-ich="1"] .ic-sie,.phase-zeilen li[data-ich="0"] .ic-ich{display:none}
+.phase-zeit{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--linie);text-align:right;font-size:var(--fs-2);color:var(--text-2)}
+.phase-zeit strong{color:var(--tinte);font-weight:600}
+.phase-details{margin:12px 0 0}
+.phase-details summary{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-size:var(--fs-2);font-weight:600;color:var(--primaer-dunkel);list-style:none}
+.phase-details summary::-webkit-details-marker{display:none}
+.phase-details summary::after{content:"";width:8px;height:8px;margin-top:-4px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform var(--dauer) var(--kurve)}
+.phase-details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+.phase-details ol{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid var(--linie)}
+.phase-details li{display:flex;flex-direction:column;gap:4px;padding:14px 0;border-bottom:1px solid var(--linie)}
+.phase-d-kopf{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.phase-d-kopf strong{font-weight:600;font-size:var(--fs-3)}
+.phase-opt{padding:2px 8px;border-radius:999px;background:var(--bg-papier-tief);font-size:var(--fs-1);color:var(--text-2)}
+.phase-d-min{margin-left:auto;font-size:var(--fs-2);color:var(--text-2);font-variant-numeric:tabular-nums}
+.phase-d-text{font-size:var(--fs-2);line-height:1.55;color:var(--text-lese)}
+/* Kompakte Variante (Startseite) */
+.phasen-kompakt{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.phasen-kompakt li{display:flex;flex-direction:column;gap:12px;padding:24px}
+.phasen-kompakt .phase-n{font-size:var(--fs-5)}
+.phasen-kompakt p{margin:0;font-size:var(--fs-2);line-height:1.55;color:var(--text-lese)}
+/* Aufwand auf einen Blick */
+.aufwand{padding:32px}
+.aufwand-wochen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.aufwand-woche{min-width:0}
+.aufwand-w{display:flex;justify-content:space-between;margin:0 0 12px;padding-bottom:8px;border-bottom:2px solid var(--tinte);font-size:var(--fs-2);font-weight:600;font-variant-numeric:tabular-nums}
+.aufwand-woche ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.aufwand-woche li{flex-grow:1;display:flex;flex-direction:column;gap:2px;min-width:0;padding:10px 12px;border-radius:var(--r-1);background:var(--primaer);color:#FFFFFF;font-size:var(--fs-1);line-height:1.35}
+.aufwand-woche li strong{font-size:var(--fs-2);font-variant-numeric:tabular-nums}
+.aufwand-woche li[data-opt="1"]{background:#DDE3FF;color:var(--tinte)}
+.aufwand-fuss{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;margin-top:32px;padding-top:24px;border-top:1px solid var(--linie)}
+.aufwand-total{display:flex;align-items:baseline;gap:12px;margin:0}
+.schalter{display:inline-flex;align-items:center;gap:12px;min-height:44px;padding:0;border:0;background:none;font:inherit;font-size:var(--fs-3);font-weight:500;color:var(--tinte);cursor:pointer;text-align:left}
+.schalter-spur{position:relative;flex:none;width:48px;height:28px;border-radius:999px;background:var(--linie-stark);transition:background var(--dauer) var(--kurve)}
+.schalter-spur::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(17,19,26,0.3);transition:transform var(--dauer) var(--kurve)}
+.schalter[aria-checked="true"] .schalter-spur{background:var(--primaer)}
+.schalter[aria-checked="true"] .schalter-spur::after{transform:translateX(20px)}
+/* Danach */
+.danach{display:flex;gap:24px;align-items:flex-start;max-width:760px;padding:32px}
+.danach>.ic{color:var(--primaer)}
+/* Drei Karten nebeneinander */
+.raster-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;list-style:none;margin:0;padding:0}
+.stein{padding:28px;display:flex;flex-direction:column;gap:12px}
+.stein .ic{color:var(--akzent-limette)}
+.stein p{margin:0;font-size:var(--fs-3);line-height:1.55;color:var(--auf-tinte-2)}
+@media(max-width:1023px){
+ .zahlen-reihe{grid-template-columns:minmax(0,1fr);gap:20px}
+ .fahrplan{grid-template-columns:minmax(0,1fr)}.fahrplan-nav{display:none}
+ .phasen{position:relative;padding-left:28px}
+ .phasen::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--linie)}
+ .phase::before{content:"";position:absolute;left:-27px;top:40px;width:14px;height:14px;border-radius:50%;background:var(--primaer);box-shadow:0 0 0 4px var(--bg-papier)}
+ .phasen-kompakt{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .raster-3{grid-template-columns:minmax(0,1fr)}
+ .aufwand-wochen{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:767px){.phase,.aufwand,.danach{padding:24px}.phasen-kompakt{grid-template-columns:minmax(0,1fr)}.danach{flex-direction:column;gap:12px}}
+/* Startseite */
+.hero.band-raster{background-color:var(--bg-papier)}
+.werk .werk-bild{display:block;width:100%;height:auto}
+.zahlen-streifen{display:none;padding:40px 0}
+.zahlen-streifen .zahlen-reihe{margin:0;padding:0;border:0}
+@media(min-width:1024px){.zahlen-streifen{display:block}.hero .fakten{display:none}}
+.raster-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.mk{display:flex;flex-direction:column;overflow:hidden}
+.mk-bild{position:relative;margin:24px 24px 0;border-radius:var(--r-1) var(--r-1) 0 0;overflow:hidden;background:#FFFFFF;aspect-ratio:16/9}
+.mk-bild img{display:block;width:100%;height:auto}
+.mk-handy{position:absolute;right:16px;bottom:-40px;width:22%;padding:4px;border-radius:18px;background:#0B0C10;box-shadow:0 12px 32px -12px rgba(0,0,0,0.6)}
+.mk-handy img{border-radius:14px}
+.mk-text{display:flex;flex-direction:column;gap:12px;padding:28px}
+.mk-text p{margin:0;font-size:var(--fs-3);line-height:1.55;color:var(--auf-tinte-2)}
+.mk-chips{display:flex;flex-wrap:wrap;gap:8px}
+.mk .karte-link{color:var(--auf-tinte)}
+.mk-mehr{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--akzent-limette)!important}
+.mk-mehr span{transition:transform var(--dauer) var(--kurve)}
+@media(hover:hover){.mk:hover .mk-mehr span{transform:translateX(4px)}}
+.pk-kurz .card{border-radius:var(--r-2);border:0;box-shadow:var(--schatten-1)}
+.pk-kurz .pk-std{border:0;box-shadow:inset 0 0 0 2px var(--primaer),var(--schatten-2)}
+.pk-name{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px;font-size:var(--fs-4);font-weight:600}
+.pk-preis{margin:0}
+.preise-fuss{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;margin:32px 0 0}
+.branchen-zeile{margin:0;font-size:var(--fs-2);color:var(--text-2)}
+.branchen-zeile a{color:var(--tinte)}
+/* Vergleich mit Symbolen */
+.vergleich{padding:8px 32px}
+.vg-zeile{display:grid;grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr));align-items:center;gap:16px;min-height:64px;border-bottom:1px solid var(--linie)}
+.vg-zeile:last-child{border-bottom:0}
+.vg-kopf{min-height:56px;font-size:var(--fs-2);font-weight:600}
+.vg-kopf span,.vg-zeile [role=cell]{text-align:center;justify-self:center}
+.vg-frage{font-size:var(--fs-3);font-weight:500}
+.vg-ich{color:var(--primaer-dunkel)}
+.vg-i{display:inline-block;width:28px;height:28px;border-radius:50%;vertical-align:middle;background-position:center;background-repeat:no-repeat;background-size:16px}
+[data-w="ja"] .vg-i{background-color:var(--primaer);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")}
+[data-w="teils"] .vg-i{background:linear-gradient(90deg,var(--linie-stark) 50%,transparent 50%);box-shadow:inset 0 0 0 2px var(--linie-stark)}
+[data-w="nein"] .vg-i{box-shadow:inset 0 0 0 2px var(--linie-stark);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23565D6B' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M7 7l10 10M17 7L7 17'/%3E%3C/svg%3E")}
+.vg-legende{display:flex;flex-wrap:wrap;gap:8px 24px;margin:16px 0 0}
+.vg-legende>span{display:inline-flex;align-items:center;gap:8px}
+.vg-legende .vg-i{width:20px;height:20px;background-size:12px}
+/* Person mit LinkedIn */
+.person2{display:grid;grid-template-columns:280px minmax(0,1fr);gap:64px;align-items:center}
+.portraet-link{position:relative;display:block;width:280px;border-radius:50%;transition:transform var(--dauer) var(--kurve)}
+.portraet{display:block;width:280px;height:280px;border-radius:50%;object-fit:cover;object-position:50% 22%;background:var(--bg-tinte-hell)}
+.li-abzeichen{position:absolute;right:16px;bottom:16px;display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:#FFFFFF;color:#0A66C2;box-shadow:var(--schatten-1);transition:opacity var(--dauer) var(--kurve),transform var(--dauer) var(--kurve)}
+.li-abzeichen svg{width:22px;height:22px}
+@media(hover:hover) and (pointer:fine){.li-abzeichen{opacity:0;transform:scale(0.9)}
+ .portraet-link:hover,.portraet-link:focus-visible{transform:translateY(-4px)}
+ .portraet-link:hover .li-abzeichen,.portraet-link:focus-visible .li-abzeichen{opacity:1;transform:none}}
+.portraet-link:focus-visible{outline-offset:6px}
+.person-fakten{list-style:none;margin:28px 0 32px;padding:0;display:flex;flex-direction:column;gap:14px}
+.person-fakten li{display:flex;gap:12px;align-items:center;font-size:var(--fs-3);color:var(--auf-tinte)}
+.person-fakten .ic{color:var(--akzent-limette)}
+.li-knopf svg{flex:none}
+@media(max-width:1023px){.raster-2{grid-template-columns:minmax(0,1fr)}.person2{grid-template-columns:minmax(0,1fr);gap:32px}.vergleich{padding:8px 20px}}
+@media(max-width:767px){.portraet-link:not(.portraet-gross),.portraet-link:not(.portraet-gross) .portraet{width:200px;height:200px}.vg-zeile{grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:8px}.vg-kopf{font-size:var(--fs-1)}.vg-frage{font-size:var(--fs-2)}.mk-bild{margin:16px 16px 0}.mk-text{padding:24px 20px}}
+/* Angebot */
+.hdr-price.band-kobalt{padding:var(--sektion-y) 0}
+.pk-detail{margin:32px 0 0;border-top:1px solid var(--linie)}
+.pk-detail summary{display:flex;align-items:center;gap:10px;min-height:56px;cursor:pointer;font-size:var(--fs-3);font-weight:600;list-style:none}
+.pk-detail summary::-webkit-details-marker{display:none}
+.pk-detail summary::after{content:"";width:8px;height:8px;margin-top:-4px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform var(--dauer) var(--kurve)}
+.pk-detail[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+.pk-detail-raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:8px 0 24px}
+.pk-detail-raster ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:var(--fs-2);line-height:1.5;color:var(--text-lese)}
+.betrieb-karte{display:flex;flex-direction:column;gap:8px;padding:28px}
+.betrieb-preis{margin:8px 0 0;display:flex;align-items:baseline;gap:6px}
+.betrieb-liste{margin:16px 0 0;padding:16px 0 0;border-top:1px solid var(--auf-tinte-linie);list-style:none;display:flex;flex-direction:column;gap:10px}
+.betrieb-liste li{position:relative;padding-left:22px;font-size:var(--fs-2);line-height:1.5;color:var(--auf-tinte-2)}
+.betrieb-liste li::before{content:"";position:absolute;left:2px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--akzent-limette)}
+.band-tinte .klein{color:var(--auf-tinte-2)}
+.nicht-liste{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 32px;list-style:none;margin:0;padding:0}
+.nicht-liste li{display:flex;gap:10px;align-items:flex-start;font-size:var(--fs-3);line-height:1.45;color:var(--text-lese)}
+.nicht-liste .ic{color:var(--text-2);margin-top:1px}
+@media(max-width:1023px){.pk-detail-raster,.nicht-liste{grid-template-columns:minmax(0,1fr)}}
+@media(min-width:768px) and (max-width:1023px){.nicht-liste{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.preis-herleitung{padding:0}
+.preis-herleitung summary{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px;padding:20px 32px;cursor:pointer;list-style:none}
+.preis-herleitung summary::-webkit-details-marker{display:none}
+.preis-herleitung summary::after{content:"";flex:none;width:10px;height:10px;margin-top:-5px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform var(--dauer) var(--kurve)}
+.preis-herleitung[open] summary::after{transform:rotate(-135deg);margin-top:5px}
+.preis-herleitung-inhalt{padding:0 32px 32px}
+/* Über mich */
+.ue-hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:center}
+.ue-bild{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.portraet-gross{width:100%;max-width:420px;border-radius:var(--r-3)}
+.portraet-gross .portraet{width:100%;height:auto;aspect-ratio:4/5;border-radius:var(--r-3);object-position:20% 50%;box-shadow:var(--schatten-2)}
+.portraet-gross .li-abzeichen{right:20px;bottom:20px}
+.zeitleiste2{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;position:relative}
+.zeitleiste2::before{content:"";position:absolute;left:0;right:0;top:7px;height:2px;background:var(--tinte)}
+.zeitleiste2 li{position:relative;display:flex;flex-direction:column;gap:8px;padding-top:32px}
+.zeitleiste2 li::before{content:"";position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:var(--primaer);box-shadow:0 0 0 4px var(--bg-papier-tief)}
+.zl2-jahr{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--fs-1);color:var(--text-2)}
+.zl2-t{font-size:var(--fs-3);font-weight:600;line-height:1.4}
+.zusage{padding:28px;display:flex;flex-direction:column;gap:12px}
+.zusage .ic{color:var(--primaer)}
+.zusage p{margin:0;font-size:var(--fs-3);line-height:1.55;color:var(--text-lese)}
+.technik{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.technik li{display:flex;flex-direction:column;gap:8px;padding:24px;border:1px solid var(--auf-tinte-linie);border-radius:var(--r-2);background:var(--bg-tinte-hell)}
+.technik .ic{color:var(--akzent-limette);margin-bottom:8px}
+.technik strong{font-size:var(--fs-4);font-weight:600;color:var(--auf-tinte)}
+.technik span{font-size:var(--fs-2);color:var(--auf-tinte-2)}
+.ue-zeit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
+.ue-wochen{padding:28px}
+.ue-wochen dl{margin:16px 0 0}
+.ue-wochen dl>div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--linie);font-size:var(--fs-2)}
+.ue-wochen dt{font-weight:600}.ue-wochen dd{margin:0;color:var(--text-lese);text-align:right}
+.ue-status{display:flex;align-items:center;gap:12px;margin:20px 0 0;font-size:var(--fs-3)}
+.ue-portfolio{margin:32px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.25);font-size:var(--fs-2);color:#E7EBFF}
+.band-kobalt a:not(.btn){color:#FFFFFF}
+@media(max-width:1023px){.ue-hero,.ue-zeit{grid-template-columns:minmax(0,1fr);gap:40px}.zeitleiste2,.technik{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:767px){.zeitleiste2{grid-template-columns:minmax(0,1fr);padding-left:28px}.zeitleiste2::before{left:7px;right:auto;top:0;bottom:0;width:2px;height:auto}.zeitleiste2 li{padding-top:0}.zeitleiste2 li::before{left:-28px;top:3px}.technik{grid-template-columns:minmax(0,1fr)}.portraet-gross{max-width:320px}}
+/* Rechtstexte: Lesebreite 720 px, mitlaufendes Inhaltsverzeichnis links */
+.recht{display:grid;grid-template-columns:240px minmax(0,720px);column-gap:64px;align-items:start}
+.recht>*{grid-column:2}
+.recht>.recht-inhalt{grid-column:1;grid-row:1 / span 3;position:sticky;top:112px;max-height:calc(100vh - 140px);overflow:auto;margin:0;padding:0 0 0 16px;border-left:2px solid var(--linie)}
+.recht-inhalt ul{gap:0!important}
+.recht-inhalt a{display:block;padding:6px 0;font-size:var(--fs-2)!important;line-height:1.4;color:var(--text-lese);text-decoration:none}
+@media(hover:hover){.recht-inhalt a:hover{color:var(--primaer-dunkel);text-decoration:underline}}
+.recht p,.recht li{color:var(--text-lese)}
+.recht [id^="ds-"],.recht [id^="im-"],.recht [id^="agb-"]{scroll-margin-top:112px}
+@media(max-width:1023px){.recht{grid-template-columns:minmax(0,1fr)}.recht>*,.recht>.recht-inhalt{grid-column:1;grid-row:auto;position:static;max-height:none;margin:0 0 40px;padding:20px;border:1px solid var(--linie);border-radius:var(--r-2)}.recht-inhalt a{padding:10px 0}}
+/* Fusszeile */
+.fuss-ort{max-width:34ch;margin:8px 0 0;font-size:var(--fs-2);line-height:1.5;color:var(--linie-stark)}
+.fuss-li{display:flex;flex-wrap:wrap;gap:8px 20px;margin:20px 0 0}
+.fuss-li a{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:var(--fs-2);color:var(--grund);text-decoration:none}
+@media(hover:hover){.fuss-li a:hover span{text-decoration:underline}}
+.fuss-branchen{margin:40px 0 0;font-size:var(--fs-2);color:var(--linie-stark)}
+.fuss-branchen a{display:inline-block;padding:8px 0;color:var(--grund)}
+/* Branchenseiten */
+.br-inhalte{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;list-style:none;margin:0;padding:0}
+@media(min-width:1024px){.br-inhalte{grid-template-columns:repeat(4,minmax(0,1fr))}.br-inhalte:has(>li:nth-child(5)){grid-template-columns:repeat(6,minmax(0,1fr))}.br-inhalte:has(>li:nth-child(5))>li{grid-column:span 2}.br-inhalte:has(>li:nth-child(5))>li:nth-child(n+4){grid-column:span 3}}
+.br-inhalte li{display:flex;flex-direction:column;gap:12px;padding:28px}
+.br-inhalte p{margin:0;font-size:var(--fs-3);line-height:1.55;color:var(--text-lese)}
+.br-ico{display:block;width:32px;height:32px;background:var(--primaer);-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
+.br-muster{max-width:820px}
+.br-buehne{padding:24px;border-radius:var(--r-3);background:var(--bg-papier-tief);color:var(--tinte)}
+.br-preise{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:center}
+.br-pakete{margin:0;padding:8px 28px}
+.br-pakete>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.br-pakete>div:last-child{border-bottom:0}
+.br-pakete dt{font-size:var(--fs-4);font-weight:600}.br-pakete dd{margin:0;font-size:var(--fs-5)}
+@media(max-width:1023px){.br-preise{grid-template-columns:minmax(0,1fr);gap:32px}}
+@media(max-width:767px){.br-buehne{padding:12px}}
 </style>
 <style id="mobil">
 /* Handy und Tablet bis 1023 px. Die Ansicht ab 1024 px bleibt unverändert. */
@@ -970,14 +1191,14 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 
 <sc-if value="{{ isStart }}" hint-placeholder-val="{{ true }}">
 <div>
-<section class="hero" aria-labelledby="hero-t" data-abschnitt="hero">
+<section class="hero band-raster" aria-labelledby="hero-t" data-abschnitt="hero">
   <div class="wrap hero-pad">
     <div class="inner hero-raster">
       <div class="hero-text">
         <p class="hero-gruss" style="display:{{ grussDisplay }}">{{ grussText }}</p>
-        <p class="label hero-ort" style="animation:{{ heroAnim0 }}">Nico Bodmer · Webseiten aus Berikon AG</p>
-        <h1 id="hero-t" tabindex="-1" class="t-h1 hero-h1" style="animation:{{ heroAnim1 }}">Sie sehen Ihre neue Website, <span class="leuchtstift" style="animation-delay:450ms">bevor </span><span class="leuchtstift" style="animation-delay:560ms">Sie </span><span class="leuchtstift" style="animation-delay:670ms">bezahlen.</span></h1>
-        <p class="t-lead hero-lead" style="animation:{{ heroAnim2 }}">Für Handwerk, Gastro, Praxen und Läden. Ich zeige Ihnen den fertigen Entwurf, Sie entscheiden danach.</p>
+        <p class="augenbraue hero-ort" style="animation:{{ heroAnim0 }}">Webdesign aus Berikon AG für Betriebe in der ganzen Schweiz</p>
+        <h1 id="hero-t" tabindex="-1" class="titel-1 hero-h1" style="animation:{{ heroAnim1 }}">Sie sehen Ihre neue Website, <span class="leuchtstift" style="animation-delay:450ms">bevor </span><span class="leuchtstift" style="animation-delay:560ms">Sie </span><span class="leuchtstift" style="animation-delay:670ms">bezahlen.</span></h1>
+        <p class="einleitung hero-lead" style="animation:{{ heroAnim2 }}">Für Handwerk, Gastro, Praxen und Läden. Sie sehen den fertigen Entwurf und entscheiden danach.</p>
         <div class="hero-handy-chips">
           <p class="hero-frage-t" id="hero-frage-oben">Was sollen Besucher auf Ihrer neuen Website tun?</p>
           <div class="hero-chips" role="group" aria-labelledby="hero-frage-oben">
@@ -1000,142 +1221,162 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <figure class="werk" style="animation:{{ heroAnim4 }}">
         <a class="werk-link" href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}" aria-label="Musterprojekt Firstlicht Solartechnik ansehen">
           <div class="rahmen-browser">
-            <div class="rahmen-leiste" aria-hidden="true"><span class="rahmen-punkte"><i></i><i></i><i></i></span><span class="rahmen-adresse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>odera.ch/musterprojekte/firstlicht</span></span><span></span></div>
-            <div class="bild" role="img" aria-label="Startseite des Musterprojekts Firstlicht Solartechnik am Computer" style="aspect-ratio:1120/630;background-image:url(assets/img/muster-firstlicht-desktop.webp)"></div>
+            <div class="rahmen-leiste" aria-hidden="true"><span class="rahmen-punkte"><i></i><i></i><i></i></span><span class="rahmen-adresse"><span>odera.ch/musterprojekte/firstlicht</span></span><span></span></div>
+            <picture><source type="image/avif" srcset="assets/img/musterprojekt-solar-desktop-1280.avif 1280w, assets/img/musterprojekt-solar-desktop-2560.avif 2560w" sizes="(min-width:1024px) 640px, 92vw"><img class="werk-bild" src="assets/img/musterprojekt-solar-desktop-1280.webp" srcset="assets/img/musterprojekt-solar-desktop-1280.webp 1280w, assets/img/musterprojekt-solar-desktop-2560.webp 2560w" sizes="(min-width:1024px) 640px, 92vw" width="1280" height="720" alt="Startseite des Musterprojekts Firstlicht Solartechnik am Computer" loading="lazy" decoding="async"></picture>
           </div>
-          <div class="rahmen-handy"><div class="rahmen-schirm"><span class="rahmen-insel" aria-hidden="true"></span><div class="bild" role="img" aria-label="Dieselbe Seite auf dem Handy" style="aspect-ratio:300/585;background-image:url(assets/img/muster-firstlicht-handy.webp)"></div></div></div>
+          <div class="rahmen-handy"><div class="rahmen-schirm"><span class="rahmen-insel" aria-hidden="true"></span><picture><source type="image/avif" srcset="assets/img/musterprojekt-solar-handy-390.avif 390w, assets/img/musterprojekt-solar-handy-780.avif 780w" sizes="(min-width:1024px) 160px, 240px"><img class="werk-bild" src="assets/img/musterprojekt-solar-handy-390.webp" srcset="assets/img/musterprojekt-solar-handy-390.webp 390w, assets/img/musterprojekt-solar-handy-780.webp 780w" sizes="(min-width:1024px) 160px, 240px" width="390" height="760" alt="Dieselbe Seite auf dem Handy" loading="lazy" decoding="async"></picture></div></div>
         </a>
-        <figcaption>Musterprojekt Firstlicht Solartechnik. Der Betrieb ist erfunden, die Seite ist echt. <a href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}">Ganze Seite ansehen</a></figcaption>
+        <figcaption>Musterprojekt Firstlicht, ein erfundener Betrieb. <a href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}">Ansehen</a></figcaption>
       </figure>
     </div>
   </div>
 </section>
 
-<section class="sektion sektion-flaeche" aria-labelledby="muster-t" id="start-muster" data-abschnitt="musterprojekte">
+<section class="band band-tinte zahlen-streifen" aria-label="Das Wichtigste in drei Zahlen">
   <div class="wrap"><div class="inner">
-    <p class="label abschnitt-nr">01 · Musterprojekte</p>
-    <h2 id="muster-t" class="t-h2" style="margin:0 0 12px">So sehen meine Seiten aus</h2>
-    <p class="t-lead" style="margin:0 0 48px">Zwei Seiten mit zwei verschiedenen Zielen. Die erste ist für einen erfundenen Betrieb gebaut, die zweite ist mein eigenes Portfolio.</p>
-    <div class="g-two">
-      <div>
-        <a href="/musterprojekte/doppelmeter/" class="muster-bild" data-title="Schreinerei Doppelmeter" data-muster="doppelmeter" onClick="{{ openMuster }}"><span class="bild" role="img" aria-label="Musterprojekt Doppelmeter, Abschnitt Werkstatt" style="aspect-ratio:960/495;background-image:url(assets/img/muster-doppelmeter-werkstatt.webp)"></span></a>
-        <p class="label" style="margin:0 0 8px">Beispiel-Firmenseite · Paket Standard</p>
-        <h3 class="t-h3" style="margin:0 0 8px">Schreinerei Doppelmeter</h3>
-        <p class="t-text" style="margin:0 0 16px;color:var(--text-2)">Ziel ist der Anruf. Darum steht die Telefonnummer in jedem Bildschirm, alles andere ordnet sich darunter.</p>
-        <a href="/projekt-check/" class="einstieg" data-quelle="doppelmeter" onClick="{{ onEinstieg }}">So etwas für meinen Betrieb<span aria-hidden="true">→</span></a>
-      </div>
-      <div>
-        <a href="/musterprojekte/" class="muster-bild"><span class="bild" role="img" aria-label="Musterprojekt Portfolio Nico Bodmer, Startbildschirm" style="aspect-ratio:960/495;background-image:url(assets/img/muster-portfolio-desktop.webp)"></span></a>
-        <p class="label" style="margin:0 0 8px">Eigenprojekt · Einzelseite</p>
-        <h3 class="t-h3" style="margin:0 0 8px">Portfolio Nico Bodmer</h3>
-        <p class="t-text" style="margin:0 0 16px;color:var(--text-2)">Ziel ist, im Kopf zu bleiben. Darum bricht der Aufbau bewusst mit den Regeln für Firmenseiten.</p>
-        <a href="/musterprojekte/" class="einstieg">Alle Musterprojekte ansehen<span aria-hidden="true">→</span></a>
-      </div>
-    </div>
-    <div class="g-two" style="margin-top:56px;align-items:center">
-      <div>
-        <a href="/musterprojekte/firstlicht/" class="muster-bild" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}"><span class="bild" role="img" aria-label="Musterprojekt Firstlicht, Solarrechner" style="aspect-ratio:960/495;background-image:url(assets/img/muster-firstlicht-rechner.webp)"></span></a>
-      </div>
-      <div>
-        <p class="label" style="margin:0 0 8px">Beispiel-Firmenseite · Paket Pro</p>
-        <h3 class="t-h3" style="margin:0 0 8px">Firstlicht Solartechnik</h3>
-        <p class="t-text" style="margin:0 0 16px;color:var(--text-2)">Ziel ist die vorbereitete Anfrage. Darum rechnet ein ehrlicher Solarrechner vor, und das Ergebnis wandert direkt ins Formular.</p>
-        <a href="/musterprojekte/firstlicht/" class="einstieg" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}">Firstlicht ansehen<span aria-hidden="true">→</span></a>
-      </div>
-    </div>
+    <dl class="zahlen-reihe">
+      <div><dt class="kennzahl">ab {{ price1 }}</dt><dd>Fixpreis, einmalig</dd></div>
+      <div><dt class="kennzahl">{{ entwurfTageKurz }}</dt><dd>bis zum fertigen Entwurf</dd></div>
+      <div><dt class="kennzahl">CHF 0</dt><dd>wenn er nicht gefällt</dd></div>
+    </dl>
   </div></div>
 </section>
 
-<section class="sektion" aria-labelledby="pakete-t" data-abschnitt="preise">
+<section class="band band-tinte" aria-labelledby="muster-t" id="start-muster" data-abschnitt="musterprojekte">
   <div class="wrap"><div class="inner">
-    <p class="label abschnitt-nr">02 · Preise</p>
-    <h2 id="pakete-t" class="t-h2" style="margin:0 0 12px">Drei Pakete, feste Preise</h2>
-    <p class="t-lead" style="margin:0 0 48px">Einmalig bezahlt, ohne Abo. Hosting können Sie nach dem Livegang dazunehmen, müssen aber nicht.</p>
+    <div class="titelblock">
+      <p class="augenbraue">Musterprojekte</p>
+      <h2 id="muster-t" class="titel-2">So arbeiten meine Seiten</h2>
+      <p class="einleitung">Zwei erfundene Betriebe, zwei echte Websites.</p>
+    </div>
+    <div class="raster-2">
+      <article class="karte karte-dunkel karte-heben mk einblenden">
+        <div class="mk-bild" aria-hidden="true"><picture><source type="image/avif" srcset="assets/img/musterprojekt-schreinerei-desktop-1280.avif 1280w, assets/img/musterprojekt-schreinerei-desktop-2560.avif 2560w" sizes="(min-width:1024px) 560px, 92vw"><img src="assets/img/musterprojekt-schreinerei-desktop-1280.webp" srcset="assets/img/musterprojekt-schreinerei-desktop-1280.webp 1280w, assets/img/musterprojekt-schreinerei-desktop-2560.webp 2560w" sizes="(min-width:1024px) 560px, 92vw" width="1280" height="720" alt="" loading="lazy" decoding="async"></picture><span class="mk-handy"><picture><source type="image/avif" srcset="assets/img/musterprojekt-schreinerei-handy-390.avif 390w, assets/img/musterprojekt-schreinerei-handy-780.avif 780w" sizes="120px"><img src="assets/img/musterprojekt-schreinerei-handy-390.webp" srcset="assets/img/musterprojekt-schreinerei-handy-390.webp 390w, assets/img/musterprojekt-schreinerei-handy-780.webp 780w" sizes="120px" width="390" height="760" alt="" loading="lazy" decoding="async"></picture></span></div>
+        <div class="mk-text">
+          <p class="mk-chips"><span class="chip">Handwerk</span><span class="chip">Paket Standard</span></p>
+          <h3 class="titel-3"><a class="karte-link" href="/musterprojekte/doppelmeter/" data-title="Schreinerei Doppelmeter" data-muster="doppelmeter" onClick="{{ openMuster }}">Schreinerei Doppelmeter</a></h3>
+          <p>Ziel: der Anruf. Die Nummer steht in jedem Bildschirm.</p>
+          <p class="mk-mehr" aria-hidden="true">Musterprojekt ansehen<span>→</span></p>
+        </div>
+      </article>
+      <article class="karte karte-dunkel karte-heben mk einblenden">
+        <div class="mk-bild" aria-hidden="true"><picture><source type="image/avif" srcset="assets/img/musterprojekt-solar-desktop-1280.avif 1280w, assets/img/musterprojekt-solar-desktop-2560.avif 2560w" sizes="(min-width:1024px) 560px, 92vw"><img src="assets/img/musterprojekt-solar-desktop-1280.webp" srcset="assets/img/musterprojekt-solar-desktop-1280.webp 1280w, assets/img/musterprojekt-solar-desktop-2560.webp 2560w" sizes="(min-width:1024px) 560px, 92vw" width="1280" height="720" alt="" loading="lazy" decoding="async"></picture><span class="mk-handy"><picture><source type="image/avif" srcset="assets/img/musterprojekt-solar-handy-390.avif 390w, assets/img/musterprojekt-solar-handy-780.avif 780w" sizes="120px"><img src="assets/img/musterprojekt-solar-handy-390.webp" srcset="assets/img/musterprojekt-solar-handy-390.webp 390w, assets/img/musterprojekt-solar-handy-780.webp 780w" sizes="120px" width="390" height="760" alt="" loading="lazy" decoding="async"></picture></span></div>
+        <div class="mk-text">
+          <p class="mk-chips"><span class="chip">Solar</span><span class="chip">Paket Pro</span></p>
+          <h3 class="titel-3"><a class="karte-link" href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}">Firstlicht Solartechnik</a></h3>
+          <p>Ziel: die vorbereitete Anfrage, mit ehrlichem Solarrechner.</p>
+          <p class="mk-mehr" aria-hidden="true">Musterprojekt ansehen<span>→</span></p>
+        </div>
+      </article>
+    </div>
+    <p style="margin:32px 0 0"><a href="/musterprojekte/" class="einstieg">Im Detail<span aria-hidden="true">→</span></a></p>
+  </div></div>
+</section>
+
+<section class="band band-papier" aria-labelledby="pakete-t" data-abschnitt="preise">
+  <div class="wrap"><div class="inner">
+    <div class="titelblock">
+      <p class="augenbraue">Preise</p>
+      <h2 id="pakete-t" class="titel-2">Drei Pakete, feste Preise</h2>
+      <p class="einleitung">Einmalig bezahlt, ohne Abo.</p>
+    </div>
     <div class="g-pkg pk-kurz wisch">
       <div class="card pk-start">
-        <p class="label" style="margin:0 0 12px">Website</p>
-        <p class="preis" style="margin:0 0 4px">{{ price1 }}</p>
-        <p class="t-klein" style="margin:0 0 20px">einmalig</p>
+        <p class="pk-name">Website</p>
+        <p class="kennzahl pk-preis">{{ price1 }}</p>
+        <p class="klein" style="margin:4px 0 20px">einmalig</p>
         <ul class="pk-punkte"><li>Eine Seite mit allen Abschnitten</li><li>Kontaktformular</li><li>Eine Korrekturrunde</li></ul>
         <a href="/projekt-check/" class="btn btn-sekundaer pk-link" data-quelle="paket-website" onClick="{{ onEinstieg }}">Mit Website starten</a>
       </div>
       <div class="card pk-std">
-        <p class="label" style="margin:0 0 12px">Standard <span class="stempel" style="margin-left:8px">Meine Empfehlung</span></p>
-        <p class="preis" style="margin:0 0 4px">{{ price2 }}</p>
-        <p class="t-klein" style="margin:0 0 20px">einmalig</p>
+        <p class="pk-name">Standard <span class="stempel">Meine Empfehlung</span></p>
+        <p class="kennzahl pk-preis">{{ price2 }}</p>
+        <p class="klein" style="margin:4px 0 20px">einmalig</p>
         <ul class="pk-punkte"><li>Bis 5 Unterseiten</li><li>Bildergalerie und Google-Unternehmensprofil</li><li>Zwei Korrekturrunden</li></ul>
         <a href="/projekt-check/" class="btn btn-primaer pk-link" data-quelle="paket-standard" onClick="{{ onEinstieg }}">Mit Standard starten</a>
       </div>
       <div class="card pk-plus">
-        <p class="label" style="margin:0 0 12px">Pro</p>
-        <p class="preis" style="margin:0 0 4px">{{ price3 }}</p>
-        <p class="t-klein" style="margin:0 0 20px">einmalig</p>
+        <p class="pk-name">Pro</p>
+        <p class="kennzahl pk-preis">{{ price3 }}</p>
+        <p class="klein" style="margin:4px 0 20px">einmalig</p>
         <ul class="pk-punkte"><li>Bis 10 Seiten</li><li>Terminbuchung, zweite Sprache, Texte selbst bearbeiten</li><li>Drei Korrekturrunden</li></ul>
         <a href="/projekt-check/" class="btn btn-sekundaer pk-link" data-quelle="paket-pro" onClick="{{ onEinstieg }}">Mit Pro starten</a>
       </div>
     </div>
     <div class="pk-punkte-nav" aria-hidden="true"><i></i><i></i><i></i></div>
-    <p style="margin:32px 0 0"><a href="/angebot/" class="einstieg">Alle Leistungen und Zusätze im Angebot<span aria-hidden="true">→</span></a></p>
+    <div class="preise-fuss">
+      <a href="/angebot/" class="einstieg">Alle Details<span aria-hidden="true">→</span></a>
+      <p class="branchen-zeile">Websites für: <a href="/website-fuer-handwerker/">Handwerk</a> · <a href="/website-fuer-restaurants/">Gastronomie</a> · <a href="/website-fuer-praxen/">Praxen</a> · <a href="/website-fuer-laeden/">Läden</a></p>
+    </div>
   </div></div>
 </section>
 
-<section class="sektion sektion-flaeche" aria-labelledby="ablauf-t" data-abschnitt="ablauf">
+<section class="band band-tief" aria-labelledby="ablauf-t" data-abschnitt="ablauf">
   <div class="wrap"><div class="inner">
-    <p class="label abschnitt-nr">03 · Ablauf</p>
-    <h2 id="ablauf-t" class="t-h2" style="margin:0 0 48px">So läuft es</h2>
-    <ol class="schritte">
-      <li><p class="schritt-n">01</p><p class="schritt-t">Fragen beantworten</p><p class="schritt-s">{{ checkUmfang }}, ohne Registrierung.</p></li>
-      <li><p class="schritt-n">02</p><p class="schritt-t">Entwurf ansehen</p><p class="schritt-s">Innert {{ entwurfTageText }} sehen Sie Ihre fertige Seite.</p></li>
-      <li><p class="schritt-n">03</p><p class="schritt-t">Änderungen sagen</p><p class="schritt-s">Sie sagen, was anders soll, ich setze es um.</p></li>
-      <li><p class="schritt-n">04</p><p class="schritt-t">Online gehen</p><p class="schritt-s">Ich schalte auf und übergebe Ihnen Domain, Zugänge und Quellcode.</p></li>
+    <div class="titelblock">
+      <p class="augenbraue">Ablauf</p>
+      <h2 id="ablauf-t" class="titel-2">So läuft es</h2>
+    </div>
+    <ol class="phasen-kompakt">
+      <sc-for list="{{ phasen }}" as="p" hint-placeholder-count="4">
+        <li class="karte einblenden"><span class="phase-n" aria-hidden="true">{{ p.n }}</span><h3 class="titel-3">{{ p.t }}</h3><p>{{ p.kurz }}</p></li>
+      </sc-for>
     </ol>
-    <p class="hinweis hinweis-akzent" style="margin:48px 0 0"><span class="lime-kreis" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><span><strong>Bezahlt wird erst, wenn Ihnen der Entwurf aus Schritt 02 gefällt.</strong> Einmal, ohne Anzahlung. Gefällt er Ihnen nicht, kostet es Sie nichts.</span></p>
+    <p style="margin:32px 0 0"><a href="/ablauf/" class="einstieg">Ganzer Ablauf<span aria-hidden="true">→</span></a></p>
   </div></div>
 </section>
 
-<section class="sektion" aria-labelledby="vergleich-t" data-abschnitt="vergleich">
+<section class="band band-papier" aria-labelledby="vergleich-t" data-abschnitt="vergleich">
   <div class="wrap"><div class="inner">
-    <p class="label abschnitt-nr">04 · Einordnung</p>
-    <h2 id="vergleich-t" class="t-h2" style="margin:0 0 12px">Baukasten, Agentur oder ich?</h2>
-    <p class="t-lead" style="margin:0 0 48px">Alle drei Wege führen zu einer Website. Sie unterscheiden sich darin, wer die Arbeit macht und wann Sie etwas sehen.</p>
-    <div class="wahl" role="table" aria-label="Vergleich Baukasten, Agentur und ODERA" data-offen="{{ wahlOffenAttr }}">
-      <div class="wahl-kopf" role="row"><span role="columnheader"><span class="rechner-sr">Frage</span></span><span role="columnheader">Baukasten</span><span role="columnheader">Agentur</span><span role="columnheader" class="wahl-ich">ODERA</span></div>
-      <sc-for list="{{ wahlZeilen }}" as="z" hint-placeholder-count="4">
-        <div class="wahl-zeile" role="row">
-          <span role="rowheader" class="wahl-frage">{{ z.frage }}</span>
-          <span role="cell" data-l="Baukasten">{{ z.baukasten }}</span>
-          <span role="cell" data-l="Agentur">{{ z.agentur }}</span>
-          <span role="cell" data-l="ODERA" class="wahl-ich">{{ z.ich }}</span>
+    <div class="titelblock">
+      <p class="augenbraue">Einordnung</p>
+      <h2 id="vergleich-t" class="titel-2">Baukasten, Agentur oder ich?</h2>
+    </div>
+    <div class="vergleich karte" role="table" aria-label="Vergleich Baukasten, Agentur und ODERA">
+      <div class="vg-zeile vg-kopf" role="row"><span role="columnheader"><span class="rechner-sr">Kriterium</span></span><span role="columnheader">Baukasten</span><span role="columnheader">Agentur</span><span role="columnheader" class="vg-ich">ODERA</span></div>
+      <sc-for list="{{ vergleichZeilen }}" as="z" hint-placeholder-count="4">
+        <div class="vg-zeile" role="row">
+          <span role="rowheader" class="vg-frage">{{ z.frage }}</span>
+          <span role="cell" data-w="{{ z.b }}"><span class="vg-i" aria-hidden="true"></span><span class="rechner-sr">{{ z.bText }}</span></span>
+          <span role="cell" data-w="{{ z.a }}"><span class="vg-i" aria-hidden="true"></span><span class="rechner-sr">{{ z.aText }}</span></span>
+          <span role="cell" data-w="{{ z.o }}" class="vg-ich"><span class="vg-i" aria-hidden="true"></span><span class="rechner-sr">{{ z.oText }}</span></span>
         </div>
       </sc-for>
     </div>
-    <button type="button" class="wahl-mehr" onClick="{{ wahlUmschalten }}" aria-expanded="{{ wahlOffen }}">{{ wahlMehrText }}</button>
-    <p class="t-klein" style="margin:16px 0 0">Allgemeine Einordnung. Einzelne Anbieter arbeiten anders.</p>
+    <p class="vg-legende klein"><span data-w="ja"><span class="vg-i" aria-hidden="true"></span>erfüllt</span><span data-w="teils"><span class="vg-i" aria-hidden="true"></span>je nach Anbieter</span><span data-w="nein"><span class="vg-i" aria-hidden="true"></span>nicht erfüllt</span></p>
+    <p class="lesetext" style="margin:24px 0 0">Bei mir sehen Sie den Entwurf, bevor Sie zahlen. <span class="klein">Allgemeine Einordnung.</span></p>
   </div></div>
 </section>
 
-<section class="sektion sektion-flaeche" aria-labelledby="person-t" data-abschnitt="ueber-mich">
-  <div class="wrap"><div class="inner person">
-    <img class="person-bild" src="assets/img/portrait-nico-bodmer.webp" alt="Nico Bodmer" width="160" height="160" loading="lazy" decoding="async">
+<section class="band band-tinte" aria-labelledby="person-t" data-abschnitt="ueber-mich">
+  <div class="wrap"><div class="inner person2">
+    <a class="portraet-link" href="{{ linkedinPerson }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn-Profil von Nico Bodmer, öffnet in neuem Tab">
+      <img class="portraet" src="assets/img/portrait-nico-bodmer.webp" alt="Nico Bodmer" width="320" height="320" loading="lazy" decoding="async">
+      <span class="li-abzeichen" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span>
+    </a>
     <div>
-      <p class="label abschnitt-nr">05 · Wer das macht</p>
-      <h2 id="person-t" class="t-h2" style="margin:0 0 16px">Sie reden mit dem, der die Seite baut</h2>
-      <p class="t-lead" style="margin:0 0 28px;color:var(--tinte)">Ich heisse Nico Bodmer und baue von Berikon aus Webseiten für kleine Betriebe. Nebenberuflich und darum höchstens {{ plaetzeText }} gleichzeitig.</p>
-      <dl class="lebenslauf">
-        <div><dt>Ausbildung</dt><dd>Platform Developer EFZ, technische Berufsmaturität</dd></div>
-        <div><dt>Beruf</dt><dd>Seit 2021 in der IT, heute technischer Vertrieb für Daten und KI</dd></div>
-        <div><dt>Studium</dt><dd>BSc Digital Business &amp; AI an der HWZ, berufsbegleitend</dd></div>
-      </dl>
-      <a href="/ueber-mich/" class="einstieg">Mehr über mich und meine Arbeitsweise<span aria-hidden="true">→</span></a>
+      <p class="augenbraue">Wer das macht</p>
+      <h2 id="person-t" class="titel-2">Sie reden mit dem, der die Seite baut</h2>
+      <p class="einleitung">Ich heisse Nico Bodmer und baue Websites für kleine Betriebe.</p>
+      <ul class="person-fakten">
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11.5V16c3 2 7 2 10 0v-4.5"/></svg>Platform Developer EFZ und technische Berufsmaturität</li>
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Seit 2021 in der IT</li>
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Höchstens {{ plaetzeText }} gleichzeitig</li>
+      </ul>
+      <div class="knopfreihe">
+        <a class="btn btn-sekundaer li-knopf" href="{{ linkedinPerson }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn-Profil von Nico Bodmer, öffnet in neuem Tab"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>
+        <a href="/ueber-mich/" class="einstieg">Mehr über mich<span aria-hidden="true">→</span></a>
+      </div>
     </div>
   </div></div>
 </section>
 
-<section class="sektion" aria-labelledby="fragen-t" data-abschnitt="fragen">
+<section class="band band-tief" aria-labelledby="fragen-t" data-abschnitt="fragen">
   <div class="wrap"><div class="inner">
-    <p class="label abschnitt-nr">06 · Fragen</p>
-    <h2 id="fragen-t" class="t-h2" style="margin:0 0 12px">Was Sie sich vielleicht fragen</h2>
-    <p class="t-lead" style="margin:0 0 48px">Die drei häufigsten Fragen stehen hier. Für alles andere antwortet mein Assistent sofort.</p>
+    <div class="titelblock">
+      <p class="augenbraue">Fragen</p>
+      <h2 id="fragen-t" class="titel-2">Was Sie sich vielleicht fragen</h2>
+          </div>
     <div class="fragen-raster">
       <div>
         <div class="fragen">
@@ -1143,12 +1384,10 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <details class="frage"><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
           </sc-for>
         </div>
-        <p class="t-text" style="margin:24px 0 0">Lieber persönlich? <a href="{{ mailKontakt }}">kontakt@odera.ch</a>, Antwort spätestens am nächsten Abend.</p>
-      </div>
+              </div>
       <aside class="ki-karte" aria-labelledby="ki-t" style="display:{{ chatKarteDisplay }}">
         <div class="ki-kopf"><p id="ki-t" class="ki-titel">Assistent von ODERA</p><span class="ki-marke">KI</span></div>
-        <p class="ki-gruss">Grüezi. Ich kenne Angebot, Preise und Ablauf und antworte sofort. Verbindliches klärt Nico persönlich.</p>
-        <p class="label" style="margin:0 0 10px">Häufig gefragt</p>
+        <p class="ki-gruss">Grüezi. Ich beantworte Fragen zu Angebot, Preisen und Ablauf sofort.</p>
         <div class="ki-chips">
           <sc-for list="{{ chatVorschlaege }}" as="v" hint-placeholder-count="4">
             <button type="button" class="ki-chip" data-v="{{ v }}" onClick="{{ onChatVorlage }}" aria-haspopup="dialog">{{ v }}</button>
@@ -1159,31 +1398,28 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <input id="ki-frage" name="frage" type="text" maxlength="1000" autocomplete="off" placeholder="Eigene Frage stellen">
           <button type="submit" class="btn btn-primaer ki-los">Fragen</button>
         </form>
-        <p class="ki-hinweis">KI-Antworten sind unverbindlich. Bitte keine persönlichen Daten eingeben. <a href="/datenschutz/#ds-8">Datenschutz</a></p>
+        <p class="ki-hinweis">Unverbindlich, bitte ohne persönliche Daten. <a href="/datenschutz/#ds-8">Datenschutz</a></p>
       </aside>
     </div>
   </div></div>
 </section>
 
-<section id="abschluss" class="sektion sektion-blau" data-flaeche="blau" aria-labelledby="abschluss-t" data-abschnitt="abschluss">
+<section id="abschluss" class="band band-kobalt" data-flaeche="blau" aria-labelledby="abschluss-t" data-abschnitt="abschluss">
   <div class="wrap"><div class="inner abschluss">
     <div>
-      <h2 id="abschluss-t" class="t-h2" style="color:var(--auf-dunkel);margin:0 0 16px">Fangen wir mit der ersten Frage an</h2>
+      <h2 id="abschluss-t" class="titel-2" style="margin:0 0 16px">Fangen wir mit der ersten Frage an</h2>
       <p class="t-lead" style="color:var(--auf-dunkel);margin:0 0 32px">{{ kontaktCheckText }}</p>
       <p class="hero-frage-t" id="hero-frage-t" style="color:var(--auf-dunkel)">Was sollen Besucher auf Ihrer neuen Website tun?</p>
       <div class="hero-chips" role="group" aria-labelledby="hero-frage-t">
         <sc-for list="{{ heroChips }}" as="c" hint-placeholder-count="4">
-          <button type="button" class="hero-chip" data-v="{{ c.v }}" onClick="{{ onHeroChip }}" aria-describedby="chip-hinweis">{{ c.label }}</button>
+          <button type="button" class="hero-chip" data-v="{{ c.v }}" onClick="{{ onHeroChip }}">{{ c.label }}</button>
         </sc-for>
       </div>
-      <p id="chip-hinweis" class="t-klein" style="color:var(--auf-dunkel);margin:12px 0 0">Ein Klick startet den Projekt-Check mit dieser Antwort.</p>
     </div>
     <div class="abschluss-seite">
-      <p data-nosnap="1" style="display:flex;align-items:flex-start;gap:12px;margin:0 0 20px">
-        <span class="{{ availPuls }}" style="width:10px;height:10px;margin-top:7px;border-radius:999px;background:{{ availDot }};flex:none"></span><span>{{ availability }}</span>
-      </p>
       <p class="auslastung"><span class="label" style="color:var(--auf-dunkel)">Auslastung</span><span class="ausl-balken" aria-hidden="true"><sc-for list="{{ auslPlaetze }}" as="pl" hint-placeholder-count="2"><i data-frei="{{ pl.frei }}"></i></sc-for></span><strong>{{ heroAuslText }}</strong></p>
-      <p style="margin:0">Lieber direkt schreiben: <a href="{{ mailKontakt }}" style="color:var(--auf-dunkel)">kontakt@odera.ch</a></p>
+      <p style="margin:0 0 20px"><a href="{{ mailKontakt }}" style="color:var(--auf-dunkel)">kontakt@odera.ch</a></p>
+      <a class="btn btn-sekundaer li-knopf" href="{{ linkedinFirma }}" target="_blank" rel="noopener noreferrer" aria-label="ODERA auf LinkedIn folgen, öffnet in neuem Tab"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>ODERA auf LinkedIn folgen</a>
     </div>
   </div></div>
 </section>
@@ -1282,7 +1518,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   <p class="pr-s" style="border-top:1pt solid #000000;padding-top:6pt;margin-top:14pt">kontakt@odera.ch · odera.ch</p>
 </div>
 <div class="pgscreen">
-  <section class="hdr-price g3" data-flaeche="blau">
+  <section class="hdr-price band-kobalt" data-flaeche="blau" data-abschnitt="angebot-kopf">
     <svg class="hdr-decor" aria-hidden="true" width="600" height="600" viewBox="0 0 600 600" style="position:absolute;top:50%;right:-160px;transform:translateY(-50%);pointer-events:none">
       <circle cx="300" cy="300" r="140" fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="1.5"></circle>
       <circle cx="300" cy="300" r="220" fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="1.5"></circle>
@@ -1291,22 +1527,22 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
     <div class="wrap sect" style="padding-top:0;padding-bottom:0;width:100%">
       <div class="inner" style="position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,3fr);gap:48px;align-items:center">
         <div class="txt">
-          <span class="badge" style="margin-bottom:24px;background:var(--flaeche)">Preise</span>
-          <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.06;letter-spacing:-0.03em;color:var(--auf-dunkel);margin:0 0 24px">Was Ihre Website kostet.</h1>
-          <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:var(--auf-dunkel);margin:0;text-wrap:pretty">Sie bekommen Ihre Website als fertigen Entwurf, bevor Sie sich für irgendetwas entscheiden. Was sie kostet, steht hier offen. Einmalig, ohne Abonnement, ohne Nachträge.</p>
+          <p class="augenbraue">Preise</p>
+          <h1 tabindex="-1" class="titel-1">Was Ihre Website kostet.</h1>
+          <p class="einleitung">Sie zahlen erst, wenn Ihnen der Entwurf gefällt. Einmalig, ohne Abo, ohne Nachträge.</p>
         </div>
         <div class="price-rail" style="display:flex;flex-direction:column">
           <div style="padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.25)">
-            <p class="mono" style="font-size:13px;letter-spacing:0.06em;color:var(--auf-dunkel);margin:0 0 6px">Website</p>
-            <p class="mono" style="font-size:clamp(24px,2.6vw,34px);color:var(--auf-dunkel);margin:0;font-variant-numeric:tabular-nums">{{ price1 }}</p>
+            <p style="font-size:var(--fs-2);color:#E7EBFF;margin:0 0 6px">Website</p>
+            <p class="kennzahl" style="margin:0">{{ price1 }}</p>
           </div>
           <div style="padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.25)">
-            <p class="mono" style="font-size:13px;letter-spacing:0.06em;color:var(--auf-dunkel);margin:0 0 6px">Standard</p>
-            <p class="mono" style="font-size:clamp(24px,2.6vw,34px);color:var(--auf-dunkel);margin:0;font-variant-numeric:tabular-nums">{{ price2 }}</p>
+            <p style="font-size:var(--fs-2);color:#E7EBFF;margin:0 0 6px">Standard</p>
+            <p class="kennzahl" style="margin:0">{{ price2 }}</p>
           </div>
           <div style="padding:20px 0">
-            <p class="mono" style="font-size:13px;letter-spacing:0.06em;color:var(--auf-dunkel);margin:0 0 6px">Pro</p>
-            <p class="mono" style="font-size:clamp(24px,2.6vw,34px);color:var(--auf-dunkel);margin:0;font-variant-numeric:tabular-nums">{{ price3 }}</p>
+            <p style="font-size:var(--fs-2);color:#E7EBFF;margin:0 0 6px">Pro</p>
+            <p class="kennzahl" style="margin:0">{{ price3 }}</p>
           </div>
         </div>
       </div>
@@ -1319,9 +1555,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
     </div></div>
   </section>
 
-  <section class="wrap sect">
+  <section class="band band-papier" data-abschnitt="pakete"><div class="wrap">
     <div class="inner">
-      <p class="label abschnitt-nr">01 · Paket finden</p>
+      <p class="augenbraue">Paket finden</p>
       <div class="angebot-intro">
         <p class="t-text" style="margin:0">Der Preis ändert sich nach der Offerte nicht. Auch dann nicht, wenn ich mich verschätzt habe.</p>
         <a class="einstieg" href="/projekt-check/?kurz=1">Nur den Preis wissen: drei Fragen<span aria-hidden="true">→</span></a>
@@ -1359,75 +1595,54 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </div>
       </div>
 
-      <p class="label abschnitt-nr" style="margin-top:var(--a-5)">02 · Pakete</p>
-      <h2 class="t-h2" style="margin:0 0 var(--a-4)">Was in jedem Paket steckt</h2>
+      <div class="titelblock" style="margin-top:var(--a-5)"><p class="augenbraue">Pakete</p><h2 class="titel-2">Was in jedem Paket steckt</h2></div>
       <div class="g-pkg wisch" style="align-items:stretch">
         <div class="card pk-karte pk-start" data-passt="{{ passtWebsite }}">
-          <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-2);margin:0 0 12px">Website</p>
-          <p class="preis" style="margin:0 0 8px">{{ price1 }}</p>
-          <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 20px">einmalig</p>
-          <p style="font-size:16px;line-height:1.65;margin:0 0 24px">Eine Seite, die alles Wichtige zeigt.</p>
-          <ul style="list-style:none;margin:0 0 24px;padding:0;display:flex;flex-direction:column;gap:12px">
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Eine Seite mit allen Abschnitten</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Kontaktformular</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Impressum und Datenschutzerklärung</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Für Handy, Tablet und Computer</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Eine Korrekturrunde</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert {{ entwurfTageD }}</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 10 Arbeitstage nach Ihrer Freigabe</li>
-          </ul>
+          <p class="pk-name">Website</p>
+          <p class="kennzahl pk-preis">{{ price1 }}</p>
+          <p class="klein" style="margin:4px 0 16px">einmalig</p>
+          <p class="lesetext" style="margin:0 0 20px">Eine Seite, die alles Wichtige zeigt.</p>
+          <ul class="pk-punkte"><li>Eine Seite mit allen Abschnitten</li><li>Kontaktformular</li><li>Für Handy, Tablet und Computer</li><li>Eine Korrekturrunde</li><li>Online 10 Arbeitstage nach Ihrer Freigabe</li></ul>
           <p class="aufwand"><span class="label">Ihr Aufwand</span>ein Formular und eine Rückmeldung.</p>
           <a class="btn btn-sekundaer" href="/projekt-check/?paket=website" data-quelle="paket-website" onClick="{{ onEinstieg }}">Mit Paket Website starten</a>
         </div>
 
         <div class="card pk-karte pk-std" data-passt="{{ passtStandard }}">
           <span class="stempel" style="align-self:flex-start;margin-bottom:16px">Meine Empfehlung</span>
-          <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-2);margin:0 0 12px">Standard</p>
-          <p class="preis" style="margin:0 0 8px">{{ price2 }}</p>
-          <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 20px">einmalig</p>
-          <p style="font-size:16px;line-height:1.65;margin:0 0 24px">Die vollständige Website für Ihr Unternehmen.</p>
-          <ul style="list-style:none;margin:0 0 24px;padding:0;display:flex;flex-direction:column;gap:12px">
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Bis 5 Unterseiten</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Leistungsseiten, Über uns, Kontakt</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Kontaktformular</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Bildergalerie</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Google-Unternehmensprofil eingerichtet</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Grundlagen für die Auffindbarkeit bei Google</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Ladezeit unter einer Sekunde</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Zwei Korrekturrunden</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert {{ entwurfTageD }}</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 15 Arbeitstage nach Ihrer Freigabe</li>
-          </ul>
+          <p class="pk-name">Standard</p>
+          <p class="kennzahl pk-preis">{{ price2 }}</p>
+          <p class="klein" style="margin:4px 0 16px">einmalig</p>
+          <p class="lesetext" style="margin:0 0 20px">Die vollständige Website für Ihr Unternehmen.</p>
+          <ul class="pk-punkte"><li>Bis 5 Unterseiten</li><li>Bildergalerie</li><li>Google-Unternehmensprofil eingerichtet</li><li>Zwei Korrekturrunden</li><li>Online 15 Arbeitstage nach Ihrer Freigabe</li></ul>
           <p class="aufwand"><span class="label">Ihr Aufwand</span>ein Formular, Ihre Bilder, zwei Rückmeldungen.</p>
           <a class="btn btn-primaer" href="/projekt-check/?paket=standard" data-quelle="paket-standard" onClick="{{ onEinstieg }}">Mit Paket Standard starten</a>
         </div>
 
         <div class="card pk-karte pk-plus" data-passt="{{ passtPro }}">
-          <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-2);margin:0 0 12px">Pro</p>
-          <p class="preis" style="margin:0 0 8px">{{ price3 }}</p>
-          <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 20px">einmalig</p>
-          <p style="font-size:16px;line-height:1.65;margin:0 0 24px">Wenn mehr dahintersteckt.</p>
-          <ul style="list-style:none;margin:0 0 24px;padding:0;display:flex;flex-direction:column;gap:12px">
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Bis 10 Seiten</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online-Terminbuchung oder erweiterte Formulare</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Texte selbst bearbeiten ohne Technikkenntnisse</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Zweite Sprache</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Bereich für offene Stellen</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Drei Korrekturrunden</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Bevorzugte Terminvergabe</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Entwurf innert {{ entwurfTageD }}</li>
-            <li style="display:flex;gap:12px;font-size:16px;line-height:1.65"><span class="chk" style="font-weight:600">✓</span>Online 25 Arbeitstage nach Ihrer Freigabe</li>
-          </ul>
+          <p class="pk-name">Pro</p>
+          <p class="kennzahl pk-preis">{{ price3 }}</p>
+          <p class="klein" style="margin:4px 0 16px">einmalig</p>
+          <p class="lesetext" style="margin:0 0 20px">Wenn mehr dahintersteckt.</p>
+          <ul class="pk-punkte"><li>Bis 10 Seiten</li><li>Online-Terminbuchung oder erweiterte Formulare</li><li>Zweite Sprache</li><li>Texte selbst bearbeiten ohne Technikkenntnisse</li><li>Drei Korrekturrunden</li></ul>
           <p class="aufwand"><span class="label">Ihr Aufwand</span>ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
           <a class="btn btn-sekundaer" href="/projekt-check/?paket=pro" data-quelle="paket-pro" onClick="{{ onEinstieg }}">Mit Paket Pro starten</a>
         </div>
       </div>
     <div class="pk-punkte-nav" aria-hidden="true"><i></i><i></i><i></i></div>
 
+      <details class="pk-detail">
+        <summary>Alle Leistungen der drei Pakete</summary>
+        <div class="pk-detail-raster">
+          <div><p class="pk-name">Website</p><ul><li>Eine Seite mit allen Abschnitten</li><li>Kontaktformular</li><li>Impressum und Datenschutzerklärung</li><li>Für Handy, Tablet und Computer</li><li>Eine Korrekturrunde</li><li>Entwurf innert {{ entwurfTageD }}</li><li>Online 10 Arbeitstage nach Ihrer Freigabe</li></ul></div>
+          <div><p class="pk-name">Standard</p><ul><li>Bis 5 Unterseiten</li><li>Leistungsseiten, Über uns, Kontakt</li><li>Kontaktformular</li><li>Bildergalerie</li><li>Google-Unternehmensprofil eingerichtet</li><li>Grundlagen für die Auffindbarkeit bei Google</li><li>Ladezeit unter einer Sekunde</li><li>Zwei Korrekturrunden</li><li>Entwurf innert {{ entwurfTageD }}</li><li>Online 15 Arbeitstage nach Ihrer Freigabe</li></ul></div>
+          <div><p class="pk-name">Pro</p><ul><li>Bis 10 Seiten</li><li>Online-Terminbuchung oder erweiterte Formulare</li><li>Texte selbst bearbeiten ohne Technikkenntnisse</li><li>Zweite Sprache</li><li>Bereich für offene Stellen</li><li>Drei Korrekturrunden</li><li>Bevorzugte Terminvergabe</li><li>Entwurf innert {{ entwurfTageD }}</li><li>Online 25 Arbeitstage nach Ihrer Freigabe</li></ul></div>
+        </div>
+      </details>
+
       <div class="card logo-add">
         <div class="logo-add-head">
-          <span class="mono" style="align-self:flex-start;padding:6px 14px;border-radius:999px;border:1px solid var(--text-2);color:var(--text-2);font-size:13px;letter-spacing:0.04em;margin-bottom:16px">ZUSATZ</span>
-          <p class="mono" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-2);margin:0 0 12px">Logo</p>
+          <span class="chip" style="align-self:flex-start;margin-bottom:16px">Zusatz</span>
+          <p class="pk-name">Logo</p>
           <p class="mono" style="font-size:clamp(30px,3vw,42px);line-height:1.05;margin:0 0 8px;font-variant-numeric:tabular-nums">{{ logoAlleinChf }}</p>
           <p style="font-size:13px;letter-spacing:0.02em;color:var(--text-2);margin:0 0 20px">{{ logoMitChf }} zusammen mit einer Website</p>
           <p style="font-size:16px;line-height:1.65;margin:0">Ein eigenständiges Zeichen für Ihren Betrieb.</p>
@@ -1445,10 +1660,10 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p style="font-size:13px;line-height:1.7;color:var(--text-2);margin:0">Nicht enthalten: Markenrecherche, Markenanmeldung, Visitenkarten und weitere Drucksachen.</p>
         </div>
       </div>
-      <p style="font-size:16px;line-height:1.7;color:var(--tinte);margin:48px auto 0;max-width:860px;text-align:center;text-wrap:pretty">Alle Paketpreise sind einmalig. Es gibt kein Abonnement und keine monatliche Gebühr. Hosting ist in keinem Paket enthalten, kann aber nach dem Livegang optional bei mir bezogen werden. Die Aufschaltung übernehme ich einmalig, sie ist im Preis enthalten.</p>
+      <p class="lesetext" style="margin:40px auto 0;text-align:center">Alle Preise sind einmalig, ohne Abonnement. Hosting ist nicht enthalten und nach dem Livegang optional. Die Aufschaltung ist im Preis enthalten.</p>
       <details class="mdet" open="{{ true }}" style="max-width:860px;margin:48px auto 0;border-top:1px solid var(--linie)">
         <summary class="msum">Zusatzleistungen</summary>
-        <p class="mono mhide" style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-2);margin:24px 0 16px">Zusatzleistungen</p>
+        
         <ul style="list-style:none;margin:0;padding:0">
           <li style="display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65"><span>Weitere Korrekturrunde</span><span class="mono" style="font-variant-numeric:tabular-nums">{{ korrekturChf }}</span></li>
           <li style="display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65"><span>Texterstellung</span><span class="mono" style="font-variant-numeric:tabular-nums">{{ texteChf }} pro Seite</span></li>
@@ -1456,76 +1671,49 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </ul>
       </details>
     </div>
-  </section>
+  </div></section>
 
-  <section class="sektion-flaeche" style="background:var(--flaeche)">
-    <div class="wrap sect">
-      <div class="inner">
-        <p class="label abschnitt-nr">03 · Betrieb, optional nach dem Livegang</p>
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;color:var(--tinte);margin:0 0 20px;text-wrap:balance">Wer betreibt Ihre Website danach?</h2>
-        <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:var(--text-2);margin:0 0 48px;max-width:760px;text-wrap:pretty">Nach der Übergabe gehört die Website Ihnen. Sie können sie selbst betreiben oder den Betrieb mir überlassen. Beides ist möglich, Sie entscheiden erst am Schluss.</p>
-        <div class="g-host wisch">
-        <div class="host-card">
-          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.2;letter-spacing:-0.02em;color:var(--tinte);margin:0 0 20px">Sie hosten selbst</h3>
-          <p class="mono" style="font-size:clamp(30px,3.2vw,42px);line-height:1.05;color:var(--tinte);margin:0 0 8px;font-variant-numeric:tabular-nums;white-space:nowrap">CHF 0</p>
-          <p style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 24px">Serverstandort nach Ihrer Wahl</p>
-          <div aria-hidden="true" style="height:1px;background:var(--linie);margin:0 0 24px"></div>
-          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px">
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Sie erhalten alle Dateien, den Quellcode und eine schriftliche Anleitung</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Sie wählen Ihren Anbieter frei</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Hosting und Domain zahlen Sie dort direkt, üblicherweise CHF 120 bis 200 pro Jahr</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>SSL, Backups und Erneuerungen liegen bei Ihnen</span></li>
-          </ul>
-        </div>
-        <div class="host-card">
-          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.2;letter-spacing:-0.02em;color:var(--tinte);margin:0 0 20px">Betrieb bei mir</h3>
-          <p class="mono" style="font-size:clamp(30px,3.2vw,42px);line-height:1.05;color:var(--tinte);margin:0 0 8px;font-variant-numeric:tabular-nums;white-space:nowrap">{{ hostAuslandChf }} <span style="font-size:13px;letter-spacing:0.02em;color:var(--text-2);white-space:nowrap">pro Jahr</span></p>
-          <p style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 24px">Server in der EU oder den USA</p>
-          <div aria-hidden="true" style="height:1px;background:var(--linie);margin:0 0 24px"></div>
-          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px">
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Hosting, SSL und dessen Erneuerung</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Tägliche Sicherungen</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Erreichbarkeitsprüfung</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Ich bin Ihre Ansprechperson bei Störungen</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Antwort innert 2 Werktagen</span></li>
-          </ul>
-        </div>
-        <div class="host-card">
-          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.2;letter-spacing:-0.02em;color:var(--tinte);margin:0 0 20px">Betrieb bei mir, Schweiz</h3>
-          <p class="mono" style="font-size:clamp(30px,3.2vw,42px);line-height:1.05;color:var(--tinte);margin:0 0 8px;font-variant-numeric:tabular-nums;white-space:nowrap">{{ hostSchweizChf }} <span style="font-size:13px;letter-spacing:0.02em;color:var(--text-2);white-space:nowrap">pro Jahr</span></p>
-          <p style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 24px">Server in der Schweiz</p>
-          <div aria-hidden="true" style="height:1px;background:var(--linie);margin:0 0 24px"></div>
-          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px">
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Hosting, SSL und dessen Erneuerung</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Tägliche Sicherungen</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Erreichbarkeitsprüfung</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Ich bin Ihre Ansprechperson bei Störungen</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Antwort innert 2 Werktagen</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Ihre Website und alle Formulardaten bleiben in der Schweiz</span></li>
-            <li class="host-li"><span class="host-dot" aria-hidden="true"></span><span>Geeignet, wenn Sie mit vertraulichen Kundendaten arbeiten</span></li>
-          </ul>
-        </div>
-        </div>
-    <div class="pk-punkte-nav" aria-hidden="true"><i></i><i></i><i></i></div>
-        <p style="font-size:16px;line-height:1.65;color:var(--tinte);margin:40px 0 12px;max-width:760px;text-wrap:pretty">Die Einrichtung ist in beiden Betriebsvarianten im Projektpreis enthalten. Abgerechnet wird einmal jährlich im Voraus, kündbar mit 30 Tagen auf Monatsende.</p>
-        <p style="font-size:13px;line-height:1.7;color:var(--text-2);margin:0;max-width:760px">Nicht enthalten: Textänderungen, neue Seiten, neue Bilder, Suchmaschinenoptimierung und Domainkosten. Änderungen nach Aufwand zu {{ stundensatzTxt }}.</p>
+  <section id="betrieb" class="band band-tinte" aria-labelledby="betrieb-t" data-abschnitt="betrieb">
+    <div class="wrap"><div class="inner">
+      <div class="titelblock">
+        <p class="augenbraue">Betrieb, optional nach dem Livegang</p>
+        <h2 id="betrieb-t" class="titel-2">Wer betreibt Ihre Website danach?</h2>
+        <p class="einleitung">Die Website gehört Ihnen. Sie betreiben sie selbst oder überlassen es mir, entschieden wird am Schluss.</p>
       </div>
-    </div>
+      <div class="raster-3 g-host wisch">
+        <div class="karte karte-dunkel betrieb-karte">
+          <h3 class="titel-3">Sie hosten selbst</h3>
+          <p class="betrieb-preis"><span class="kennzahl">CHF 0</span></p>
+          <p class="klein">Serverstandort nach Ihrer Wahl</p>
+          <ul class="betrieb-liste"><li>Sie erhalten alle Dateien, den Quellcode und eine schriftliche Anleitung</li><li>Sie wählen Ihren Anbieter frei</li><li>Hosting und Domain zahlen Sie dort direkt, üblicherweise CHF 120 bis 200 pro Jahr</li><li>SSL, Backups und Erneuerungen liegen bei Ihnen</li></ul>
+        </div>
+        <div class="karte karte-dunkel betrieb-karte">
+          <h3 class="titel-3">Betrieb bei mir</h3>
+          <p class="betrieb-preis"><span class="kennzahl">{{ hostAuslandChf }}</span><span class="klein"> pro Jahr</span></p>
+          <p class="klein">Server in der EU oder den USA</p>
+          <ul class="betrieb-liste"><li>Hosting, SSL und dessen Erneuerung</li><li>Tägliche Sicherungen</li><li>Erreichbarkeitsprüfung</li><li>Ich bin Ihre Ansprechperson bei Störungen</li><li>Antwort innert 2 Werktagen</li></ul>
+        </div>
+        <div class="karte karte-dunkel betrieb-karte">
+          <h3 class="titel-3">Betrieb bei mir, Schweiz</h3>
+          <p class="betrieb-preis"><span class="kennzahl">{{ hostSchweizChf }}</span><span class="klein"> pro Jahr</span></p>
+          <p class="klein">Server in der Schweiz</p>
+          <ul class="betrieb-liste"><li>Alles wie «Betrieb bei mir»</li><li>Ihre Website und alle Formulardaten bleiben in der Schweiz</li><li>Geeignet, wenn Sie mit vertraulichen Kundendaten arbeiten</li></ul>
+        </div>
+      </div>
+      <div class="pk-punkte-nav" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p class="lesetext" style="margin:32px 0 8px">Die Einrichtung ist in beiden Betriebsvarianten im Projektpreis enthalten. Abgerechnet wird einmal jährlich im Voraus, kündbar mit 30 Tagen auf Monatsende.</p>
+      <p class="klein">Nicht enthalten: Textänderungen, neue Seiten, neue Bilder, Suchmaschinenoptimierung und Domainkosten. Änderungen nach Aufwand zu {{ stundensatzTxt }}.</p>
+    </div></div>
   </section>
 
 
 
 
-  <section class="wrap">
-    <div class="inner" style="padding-bottom:24px">
-      <div style="margin-top:48px;border:1px solid var(--linie);border-radius:20px;background:var(--grund);overflow:hidden">
-        <button type="button" onClick="{{ togglePrice }}" aria-expanded="{{ priceOpen }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px;padding:20px 32px;background:none;border:none;cursor:pointer;text-align:left">
-          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;color:var(--tinte)">So kommt der Preis zustande</span>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#11131A" stroke-width="2" style="flex:none;transform:{{ priceRot }};transition:transform 180ms ease-in-out"><path d="M6 9.5l6 6 6-6"></path></svg>
-        </button>
-        <div style="display:grid;grid-template-rows:{{ priceRows }};transition:grid-template-rows 220ms ease-in-out">
-          <div style="overflow:hidden">
-            <div style="padding:0 32px 32px">
+  <section class="band band-papier" data-abschnitt="preis-herleitung"><div class="wrap">
+    <div class="inner">
+      <details class="karte preis-herleitung">
+        <summary><span class="titel-3">So kommt der Preis zustande</span></summary>
+        <div class="preis-herleitung-inhalt">
               <p style="font-size:16px;line-height:1.65;color:var(--text-2);margin:0 0 24px;max-width:65ch">Paket Standard kostet {{ price2 }}. Dahinter stecken rund 31 Stunden. Hier sind sie, Posten für Posten.</p>
               <div style="border-top:1px solid var(--linie)">
                 <div class="row" style="justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie)"><span style="font-size:16px;color:var(--tinte)">Formular lesen, Betrieb recherchieren, Konzept festlegen</span><span class="mono" style="font-size:16px;font-variant-numeric:tabular-nums">2,0</span></div>
@@ -1550,54 +1738,27 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               <p style="font-size:16px;line-height:1.65;color:var(--text-2);margin:0 0 16px;max-width:65ch">Davon gehen Sozialabgaben, Steuern, Versicherung, Software und Weiterbildung ab. Was pro Stunde übrig bleibt, können Sie selbst ausrechnen. Ich habe kein Problem damit, dass Sie es wissen.</p>
               <p style="font-size:16px;line-height:1.65;color:var(--text-2);margin:0;max-width:65ch">Brauche ich statt 31 Stunden vierzig, bleibt es bei {{ price2 }}. Das ist der Sinn eines Fixpreises.</p>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="wrap sect">
-    <div class="inner">
-      <details class="mdet" open="{{ true }}">
-        <summary class="msum">Was nicht im Preis ist</summary>
-      <h2 class="mhide" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px">Was nicht im Preis ist</h2>
-      <p class="txt mhide" style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:var(--text-2);margin:0 0 48px">Damit wir am Schluss nicht darüber streiten.</p>
-      <div class="g-excl" style="max-width:1000px">
-        <ul style="list-style:none;margin:0;padding:0">
-          <li style="padding:16px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65">Fotografie und Bildbeschaffung</li>
-          <li style="padding:16px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65">Logo, als Zusatz buchbar</li>
-          <li style="padding:16px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65">Firmenauftritt über das Logo hinaus</li>
-          <li style="padding:16px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65">Onlineshop und Zahlungsabwicklung</li>
-          <li style="padding:16px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65">Laufende Suchmaschinenoptimierung</li>
-          <li style="padding:16px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65">Werbeanzeigen</li>
-        </ul>
-        <ul style="list-style:none;margin:0;padding:0">
-          <li style="padding:16px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65">Betreuung sozialer Netzwerke</li>
-          <li style="padding:16px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65">Rechtsberatung</li>
-          <li style="padding:16px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65">Laufende Inhaltspflege nach der Übergabe</li>
-          <li style="padding:16px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65">Hosting- und Domainkosten</li>
-          <li style="padding:16px 0;border-bottom:1px solid var(--linie);font-size:16px;line-height:1.65">Übernahme von mehr als 20 bestehenden Seiten</li>
-        </ul>
-      </div>
       </details>
     </div>
+  </div></section>
+
+  <section class="band band-tief" aria-labelledby="nicht-t" data-abschnitt="nicht-im-preis">
+    <div class="wrap"><div class="inner">
+      <div class="titelblock">
+        <p class="augenbraue">Klarheit</p>
+        <h2 id="nicht-t" class="titel-2">Was nicht im Preis ist</h2>
+      </div>
+      <ul class="nicht-liste"><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Fotografie und Bildbeschaffung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Logo, als Zusatz buchbar</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Firmenauftritt über das Logo hinaus</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Onlineshop und Zahlungsabwicklung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Laufende Suchmaschinenoptimierung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Werbeanzeigen</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Betreuung sozialer Netzwerke</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Rechtsberatung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Laufende Inhaltspflege nach der Übergabe</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Hosting- und Domainkosten</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Übernahme von mehr als 20 bestehenden Seiten</span></li></ul>
+    </div></div>
   </section>
 
-  <section style="background:var(--grund)">
-    <div class="wrap sect">
+  <section class="band band-papier" aria-labelledby="angebot-fragen-t" data-abschnitt="fragen">
+    <div class="wrap">
       <div class="inner txt">
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 48px">Was Sie sich jetzt vermutlich denken</h2>
-        <div style="border-top:1px solid var(--linie)">
+        <div class="titelblock"><p class="augenbraue">Fragen</p><h2 id="angebot-fragen-t" class="titel-2">Was Sie sich jetzt vermutlich denken</h2></div>
+        <div class="fragen">
           <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
-            <div style="border-bottom:1px solid var(--linie)">
-              <button type="button" data-i="{{ f.i }}" onClick="{{ onFaq }}" aria-expanded="{{ f.open }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;padding:16px 0;background:none;border:none;cursor:pointer;text-align:left;font-size:20px;font-weight:600;color:var(--tinte)">
-                {{ f.q }}
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#11131A" stroke-width="2" style="flex:none;transform:{{ f.rot }};transition:transform 180ms ease-in-out"><path d="M6 9.5l6 6 6-6"></path></svg>
-              </button>
-              <div style="display:grid;grid-template-rows:{{ f.rows }};transition:grid-template-rows 220ms ease-in-out">
-                <div style="overflow:hidden"><p style="margin:0;padding:0 0 24px;font-size:16px;line-height:1.65;color:var(--text-2);max-width:65ch">{{ f.a }}</p></div>
-              </div>
-            </div>
+            <details class="frage"><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
           </sc-for>
         </div>
         <div class="angebot-schluss">
@@ -1614,128 +1775,118 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 
 <sc-if value="{{ isAblauf }}" hint-placeholder-val="{{ false }}">
 <div>
-  <section class="hdr-flow" style="background:var(--grund);align-items:stretch;padding:var(--a-6) 0 var(--a-4)">
-    <div class="wrap" style="padding-top:0;padding-bottom:0;width:100%;display:flex;align-items:center">
-      <div style="position:relative;z-index:1;max-width:900px;text-align:left">
-        <p class="label" style="margin:0 0 24px">Ablauf</p>
-        <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,calc(24px + 2.5vw),60px);line-height:1.06;letter-spacing:-0.03em;word-spacing:normal;color:var(--tinte);margin:0 0 24px;text-wrap:balance">So entsteht Ihre Website.</h1>
-        <p style="max-width:640px;font-size:clamp(17px,calc(15.9px + 0.29vw),20px);line-height:1.55;color:var(--tinte);margin:0 0 56px">Sie füllen ein Formular aus. Ich gestalte daraus eine fertige Seite, kostenlos und unverbindlich. Gefällt sie Ihnen, setzen wir Ihre Änderungen um, ich schalte sie auf und übergebe Ihnen alles. Gefällt sie Ihnen nicht, zahlen Sie nichts.</p>
-      </div>
-    </div>
+  <section class="band band-tinte band-raster ab-hero" aria-labelledby="ab-t" data-abschnitt="ablauf-kopf">
+    <div class="wrap"><div class="inner">
+      <p class="augenbraue">Ablauf</p>
+      <h1 id="ab-t" tabindex="-1" class="titel-1">So entsteht Ihre Website.</h1>
+      <p class="einleitung">Sie füllen ein Formular aus, ich baue daraus einen fertigen Entwurf. Gefällt er Ihnen nicht, zahlen Sie nichts.</p>
+      <dl class="zahlen-reihe">
+        <div><dt class="kennzahl">{{ entwurfTageKurz }}</dt><dd>bis zum fertigen Entwurf</dd></div>
+        <div><dt class="kennzahl">CHF 0</dt><dd>bis Sie den Entwurf annehmen</dd></div>
+        <div><dt class="kennzahl">rund 2 Std.</dt><dd>Ihr Aufwand, verteilt auf drei Wochen</dd></div>
+      </dl>
+      <a href="/projekt-check/" class="btn btn-akzent" data-quelle="ablauf-kopf" onClick="{{ onEinstieg }}">Projekt-Check starten</a>
+    </div></div>
   </section>
 
-  <section class="ph-sect">
-    <div class="wrap sect">
-      <div class="inner">
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 48px">In vier Phasen</h2>
-        <div class="ph-wrap" id="phline">
-          <span class="ph-track" aria-hidden="true"><span class="ph-fill ph-fill-h" style="width:{{ phFillPct }}"></span><span class="ph-fill ph-fill-v" style="height:{{ phFillPct }}"></span></span>
-          <ol class="ph-list">
-            <sc-for list="{{ phases }}" as="p" hint-placeholder-count="4">
-              <li class="ph">
-                <span class="mono ph-num" aria-hidden="true">{{ p.n }}</span>
-                <h3 class="ph-t"><span class="ph-sr">Phase {{ p.n }}: </span>{{ p.t }}</h3>
-                <p class="ph-line"><span class="ph-who">Sie:</span> {{ p.sie }}</p>
-                <p class="ph-line"><span class="ph-who">Ich:</span> {{ p.ich }}</p>
-                <p class="ph-meta"><span class="mono ph-cost {{ p.costCls }}">{{ p.kosten }}</span><span class="mono ph-dur">{{ p.dauer }}</span></p>
-              </li>
-            </sc-for>
-          </ol>
-        </div>
+  <section class="band band-papier" aria-labelledby="ab-fahrplan-t" data-abschnitt="fahrplan">
+    <div class="wrap"><div class="inner">
+      <div class="titelblock">
+        <p class="augenbraue">Fahrplan</p>
+        <h2 id="ab-fahrplan-t" class="titel-2">Vier Phasen bis zur fertigen Website</h2>
       </div>
-    </div>
+      <div class="fahrplan">
+        <nav class="fahrplan-nav" aria-label="Phasen" onClick="{{ jumpToSection }}">
+          <span class="fahrplan-spur" aria-hidden="true"><span style="height:{{ phFillPct }}"></span></span>
+          <sc-for list="{{ phasen }}" as="p" hint-placeholder-count="4">
+            <a href="#phase-{{ p.n }}"><span class="fahrplan-nav-n">{{ p.n }}</span>{{ p.t }}</a>
+          </sc-for>
+        </nav>
+        <ol class="phasen" id="phline">
+          <sc-for list="{{ phasen }}" as="p" hint-placeholder-count="4">
+            <li class="phase karte einblenden" id="phase-{{ p.n }}">
+              <div class="phase-kopf"><span class="phase-n" aria-hidden="true">{{ p.n }}</span><h3 class="titel-3">{{ p.t }}</h3></div>
+              <p class="phase-chips"><span class="chip"><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>{{ p.wann }}</span><span class="chip"><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>{{ p.kosten }}</span></p>
+              <ul class="phase-zeilen">
+                <li data-ich="{{ p.ich1 }}"><svg class="ic ic-sie" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><svg class="ic ic-ich" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10z"/><path d="M13.5 7.5l3 3"/></svg><span>{{ p.z1 }}</span></li>
+                <li data-ich="{{ p.ich2 }}"><svg class="ic ic-sie" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><svg class="ic ic-ich" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10z"/><path d="M13.5 7.5l3 3"/></svg><span>{{ p.z2 }}</span></li>
+              </ul>
+              <p class="phase-zeit">Ihre Zeit: <strong>{{ p.zeit }}</strong></p>
+              <details class="phase-details">
+                <summary>{{ p.detailsTitel }}</summary>
+                <ol>
+                  <sc-for list="{{ p.details }}" as="d" hint-placeholder-count="3">
+                    <li><span class="phase-d-kopf"><strong>{{ d.titel }}</strong><span class="phase-opt" style="display:{{ d.optDisplay }}">optional</span><span class="phase-d-min">{{ d.min }}</span></span><span class="phase-d-text">{{ d.text }}</span></li>
+                  </sc-for>
+                </ol>
+              </details>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+    </div></div>
   </section>
 
-  <section class="ph-tint">
-    <div class="wrap sect">
-      <div class="inner">
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px">Die Schritte im Einzelnen</h2>
-        <p style="font-size:16px;line-height:1.65;color:var(--text-2);margin:0 0 40px;max-width:65ch">Optionale Schritte können Sie abwählen. Die Minuten rechnen sich nebenan zusammen.</p>
-        <div class="st-raster">
-        <div class="st-list">
-          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="10">
-            <div>
-              <h3 class="st-group" style="display:{{ s.headDisplay }}"><span class="mono st-group-n" aria-hidden="true">{{ s.phaseN }}</span>{{ s.phaseT }}</h3>
-              <div class="st-card" style="border:{{ s.cardBorder }};opacity:{{ s.op }}">
-                <span class="mono st-n">{{ s.n }}</span>
-                <div class="st-body">
-                  <p class="st-title">{{ s.title }} <span class="mono st-tag">{{ s.tag }}</span></p>
-                  <p class="st-text">{{ s.text }}</p>
-                  <p class="st-text" style="display:{{ s.altDisplay }}">{{ s.altText }}</p>
-                  <p class="st-text" style="display:{{ s.startDisplay }}"><a href="/projekt-check/" class="einstieg" data-quelle="ablauf" onClick="{{ onEinstieg }}">Schritt 1 jetzt starten<span aria-hidden="true">→</span></a></p>
-                </div>
-                <div class="st-side">
-                  <button type="button" role="switch" aria-checked="{{ s.on }}" data-i="{{ s.i }}" onClick="{{ onStep }}" style="display:{{ s.swDisplay }};align-items:center;gap:10px;min-height:44px;padding:0;background:none;border:none;cursor:pointer">
-                    <span style="font-size:13px;color:var(--text-2);white-space:nowrap">mache ich selbst</span>
-                    <span aria-hidden="true" style="position:relative;width:48px;height:28px;border-radius:999px;border:1px solid var(--tinte);background:{{ s.track }};transition:background 180ms linear;flex:none;box-sizing:border-box">
-                      <span style="position:absolute;top:2px;left:{{ s.knob }};width:22px;height:22px;border-radius:999px;background:{{ s.knobBg }};transition:left 180ms ease-in-out"></span>
-                    </span>
-                  </button>
-                  <span class="mono st-min" style="text-decoration:{{ s.strike }}">{{ s.minLabel }}</span>
-                  <span class="mono st-min" style="display:{{ s.altDisplay }}">{{ s.altLabel }}</span>
-                </div>
-              </div>
+  <section class="band band-tief" aria-labelledby="ab-aufwand-t" data-abschnitt="aufwand">
+    <div class="wrap"><div class="inner">
+      <div class="titelblock">
+        <p class="augenbraue">Ihr Aufwand</p>
+        <h2 id="ab-aufwand-t" class="titel-2">Ihr Aufwand auf einen Blick</h2>
+        <p class="einleitung">Knapp zwei Stunden, verteilt auf drei Wochen.</p>
+      </div>
+      <div class="aufwand karte">
+        <div class="aufwand-wochen">
+          <sc-for list="{{ aufwandWochen }}" as="w" hint-placeholder-count="3">
+            <div class="aufwand-woche">
+              <p class="aufwand-w"><span>{{ w.label }}</span><span>{{ w.summe }}</span></p>
+              <ul>
+                <sc-for list="{{ w.teile }}" as="x" hint-placeholder-count="2">
+                  <li data-opt="{{ x.opt }}" style="flex-basis:{{ x.breite }}"><span>{{ x.titel }}</span><strong>{{ x.min }}</strong></li>
+                </sc-for>
+              </ul>
             </div>
           </sc-for>
         </div>
-        <aside class="st-zeit" aria-labelledby="zeit-t">
-          <h3 id="zeit-t" class="t-h3" style="margin:0 0 12px">Wie viel Zeit brauchen Sie?</h3>
-          <p style="font-size:var(--fs-text);line-height:1.55;color:var(--tinte);margin:0 0 12px;max-width:560px">{{ totNote }}</p>
-          <p class="mono" style="font-size:13px;line-height:1.5;color:var(--tinte);margin:0;display:{{ allOffDisplay }}">{{ allOffNote }}</p>
-          <div class="zeit-card" aria-live="polite">
-          <div class="zeit-row"><span class="mono zeit-l"><span class="zeit-dot" style="background:var(--tinte)"></span>Erforderlich</span><span class="mono zeit-v">{{ reqMin }} Min</span></div>
-          <div class="zeit-row"><span class="mono zeit-l"><span class="zeit-dot" style="background:#AAB8F7;border:1px solid #AAB8F7"></span>Optional</span><span class="mono zeit-v">{{ optMin }} Min</span></div>
-          <div class="zeit-row zeit-tot"><span class="mono zeit-l">Total</span><span class="mono zeit-v" style="font-size:40px">{{ totMin }} Min</span></div>
-          <div style="display:flex;height:14px;border-radius:999px;overflow:hidden;background:var(--flaeche);border:1px solid var(--tinte);margin-top:20px">
-            <span style="width:{{ barReq }};background:var(--tinte);transition:width 300ms ease-in-out"></span>
-            <span style="width:{{ barOpt }};background:#AAB8F7;transition:width 300ms ease-in-out"></span>
-          </div>
-        </aside>
+        <div class="aufwand-fuss">
+          <button type="button" class="schalter" role="switch" aria-checked="{{ aufwandOpt }}" onClick="{{ onAufwandOpt }}"><span class="schalter-spur" aria-hidden="true"></span>Optionale Schritte einrechnen</button>
+          <p class="aufwand-total" aria-live="polite"><span class="klein">Total</span><span class="kennzahl">{{ aufwandTotal }}</span></p>
         </div>
       </div>
-    </div>
+    </div></div>
   </section>
 
-
-
-  <section class="ph-tint">
-    <div class="wrap" style="padding-top:var(--a-5);padding-bottom:var(--a-5)">
-      <div class="inner"><div class="txt">
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px">Danach</h2>
-        <p style="font-size:16px;line-height:1.7;margin:0 0 16px;max-width:680px;text-wrap:pretty">Nach der Übergabe betreiben Sie die Website selbst oder überlassen den Betrieb mir. Das entscheiden Sie nach dem Livegang.</p>
-        <p style="font-size:16px;line-height:1.6;margin:0"><a href="/angebot/">Preise für den Betrieb auf der Angebotsseite</a></p>
-      </div></div>
-    </div>
-  </section>
-
-  <section class="sektion-flaeche" style="background:var(--flaeche)">
-    <div class="wrap sect">
-      <div class="inner">
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;color:var(--tinte);margin:0 0 16px">Drei Dinge, an denen solche Projekte scheitern</h2>
-        <p class="txt" style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:var(--text-2);margin:0 0 48px">Und was ich dagegen tue, bevor es passiert.</p>
-        <div class="g-prom">
-          <div style="border-top:1px solid var(--linie);padding-top:24px">
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2.1vw,30px);line-height:1.28;color:var(--tinte);margin:0 0 16px">Die Inhalte kommen nie.</h3>
-            <p style="font-size:16px;line-height:1.65;color:var(--tinte);margin:0">Deshalb beginnt die Lieferfrist erst, wenn Fragebogen und Bilder bei mir sind. Das steht in der Auftragsbestätigung, damit keiner von uns im Ungewissen bleibt.</p>
-          </div>
-          <div style="border-top:1px solid var(--linie);padding-top:24px">
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2.1vw,30px);line-height:1.28;color:var(--tinte);margin:0 0 16px">Es reden zu viele mit.</h3>
-            <p style="font-size:16px;line-height:1.65;color:var(--tinte);margin:0">Eine Ansprechperson wird namentlich festgehalten. Wer freigibt, steht vorher fest, sonst dreht sich das Projekt im Kreis.</p>
-          </div>
-          <div style="border-top:1px solid var(--linie);padding-top:24px">
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2.1vw,30px);line-height:1.28;color:var(--tinte);margin:0 0 16px">Die Zugangsdaten sind weg.</h3>
-            <p style="font-size:16px;line-height:1.65;color:var(--tinte);margin:0">Ich frage Domain- und Hosting-Zugänge am ersten Tag ab, nicht am letzten. Das rettet mehr Termine als alles andere.</p>
-          </div>
+  <section class="band band-papier" aria-labelledby="ab-danach-t" data-abschnitt="danach">
+    <div class="wrap"><div class="inner">
+      <div class="danach karte">
+        <svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+        <div>
+          <h2 id="ab-danach-t" class="titel-3">Danach</h2>
+          <p class="lesetext" style="margin:8px 0 12px">Nach der Übergabe betreiben Sie die Website selbst oder überlassen den Betrieb mir. Das entscheiden Sie nach dem Livegang.</p>
+          <a href="/angebot/#betrieb" class="einstieg">Preise für den Betrieb ansehen<span aria-hidden="true">→</span></a>
         </div>
       </div>
-    </div>
+    </div></div>
   </section>
 
-  <section id="abschluss" class="sektion sektion-blau" data-flaeche="blau">
-    <div class="wrap"><div class="inner txt">
-      <h2 class="t-h2" style="color:var(--auf-dunkel);margin:0 0 16px">{{ schrittEinsDauer }}</h2>
-      <p class="t-lead" style="color:var(--auf-dunkel);margin:0 0 32px">Ihr Risiko dabei: keines. Der Entwurf kostet Sie nichts, und solange Sie ihn nicht angenommen haben, gibt es keine Rechnung. Ich trage das Risiko, dass mein Entwurf nicht trifft.</p>
-      <a href="/projekt-check/" class="btn btn-akzent" data-quelle="ablauf" onClick="{{ onEinstieg }}">Projekt-Check starten</a>
+  <section class="band band-tinte" aria-labelledby="ab-scheitern-t" data-abschnitt="stolpersteine">
+    <div class="wrap"><div class="inner">
+      <div class="titelblock">
+        <p class="augenbraue">Aus Erfahrung</p>
+        <h2 id="ab-scheitern-t" class="titel-2">Drei Dinge, an denen Projekte scheitern</h2>
+      </div>
+      <ul class="raster-3">
+        <li class="karte karte-dunkel stein einblenden"><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg><h3 class="titel-3">Die Inhalte kommen nie.</h3><p>Die Lieferfrist beginnt erst, wenn Fragebogen und Bilder bei mir sind.</p></li>
+        <li class="karte karte-dunkel stein einblenden"><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c1-3.5 3.5-5 6-5s5 1.5 6 5M15 14.5c2.5 0 4.5 1.2 5.5 4"/></svg><h3 class="titel-3">Es reden zu viele mit.</h3><p>Ansprechperson und Freigabe stehen vorher namentlich fest.</p></li>
+        <li class="karte karte-dunkel stein einblenden"><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="14" r="4"/><path d="M11 11l9-9M16 6l3 3M14 8l2 2"/></svg><h3 class="titel-3">Die Zugangsdaten sind weg.</h3><p>Alle Zugänge frage ich am ersten Tag ab, nicht am letzten.</p></li>
+      </ul>
+    </div></div>
+  </section>
+
+  <section id="abschluss" class="band band-kobalt" data-flaeche="blau" aria-labelledby="ab-abschluss-t" data-abschnitt="abschluss">
+    <div class="wrap"><div class="inner">
+      <h2 id="ab-abschluss-t" class="titel-2">{{ schrittEinsDauer }}</h2>
+      <p class="einleitung">Der Entwurf kostet Sie nichts. Solange Sie ihn nicht angenommen haben, gibt es keine Rechnung.</p>
+      <div class="knopfreihe" style="margin-top:32px"><a href="/projekt-check/" class="btn btn-akzent" data-quelle="ablauf" onClick="{{ onEinstieg }}">Projekt-Check starten</a></div>
     </div></div>
   </section>
 </div>
@@ -1853,196 +2004,95 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 
 <sc-if value="{{ isUeber }}" hint-placeholder-val="{{ false }}">
 <div>
-  <section style="background:var(--grund)">
-    <div class="wrap sect">
-      <div class="inner g-hero" style="align-items:start">
-        <div style="position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:var(--linie)">
-          <img src="assets/img/portrait-nico-bodmer.webp" alt="Porträt von Nico Bodmer" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:20% 50%;display:block">
-          <span class="badge" style="position:absolute;left:16px;bottom:16px;background:var(--flaeche)">Nico Bodmer</span>
-        </div>
-        <div class="stack">
-          <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.06;letter-spacing:-0.03em;margin:0">Wer das macht</h1>
-          <p class="label" style="margin:0">Nico Bodmer · Berikon AG</p>
-          <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;text-wrap:pretty;color:var(--tinte);margin:0;max-width:65ch">Ich heisse Nico Bodmer und baue Webseiten für Betriebe in der ganzen Schweiz. Gelernt habe ich das nicht nebenbei, sondern in einer vierjährigen Lehre als Platform Developer mit eidgenössischem Fähigkeitszeugnis und technischer Berufsmaturität.</p>
-          <p style="font-size:16px;line-height:1.65;margin:0;max-width:65ch">Hauptberuflich arbeite ich seit 2021 in der IT-Branche. Was ich dort täglich mache (Systeme aufbauen, betreiben und übergeben) ist dasselbe, was Ihre Website braucht, nur in grösserem Massstab.</p>
-          <p style="font-size:16px;line-height:1.65;margin:0;max-width:65ch">Berufsbegleitend studiere ich Digital Business und künstliche Intelligenz an der Hochschule für Wirtschaft Zürich.</p>
-        </div>
+  <section class="band band-papier band-raster" aria-labelledby="ue-t" data-abschnitt="ueber-kopf">
+    <div class="wrap"><div class="inner ue-hero">
+      <div class="ue-bild">
+        <a class="portraet-link portraet-gross" href="{{ linkedinPerson }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn-Profil von Nico Bodmer, öffnet in neuem Tab">
+          <img class="portraet" src="assets/img/portrait-nico-bodmer.webp" alt="Porträt von Nico Bodmer" width="420" height="525" fetchpriority="high" decoding="async">
+          <span class="li-abzeichen" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span>
+        </a>
+        <a class="btn btn-sekundaer li-knopf" href="{{ linkedinPerson }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn-Profil von Nico Bodmer, öffnet in neuem Tab"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg> LinkedIn</a>
       </div>
-    </div>
+      <div>
+        <p class="augenbraue">Nico Bodmer · Webdesigner aus Berikon AG</p>
+        <h1 id="ue-t" tabindex="-1" class="titel-1">Wer das macht</h1>
+        <p class="einleitung">Ich baue Websites für Betriebe im Freiamt, am Mutschellen, im Aargau und in der ganzen Schweiz. Gelernt habe ich das in einer vierjährigen Lehre als Platform Developer EFZ.</p>
+        <p class="lesetext" style="margin:16px 0 0">Seit 2021 arbeite ich in der IT: Systeme aufbauen, betreiben und übergeben. Berufsbegleitend studiere ich Digital Business und KI an der HWZ.</p>
+      </div>
+    </div></div>
   </section>
 
-  <section class="wrap sect">
-    <div class="inner">
-      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 48px">Werdegang</h2>
-      <ol class="zeitleiste">
-        <li><span class="zl-jahr">2021 bis 2025</span><div><p class="zl-t">Lehre als Platform Developer EFZ</p><p class="zl-s">Vier Jahre Ausbildung in Entwicklung, Betrieb und Deployment.</p></div></li>
-        <li><span class="zl-jahr">2025</span><div><p class="zl-t">Technische Berufsmaturität</p><p class="zl-s">Abgeschlossen parallel zur Lehre.</p></div></li>
-        <li><span class="zl-jahr">seit 2021</span><div><p class="zl-t">In der IT-Branche tätig</p><p class="zl-s">Support, Deployment, Webentwicklung, heute im technischen Vertrieb für Daten und künstliche Intelligenz.</p></div></li>
-        <li><span class="zl-jahr">seit 2026 <span class="stempel" style="margin-left:6px">heute</span></span><div><p class="zl-t">BSc Digital Business und AI</p><p class="zl-s">Berufsbegleitendes Studium an der HWZ Zürich.</p></div></li>
+  <section class="band band-tief" aria-labelledby="ue-weg-t" data-abschnitt="werdegang">
+    <div class="wrap"><div class="inner">
+      <div class="titelblock"><p class="augenbraue">Werdegang</p><h2 id="ue-weg-t" class="titel-2">Ausbildung und Beruf</h2></div>
+      <ol class="zeitleiste2">
+        <li class="einblenden"><span class="zl2-jahr">2021 bis 2025</span><span class="zl2-t">Lehre als Platform Developer EFZ</span></li>
+        <li class="einblenden"><span class="zl2-jahr">2025</span><span class="zl2-t">Technische Berufsmaturität</span></li>
+        <li class="einblenden"><span class="zl2-jahr">seit 2021</span><span class="zl2-t">In der IT, heute im technischen Vertrieb für Daten und KI</span></li>
+        <li class="einblenden"><span class="zl2-jahr">seit 2026</span><span class="zl2-t">BSc Digital Business und AI, HWZ Zürich</span></li>
       </ol>
-    </div>
+    </div></div>
   </section>
 
-  <section class="sektion-flaeche" style="background:var(--flaeche)">
-    <div class="wrap sect">
-      <div class="inner">
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;color:var(--tinte);margin:0 0 48px">So arbeite ich</h2>
-        <div class="g-prom">
-          <div>
-            <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 12px">01</p>
-            <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;color:var(--primaer-dunkel);margin:0 0 12px">Fixpreis</p>
-            <p style="font-size:16px;line-height:1.65;color:var(--tinte);margin:0;max-width:34ch;text-wrap:pretty">Ich schätze den Aufwand, trage das Risiko und halte den Preis. Wenn ich mich verschätze, ist das mein Problem, nicht Ihres.</p>
-          </div>
-          <div>
-            <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 12px">02</p>
-            <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;color:var(--primaer-dunkel);margin:0 0 12px">Eine Ansprechperson</p>
-            <p style="font-size:16px;line-height:1.65;color:var(--tinte);margin:0;max-width:34ch;text-wrap:pretty">Sie reden mit dem, der die Seite baut. Keine Weiterleitung, keine Projektleitung dazwischen, keine Stundenabrechnung für Sitzungen.</p>
-          </div>
-          <div>
-            <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 12px">03</p>
-            <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.25;color:var(--primaer-dunkel);margin:0 0 12px">Kein Lock-in</p>
-            <p style="font-size:16px;line-height:1.65;color:var(--tinte);margin:0;max-width:34ch;text-wrap:pretty">Domain, Zugänge und Quellcode laufen ab dem ersten Tag auf Ihren Namen. Jede andere Fachperson kann jederzeit übernehmen.</p>
-          </div>
-        </div>
+  <section class="band band-papier" aria-labelledby="ue-zusagen-t" data-abschnitt="zusagen">
+    <div class="wrap"><div class="inner">
+      <div class="titelblock">
+        <p class="augenbraue">So arbeite ich</p>
+        <h2 id="ue-zusagen-t" class="titel-2">Zusagen statt Kundenstimmen</h2>
+        <p class="einleitung">Ich erfinde keine Referenzen. Messen Sie mich an diesen drei Punkten.</p>
       </div>
-    </div>
+      <ul class="raster-3">
+        <li class="karte zusage einblenden"><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><h3 class="titel-3">Fixpreis</h3><p>Der Preis steht vor Projektstart schriftlich fest und ändert sich nicht.</p></li>
+        <li class="karte zusage einblenden"><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg><h3 class="titel-3">Fester Termin</h3><p>Der Liefertermin steht als Datum in der Auftragsbestätigung.</p></li>
+        <li class="karte zusage einblenden"><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="14" r="4"/><path d="M11 11l9-9M16 6l3 3M14 8l2 2"/></svg><h3 class="titel-3">Kein Lock-in</h3><p>Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag.</p></li>
+      </ul>
+    </div></div>
   </section>
 
-  <section class="wrap sect">
-    <div class="inner">
-      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 24px">Hier stehen keine Kundenstimmen.</h2>
-      <p style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;color:var(--text-2);margin:0 0 48px;max-width:640px;text-wrap:pretty">Ich baue seit Kurzem Websites auf eigene Rechnung, und ich erfinde keine Referenzen, um grösser zu wirken. Statt Lob von angeblichen Kunden bekommen Sie Zusagen, an denen Sie mich messen können.</p>
-      <div style="max-width:900px;border-top:1px solid var(--linie)">
-        <div style="display:flex;gap:24px;padding:24px 0;border-bottom:1px solid var(--linie)">
-          <span class="mono" style="flex:none;font-size:13px;color:var(--text-2);padding-top:3px">01</span>
-          <p style="font-size:16px;line-height:1.65;margin:0">Der Preis steht vor Projektstart schriftlich fest und ändert sich nicht.</p>
-        </div>
-        <div style="display:flex;gap:24px;padding:24px 0;border-bottom:1px solid var(--linie)">
-          <span class="mono" style="flex:none;font-size:13px;color:var(--text-2);padding-top:3px">02</span>
-          <p style="font-size:16px;line-height:1.65;margin:0">Der Liefertermin steht als Datum in der Auftragsbestätigung, nicht als Absicht.</p>
-        </div>
-        <div style="display:flex;gap:24px;padding:24px 0;border-bottom:1px solid var(--linie)">
-          <span class="mono" style="flex:none;font-size:13px;color:var(--text-2);padding-top:3px">03</span>
-          <p style="font-size:16px;line-height:1.65;margin:0">Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag.</p>
-        </div>
+  <section class="band band-tinte" aria-labelledby="ue-technik-t" data-abschnitt="technik">
+    <div class="wrap"><div class="inner">
+      <div class="titelblock"><p class="augenbraue">Womit ich arbeite</p><h2 id="ue-technik-t" class="titel-2">Gängige Technik, keine Eigenbauten</h2></div>
+      <ul class="technik">
+        <li><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg><strong>Unter einer Sekunde</strong><span>React, Astro, Vite</span></li>
+        <li><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><strong>Sicher betrieben</strong><span>SSL, Backups, Überwachung</span></li>
+        <li><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><strong>Daten in CH oder EU</strong><span>nach revDSG</span></li>
+        <li><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8"/></svg><strong>Kein WordPress</strong><span>keine Baukästen</span></li>
+      </ul>
+    </div></div>
+  </section>
+
+  <section class="band band-papier" aria-labelledby="ue-zeit-t" data-abschnitt="erreichbarkeit">
+    <div class="wrap"><div class="inner ue-zeit">
+      <div>
+        <div class="titelblock"><p class="augenbraue">Kapazität</p><h2 id="ue-zeit-t" class="titel-2">Höchstens zwei Projekte gleichzeitig</h2></div>
+        <dc-import name="kapazitaet" total="{{ plaetzeTotal }}" frei="{{ plaetzeFrei }}" hint-size="100%,72px"></dc-import>
+        <p class="klein" style="margin:12px 0 0">Zwei Plätze, weil ich das nebenberuflich mache. Keine erfundene Knappheit.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="wrap sect">
-    <div class="inner">
-      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px">Womit ich arbeite</h2>
-      <p class="txt" style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;text-wrap:pretty;color:var(--text-2);margin:0 0 48px">Gängige Technik, keine Eigenbauten, die niemand ausser mir warten kann. Hier steht, was das für Sie bedeutet.</p>
-      <div class="g-tech">
-        <div class="tech-karte">
-          <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:var(--text-2);margin:0 0 20px">AUFBAU</p>
-          <p style="font-size:16px;line-height:1.6;color:var(--tinte);margin:0 0 16px;text-wrap:pretty">Ihre Seite lädt in unter einer Sekunde, weil sie fertig ausgeliefert wird statt bei jedem Aufruf neu zusammengebaut zu werden.</p>
-          <p class="t-klein" style="margin:auto 0 0">Werkzeuge: React, TypeScript, Astro, Tailwind CSS, Vite</p>
-          
-          
-          
-        </div>
-        <div class="tech-karte">
-          <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:var(--text-2);margin:0 0 20px">BETRIEB UND SICHERHEIT</p>
-          <p style="font-size:16px;line-height:1.6;color:var(--tinte);margin:0 0 16px;text-wrap:pretty">Updates laufen automatisch. Fällt etwas aus, ist die letzte funktionierende Fassung innert Minuten wieder online.</p>
-          <p class="t-klein" style="margin:auto 0 0">Werkzeuge: GitHub Actions, Docker, automatische Backups, SSL, Überwachung</p>
-          
-          
-          
-        </div>
-        <div class="tech-karte">
-          <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:var(--text-2);margin:0 0 20px">DATEN UND FORMULARE</p>
-          <p style="font-size:16px;line-height:1.6;color:var(--tinte);margin:0 0 16px;text-wrap:pretty">Anfragen aus Ihrem Formular bleiben in der Schweiz oder in Europa. Das können Sie Ihren Kunden sagen, ohne zu zögern.</p>
-          <p class="t-klein" style="margin:auto 0 0">Werkzeuge: Schweizer Rechenzentrum, Supabase, Formularversand, Datenschutz nach revDSG</p>
-          
-          
-          
-        </div>
+      <div class="karte ue-wochen">
+        <h3 class="titel-3">Wann Sie mich erreichen</h3>
+        <dl>
+          <div><dt>Montag, Mittwoch</dt><dd>abends</dd></div>
+          <div><dt>Dienstag</dt><dd>nicht erreichbar, Studium</dd></div>
+          <div><dt>Donnerstag</dt><dd>ganzer Tag, abends Studium</dd></div>
+          <div><dt>Freitag</dt><dd>abends, tagsüber eingeschränkt</dd></div>
+          <div><dt>Wochenende</dt><dd>nicht erreichbar</dd></div>
+        </dl>
       </div>
-      <div style="margin-top:24px;border-radius:20px;padding:32px;background:var(--flaeche);border:1px solid var(--linie)">
-        <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:var(--tinte);margin:0 0 12px">WOMIT ICH NICHT ARBEITE</p>
-        <p style="font-size:16px;line-height:1.65;color:var(--tinte);margin:0;max-width:820px;text-wrap:pretty">Kein WordPress mit zwanzig Zusatzmodulen. Keine Baukästen. Keine Technik, die in zwei Jahren niemand mehr pflegt. Wenn Sie mich morgen ersetzen, findet jede Fachperson sich in Ihrem Projekt zurecht.</p>
+    </div></div>
+  </section>
+
+  <section id="abschluss" class="band band-kobalt" data-flaeche="blau" aria-labelledby="ue-kontakt-t" data-abschnitt="abschluss">
+    <div class="wrap"><div class="inner">
+      <h2 id="ue-kontakt-t" class="titel-2" style="max-width:22ch">Schreiben Sie mir. Antwort spätestens am nächsten Abend.</h2>
+      <p class="einleitung">Am liebsten über den Projekt-Check. {{ kontaktCheckText }}</p>
+      <p data-nosnap="1" class="ue-status"><span style="width:10px;height:10px;border-radius:999px;background:{{ availDot }};flex:none"></span>{{ availability }}</p>
+      <div class="knopfreihe" style="margin-top:32px">
+        <a href="/projekt-check/" class="btn btn-akzent" data-quelle="ueber" onClick="{{ onEinstieg }}">Projekt-Check starten</a>
+        <a class="btn btn-sekundaer li-knopf" href="{{ linkedinFirma }}" target="_blank" rel="noopener noreferrer" aria-label="ODERA auf LinkedIn folgen, öffnet in neuem Tab"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg> ODERA auf LinkedIn folgen</a>
       </div>
-    </div>
-  </section>
-
-  <section class="wrap" style="padding-bottom:24px">
-    <div class="inner">
-      <dc-import name="kapazitaet" total="{{ plaetzeTotal }}" frei="{{ plaetzeFrei }}" hint-size="100%,72px"></dc-import>
-      <p style="font-size:13px;line-height:1.5;color:var(--text-2);margin:12px 0 0">Zwei Plätze, weil ich das nebenberuflich mache. Keine erfundene Knappheit.</p>
-    </div>
-  </section>
-
-  <section class="wrap sect" style="background:var(--grund);padding-top:88px;padding-bottom:0">
-    <div class="inner" style="max-width:820px">
-      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2.1vw,30px);line-height:1.25;letter-spacing:-0.02em;margin:0 0 24px">Wann Sie mich erreichen</h3>
-      <div style="border-top:1px solid var(--linie)">
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie)">
-          <span class="mono" style="font-size:16px;color:var(--tinte)">Montag</span>
-          <span style="font-size:16px;color:var(--text-2);text-align:right">abends</span>
-        </div>
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie)">
-          <span class="mono" style="font-size:16px;color:var(--tinte)">Dienstag</span>
-          <span style="font-size:16px;color:var(--text-2);text-align:right">nicht erreichbar, Studium</span>
-        </div>
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie)">
-          <span class="mono" style="font-size:16px;color:var(--tinte)">Mittwoch</span>
-          <span style="font-size:16px;color:var(--text-2);text-align:right">abends</span>
-        </div>
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie)">
-          <span class="mono" style="font-size:16px;color:var(--tinte)">Donnerstag</span>
-          <span style="font-size:16px;color:var(--text-2);text-align:right">ganzer Tag, abends Studium</span>
-        </div>
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie)">
-          <span class="mono" style="font-size:16px;color:var(--tinte)">Freitag</span>
-          <span style="font-size:16px;color:var(--text-2);text-align:right">abends, tagsüber eingeschränkt</span>
-        </div>
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--linie)">
-          <span class="mono" style="font-size:16px;color:var(--tinte)">Samstag und Sonntag</span>
-          <span style="font-size:16px;color:var(--text-2);text-align:right">nicht erreichbar</span>
-        </div>
-      </div>
-      <p style="font-size:16px;line-height:1.6;color:var(--text-2);margin:20px 0 0;text-wrap:pretty">Ich sage lieber vorher, wann ich nicht da bin, als nachher zu erklären, warum ich nicht geantwortet habe.</p>
-    </div>
-  </section>
-
-  <section class="wrap" style="padding-top:0;padding-bottom:24px">
-    <div class="inner"><p style="font-size:13px;color:var(--text-2);margin:0"><a href="/impressum/" style="color:var(--text-2)">Rechtliche Angaben finden Sie im Impressum.</a></p></div>
-  </section>
-
-  <section id="abschluss" class="sektion-blau" data-flaeche="blau" style="background:var(--primaer)">
-    <div class="wrap" style="padding-top:var(--a-6);padding-bottom:var(--a-6)">
-      <div class="inner">
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;color:var(--grund);margin:0 0 16px">Schreiben Sie mir. Ich antworte spätestens am nächsten Abend.</h2>
-        <p class="txt" style="font-size:clamp(18px,1.6vw,22px);line-height:1.52;text-wrap:pretty;color:#DDE3FF;margin:0 0 48px">Am liebsten mit dem Projekt-Check. Dann habe ich alles, was ich brauche, und wir sparen uns zwei Rückfragen. Wenn Sie nur eine Frage haben, reicht auch eine Zeile.</p>
-        <div class="g-contact">
-          <div>
-            <p data-nosnap="1" class="mono" style="display:flex;align-items:center;gap:12px;font-size:16px;color:var(--grund);margin:0 0 24px">
-              <span style="width:10px;height:10px;border-radius:999px;background:{{ availDot }};flex:none"></span>{{ availability }}
-            </p>
-            <a href="/projekt-check/" data-quelle="ueber" onClick="{{ onEinstieg }}" data-magnet="1" style="display:flex;align-items:center;gap:24px;min-height:88px;padding:20px 32px;border-radius:999px;background:var(--akzent);color:var(--tinte);text-decoration:none;box-shadow:{{ mailShadow }};transition:box-shadow 200ms ease-out">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#11131A" stroke-width="1.8" style="flex:none">
-                <rect x="2" y="6" width="24" height="16" rx="3"></rect>
-                <path d="M2 8l12 8 12-8" style="transform:{{ flapT }};transform-origin:14px 8px;transition:transform 200ms ease-out"></path>
-              </svg>
-              <span>
-                <span style="display:block;font-size:20px;font-weight:600;line-height:1.3">{{ kontaktCheckTitel }}</span>
-                <span style="display:block;font-size:16px;line-height:1.5;margin-top:4px">{{ kontaktCheckText }}</span>
-              </span>
-            </a>
-            <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px">
-              <a class="link-44" href="{{ mailKontakt }}" style="font-size:16px;color:var(--auf-dunkel)">Oder direkt schreiben: kontakt@odera.ch</a>
-            </div>
-          </div>
-          <div>
-            <p style="font-size:13px;letter-spacing:0.04em;color:var(--grund);margin:0;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.35)">Antwort spätestens am nächsten Abend, ausser am Wochenende</p>
-            <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--grund);margin:0;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.35)">Erstgespräch kostenlos, 30 Minuten</p>
-            <p style="font-size:13px;letter-spacing:0.04em;color:var(--grund);margin:0;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.35)">Vor-Ort-Termine im Raum Zürich und Aargau</p>
-            <p style="font-size:16px;line-height:1.55;color:#DDE3FF;margin:16px 0 0">Erreichbar an den meisten Abenden und donnerstags den ganzen Tag. Am Wochenende nicht.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+      <p style="margin:24px 0 0"><a href="{{ mailKontakt }}" style="color:#FFFFFF">kontakt@odera.ch</a> · Erstgespräch kostenlos, 30 Minuten · Vor-Ort-Termine im Raum Zürich und Aargau</p>
+      <p class="ue-portfolio">Mein persönliches Portfolio: <a href="https://nico-bodmer.ch" target="_blank" rel="noopener">nico-bodmer.ch</a> · <a href="/impressum/">Impressum</a></p>
+    </div></div>
   </section>
 </div>
 </sc-if>
@@ -2051,17 +2101,17 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 <div>
   <section style="background:var(--grund)">
     <div class="wrap" style="padding-top:88px;padding-bottom:48px">
-      <div class="inner txt" style="max-width:65ch">
-        <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 24px">RECHTLICHES</p>
-        <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.06;letter-spacing:-0.03em;margin:0">Impressum</h1>
+      <div class="inner">
+        <p class="augenbraue">Rechtliches</p>
+        <h1 tabindex="-1" class="titel-1">Impressum</h1>
       </div>
     </div>
   </section>
   <section class="wrap sect">
-    <div class="inner txt" style="max-width:65ch">
+    <div class="inner recht">
       <p style="font-size:16px;line-height:1.7;margin:0 0 32px">Angaben nach Art. 3 Abs. 1 lit. s des Bundesgesetzes gegen den unlauteren Wettbewerb.</p>
-      <nav aria-label="Abschnitte" style="margin:0 0 48px;padding:20px;border:1px solid var(--linie);border-radius:14px">
-        <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 12px">INHALT</p>
+      <nav aria-label="Abschnitte" class="recht-inhalt">
+        <p class="augenbraue">Inhalt</p>
         <ul onClick="{{ jumpToSection }}" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px">
           <li><a href="#im-1" style="font-size:16px">1. Verantwortlich für diese Website</a></li>
           <li><a href="#im-2" style="font-size:16px">2. Kontakt</a></li>
@@ -2114,17 +2164,17 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 <div>
   <section style="background:var(--grund)">
     <div class="wrap" style="padding-top:88px;padding-bottom:48px">
-      <div class="inner txt" style="max-width:65ch">
-        <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 24px">RECHTLICHES</p>
-        <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.06;letter-spacing:-0.03em;margin:0">Datenschutz&shy;erklärung</h1>
+      <div class="inner">
+        <p class="augenbraue">Rechtliches</p>
+        <h1 tabindex="-1" class="titel-1">Datenschutz&shy;erklärung</h1>
       </div>
     </div>
   </section>
   <section class="wrap sect">
-    <div class="inner txt" style="max-width:65ch">
+    <div class="inner recht">
       <p style="font-size:16px;line-height:1.7;margin:0 0 32px">Diese Erklärung beschreibt, welche Personendaten beim Besuch dieser Website, bei einer Projektanfrage und bei der Nutzung des Chat-Assistenten bearbeitet werden. Sie richtet sich nach dem Schweizer Datenschutzgesetz.</p>
-      <nav aria-label="Abschnitte" style="margin:0 0 48px;padding:20px;border:1px solid var(--linie);border-radius:14px">
-        <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 12px">INHALT</p>
+      <nav aria-label="Abschnitte" class="recht-inhalt">
+        <p class="augenbraue">Inhalt</p>
         <ul onClick="{{ jumpToSection }}" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px">
           <li><a href="#ds-1" style="font-size:16px">1. Verantwortliche Person</a></li>
           <li><a href="#ds-2" style="font-size:16px">2. Besuch dieser Website</a></li>
@@ -2159,27 +2209,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">4. Schriften</h2>
           <p style="font-size:16px;line-height:1.7;margin:0 0 16px">{{ fontsPrivacyText }}</p>
         </div>
-        <sc-if value="{{ dsMail }}" hint-placeholder-val="{{ true }}">
-        <div id="ds-5" style="margin-top:48px">
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">5. Projektanfrage über das Formular</h2>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Das Anfrageformular auf dieser Website speichert nichts. Ihre Antworten bleiben ausschliesslich in Ihrem Browser, solange das Formular geöffnet ist. Es gibt keine Datenbank und keine Übermittlung an diese Website. Am Ende erzeugt das Formular eine vorbereitete E-Mail, die sich in Ihrem eigenen E-Mail-Programm öffnet. Erst wenn Sie diese E-Mail selbst absenden, erhalte ich Ihre Angaben. Der Versand läuft über Ihren eigenen E-Mail-Anbieter, auf den ich keinen Einfluss habe. Alternativ können Sie Ihre Antworten in die Zwischenablage kopieren und selbst entscheiden, was Sie mir schicken. Schliessen Sie das Formular, ohne die E-Mail abzusenden, erfahre ich nichts davon.</p>
-        </div>
-        <div id="ds-6" style="margin-top:48px">
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">6. Welche Angaben Sie mir übermitteln</h2>
-          <ul style="font-size:16px;line-height:1.7;margin:0 0 16px;padding-left:20px">
-            <li>Name</li>
-            <li>E-Mail-Adresse</li>
-            <li>Telefonnummer, optional</li>
-            <li>Angaben zu Ihrem Projekt, Branche, Umfang und Budget</li>
-          </ul>
-          <p style="font-size:16px;line-height:1.7;margin:0">Pflicht sind nur Name und E-Mail-Adresse. Alle weiteren Angaben sind freiwillig und dienen dazu, dass ich Ihr Projekt ohne Rückfragen einschätzen kann.</p>
-        </div>
-        <div id="ds-7" style="margin-top:48px">
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">7. Bearbeitung Ihrer Anfrage</h2>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Ihre E-Mail geht in mein Postfach bei Infomaniak Network SA mit Serverstandort in der Schweiz. Ich verwende Ihre Angaben ausschliesslich, um Ihre Anfrage zu beantworten, ein Angebot zu erstellen und ein allfälliges Projekt abzuwickeln. Es erfolgt keine Weitergabe an Dritte, keine Werbung und kein Newsletter.</p>
-        </div>
-        </sc-if>
-        <sc-if value="{{ dsDirekt }}" hint-placeholder-val="{{ false }}">
+
         <div id="ds-5" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">5. Projektanfrage über den Projekt-Check</h2>
           <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Ihre Antworten im Projekt-Check bleiben in Ihrem Browser, bis Sie auf «Senden» klicken. Schliessen Sie das Formular vorher, erfahre ich nichts davon. Erst mit dem Senden werden Ihre Angaben verschlüsselt (HTTPS) an mich übermittelt und mir als E-Mail zugestellt. Sie werden dabei in keiner Datenbank gespeichert. Zweck ist die Beantwortung Ihrer Anfrage, die Erstellung einer Offerte und die Vorbereitung eines allfälligen Vertrags.</p>
@@ -2210,7 +2240,6 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Cloudflare und Resend können Daten auch in den USA bearbeiten. Cloudflare ist nach dem Swiss-U.S. Data Privacy Framework zertifiziert. Im Register des US-Handelsministeriums steht am 28. September 2026 der Status «Active, Re-certification under Review». Zusätzlich enthält der Datenverarbeitungsvertrag von Cloudflare Standardvertragsklauseln, die für Daten aus der Schweiz an das Schweizer Recht angepasst sind.</p>
           <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Resend ist gemäss demselben Register nur nach dem EU-U.S. Data Privacy Framework und der Erweiterung für das Vereinigte Königreich zertifiziert, nicht nach dem Swiss-U.S. Data Privacy Framework. Für Daten aus der Schweiz stützt sich die Bekanntgabe darum auf die Standardvertragsklauseln der EU-Kommission im Datenverarbeitungsvertrag von Resend, die für die Schweiz nach dem Datenschutzgesetz angepasst sind (Art. 16 Abs. 2 lit. d DSG).</p>
         </div>
-        </sc-if>
         <div id="ds-8" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">8. Chat-Assistent</h2>
           <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Auf dieser Website können Sie einem Chat-Assistenten Fragen zu meinem Angebot stellen. Die Antworten erzeugt ein KI-Programm. Sie sind unverbindlich und ersetzen keine Offerte. Der Assistent wird erst geladen, wenn Sie ihn öffnen, und Daten werden nur übermittelt, wenn Sie eine Nachricht absenden. Die vier vorgeschlagenen Fragen beantwortet die Website selbst, dabei wird nichts übermittelt. Die Nutzung ist freiwillig. Sie erreichen mich jederzeit auch per E-Mail oder über den Projekt-Check.</p>
@@ -2234,6 +2263,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <div id="ds-11" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">11. Externe Links</h2>
           <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Diese Website verlinkt auf nico-bodmer.ch sowie auf einzelne externe Seiten. Für deren Inhalte und Datenbearbeitung ist die jeweilige Betreiberin oder der jeweilige Betreiber verantwortlich.</p>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Auf dieser Website verlinke ich mein LinkedIn-Profil und die LinkedIn-Seite von ODERA Design. Erst wenn Sie auf einen dieser Links klicken, wird LinkedIn aufgerufen. Dort gilt die Datenschutzerklärung von LinkedIn.</p>
         </div>
         <div id="ds-12" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">12. Ihre Rechte</h2>
@@ -2250,7 +2280,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Damit Seitenaufrufe desselben Besuchs zusammengezählt werden können, legt Ihr Browser eine zufällige Kennung im Sitzungsspeicher (sessionStorage) dieses Tabs ab. Sie wird gelöscht, wenn Sie den Tab schliessen, und lässt keinen Rückschluss auf Ihre Person zu. Ihre Wahl («Zustimmen» oder «Ablehnen») speichert Ihr Browser im lokalen Speicher (localStorage), damit der Hinweis nicht bei jedem Besuch erscheint.</p>
           <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Die Angaben gehen an einen eigenen Dienst bei Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA (Cloudflare Workers), und werden in einer Datenbank von Cloudflare gespeichert, deren Standort auf die EU festgelegt ist (Cloudflare D1, Jurisdiktion EU). Cloudflare bearbeitet die Angaben als Auftragsbearbeiterin in meinem Auftrag. Beim Übermitteln erhält Cloudflare technisch bedingt Ihre IP-Adresse. Sie dient nur dazu, das Land zu bestimmen und zu viele Anfragen in kurzer Zeit abzuweisen, und wird nicht gespeichert. Zur Zertifizierung von Cloudflare und zu den Standardvertragsklauseln gilt das in Abschnitt 8 Gesagte.</p>
           <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Die einzelnen Angaben werden nach 14 Monaten automatisch gelöscht. Ausgewertet werden nur zusammengezählte Zahlen, zum Beispiel wie viele Besuche eine Seite hatte.</p>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Ihre Einwilligung ist freiwillig. Sie können sie jederzeit widerrufen, über den Link «Einstellungen» unten auf jeder Seite oder hier: <a href="/datenschutz/#ds-14" data-statistik-einstellungen>Statistik-Einstellungen öffnen</a>. Nach dem Widerruf wird nichts mehr erfasst.</p>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Ihre Einwilligung ist freiwillig. Sie können sie jederzeit widerrufen, über den Link «Statistik-Einstellungen» unten auf jeder Seite oder hier: <a href="/datenschutz/#ds-14" data-statistik-einstellungen>Statistik-Einstellungen öffnen</a>. Nach dem Widerruf wird nichts mehr erfasst.</p>
         </div>
       </div>
       <p class="mono" style="font-size:13px;color:var(--text-2);margin:64px 0 0">Stand: {{ standRechtstexte }}</p>
@@ -2263,17 +2293,17 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 <div>
   <section style="background:var(--grund)">
     <div class="wrap" style="padding-top:88px;padding-bottom:48px">
-      <div class="inner txt" style="max-width:65ch">
-        <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 24px">RECHTLICHES</p>
-        <h1 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.06;letter-spacing:-0.03em;margin:0">Allgemeine <span style="display:inline-block">Geschäfts&shy;bedingungen</span></h1>
+      <div class="inner">
+        <p class="augenbraue">Rechtliches</p>
+        <h1 tabindex="-1" class="titel-1">Allgemeine <span style="display:inline-block">Geschäfts&shy;bedingungen</span></h1>
       </div>
     </div>
   </section>
   <section class="wrap sect">
-    <div class="inner txt" style="max-width:65ch">
+    <div class="inner recht">
       <p style="font-size:16px;line-height:1.7;margin:0 0 32px">Diese Bedingungen gelten für Aufträge zur Gestaltung und Umsetzung von Websites und Logos durch Nico Robin Bodmer, ODERA Design. Sie werden Bestandteil des Vertrags, sobald ein Angebot angenommen wird.</p>
-      <nav aria-label="Abschnitte" style="margin:0 0 48px;padding:20px;border:1px solid var(--linie);border-radius:14px">
-        <p class="mono" style="font-size:13px;letter-spacing:0.04em;color:var(--text-2);margin:0 0 12px">INHALT</p>
+      <nav aria-label="Abschnitte" class="recht-inhalt">
+        <p class="augenbraue">Inhalt</p>
         <ul onClick="{{ jumpToSection }}" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px">
           <li><a href="#agb-1" style="font-size:16px">1. Geltungsbereich und Vertragsschluss</a></li>
           <li><a href="#agb-2" style="font-size:16px">2. Ablauf des Projekts</a></li>
@@ -2667,6 +2697,100 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   </sc-if>
 </div>
 </sc-if>
+<sc-if value="{{ isBranche }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section class="band band-papier band-raster" aria-labelledby="br-t" data-abschnitt="hero">
+    <div class="wrap"><div class="inner">
+      <p class="augenbraue">Webdesign aus Berikon AG</p>
+      <h1 id="br-t" tabindex="-1" class="titel-1" style="max-width:18ch">{{ br.h1 }}</h1>
+      <p class="einleitung">{{ br.lead }}</p>
+      <div class="knopfreihe" style="margin-top:32px">
+        <a href="/projekt-check/" class="btn btn-primaer" data-quelle="{{ br.quelle }}" onClick="{{ onEinstieg }}">Projekt-Check starten</a>
+        <a href="/angebot/" class="btn btn-sekundaer">Preise ansehen</a>
+      </div>
+      <p class="klein" style="margin:20px 0 0">Fertiger Entwurf innert {{ entwurfTageText }}, gratis und unverbindlich.</p>
+    </div></div>
+  </section>
+
+  <section class="band band-tief" aria-labelledby="br-inhalte-t" data-abschnitt="inhalte">
+    <div class="wrap"><div class="inner">
+      <div class="titelblock"><p class="augenbraue">Inhalte</p><h2 id="br-inhalte-t" class="titel-2">Was auf Ihre Website gehört</h2></div>
+      <ul class="br-inhalte">
+        <sc-for list="{{ br.inhalte }}" as="c" hint-placeholder-count="4">
+          <li class="karte einblenden"><span class="ico ico-26 br-ico" aria-hidden="true" style="--ico:{{ c.ico }}"></span><h3 class="titel-3">{{ c.t }}</h3><p>{{ c.s }}</p></li>
+        </sc-for>
+      </ul>
+    </div></div>
+  </section>
+
+  <section class="band band-tinte" aria-labelledby="br-beispiel-t" data-abschnitt="beispiel">
+    <div class="wrap"><div class="inner">
+      <div class="titelblock"><p class="augenbraue">Beispiel</p><h2 id="br-beispiel-t" class="titel-2">{{ br.beispielTitel }}</h2><p class="einleitung">{{ br.beispielText }}</p></div>
+<sc-if value="{{ brMuster }}" hint-placeholder-val="{{ false }}">
+      <article class="karte karte-dunkel karte-heben mk br-muster">
+        <div class="mk-bild" aria-hidden="true"><picture><source type="image/avif" srcset="assets/img/musterprojekt-schreinerei-desktop-1280.avif 1280w, assets/img/musterprojekt-schreinerei-desktop-2560.avif 2560w" sizes="(min-width:1024px) 760px, 92vw"><img src="assets/img/musterprojekt-schreinerei-desktop-1280.webp" srcset="assets/img/musterprojekt-schreinerei-desktop-1280.webp 1280w, assets/img/musterprojekt-schreinerei-desktop-2560.webp 2560w" sizes="(min-width:1024px) 760px, 92vw" width="1280" height="720" alt="" loading="lazy" decoding="async"></picture></div>
+        <div class="mk-text">
+          <p class="mk-chips"><span class="chip">Handwerk</span><span class="chip">Paket Standard</span></p>
+          <h3 class="titel-3"><a class="karte-link" href="/musterprojekte/doppelmeter/" data-title="Schreinerei Doppelmeter" data-muster="doppelmeter" onClick="{{ openMuster }}">Schreinerei Doppelmeter</a></h3>
+          <p class="mk-mehr" aria-hidden="true">Musterprojekt ansehen<span>→</span></p>
+        </div>
+      </article>
+</sc-if>
+<sc-if value="{{ brGenerator }}" hint-placeholder-val="{{ false }}">
+      <div class="br-buehne"><div id="gen-buehne" class="gen-platz" data-branche="{{ br.gen }}"></div></div>
+</sc-if>
+    </div></div>
+  </section>
+
+  <section class="band band-papier" aria-labelledby="br-ablauf-t" data-abschnitt="ablauf">
+    <div class="wrap"><div class="inner">
+      <div class="titelblock"><p class="augenbraue">Ablauf</p><h2 id="br-ablauf-t" class="titel-2">In vier Schritten online</h2></div>
+      <ol class="phasen-kompakt">
+        <sc-for list="{{ phasen }}" as="p" hint-placeholder-count="4">
+          <li class="karte einblenden"><span class="phase-n" aria-hidden="true">{{ p.n }}</span><h3 class="titel-3">{{ p.t }}</h3><p>{{ p.kurz }}</p></li>
+        </sc-for>
+      </ol>
+      <p style="margin:32px 0 0"><a href="/ablauf/" class="einstieg">Ganzer Ablauf<span aria-hidden="true">→</span></a></p>
+    </div></div>
+  </section>
+
+  <section class="band band-tief" aria-labelledby="br-preise-t" data-abschnitt="preise">
+    <div class="wrap"><div class="inner br-preise">
+      <div>
+        <p class="augenbraue">Preise</p>
+        <h2 id="br-preise-t" class="titel-2">Fixpreis, einmalig</h2>
+        <p class="lesetext" style="margin:16px 0 24px">{{ br.preis }}</p>
+        <a href="/angebot/" class="einstieg">Alle Pakete und Preise<span aria-hidden="true">→</span></a>
+      </div>
+      <dl class="br-pakete karte">
+        <div><dt>Website</dt><dd class="kennzahl">{{ price1 }}</dd></div>
+        <div><dt>Standard</dt><dd class="kennzahl">{{ price2 }}</dd></div>
+        <div><dt>Pro</dt><dd class="kennzahl">{{ price3 }}</dd></div>
+      </dl>
+    </div></div>
+  </section>
+
+  <section class="band band-papier" aria-labelledby="br-fragen-t" data-abschnitt="fragen">
+    <div class="wrap"><div class="inner txt">
+      <div class="titelblock"><p class="augenbraue">Fragen</p><h2 id="br-fragen-t" class="titel-2">Was Sie sich vielleicht fragen</h2></div>
+      <div class="fragen">
+        <sc-for list="{{ br.fragen }}" as="f" hint-placeholder-count="3">
+          <details class="frage"><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
+        </sc-for>
+      </div>
+    </div></div>
+  </section>
+
+  <section id="abschluss" class="band band-kobalt" data-flaeche="blau" aria-labelledby="br-abschluss-t" data-abschnitt="abschluss">
+    <div class="wrap"><div class="inner">
+      <h2 id="br-abschluss-t" class="titel-2" style="max-width:22ch">Sehen Sie Ihre Website, bevor Sie bezahlen.</h2>
+      <p class="einleitung">{{ kontaktCheckText }}</p>
+      <div class="knopfreihe" style="margin-top:32px"><a href="/projekt-check/" class="btn btn-akzent" data-quelle="{{ br.quelle }}" onClick="{{ onEinstieg }}">Projekt-Check starten</a></div>
+    </div></div>
+  </section>
+</div>
+</sc-if>
+
 <sc-if value="{{ isNf }}" hint-placeholder-val="{{ false }}">
 <div>
   <section style="background:var(--grund)">
@@ -2722,7 +2846,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <dc-import name="logo" kind="wort" h="32" fg="#F6F5F1" cut="#11131A" hint-size="152px,32px"></dc-import>
           </div>
           <p style="font-size:16px;line-height:1.5;color:#C9CED6;margin:0">Webseiten für Schweizer Betriebe</p>
-          <p style="font-size:16px;line-height:1.5;color:var(--linie-stark);margin:4px 0 0">Berikon AG</p>
+          <p class="fuss-ort">Aus Berikon AG für Betriebe im Freiamt, am Mutschellen, im Kanton Aargau und in der ganzen Schweiz.</p>
+          <p class="fuss-li">
+            <a href="{{ linkedinFirma }}" target="_blank" rel="noopener noreferrer" aria-label="ODERA Design auf LinkedIn, öffnet in neuem Tab"><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>ODERA Design</span></a>
+            <a href="{{ linkedinPerson }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn-Profil von Nico Bodmer, öffnet in neuem Tab"><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>Nico Bodmer</span></a>
+          </p>
         </div>
         <div style="display:flex;flex-direction:column;gap:12px">
           <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="5">
@@ -2744,10 +2872,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <a href="/datenschutz/" style="font-size:16px;color:var(--linie-stark)">Datenschutz</a>
         <a href="/agb/" style="font-size:16px;color:var(--linie-stark)">AGB</a>
       </div>
-      <div class="row" style="justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid rgba(246,245,241,0.15);gap:16px">
+      <p class="fuss-branchen">Websites für: <a href="/website-fuer-handwerker/">Handwerk</a> · <a href="/website-fuer-restaurants/">Gastronomie</a> · <a href="/website-fuer-praxen/">Praxen</a> · <a href="/website-fuer-laeden/">Läden</a></p>
+      <div class="row" style="justify-content:space-between;margin-top:32px;padding-top:24px;border-top:1px solid rgba(246,245,241,0.15);gap:16px">
         <p style="font-size:16px;color:var(--linie-stark);margin:0">© 2026 ODERA Design · Nico Bodmer</p>
         <div class="row f-tip" style="gap:24px">
-          <p style="font-size:13px;color:var(--linie-stark);margin:0">Keine Cookies. Statistik nur mit Ihrer Einwilligung. <a href="/datenschutz/#ds-14" data-statistik-einstellungen style="color:var(--linie-stark)">Einstellungen</a></p>
+          <p style="font-size:13px;color:var(--linie-stark);margin:0">Keine Cookies. Statistik nur mit Ihrer Einwilligung. <a href="/datenschutz/#ds-14" data-statistik-einstellungen style="color:var(--linie-stark)">Statistik-Einstellungen</a></p>
         </div>
       </div>
     </div>
@@ -2776,6 +2905,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;showStickyBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Verhalten&quot;},&quot;startPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;/&quot;,&quot;/angebot&quot;,&quot;/ablauf&quot;,&quot;/musterprojekte&quot;,&quot;/ueber-mich&quot;,&quot;/projekt-check&quot;],&quot;default&quot;:&quot;/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Verhalten&quot;}}">
 class Component extends DCLogic {
   EMAIL = 'kontakt@odera.ch';
+  // LinkedIn: gewöhnliche Links, keine Skripte. Einzige Stelle für beide Adressen (auch JSON-LD in tools/seo-build.mjs).
+  ODERA_LINKEDIN_URL = 'https://www.linkedin.com/company/odera-design';
+  LINKEDIN_PERSON_URL = 'https://www.linkedin.com/in/nico-bodmer/';
   // Adresse des Chat-Proxys (chat-proxy/, Cloudflare Worker). Leer lassen, solange er nicht läuft: Dann ist der Assistent ausgeblendet.
   CHAT_ENDPOINT = 'https://odera-chat.odera-chat-proxy.workers.dev/';
   // Projekt-Check direkt absenden (Worker anfrage-proxy/). Schalter: Sind beide Werte gesetzt, sendet der
@@ -2863,23 +2995,36 @@ class Component extends DCLogic {
   PLAETZE_TOTAL = 2;
   PLAETZE_FREI = 1;
   PAGES = {
-    '/': { key: 'start', title: 'Webseiten für Schweizer Betriebe: Fixpreis, Entwurf in 5 Arbeitstagen | ODERA Design',
-      desc: 'Sie sehen Ihre neue Website, bevor Sie einen Franken bezahlen. Fixpreis, kostenloser Entwurf in 5 Arbeitstagen, für Betriebe in der ganzen Schweiz.' },
-    '/404': { key: 'nf', title: 'Seite nicht gefunden | ODERA Design', noindex: true },
+    // Titel höchstens 60 Zeichen, Beschreibung 120 bis 155 Zeichen (docs/seo.md). Trenner im Titel: «·».
+    '/': { key: 'start', title: 'Website erstellen lassen ab CHF 890 · ODERA Design',
+      desc: 'Neue Website für Ihren Betrieb: fertiger Entwurf in 5 Arbeitstagen, gratis und unverbindlich. Fixpreis ab CHF 890. Webdesign aus Berikon AG.' },
+    '/404': { key: 'nf', title: 'Seite nicht gefunden · ODERA Design', noindex: true },
     // Einstieg aus Briefen und QR-Codes (?firma=...&branche=...), zeigt die Startseite
-    '/start': { key: 'start', title: 'Willkommen | ODERA Design', noindex: true },
-    '/angebot': { key: 'angebot', title: 'Preise und Pakete | ODERA Design',
-      desc: 'Drei Pakete zum Fixpreis: Website CHF 890, Standard CHF 1\u2019900, Pro CHF 3\u2019400. Einmalig, ohne Abonnement, ohne Nachträge. Der Entwurf kommt vorab.' },
-    '/ablauf': { key: 'ablauf', title: 'So läuft ein Projekt ab | ODERA Design',
-      desc: 'Sie zahlen erst, wenn Ihnen der Entwurf gefällt. So läuft ein Projekt ab: Formular, kostenloser Entwurf, Rückmeldung, Umsetzung, Übergabe.' },
-    '/musterprojekte': { key: 'muster', title: 'Musterprojekte | ODERA Design',
-      desc: 'Drei Musterprojekte: eine erfundene Schreinerei, ein erfundener Solarinstallateur mit Rechner und mein eigenes Portfolio. Ich liefere keine Vorlage in anderen Farben aus.' },
-    '/ueber-mich': { key: 'ueber', title: 'Über mich und Kontakt | ODERA Design',
-      desc: 'Nico Bodmer baut Webseiten für Betriebe in der ganzen Schweiz. Lehre als Platform Developer EFZ, seit 2021 in der IT. Erreichbarkeit und Kontakt.' },
-    '/projekt-check': { key: 'check', title: 'Projekt-Check: Ihre Anfrage in 6 Minuten | ODERA Design', noindex: true },
-    '/impressum': { key: 'impressum', title: 'Impressum | ODERA Design', noindex: true },
-    '/datenschutz': { key: 'datenschutz', title: 'Datenschutz | ODERA Design', noindex: true },
-    '/agb': { key: 'agb', title: 'Allgemeine Geschäftsbedingungen | ODERA Design', noindex: true }
+    '/start': { key: 'start', title: 'Willkommen · ODERA Design', noindex: true },
+    '/angebot': { key: 'angebot', title: 'Was kostet eine Website? Fixpreise · ODERA Design',
+      desc: 'Website, Standard oder Pro: drei Pakete zum Fixpreis ab CHF 890, einmalig und ohne Abo. Betrieb auf Wunsch ab CHF 240 pro Jahr.' },
+    '/ablauf': { key: 'ablauf', title: 'Website erstellen lassen: der Ablauf · ODERA Design',
+      desc: 'Vier Phasen, rund zwei Stunden Ihrer Zeit: Sie sehen den fertigen Entwurf, bevor Sie einen Franken bezahlen. So entsteht Ihre Website.' },
+    '/musterprojekte': { key: 'muster', title: 'Webdesign Beispiele für Betriebe · ODERA Design',
+      desc: 'Zwei Beispiel-Websites für Handwerk und Solar. Sehen Sie, wie Ihre neue Seite aussehen könnte, und testen Sie Ihren Betrieb in zehn Sekunden.' },
+    '/ueber-mich': { key: 'ueber', title: 'Nico Bodmer, Webdesigner aus Berikon · ODERA Design',
+      desc: 'Sie reden mit dem, der die Seite baut: Nico Bodmer aus Berikon AG baut Websites für Betriebe im Aargau und in der ganzen Schweiz.' },
+    '/website-fuer-handwerker': { key: 'branche', title: 'Website für Handwerker ab CHF 890 · ODERA Design',
+      desc: 'Website für Ihren Handwerksbetrieb: Telefonnummer, Referenzbilder, Offerte-Knopf. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890.' },
+    '/website-fuer-restaurants': { key: 'branche', title: 'Website für Restaurants und Cafés · ODERA Design',
+      desc: 'Website für Ihr Restaurant oder Café: Karte, Öffnungszeiten und Reservation auf dem Handy. Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890.' },
+    '/website-fuer-praxen': { key: 'branche', title: 'Website für Praxen ab CHF 890 · ODERA Design',
+      desc: 'Website für Ihre Praxis: Termine, Team und Anfahrt klar gezeigt, Daten auf Wunsch in der Schweiz. Entwurf in 5 Arbeitstagen, gratis. Ab CHF 890.' },
+    '/website-fuer-laeden': { key: 'branche', title: 'Website für Läden ab CHF 890 · ODERA Design',
+      desc: 'Website für Ihren Laden: Sortiment, Öffnungszeiten und Anfahrt auf einen Blick. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890.' },
+    '/projekt-check': { key: 'check', title: 'Projekt-Check: Angebot in 6 Minuten · ODERA Design',
+      desc: '18 kurze Fragen, rund 6 Minuten. Danach erhalten Sie ein Angebot zum Fixpreis und einen kostenlosen Entwurf Ihrer neuen Website, ohne Risiko.' },
+    // Impressum bleibt noindex: Es nennt die Wohnadresse (Entscheid Nico, keine Strasse in Suchmaschinen)
+    '/impressum': { key: 'impressum', title: 'Impressum · ODERA Design', noindex: true },
+    '/datenschutz': { key: 'datenschutz', title: 'Datenschutzerklärung · ODERA Design',
+      desc: 'Welche Daten beim Besuch von odera.ch, im Projekt-Check, im Chat und bei der Statistik mit Einwilligung bearbeitet werden. Keine Cookies.' },
+    '/agb': { key: 'agb', title: 'Allgemeine Geschäftsbedingungen · ODERA Design',
+      desc: 'Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Betrieb und Hosting.' }
   };
 
 
@@ -2911,6 +3056,12 @@ class Component extends DCLogic {
     leiste: { label: 'Leiste unten' },
     kontakt: { label: 'Kontaktbereich' },
     einblicke: { label: 'Einblicke (Blog)' },
+    'ablauf-kopf': { label: 'Ablauf, oben' },
+    'muster-abschluss': { label: 'Musterprojekte, Abschluss' },
+    'branche-handwerk': { label: 'Branchenseite Handwerk', ans: { BRANCHE: 'Handwerk und Bau' }, skip: ['BRANCHE'] },
+    'branche-gastro': { label: 'Branchenseite Restaurants', ans: { BRANCHE: 'Gastronomie und Hotellerie' }, skip: ['BRANCHE'] },
+    'branche-praxis': { label: 'Branchenseite Praxen', ans: { BRANCHE: 'Gesundheit und Therapie' }, skip: ['BRANCHE'] },
+    'branche-laden': { label: 'Branchenseite Läden', ans: { BRANCHE: 'Laden und Handel' }, skip: ['BRANCHE'] },
   };
   // Branchen in Brief-Links (?branche=...)
   BRIEF_BRANCHEN = { handwerk: 'Handwerk und Bau', gastro: 'Gastronomie und Hotellerie', gesundheit: 'Gesundheit und Therapie',
@@ -2952,13 +3103,129 @@ class Component extends DCLogic {
     ['Warm und persönlich', 'linear-gradient(#B4532A,#B4532A) 12px 12px/40px 40px no-repeat, linear-gradient(#11131A,#11131A) 62px 14px/56px 6px no-repeat, linear-gradient(#5B6270,#5B6270) 62px 30px/44px 3px no-repeat, var(--wash-3)']
   ];
 
-  // Die vier Phasen auf der Ablaufseite. Muss zu den AGB passen (Paragrafen 2 und 4). steps: Indizes in STEPS.
+  // Die vier Phasen (Ablauf und Startseite, eine Komponente in zwei Varianten). Muss zu den AGB passen (Paragrafen 2 und 4).
+  // Zeilen in chronologischer Reihenfolge: zuerst = wer zuerst handelt. steps: Indizes in STEPS (Details und Minuten).
+  // sie, ich, dauer: liest auch tools/wissen-build.mjs (feste Chat-Antwort «Wie läuft ein Projekt ab?»).
   PHASES = [
-    { t: 'Anfrage und Angebot', sie: 'Sie füllen das Formular aus, rund {MIN} Minuten, und nehmen das Angebot an, wenn es passt.', ich: 'Ich melde mich und schicke Ihnen ein Angebot zum Fixpreis.', kosten: 'gratis', frei: true, dauer: 'Antwort spätestens am nächsten Abend, ausser am Wochenende', steps: [0, 1, 2] },
-    { t: 'Entwurf', sie: 'Sie sehen den Entwurf an und geben Rückmeldung. Gefällt er Ihnen nicht, endet es hier.', ich: 'Ich gestalte Ihre Seite als fertigen Entwurf.', kosten: 'gratis', frei: true, dauer: 'innert {TAGE_WORT}', steps: [3, 4, 5] },
-    { t: 'Umsetzung', sie: 'Sie nehmen den Entwurf an. Dann kommt die Rechnung über den Fixpreis, einmal und ohne Anzahlung.', ich: 'Ich setze Ihre Änderungen um, mit den Korrekturrunden aus Ihrem Paket.', kosten: 'Fixpreis, einmal', frei: false, dauer: 'je nach Paket, steht im Angebot', steps: [6, 7] },
-    { t: 'Übergabe', sie: 'Sie geben die fertige Seite schriftlich frei.', ich: 'Ich schalte sie auf und übergebe Ihnen Domain, Zugänge und Quellcode.', kosten: 'keine weiteren Kosten', frei: false, dauer: 'rund 35 Minuten Ihrer Zeit', steps: [8, 9] }
+    { t: 'Anfrage', wann: 'Tag 1', kosten: 'gratis', frei: true, zuerst: 'sie',
+      sie: 'Sie füllen den Projekt-Check aus, {FRAGEN} Fragen, rund {MIN} Minuten.',
+      ich: 'Ich melde mich spätestens am nächsten Abend (ausser am Wochenende) und schicke ein Angebot zum Fixpreis.',
+      kurz: 'Sie beantworten {FRAGEN} Fragen, ich schicke ein Angebot.', optName: 'optionalem Gespräch',
+      dauer: 'Antwort spätestens am nächsten Abend, ausser am Wochenende', steps: [0, 1, 2] },
+    { t: 'Entwurf', wann: 'innert {TAGE}', kosten: 'gratis', frei: true, zuerst: 'ich',
+      ich: 'Ich gestalte Ihre Seite als fertigen Entwurf mit Ihren Inhalten.',
+      sie: 'Sie sehen ihn an und geben Rückmeldung. Gefällt er nicht, endet es hier, ohne Kosten.',
+      kurz: 'Innert {TAGE_WORT} sehen Sie Ihre fertige Seite.',
+      dauer: 'innert {TAGE_WORT}', steps: [3, 4, 5] },
+    { t: 'Umsetzung', wann: 'nach Ihrer Zusage', kosten: 'Fixpreis, einmal', frei: false, zuerst: 'sie',
+      sie: 'Sie nehmen den Entwurf an, dann kommt die Rechnung, einmal und ohne Anzahlung.',
+      ich: 'Ich setze Ihre Änderungen um, mit den Korrekturrunden aus Ihrem Paket.',
+      kurz: 'Erst jetzt kommt die Rechnung, ohne Anzahlung.', optName: 'optionaler zweiter Rückmeldung',
+      dauer: 'je nach Paket, steht im Angebot', steps: [6, 7] },
+    { t: 'Übergabe', wann: 'Abschluss', kosten: 'keine weiteren Kosten', frei: false, zuerst: 'sie',
+      sie: 'Sie geben die fertige Seite schriftlich frei.',
+      ich: 'Ich schalte sie auf und übergebe Domain, Zugänge und Quellcode. Danach gehört alles Ihnen.',
+      kurz: 'Domain, Zugänge und Quellcode gehören Ihnen.',
+      dauer: 'rund 35 Minuten Ihrer Zeit', steps: [8, 9] }
   ];
+  // Woche, in der ein Schritt mit Aufwand für den Kunden liegt (Ablauf, «Ihr Aufwand auf einen Blick»). Index in STEPS.
+  WOCHE = { 0: 1, 2: 1, 4: 2, 5: 2, 7: 3, 8: 3, 9: 3 };
+
+  // Branchenseiten (Teil 10): eigener Inhalt je Branche, nur belegbare Aussagen aus Angebot und Paketen.
+  // quelle: Einstieg in den Projekt-Check (EINSTIEGE), gen: Branche im Vorschau-Werkzeug, muster: eigenes Musterprojekt.
+  // Linien-Symbole der Branchenseiten (SVG-Pfade, 24 × 24, als CSS-Maske über icoUrl)
+  BRANCHEN_ICONS = {
+    telefon: 'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2',
+    bild: 'M3 5h18v14H3z M3 16l5-5 4 4 3-3 6 6 M15 9a1.5 1.5 0 1 0 0.01 0',
+    formular: 'M6 3h9l3 3v15H6z M9 10h6 M9 14h6 M9 18h3',
+    karte: 'M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z M12 7a3 3 0 1 0 0 6a3 3 0 1 0 0-6z',
+    'karte-menu': 'M5 3h14v18H5z M8 8h8 M8 12h8 M8 16h5',
+    uhr: 'M12 3a9 9 0 1 0 0.01 0 M12 7v5l3 2',
+    gruppe: 'M9 4.5a3.5 3.5 0 1 0 0.01 0 M3 19c1-3.5 3.5-5 6-5s5 1.5 6 5 M17 6.5a2.5 2.5 0 1 0 0.01 0 M15 14.5c2.5 0 4.5 1.2 5.5 4',
+    kalender: 'M4 5h16v15H4z M8 3v4 M16 3v4 M4 10h16',
+    person: 'M12 4a4 4 0 1 0 0.01 0 M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6',
+    dokument: 'M7 3h7l4 4v14H7z M14 3v4h4 M10 12h5 M10 16h5',
+    schloss: 'M5 10h14v10H5z M8 10V7a4 4 0 0 1 8 0v3',
+    stern: 'M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z',
+  };
+  BRANCHEN_SEITEN = {
+    '/website-fuer-handwerker': {
+      h1: 'Website für Handwerksbetriebe', quelle: 'branche-handwerk', muster: 'doppelmeter', dienst: 'Website für Handwerksbetriebe',
+      lead: 'Wer Ihre Website öffnet, soll anrufen oder eine Offerte anfragen. Genau darauf baue ich sie, für Betriebe im Aargau und in der ganzen Schweiz.',
+      inhalte: [
+        ['telefon', 'Telefonnummer in jedem Bildschirm', 'Wer einen Handwerker sucht, will meist sofort jemanden sprechen. Die Nummer steht oben und ist auf dem Handy antippbar.'],
+        ['bild', 'Referenzbilder Ihrer Arbeiten', 'Fotos überzeugen mehr als jede Beschreibung. Ich ordne sie nach Leistung, damit Besucher schnell finden, was sie suchen.'],
+        ['formular', 'Ein Knopf für die Offerte', 'Ein kurzes Formular fragt nach den Angaben, die Sie für eine Offerte brauchen. Das spart Ihnen Rückfragen.'],
+        ['karte', 'Ihr Einzugsgebiet', 'Welche Gemeinden Sie bedienen, steht klar auf der Seite. Das hilft Besuchern und der Suche bei Google.'],
+        ['dokument', 'Jede Leistung auf eigener Seite', 'Küchen, Bäder oder Fassaden: Im Paket Standard bekommt jede Leistung eine eigene Seite. So finden Besucher genau die Arbeit, die sie suchen.'],
+      ],
+      beispielTitel: 'So sieht eine Handwerker-Website aus',
+      beispielText: 'Schreinerei Doppelmeter ist ein erfundener Betrieb, die Seite ist echt: Telefonnummer in jedem Bildschirm, Küchen, Schränke und Werkstatt auf eigenen Seiten.',
+      preis: 'Für die meisten Handwerksbetriebe passt das Paket Standard: bis 5 Unterseiten, Bildergalerie und eingerichtetes Google-Unternehmensprofil.',
+      fragen: [
+        ['Ich habe kaum Fotos meiner Arbeiten. Geht das trotzdem?', 'Ja. Für den Entwurf reichen wenige Bilder. Einen Fotografen kann ich organisieren, die Kosten richten sich nach dem Aufwand.'],
+        ['Muss ich die Texte selbst schreiben?', 'Nein. Vorhandene Texte bereite ich im Paket auf. Texte von Grund auf schreibe ich für {TEXTE} pro Seite.'],
+        ['Werde ich damit bei Google gefunden?', 'Im Paket Standard richte ich Ihr Google-Unternehmensprofil ein und lege die Grundlagen für die Auffindbarkeit. Einen bestimmten Platz in den Suchergebnissen kann niemand versprechen.'],
+      ],
+    },
+    '/website-fuer-restaurants': {
+      h1: 'Website für Restaurants und Cafés', quelle: 'branche-gastro', gen: 'gastronomie', dienst: 'Website für Restaurants und Cafés',
+      lead: 'Gäste schauen vor dem Besuch nach: Was gibt es, ist heute offen, kann ich reservieren? Ihre Website beantwortet das auf dem Handy in Sekunden.',
+      inhalte: [
+        ['karte-menu', 'Die Karte als Text', 'Mittags- und Abendkarte direkt auf der Seite statt als PDF. Gut lesbar auf dem Handy und für Google verständlich.'],
+        ['uhr', 'Öffnungszeiten auf einen Blick', 'Der heutige Tag ist hervorgehoben, Ruhetage und Betriebsferien stehen gleich daneben.'],
+        ['telefon', 'Reservieren ohne Umweg', 'Ein Knopf zum Anrufen und ein Formular für Reservationen. Eine Online-Buchung gibt es im Paket Pro.'],
+        ['bild', 'Bilder von Raum und Gerichten', 'Gute Fotos zeigen, wie ein Abend bei Ihnen wird. Ich zeige sie gross und sorge dafür, dass sie schnell laden.'],
+        ['gruppe', 'Anlässe und Gruppen', 'Eine eigene Seite für Firmenessen, Geburtstage und Apéros, mit einem Formular für die Anfrage.'],
+      ],
+      beispielTitel: 'Sehen Sie Ihr Lokal in zehn Sekunden',
+      beispielText: 'Tippen Sie den Namen Ihres Lokals ein. Das Vorschau-Werkzeug zeichnet sofort, wie der Anfang Ihrer Seite aussehen könnte.',
+      preis: 'Eine Seite mit Karte, Öffnungszeiten und Kontakt gibt es im Paket Website. Mit eigener Seite für Anlässe passt Standard, mit Online-Buchung Pro.',
+      fragen: [
+        ['Kann ich die Menükarte selbst ändern?', 'Im Paket Pro bearbeiten Sie Texte selbst, ohne Technikkenntnisse. In den anderen Paketen ändere ich sie für Sie, nach Aufwand zu {STUNDE} pro Stunde.'],
+        ['Brauche ich ein Reservationssystem?', 'Nicht unbedingt. Für viele Lokale reichen ein Knopf zum Anrufen und ein Formular. Eine Online-Buchung gibt es im Paket Pro.'],
+        ['Gehört die Website danach mir?', 'Ja. Domain, Zugänge und Quellcode gehören Ihnen. Den Betrieb übernehmen Sie selbst oder ich, ab {BETRIEB} pro Jahr.'],
+      ],
+    },
+    '/website-fuer-praxen': {
+      h1: 'Website für Praxen', quelle: 'branche-praxis', gen: 'praxis', dienst: 'Website für Praxen',
+      lead: 'Wer eine Praxis sucht, will Vertrauen fassen und einen Termin finden. Ihre Website zeigt beides klar und ruhig.',
+      inhalte: [
+        ['kalender', 'Der Weg zum Termin', 'Telefonnummer und Terminanfrage stehen oben. Eine Online-Terminbuchung gibt es im Paket Pro.'],
+        ['person', 'Team und Ausbildung', 'Fotos und kurze Angaben zu Ausbildung und Schwerpunkten schaffen Vertrauen, bevor jemand anruft.'],
+        ['dokument', 'Behandlungen verständlich erklärt', 'Ihr Angebot in einfacher Sprache, ohne Fachjargon. So wissen Besucher, ob sie bei Ihnen richtig sind.'],
+        ['karte', 'Anfahrt und Zugang', 'Adresse, Parkplätze, öffentlicher Verkehr und Zugang mit Rollstuhl auf einen Blick.'],
+        ['schloss', 'Daten in der Schweiz', 'Mit dem Betrieb bei mir auf Schweizer Servern bleiben Website und Formulardaten in der Schweiz.'],
+      ],
+      beispielTitel: 'Sehen Sie Ihre Praxis in zehn Sekunden',
+      beispielText: 'Tippen Sie den Namen Ihrer Praxis ein. Das Vorschau-Werkzeug zeichnet sofort, wie der Anfang Ihrer Seite aussehen könnte.',
+      preis: 'Für Praxen mit mehreren Angeboten passt meist Standard. Online-Terminbuchung und zweite Sprache gibt es im Paket Pro.',
+      fragen: [
+        ['Kann ich Online-Termine anbieten?', 'Ja, im Paket Pro: Online-Terminbuchung oder erweiterte Formulare, dazu bis 10 Seiten.'],
+        ['Wo liegen die Daten aus dem Kontaktformular?', 'Wählen Sie den Betrieb bei mir mit Schweizer Server ({BETRIEB_CH} pro Jahr), bleiben Website und Formulardaten in der Schweiz.'],
+        ['Wie lange dauert es bis zur fertigen Seite?', 'Den Entwurf sehen Sie innert {TAGE_WORT}. Online geht die Seite je nach Paket 10 bis 25 Arbeitstage nach Ihrer Freigabe.'],
+      ],
+    },
+    '/website-fuer-laeden': {
+      h1: 'Website für Läden', quelle: 'branche-laden', gen: 'verkauf', dienst: 'Website für Läden und Geschäfte',
+      lead: 'Wer Ihren Laden sucht, will wissen: Was finde ich dort, wann ist offen, wie komme ich hin? Ihre Website beantwortet das, bevor jemand losfährt.',
+      inhalte: [
+        ['bild', 'Ihr Sortiment mit Bildern', 'Zeigen Sie, was es bei Ihnen gibt, nach Bereichen geordnet. So kommen Kunden mit einem Ziel in den Laden.'],
+        ['uhr', 'Öffnungszeiten und Feiertage', 'Aktuelle Zeiten, auch vor Feiertagen. Nichts ärgert mehr als eine verschlossene Tür.'],
+        ['karte', 'Anfahrt und Parkplätze', 'Adresse mit Kartenlink, Parkplätze und Haltestelle in der Nähe.'],
+        ['telefon', 'Fragen per Anruf oder Formular', 'Ob etwas an Lager ist, klären Kundinnen und Kunden mit einem Anruf oder über das Kontaktformular.'],
+        ['stern', 'Google-Unternehmensprofil', 'Im Paket Standard richte ich es ein. Öffnungszeiten, Adresse und Bilder erscheinen dann direkt in der Google-Suche.'],
+      ],
+      beispielTitel: 'Sehen Sie Ihren Laden in zehn Sekunden',
+      beispielText: 'Tippen Sie den Namen Ihres Ladens ein. Das Vorschau-Werkzeug zeichnet sofort, wie der Anfang Ihrer Seite aussehen könnte.',
+      preis: 'Für einen Laden mit Sortiment, Öffnungszeiten und Anfahrt passt meist das Paket Website oder Standard.',
+      fragen: [
+        ['Kann ich auch online verkaufen?', 'Ein Onlineshop mit Zahlungsabwicklung ist in keinem Paket enthalten. Die Website zeigt Ihr Sortiment und bringt Kundschaft in den Laden.'],
+        ['Wie halte ich Aktionen aktuell?', 'Im Paket Pro bearbeiten Sie Texte selbst. Sonst ändere ich sie für Sie, nach Aufwand zu {STUNDE} pro Stunde.'],
+        ['Was bringt das Google-Unternehmensprofil?', 'Es zeigt Öffnungszeiten, Adresse und Bilder direkt in der Google-Suche und auf Google Maps. Im Paket Standard richte ich es ein.'],
+      ],
+    },
+  };
 
   TIMING = ['So schnell wie möglich', 'In einem Monat', 'In zwei bis drei Monaten', 'Kein festes Datum'];
 
@@ -3051,7 +3318,7 @@ class Component extends DCLogic {
   state = {
     path: '/', scrolled: false, menu: false, barOn: false, pageKey: 0, kopfWeg: false, menuZu: false, pkAktiv: 0, wahlOffen: false,
 
-    faq: (typeof window !== 'undefined' && window.innerWidth <= 560) ? -1 : 0, priceOpen: false, off: {}, reqMin: this.zeitSumme(true), optMin: this.zeitSumme(false), totMin: this.zeitSumme(true) + this.zeitSumme(false),
+    aufwandOpt: false, faq: (typeof window !== 'undefined' && window.innerWidth <= 560) ? -1 : 0, priceOpen: false, off: {}, reqMin: this.zeitSumme(true), optMin: this.zeitSumme(false), totMin: this.zeitSumme(true) + this.zeitSumme(false),
     device: 'desktop', geraete: {}, muster: null, closeHover: false,
     gFilled: false,
     consent: false,
@@ -3720,7 +3987,7 @@ class Component extends DCLogic {
     if (!platz || platz.dataset.beobachtet) return;
     platz.dataset.beobachtet = '1';
     const laden = () => import('/assets/js/generator.js')
-      .then((m) => m.starten(platz, { reduce: this.reduce, weiter: (d) => this.generatorCheck(d) }))
+      .then((m) => m.starten(platz, { reduce: this.reduce, branche: platz.dataset.branche || '', weiter: (d) => this.generatorCheck(d) }))
       .catch(() => { platz.dataset.beobachtet = ''; });
     if (!('IntersectionObserver' in window)) { laden(); return; }
     const io = new IntersectionObserver((e) => { if (e.some((x) => x.isIntersecting)) { io.disconnect(); laden(); } }, { rootMargin: '600px 0px' });
@@ -3765,7 +4032,8 @@ class Component extends DCLogic {
   // Werte im Text: {TAGE}, {TAGE_WORT}, {MIN}, {FRAGEN}, {PREIS_STD}, {ERF_MIN} kommen aus den Konstanten oben
   werte(t) {
     const w = { TAGE: this.ENTWURF_TAGE + ' Arbeitstagen', TAGE_WORT: (this.ZAHLWORT[this.ENTWURF_TAGE] || this.ENTWURF_TAGE) + ' Arbeitstagen',
-      MIN: String(this.CHECK_MINUTEN), FRAGEN: String(this.fragenZahl()), PREIS_STD: 'CHF\u00a0' + this.fmt(this.PAKET_PREIS[1]), ERF_MIN: String(this.zeitSumme(true)) };
+      MIN: String(this.CHECK_MINUTEN), FRAGEN: String(this.fragenZahl()), PREIS_STD: 'CHF\u00a0' + this.fmt(this.PAKET_PREIS[1]), ERF_MIN: String(this.zeitSumme(true)),
+      TEXTE: 'CHF\u00a0' + this.TEXT_PRO_SEITE_CHF, STUNDE: 'CHF\u00a0' + this.STUNDENSATZ_CHF, BETRIEB: 'CHF\u00a0' + this.HOSTING_AUSLAND_CHF, BETRIEB_CH: 'CHF\u00a0' + this.HOSTING_SCHWEIZ_CHF };
     return String(t).replace(/\{([A-Z_]+)\}/g, (m, k) => (w[k] !== undefined ? w[k] : m));
   }
   // Minuten aus den Ablaufschritten: erforderlich oder optional (ohne abgewählte)
@@ -4152,6 +4420,11 @@ class Component extends DCLogic {
     const s = this.state;
     const geraetVon = (p) => s.geraete[p] || (s.device === 'mobile' ? 'handy' : 'desktop');
     const page = this.PAGES[s.path].key;
+    // Branchenseite: Inhalt aus BRANCHEN_SEITEN, Symbole als CSS-Maske, Platzhalter aufgelöst
+    const brRoh = this.BRANCHEN_SEITEN[s.path];
+    const brSeite = brRoh ? Object.assign({}, brRoh, { gen: brRoh.gen || '',
+      inhalte: brRoh.inhalte.map((c) => ({ ico: this.icoUrl(this.BRANCHEN_ICONS[c[0]] || ''), t: c[1], s: this.werte(c[2]) })),
+      fragen: brRoh.fragen.map((f) => ({ q: f[0], a: this.werte(f[1]) })) }) : { h1: '', lead: '', inhalte: [], fragen: [], quelle: '', gen: '' };
     const isCheck = page === 'check';
     const isLegal = page === 'impressum' || page === 'datenschutz' || page === 'agb';
     const fr = this.fragen();
@@ -4201,7 +4474,8 @@ class Component extends DCLogic {
       navLinks: this.NAV.map((n, i) => ({ label: n.label, href: n.href, cur: s.path === n.path ? 'page' : undefined, dot: s.path === n.path ? 1 : 0, i })),
       showChrome: !isCheck,
       isStart: page === 'start', isAngebot: page === 'angebot', isAblauf: page === 'ablauf',
-      isMuster: page === 'muster', isUeber: page === 'ueber', isCheck: isCheck,
+      isMuster: page === 'muster', isUeber: page === 'ueber', isCheck: isCheck, isBranche: page === 'branche',
+      br: brSeite, brMuster: !!(brSeite && brSeite.muster), brGenerator: !!(brSeite && brSeite.gen),
       isImpressum: page === 'impressum', isDatenschutz: page === 'datenschutz', isAgb: page === 'agb',
       isNf: page === 'nf',
       heute: new Date().toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' }),
@@ -4270,6 +4544,32 @@ class Component extends DCLogic {
       togglePrice: () => this.setState({ priceOpen: !s.priceOpen }),
       onFaq: (e) => { const i = Number(e.currentTarget.dataset.i); this.setState({ faq: s.faq === i ? -1 : i }); },
 
+      // Phasen-Komponente: Ablauf (volle Variante) und Startseite (kompakt)
+      phasen: this.PHASES.map((ph, i) => {
+        const pflicht = ph.steps.reduce((m, si) => m + (this.STEPS[si][3] ? this.STEPS[si][2] : 0), 0);
+        const opt = ph.steps.reduce((m, si) => m + (this.STEPS[si][3] ? 0 : this.STEPS[si][2]), 0);
+        const zeilen = [['Sie', this.werte(ph.sie)], ['Ich', this.werte(ph.ich)]];
+        if (ph.zuerst === 'ich') zeilen.reverse();
+        return {
+          n: String(i + 1).padStart(2, '0'), t: ph.t, wann: this.werte(ph.wann), kosten: ph.kosten, kurz: this.werte(ph.kurz),
+          wer1: zeilen[0][0], z1: zeilen[0][1], wer2: zeilen[1][0], z2: zeilen[1][1],
+          ich1: zeilen[0][0] === 'Ich' ? '1' : '0', ich2: zeilen[1][0] === 'Ich' ? '1' : '0',
+          zeit: (pflicht ? pflicht + ' Min' : 'ohne Aufwand für Sie') + (opt && ph.optName ? ', mit ' + ph.optName + ' ' + (pflicht + opt) + ' Min' : ''),
+          detailsTitel: 'Details zu Phase ' + (i + 1),
+          details: ph.steps.map((si) => { const st = this.STEPS[si]; return { titel: st[0], text: this.werte(st[1]),
+            min: st[2] ? st[2] + ' Min' : 'ohne Aufwand für Sie', optDisplay: st[3] ? 'none' : 'inline-flex' }; }),
+        };
+      }),
+      // «Ihr Aufwand auf einen Blick»: Segmente pro Woche, ein Schalter für die optionalen Schritte
+      aufwandOpt: s.aufwandOpt ? 'true' : 'false',
+      onAufwandOpt: () => this.setState({ aufwandOpt: !s.aufwandOpt }),
+      aufwandTotal: (this.zeitSumme(true) + (s.aufwandOpt ? this.zeitSumme(false) : 0)) + ' Minuten',
+      aufwandWochen: [1, 2, 3].map((w) => {
+        const teile = Object.keys(this.WOCHE).filter((si) => this.WOCHE[si] === w).map(Number)
+          .filter((si) => this.STEPS[si][3] || s.aufwandOpt).map((si) => ({ titel: this.STEPS[si][0], min: this.STEPS[si][2] + ' Min',
+            breite: Math.max(14, this.STEPS[si][2] / 30 * 100) + '%', opt: this.STEPS[si][3] ? '0' : '1' }));
+        return { label: 'Woche ' + w, teile, summe: teile.reduce((m, x) => m + parseInt(x.min, 10), 0) + ' Min' };
+      }),
       phases: this.PHASES.map((ph, i) => ({ n: String(i + 1), t: ph.t, sie: this.werte(ph.sie), ich: this.werte(ph.ich), kosten: ph.kosten, costCls: ph.frei ? 'frei' : '', dauer: this.werte(ph.dauer) })),
       phFillPct: s.phFill + '%',
       steps: this.STEPS.map((st, i) => {
@@ -4400,6 +4700,15 @@ class Component extends DCLogic {
       entwurfTageText: (this.ZAHLWORT[this.ENTWURF_TAGE] || this.ENTWURF_TAGE) + ' Arbeitstagen',
       plaetzeText: (this.ZAHLWORT[this.PLAETZE_TOTAL] || this.PLAETZE_TOTAL) + ' Projekte',
       startFaqs: [0, 1, 3].map((i) => ({ q: this.FAQ[i][0], a: this.werte(this.FAQ[i][1]) })),
+      linkedinPerson: this.LINKEDIN_PERSON_URL, linkedinFirma: this.ODERA_LINKEDIN_URL,
+      // Vergleich Startseite: ja, teils (je nach Anbieter), nein. Der Text steht für Screenreader in der Zelle.
+      vergleichZeilen: [
+        ['Jemand baut die Seite für Sie', 'nein', 'ja', 'ja'],
+        ['Ergebnis sehen, bevor Sie zahlen', 'teils', 'nein', 'ja'],
+        ['Fixpreis, einmalig', 'nein', 'teils', 'ja'],
+        ['Seite und Quellcode gehören Ihnen', 'nein', 'teils', 'ja'],
+      ].map((z) => { const txt = { ja: 'Ja', teils: 'Teilweise', nein: 'Nein' };
+        return { frage: z[0], b: z[1], bText: txt[z[1]], a: z[2], aText: txt[z[2]], o: z[3], oText: txt[z[3]] }; }),
       wahlZeilen: [
         { frage: 'Wer baut die Seite?', baukasten: 'Sie selbst, mit einer Vorlage.', agentur: 'Ein Team, oft mit Projektleitung.', ich: 'Ich, vom Entwurf bis zur Übergabe.' },
         { frage: 'Wann sehen Sie das Ergebnis?', baukasten: 'Wenn Sie fertig gebaut haben.', agentur: 'Meist nach Konzept und Auftrag.', ich: 'Innert ' + this.ENTWURF_TAGE + ' Arbeitstagen, vor jeder Zahlung.' },
