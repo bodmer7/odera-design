@@ -399,9 +399,24 @@ try {
       const probleme = beobachten(page);
       await page.goto(BASIS + '/', { waitUntil: 'networkidle' });
       const banner = page.locator('.st-banner');
-      ok(!(await banner.isVisible().catch(() => false)), `${geraet}: Banner bremst das erste Zeichnen nicht (erscheint verzögert)`);
-      await warte(2800);
-      ok(await banner.isVisible(), `${geraet}: Banner erscheint ohne gespeicherte Wahl`);
+      if (geraet === 'Desktop') {
+        ok(!(await banner.isVisible().catch(() => false)), `${geraet}: Banner bremst das erste Zeichnen nicht (erscheint verzögert)`);
+        await warte(2800);
+        ok(await banner.isVisible(), `${geraet}: Banner erscheint ohne gespeicherte Wahl`);
+      } else {
+        // Handy: kompakte Leiste direkt beim Laden, höchstens rund 120 px, oberhalb der festen Leiste unten
+        ok(await banner.isVisible(), `${geraet}: kompakte Leiste erscheint direkt beim Laden`);
+        await page.mouse.wheel(0, 900); await warte(2000);
+        const lage = await page.evaluate(() => {
+          const b = document.querySelector('.st-banner').getBoundingClientRect();
+          const l = [...document.querySelectorAll('.mobbar')].find((x) => x.getClientRects().length);
+          const r = l ? l.getBoundingClientRect() : null;
+          const mitte = r ? document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2) : null;
+          return { hoehe: Math.round(b.height), ueber: r ? b.bottom <= r.top + 1 : true, leisteFrei: !r || (mitte && l.contains(mitte)), text: document.querySelector('.st-banner').innerText };
+        });
+        ok(lage.hoehe <= 125 && lage.ueber && lage.leisteFrei && /Ohne Cookies und ohne IP-Adresse/.test(lage.text),
+          `${geraet}: Leiste ${lage.hoehe} px hoch, über der festen Leiste, feste Leiste frei`);
+      }
       const knoepfe = await banner.locator('button').evaluateAll((b) => b.map((x) => ({ t: x.textContent, k: x.className, w: Math.round(x.getBoundingClientRect().width) })));
       ok(knoepfe.length === 2 && knoepfe[0].k === knoepfe[1].k && /Zustimmen/.test(knoepfe[0].t) && /Ablehnen/.test(knoepfe[1].t), `${geraet}: Zustimmen und Ablehnen gleichwertig`);
       const breite = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);

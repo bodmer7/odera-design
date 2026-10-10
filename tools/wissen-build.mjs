@@ -5,7 +5,7 @@
 //
 // Quelle ist dieselbe wie für die Website: src/seite.html. Das Skript rendert jede öffentliche Seite in
 // Chrome und übernimmt den sichtbaren Text wörtlich. Dazu kommen einige Angaben, die nur im Code
-// stehen (Wochenplan der Erreichbarkeit, Referenzpreise, Hinweis im Projekt-Check). Nichts wird von Hand ergänzt.
+// stehen (Antwortzusage, Referenzpreise, Hinweis im Projekt-Check). Nichts wird von Hand ergänzt.
 //
 // Damit das Gratis-Kontingent von Workers AI möglichst viele Nachrichten trägt, wird der Text verdichtet
 // (Bedienelemente, Inhaltsverzeichnisse und Doppeltes fallen weg) und in Teile gegliedert:
@@ -82,19 +82,6 @@ function wert(name) {
   if (!m) throw new Error(name + ' in src/seite.html nicht gefunden.');
   return new Function('return ' + (m[1] || m[2]))();
 }
-const TAGE = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
-function wochenplan() {
-  const plan = wert('WOCHENPLAN');
-  return [1, 2, 3, 4, 5, 6, 0].map((t) => {
-    let von = 0;
-    const teile = plan[t].map(([bis, text]) => {
-      const zeit = von === 0 && bis === 24 ? 'ganzer Tag' : von === 0 ? `bis ${bis} Uhr` : bis === 24 ? `ab ${von} Uhr` : `${von} bis ${bis} Uhr`;
-      von = bis;
-      return `${zeit} «${text}»`;
-    });
-    return `${TAGE[t]}, ${teile.join(', ')}`;
-  }).join('\n');
-}
 function referenz() {
   const preise = wert('PAKET_PREIS');
   const ref = quelle.match(/const refMap = (\{[^}]+\});/);
@@ -158,7 +145,7 @@ const kern = (id, titel, text) => TEILE.push({ id, titel, immer: true, text: ver
 for (const s of roh.filter((r) => r.immer)) kern(s.pfad, s.titel, `Adresse: ${SITE}${urlOf(s.pfad)}\n${s.text}`);
 kern('projekt-check', 'Projekt-Check (Anfrageformular)', projektCheck());
 kern('referenz', 'Referenzpreis', referenz());
-kern('erreichbarkeit', 'Erreichbarkeit nach Wochentag', 'So antwortet Nico auf Anfragen, je nach Wochentag und Uhrzeit:\n' + wochenplan());
+kern('erreichbarkeit', 'Erreichbarkeit', wert('ANTWORT_ZUSAGE') + '. Am besten erreichen Sie Nico per Mail oder über den Projekt-Check. Ein kurzes Gespräch vereinbaren Sie gern per Mail.');
 kern('kontakt', 'Kontakt', fuss);
 for (const s of roh.filter((r) => !r.immer)) {
   TEILE.push({ id: s.pfad, titel: s.titel, immer: false, stichworte: s.stichworte, text: verdichte(`Adresse: ${SITE}${urlOf(s.pfad)}\n${s.text}`, new Set(kernGesehen)) });

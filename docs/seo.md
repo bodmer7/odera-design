@@ -11,7 +11,7 @@ der Website ist das Google-Unternehmensprofil (Checkliste unten).
   ersten Zeichnen geladen. Gegenprobe: `node tools/gliederung.mjs` (Gliederung) und die Schleife aus dem Auftrag.
 - `lang="de-CH"`, `canonical` auf sich selbst (404 ohne), Open Graph und Twitter Card je Seite, Favicon-Set und Manifest.
 - `sitemap.xml` mit allen indexierbaren Adressen und `lastmod` (Datum der letzten Textänderung, `tools/sitemap-stand.json`).
-  Nicht drin: die Detailseiten der Musterprojekte, 404, `/start/`, Impressum.
+  Nicht drin: die Detailseiten der Musterprojekte, 404, `/start/`, Impressum und der Projekt-Check (seit 10. Oktober 2026).
 
 ## Begriffsplan
 
@@ -37,7 +37,7 @@ und auf Über mich. Name, Ort und E-Mail überall gleich: «ODERA Design», «Be
 |---|---|---|
 | `/` | Website erstellen lassen ab CHF 890 · ODERA Design (50) | Neue Website für Ihren Betrieb: fertiger Entwurf in 5 Arbeitstagen, gratis und unverbindlich. Fixpreis ab CHF 890. Webdesign aus Berikon AG. (140) |
 | `/angebot/` | Was kostet eine Website? Fixpreise · ODERA Design (49) | Website, Standard oder Pro: drei Pakete zum Fixpreis ab CHF 890, einmalig und ohne Abo. Betrieb auf Wunsch ab CHF 240 pro Jahr. (127) |
-| `/ablauf/` | Website erstellen lassen: der Ablauf · ODERA Design (51) | Vier Phasen, rund zwei Stunden Ihrer Zeit: Sie sehen den fertigen Entwurf, bevor Sie einen Franken bezahlen. So entsteht Ihre Website. (134) |
+| `/ablauf/` | Website erstellen lassen: der Ablauf · ODERA Design (51) | Vier Phasen, 81 Minuten Ihrer Zeit, mit optionalen Schritten knapp 2 Stunden. Sie sehen den fertigen Entwurf, bevor Sie einen Franken bezahlen. (143) |
 | `/musterprojekte/` | Webdesign Beispiele für Betriebe · ODERA Design (47) | Zwei Beispiel-Websites für Handwerk und Solar. Sehen Sie, wie Ihre neue Seite aussehen könnte, und testen Sie Ihren Betrieb in zehn Sekunden. (141) |
 | `/ueber-mich/` | Nico Bodmer, Webdesigner aus Berikon · ODERA Design (51) | Sie reden mit dem, der die Seite baut: Nico Bodmer aus Berikon AG baut Websites für Betriebe im Aargau und in der ganzen Schweiz. (129) |
 | `/website-fuer-handwerker/` | Website für Handwerker ab CHF 890 · ODERA Design (48) | Website für Ihren Handwerksbetrieb: Telefonnummer, Referenzbilder, Offerte-Knopf. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890. (146) |
@@ -49,7 +49,7 @@ und auf Über mich. Name, Ort und E-Mail überall gleich: «ODERA Design», «Be
 | `/datenschutz/` | Datenschutzerklärung · ODERA Design (35) | Welche Daten beim Besuch von odera.ch, im Projekt-Check, im Chat und bei der Statistik mit Einwilligung bearbeitet werden. Keine Cookies. (137) |
 | `/agb/` | Allgemeine Geschäftsbedingungen · ODERA Design (46) | Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Betrieb und Hosting. (137) |
 
-Trenner im Titel einheitlich «·». Das Impressum bleibt `noindex`, weil es die Wohnadresse nennt (Abweichung vom
+Trenner im Titel einheitlich «·». Seit 10. Oktober 2026 ist auch der Projekt-Check wieder `noindex` und nicht in der Sitemap (Entscheid Nico). Das Impressum bleibt `noindex`, weil es die Wohnadresse nennt (Abweichung vom
 Auftrag, siehe `docs/entscheidungen.md`).
 
 ## Strukturierte Daten (JSON-LD)
@@ -134,8 +134,7 @@ Keine Bewertungen, keine Öffnungszeiten (kein Ladenlokal), FAQPage nur mit sich
     - h3 Kein Lock-in
   - h2 Gängige Technik, keine Eigenbauten
   - h2 Höchstens zwei Projekte gleichzeitig
-    - h3 Wann Sie mich erreichen
-  - h2 Schreiben Sie mir. Antwort spätestens am nächsten Abend.
+  - h2 Schreiben Sie mir. Antwort meist am nächsten Abend.
 
 ### `/website-fuer-handwerker/` ✓
 

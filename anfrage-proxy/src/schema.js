@@ -225,7 +225,7 @@ export const ANFRAGE = {
  "naechsteSchritte": [
   [
    "Ich melde mich",
-   "Antwort spätestens am nächsten Abend, ausser am Wochenende"
+   "Antwort meist am nächsten Abend, spätestens innert zwei Werktagen"
   ],
   [
    "Kostenloser Entwurf",

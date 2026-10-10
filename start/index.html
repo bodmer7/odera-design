@@ -27,8 +27,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://odera.ch/start/#seite","url":"https://odera.ch/start/","name":"Willkommen · ODERA Design","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/start/#brotkrumen"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/start/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Willkommen","item":"https://odera.ch/start/"}]},{"@type":"FAQPage","@id":"https://odera.ch/start/#fragen","mainEntity":[{"@type":"Question","name":"Das ist mir zu teuer.","acceptedAnswer":{"@type":"Answer","text":"Standard kostet CHF 1’900, einmalig. Danach zahlen Sie nur noch Hosting und Domain bei Ihrem Anbieter, üblicherweise CHF 120 bis 200 pro Jahr. Und Sie sehen den Entwurf, bevor Sie sich entscheiden."}},{"@type":"Question","name":"Ich habe keine Zeit dafür.","acceptedAnswer":{"@type":"Answer","text":"Ein Formular von rund 6 Minuten und Ihre Rückmeldungen. Erforderlich sind 81 Minuten, verteilt auf drei Wochen. Alles Übrige entscheiden Sie."}},{"@type":"Question","name":"Sie sind allein: was, wenn Sie ausfallen?","acceptedAnswer":{"@type":"Answer","text":"Ich verwende gängige Technik ohne Abhängigkeiten. Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag. Jede andere Fachperson kann übernehmen, ohne von vorne zu beginnen."}}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=ee024970ce" as="script" fetchpriority="low">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://odera.ch/start/#seite","url":"https://odera.ch/start/","name":"Willkommen · ODERA Design","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/start/#brotkrumen"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/start/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Willkommen","item":"https://odera.ch/start/"}]},{"@type":"FAQPage","@id":"https://odera.ch/start/#fragen","mainEntity":[{"@type":"Question","name":"Das ist mir zu teuer.","acceptedAnswer":{"@type":"Answer","text":"Standard kostet CHF 1’900, einmalig. Danach zahlen Sie nur noch Hosting und Domain bei Ihrem Anbieter, üblicherweise CHF 120 bis 200 pro Jahr. Und Sie sehen den Entwurf, bevor Sie sich entscheiden."}},{"@type":"Question","name":"Ich habe keine Zeit dafür.","acceptedAnswer":{"@type":"Answer","text":"Ein Formular von rund 6 Minuten und Ihre Rückmeldungen. Erforderlich sind 81 Minuten, mit optionalen Schritten knapp 2 Stunden, verteilt auf drei bis sechs Wochen, je nach Paket. Alles Übrige entscheiden Sie."}},{"@type":"Question","name":"Sie sind allein: was, wenn Sie ausfallen?","acceptedAnswer":{"@type":"Answer","text":"Ich verwende gängige Technik ohne Abhängigkeiten. Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag. Jede andere Fachperson kann übernehmen, ohne von vorne zu beginnen."}}]}]}</script>
+<link rel="preload" href="assets/js/vorlage.js?v=327d0e05f8" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -614,12 +614,12 @@ if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1
 <script defer src="assets/js/vendor/react-18.3.1.production.min.js"></script>
 <script defer src="assets/js/vendor/react-dom-18.3.1.production.min.js"></script>
 <!-- Statistik nur nach Einwilligung (Banner), ohne Cookies: assets/js/statistik.js, docs/tracking.md. Bei Änderungen v= erhöhen (Zwischenspeicher 1 Woche). -->
-<script defer src="assets/js/statistik.js?v=2"></script>
+<script defer src="assets/js/statistik.js?v=3"></script>
 <script>
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=ee024970ce';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=327d0e05f8';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -1107,6 +1107,44 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 .gen-platz{min-height:740px}
 @media(max-width:1023px){.gen-platz{min-height:1250px}}
 @media(max-width:767px){.gen-platz{min-height:1550px}}
+
+/* ===== Handy-Korrekturen 10. Oktober 2026 (nur unter 768 px, Tablet und Desktop unverändert) ===== */
+.rl-kurz{display:none}
+@media(max-width:767px){
+ /* 7b Telefon-Mockup nach dem Hero höchstens rund 55 % der Bildschirmhöhe, zentriert */
+ .werk .rahmen-handy{width:min(62%,240px,calc((55vh - 14px) / 2.05));width:min(62%,240px,calc((55svh - 14px) / 2.05));margin-left:auto;margin-right:auto}
+ /* 7c Startseite: drei Pakete untereinander statt Karussell, Standard zuerst, ohne Punkte */
+ .pk-kurz.wisch{flex-direction:column;overflow:visible;margin:0;padding:0;scroll-snap-type:none;gap:16px!important}
+ .pk-kurz.wisch>*{flex:0 0 auto}
+ .pk-kurz+.pk-punkte-nav{display:none!important}
+ /* 7d Startseite «So läuft es»: kompakte Liste statt Karten */
+ .start-schritte{display:flex;flex-direction:column;gap:0}
+ .start-schritte>li.karte{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:12px;row-gap:2px;padding:12px 0;border-radius:0;background:none;box-shadow:none;border-bottom:1px solid var(--linie)}
+ .start-schritte>li.karte:last-child{border-bottom:0}
+ .start-schritte .phase-n{grid-row:1 / span 2;font-size:var(--fs-4);line-height:1.4}
+ .start-schritte .titel-3{font-size:var(--fs-3);line-height:1.4}
+ .start-schritte p{font-size:var(--fs-2);line-height:1.45}
+ /* 7e Vergleich: Kriterien rund 50 %, schmale Symbolspalten, einzeilige Köpfe */
+ .vergleich{padding:4px 12px}
+ .vg-zeile{grid-template-columns:50% repeat(3,minmax(0,1fr));gap:4px;min-height:56px}
+ .vg-kopf{min-height:44px;font-size:11px;white-space:nowrap}
+ .vg-frage{font-size:var(--fs-2);line-height:1.35}
+ .vg-zeile .vg-i{width:22px;height:22px;background-size:12px}
+ /* 7f Paketrechner: kurze, einzeilige Beschriftung */
+ .rl-lang{display:none}.rl-kurz{display:inline}
+ .rechner-los{white-space:nowrap}
+ /* 7g Über mich: Porträt höchstens rund 45 % der Bildschirmhöhe, Ausschnitt Gesicht und Oberkörper */
+ .portraet-gross .portraet{aspect-ratio:auto;height:40vh;height:40svh;object-fit:cover;object-position:50% 22%}
+ [data-abschnitt="ueber-kopf"]{padding-top:32px}
+ .ue-hero{gap:24px}.ue-bild{gap:16px}
+ /* 7h Tippflächen mindestens 44 px, Schrift und Optik unverändert */
+ .mk .karte-link,.br-muster .karte-link{display:inline-block;padding:8px 0;margin:-8px 0}
+ .werk figcaption a{display:inline-block;padding:14px 0;margin:-14px 0}
+ .mp2-text .knopfreihe a:not(.btn){display:inline-flex;align-items:center;min-height:44px}
+ /* 7i Inhalte sofort zeigen, ohne Einblenden */
+ html.einblenden-an .einblenden:not(.ist-da){opacity:1;transform:none}
+ html.einblenden-an .einblenden{transition:none}
+}
 </style>
 </head>
 <body>
@@ -1283,7 +1321,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <p class="augenbraue">Ablauf</p>
       <h2 id="ablauf-t" class="titel-2">So läuft es</h2>
     </div>
-    <ol class="phasen-kompakt">
+    <ol class="phasen-kompakt start-schritte">
       
         <li class="karte einblenden"><span class="phase-n" aria-hidden="true"><span class="sc-interp">01</span></span><h3 class="titel-3"><span class="sc-interp">Anfrage</span></h3><p><span class="sc-interp">Sie beantworten 18 Fragen, ich schicke ein Angebot.</span></p></li>
       
@@ -1348,7 +1386,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <ul class="person-fakten">
         <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-5 9 5-9 5z"></path><path d="M7 11.5V16c3 2 7 2 10 0v-4.5"></path></svg>Platform Developer EFZ und technische Berufsmaturität</li>
         <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>Seit 2021 in der IT</li>
-        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Höchstens <span class="sc-interp">zwei Projekte</span> gleichzeitig</li>
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><span>Höchstens <span class="sc-interp">zwei Projekte</span> gleichzeitig</span></li>
       </ul>
       <div class="knopfreihe">
         <a class="btn btn-sekundaer li-knopf" href="https://www.linkedin.com/in/nico-bodmer/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn-Profil von Nico Bodmer, öffnet in neuem Tab"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg>LinkedIn</a>
@@ -1367,7 +1405,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           
             <details class="frage"><summary><span class="sc-interp">Das ist mir zu teuer.</span></summary><p><span class="sc-interp">Standard kostet CHF&nbsp;1’900, einmalig. Danach zahlen Sie nur noch Hosting und Domain bei Ihrem Anbieter, üblicherweise CHF 120 bis 200 pro Jahr. Und Sie sehen den Entwurf, bevor Sie sich entscheiden.</span></p></details>
           
-            <details class="frage"><summary><span class="sc-interp">Ich habe keine Zeit dafür.</span></summary><p><span class="sc-interp">Ein Formular von rund 6 Minuten und Ihre Rückmeldungen. Erforderlich sind 81 Minuten, verteilt auf drei Wochen. Alles Übrige entscheiden Sie.</span></p></details>
+            <details class="frage"><summary><span class="sc-interp">Ich habe keine Zeit dafür.</span></summary><p><span class="sc-interp">Ein Formular von rund 6 Minuten und Ihre Rückmeldungen. Erforderlich sind 81 Minuten, mit optionalen Schritten knapp 2 Stunden, verteilt auf drei bis sechs Wochen, je nach Paket. Alles Übrige entscheiden Sie.</span></p></details>
           
             <details class="frage"><summary><span class="sc-interp">Sie sind allein: was, wenn Sie ausfallen?</span></summary><p><span class="sc-interp">Ich verwende gängige Technik ohne Abhängigkeiten. Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag. Jede andere Fachperson kann übernehmen, ohne von vorne zu beginnen.</span></p></details>
           
@@ -1452,7 +1490,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </div>
         <div style="display: flex; flex-direction: column; gap: 12px;">
           <a href="mailto:kontakt@odera.ch" style="font-size: 20px; color: var(--akzent);">kontakt@odera.ch</a>
-          <p style="font-size: 13px; color: var(--linie-stark); margin: 0px;">Antwort spätestens am nächsten Abend, ausser am Wochenende</p>
+          <p style="font-size: 13px; color: var(--linie-stark); margin: 0px;"><span class="sc-interp">Antwort meist am nächsten Abend, spätestens innert zwei Werktagen</span></p>
         </div>
         <div class="f-legal" style="display: flex; flex-direction: column; gap: 12px;">
           <a href="/impressum/" style="font-size: 16px; color: var(--grund); text-decoration: none;">Impressum</a>

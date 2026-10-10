@@ -61,8 +61,7 @@
     - h3 Kein Lock-in
   - h2 Gängige Technik, keine Eigenbauten
   - h2 Höchstens zwei Projekte gleichzeitig
-    - h3 Wann Sie mich erreichen
-  - h2 Schreiben Sie mir. Antwort spätestens am nächsten Abend.
+  - h2 Schreiben Sie mir. Antwort meist am nächsten Abend.
 
 ### `/website-fuer-handwerker/` ✓
 

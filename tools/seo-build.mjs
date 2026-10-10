@@ -58,7 +58,7 @@ const chf = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u2019')
 function angebotsKatalog(mitBetrieb) {
   const liste = PAKETE.map(([n, d], i) => ({ '@type': 'Offer', name: 'Paket ' + n, description: d, price: String(PREISE[i]), priceCurrency: 'CHF', url: SITE + '/angebot/' }));
   if (mitBetrieb) liste.push(
-    { '@type': 'Offer', name: 'Betrieb, Server in der EU oder den USA', description: 'Hosting, SSL, tägliche Sicherungen, Erreichbarkeitsprüfung', price: String(FIRMA.betrieb[0]), priceCurrency: 'CHF',
+    { '@type': 'Offer', name: 'Betrieb, Server in der EU', description: 'Hosting, SSL, tägliche Sicherungen, Erreichbarkeitsprüfung', price: String(FIRMA.betrieb[0]), priceCurrency: 'CHF',
       priceSpecification: { '@type': 'UnitPriceSpecification', price: String(FIRMA.betrieb[0]), priceCurrency: 'CHF', unitText: 'Jahr' }, url: SITE + '/angebot/#betrieb' },
     { '@type': 'Offer', name: 'Betrieb, Server in der Schweiz', description: 'Wie oben, Website und Formulardaten bleiben in der Schweiz', price: String(FIRMA.betrieb[1]), priceCurrency: 'CHF',
       priceSpecification: { '@type': 'UnitPriceSpecification', price: String(FIRMA.betrieb[1]), priceCurrency: 'CHF', unitText: 'Jahr' }, url: SITE + '/angebot/#betrieb' });
@@ -364,7 +364,9 @@ for (const [p, fp] of Object.entries(fingerabdruck)) {
   if (!stand[p] || stand[p].fp !== fp) stand[p] = { fp, lastmod: heute };
 }
 writeFileSync(STAND_DATEI, JSON.stringify(stand, null, 2) + '\n');
-const indexierbar = Object.keys(PAGES).filter((p) => !PAGES[p].noindex);
+// Der Projekt-Check gehört nicht in die Sitemap (Entscheid Nico, 10. Oktober 2026)
+const OHNE_SITEMAP = ['/projekt-check'];
+const indexierbar = Object.keys(PAGES).filter((p) => !PAGES[p].noindex && !OHNE_SITEMAP.includes(p));
 writeFileSync(join(ROOT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
   indexierbar.map((p) => `  <url><loc>${SITE}${urlOf(p)}</loc><lastmod>${(stand[p] || {}).lastmod || heute}</lastmod></url>`).join('\n') + '\n</urlset>\n');

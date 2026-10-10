@@ -64,7 +64,7 @@ test('Kopie an die Kundin: Absender anfrage@, Reply-To kontakt@', async () => {
   assert.equal(d.kopie, true); assert.equal(mails.length, 2);
   assert.deepEqual(mails[1].to, ['anna@beispiel.ch']); assert.equal(mails[1].reply_to, 'kontakt@odera.ch');
   assert.match(mails[1].subject, /^Ihre Anfrage bei ODERA Design · ODR-/);
-  assert.match(mails[1].text, /Antwort spätestens am nächsten Abend, ausser am Wochenende/);
+  assert.match(mails[1].text, /Antwort meist am nächsten Abend, spätestens innert zwei Werktagen/);
   assert.doesNotMatch(mails[1].html + mails[1].text, /newsletter|angebot des monats/i);
   assert.doesNotMatch(mails[1].html + mails[1].text, /Einstieg|Preis-Rechner/, 'Quelle nur in der Mail an Nico');
 });

@@ -33,11 +33,37 @@
     '@media(max-width:767px){.st-banner{left:12px;right:12px;padding:16px;font-size:14px}.st-banner p{margin:0 0 12px}.st-knopf{min-height:44px}}' +
     // Desktop: kleine Karte unten links (höchstens 380 px), der Chat-Knopf unten rechts bleibt frei
     '@media(min-width:1024px){.st-banner{left:24px;right:auto;bottom:24px;max-width:380px;margin:0}}' +
+    // Handy (unter 768 px): kompakte Leiste über der festen Leiste unten, kurzer Text, zwei gleich grosse Knöpfe
+    '.st-kurz{display:none}.st-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}' +
+    '@media(max-width:767px){.st-banner{left:8px;right:8px;bottom:var(--st-unten,8px);max-width:none;padding:10px 12px;border-radius:14px;font-size:13px;line-height:1.35}' +
+    '.st-banner .st-titel{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.st-lang{display:none}.st-kurz{display:block;margin:0 0 8px}' +
+    '.st-stand{margin:0 0 4px;font-size:12px}.st-knoepfe{gap:8px;flex-wrap:nowrap}.st-knopf{flex:1 1 0;min-height:44px;padding:0 12px;font-size:15px}' +
+    // Bei offenem Handy-Menü tritt die Leiste zurück, danach ist sie wieder da
+    'html[data-menue="1"] .st-banner{display:none}}' +
     '@media print{.st-banner{display:none}}';
 
   var banner = null;
   // Solange das Banner sichtbar ist, bekommt die Seite unten Platz in seiner Höhe. So verdeckt es keine Links
   // am Seitenende. Der Platz kommt nur am Ende dazu, sichtbare Inhalte verschieben sich nicht (kein CLS).
+  // Handy: Banner direkt über der festen Leiste unten (Entwurf, Starten, Chat), die sichtbar und klickbar bleibt
+  function ueberLeiste() {
+    if (!banner) return;
+    var unten = 8;
+    if (window.innerWidth < 768) {
+      // Feste Leisten unten: Startleiste (.mobbar) und Weiter-Leiste im Projekt-Check (.q-leiste)
+      [].slice.call(document.querySelectorAll('.mobbar, .q-leiste')).forEach(function (l) {
+        if (!l.getClientRects().length || getComputedStyle(l).position !== 'fixed') return;
+        unten = Math.max(unten, Math.ceil(window.innerHeight - l.getBoundingClientRect().top + 8));
+      });
+    }
+    banner.style.setProperty('--st-unten', unten + 'px');
+  }
+  var lageGeplant = false;
+  window.addEventListener('scroll', function () {
+    if (!banner || lageGeplant || window.innerWidth >= 768) return;
+    lageGeplant = true;
+    requestAnimationFrame(function () { lageGeplant = false; ueberLeiste(); platzUnten(); });
+  }, { passive: true });
   function platzUnten() {
     if (!banner) { document.body.style.paddingBottom = ''; return; }
     var r = banner.getBoundingClientRect();
@@ -47,7 +73,8 @@
     if (banner) { banner.remove(); banner = null; }
     platzUnten();
   }
-  window.addEventListener('resize', function () { if (banner) platzUnten(); });
+  window.addEventListener('resize', function () { if (banner) { ueberLeiste(); platzUnten(); } });
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', function () { if (banner) { ueberLeiste(); platzUnten(); } });
   // Escape schliesst das Banner für diesen Seitenaufruf, ohne zu speichern
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && banner) bannerWeg(); });
 
@@ -63,8 +90,9 @@
     banner.innerHTML =
       '<p class="st-titel" id="st-titel">Statistik</p>' +
       (nachfrage && wahl ? '<p class="st-stand">Zurzeit ' + (wahl === 'ja' ? 'eingeschaltet' : 'ausgeschaltet') + '.</p>' : '') +
-      '<p>Darf ich zählen, wie diese Website genutzt wird? Gespeichert werden nur Angaben wie aufgerufene Seiten und Klicks, ohne Cookies, ohne IP-Adresse und ohne Ihren Namen. ' +
+      '<p class="st-lang">Darf ich zählen, wie diese Website genutzt wird? Gespeichert werden nur Angaben wie aufgerufene Seiten und Klicks, ohne Cookies, ohne IP-Adresse und ohne Ihren Namen. ' +
       'Sie können Ihre Wahl jederzeit unten auf jeder Seite ändern. <a href="/datenschutz/#ds-14">Mehr im Datenschutz</a></p>' +
+      '<p class="st-kurz">Darf ich zählen, wie diese Seite genutzt wird? Ohne Cookies und ohne IP-Adresse. <a href="/datenschutz/#ds-14">Mehr<span class="st-sr"> zur Statistik</span></a></p>' +
       '<div class="st-knoepfe"><button type="button" class="st-knopf" data-st="ja">Zustimmen</button><button type="button" class="st-knopf" data-st="nein">Ablehnen</button></div>';
     banner.addEventListener('click', function (e) {
       var b = e.target.closest && e.target.closest('[data-st]');
@@ -76,7 +104,11 @@
       else stoppen();
     });
     document.body.appendChild(banner);
+    ueberLeiste();
     platzUnten();
+    // Die feste Leiste erscheint auf dem Handy erst nach dem Aufbau der Seite: Lage kurz danach nochmals setzen
+    setTimeout(function () { ueberLeiste(); platzUnten(); }, 600);
+    setTimeout(function () { ueberLeiste(); platzUnten(); }, 1600);
     if (nachfrage) { var k = banner.querySelector('[data-st]'); if (k) k.focus(); }
   }
 
@@ -352,7 +384,8 @@
     if (wahl === 'ja') starten();
     else if (wahl !== 'nein') {
       // Banner erst nach der ersten Handlung oder nach 2,5 s, damit er das erste Zeichnen der Seite nicht bremst (LCP)
-      if (window.__bannerSofort) { bannerZeigen(false); return; }
+      // Auf dem Handy erscheint die kompakte Leiste direkt beim Laden
+      if (window.__bannerSofort || window.innerWidth < 768) { bannerZeigen(false); return; }
       var gezeigt = false;
       var zeigen = function () {
         if (gezeigt) return; gezeigt = true;
