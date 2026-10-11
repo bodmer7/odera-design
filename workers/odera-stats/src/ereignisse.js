@@ -12,7 +12,7 @@ export const MAX_EREIGNISSE = 40;
 export const MAX_BYTES = 12000;
 
 const ID = /^[A-Za-z0-9_-]{16,40}$/;
-const KAMPAGNE = /^(ak-\d{4}-w\d{2}|li-\d{4}-w\d{2}-(mo|mi|fr)|gbp)$/;
+const KAMPAGNE = /^(ak-\d{4}-w\d{2}|li-\d{4}-w\d{2}-(mo|di|mi|do|fr|sa|so)|gbp)$/;
 
 /** Nur Buchstaben, Ziffern und wenige Zeichen, gekürzt. */
 function kurz(wert, max = 60) {

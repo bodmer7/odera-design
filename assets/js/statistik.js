@@ -315,7 +315,7 @@
     ersterAufruf = neueSitzung;
     geraet = window.innerWidth < 768 ? 'mobil' : window.innerWidth < 1024 ? 'tablet' : 'desktop';
     var k = new URLSearchParams(location.search).get('k');
-    if (k && /^(ak-\d{4}-w\d{2}|li-\d{4}-w\d{2}-(mo|mi|fr)|gbp)$/.test(k)) schreiben('sessionStorage', 'odera-k', k);
+    if (k && /^(ak-\d{4}-w\d{2}|li-\d{4}-w\d{2}-(mo|di|mi|do|fr|sa|so)|gbp)$/.test(k)) schreiben('sessionStorage', 'odera-k', k);
     kampagne = lesen('sessionStorage', 'odera-k');
     herkunft = null;
     if (neueSitzung) {

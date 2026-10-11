@@ -33,7 +33,8 @@ test('Herkunft, Pfad, Kampagne und Zürcher Tag', () => {
   assert.equal(quelle('evil/path'), null);
   assert.equal(pfad('/a b'), null);
   assert.equal(kampagne('ak-2026-w41'), 'ak-2026-w41');
-  assert.equal(kampagne('li-2026-w41-sa'), null);
+  assert.equal(kampagne('li-2026-w41-sa'), 'li-2026-w41-sa');
+  assert.equal(kampagne('li-2026-w41-xx'), null);
   assert.equal(kampagne('gbp'), 'gbp');
   assert.equal(zuercherTag(new Date('2026-10-07T22:30:00Z')), '2026-10-08');
   const ohneRef = bereinigen({ s, e: [{ t: 'page_view', p: '/', erster: true }, { t: 'page_view', p: '/ablauf/' }] }, { jetzt });

@@ -113,7 +113,7 @@ Frage, klein, ohne Akzente, mit Bindestrichen (z. B.
 | Präfix | Format | Herkunft |
 | --- | --- | --- |
 | `ak-` | `ak-2026-w41` | Akquise-Mails (derzeit nicht genutzt: Links in Mails ohne Parameter) |
-| `li-` | `li-2026-w41-mo` (Tag `mo`, `mi`, `fr`) | LinkedIn-Beiträge (erster Kommentar verlinkt direkt den Artikel: `/einblicke/<pfad>/?k=li-…`) |
+| `li-` | `li-2026-w41-mo` (Wochentag des Postings: `mo`, `di`, `mi`, `do`, `fr`, `sa`, `so`) | LinkedIn-Beiträge (erster Kommentar verlinkt direkt den Artikel: `/einblicke/<pfad>/?k=li-…`) |
 | `gbp` | `gbp` | Google-Unternehmensprofil |
 
 Andere Werte von `k` werden verworfen.
