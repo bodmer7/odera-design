@@ -28,3 +28,11 @@ _lokal/
 .dev.vars
 .wrangler/
 
+# Öffentliches Repo: Schlüssel, Zertifikate und lokale Notizen nie einchecken
+.env
+.env.*
+*.pem
+*.key
+*.p12
+CLAUDE.local.md
+

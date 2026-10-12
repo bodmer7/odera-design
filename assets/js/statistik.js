@@ -232,7 +232,6 @@
     var h = u.hostname.replace(/^www\./, '');
     if (/(^|\.)linkedin\.com$/.test(h)) return /^\/company\//.test(u.pathname) ? 'linkedin-firma' : 'linkedin';
     if (h === 'nico-bodmer.ch') return 'portfolio';
-    if (/atrega/.test(h)) return 'atrega';
     return h.slice(0, 60);
   }
 

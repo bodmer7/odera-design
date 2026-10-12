@@ -42,7 +42,7 @@ window.NB_I18N = {
     "metrics.efz": "Platform Developer EFZ",
 
     "about.title": "Support, deployment, projects of my own",
-    "about.p1": "I started in IT as an apprentice in 2021: level 1 and level 2 support, device management, weekly short presentations for the team. Then technical support on site with customers, followed by deploying internal applications on Red Hat OpenShift and IBM Cloud plus web development with React.",
+    "about.p1": "I started in IT as an apprentice in 2021: level 1 and level 2 support, device management, weekly short presentations for the team. Then technical support on site with customers, followed by deploying internal applications on Red Hat OpenShift and cloud platforms plus web development with React.",
     "about.p2": "Today I work in data &amp; AI: requirements analysis, proposals, technical concepts. From September 2026 I add a part-time BSc in Digital Business &amp; AI at HWZ Zurich.",
     "about.p3": "Alongside that I build websites and my own applications with current AI tooling. Someone who has done support builds pages that are still maintainable two years later.",
 
@@ -54,7 +54,9 @@ window.NB_I18N = {
     "job1.b3": "Working with cross-functional teams",
     "job1.b4": "Supporting events and customer sessions (including TechXchange)",
 
-    "job2.b1": "Deploying internal applications on Red Hat OpenShift and IBM Cloud",
+    "career.org": "International technology company",
+    "career.orgLab": "Research lab in Zurich",
+    "job2.b1": "Deploying internal applications on Red Hat OpenShift and cloud platforms",
     "job2.b2": "Web development with HTML, CSS, JavaScript and React",
     "job2.b3": "Improving existing internal applications for better usability",
 

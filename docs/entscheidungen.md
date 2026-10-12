@@ -9,7 +9,7 @@ ganz oben.
 | Frage | Antwort |
 |---|---|
 | Zweites Musterprojekt | Kein neues Gastro-Projekt. Es gibt bereits **Firstlicht Solartechnik** (Paket Pro, seit 7. Oktober live). Startseite und Musterprojekte zeigen genau zwei Musterprojekte: Doppelmeter (Standard) und Firstlicht (Pro). Kein Portfolio mehr dort, nur noch auf Über mich. Mess-ID `firstlicht`. Die Branchenseite für Restaurants nutzt das Vorschau-Werkzeug mit der Branche Gastronomie. Ein Gastro-Muster kann später als eigener Auftrag folgen. |
-| Referenz Atrega Treuhand AG | Nein. Keine Referenz auf der Website. |
+| Referenz auf ein früheres Kundenprojekt | Nein. Keine Referenz auf der Website. |
 | Strassenadresse in den strukturierten Daten | Nein. Nur Berikon, 8965, AG, CH. |
 | Statistik (Teil 11) | Ja, vollständig umsetzen und live schalten. D1 in der EU, Worker selbst deployen. Zuerst Datenschutz live, dann Banner und Skript. |
 

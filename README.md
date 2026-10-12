@@ -195,10 +195,11 @@ node tools/seo-build.mjs
 
 Danach die Änderungen einchecken. Das Skript braucht die GitHub-Anmeldung
 (`gh auth status`), weil das Portfolio-Repository privat ist. Gegenüber dem
-Original ändert es nur vier Dinge, damit die Kopie zu den Zusagen dieser
+Original ändert es nur fünf Dinge, damit die Kopie zu den Zusagen dieser
 Website passt: Die Schriften kommen von diesem Server statt von Google Fonts,
 das Portfolio merkt sich Farbschema und Sprache nicht im Browser, die Kopie ist
-`noindex` und hat kein `canonical`, und ein Kommentar nennt Quelle und Stand.
+`noindex` und hat kein `canonical`, ein Kommentar nennt Quelle und Stand, und
+der Arbeitgeber wird nicht genannt (neutrale Umschreibung, kein `worksFor`).
 Findet das Skript eine der Stellen nicht mehr, weil sich das Portfolio
 verändert hat, bricht es mit einer Meldung ab.
 
@@ -497,7 +498,7 @@ im Protokoll.
 
 1. Prüfung: Fehlen erzeugte Dateien (Unterseiten, Sitemap, `.htaccess`), bricht
    der Workflow ab, bevor etwas hochgeladen wird.
-2. Upload aller Dateien per SFTP. Ausgenommen sind `README.md`, `tools/`,
+2. Upload aller Dateien per SFTP. Ausgenommen sind `README.md`, `LICENSE`, `tools/`,
    `.github/`, `.gitignore` und lokale Ordner.
 3. Live-Test, falls `SITE_URL` gesetzt ist.
 
@@ -533,7 +534,7 @@ zurücknehmen und pushen. Danach stehen die alten Inhalte wieder auf dem Server.
 
 Mit einem SFTP-Programm (z. B. Cyberduck oder FileZilla) mit denselben
 Zugangsdaten verbinden und diese Dateien und Ordner in den Zielordner
-kopieren: alles ausser `README.md`, `tools/`, `.github/`, `.gitignore` und
+kopieren: alles ausser `README.md`, `LICENSE`, `tools/`, `.github/`, `.gitignore` und
 lokalen Ordnern, also `index.html`, die Ordner der Unterseiten (`angebot/`,
 `ablauf/`, `musterprojekte/`, `ueber-mich/`, `projekt-check/`, `impressum/`,
 `datenschutz/`, `agb/`), `404.html`, `favicon.svg`, `robots.txt`,

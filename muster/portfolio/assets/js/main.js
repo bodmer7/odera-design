@@ -24,11 +24,11 @@
   var META = {
     de: {
       title: "Nico Bodmer — Websites und digitale Projekte",
-      desc: "Nico Bodmer baut Websites und eigene Anwendungen. Hauptberuflich im Data-&-AI-Umfeld bei IBM Schweiz, Studium Digital Business & AI an der HWZ Zürich."
+      desc: "Nico Bodmer baut Websites und eigene Anwendungen. Hauptberuflich im Data-&-AI-Umfeld bei einem internationalen Technologieunternehmen, Studium Digital Business & AI an der HWZ Zürich."
     },
     en: {
       title: "Nico Bodmer — Websites and digital projects",
-      desc: "Nico Bodmer builds websites and his own applications. Day job in data & AI at IBM Switzerland, studying Digital Business & AI at HWZ Zurich."
+      desc: "Nico Bodmer builds websites and his own applications. Day job in data & AI at an international technology company, studying Digital Business & AI at HWZ Zurich."
     }
   };
 

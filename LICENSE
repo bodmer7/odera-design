@@ -1,0 +1,26 @@
+Copyright (c) 2026 Nico Bodmer, ODERA Design. Alle Rechte vorbehalten.
+
+Dieses Repository ist öffentlich, damit odera.ch über GitHub Pages ausgeliefert werden kann. Das ist keine
+Lizenz: Code, Texte, Gestaltung, Grafiken, Logos und Fotos dürfen ohne schriftliche Zustimmung weder kopiert
+noch verändert noch weiterverbreitet werden.
+
+Ausgenommen sind die folgenden Fremdinhalte. Für sie gelten die Lizenzen ihrer Urheberinnen und Urheber:
+
+1. Schriften unter der SIL Open Font License 1.1
+   - Archivo, Bricolage Grotesque, Fraunces, IBM Plex Mono, Instrument Serif, Inter, JetBrains Mono,
+     Work Sans: Lizenztexte in assets/fonts/lizenzen/
+   - Manrope, Schibsted Grotesk (Musterprojekt Firstlicht): Lizenztexte in
+     musterprojekte/firstlicht/assets/fonts/
+
+2. React und React DOM 18.3.1 (assets/js/vendor/), Copyright (c) Facebook, Inc. and its affiliates,
+   unter der MIT-Lizenz.
+
+3. Fotos von Unsplash unter der Unsplash-Lizenz (https://unsplash.com/license): die Fotos im Musterprojekt
+   Doppelmeter (musterprojekte/doppelmeter/) und die Beispielbilder des Vorschau-Werkzeugs
+   (assets/img/generator/). Die Nachweise mit den Namen der Fotografinnen und Fotografen stehen im
+   Impressum (https://odera.ch/impressum/, Abschnitt «Bildnachweise»).
+
+4. Kartendaten im Bildschirmfoto muster/portfolio/assets/img/geo-quiz.webp: © OpenStreetMap-Mitwirkende
+   (Open Database License), © swisstopo, wie im Bild selbst angegeben.
+
+Marken- und Produktnamen Dritter, die in Texten genannt werden, gehören ihren jeweiligen Inhabern.

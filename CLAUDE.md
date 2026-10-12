@@ -1,7 +1,7 @@
 # CLAUDE.md: Entscheidungen und offene Punkte für odera.ch
 
 Kurzfassung für die Arbeit an diesem Repo. Technische Details stehen im `README.md`,
-hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 8. Oktober 2026.
+hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 12. Oktober 2026.
 
 ## Feste Regeln
 
@@ -13,6 +13,9 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 8. Oktober 2
   Ausnahme ist die Statistik mit Opt-in nach Teil 11, mit eigener Datenbank odera-stats (EU) und
   ohne Personendaten. Sonst keine Pop-ups, keine Dark Patterns, keine weitere Datenbank, keine
   Secrets im Browser, keine URL-Parameter mit Personendaten.
+- **Repo ist öffentlich** (GitHub Pages). Keine Secrets, keine Personendaten, keine Business-Interna (Firmen und
+  Kontakte aus der Akquise, Kundendaten, Statistikwerte, Kampagnen). IBM auf odera.ch nie nennen, auch nicht im
+  Portfolio-Muster (`tools/portfolio-sync.mjs` neutralisiert es). Interne Notizen gehören ins private Akquise-Repo.
 - **Nur Gratis-Pläne:** GitHub Pages, Cloudflare Workers und Workers AI, Resend. Nie nach Schlüsseln
   im Chat fragen.
 - **Veröffentlichen:** ohne weiteres OK, wenn alles grün ist (Funktionstests, Kontrast, Lighthouse
@@ -33,10 +36,11 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 8. Oktober 2
 - Fallen in der dc-Laufzeit: camelCase-Attribute werden umgeschrieben (in CSS-SVGs `%76iewBox`
   schreiben); native Ereignis-Attribute und `src="{{ … }}"` laufen schon in der rohen Vorlage, darum
   iframes und Lade-Listener per Code erzeugen.
-- Veröffentlichen: Feature-Branch, Fast-Forward auf `main`, Push. GitHub Actions lädt nach Infomaniak
-  hoch, GitHub Pages baut parallel. Ändert sich etwas, das der Chat-Assistent wissen soll
+- Veröffentlichen: Feature-Branch, Fast-Forward auf `main`, Push. odera.ch zeigt per DNS auf GitHub Pages, das
+  baut nach jedem Push. Der Infomaniak-Workflow hat keine Secrets und überspringt den Upload (Stand 12. Oktober 2026). Ändert sich etwas, das der Chat-Assistent wissen soll
   (`chat-proxy/src/wissen.js`), danach `chat-proxy` deployen. Ändern sich Formular oder Prüfregeln,
   zuerst `anfrage-proxy`, dann `chat-proxy` deployen.
+- Git-Identität in diesem Repo (lokal gesetzt): «Nico Bodmer» mit der GitHub-noreply-Adresse, nie die private Adresse.
 - Commits werden über 1Password signiert und scheitern oft mit «failed to fill whole buffer».
   Mehrmals versuchen, sonst Nico bitten, 1Password zu entsperren.
 - Headless-Testläufe räumen ihre Chrome-Profile im System-Temp auf. Am 1. Oktober 2026 hatten
@@ -68,7 +72,7 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 8. Oktober 2
 
 ### Einblicke (Blog, seit 8. Oktober 2026)
 - `/einblicke/` mit Übersicht und Artikeln ist statisches HTML ohne React und ohne Nachladen. Geschrieben wird es
-  vom Akquise-Tool (Repo `odera-akquise`, Knopf «Gepostet» bei LinkedIn-Beiträgen) über die GitHub-API, ein
+  vom Akquise-Tool (privates Repo `odera-akquise`) über die GitHub-API, ein
   Commit pro Artikel, Token nur mit Contents-Recht auf dieses Repo. Nicht von Hand ändern.
 - Vorlage `src/einblicke-vorlage.html` erzeugt `tools/seo-build.mjs` aus «Über mich»: gleicher Kopf, gleiche
   Fusszeile, beide Menüs fest im HTML, `assets/js/einblicke.js` für Menü, Kopf und Unterstrich, Stil in
@@ -175,8 +179,8 @@ Beispielseiten erfundener Betriebe (Doppelmeter, Firstlicht). Für jedes Muster 
       under Review». Status nachprüfen und Text bei Bedarf anpassen.
 - [ ] **Unzuverlässiger Test:** `einstiege` bei 390 px scheitert manchmal beim Senden, wenn er direkt
       nach anderen Tests läuft. Einzeln grün.
-- [ ] **`README.md` ist öffentlich** unter odera.ch/README.md erreichbar (GitHub Pages). Prüfen, ob
-      das gewollt ist. `CLAUDE.md` ist von beiden Hosts ausgeschlossen.
+- [x] **`README.md` nicht auf odera.ch:** am 12. Oktober 2026 geprüft, `/README.md`, `/CLAUDE.md` und
+      `/docs/tracking.md` liefern 404 (`_config.yml`). Auf GitHub bleiben sie öffentlich.
 - [ ] **Alte lokale Branches** aufräumen (`fehler`, `mobil`, `generator`, `generator2` und ältere
       sind in `main` enthalten). Ausnahme: `chat-assistent` hat Commits, die nicht in `main` sind.
       Vor dem Löschen prüfen.

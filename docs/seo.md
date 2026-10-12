@@ -2,7 +2,7 @@
 
 Stand: 9. Oktober 2026. Ehrlich vorweg: Platz 1 kann niemand garantieren. Ziel ist, für realistische lokale
 Suchanfragen gut zu ranken: technisch einwandfrei, klar im Angebot, eindeutige Signale. Der stärkste Hebel ausserhalb
-der Website ist das Google-Unternehmensprofil (Checkliste unten).
+der Website ist das Google-Unternehmensprofil.
 
 ## Technik (Teil 2)
 
@@ -269,17 +269,7 @@ Keine Bewertungen, keine Öffnungszeiten (kein Ladenlokal), FAQPage nur mit sich
   - h2 19. Änderungen
 
 
-## Checkliste für Nico (ausserhalb der Website)
+## Ausserhalb der Website
 
-1. **Google Search Console:** Domain-Property für odera.ch anlegen, per DNS-TXT beim Domain-Anbieter bestätigen,
-   `sitemap.xml` einreichen, Startseite prüfen und Indexierung beantragen. Favicon und Logo übernimmt Google erst
-   nach einem neuen Crawl, das kann Tage bis Wochen dauern.
-2. **Bing Webmaster Tools:** Website aus der Search Console importieren.
-3. **Google-Unternehmensprofil:** Kategorie «Webdesigner», als Dienstleister mit Einzugsgebiet, Wohnadresse
-   ausblenden, Logo und Titelbild hochladen, Leistungen mit Preisen, Website-Link `https://odera.ch/?k=gbp`.
-   Echte Kundinnen und Kunden um eine Bewertung bitten, sobald es sie gibt. Keine gekauften Bewertungen.
-4. **Verzeichnisse:** local.ch und search.ch mit exakt denselben Angaben wie auf der Website.
-5. **LinkedIn:** Unternehmensseite mit Website-Link, persönliches Profil mit Link auf odera.ch.
-6. **Verweise von aussen:** nico-bodmer.ch verlinkt auf odera.ch.
-7. **Monatlich:** Klicks, Impressionen und Positionen pro Suchbegriff in der Search Console ansehen und mit dem
-   Statistik-Dashboard der Akquise-App vergleichen.
+Aufgaben ausserhalb des Repos (Search Console, Unternehmensprofil, Verzeichnisse, Verweise) stehen im privaten
+Akquise-Repo. Anleitung für die Search Console: `README.md`, Abschnitt «Google Search Console».

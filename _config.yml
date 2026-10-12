@@ -6,6 +6,7 @@ exclude:
   - node_modules
   - CLAUDE.md
   - README.md
+  - LICENSE
   # Dokumentation, Werkzeuge und Worker gehören nicht auf die Website
   - docs
   - src

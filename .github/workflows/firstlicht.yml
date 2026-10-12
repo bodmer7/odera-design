@@ -11,6 +11,10 @@ on:
       - 'musterprojekte/firstlicht/**'
       - 'tools/firstlicht/**'
 
+# Öffentliches Repo: der Workflow darf nur lesen
+permissions:
+  contents: read
+
 jobs:
   pruefen:
     runs-on: ubuntu-latest

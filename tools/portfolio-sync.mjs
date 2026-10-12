@@ -8,11 +8,13 @@
 // Die Kopie wird nicht von Hand bearbeitet. Bei jeder Änderung am Portfolio das Skript erneut ausführen
 // und das Ergebnis einchecken.
 //
-// Gegenüber dem Original werden nur diese vier Dinge geändert, damit die Kopie zu den Zusagen dieser Website passt:
+// Gegenüber dem Original werden nur diese fünf Dinge geändert, damit die Kopie zu den Zusagen dieser Website passt:
 //   1. Google Fonts entfallen. Die Schriften kommen von diesem Server (assets/fonts/portfolio-muster.css).
 //   2. Das Portfolio merkt sich Farbschema und Sprache im Browser (localStorage). Hier wird das abgeschaltet.
 //   3. canonical entfällt und die Seite ist noindex. Sie ist eine Kopie von nico-bodmer.ch.
 //   4. Ein Kommentar nennt Quelle und Stand der Kopie.
+//   5. Der Arbeitgeber wird auf odera.ch nicht genannt: Firmennamen werden neutral umschrieben (NEUTRAL unten),
+//      worksFor im JSON-LD entfällt. Das echte Portfolio bleibt unverändert.
 
 import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync, existsSync, mkdtempSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
@@ -73,10 +75,41 @@ ersetze(zeile(/<link rel="canonical"[^>]*>\n/, 'canonical'), '', 'canonical');
 // 4. Herkunft
 ersetze('<!DOCTYPE html>\n', `<!DOCTYPE html>\n<!-- Kopie von github.com/${REPO}, Stand ${stand}. Erzeugt mit tools/portfolio-sync.mjs. Nicht von Hand ändern. -->\n`, 'Herkunft');
 
+// 5. Arbeitgeber neutral. Jede Stelle muss gefunden werden, sonst bricht das Skript ab (Portfolio verändert?).
+//    Die Firmenzeilen der Stationen bekommen eine Übersetzung, damit sie auf Englisch nicht deutsch bleiben.
+const NEUTRAL = {
+  'index.html': [
+    ['  "worksFor": { "@type": "Organization", "name": "IBM Schweiz AG" },\n', ''],
+    ['<span class="row__org">IBM Schweiz AG</span>', '<span class="row__org" data-i18n="career.org">Internationales Technologieunternehmen</span>'],
+    ['<span class="row__org">IBM Forschungslabor Zürich</span>', '<span class="row__org" data-i18n="career.orgLab">Forschungslabor in Zürich</span>'],
+    ['bei IBM Schweiz', 'bei einem internationalen Technologieunternehmen'],
+    ['Red Hat OpenShift und IBM Cloud', 'Red Hat OpenShift und Cloud-Plattformen'],
+    ['IBM Cloud', 'Cloud-Plattformen'],
+  ],
+  'assets/js/main.js': [
+    ['bei IBM Schweiz', 'bei einem internationalen Technologieunternehmen'],
+    ['at IBM Switzerland', 'at an international technology company'],
+  ],
+  'assets/js/i18n.js': [
+    ['Red Hat OpenShift and IBM Cloud', 'Red Hat OpenShift and cloud platforms'],
+    ['    "job2.b1":', '    "career.org": "International technology company",\n    "career.orgLab": "Research lab in Zurich",\n    "job2.b1":'],
+  ],
+};
+const neutral = (datei, text) => {
+  for (const [von, nach] of NEUTRAL[datei] || []) {
+    if (!text.includes(von)) throw new Error(`Änderung «${von.trim()}» in ${datei} nicht möglich: Stelle nicht gefunden. Hat sich das Portfolio verändert?`);
+    text = text.replaceAll(von, () => nach);
+  }
+  return text;
+};
+html = neutral('index.html', html);
+
 // Schreiben
 rmSync(ZIEL, { recursive: true, force: true });
 mkdirSync(ZIEL, { recursive: true });
 cpSync(join(quelle, 'assets'), join(ZIEL, 'assets'), { recursive: true });
+for (const datei of Object.keys(NEUTRAL).filter((d) => d !== 'index.html'))
+  writeFileSync(join(ZIEL, datei), neutral(datei, readFileSync(join(ZIEL, datei), 'utf8')));
 // Externe LinkedIn-Links wie auf odera.ch: neuer Tab, ohne Referrer
 html = html.replace(/(<a [^>]*href="https:\/\/www\.linkedin\.com\/[^"]*"[^>]*?) rel="noopener"/g, '$1 rel="noopener noreferrer"');
 writeFileSync(join(ZIEL, 'index.html'), html);
@@ -86,6 +119,8 @@ if (aufraeumen) rmSync(aufraeumen, { recursive: true, force: true });
 const extern = [...html.matchAll(/(?:src|href)="(https?:\/\/[^"]+)"/g)].map((m) => m[1])
   .filter((u) => !/^https:\/\/(odera\.ch|www\.linkedin\.com|github\.com|bodmer7\.github\.io)/.test(u));
 if (extern.length) throw new Error('Unerwartete externe Adressen: ' + extern.join(', '));
+const rest = ['index.html', 'assets/js/main.js', 'assets/js/i18n.js'].filter((d) => /\bIBM\b/.test(readFileSync(join(ZIEL, d), 'utf8')));
+if (rest.length) throw new Error('Arbeitgeber noch genannt in: ' + rest.join(', '));
 if (existsSync(join(ZIEL, 'assets', 'css')) && /googleapis|gstatic/.test(readFileSync(join(ZIEL, 'assets', 'css', 'style.css'), 'utf8')))
   throw new Error('style.css lädt Google Fonts.');
 

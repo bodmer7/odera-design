@@ -101,22 +101,17 @@ Paket-Knöpfe als `paket-website`, `paket-standard`, `paket-pro`. Ohne
 **Musterprojekte:** `doppelmeter`, `firstlicht`.
 
 **Links nach aussen:** `linkedin` (persönliches Profil), `linkedin-firma`
-(Unternehmensseite), `portfolio` (nico-bodmer.ch), `atrega`, `mailto`,
-`telefon`, sonst der Hostname.
+(Unternehmensseite), `portfolio` (nico-bodmer.ch), `mailto`, `telefon`,
+sonst der Hostname.
 
 **Fragen und Chat-Vorschläge:** Kennung aus den ersten fünf Wörtern der
 Frage, klein, ohne Akzente, mit Bindestrichen (z. B.
 `was-kostet-eine-website`).
 
-**Kampagnen (`?k=` in der Adresse, gilt für die ganze Sitzung):**
-
-| Präfix | Format | Herkunft |
-| --- | --- | --- |
-| `ak-` | `ak-2026-w41` | Akquise-Mails (derzeit nicht genutzt: Links in Mails ohne Parameter) |
-| `li-` | `li-2026-w41-mo` (Wochentag des Postings: `mo`, `di`, `mi`, `do`, `fr`, `sa`, `so`) | LinkedIn-Beiträge (erster Kommentar verlinkt direkt den Artikel: `/einblicke/<pfad>/?k=li-…`) |
-| `gbp` | `gbp` | Google-Unternehmensprofil |
-
-Andere Werte von `k` werden verworfen.
+**Kampagnen (`?k=` in der Adresse, gilt für die ganze Sitzung):** Erlaubt sind
+nur die Muster in `assets/js/statistik.js` und `KAMPAGNE` in
+`workers/odera-stats/src/ereignisse.js` (beide gleich halten). Andere Werte
+werden verworfen. Was die Kennungen bedeuten, steht im privaten Akquise-Repo.
 
 **Gerät:** Breite beim Start der Sitzung, unter 768 px `mobil`, unter
 1024 px `tablet`, sonst `desktop`. **Land:** aus `request.cf.country` im
@@ -124,9 +119,8 @@ Worker.
 
 ## Einblicke (Blog)
 
-Markiert Nico im Akquise-Tool einen LinkedIn-Beitrag als gepostet (Knopf
-«Gepostet»), schreibt das Tool den passenden Artikel in einem Commit in dieses
-Repo: `einblicke/<pfad>/index.html` mit `titelbild.webp` (Bildkarte, sonst
+Das Akquise-Tool (privates Repo) schreibt jeden Artikel in einem Commit über
+die GitHub-API in dieses Repo: `einblicke/<pfad>/index.html` mit `titelbild.webp` (Bildkarte, sonst
 `.jpg`) und `vorschau.jpg` (1200 × 630 für geteilte Links), dazu
 `einblicke/index.html`, `einblicke/feed.xml`, `einblicke/sitemap.xml` (in
 `robots.txt` eingetragen) und die Daten unter `src/einblicke/` (nicht
