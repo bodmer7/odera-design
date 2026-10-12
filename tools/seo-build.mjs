@@ -44,19 +44,27 @@ const text = (name) => (quelle.match(new RegExp(' {2}' + name + " = '([^']+)';")
 const FIRMA = {
   linkedinFirma: text('ODERA_LINKEDIN_URL'), linkedinPerson: text('LINKEDIN_PERSON_URL'),
   betrieb: [zahl('HOSTING_AUSLAND_CHF'), zahl('HOSTING_SCHWEIZ_CHF')],
-  claim: 'Digitale Auftritte für Unternehmen, die weiterkommen wollen.',
 };
 if (!FIRMA.linkedinFirma || !FIRMA.linkedinPerson || !FIRMA.betrieb[0] || !FIRMA.betrieb[1]) throw new Error('LinkedIn-Adressen oder Betriebspreise in src/seite.html nicht gefunden.');
 const BRANCHEN = new Function('return ' + ((quelle.match(/ {2}BRANCHEN_SEITEN = (\{[\s\S]*?\n {2}\});/) || [])[1] || '{}'))();
 const ORG = SITE + '/#organisation', PERSON = SITE + '/ueber-mich/#person', WEBSITE = SITE + '/#website';
+// Pakete wie auf /angebot/ sichtbar (Karten «Was in jedem Paket steckt»)
 const PAKETE = [
-  ['Website', 'Eine Seite mit allen Abschnitten, Kontaktformular, eine Korrekturrunde'],
-  ['Standard', 'Bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil, zwei Korrekturrunden'],
-  ['Pro', 'Bis 10 Seiten, Online-Terminbuchung, zweite Sprache, Texte selbst bearbeiten, drei Korrekturrunden'],
+  ['Website', 'Eine Seite mit allen Abschnitten, Kontaktformular, für Handy, Tablet und Computer, eine Korrekturrunde'],
+  ['Standard', 'Bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil eingerichtet, zwei Korrekturrunden'],
+  ['Pro', 'Bis 10 Seiten, Online-Terminbuchung oder erweiterte Formulare, zweite Sprache, Texte selbst bearbeiten ohne Technikkenntnisse, drei Korrekturrunden'],
 ];
-const chf = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u2019');
+const LOGO = [zahl('LOGO_ALLEIN_CHF'), zahl('LOGO_MIT_WEBSITE_CHF')];
+if (!LOGO[0] || !LOGO[1]) throw new Error('LOGO_ALLEIN_CHF oder LOGO_MIT_WEBSITE_CHF in src/seite.html nicht gefunden.');
+const chf = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '’');
 function angebotsKatalog(mitBetrieb) {
-  const liste = PAKETE.map(([n, d], i) => ({ '@type': 'Offer', name: 'Paket ' + n, description: d, price: String(PREISE[i]), priceCurrency: 'CHF', url: SITE + '/angebot/' }));
+  const liste = PAKETE.map(([n, d], i) => ({ '@type': 'Offer', '@id': SITE + '/angebot/#paket-' + n.toLowerCase(), name: 'Paket ' + n, description: d,
+    price: String(PREISE[i]), priceCurrency: 'CHF', url: SITE + '/angebot/' }));
+  liste.push(
+    { '@type': 'Offer', '@id': SITE + '/angebot/#logo', name: 'Logo-Design', description: 'Ein eigenständiges Zeichen für Ihren Betrieb. 3 Richtungen zur Auswahl, 2 Korrekturrunden, fertige Dateien für Web und Druck.',
+      price: String(LOGO[0]), priceCurrency: 'CHF', url: SITE + '/angebot/' },
+    { '@type': 'Offer', '@id': SITE + '/angebot/#logo-mit-website', name: 'Logo-Design zusammen mit einer Website', description: 'Wie oben, gebucht zusammen mit einem Website-Paket.',
+      price: String(LOGO[1]), priceCurrency: 'CHF', url: SITE + '/angebot/' });
   if (mitBetrieb) liste.push(
     { '@type': 'Offer', name: 'Betrieb, Server in der EU', description: 'Hosting, SSL, tägliche Sicherungen, Erreichbarkeitsprüfung', price: String(FIRMA.betrieb[0]), priceCurrency: 'CHF',
       priceSpecification: { '@type': 'UnitPriceSpecification', price: String(FIRMA.betrieb[0]), priceCurrency: 'CHF', unitText: 'Jahr' }, url: SITE + '/angebot/#betrieb' },
@@ -64,7 +72,29 @@ function angebotsKatalog(mitBetrieb) {
       priceSpecification: { '@type': 'UnitPriceSpecification', price: String(FIRMA.betrieb[1]), priceCurrency: 'CHF', unitText: 'Jahr' }, url: SITE + '/angebot/#betrieb' });
   return { '@type': 'OfferCatalog', name: 'Websites zum Fixpreis', itemListElement: liste };
 }
-const GEBIET = [{ '@type': 'AdministrativeArea', name: 'Kanton Aargau' }, { '@type': 'AdministrativeArea', name: 'Kanton Zürich' }, { '@type': 'Country', name: 'Schweiz' }];
+// Einzugsgebiet wie im Fuss jeder Seite: «im Freiamt, am Mutschellen, im Kanton Aargau und in der ganzen Schweiz»
+const GEBIET = [{ '@type': 'Place', name: 'Freiamt' }, { '@type': 'Place', name: 'Mutschellen' },
+  { '@type': 'AdministrativeArea', name: 'Kanton Aargau' }, { '@type': 'Country', name: 'Schweiz' }];
+// Person: nur, was auf «Über mich» steht. Kein Arbeitgeber (kein worksFor).
+const PERSON_KURZ = { '@type': 'Person', '@id': PERSON, name: 'Nico Bodmer', url: SITE + '/ueber-mich/', sameAs: [FIRMA.linkedinPerson] };
+const PERSON_VOLL = { ...PERSON_KURZ, jobTitle: 'Webdesigner', image: SITE + '/assets/img/portrait-nico-bodmer.webp',
+  address: { '@type': 'PostalAddress', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
+  hasCredential: [
+    { '@type': 'EducationalOccupationalCredential', name: 'Platform Developer EFZ', credentialCategory: 'Eidgenössisches Fähigkeitszeugnis (EFZ)',
+      description: 'Vierjährige Lehre, 2021 bis 2025' },
+    { '@type': 'EducationalOccupationalCredential', name: 'Technische Berufsmaturität', credentialCategory: 'Berufsmaturität', description: '2025' }],
+  affiliation: { '@type': 'CollegeOrUniversity', name: 'HWZ Hochschule für Wirtschaft Zürich', description: 'Berufsbegleitendes Studium BSc Digital Business und AI, seit 2026' },
+  knowsAbout: ['Webdesign', 'React', 'Astro', 'Vite'] };
+const ORGANISATION = { '@type': 'ProfessionalService', '@id': ORG, name: NAME, url: SITE + '/', email: EMAIL,
+  description: 'Webseiten für Schweizer Betriebe. Fertiger Entwurf in 5 Arbeitstagen, gratis und unverbindlich, danach Fixpreis ab ' + chf(PREISE[0]) + '. Webdesign aus Berikon AG.',
+  logo: { '@type': 'ImageObject', '@id': SITE + '/#logo', url: SITE + '/assets/img/odera-logo-512.png' },
+  image: SITE + VORSCHAU.url, priceRange: chf(PREISE[0]) + ' bis ' + chf(PREISE[2]),
+  address: { '@type': 'PostalAddress', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
+  areaServed: GEBIET, founder: PERSON_KURZ, sameAs: [FIRMA.linkedinFirma],
+  contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: EMAIL, availableLanguage: 'de' } };
+function brotkrumen(url, stufen) {
+  return { '@type': 'BreadcrumbList', '@id': url + '#brotkrumen', itemListElement: [['Start', SITE + '/'], ...stufen].map(([name, item], i) => ({ '@type': 'ListItem', position: i + 1, name, item })) };
+}
 function strukturDaten(pfad, p, teile) {
   const url = SITE + urlOf(pfad);
   const graph = [];
@@ -72,25 +102,20 @@ function strukturDaten(pfad, p, teile) {
   if (pfad === '/') {
     graph.push(
       { '@type': 'WebSite', '@id': WEBSITE, url: SITE + '/', name: NAME, inLanguage: 'de-CH', publisher: { '@id': ORG } },
-      { '@type': 'LocalBusiness', '@id': ORG, name: NAME, url: SITE + '/', email: EMAIL, description: FIRMA.claim + ' ' + p.desc,
-        logo: { '@type': 'ImageObject', url: SITE + '/assets/img/odera-logo-512.png', width: 512, height: 512 },
-        image: SITE + VORSCHAU.url, priceRange: chf(PREISE[0]) + ' bis ' + chf(PREISE[2]),
-        address: { '@type': 'PostalAddress', postalCode: '8965', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
-        areaServed: GEBIET, founder: { '@id': PERSON }, sameAs: [FIRMA.linkedinFirma],
-        contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: EMAIL, availableLanguage: 'de' },
-        hasOfferCatalog: angebotsKatalog(false) },
-      { '@type': 'WebPage', '@id': url + '#seite', url, name: p.title, inLanguage: 'de-CH', isPartOf: { '@id': WEBSITE }, about: { '@id': ORG } });
+      { ...ORGANISATION, hasOfferCatalog: angebotsKatalog(false) },
+      { '@type': 'WebPage', '@id': url + '#seite', url, name: p.title, description: p.desc || undefined, inLanguage: 'de-CH', isPartOf: { '@id': WEBSITE }, about: { '@id': ORG } });
   } else {
-    graph.push({ '@type': 'WebPage', '@id': url + '#seite', url, name: p.title, description: p.desc || undefined, inLanguage: 'de-CH', isPartOf: { '@id': WEBSITE },
-      breadcrumb: { '@id': url + '#brotkrumen' } },
-    { '@type': 'BreadcrumbList', '@id': url + '#brotkrumen', itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Start', item: SITE + '/' },
-      { '@type': 'ListItem', position: 2, name: (BRANCHEN[pfad] && BRANCHEN[pfad].h1) || name, item: url }] });
-    if (pfad === '/angebot') graph.push({ '@type': 'Service', '@id': url + '#leistung', name: 'Website erstellen zum Fixpreis', provider: { '@id': ORG },
+    graph.push({ '@type': pfad === '/ueber-mich' ? 'ProfilePage' : 'WebPage', '@id': url + '#seite', url, name: p.title, description: p.desc || undefined, inLanguage: 'de-CH',
+      isPartOf: { '@id': WEBSITE }, breadcrumb: { '@id': url + '#brotkrumen' }, mainEntity: pfad === '/ueber-mich' ? { '@id': PERSON } : undefined },
+    brotkrumen(url, [[(BRANCHEN[pfad] && BRANCHEN[pfad].h1) || name, url]]));
+    if (pfad === '/angebot') graph.push({ '@type': 'Service', '@id': url + '#leistung', name: 'Website erstellen zum Fixpreis', serviceType: 'Webdesign', provider: { '@id': ORG },
       areaServed: GEBIET, hasOfferCatalog: angebotsKatalog(true) });
-    if (pfad === '/ueber-mich') graph.push({ '@type': 'Person', '@id': PERSON, name: 'Nico Bodmer', jobTitle: 'Webdesigner', worksFor: { '@id': ORG },
-      image: SITE + '/assets/img/portrait-nico-bodmer.webp', sameAs: [FIRMA.linkedinPerson],
-      address: { '@type': 'PostalAddress', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' } });
+    if (pfad === '/ueber-mich') graph.push(PERSON_VOLL);
+    // Beide Muster sind erfundene Betriebe. Das steht auch in den Daten, damit sie niemand für Kundenprojekte hält.
+    if (pfad === '/musterprojekte') graph.push({ '@type': 'ItemList', '@id': url + '#muster', name: 'Musterprojekte von ODERA Design',
+      itemListElement: [['Schreinerei Doppelmeter', 'doppelmeter'], ['Firstlicht Solartechnik', 'firstlicht']].map(([n, ordner], i) => ({ '@type': 'ListItem', position: i + 1,
+        item: { '@type': 'CreativeWork', name: 'Musterprojekt ' + n, url: SITE + '/musterprojekte/' + ordner + '/', creator: { '@id': ORG },
+          description: 'Beispielseite von ODERA Design. Der Betrieb ist frei erfunden.' } })) });
     if (BRANCHEN[pfad]) graph.push({ '@type': 'Service', '@id': url + '#leistung', name: BRANCHEN[pfad].dienst, serviceType: BRANCHEN[pfad].dienst,
       provider: { '@id': ORG }, areaServed: GEBIET, offers: { '@type': 'Offer', price: String(PREISE[0]), priceCurrency: 'CHF', url: SITE + '/angebot/' } });
   }
@@ -189,7 +214,7 @@ const AUSZUG = `(() => {
     nav: [...document.querySelectorAll('#dc-root header nav a')].map((a) => ({ label: a.innerText.trim(), href: a.getAttribute('href') })),
     // Fertig gerenderte Seite für den Vorab-Block (ohne interne Zähler der Laufzeit)
     vorab: vorabHtml(),
-    faq: [...document.querySelectorAll('#dc-root main details.frage')].map((d) => ({ q: d.querySelector('summary').textContent.trim(), a: d.querySelector('p').textContent.trim() })),
+    faq: [...document.querySelectorAll('#dc-root main details.frage')].map((d) => ({ q: d.querySelector('summary').textContent.trim(), a: [...d.querySelectorAll('p')].map((x) => x.textContent.trim()).join(' ') })),
     main: teil('#dc-root main'),
     footer: teil('#dc-root footer'),
   };

@@ -59,13 +59,19 @@ LinkedIn-Adressen `ODERA_LINKEDIN_URL` und `LINKEDIN_PERSON_URL`, Branchenseiten
 
 | Seite | Typen |
 |---|---|
-| `/` | WebSite, LocalBusiness `#organisation` (Logo `odera-logo-512.png`, Adresse ohne Strasse, Einzugsgebiet Aargau, Zürich, Schweiz, `priceRange`, `sameAs` LinkedIn-Firma, `contactPoint`, drei Pakete), WebPage, FAQPage |
-| `/angebot/` | WebPage, BreadcrumbList, Service mit OfferCatalog (drei Pakete, zwei Betriebsarten), FAQPage |
-| `/ueber-mich/` | WebPage, BreadcrumbList, Person `#person` (`sameAs` LinkedIn-Profil, `worksFor` Organisation) |
+| `/` | WebSite, ProfessionalService `#organisation` (Logo `odera-logo-512.png`, Adresse nur Ort Berikon, AG, CH, Einzugsgebiet Freiamt, Mutschellen, Kanton Aargau, Schweiz, `priceRange`, `sameAs` LinkedIn-Firma, `founder` Person mit `sameAs` LinkedIn-Profil, `contactPoint`, Pakete und Logo-Design), WebPage, FAQPage |
+| `/angebot/` | WebPage, BreadcrumbList, Service mit OfferCatalog (drei Pakete, Logo-Design CHF 490 und CHF 390 mit Website, zwei Betriebsarten), FAQPage |
+| `/ueber-mich/` | ProfilePage, BreadcrumbList, Person `#person` (`sameAs` LinkedIn-Profil, `hasCredential` Platform Developer EFZ und Technische Berufsmaturität, `affiliation` HWZ). Kein `worksFor`, kein Arbeitgeber. |
+| `/musterprojekte/` | WebPage, BreadcrumbList, ItemList der zwei Muster als CreativeWork mit «Der Betrieb ist frei erfunden.» |
 | Branchenseiten | WebPage, BreadcrumbList, Service mit `serviceType` und `areaServed`, FAQPage |
+| Einblicke-Artikel | BlogPosting (Autor `#person`, Herausgeber `#organisation`, `isPartOf` Blog, `dateModified` nie vor `datePublished`), BreadcrumbList |
 | übrige | WebPage, BreadcrumbList |
 
-Keine Bewertungen, keine Öffnungszeiten (kein Ladenlokal), FAQPage nur mit sichtbaren Fragen.
+Keine Bewertungen, keine Öffnungszeiten (kein Ladenlokal), FAQPage nur mit sichtbaren Fragen (alle Absätze der Antwort, Wortlaut
+wie sichtbar). Die Einblicke schreibt das Akquise-Tool. `tools/einblicke-auffrischen.mjs` gleicht ihre Daten an
+(`schemaAngleichen`), bis das Akquise-Tool sie selbst so schreibt.
+
+**Prüfung 12. Oktober 2026:** alle 19 Blöcke gültiges JSON und typgeprüft gegen schema.org mit `schema-dts` (validator.schema.org war aus der Arbeitsumgebung nicht erreichbar).
 
 **Prüfung:** Schema.org Validator am 9. Oktober 2026 mit der Live-Startseite: 0 Fehler, 0 Warnungen (WebSite, LocalBusiness, WebPage, FAQPage). Den Google Rich Results Test bitte nach der Einrichtung der Search Console für Startseite, Angebot und eine Branchenseite laufen lassen.
 

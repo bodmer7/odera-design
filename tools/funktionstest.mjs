@@ -343,14 +343,14 @@ try {
           h2: document.querySelectorAll('.eb-text h2').length,
           bild: img ? img.naturalWidth : 0,
           alt: img ? img.alt : '',
-          artikel: ld.some((d) => (d['@graph'] || [d]).some((x) => x['@type'] === 'Article')),
+          artikel: ld.some((d) => (d['@graph'] || [d]).some((x) => x['@type'] === 'BlogPosting')),
           og: (document.querySelector('meta[property="og:image"]') || {}).content,
           cta: (document.querySelector('#abschluss a.btn') || {}).getAttribute ? document.querySelector('#abschluss a.btn').getAttribute('href') : null,
           worte: document.querySelector('.eb-text').innerText.split(/\s+/).length,
         };
       });
       ok(art.h1 === 1 && art.h2 >= 3 && art.bild > 0 && art.alt.length > 10 && art.artikel && art.cta === '/projekt-check/?quelle=einblicke',
-        `Einblicke: Artikel ${ueb.karten[0]} mit Titelbild (${art.bild} px), Alt-Text, ${art.h2} Zwischentiteln, JSON-LD Article, ${art.worte} Wörter`);
+        `Einblicke: Artikel ${ueb.karten[0]} mit Titelbild (${art.bild} px), Alt-Text, ${art.h2} Zwischentiteln, JSON-LD BlogPosting, ${art.worte} Wörter`);
       const og = await page.request.get(BASIS + new URL(art.og).pathname);
       ok(og.status() === 200, `Einblicke: Vorschaubild ${new URL(art.og).pathname} vorhanden`);
       await page.locator('#abschluss a.btn').click();
