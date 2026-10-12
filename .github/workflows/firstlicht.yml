@@ -1,6 +1,6 @@
 name: Musterprojekt Firstlicht prüfen
 
-# Läuft nur, wenn sich am Musterprojekt etwas ändert. Braucht keine Zugangsdaten und veröffentlicht nichts.
+# Läuft, wenn sich am Musterprojekt etwas ändert, oder von Hand (Actions, «Run workflow»). Braucht keine Zugangsdaten und veröffentlicht nichts.
 on:
   push:
     paths:
@@ -10,6 +10,7 @@ on:
     paths:
       - 'musterprojekte/firstlicht/**'
       - 'tools/firstlicht/**'
+  workflow_dispatch:
 
 # Öffentliches Repo: der Workflow darf nur lesen
 permissions:
