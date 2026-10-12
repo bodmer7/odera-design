@@ -7,7 +7,8 @@
 // Gleiche Regel wie das Akquise-Tool (scripts/einblicke.ts neu-erstellen): <!-- einblicke:kopf --> wird durch den
 // seitenspezifischen Kopf ersetzt, die Marke <!-- einblicke:linkedin-firma … --> entfällt, <!-- einblicke:inhalt -->
 // wird durch den Inhalt von <main> ersetzt. Nützlich nach Änderungen an Kopf, Stil oder Fusszeile (seo-build), wenn
-// gerade kein neuer Artikel ansteht. Texte der Artikel ändert das Skript nicht, nur die strukturierten Daten (schemaAngleichen).
+// gerade kein neuer Artikel ansteht. Texte der Artikel ändert das Skript nicht, nur Kopf (kopfAngleichen), strukturierte Daten (schemaAngleichen) und
+// den Link der Autorenzeile (autorVerlinken).
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -31,6 +32,11 @@ function kopfAngleichen(html) {
   if (!html.includes('name="twitter:title"')) html = html.replace(/(<meta name="twitter:card" content="[^"]*">)/, (_, a) =>
     `${a}\n<meta name="twitter:title" content="${titel}">` + (desc ? `\n<meta name="twitter:description" content="${desc}">` : ''));
   return html;
+}
+
+// Autorenzeile unter dem Titel: Name als Link auf «Über mich» (rel="author"), wie in den strukturierten Daten
+function autorVerlinken(html) {
+  return html.replace(/(<p class="klein eb-meta">[\s\S]*?· )Nico Bodmer(, ODERA Design<\/p>)/, '$1<a href="/ueber-mich/" rel="author">Nico Bodmer</a>$2');
 }
 
 // Strukturierte Daten an die übrigen Seiten angleichen (gleiche @id für Firma und Person wie in tools/seo-build.mjs):
@@ -64,7 +70,7 @@ for (const f of ['einblicke/index.html', ...ordner]) {
   if (!kopf || !inhalt) throw new Error(`Kopf oder Inhalt in ${f} nicht gefunden.`);
   let neu = vorlage.replace('<!-- einblicke:kopf -->', () => kopf).replace(/<!-- einblicke:linkedin-firma [^>]*-->\n/, '')
     .replace('<!-- einblicke:inhalt -->', () => inhalt);
-  neu = kopfAngleichen(schemaAngleichen(neu));
+  neu = autorVerlinken(kopfAngleichen(schemaAngleichen(neu)));
   if (process.env.NUR_PRUEFEN) { console.log(f.padEnd(80), alt === neu ? 'aktuell' : 'weicht ab'); continue; }
   writeFileSync(join(ROOT, f), neu);
   console.log(f.padEnd(80), alt === neu ? 'unverändert' : 'neu geschrieben');
