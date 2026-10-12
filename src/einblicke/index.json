@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "kurz-pruefen-bevor-das-jahresende-kommt",
+      "titel": "Kurz prüfen, bevor das Jahresende kommt",
+      "beschreibung": "Der Herbst-Check für Ihre Website. Vor dem Jahresende wird es in vielen Betrieben hektisch. Jetzt ist noch Zeit, die Website kurz durchzugehen.",
+      "anriss": "Der Herbst-Check für Ihre Website. Vor dem Jahresende wird es in vielen Betrieben hektisch. Jetzt ist noch Zeit, die Website kurz durchzugehen.",
+      "datum": "2026-10-12",
+      "geaendert": "2026-10-12T06:11:43Z",
+      "rubrik": "Praxis-Tipp",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: Kurz prüfen, bevor das Jahresende kommt"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "erst-der-entwurf-dann-die-entscheidung",
       "titel": "Erst der Entwurf, dann die Entscheidung",
       "beschreibung": "Warum ich zuerst arbeite und erst dann eine Rechnung schreibe. Bei mir sehen Sie den ersten Entwurf Ihrer Website, bevor Sie sich für irgendetwas…",

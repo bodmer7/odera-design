@@ -1,0 +1,84 @@
+{
+  "v": 1,
+  "slug": "kurz-pruefen-bevor-das-jahresende-kommt",
+  "titel": "Kurz prüfen, bevor das Jahresende kommt",
+  "beschreibung": "Der Herbst-Check für Ihre Website. Vor dem Jahresende wird es in vielen Betrieben hektisch. Jetzt ist noch Zeit, die Website kurz durchzugehen.",
+  "anriss": "Der Herbst-Check für Ihre Website. Vor dem Jahresende wird es in vielen Betrieben hektisch. Jetzt ist noch Zeit, die Website kurz durchzugehen.",
+  "datum": "2026-10-12",
+  "geaendert": "2026-10-12T06:11:43Z",
+  "saeule": "praxis",
+  "rubrik": "Praxis-Tipp",
+  "thema_id": "okt-herbstcheck",
+  "kurz": [
+    "Formular selbst testen",
+    "Telefonnummer antippen",
+    "Seite auf dem Handy durchscrollen"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Warum das wichtig ist",
+      "absaetze": [
+        "Stimmen Preise und Öffnungszeiten? Funktioniert das Formular noch? Kommen Anfragen wirklich im Postfach an? Ein Test dauert nur wenige Minuten.",
+        "Vor dem Jahresende wird es in vielen Betrieben hektisch. Jetzt ist noch Zeit, die Website kurz durchzugehen und kleine Fehler zu beheben, bevor sie Anfragen kosten.",
+        "Besonders wichtig ist das Kontaktformular. Funktioniert es nicht mehr, merkt man das oft lange nicht, weil einfach keine Anfragen mehr kommen.",
+        "Ich sehe diesen Punkt bei vielen kleinen Betrieben, ganz unabhängig von der Branche. Darum lohnt sich ein kurzer Blick, bevor Sie an grössere Änderungen denken."
+      ]
+    },
+    {
+      "titel": "So gehen Sie vor",
+      "absaetze": [
+        "Sie brauchen dafür in den meisten Fällen keine neue Website. Die folgenden Punkte lassen sich einzeln umsetzen. Beginnen Sie mit dem, der Ihrer Kundschaft heute am meisten fehlt."
+      ],
+      "punkte": [
+        {
+          "titel": "Formular selbst testen",
+          "text": "Testen Sie das Formular selbst und prüfen Sie, ob die Anfrage im Postfach ankommt."
+        },
+        {
+          "titel": "Telefonnummer antippen",
+          "text": "Tippen Sie auf dem Handy auf Ihre Telefonnummer und prüfen Sie, ob der Anruf startet."
+        },
+        {
+          "titel": "Seite auf dem Handy durchscrollen",
+          "text": "Scrollen Sie die Seite auf dem Handy durch und achten Sie auf Stellen, die nicht stimmen."
+        }
+      ],
+      "nach": [
+        "Mehr braucht es oft nicht. Wenn Sie unsicher sind, wie das bei Ihrer Seite aussehen könnte, schauen Sie sich die Musterprojekte auf meiner Website an."
+      ]
+    },
+    {
+      "titel": "Kleine Schritte statt grosser Umbau",
+      "absaetze": [
+        "Viele Betriebe warten mit Verbesserungen, bis sie Zeit für eine ganz neue Website haben. Dieser Moment kommt selten. Wirksamer ist es, einen Punkt nach dem anderen anzugehen. Jede kleine Änderung hilft Ihrer Kundschaft sofort, und Sie sehen schnell, was sich lohnt. Erst wenn sich vieles auf einmal ändern muss, ist ein Neuanfang die bessere Wahl."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Machen Sie diese drei Tests heute: Formular, Telefonnummer, Handy-Ansicht. Zusammen dauern sie keine Viertelstunde und geben Ihnen Sicherheit.",
+        "Ein Tipp aus der Praxis: Notieren Sie sich solche Punkte gleich im Kalender. Wer seine Website einmal im Monat kurz anschaut, muss sie selten ganz neu machen.",
+        "Haben Sie Ihr Kontaktformular in letzter Zeit selbst getestet?"
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 6 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Kurz prüfen, bevor das Jahresende kommt"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}
