@@ -89,6 +89,7 @@ angebot/, ablauf/, ...      Erzeugte Kopien von index.html mit eigenen Suchmasch
 404.html                    Erzeugte Fehlerseite, der Webserver liefert sie bei unbekannten Adressen
 favicon.svg                 Seitensymbol
 robots.txt, sitemap.xml     Erzeugt, für Suchmaschinen
+llms.txt                    Erzeugt, Kurzfassung für Sprachmodelle (llmstxt.org)
 .htaccess                   Einstellungen für den Apache-Webserver (Fehlerseite, Kompression, Zwischenspeicher)
 tools/seo-build.mjs         Erzeugt die Dateien oben
 tools/portfolio-sync.mjs    Holt das aktuelle Portfolio als Musterprojekt (muster/portfolio/)
@@ -146,8 +147,9 @@ Was für die Auffindbarkeit im Code steckt und wie es gepflegt wird:
   `musterprojekte/doppelmeter/`. Das Impressum
   enthält die Wohnadresse, und die Musterseiten zeigen einen erfundenen Betrieb
   mit erfundener Telefonnummer. Die Seiten bleiben erreichbar und verlinkt.
-- **`sitemap.xml` und `robots.txt`** mit den fünf Seiten, die in die Suche
-  sollen.
+- **`sitemap.xml`, `robots.txt` und `llms.txt`** erzeugt `tools/seo-build.mjs`: Sitemap mit allen
+  indexierbaren Seiten und den Einblicke-Artikeln, robots.txt mit ausdrücklicher Freigabe für Such- und
+  KI-Crawler, llms.txt als Kurzfassung für Sprachmodelle (Details: `docs/seo.md`).
 
 ### Nach jeder Änderung an index.html
 

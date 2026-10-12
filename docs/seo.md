@@ -10,8 +10,17 @@ der Website ist das Google-Unternehmensprofil.
   154 KB statt rund 415 KB. Die Vorlage mit allen Seiten liegt in `assets/js/vorlage.js` und wird erst nach dem
   ersten Zeichnen geladen. Gegenprobe: `node tools/gliederung.mjs` (Gliederung) und die Schleife aus dem Auftrag.
 - `lang="de-CH"`, `canonical` auf sich selbst (404 ohne), Open Graph und Twitter Card je Seite, Favicon-Set und Manifest.
-- `sitemap.xml` mit allen indexierbaren Adressen und `lastmod` (Datum der letzten Textänderung, `tools/sitemap-stand.json`).
-  Nicht drin: die Detailseiten der Musterprojekte, 404, `/start/`, Impressum und der Projekt-Check (seit 10. Oktober 2026).
+- `sitemap.xml` mit allen indexierbaren Adressen und `lastmod` (Datum der letzten Textänderung, `tools/sitemap-stand.json`),
+  seit 12. Oktober 2026 auch mit der Einblicke-Übersicht und allen Artikeln (`lastmod` = Änderungsdatum des Artikels aus
+  `article:modified_time`, nie vor dem Veröffentlichungsdatum). Nicht drin: die Detailseiten der Musterprojekte, 404,
+  `/start/`, Impressum und der Projekt-Check (seit 10. Oktober 2026).
+- **Neue Artikel:** Das Akquise-Tool führt `einblicke/sitemap.xml` bei jedem Artikel nach, `robots.txt` nennt beide Sitemaps.
+  Ein neuer Artikel ist damit sofort in einer Sitemap. In `sitemap.xml` und `llms.txt` erscheint er beim nächsten
+  `node tools/seo-build.mjs`.
+- `robots.txt` erlaubt alle Crawler und nennt die bekannten Such- und KI-Crawler (GPTBot, OAI-SearchBot, ClaudeBot,
+  PerplexityBot, Google-Extended, Applebot-Extended und weitere) ausdrücklich. Liste: `KI_CRAWLER` in `tools/seo-build.mjs`.
+- `llms.txt` nach llmstxt.org (Kurzfassung, Preise, Links zu allen öffentlichen Seiten und Artikeln), erzeugt aus denselben
+  Werten wie die Seiten (`PAKET_PREIS`, `LOGO_*`, `HOSTING_*`, `PAGES`, Einblicke).
 
 ## Begriffsplan
 

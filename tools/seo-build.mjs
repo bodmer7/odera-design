@@ -19,7 +19,7 @@
 // Nach jeder Änderung an Texten oder Seiten in index.html erneut ausführen und die Ergebnisse einchecken.
 // Am Schluss entsteht auch die Wissensbasis des Chat-Assistenten (tools/wissen-build.mjs).
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
 import { ROOT, QUELLE, leseSeiten, startServer, startChrome } from './lib/browser.mjs';
@@ -409,12 +409,86 @@ writeFileSync(STAND_DATEI, JSON.stringify(stand, null, 2) + '\n');
 // Der Projekt-Check gehört nicht in die Sitemap (Entscheid Nico, 10. Oktober 2026)
 const OHNE_SITEMAP = ['/projekt-check'];
 const indexierbar = Object.keys(PAGES).filter((p) => !PAGES[p].noindex && !OHNE_SITEMAP.includes(p));
+
+// Einblicke (statische Seiten aus dem Akquise-Tool): Titel, Beschreibung und Datum aus der jeweiligen Seite.
+// lastmod ist das Änderungsdatum des Artikels (dateModified, nie vor datePublished), nicht das Datum des letzten
+// Neuschreibens der Vorlage. Sonst gälten nach jeder Stiländerung alle Artikel als neu.
+function einblickeLesen() {
+  const attr = (html, re) => ((html.match(re) || [])[1] || '').replace(/&quot;/g, '"').replace(/&amp;/g, '&');
+  const ordner = existsSync(join(ROOT, 'einblicke')) ? readdirSync(join(ROOT, 'einblicke'), { withFileTypes: true })
+    .filter((d) => d.isDirectory() && existsSync(join(ROOT, 'einblicke', d.name, 'index.html'))).map((d) => d.name) : [];
+  return ordner.map((name) => {
+    const html = readFileSync(join(ROOT, 'einblicke', name, 'index.html'), 'utf8');
+    const ver = attr(html, /<meta property="article:published_time" content="([^"]+)"/);
+    const geaendert = attr(html, /<meta property="article:modified_time" content="([^"]+)"/);
+    return { url: `${SITE}/einblicke/${name}/`, titel: attr(html, /<h1[^>]*>([^<]+)<\/h1>/), desc: attr(html, /<p class="einleitung">([^<]+)<\/p>/) || attr(html, /<meta name="description" content="([^"]+)"/),
+      index: !/<meta name="robots" content="noindex/.test(html), datum: ver, lastmod: geaendert && geaendert > ver ? geaendert : ver };
+  }).filter((a) => a.index && a.datum).sort((a, b) => b.datum.localeCompare(a.datum));
+}
+const ARTIKEL = einblickeLesen();
+const uebersichtIndex = existsSync(join(ROOT, 'einblicke', 'index.html')) && !/<meta name="robots" content="noindex/.test(readFileSync(join(ROOT, 'einblicke', 'index.html'), 'utf8'));
+const einblickeUrls = [
+  ...(uebersichtIndex && ARTIKEL.length ? [{ loc: `${SITE}/einblicke/`, lastmod: ARTIKEL.map((a) => a.lastmod).sort().at(-1) }] : []),
+  ...ARTIKEL.map((a) => ({ loc: a.url, lastmod: a.lastmod }))];
 writeFileSync(join(ROOT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  indexierbar.map((p) => `  <url><loc>${SITE}${urlOf(p)}</loc><lastmod>${(stand[p] || {}).lastmod || heute}</lastmod></url>`).join('\n') + '\n</urlset>\n');
-// Die Einblicke haben eine eigene Sitemap (einblicke/sitemap.xml), geschrieben vom Akquise-Tool.
-writeFileSync(join(ROOT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\nSitemap: ${SITE}/einblicke/sitemap.xml\n`);
-geschrieben.push('sitemap.xml'.padEnd(34) + `${indexierbar.length} Adressen`, 'robots.txt');
+  [...indexierbar.map((p) => ({ loc: SITE + urlOf(p), lastmod: (stand[p] || {}).lastmod || heute })), ...einblickeUrls]
+    .map((u) => `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod></url>`).join('\n') + '\n</urlset>\n');
+
+// robots.txt: alle Such- und KI-Crawler ausdrücklich erlaubt. Die Einblicke haben zusätzlich eine eigene Sitemap
+// (einblicke/sitemap.xml, vom Akquise-Tool bei jedem Artikel nachgeführt), damit neue Artikel sofort darin stehen.
+const KI_CRAWLER = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User',
+  'Google-Extended', 'Applebot', 'Applebot-Extended', 'Bingbot', 'CCBot', 'meta-externalagent', 'Amazonbot', 'DuckAssistBot', 'MistralAI-User'];
+writeFileSync(join(ROOT, 'robots.txt'), '# Alle Such- und KI-Crawler sind willkommen. Erzeugt mit tools/seo-build.mjs.\n' +
+  'User-agent: *\nAllow: /\n\n' + KI_CRAWLER.map((b) => `User-agent: ${b}\nAllow: /\n`).join('\n') +
+  `\nSitemap: ${SITE}/sitemap.xml\nSitemap: ${SITE}/einblicke/sitemap.xml\n`);
+geschrieben.push('sitemap.xml'.padEnd(34) + `${indexierbar.length + einblickeUrls.length} Adressen`, 'robots.txt');
+
+// llms.txt nach llmstxt.org: Kurzfassung für Sprachmodelle, nur Angaben, die auf der Website stehen.
+const seite = (pfad, satz) => `- [${(PAGES[pfad].title || '').split(' · ')[0]}](${SITE}${urlOf(pfad)}): ${satz || PAGES[pfad].desc}`;
+const LLMS = `# ${NAME}
+
+> ${NAME} ist die Geschäftsbezeichnung von Nico Bodmer aus Berikon AG (Einzelunternehmen). Er baut Websites für kleine Betriebe wie Handwerk, Gastronomie, Praxen und Läden im Freiamt, am Mutschellen, im Kanton Aargau und in der ganzen Schweiz. Preismodell: Fixpreis, einmalig und ohne Abo. Paket Website ${chf(PREISE[0])}, Standard ${chf(PREISE[1])}, Pro ${chf(PREISE[2])}. Der erste Entwurf entsteht in 5 Arbeitstagen, ist gratis und unverbindlich. Bezahlt wird erst nach Annahme des Entwurfs.
+
+- Logo als Zusatz: ${chf(LOGO[0])}, zusammen mit einer Website ${chf(LOGO[1])}.
+- Betrieb nach der Übergabe optional: ${chf(FIRMA.betrieb[0])} pro Jahr (Server in der EU) oder ${chf(FIRMA.betrieb[1])} pro Jahr (Server in der Schweiz).
+- Höchstens zwei Projekte gleichzeitig, nebenberuflich. Keine Kundenstimmen, stattdessen feste Zusagen: Fixpreis, fester Termin, kein Lock-in.
+- Kontakt: ${EMAIL}. Anfragen am liebsten über den Projekt-Check: ${SITE}/projekt-check/
+- Die Musterprojekte zeigen frei erfundene Betriebe, keine Kundenprojekte.
+
+## Angebot und Ablauf
+
+${seite('/angebot')}
+${seite('/ablauf')}
+${seite('/projekt-check', 'Fragebogen mit 18 kurzen Fragen, rund 6 Minuten. Danach folgen ein Angebot zum Fixpreis und ein kostenloser Entwurf.')}
+
+## Musterprojekte
+
+${seite('/musterprojekte', 'Zwei Beispiel-Websites erfundener Betriebe (Schreinerei Doppelmeter und Firstlicht Solartechnik) und ein Werkzeug, das den eigenen Betrieb in zehn Sekunden als Vorschau zeigt.')}
+- [Musterprojekt Schreinerei Doppelmeter](${SITE}/musterprojekte/doppelmeter/): Beispielseite einer frei erfundenen Schreinerei, Paket Standard.
+- [Musterprojekt Firstlicht Solartechnik](${SITE}/musterprojekte/firstlicht/): Beispielseite eines frei erfundenen Solarbetriebs, Paket Pro.
+
+## Branchenseiten
+
+${Object.keys(BRANCHEN).filter((p) => PAGES[p] && !PAGES[p].noindex).map((p) => seite(p)).join('\n')}
+
+## Einblicke
+
+- [Einblicke](${SITE}/einblicke/): Blog mit Praxis-Tipps, Beobachtungen und Haltung rund um Websites für kleine Betriebe in der Schweiz.
+${ARTIKEL.map((a) => `- [${a.titel}](${a.url}): ${a.desc.trim()}`).join('\n')}
+
+## Über mich
+
+${seite('/ueber-mich', 'Wer hinter ODERA Design steht: Lehre als Platform Developer EFZ, Technische Berufsmaturität, berufsbegleitendes Studium Digital Business und AI an der HWZ. Höchstens zwei Projekte gleichzeitig.')}
+
+## Optional
+
+${seite('/impressum', 'Verantwortliche Person, Kontakt, Rechtsform (Einzelunternehmen ohne Handelsregistereintrag, keine Mehrwertsteuerpflicht) und Bildnachweise.')}
+${seite('/datenschutz')}
+${seite('/agb')}
+`;
+writeFileSync(join(ROOT, 'llms.txt'), LLMS);
+geschrieben.push('llms.txt'.padEnd(34) + `${ARTIKEL.length} Artikel`);
 
 console.log(geschrieben.join('\n'));
 console.log('Nicht in der Suche (noindex):', Object.keys(PAGES).filter((p) => PAGES[p].noindex).join(', '));
