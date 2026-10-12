@@ -58,7 +58,11 @@ und auf Über mich. Name, Ort und E-Mail überall gleich: «ODERA Design», «Be
 | `/datenschutz/` | Datenschutzerklärung · ODERA Design (35) | Welche Daten beim Besuch von odera.ch, im Projekt-Check, im Chat und bei der Statistik mit Einwilligung bearbeitet werden. Keine Cookies. (137) |
 | `/agb/` | Allgemeine Geschäftsbedingungen · ODERA Design (46) | Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Betrieb und Hosting. (137) |
 
-Trenner im Titel einheitlich «·». Seit 10. Oktober 2026 ist auch der Projekt-Check wieder `noindex` und nicht in der Sitemap (Entscheid Nico). Das Impressum bleibt `noindex`, weil es die Wohnadresse nennt (Abweichung vom
+Trenner im Titel einheitlich «·», auch in den Einblicken (`tools/einblicke-auffrischen.mjs`, lange Artikeltitel ohne Zusatz).
+Jede Seite hat zusätzlich `twitter:title` und `twitter:description`.
+
+**Interne Links (seit 12. Oktober 2026):** Angebot verlinkt Musterprojekte und alle Branchenseiten, Musterprojekte verlinkt die
+Branchenseiten, jede Branchenseite verlinkt alle Musterprojekte und die übrigen Branchen (`brAndere()`). Seit 10. Oktober 2026 ist auch der Projekt-Check wieder `noindex` und nicht in der Sitemap (Entscheid Nico). Das Impressum bleibt `noindex`, weil es die Wohnadresse nennt (Abweichung vom
 Auftrag, siehe `docs/entscheidungen.md`).
 
 ## Strukturierte Daten (JSON-LD)

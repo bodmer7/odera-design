@@ -18,6 +18,21 @@ const ORG = { '@type': 'ProfessionalService', '@id': SITE + '/#organisation', na
   logo: { '@type': 'ImageObject', url: SITE + '/assets/img/odera-logo-512.png' } };
 const AUTOR = { '@type': 'Person', '@id': SITE + '/ueber-mich/#person', name: 'Nico Bodmer', url: SITE + '/ueber-mich/' };
 
+// Kopf wie auf den übrigen Seiten: Titel-Trenner «·» statt «|» (lange Titel ohne Zusatz, damit sie nicht über 65 Zeichen
+// wachsen), Twitter-Titel und -Beschreibung wie Open Graph.
+function kopfAngleichen(html) {
+  const titelAlt = (html.match(/<title>([^<]*)<\/title>/) || [])[1];
+  if (!titelAlt) return html;
+  const kern = titelAlt.replace(/ [|·] ODERA Design$/, '');
+  const titel = (kern + ' · ODERA Design').length <= 65 ? kern + ' · ODERA Design' : kern;
+  html = html.replace(`<title>${titelAlt}</title>`, () => `<title>${titel}</title>`)
+    .replace(/(<meta property="og:title" content=")[^"]*"/, (_, a) => `${a}${titel}"`);
+  const desc = (html.match(/<meta property="og:description" content="([^"]*)"/) || [])[1];
+  if (!html.includes('name="twitter:title"')) html = html.replace(/(<meta name="twitter:card" content="[^"]*">)/, (_, a) =>
+    `${a}\n<meta name="twitter:title" content="${titel}">` + (desc ? `\n<meta name="twitter:description" content="${desc}">` : ''));
+  return html;
+}
+
 // Strukturierte Daten an die übrigen Seiten angleichen (gleiche @id für Firma und Person wie in tools/seo-build.mjs):
 // Artikel als BlogPosting mit Verweis auf Autor, Firma und Blog; dateModified nie vor datePublished.
 function schemaAngleichen(html) {
@@ -49,7 +64,7 @@ for (const f of ['einblicke/index.html', ...ordner]) {
   if (!kopf || !inhalt) throw new Error(`Kopf oder Inhalt in ${f} nicht gefunden.`);
   let neu = vorlage.replace('<!-- einblicke:kopf -->', () => kopf).replace(/<!-- einblicke:linkedin-firma [^>]*-->\n/, '')
     .replace('<!-- einblicke:inhalt -->', () => inhalt);
-  neu = schemaAngleichen(neu);
+  neu = kopfAngleichen(schemaAngleichen(neu));
   if (process.env.NUR_PRUEFEN) { console.log(f.padEnd(80), alt === neu ? 'aktuell' : 'weicht ab'); continue; }
   writeFileSync(join(ROOT, f), neu);
   console.log(f.padEnd(80), alt === neu ? 'unverändert' : 'neu geschrieben');

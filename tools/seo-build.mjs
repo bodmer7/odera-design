@@ -254,6 +254,8 @@ function kopf(pfad, teile = {}) {
     `<meta property="og:image:height" content="${VORSCHAU.hoehe}">`,
     `<meta property="og:image:alt" content="${escA(VORSCHAU.alt)}">`,
     '<meta name="twitter:card" content="summary_large_image">',
+    `<meta name="twitter:title" content="${escA(p.title)}">`,
+    ...(p.desc ? [`<meta name="twitter:description" content="${escA(p.desc)}">`] : []),
     `<meta name="twitter:image" content="${SITE}${VORSCHAU.url}">`,
     '<style>x-dc{display:none!important}</style>',
   );

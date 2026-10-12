@@ -1241,7 +1241,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           </div>
           <div class="rahmen-handy"><div class="rahmen-schirm"><span class="rahmen-insel" aria-hidden="true"></span><picture><source type="image/avif" srcset="assets/img/musterprojekt-solar-handy-390.avif 390w, assets/img/musterprojekt-solar-handy-780.avif 780w" sizes="(min-width:1024px) 160px, 240px"><img class="werk-bild" src="assets/img/musterprojekt-solar-handy-390.webp" srcset="assets/img/musterprojekt-solar-handy-390.webp 390w, assets/img/musterprojekt-solar-handy-780.webp 780w" sizes="(min-width:1024px) 160px, 240px" width="390" height="760" alt="Startseite des Musterprojekts Firstlicht Solartechnik auf dem Handy" loading="lazy" decoding="async"></picture></div></div>
         </a>
-        <figcaption>Musterprojekt Firstlicht, ein erfundener Betrieb. <a href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}">Ansehen</a></figcaption>
+        <figcaption>Musterprojekt Firstlicht, ein erfundener Betrieb. <a href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" onClick="{{ openMuster }}" aria-label="Musterprojekt Firstlicht ansehen">Ansehen</a></figcaption>
       </figure>
     </div>
   </div>
@@ -1676,6 +1676,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </div>
       </div>
       <p class="lesetext" style="margin:40px auto 0;text-align:center">Alle Preise sind einmalig, ohne Abonnement. Hosting ist nicht enthalten und nach dem Livegang optional. Die Aufschaltung ist im Preis enthalten.</p>
+      <p class="branchen-zeile" style="margin:16px auto 0;text-align:center">So sieht das aus: <a href="/musterprojekte/">zwei Musterprojekte</a>. Websites für: <a href="/website-fuer-handwerker/">Handwerk</a> · <a href="/website-fuer-restaurants/">Gastronomie</a> · <a href="/website-fuer-praxen/">Praxen</a> · <a href="/website-fuer-laeden/">Läden</a></p>
       <details class="mdet" open="{{ true }}" style="max-width:860px;margin:48px auto 0;border-top:1px solid var(--linie)">
         <summary class="msum">Zusatzleistungen</summary>
         
@@ -2000,7 +2001,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p class="einleitung">Firmenname eintippen, Branche wählen. Sie sehen sofort, wie der Anfang Ihrer Seite aussehen könnte.</p>
         </div>
         <div id="gen-buehne" class="gen-platz"></div>
-        <p class="klein" style="margin:40px 0 0">{{ ladezeitNotiz }}</p>
+        <p class="branchen-zeile" style="margin:40px 0 0">Mehr zu Ihrer Branche: <a href="/website-fuer-handwerker/">Handwerk</a> · <a href="/website-fuer-restaurants/">Gastronomie</a> · <a href="/website-fuer-praxen/">Praxen</a> · <a href="/website-fuer-laeden/">Läden</a></p>
+        <p class="klein" style="margin:16px 0 0">{{ ladezeitNotiz }}</p>
       </div>
     </div>
   </section>
@@ -2744,6 +2746,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 <sc-if value="{{ brGenerator }}" hint-placeholder-val="{{ false }}">
       <div class="br-buehne"><div id="gen-buehne" class="gen-platz" data-branche="{{ br.gen }}"></div></div>
 </sc-if>
+      <p style="margin:32px 0 0"><a href="/musterprojekte/" class="einstieg">Alle Musterprojekte<span aria-hidden="true">→</span></a></p>
     </div></div>
   </section>
 
@@ -2783,6 +2786,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <details class="frage"><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
         </sc-for>
       </div>
+      <p class="branchen-zeile" style="margin:32px 0 0">Websites für andere Branchen: <sc-for list="{{ brAndere }}" as="b" hint-placeholder-count="3"><a href="{{ b.href }}">{{ b.label }}</a>{{ b.sep }}</sc-for></p>
     </div></div>
   </section>
 
@@ -4262,6 +4266,12 @@ class Component extends DCLogic {
   }
 
   logoWunsch() { return this.state.ans.LOGO === this.LOGO_NEU; }
+  // Branchenseiten verlinken die übrigen Branchen (gleiche Namen wie in der Fusszeile)
+  brAndere(pfad) {
+    const namen = { '/website-fuer-handwerker': 'Handwerk', '/website-fuer-restaurants': 'Gastronomie', '/website-fuer-praxen': 'Praxen', '/website-fuer-laeden': 'Läden' };
+    const andere = Object.keys(namen).filter((p) => p !== pfad);
+    return andere.map((p, i) => ({ href: p + '/', label: namen[p], sep: i < andere.length - 1 ? ' · ' : '' }));
+  }
   logoMitWebsiteChf() { return 'CHF ' + this.fmt(this.LOGO_MIT_WEBSITE_CHF); }
 
   hostingAuslandTxt() { return 'CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr'; }
@@ -4471,6 +4481,7 @@ class Component extends DCLogic {
       isStart: page === 'start', isAngebot: page === 'angebot', isAblauf: page === 'ablauf',
       isMuster: page === 'muster', isUeber: page === 'ueber', isCheck: isCheck, isBranche: page === 'branche',
       br: brSeite, brMuster: !!(brSeite && brSeite.muster), brGenerator: !!(brSeite && brSeite.gen),
+      brAndere: this.brAndere(s.path),
       isImpressum: page === 'impressum', isDatenschutz: page === 'datenschutz', isAgb: page === 'agb',
       isNf: page === 'nf',
       heute: new Date().toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' }),
