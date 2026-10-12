@@ -29,7 +29,7 @@
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://odera.ch/projekt-check/#seite","url":"https://odera.ch/projekt-check/","name":"Projekt-Check: Angebot in 6 Minuten · ODERA Design","description":"18 kurze Fragen, rund 6 Minuten. Danach erhalten Sie ein Angebot zum Fixpreis und einen kostenlosen Entwurf Ihrer neuen Website, ohne Risiko.","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/projekt-check/#brotkrumen"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/projekt-check/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Projekt-Check: Angebot in 6 Minuten","item":"https://odera.ch/projekt-check/"}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=327d0e05f8" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=8b3a5daeb4" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -168,7 +168,6 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 @media(hover:hover){.hero-chip:hover{background:var(--akzent-tint)}}
 .hero-chip[data-gewaehlt="1"]{background:var(--akzent);border-color:var(--tinte);color:var(--tinte)}
 .hero-chip:focus-visible{outline:3px solid var(--tinte);outline-offset:2px}
-::view-transition-old(einstieg),::view-transition-new(einstieg){animation-duration:360ms}
 @media(max-width:430px){.hero-chip{font-size:16px;padding:0 12px;text-align:center}}
 .wrap{max-width:1440px;margin:0 auto;padding:0 120px}
 .sect{padding-top:var(--a-6);padding-bottom:var(--a-6)}
@@ -620,7 +619,7 @@ if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=327d0e05f8';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=8b3a5daeb4';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -1011,10 +1010,10 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .menue-link{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;color:#FFFFFF;text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(34px,9.6vw,40px);line-height:1.1;letter-spacing:-0.025em;border-bottom:1px solid rgba(255,255,255,0.16);animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:calc(140ms + var(--i,0) * 40ms);transition:transform 140ms ease-out}
  .menue-link:active{transform:translateX(6px)}
  .menue-link[aria-current="page"] .menue-link-t{text-decoration:underline;text-decoration-color:var(--akzent);text-decoration-thickness:4px;text-underline-offset:9px;text-decoration-skip-ink:none}
- .menue-pfeil{flex:none;width:22px;height:22px;opacity:0.75;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat}
+ .menue-pfeil{flex:none;width:22px;height:22px;opacity:0.75;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");mask-position:center;mask-size:contain;mask-repeat:no-repeat}
  .menue-frage{align-items:center;gap:12px;min-height:56px;margin-top:8px;padding:0;border:0;background:none;color:#FFFFFF;font:inherit;font-size:18px;font-weight:600;text-align:left;cursor:pointer;animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:300ms;transition:transform 140ms ease-out}
  .menue-frage:active{transform:translateX(6px)}
- .menue-frage-i{flex:none;width:24px;height:24px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E") center/contain no-repeat}
+ .menue-frage-i{flex:none;width:24px;height:24px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E") center/contain no-repeat;mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E");mask-position:center;mask-size:contain;mask-repeat:no-repeat}
  .menue-unten{margin-top:auto;padding-top:32px;display:flex;flex-direction:column;gap:8px;animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:340ms}
  .menue-cta{display:flex;align-items:center;justify-content:center;min-height:60px;border-radius:999px;background:var(--akzent);color:var(--tinte);font-size:17px;font-weight:700;text-decoration:none;transition:transform 120ms ease-out}
  .menue-cta:active{transform:scale(0.97)}
@@ -1153,11 +1152,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 <noscript><p class="ohne-js">Der Projekt-Check braucht JavaScript. Schreiben Sie mir stattdessen: <a href="mailto:kontakt@odera.ch">kontakt@odera.ch</a></p></noscript>
 <!-- seo-noscript:end -->
 <!-- vorab:start -->
-<div id="vorab"><div class="sc-host" data-sc-name="Root"><main style="animation: auto ease 0s 1 normal none running none;"><div style="min-height: 100vh; background: rgb(246, 245, 241); transition: background 200ms linear;">
+<div id="vorab"><div class="sc-host" data-sc-name="Root"><main style="animation: none;"><div style="min-height: 100vh; background: rgb(246, 245, 241); transition: background 200ms linear;">
   <div class="wrap navbar">
-    <div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(17, 19, 26);">
+    <span class="sc-host" data-sc-name="logo" style="display: block;"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(17, 19, 26);">
   <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(239, 241, 254); transform: rotate(-19deg);"></span></span>DERA</span>
-  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></span>
     <a href="/" style="font-size: 16px; color: rgb(17, 19, 26); min-height: 48px; display: inline-flex; align-items: center;">Abbrechen</a>
   </div>
   <h1 class="rechner-sr">Projekt-Check von ODERA Design</h1>
@@ -1187,7 +1186,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <p role="status" style="display: none; font-size: 16px; line-height: 1.5; color: var(--tinte); background: var(--flaeche); border: 1px solid var(--primaer); border-radius: 12px; padding: 12px 16px; margin: 0px 0px 20px;"><span class="sc-interp"></span></p>
             <p class="mono" style="font-size: 13px; letter-spacing: 0.08em; color: var(--primaer); margin: 0px 0px 8px;"><span class="sc-interp">ABSCHNITT 1 VON 6 · IHR BETRIEB</span></p>
             <p class="mono qnum" aria-hidden="true"><span class="sc-interp">01</span></p>
-            <h2 tabindex="-1" style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; font-size: var(--fs-h2); line-height: 1.12; letter-spacing: -0.03em; margin: 0px 0px 16px; text-wrap: pretty; view-transition-name: none;"><span class="sc-interp">Wie heisst Ihr Betrieb?</span></h2>
+            <h2 tabindex="-1" data-vt="0" style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; font-size: var(--fs-h2); line-height: 1.12; letter-spacing: -0.03em; margin: 0px 0px 16px; text-wrap: pretty;"><span class="sc-interp">Wie heisst Ihr Betrieb?</span></h2>
             <p class="mono q-wichtig" style="display: none;">Die wichtigste Frage für Ihren Entwurf</p>
             <p style="font-size: 16px; line-height: 1.55; color: var(--text-2); margin: 0px 0px 12px; display: none;"><span class="sc-interp"></span></p>
             <details class="q-was" style="display: none;"><summary>Was heisst das?</summary><p><span class="sc-interp"></span></p></details>
@@ -1203,7 +1202,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <p class="mono q-status" aria-live="polite" style="font-size: 13px; color: var(--text-2); margin: 4px 0px 0px; min-height: 18px;"><span class="sc-interp"></span></p>
           </div>
 
-          <div class="qright" style="animation: auto ease 0s 1 normal none running none; display: flex; flex-direction: column;">
+          <div class="qright" style="animation: none; display: flex; flex-direction: column;">
             <div class="f-zusammen" role="alert" style="display: none;">
               <p><span class="sc-interp">Bitte prüfen Sie 0 Angaben:</span></p>
               <ul></ul>
@@ -1306,7 +1305,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               
                 <div class="fline" data-fehler="0" style="animation-name: none;">
                   <label class="f-label" for="f-firma"><span><span class="sc-interp">Name des Betriebs</span></span><span class="f-tag" data-pflicht="1" style="animation-name: tagRein;"><span class="sc-interp">Pflichtfeld</span></span></label>
-                  <input id="f-firma" type="text" data-k="firma" maxlength="120" placeholder="Schreinerei Muster GmbH" autocomplete="organization" enterkeyhint="next" required="" aria-required="true" aria-invalid="false" aria-describedby="f-firma-fehler" value="">
+                  <input id="f-firma" type="text" data-k="firma" maxlength="120" placeholder="Schreinerei Muster GmbH" autocomplete="organization" enterkeyhint="next" required="" aria-invalid="false" aria-describedby="f-firma-fehler" value="">
                   <span class="ulx" aria-hidden="true"></span>
                   <span class="f-ok" aria-hidden="true" style="display: none; animation-name: none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
                   <p class="f-fehler" id="f-firma-fehler" data-an="0" aria-live="polite"><span class="f-fehler-i" aria-hidden="true" style="display: none;">!</span><span class="sc-interp"></span></p>
@@ -1315,7 +1314,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               
                 <div class="fline" data-fehler="0" style="animation-name: none;">
                   <label class="f-label" for="f-ort"><span><span class="sc-interp">Ort</span></span><span class="f-tag" data-pflicht="0" style="animation-name: tagRein2;"><span class="sc-interp">optional</span></span></label>
-                  <input id="f-ort" type="text" data-k="ort" maxlength="80" placeholder="Wohlen AG" autocomplete="address-level2" enterkeyhint="next" aria-required="false" aria-invalid="false" aria-describedby="f-ort-fehler" value="">
+                  <input id="f-ort" type="text" data-k="ort" maxlength="80" placeholder="Wohlen AG" autocomplete="address-level2" enterkeyhint="next" aria-invalid="false" aria-describedby="f-ort-fehler" value="">
                   <span class="ulx" aria-hidden="true"></span>
                   <span class="f-ok" aria-hidden="true" style="display: none; animation-name: none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
                   <p class="f-fehler" id="f-ort-fehler" data-an="0" aria-live="polite"><span class="f-fehler-i" aria-hidden="true" style="display: none;">!</span><span class="sc-interp"></span></p>
@@ -1335,7 +1334,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             </div>
             <p id="q-offen" class="mono q-offen" style="order: 6;"><span class="sc-interp">Noch offen: Name des Betriebs</span></p>
             </div>
-            <p style="display: none; margin: 16px 0px 0px; text-align: right; order: 7;"><button type="button" data-own-enter="1" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; padding: 0px; min-height: 44px; color: var(--tinte); font-size: 16px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer;">Zurück zur Übersicht</button></p>
+            <p style="display: none; margin: 16px 0px 0px; text-align: right; order: 7;"><button type="button" data-own-enter="1" style="background: none; border: none; padding: 0px; min-height: 44px; color: var(--tinte); font-size: 16px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer;">Zurück zur Übersicht</button></p>
             <p style="display: block; font-size: 13px; line-height: 1.5; margin: 16px 0px 0px; order: 8;"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
           </div>
         </div>
@@ -1348,7 +1347,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 
   
 
-  </div></main><button type="button" class="chat-btn" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten, Taste f" title="Fragen an den KI-Assistenten (Taste f)" data-bar="0" data-hell="0" style="display: none; animation: auto ease 0s 1 normal none running none;">
+  </div></main><button type="button" class="chat-btn" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten, Taste f" title="Fragen an den KI-Assistenten (Taste f)" data-bar="0" data-hell="0" style="display: none; animation: none;">
   <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"></path><path d="M8.5 9.5h7M8.5 12.5h4"></path></svg>
   <span class="chat-btn-l">Assistent fragen</span></button></div></div>
 <!-- vorab:end -->

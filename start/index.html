@@ -28,7 +28,7 @@
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://odera.ch/start/#seite","url":"https://odera.ch/start/","name":"Willkommen · ODERA Design","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/start/#brotkrumen"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/start/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Willkommen","item":"https://odera.ch/start/"}]},{"@type":"FAQPage","@id":"https://odera.ch/start/#fragen","mainEntity":[{"@type":"Question","name":"Das ist mir zu teuer.","acceptedAnswer":{"@type":"Answer","text":"Standard kostet CHF 1’900, einmalig. Danach zahlen Sie nur noch Hosting und Domain bei Ihrem Anbieter, üblicherweise CHF 120 bis 200 pro Jahr. Und Sie sehen den Entwurf, bevor Sie sich entscheiden."}},{"@type":"Question","name":"Ich habe keine Zeit dafür.","acceptedAnswer":{"@type":"Answer","text":"Ein Formular von rund 6 Minuten und Ihre Rückmeldungen. Erforderlich sind 81 Minuten, mit optionalen Schritten knapp 2 Stunden, verteilt auf drei bis sechs Wochen, je nach Paket. Alles Übrige entscheiden Sie."}},{"@type":"Question","name":"Sie sind allein: was, wenn Sie ausfallen?","acceptedAnswer":{"@type":"Answer","text":"Ich verwende gängige Technik ohne Abhängigkeiten. Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag. Jede andere Fachperson kann übernehmen, ohne von vorne zu beginnen."}}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=327d0e05f8" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=8b3a5daeb4" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -167,7 +167,6 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 @media(hover:hover){.hero-chip:hover{background:var(--akzent-tint)}}
 .hero-chip[data-gewaehlt="1"]{background:var(--akzent);border-color:var(--tinte);color:var(--tinte)}
 .hero-chip:focus-visible{outline:3px solid var(--tinte);outline-offset:2px}
-::view-transition-old(einstieg),::view-transition-new(einstieg){animation-duration:360ms}
 @media(max-width:430px){.hero-chip{font-size:16px;padding:0 12px;text-align:center}}
 .wrap{max-width:1440px;margin:0 auto;padding:0 120px}
 .sect{padding-top:var(--a-6);padding-bottom:var(--a-6)}
@@ -619,7 +618,7 @@ if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=327d0e05f8';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=8b3a5daeb4';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -1010,10 +1009,10 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .menue-link{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;color:#FFFFFF;text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(34px,9.6vw,40px);line-height:1.1;letter-spacing:-0.025em;border-bottom:1px solid rgba(255,255,255,0.16);animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:calc(140ms + var(--i,0) * 40ms);transition:transform 140ms ease-out}
  .menue-link:active{transform:translateX(6px)}
  .menue-link[aria-current="page"] .menue-link-t{text-decoration:underline;text-decoration-color:var(--akzent);text-decoration-thickness:4px;text-underline-offset:9px;text-decoration-skip-ink:none}
- .menue-pfeil{flex:none;width:22px;height:22px;opacity:0.75;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat}
+ .menue-pfeil{flex:none;width:22px;height:22px;opacity:0.75;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");mask-position:center;mask-size:contain;mask-repeat:no-repeat}
  .menue-frage{align-items:center;gap:12px;min-height:56px;margin-top:8px;padding:0;border:0;background:none;color:#FFFFFF;font:inherit;font-size:18px;font-weight:600;text-align:left;cursor:pointer;animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:300ms;transition:transform 140ms ease-out}
  .menue-frage:active{transform:translateX(6px)}
- .menue-frage-i{flex:none;width:24px;height:24px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E") center/contain no-repeat}
+ .menue-frage-i{flex:none;width:24px;height:24px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E") center/contain no-repeat;mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E");mask-position:center;mask-size:contain;mask-repeat:no-repeat}
  .menue-unten{margin-top:auto;padding-top:32px;display:flex;flex-direction:column;gap:8px;animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:340ms}
  .menue-cta{display:flex;align-items:center;justify-content:center;min-height:60px;border-radius:999px;background:var(--akzent);color:var(--tinte);font-size:17px;font-weight:700;text-decoration:none;transition:transform 120ms ease-out}
  .menue-cta:active{transform:scale(0.97)}
@@ -1157,24 +1156,24 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   <div class="wrap navbar">
     <a href="/" class="kopf-logo" style="text-decoration: none; color: var(--tinte); display: flex; align-items: center; gap: 12px;">
       <span class="logo-normal">
-      <div class="sc-host" data-sc-name="logo"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(45, 76, 240); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 21px; color: rgb(246, 245, 241);">
-  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(45, 76, 240); transform: rotate(-19deg);"></span></span></span></div>
+      <span class="sc-host" data-sc-name="logo" style="display: block;"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(45, 76, 240); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 21px; color: rgb(246, 245, 241);">
+  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(45, 76, 240); transform: rotate(-19deg);"></span></span></span></span>
       <span style="display: block;">
-        <span class="logo-lg"><div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(17, 19, 26);">
+        <span class="logo-lg"><span class="sc-host" data-sc-name="logo" style="display: block;"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(17, 19, 26);">
   <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span>DERA</span>
-  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div></span>
-        <span class="logo-sm"><div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 23px; color: rgb(17, 19, 26);">
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></span></span>
+        <span class="logo-sm"><span class="sc-host" data-sc-name="logo" style="display: block;"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 23px; color: rgb(17, 19, 26);">
   <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span>DERA</span>
-  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div></span>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></span></span>
         <span class="tagline">Webseiten für Schweizer Betriebe</span>
       </span>
       </span>
       <span class="logo-menue" aria-hidden="true">
-        <div class="sc-host" data-sc-name="logo"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgb(255, 255, 255); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 18px; color: rgb(45, 76, 240);">
-  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(255, 255, 255); transform: rotate(-19deg);"></span></span></span></div>
-        <div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 23px; color: rgb(255, 255, 255);">
+        <span class="sc-host" data-sc-name="logo" style="display: block;"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgb(255, 255, 255); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 18px; color: rgb(45, 76, 240);">
+  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(255, 255, 255); transform: rotate(-19deg);"></span></span></span></span>
+        <span class="sc-host" data-sc-name="logo" style="display: block;"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 23px; color: rgb(255, 255, 255);">
   <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(45, 76, 240); transform: rotate(-19deg);"></span></span>DERA</span>
-  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></span>
       </span>
     </a>
     <nav class="navmid" aria-label="Hauptnavigation">
@@ -1201,14 +1200,14 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </button>
       </div>
     </div>
-  </div></header><main style="animation: auto ease 0s 1 normal none running none;"><div><section class="hero band-raster" aria-labelledby="hero-t" data-abschnitt="hero">
+  </div></header><main style="animation: none;"><div><section class="hero band-raster" aria-labelledby="hero-t" data-abschnitt="hero">
   <div class="wrap hero-pad">
     <div class="inner hero-raster">
       <div class="hero-text">
         <p class="hero-gruss" style="display: none;"><span class="sc-interp"></span></p>
-        <p class="augenbraue hero-ort" style="animation: auto ease 0s 1 normal none running none;">Webdesign aus Berikon AG für Betriebe in der ganzen Schweiz</p>
-        <h1 id="hero-t" tabindex="-1" class="titel-1 hero-h1" style="animation: auto ease 0s 1 normal none running none;">Sie sehen Ihre neue Website, <span class="leuchtstift" style="animation-delay: 450ms;">bevor </span><span class="leuchtstift" style="animation-delay: 560ms;">Sie </span><span class="leuchtstift" style="animation-delay: 670ms;">bezahlen.</span></h1>
-        <p class="einleitung hero-lead" style="animation: auto ease 0s 1 normal none running none;">Für Handwerk, Gastro, Praxen und Läden. Sie sehen den fertigen Entwurf und entscheiden danach.</p>
+        <p class="augenbraue hero-ort" style="animation: none;">Webdesign aus Berikon AG für Betriebe in der ganzen Schweiz</p>
+        <h1 id="hero-t" tabindex="-1" class="titel-1 hero-h1" style="animation: none;">Sie sehen Ihre neue Website, <span class="leuchtstift" style="animation-delay: 450ms;">bevor </span><span class="leuchtstift" style="animation-delay: 560ms;">Sie </span><span class="leuchtstift" style="animation-delay: 670ms;">bezahlen.</span></h1>
+        <p class="einleitung hero-lead" style="animation: none;">Für Handwerk, Gastro, Praxen und Läden. Sie sehen den fertigen Entwurf und entscheiden danach.</p>
         <div class="hero-handy-chips">
           <p class="hero-frage-t" id="hero-frage-oben">Was sollen Besucher auf Ihrer neuen Website tun?</p>
           <div class="hero-chips" role="group" aria-labelledby="hero-frage-oben">
@@ -1224,17 +1223,17 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           </div>
           <p id="chip-hinweis-oben" class="rechner-sr">Ein Tipp startet den Projekt-Check mit dieser Antwort.</p>
         </div>
-        <div class="hero-aktion" style="animation: auto ease 0s 1 normal none running none;">
+        <div class="hero-aktion" style="animation: none;">
           <a href="/projekt-check/" class="btn btn-primaer" data-quelle="hero">Projekt-Check starten</a>
           <a href="/angebot/" class="btn btn-sekundaer">Preise ansehen</a>
         </div>
-        <dl class="fakten" style="animation: auto ease 0s 1 normal none running none;">
+        <dl class="fakten" style="animation: none;">
           <div><dt>ab <span class="sc-interp">CHF&nbsp;890</span></dt><dd>Fixpreis, einmalig</dd></div>
           <div><dt><span class="sc-interp">5 Arbeitstage</span></dt><dd>bis zum Entwurf</dd></div>
           <div><dt>CHF 0</dt><dd>wenn er nicht gefällt</dd></div>
         </dl>
       </div>
-      <figure class="werk" style="animation: auto ease 0s 1 normal none running none;">
+      <figure class="werk" style="animation: none;">
         <a class="werk-link" href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" aria-label="Musterprojekt Firstlicht Solartechnik ansehen">
           <div class="rahmen-browser">
             <div class="rahmen-leiste" aria-hidden="true"><span class="rahmen-punkte"><i></i><i></i><i></i></span><span class="rahmen-adresse"><span>odera.ch/musterprojekte/firstlicht</span></span><span></span></div>
@@ -1462,11 +1461,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <div class="g-foot">
         <div>
           <div style="display: flex; align-items: center; gap: 12px; margin: 0px 0px 12px;">
-            <div class="sc-host" data-sc-name="logo"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(246, 245, 241); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 21px; color: rgb(17, 19, 26);">
-  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span></span></div>
-            <div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(246, 245, 241);">
+            <span class="sc-host" data-sc-name="logo" style="display: block;"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(246, 245, 241); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 21px; color: rgb(17, 19, 26);">
+  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span></span></span>
+            <span class="sc-host" data-sc-name="logo" style="display: block;"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(246, 245, 241);">
   <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(17, 19, 26); transform: rotate(-19deg);"></span></span>DERA</span>
-  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></span>
           </div>
           <p style="font-size: 16px; line-height: 1.5; color: rgb(201, 206, 214); margin: 0px;">Webseiten für Schweizer Betriebe</p>
           <p class="fuss-ort">Aus Berikon AG für Betriebe im Freiamt, am Mutschellen, im Kanton Aargau und in der ganzen Schweiz.</p>
@@ -1511,7 +1510,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </div>
       </div>
     </div>
-  </div></footer><button type="button" class="chat-btn" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten, Taste f" title="Fragen an den KI-Assistenten (Taste f)" data-bar="0" data-hell="0" style="display: inline-flex; animation: auto ease 0s 1 normal none running none;">
+  </div></footer><button type="button" class="chat-btn" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten, Taste f" title="Fragen an den KI-Assistenten (Taste f)" data-bar="0" data-hell="0" style="display: inline-flex; animation: none;">
   <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"></path><path d="M8.5 9.5h7M8.5 12.5h4"></path></svg>
   <span class="chat-btn-l">Assistent fragen</span></button></div></div>
 <!-- vorab:end -->

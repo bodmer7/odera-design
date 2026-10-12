@@ -167,11 +167,28 @@ const AUSZUG = `(() => {
     const innen = fluss([...n.childNodes]);
     return innen ? { art: 'block', html: innen } : { art: 'nichts' };
   };
+  // Für gültiges HTML: Komponenten-Hüllen (<div class="sc-host">) mit reinem Textinhalt stehen oft in einem <span> oder <a>.
+  // Dort wird daraus ein <span> mit display:block, das zeichnet gleich. Die Laufzeit ersetzt den Block beim Start ohnehin.
+  const PHRASING = /^(A|ABBR|B|BR|CODE|EM|I|IMG|KBD|MARK|Q|S|SMALL|SPAN|STRONG|SUB|SUP|SVG|TIME|U|WBR|PATH|CIRCLE|RECT|LINE|POLYLINE|POLYGON|G|USE|DEFS|ELLIPSE)$/i;
+  const vorabHtml = () => {
+    const k = document.getElementById('dc-root').cloneNode(true);
+    k.querySelectorAll('div.sc-host').forEach((d) => {
+      if ([...d.querySelectorAll('*')].some((e) => !PHRASING.test(e.tagName))) return;
+      const s = document.createElement('span');
+      for (const at of d.attributes) s.setAttribute(at.name, at.value);
+      s.style.display = 'block';
+      while (d.firstChild) s.appendChild(d.firstChild);
+      d.replaceWith(s);
+    });
+    return k.innerHTML.replace(/ data-dc-tpl="\\d+"/g, '')
+      // Chrome schreibt animation:none als «auto ease 0s 1 normal none running none». Der Validator kennt «auto» als Dauer nicht.
+      .replace(/animation: auto ease 0s 1 normal none running none;/g, 'animation: none;');
+  };
   const teil = (sel) => { const el = document.querySelector(sel); return el ? (gehe(el).html || '') : ''; };
   return {
     nav: [...document.querySelectorAll('#dc-root header nav a')].map((a) => ({ label: a.innerText.trim(), href: a.getAttribute('href') })),
     // Fertig gerenderte Seite für den Vorab-Block (ohne interne Zähler der Laufzeit)
-    vorab: document.getElementById('dc-root').innerHTML.replace(/ data-dc-tpl="\\d+"/g, ''),
+    vorab: vorabHtml(),
     faq: [...document.querySelectorAll('#dc-root main details.frage')].map((d) => ({ q: d.querySelector('summary').textContent.trim(), a: d.querySelector('p').textContent.trim() })),
     main: teil('#dc-root main'),
     footer: teil('#dc-root footer'),
@@ -298,7 +315,7 @@ const EINBLICKE_JS = version('assets/js/einblicke.js');
 function einblickeMenue(footer) {
   const roh = (quelle.match(/<sc-if value="\{\{ menuOpen \}\}"[^>]*>\n([\s\S]*?)\n<\/sc-if>/) || [])[1];
   if (!roh) throw new Error('Menü (sc-if menuOpen) in src/seite.html nicht gefunden.');
-  const logo = (footer.match(/<div class="sc-host" data-sc-name="logo"><span style="display: inline-flex;[\s\S]*?<\/span><\/span><\/div>/) || [])[0];
+  const logo = (footer.match(/<(div|span) class="sc-host" data-sc-name="logo"[^>]*><span style="display: inline-flex;[\s\S]*?<\/span><\/span><\/\1>/) || [])[0];
   if (!logo) throw new Error('Wortmarke in der Fusszeile nicht gefunden.');
   const html = roh
     .replace(/<sc-for list="\{\{ navLinks \}\}"[^>]*>\n?([\s\S]*?)\n?\s*<\/sc-for>/g, (_, innen) => NAV.map((n, i) => {

@@ -110,6 +110,8 @@ mkdirSync(ZIEL, { recursive: true });
 cpSync(join(quelle, 'assets'), join(ZIEL, 'assets'), { recursive: true });
 for (const datei of Object.keys(NEUTRAL).filter((d) => d !== 'index.html'))
   writeFileSync(join(ZIEL, datei), neutral(datei, readFileSync(join(ZIEL, datei), 'utf8')));
+// Gültige Gliederung (W3C): Die Überschrift der nachgebauten alten Website ist h4 direkt unter h2. Als h3 zeichnet sie gleich (.retro__h setzt alles).
+html = html.replace(/<h4 class="retro__h"([^>]*)>([\s\S]*?)<\/h4>/g, '<h3 class="retro__h"$1>$2</h3>');
 // Externe LinkedIn-Links wie auf odera.ch: neuer Tab, ohne Referrer
 html = html.replace(/(<a [^>]*href="https:\/\/www\.linkedin\.com\/[^"]*"[^>]*?) rel="noopener"/g, '$1 rel="noopener noreferrer"');
 writeFileSync(join(ZIEL, 'index.html'), html);
