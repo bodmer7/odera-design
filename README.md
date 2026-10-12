@@ -101,6 +101,7 @@ musterprojekte/firstlicht/  Musterprojekt Solarbetrieb Firstlicht, sechs erzeugt
 tools/firstlicht/           Vorlagen, Build, Tests und Prüfungen für Firstlicht (nicht veröffentlicht)
 einblicke/                  Blog (Übersicht, Artikel, feed.xml, sitemap.xml), geschrieben vom Akquise-Tool, nicht von Hand ändern
 src/einblicke-vorlage.html  Vorlage der Einblicke, erzeugt von tools/seo-build.mjs (nicht veröffentlicht)
+tools/einblicke-auffrischen.mjs  Setzt die bestehenden Einblicke in die aktuelle Vorlage und gleicht Kopf, Daten und Autorenzeile an
 src/einblicke/              Daten der Einblicke für neue Läufe (nicht veröffentlicht)
 assets/css/einblicke.css, assets/js/einblicke.js  Stil sowie Menü und Kopf der Einblicke (ohne React)
 package.json                Nur Entwicklungswerkzeuge für Firstlicht (nicht veröffentlicht)

@@ -83,6 +83,11 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 12. Oktober 
   eigene Sitemap `einblicke/sitemap.xml` (in `robots.txt`), RSS `einblicke/feed.xml`. Ohne Artikel ist die
   Übersicht `noindex`.
 - Am Ende jedes Artikels der Projekt-Check (`?quelle=einblicke`). Tests: `node tools/funktionstest.mjs … einblicke`.
+- Seit 12. Oktober 2026: `node tools/einblicke-auffrischen.mjs` setzt die bestehenden Seiten in die aktuelle Vorlage
+  (wie `neu-erstellen` im Akquise-Repo) und gleicht an, was das Akquise-Tool noch anders schreibt: Titel-Trenner «·»,
+  Twitter-Angaben, BlogPosting mit `@id` von Person und Firma, `dateModified` nie vor `datePublished`, Autorenzeile mit
+  Link auf /ueber-mich/. Nach Änderungen an Kopf, Stil oder Fusszeile `seo-build`, dann dieses Skript. Bis das
+  Akquise-Tool dasselbe schreibt, nach jedem neuen Artikel ebenfalls ausführen (siehe Offene Punkte).
 - Seit 9. Oktober 2026: Übersicht und Artikel nutzen die Bänder des Gestaltungssystems (`.band`, `.wrap`, `.inner`,
   `.augenbraue`, `.titel-1`, `.einleitung`, `.karte`, Abschluss als `band-kobalt`) und haben damit dieselben Abstände
   wie /ablauf/. `einblicke.css` lädt als letztes vor `</head>` und setzt keine Abschnittsabstände. LinkedIn-Link auf die
@@ -166,6 +171,19 @@ Beispielseiten erfundener Betriebe (Doppelmeter, Firstlicht). Für jedes Muster 
   `tools/lighthouse.mjs`.
 
 ## Offene Punkte
+
+- [ ] **Akquise-Tool an das SEO-Audit vom 12. Oktober 2026 angleichen** (privates Repo `odera-akquise`), sonst
+      überschreibt der nächste Artikel die Korrekturen: `BlogPosting` statt `Article`, Autor
+      `{"@id":"https://odera.ch/ueber-mich/#person"}`, Herausgeber `@id` `https://odera.ch/#organisation` (statt `#firma`)
+      mit Logo `assets/img/odera-logo-512.png`, `dateModified` nie vor `datePublished`, Titel-Trenner «·», `twitter:title`
+      und `twitter:description`, Autorenzeile `<a href="/ueber-mich/" rel="author">`, Karten der Übersicht mit
+      `<div class="eb-karte-text">` statt `<span>` (h2 darin), neuen Artikel auch in `sitemap.xml` und `llms.txt`
+      eintragen (oder danach `seo-build` laufen lassen). Vorbild: `tools/einblicke-auffrischen.mjs`.
+- [ ] **Nach dem Merge `chat-proxy` deployen:** `chat-proxy/src/wissen.js` hat sich durch die neuen Linkzeilen geändert.
+- [ ] **Postleitzahl in den strukturierten Daten:** Am 12. Oktober 2026 auf Auftrag entfernt (nur Ort, Kanton, Land).
+      Am 8. Oktober war «Berikon, 8965, AG, CH» freigegeben. Nico entscheidet, ob 8965 wieder rein soll.
+- [ ] **Portfolio-Kopie `/muster/portfolio/`** ist nirgends mehr verlinkt, nennt aber eine private E-Mail-Adresse und
+      eigene Personendaten. Vorschlag: Ordner, Rahmen und `tools/portfolio-sync.mjs` entfernen.
 
 - [ ] **Ladezeit Doppelmeter auf dem Handy:** 1,65 bis 2,5 s mit gedrosseltem Netz, Ziel war 1 s.
       Desktop 0,4 bis 0,5 s.
