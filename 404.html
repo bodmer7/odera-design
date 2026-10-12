@@ -27,7 +27,7 @@
 <meta name="twitter:title" content="Seite nicht gefunden · ODERA Design">
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
-<link rel="preload" href="assets/js/vorlage.js?v=7c705ffa9f" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=4f64b50cd0" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -283,6 +283,7 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .qleft{grid-column:1 / span 4;position:sticky;top:112px}
 .qright{grid-column:6 / span 7}
 @media(max-width:1023px){.qgrid{grid-template-columns:1fr;gap:24px}.qleft,.qright{grid-column:auto}.qleft{position:static}}
+.qnum::before{content:attr(data-n)}
 .qnum{font-size:120px;line-height:0.9;color:rgba(17,19,26,0.12);margin:0 0 8px;font-variant-numeric:tabular-nums;transition:opacity 200ms linear}
 @media(max-width:1023px){.qnum{font-size:72px}}
 .acard{display:flex;align-items:center;gap:20px;text-align:left;width:100%;min-height:72px;padding:22px 20px;border-radius:16px;font-size:16px;line-height:1.4;cursor:pointer;transition:transform 140ms ease-out,border-color 140ms ease-out,background 140ms ease-out}
@@ -414,6 +415,7 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .rahmen-punkte i{width:10px;height:10px;border-radius:999px;background:#D7D4CC}
 .rahmen-adresse{justify-self:center;display:flex;align-items:center;gap:6px;min-width:0;max-width:100%;height:22px;padding:0 12px;border-radius:999px;background:#FFFFFF;border:1px solid rgba(17,19,26,0.08);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;line-height:1;color:var(--text-2)}
 .rahmen-adresse span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rahmen-adresse span[data-adresse]::before{content:attr(data-adresse)}
 .rahmen-adresse svg{flex:none;width:11px;height:11px}
 .rahmen-handy{background:#0B0C10;border-radius:34px;padding:7px;box-shadow:0 0 0 1px rgba(17,19,26,0.4),0 2px 4px rgba(17,19,26,0.12),0 28px 56px -24px rgba(17,19,26,0.5);transition:transform var(--dauer) var(--kurve),box-shadow var(--dauer) var(--kurve)}
 .rahmen-schirm{position:relative;overflow:hidden;border-radius:27px;background:#0B0C10;padding-top:10%}
@@ -602,11 +604,22 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
  .pr-blk{page-break-inside:avoid;margin:0 0 14pt}
  .pr-ul{margin:0 0 4pt;padding-left:14pt;font-size:11pt;line-height:1.45}
 }
+/* Sprunglink: erst bei Tastaturfokus sichtbar */
+.sprunglink{position:fixed;left:16px;top:16px;z-index:200;padding:12px 18px;border-radius:8px;background:var(--tinte);color:#FFFFFF;font-weight:600;text-decoration:underline;text-underline-offset:3px;transform:translateY(-200%)}
+.sprunglink:focus{transform:none;outline:3px solid var(--akzent);outline-offset:2px}
+main[tabindex="-1"]:focus{outline:none}
+.wisch[tabindex="0"]:focus-visible{outline:3px solid var(--akzent);outline-offset:4px;border-radius:12px}
 </style>
 <script>
 // Vorab-Block erst zeigen, wenn die Schriften da sind: sonst springt der Text beim Wechsel der Schrift (CLS)
 (function(){var h=document.documentElement,f=document.fonts,zeigen=function(){h.classList.add('schrift')};h.classList.add('js');
 if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1em Inter'),f.load('600 1em Inter'),f.load('500 1em "JetBrains Mono"')]).then(zeigen,zeigen)}else zeigen();setTimeout(zeigen,3000)})();
+</script>
+<script>
+// Sprunglink «Zum Inhalt»: Fokus auf den sichtbaren Hauptinhalt. Läuft vor der Laufzeit, wegen <base href="/"> nötig.
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a.sprunglink');if(!a)return;e.preventDefault();
+var m=[].slice.call(document.querySelectorAll('main')).filter(function(x){return x.getClientRects().length})[0];if(!m)return;
+if(!m.hasAttribute('tabindex'))m.setAttribute('tabindex','-1');m.focus({preventScroll:true});m.scrollIntoView();},true);
 </script>
 <script>window.__resources = {}; // Seite nicht ein zweites Mal laden (support.js), logo.dc.html liest auch kleingeschriebene Eigenschaften</script>
 <script defer src="assets/js/vendor/react-18.3.1.production.min.js"></script>
@@ -617,7 +630,7 @@ if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=7c705ffa9f';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=4f64b50cd0';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -1150,7 +1163,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 
 <!-- seo-noscript:end -->
 <!-- vorab:start -->
-<div id="vorab"><div class="sc-host" data-sc-name="Root"><header class="kopf" data-scroll="0" data-weg="0" data-menue="0">
+<div id="vorab"><div class="sc-host" data-sc-name="Root"><a class="sprunglink" href="#inhalt">Zum Inhalt springen</a><header class="kopf" data-scroll="0" data-weg="0" data-menue="0">
   <div id="thread" aria-hidden="true" style="height: 2px; width: 0%; background: var(--akzent); box-shadow: rgba(17, 19, 26, 0.45) 0px 1px 0px; transition: width 80ms linear;"></div>
   <div class="wrap navbar">
     <a href="/" class="kopf-logo" style="text-decoration: none; color: var(--tinte); display: flex; align-items: center; gap: 12px;">
@@ -1167,7 +1180,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <span class="tagline">Webseiten für Schweizer Betriebe</span>
       </span>
       </span>
-      <span class="logo-menue" aria-hidden="true">
+      <span class="logo-menue">
         <span class="sc-host" data-sc-name="logo" style="display: block;"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgb(255, 255, 255); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 18px; color: rgb(45, 76, 240);">
   <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(255, 255, 255); transform: rotate(-19deg);"></span></span></span></span>
         <span class="sc-host" data-sc-name="logo" style="display: block;"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 23px; color: rgb(255, 255, 255);">
@@ -1199,7 +1212,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </button>
       </div>
     </div>
-  </div></header><main style="animation: none;"><div>
+  </div></header><main id="inhalt" style="animation: none;"><div>
   <section style="background: var(--grund);">
     <div class="wrap" style="padding-top: var(--a-6); padding-bottom: var(--a-6);">
       <div style="max-width: 640px; margin: 0px auto; text-align: center;">

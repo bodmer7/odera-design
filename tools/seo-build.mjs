@@ -393,7 +393,7 @@ function einblickeVorlage() {
     // Unterstrich der aktiven Seite setzt assets/js/einblicke.js
     .replace(/(<span aria-hidden="true" style="position: absolute; bottom: -2px;[^"]*?)left: [\d.]+px; width: [\d.]+px; opacity: [\d.]+;/, '$1left: 0px; width: 0px; opacity: 0;');
   if (!kopfzeile.includes('<a href="/einblicke/" aria-current="page"')) throw new Error('Link «Einblicke» im Kopf nicht gefunden.');
-  const koerper = `<div id="vorab" class="einblicke">${kopfzeile}\n${einblickeMenue(footer)}\n<main id="inhalt">\n<!-- einblicke:inhalt -->\n</main>${footer}</div>\n`;
+  const koerper = `<div id="vorab" class="einblicke"><a class="sprunglink" href="#inhalt">Zum Inhalt springen</a>\n${kopfzeile}\n${einblickeMenue(footer)}\n<main id="inhalt">\n<!-- einblicke:inhalt -->\n</main>${footer}</div>\n`;
   html = html.replace(/<!-- vorab:start -->[\s\S]*?<!-- vorab:end -->/, () => `<!-- vorab:start -->\n${koerper}<!-- vorab:end -->`);
   return '<!-- Erzeugt mit tools/seo-build.mjs aus ueber-mich/index.html. Nicht von Hand ändern. Wird vom Akquise-Tool befüllt. -->\n' + html;
 }
