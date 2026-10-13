@@ -1,7 +1,7 @@
 # CLAUDE.md: Entscheidungen und offene Punkte für odera.ch
 
 Kurzfassung für die Arbeit an diesem Repo. Technische Details stehen im `README.md`,
-hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 12. Oktober 2026.
+hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 13. Oktober 2026.
 
 ## Feste Regeln
 
@@ -174,10 +174,8 @@ Beispielseiten erfundener Betriebe (Doppelmeter, Firstlicht). Für jedes Muster 
 
 ## Offene Punkte
 
-- [ ] **Akquise-Tool deployen:** Generator angeglichen in bodmer7/odera-akquise#1 (13. Oktober 2026). Nach dem Merge dort
-      `npm run deploy`, sonst nutzt der Knopf «Gepostet» noch die alte Fassung.
-- [ ] **Nach dem Merge `chat-proxy` deployen:** `chat-proxy/src/wissen.js` hat sich durch die neuen Linkzeilen geändert.
-      Danach mit einer Testfrage prüfen, dass die Links auf live erreichbare Seiten zeigen.
+- [x] **Deploys nach dem SEO-Audit:** am 13. Oktober 2026 `odera-chat` (07:58) und `odera-akquise` (07:59) deployt.
+      Geprüft über Cloudflare: Wissensbasis live identisch mit `main`, Generator der Einblicke in der neuen Fassung.
 - [ ] **Online-Prüfung nach dem Merge** (Nico): W3C-Validator, Rich Results Test, validator.schema.org.
 
 - [ ] **Ladezeit Doppelmeter auf dem Handy:** 1,65 bis 2,5 s mit gedrosseltem Netz, Ziel war 1 s.
