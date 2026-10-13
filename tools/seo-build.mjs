@@ -78,7 +78,7 @@ const GEBIET = [{ '@type': 'Place', name: 'Freiamt' }, { '@type': 'Place', name:
 // Person: nur, was auf «Über mich» steht. Kein Arbeitgeber (kein worksFor).
 const PERSON_KURZ = { '@type': 'Person', '@id': PERSON, name: 'Nico Bodmer', url: SITE + '/ueber-mich/', sameAs: [FIRMA.linkedinPerson] };
 const PERSON_VOLL = { ...PERSON_KURZ, jobTitle: 'Webdesigner', image: SITE + '/assets/img/portrait-nico-bodmer.webp',
-  address: { '@type': 'PostalAddress', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
+  address: { '@type': 'PostalAddress', postalCode: '8965', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
   hasCredential: [
     { '@type': 'EducationalOccupationalCredential', name: 'Platform Developer EFZ', credentialCategory: 'Eidgenössisches Fähigkeitszeugnis (EFZ)',
       description: 'Vierjährige Lehre, 2021 bis 2025' },
@@ -89,7 +89,7 @@ const ORGANISATION = { '@type': 'ProfessionalService', '@id': ORG, name: NAME, u
   description: 'Webseiten für Schweizer Betriebe. Fertiger Entwurf in 5 Arbeitstagen, gratis und unverbindlich, danach Fixpreis ab ' + chf(PREISE[0]) + '. Webdesign aus Berikon AG.',
   logo: { '@type': 'ImageObject', '@id': SITE + '/#logo', url: SITE + '/assets/img/odera-logo-512.png' },
   image: SITE + VORSCHAU.url, priceRange: chf(PREISE[0]) + ' bis ' + chf(PREISE[2]),
-  address: { '@type': 'PostalAddress', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
+  address: { '@type': 'PostalAddress', postalCode: '8965', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
   areaServed: GEBIET, founder: PERSON_KURZ, sameAs: [FIRMA.linkedinFirma],
   contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: EMAIL, availableLanguage: 'de' } };
 function brotkrumen(url, stufen) {
