@@ -44,19 +44,27 @@ const text = (name) => (quelle.match(new RegExp(' {2}' + name + " = '([^']+)';")
 const FIRMA = {
   linkedinFirma: text('ODERA_LINKEDIN_URL'), linkedinPerson: text('LINKEDIN_PERSON_URL'),
   betrieb: [zahl('HOSTING_AUSLAND_CHF'), zahl('HOSTING_SCHWEIZ_CHF')],
-  claim: 'Digitale Auftritte für Unternehmen, die weiterkommen wollen.',
 };
 if (!FIRMA.linkedinFirma || !FIRMA.linkedinPerson || !FIRMA.betrieb[0] || !FIRMA.betrieb[1]) throw new Error('LinkedIn-Adressen oder Betriebspreise in src/seite.html nicht gefunden.');
 const BRANCHEN = new Function('return ' + ((quelle.match(/ {2}BRANCHEN_SEITEN = (\{[\s\S]*?\n {2}\});/) || [])[1] || '{}'))();
 const ORG = SITE + '/#organisation', PERSON = SITE + '/ueber-mich/#person', WEBSITE = SITE + '/#website';
+// Pakete wie auf /angebot/ sichtbar (Karten «Was in jedem Paket steckt»)
 const PAKETE = [
-  ['Website', 'Eine Seite mit allen Abschnitten, Kontaktformular, eine Korrekturrunde'],
-  ['Standard', 'Bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil, zwei Korrekturrunden'],
-  ['Pro', 'Bis 10 Seiten, Online-Terminbuchung, zweite Sprache, Texte selbst bearbeiten, drei Korrekturrunden'],
+  ['Website', 'Eine Seite mit allen Abschnitten, Kontaktformular, für Handy, Tablet und Computer, eine Korrekturrunde'],
+  ['Standard', 'Bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil eingerichtet, zwei Korrekturrunden'],
+  ['Pro', 'Bis 10 Seiten, Online-Terminbuchung oder erweiterte Formulare, zweite Sprache, Texte selbst bearbeiten ohne Technikkenntnisse, drei Korrekturrunden'],
 ];
-const chf = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u2019');
+const LOGO = [zahl('LOGO_ALLEIN_CHF'), zahl('LOGO_MIT_WEBSITE_CHF')];
+if (!LOGO[0] || !LOGO[1]) throw new Error('LOGO_ALLEIN_CHF oder LOGO_MIT_WEBSITE_CHF in src/seite.html nicht gefunden.');
+const chf = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '’');
 function angebotsKatalog(mitBetrieb) {
-  const liste = PAKETE.map(([n, d], i) => ({ '@type': 'Offer', name: 'Paket ' + n, description: d, price: String(PREISE[i]), priceCurrency: 'CHF', url: SITE + '/angebot/' }));
+  const liste = PAKETE.map(([n, d], i) => ({ '@type': 'Offer', '@id': SITE + '/angebot/#paket-' + n.toLowerCase(), name: 'Paket ' + n, description: d,
+    price: String(PREISE[i]), priceCurrency: 'CHF', url: SITE + '/angebot/' }));
+  liste.push(
+    { '@type': 'Offer', '@id': SITE + '/angebot/#logo', name: 'Logo-Design', description: 'Ein eigenständiges Zeichen für Ihren Betrieb. 3 Richtungen zur Auswahl, 2 Korrekturrunden, fertige Dateien für Web und Druck.',
+      price: String(LOGO[0]), priceCurrency: 'CHF', url: SITE + '/angebot/' },
+    { '@type': 'Offer', '@id': SITE + '/angebot/#logo-mit-website', name: 'Logo-Design zusammen mit einer Website', description: 'Wie oben, gebucht zusammen mit einem Website-Paket.',
+      price: String(LOGO[1]), priceCurrency: 'CHF', url: SITE + '/angebot/' });
   if (mitBetrieb) liste.push(
     { '@type': 'Offer', name: 'Betrieb, Server in der EU', description: 'Hosting, SSL, tägliche Sicherungen, Erreichbarkeitsprüfung', price: String(FIRMA.betrieb[0]), priceCurrency: 'CHF',
       priceSpecification: { '@type': 'UnitPriceSpecification', price: String(FIRMA.betrieb[0]), priceCurrency: 'CHF', unitText: 'Jahr' }, url: SITE + '/angebot/#betrieb' },
@@ -64,7 +72,29 @@ function angebotsKatalog(mitBetrieb) {
       priceSpecification: { '@type': 'UnitPriceSpecification', price: String(FIRMA.betrieb[1]), priceCurrency: 'CHF', unitText: 'Jahr' }, url: SITE + '/angebot/#betrieb' });
   return { '@type': 'OfferCatalog', name: 'Websites zum Fixpreis', itemListElement: liste };
 }
-const GEBIET = [{ '@type': 'AdministrativeArea', name: 'Kanton Aargau' }, { '@type': 'AdministrativeArea', name: 'Kanton Zürich' }, { '@type': 'Country', name: 'Schweiz' }];
+// Einzugsgebiet wie im Fuss jeder Seite: «im Freiamt, am Mutschellen, im Kanton Aargau und in der ganzen Schweiz»
+const GEBIET = [{ '@type': 'Place', name: 'Freiamt' }, { '@type': 'Place', name: 'Mutschellen' },
+  { '@type': 'AdministrativeArea', name: 'Kanton Aargau' }, { '@type': 'Country', name: 'Schweiz' }];
+// Person: nur, was auf «Über mich» steht. Kein Arbeitgeber (kein worksFor).
+const PERSON_KURZ = { '@type': 'Person', '@id': PERSON, name: 'Nico Bodmer', url: SITE + '/ueber-mich/', sameAs: [FIRMA.linkedinPerson] };
+const PERSON_VOLL = { ...PERSON_KURZ, jobTitle: 'Webdesigner', image: SITE + '/assets/img/portrait-nico-bodmer.webp',
+  address: { '@type': 'PostalAddress', postalCode: '8965', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
+  hasCredential: [
+    { '@type': 'EducationalOccupationalCredential', name: 'Platform Developer EFZ', credentialCategory: 'Eidgenössisches Fähigkeitszeugnis (EFZ)',
+      description: 'Vierjährige Lehre, 2021 bis 2025' },
+    { '@type': 'EducationalOccupationalCredential', name: 'Technische Berufsmaturität', credentialCategory: 'Berufsmaturität', description: '2025' }],
+  affiliation: { '@type': 'CollegeOrUniversity', name: 'HWZ Hochschule für Wirtschaft Zürich', description: 'Berufsbegleitendes Studium BSc Digital Business und AI, seit 2026' },
+  knowsAbout: ['Webdesign', 'React', 'Astro', 'Vite'] };
+const ORGANISATION = { '@type': 'ProfessionalService', '@id': ORG, name: NAME, url: SITE + '/', email: EMAIL,
+  description: 'Webseiten für Schweizer Betriebe. Fertiger Entwurf in 5 Arbeitstagen, gratis und unverbindlich, danach Fixpreis ab ' + chf(PREISE[0]) + '. Webdesign aus Berikon AG.',
+  logo: { '@type': 'ImageObject', '@id': SITE + '/#logo', url: SITE + '/assets/img/odera-logo-512.png' },
+  image: SITE + VORSCHAU.url, priceRange: chf(PREISE[0]) + ' bis ' + chf(PREISE[2]),
+  address: { '@type': 'PostalAddress', postalCode: '8965', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
+  areaServed: GEBIET, founder: PERSON_KURZ, sameAs: [FIRMA.linkedinFirma],
+  contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: EMAIL, availableLanguage: 'de' } };
+function brotkrumen(url, stufen) {
+  return { '@type': 'BreadcrumbList', '@id': url + '#brotkrumen', itemListElement: [['Start', SITE + '/'], ...stufen].map(([name, item], i) => ({ '@type': 'ListItem', position: i + 1, name, item })) };
+}
 function strukturDaten(pfad, p, teile) {
   const url = SITE + urlOf(pfad);
   const graph = [];
@@ -72,25 +102,20 @@ function strukturDaten(pfad, p, teile) {
   if (pfad === '/') {
     graph.push(
       { '@type': 'WebSite', '@id': WEBSITE, url: SITE + '/', name: NAME, inLanguage: 'de-CH', publisher: { '@id': ORG } },
-      { '@type': 'LocalBusiness', '@id': ORG, name: NAME, url: SITE + '/', email: EMAIL, description: FIRMA.claim + ' ' + p.desc,
-        logo: { '@type': 'ImageObject', url: SITE + '/assets/img/odera-logo-512.png', width: 512, height: 512 },
-        image: SITE + VORSCHAU.url, priceRange: chf(PREISE[0]) + ' bis ' + chf(PREISE[2]),
-        address: { '@type': 'PostalAddress', postalCode: '8965', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' },
-        areaServed: GEBIET, founder: { '@id': PERSON }, sameAs: [FIRMA.linkedinFirma],
-        contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: EMAIL, availableLanguage: 'de' },
-        hasOfferCatalog: angebotsKatalog(false) },
-      { '@type': 'WebPage', '@id': url + '#seite', url, name: p.title, inLanguage: 'de-CH', isPartOf: { '@id': WEBSITE }, about: { '@id': ORG } });
+      { ...ORGANISATION, hasOfferCatalog: angebotsKatalog(false) },
+      { '@type': 'WebPage', '@id': url + '#seite', url, name: p.title, description: p.desc || undefined, inLanguage: 'de-CH', isPartOf: { '@id': WEBSITE }, about: { '@id': ORG } });
   } else {
-    graph.push({ '@type': 'WebPage', '@id': url + '#seite', url, name: p.title, description: p.desc || undefined, inLanguage: 'de-CH', isPartOf: { '@id': WEBSITE },
-      breadcrumb: { '@id': url + '#brotkrumen' } },
-    { '@type': 'BreadcrumbList', '@id': url + '#brotkrumen', itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Start', item: SITE + '/' },
-      { '@type': 'ListItem', position: 2, name: (BRANCHEN[pfad] && BRANCHEN[pfad].h1) || name, item: url }] });
-    if (pfad === '/angebot') graph.push({ '@type': 'Service', '@id': url + '#leistung', name: 'Website erstellen zum Fixpreis', provider: { '@id': ORG },
+    graph.push({ '@type': pfad === '/ueber-mich' ? 'ProfilePage' : 'WebPage', '@id': url + '#seite', url, name: p.title, description: p.desc || undefined, inLanguage: 'de-CH',
+      isPartOf: { '@id': WEBSITE }, breadcrumb: { '@id': url + '#brotkrumen' }, mainEntity: pfad === '/ueber-mich' ? { '@id': PERSON } : undefined },
+    brotkrumen(url, [[(BRANCHEN[pfad] && BRANCHEN[pfad].h1) || name, url]]));
+    if (pfad === '/angebot') graph.push({ '@type': 'Service', '@id': url + '#leistung', name: 'Website erstellen zum Fixpreis', serviceType: 'Webdesign', provider: { '@id': ORG },
       areaServed: GEBIET, hasOfferCatalog: angebotsKatalog(true) });
-    if (pfad === '/ueber-mich') graph.push({ '@type': 'Person', '@id': PERSON, name: 'Nico Bodmer', jobTitle: 'Webdesigner', worksFor: { '@id': ORG },
-      image: SITE + '/assets/img/portrait-nico-bodmer.webp', sameAs: [FIRMA.linkedinPerson],
-      address: { '@type': 'PostalAddress', addressLocality: 'Berikon', addressRegion: 'AG', addressCountry: 'CH' } });
+    if (pfad === '/ueber-mich') graph.push(PERSON_VOLL);
+    // Beide Muster sind erfundene Betriebe. Das steht auch in den Daten, damit sie niemand für Kundenprojekte hält.
+    if (pfad === '/musterprojekte') graph.push({ '@type': 'ItemList', '@id': url + '#muster', name: 'Musterprojekte von ODERA Design',
+      itemListElement: [['Schreinerei Doppelmeter', 'doppelmeter'], ['Firstlicht Solartechnik', 'firstlicht']].map(([n, ordner], i) => ({ '@type': 'ListItem', position: i + 1,
+        item: { '@type': 'CreativeWork', name: 'Musterprojekt ' + n, url: SITE + '/musterprojekte/' + ordner + '/', creator: { '@id': ORG },
+          description: 'Beispielseite von ODERA Design. Der Betrieb ist frei erfunden.' } })) });
     if (BRANCHEN[pfad]) graph.push({ '@type': 'Service', '@id': url + '#leistung', name: BRANCHEN[pfad].dienst, serviceType: BRANCHEN[pfad].dienst,
       provider: { '@id': ORG }, areaServed: GEBIET, offers: { '@type': 'Offer', price: String(PREISE[0]), priceCurrency: 'CHF', url: SITE + '/angebot/' } });
   }
@@ -167,12 +192,29 @@ const AUSZUG = `(() => {
     const innen = fluss([...n.childNodes]);
     return innen ? { art: 'block', html: innen } : { art: 'nichts' };
   };
+  // Für gültiges HTML: Komponenten-Hüllen (<div class="sc-host">) mit reinem Textinhalt stehen oft in einem <span> oder <a>.
+  // Dort wird daraus ein <span> mit display:block, das zeichnet gleich. Die Laufzeit ersetzt den Block beim Start ohnehin.
+  const PHRASING = /^(A|ABBR|B|BR|CODE|EM|I|IMG|KBD|MARK|Q|S|SMALL|SPAN|STRONG|SUB|SUP|SVG|TIME|U|WBR|PATH|CIRCLE|RECT|LINE|POLYLINE|POLYGON|G|USE|DEFS|ELLIPSE)$/i;
+  const vorabHtml = () => {
+    const k = document.getElementById('dc-root').cloneNode(true);
+    k.querySelectorAll('div.sc-host').forEach((d) => {
+      if ([...d.querySelectorAll('*')].some((e) => !PHRASING.test(e.tagName))) return;
+      const s = document.createElement('span');
+      for (const at of d.attributes) s.setAttribute(at.name, at.value);
+      s.style.display = 'block';
+      while (d.firstChild) s.appendChild(d.firstChild);
+      d.replaceWith(s);
+    });
+    return k.innerHTML.replace(/ data-dc-tpl="\\d+"/g, '')
+      // Chrome schreibt animation:none als «auto ease 0s 1 normal none running none». Der Validator kennt «auto» als Dauer nicht.
+      .replace(/animation: auto ease 0s 1 normal none running none;/g, 'animation: none;');
+  };
   const teil = (sel) => { const el = document.querySelector(sel); return el ? (gehe(el).html || '') : ''; };
   return {
     nav: [...document.querySelectorAll('#dc-root header nav a')].map((a) => ({ label: a.innerText.trim(), href: a.getAttribute('href') })),
     // Fertig gerenderte Seite für den Vorab-Block (ohne interne Zähler der Laufzeit)
-    vorab: document.getElementById('dc-root').innerHTML.replace(/ data-dc-tpl="\\d+"/g, ''),
-    faq: [...document.querySelectorAll('#dc-root main details.frage')].map((d) => ({ q: d.querySelector('summary').textContent.trim(), a: d.querySelector('p').textContent.trim() })),
+    vorab: vorabHtml(),
+    faq: [...document.querySelectorAll('#dc-root main details.frage')].map((d) => ({ q: d.querySelector('summary').textContent.trim(), a: [...d.querySelectorAll('p')].map((x) => x.textContent.trim()).join(' ') })),
     main: teil('#dc-root main'),
     footer: teil('#dc-root footer'),
   };
@@ -212,6 +254,8 @@ function kopf(pfad, teile = {}) {
     `<meta property="og:image:height" content="${VORSCHAU.hoehe}">`,
     `<meta property="og:image:alt" content="${escA(VORSCHAU.alt)}">`,
     '<meta name="twitter:card" content="summary_large_image">',
+    `<meta name="twitter:title" content="${escA(p.title)}">`,
+    ...(p.desc ? [`<meta name="twitter:description" content="${escA(p.desc)}">`] : []),
     `<meta name="twitter:image" content="${SITE}${VORSCHAU.url}">`,
     '<style>x-dc{display:none!important}</style>',
   );
@@ -298,7 +342,7 @@ const EINBLICKE_JS = version('assets/js/einblicke.js');
 function einblickeMenue(footer) {
   const roh = (quelle.match(/<sc-if value="\{\{ menuOpen \}\}"[^>]*>\n([\s\S]*?)\n<\/sc-if>/) || [])[1];
   if (!roh) throw new Error('Menü (sc-if menuOpen) in src/seite.html nicht gefunden.');
-  const logo = (footer.match(/<div class="sc-host" data-sc-name="logo"><span style="display: inline-flex;[\s\S]*?<\/span><\/span><\/div>/) || [])[0];
+  const logo = (footer.match(/<(div|span) class="sc-host" data-sc-name="logo"[^>]*><span style="display: inline-flex;[\s\S]*?<\/span><\/span><\/\1>/) || [])[0];
   if (!logo) throw new Error('Wortmarke in der Fusszeile nicht gefunden.');
   const html = roh
     .replace(/<sc-for list="\{\{ navLinks \}\}"[^>]*>\n?([\s\S]*?)\n?\s*<\/sc-for>/g, (_, innen) => NAV.map((n, i) => {
@@ -349,7 +393,7 @@ function einblickeVorlage() {
     // Unterstrich der aktiven Seite setzt assets/js/einblicke.js
     .replace(/(<span aria-hidden="true" style="position: absolute; bottom: -2px;[^"]*?)left: [\d.]+px; width: [\d.]+px; opacity: [\d.]+;/, '$1left: 0px; width: 0px; opacity: 0;');
   if (!kopfzeile.includes('<a href="/einblicke/" aria-current="page"')) throw new Error('Link «Einblicke» im Kopf nicht gefunden.');
-  const koerper = `<div id="vorab" class="einblicke">${kopfzeile}\n${einblickeMenue(footer)}\n<main id="inhalt">\n<!-- einblicke:inhalt -->\n</main>${footer}</div>\n`;
+  const koerper = `<div id="vorab" class="einblicke"><a class="sprunglink" href="#inhalt">Zum Inhalt springen</a>\n${kopfzeile}\n${einblickeMenue(footer)}\n<main id="inhalt">\n<!-- einblicke:inhalt -->\n</main>${footer}</div>\n`;
   html = html.replace(/<!-- vorab:start -->[\s\S]*?<!-- vorab:end -->/, () => `<!-- vorab:start -->\n${koerper}<!-- vorab:end -->`);
   return '<!-- Erzeugt mit tools/seo-build.mjs aus ueber-mich/index.html. Nicht von Hand ändern. Wird vom Akquise-Tool befüllt. -->\n' + html;
 }
@@ -367,12 +411,82 @@ writeFileSync(STAND_DATEI, JSON.stringify(stand, null, 2) + '\n');
 // Der Projekt-Check gehört nicht in die Sitemap (Entscheid Nico, 10. Oktober 2026)
 const OHNE_SITEMAP = ['/projekt-check'];
 const indexierbar = Object.keys(PAGES).filter((p) => !PAGES[p].noindex && !OHNE_SITEMAP.includes(p));
+
+// Einblicke (statische Seiten aus dem Akquise-Tool): Liste aus src/einblicke/index.json, gleiche Reihenfolge und gleiche
+// Zeilen wie im Akquise-Tool (src/logik/einblicke.ts: sortiere, lastmod, websiteSitemapMitEinblicken, llmsMitEinblicken).
+// Das Tool trägt einen neuen Artikel selbst in sitemap.xml und llms.txt ein; seo-build schreibt dasselbe.
+// lastmod ist das Änderungsdatum des Artikels, nie vor dem Veröffentlichungsdatum.
+function einblickeLesen() {
+  const datei = join(ROOT, 'src', 'einblicke', 'index.json');
+  if (!existsSync(datei)) return [];
+  const liste = JSON.parse(readFileSync(datei, 'utf8')).artikel || [];
+  return [...liste].sort((a, b) => b.datum.localeCompare(a.datum) || b.geaendert.localeCompare(a.geaendert) || a.slug.localeCompare(b.slug))
+    .map((e) => ({ url: `${SITE}/einblicke/${e.slug}/`, titel: e.titel, desc: e.anriss.trim(), datum: e.datum,
+      lastmod: e.geaendert.slice(0, 10) > e.datum ? e.geaendert.slice(0, 10) : e.datum }));
+}
+const ARTIKEL = einblickeLesen();
+const einblickeUrls = [
+  ...(ARTIKEL.length ? [{ loc: `${SITE}/einblicke/`, lastmod: ARTIKEL.map((a) => a.lastmod).sort().at(-1) }] : []),
+  ...ARTIKEL.map((a) => ({ loc: a.url, lastmod: a.lastmod }))];
 writeFileSync(join(ROOT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  indexierbar.map((p) => `  <url><loc>${SITE}${urlOf(p)}</loc><lastmod>${(stand[p] || {}).lastmod || heute}</lastmod></url>`).join('\n') + '\n</urlset>\n');
-// Die Einblicke haben eine eigene Sitemap (einblicke/sitemap.xml), geschrieben vom Akquise-Tool.
-writeFileSync(join(ROOT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\nSitemap: ${SITE}/einblicke/sitemap.xml\n`);
-geschrieben.push('sitemap.xml'.padEnd(34) + `${indexierbar.length} Adressen`, 'robots.txt');
+  [...indexierbar.map((p) => ({ loc: SITE + urlOf(p), lastmod: (stand[p] || {}).lastmod || heute })), ...einblickeUrls]
+    .map((u) => `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod></url>`).join('\n') + '\n</urlset>\n');
+
+// robots.txt: alle Such- und KI-Crawler ausdrücklich erlaubt. Die Einblicke haben zusätzlich eine eigene Sitemap
+// (einblicke/sitemap.xml, vom Akquise-Tool bei jedem Artikel nachgeführt), damit neue Artikel sofort darin stehen.
+const KI_CRAWLER = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User',
+  'Google-Extended', 'Applebot', 'Applebot-Extended', 'Bingbot', 'CCBot', 'meta-externalagent', 'Amazonbot', 'DuckAssistBot', 'MistralAI-User'];
+writeFileSync(join(ROOT, 'robots.txt'), '# Alle Such- und KI-Crawler sind willkommen. Erzeugt mit tools/seo-build.mjs.\n' +
+  'User-agent: *\nAllow: /\n\n' + KI_CRAWLER.map((b) => `User-agent: ${b}\nAllow: /\n`).join('\n') +
+  `\nSitemap: ${SITE}/sitemap.xml\nSitemap: ${SITE}/einblicke/sitemap.xml\n`);
+geschrieben.push('sitemap.xml'.padEnd(34) + `${indexierbar.length + einblickeUrls.length} Adressen`, 'robots.txt');
+
+// llms.txt nach llmstxt.org: Kurzfassung für Sprachmodelle, nur Angaben, die auf der Website stehen.
+const seite = (pfad, satz) => `- [${(PAGES[pfad].title || '').split(' · ')[0]}](${SITE}${urlOf(pfad)}): ${satz || PAGES[pfad].desc}`;
+const LLMS = `# ${NAME}
+
+> ${NAME} ist die Geschäftsbezeichnung von Nico Bodmer aus Berikon AG (Einzelunternehmen). Er baut Websites für kleine Betriebe wie Handwerk, Gastronomie, Praxen und Läden im Freiamt, am Mutschellen, im Kanton Aargau und in der ganzen Schweiz. Preismodell: Fixpreis, einmalig und ohne Abo. Paket Website ${chf(PREISE[0])}, Standard ${chf(PREISE[1])}, Pro ${chf(PREISE[2])}. Der erste Entwurf entsteht in 5 Arbeitstagen, ist gratis und unverbindlich. Bezahlt wird erst nach Annahme des Entwurfs.
+
+- Logo als Zusatz: ${chf(LOGO[0])}, zusammen mit einer Website ${chf(LOGO[1])}.
+- Betrieb nach der Übergabe optional: ${chf(FIRMA.betrieb[0])} pro Jahr (Server in der EU) oder ${chf(FIRMA.betrieb[1])} pro Jahr (Server in der Schweiz).
+- Höchstens zwei Projekte gleichzeitig, nebenberuflich. Keine Kundenstimmen, stattdessen feste Zusagen: Fixpreis, fester Termin, kein Lock-in.
+- Kontakt: ${EMAIL}. Anfragen am liebsten über den Projekt-Check: ${SITE}/projekt-check/
+- Die Musterprojekte zeigen frei erfundene Betriebe, keine Kundenprojekte.
+
+## Angebot und Ablauf
+
+${seite('/angebot')}
+${seite('/ablauf')}
+${seite('/projekt-check', 'Fragebogen mit 18 kurzen Fragen, rund 6 Minuten. Danach folgen ein Angebot zum Fixpreis und ein kostenloser Entwurf.')}
+
+## Musterprojekte
+
+${seite('/musterprojekte', 'Zwei Beispiel-Websites erfundener Betriebe (Schreinerei Doppelmeter und Firstlicht Solartechnik) und ein Werkzeug, das den eigenen Betrieb in zehn Sekunden als Vorschau zeigt.')}
+- [Musterprojekt Schreinerei Doppelmeter](${SITE}/musterprojekte/doppelmeter/): Beispielseite einer frei erfundenen Schreinerei, Paket Standard.
+- [Musterprojekt Firstlicht Solartechnik](${SITE}/musterprojekte/firstlicht/): Beispielseite eines frei erfundenen Solarbetriebs, Paket Pro.
+
+## Branchenseiten
+
+${Object.keys(BRANCHEN).filter((p) => PAGES[p] && !PAGES[p].noindex).map((p) => seite(p)).join('\n')}
+
+## Einblicke
+
+- [Einblicke](${SITE}/einblicke/): Blog mit Praxis-Tipps, Beobachtungen und Haltung rund um Websites für kleine Betriebe in der Schweiz.
+${ARTIKEL.map((a) => `- [${a.titel}](${a.url}): ${a.desc}`).join('\n')}
+
+## Über mich
+
+${seite('/ueber-mich', 'Wer hinter ODERA Design steht: Lehre als Platform Developer EFZ, Technische Berufsmaturität, berufsbegleitendes Studium Digital Business und AI an der HWZ. Höchstens zwei Projekte gleichzeitig.')}
+
+## Optional
+
+${seite('/impressum', 'Verantwortliche Person, Kontakt, Rechtsform (Einzelunternehmen ohne Handelsregistereintrag, keine Mehrwertsteuerpflicht) und Bildnachweise.')}
+${seite('/datenschutz')}
+${seite('/agb')}
+`;
+writeFileSync(join(ROOT, 'llms.txt'), LLMS);
+geschrieben.push('llms.txt'.padEnd(34) + `${ARTIKEL.length} Artikel`);
 
 console.log(geschrieben.join('\n'));
 console.log('Nicht in der Suche (noindex):', Object.keys(PAGES).filter((p) => PAGES[p].noindex).join(', '));

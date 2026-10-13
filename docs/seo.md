@@ -10,8 +10,17 @@ der Website ist das Google-Unternehmensprofil.
   154 KB statt rund 415 KB. Die Vorlage mit allen Seiten liegt in `assets/js/vorlage.js` und wird erst nach dem
   ersten Zeichnen geladen. Gegenprobe: `node tools/gliederung.mjs` (Gliederung) und die Schleife aus dem Auftrag.
 - `lang="de-CH"`, `canonical` auf sich selbst (404 ohne), Open Graph und Twitter Card je Seite, Favicon-Set und Manifest.
-- `sitemap.xml` mit allen indexierbaren Adressen und `lastmod` (Datum der letzten Textänderung, `tools/sitemap-stand.json`).
-  Nicht drin: die Detailseiten der Musterprojekte, 404, `/start/`, Impressum und der Projekt-Check (seit 10. Oktober 2026).
+- `sitemap.xml` mit allen indexierbaren Adressen und `lastmod` (Datum der letzten Textänderung, `tools/sitemap-stand.json`),
+  seit 12. Oktober 2026 auch mit der Einblicke-Übersicht und allen Artikeln (`lastmod` = Änderungsdatum des Artikels aus
+  `article:modified_time`, nie vor dem Veröffentlichungsdatum). Nicht drin: die Detailseiten der Musterprojekte, 404,
+  `/start/`, Impressum und der Projekt-Check (seit 10. Oktober 2026).
+- **Neue Artikel:** Das Akquise-Tool schreibt beim Veröffentlichen und Entfernen im selben Commit `einblicke/sitemap.xml`
+  und den Teil Einblicke in `sitemap.xml` und `llms.txt`, mit denselben Zeilen wie `seo-build` (Quelle für beide:
+  `src/einblicke/index.json`). Ein neuer Artikel steht damit sofort überall, ohne `seo-build`.
+- `robots.txt` erlaubt alle Crawler und nennt die bekannten Such- und KI-Crawler (GPTBot, OAI-SearchBot, ClaudeBot,
+  PerplexityBot, Google-Extended, Applebot-Extended und weitere) ausdrücklich. Liste: `KI_CRAWLER` in `tools/seo-build.mjs`.
+- `llms.txt` nach llmstxt.org (Kurzfassung, Preise, Links zu allen öffentlichen Seiten und Artikeln), erzeugt aus denselben
+  Werten wie die Seiten (`PAKET_PREIS`, `LOGO_*`, `HOSTING_*`, `PAGES`, Einblicke).
 
 ## Begriffsplan
 
@@ -49,7 +58,12 @@ und auf Über mich. Name, Ort und E-Mail überall gleich: «ODERA Design», «Be
 | `/datenschutz/` | Datenschutzerklärung · ODERA Design (35) | Welche Daten beim Besuch von odera.ch, im Projekt-Check, im Chat und bei der Statistik mit Einwilligung bearbeitet werden. Keine Cookies. (137) |
 | `/agb/` | Allgemeine Geschäftsbedingungen · ODERA Design (46) | Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Betrieb und Hosting. (137) |
 
-Trenner im Titel einheitlich «·». Seit 10. Oktober 2026 ist auch der Projekt-Check wieder `noindex` und nicht in der Sitemap (Entscheid Nico). Das Impressum bleibt `noindex`, weil es die Wohnadresse nennt (Abweichung vom
+Trenner im Titel einheitlich «·», auch in den Einblicken. Dort gilt: Zusatz « · ODERA Design» nur bis 65 Zeichen,
+sonst ohne; zu lange Artikeltitel bekommen einen Kurztitel für `title` und `og:title` (`titel_kurz`), die h1 bleibt.
+Jede Seite hat zusätzlich `twitter:title` und `twitter:description`.
+
+**Interne Links (seit 12. Oktober 2026):** Angebot verlinkt Musterprojekte und alle Branchenseiten, Musterprojekte verlinkt die
+Branchenseiten, jede Branchenseite verlinkt alle Musterprojekte und die übrigen Branchen (`brAndere()`). Seit 10. Oktober 2026 ist auch der Projekt-Check wieder `noindex` und nicht in der Sitemap (Entscheid Nico). Das Impressum bleibt `noindex`, weil es die Wohnadresse nennt (Abweichung vom
 Auftrag, siehe `docs/entscheidungen.md`).
 
 ## Strukturierte Daten (JSON-LD)
@@ -59,13 +73,19 @@ LinkedIn-Adressen `ODERA_LINKEDIN_URL` und `LINKEDIN_PERSON_URL`, Branchenseiten
 
 | Seite | Typen |
 |---|---|
-| `/` | WebSite, LocalBusiness `#organisation` (Logo `odera-logo-512.png`, Adresse ohne Strasse, Einzugsgebiet Aargau, Zürich, Schweiz, `priceRange`, `sameAs` LinkedIn-Firma, `contactPoint`, drei Pakete), WebPage, FAQPage |
-| `/angebot/` | WebPage, BreadcrumbList, Service mit OfferCatalog (drei Pakete, zwei Betriebsarten), FAQPage |
-| `/ueber-mich/` | WebPage, BreadcrumbList, Person `#person` (`sameAs` LinkedIn-Profil, `worksFor` Organisation) |
+| `/` | WebSite, ProfessionalService `#organisation` (Logo `odera-logo-512.png`, Adresse nur Ort Berikon, AG, CH, Einzugsgebiet Freiamt, Mutschellen, Kanton Aargau, Schweiz, `priceRange`, `sameAs` LinkedIn-Firma, `founder` Person mit `sameAs` LinkedIn-Profil, `contactPoint`, Pakete und Logo-Design), WebPage, FAQPage |
+| `/angebot/` | WebPage, BreadcrumbList, Service mit OfferCatalog (drei Pakete, Logo-Design CHF 490 und CHF 390 mit Website, zwei Betriebsarten), FAQPage |
+| `/ueber-mich/` | ProfilePage, BreadcrumbList, Person `#person` (`sameAs` LinkedIn-Profil, `hasCredential` Platform Developer EFZ und Technische Berufsmaturität, `affiliation` HWZ). Kein `worksFor`, kein Arbeitgeber. |
+| `/musterprojekte/` | WebPage, BreadcrumbList, ItemList der zwei Muster als CreativeWork mit «Der Betrieb ist frei erfunden.» |
 | Branchenseiten | WebPage, BreadcrumbList, Service mit `serviceType` und `areaServed`, FAQPage |
+| Einblicke-Artikel | BlogPosting (Autor `#person`, Herausgeber `#organisation`, `isPartOf` Blog, `dateModified` nie vor `datePublished`), BreadcrumbList |
 | übrige | WebPage, BreadcrumbList |
 
-Keine Bewertungen, keine Öffnungszeiten (kein Ladenlokal), FAQPage nur mit sichtbaren Fragen.
+Keine Bewertungen, keine Öffnungszeiten (kein Ladenlokal), FAQPage nur mit sichtbaren Fragen (alle Absätze der Antwort, Wortlaut
+wie sichtbar). Die Einblicke schreibt das Akquise-Tool (`src/logik/einblicke.ts` im Repo `odera-akquise`) mit denselben `@id`
+für Person und Firma wie `tools/seo-build.mjs`.
+
+**Prüfung 12. Oktober 2026:** alle 19 Blöcke gültiges JSON und typgeprüft gegen schema.org mit `schema-dts` (validator.schema.org war aus der Arbeitsumgebung nicht erreichbar).
 
 **Prüfung:** Schema.org Validator am 9. Oktober 2026 mit der Live-Startseite: 0 Fehler, 0 Warnungen (WebSite, LocalBusiness, WebPage, FAQPage). Den Google Rich Results Test bitte nach der Einrichtung der Search Console für Startseite, Angebot und eine Branchenseite laufen lassen.
 

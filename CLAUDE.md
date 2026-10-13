@@ -14,8 +14,8 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 12. Oktober 
   ohne Personendaten. Sonst keine Pop-ups, keine Dark Patterns, keine weitere Datenbank, keine
   Secrets im Browser, keine URL-Parameter mit Personendaten.
 - **Repo ist öffentlich** (GitHub Pages). Keine Secrets, keine Personendaten, keine Business-Interna (Firmen und
-  Kontakte aus der Akquise, Kundendaten, Statistikwerte, Kampagnen). IBM auf odera.ch nie nennen, auch nicht im
-  Portfolio-Muster (`tools/portfolio-sync.mjs` neutralisiert es). Interne Notizen gehören ins private Akquise-Repo.
+  Kontakte aus der Akquise, Kundendaten, Statistikwerte, Kampagnen). IBM auf odera.ch nie nennen. Die Portfolio-Kopie
+  `/muster/portfolio/` ist seit 13. Oktober 2026 gelöscht (private Adresse, nirgends verlinkt). Interne Notizen gehören ins private Akquise-Repo.
 - **Nur Gratis-Pläne:** GitHub Pages, Cloudflare Workers und Workers AI, Resend. Nie nach Schlüsseln
   im Chat fragen.
 - **Veröffentlichen:** ohne weiteres OK, wenn alles grün ist (Funktionstests, Kontrast, Lighthouse
@@ -79,10 +79,17 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 12. Oktober 
   `assets/css/einblicke.css`. Nach Änderungen an Kopf oder Stil im Akquise-Repo `scripts/einblicke.ts neu-erstellen`.
 - Menüpunkt «Einblicke» zwischen Musterprojekte und Über mich. Die Umbruchstellen des Kopfs sind dafür neu
   gemessen (Abstand 24 px ab 1379 px, kurzer Knopf ab 1319 px, Menü ab 1259 px).
-- SEO: eigene Titel, Beschreibung, canonical, Open Graph mit Bildkarte, JSON-LD Article und BreadcrumbList,
+- SEO: eigene Titel, Beschreibung, canonical, Open Graph mit Bildkarte, JSON-LD BlogPosting und BreadcrumbList,
   eigene Sitemap `einblicke/sitemap.xml` (in `robots.txt`), RSS `einblicke/feed.xml`. Ohne Artikel ist die
   Übersicht `noindex`.
 - Am Ende jedes Artikels der Projekt-Check (`?quelle=einblicke`). Tests: `node tools/funktionstest.mjs … einblicke`.
+- Seit 13. Oktober 2026 schreibt der Generator (`src/logik/einblicke.ts` im Akquise-Repo) die SEO wie die übrigen
+  Seiten: Titel-Trenner «·», Zusatz « · ODERA Design» nur bis 65 Zeichen, sonst ohne, zu lange Titel mit Kurztitel
+  (`titel_kurz` in `src/einblicke/<pfad>.json`, die h1 bleibt), Twitter-Angaben, BlogPosting mit `@id` von Person
+  und Firma, `dateModified` nie vor dem Datum, Autorenzeile mit Link auf /ueber-mich/. Beim Veröffentlichen und
+  Entfernen schreibt er auch den Teil Einblicke in `sitemap.xml` und `llms.txt`, mit denselben Zeilen wie `seo-build`
+  (beide lesen `src/einblicke/index.json`). Nach Änderungen an Kopf, Stil oder Fusszeile: `seo-build`, dann im
+  Akquise-Repo `cd scripts && npx tsx einblicke.ts neu-erstellen` (oder ohne GitHub `lokal ../../odera-design`).
 - Seit 9. Oktober 2026: Übersicht und Artikel nutzen die Bänder des Gestaltungssystems (`.band`, `.wrap`, `.inner`,
   `.augenbraue`, `.titel-1`, `.einleitung`, `.karte`, Abschluss als `band-kobalt`) und haben damit dieselben Abstände
   wie /ablauf/. `einblicke.css` lädt als letztes vor `</head>` und setzt keine Abschnittsabstände. LinkedIn-Link auf die
@@ -166,6 +173,12 @@ Beispielseiten erfundener Betriebe (Doppelmeter, Firstlicht). Für jedes Muster 
   `tools/lighthouse.mjs`.
 
 ## Offene Punkte
+
+- [ ] **Akquise-Tool deployen:** Generator angeglichen in bodmer7/odera-akquise#1 (13. Oktober 2026). Nach dem Merge dort
+      `npm run deploy`, sonst nutzt der Knopf «Gepostet» noch die alte Fassung.
+- [ ] **Nach dem Merge `chat-proxy` deployen:** `chat-proxy/src/wissen.js` hat sich durch die neuen Linkzeilen geändert.
+      Danach mit einer Testfrage prüfen, dass die Links auf live erreichbare Seiten zeigen.
+- [ ] **Online-Prüfung nach dem Merge** (Nico): W3C-Validator, Rich Results Test, validator.schema.org.
 
 - [ ] **Ladezeit Doppelmeter auf dem Handy:** 1,65 bis 2,5 s mit gedrosseltem Netz, Ziel war 1 s.
       Desktop 0,4 bis 0,5 s.

@@ -25,10 +25,11 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="ODERA Design: Sie sehen Ihre neue Website, bevor Sie bezahlen. Ab CHF 890, Entwurf in 5 Arbeitstagen.">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Willkommen · ODERA Design">
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://odera.ch/start/#seite","url":"https://odera.ch/start/","name":"Willkommen · ODERA Design","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/start/#brotkrumen"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/start/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Willkommen","item":"https://odera.ch/start/"}]},{"@type":"FAQPage","@id":"https://odera.ch/start/#fragen","mainEntity":[{"@type":"Question","name":"Das ist mir zu teuer.","acceptedAnswer":{"@type":"Answer","text":"Standard kostet CHF 1’900, einmalig. Danach zahlen Sie nur noch Hosting und Domain bei Ihrem Anbieter, üblicherweise CHF 120 bis 200 pro Jahr. Und Sie sehen den Entwurf, bevor Sie sich entscheiden."}},{"@type":"Question","name":"Ich habe keine Zeit dafür.","acceptedAnswer":{"@type":"Answer","text":"Ein Formular von rund 6 Minuten und Ihre Rückmeldungen. Erforderlich sind 81 Minuten, mit optionalen Schritten knapp 2 Stunden, verteilt auf drei bis sechs Wochen, je nach Paket. Alles Übrige entscheiden Sie."}},{"@type":"Question","name":"Sie sind allein: was, wenn Sie ausfallen?","acceptedAnswer":{"@type":"Answer","text":"Ich verwende gängige Technik ohne Abhängigkeiten. Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag. Jede andere Fachperson kann übernehmen, ohne von vorne zu beginnen."}}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=327d0e05f8" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=ea7c1e2cb6" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -167,7 +168,6 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 @media(hover:hover){.hero-chip:hover{background:var(--akzent-tint)}}
 .hero-chip[data-gewaehlt="1"]{background:var(--akzent);border-color:var(--tinte);color:var(--tinte)}
 .hero-chip:focus-visible{outline:3px solid var(--tinte);outline-offset:2px}
-::view-transition-old(einstieg),::view-transition-new(einstieg){animation-duration:360ms}
 @media(max-width:430px){.hero-chip{font-size:16px;padding:0 12px;text-align:center}}
 .wrap{max-width:1440px;margin:0 auto;padding:0 120px}
 .sect{padding-top:var(--a-6);padding-bottom:var(--a-6)}
@@ -285,6 +285,7 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .qleft{grid-column:1 / span 4;position:sticky;top:112px}
 .qright{grid-column:6 / span 7}
 @media(max-width:1023px){.qgrid{grid-template-columns:1fr;gap:24px}.qleft,.qright{grid-column:auto}.qleft{position:static}}
+.qnum::before{content:attr(data-n)}
 .qnum{font-size:120px;line-height:0.9;color:rgba(17,19,26,0.12);margin:0 0 8px;font-variant-numeric:tabular-nums;transition:opacity 200ms linear}
 @media(max-width:1023px){.qnum{font-size:72px}}
 .acard{display:flex;align-items:center;gap:20px;text-align:left;width:100%;min-height:72px;padding:22px 20px;border-radius:16px;font-size:16px;line-height:1.4;cursor:pointer;transition:transform 140ms ease-out,border-color 140ms ease-out,background 140ms ease-out}
@@ -416,6 +417,7 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .rahmen-punkte i{width:10px;height:10px;border-radius:999px;background:#D7D4CC}
 .rahmen-adresse{justify-self:center;display:flex;align-items:center;gap:6px;min-width:0;max-width:100%;height:22px;padding:0 12px;border-radius:999px;background:#FFFFFF;border:1px solid rgba(17,19,26,0.08);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;line-height:1;color:var(--text-2)}
 .rahmen-adresse span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rahmen-adresse span[data-adresse]::before{content:attr(data-adresse)}
 .rahmen-adresse svg{flex:none;width:11px;height:11px}
 .rahmen-handy{background:#0B0C10;border-radius:34px;padding:7px;box-shadow:0 0 0 1px rgba(17,19,26,0.4),0 2px 4px rgba(17,19,26,0.12),0 28px 56px -24px rgba(17,19,26,0.5);transition:transform var(--dauer) var(--kurve),box-shadow var(--dauer) var(--kurve)}
 .rahmen-schirm{position:relative;overflow:hidden;border-radius:27px;background:#0B0C10;padding-top:10%}
@@ -604,11 +606,22 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
  .pr-blk{page-break-inside:avoid;margin:0 0 14pt}
  .pr-ul{margin:0 0 4pt;padding-left:14pt;font-size:11pt;line-height:1.45}
 }
+/* Sprunglink: erst bei Tastaturfokus sichtbar */
+.sprunglink{position:fixed;left:16px;top:16px;z-index:200;padding:12px 18px;border-radius:8px;background:var(--tinte);color:#FFFFFF;font-weight:600;text-decoration:underline;text-underline-offset:3px;transform:translateY(-200%)}
+.sprunglink:focus{transform:none;outline:3px solid var(--akzent);outline-offset:2px}
+main[tabindex="-1"]:focus{outline:none}
+.wisch[tabindex="0"]:focus-visible{outline:3px solid var(--akzent);outline-offset:4px;border-radius:12px}
 </style>
 <script>
 // Vorab-Block erst zeigen, wenn die Schriften da sind: sonst springt der Text beim Wechsel der Schrift (CLS)
 (function(){var h=document.documentElement,f=document.fonts,zeigen=function(){h.classList.add('schrift')};h.classList.add('js');
 if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1em Inter'),f.load('600 1em Inter'),f.load('500 1em "JetBrains Mono"')]).then(zeigen,zeigen)}else zeigen();setTimeout(zeigen,3000)})();
+</script>
+<script>
+// Sprunglink «Zum Inhalt»: Fokus auf den sichtbaren Hauptinhalt. Läuft vor der Laufzeit, wegen <base href="/"> nötig.
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a.sprunglink');if(!a)return;e.preventDefault();
+var m=[].slice.call(document.querySelectorAll('main')).filter(function(x){return x.getClientRects().length})[0];if(!m)return;
+if(!m.hasAttribute('tabindex'))m.setAttribute('tabindex','-1');m.focus({preventScroll:true});m.scrollIntoView();},true);
 </script>
 <script>window.__resources = {}; // Seite nicht ein zweites Mal laden (support.js), logo.dc.html liest auch kleingeschriebene Eigenschaften</script>
 <script defer src="assets/js/vendor/react-18.3.1.production.min.js"></script>
@@ -619,7 +632,7 @@ if(f&&f.load){Promise.all([f.load('800 1em "Bricolage Grotesque"'),f.load('400 1
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=327d0e05f8';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=ea7c1e2cb6';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -1010,10 +1023,10 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .menue-link{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;color:#FFFFFF;text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(34px,9.6vw,40px);line-height:1.1;letter-spacing:-0.025em;border-bottom:1px solid rgba(255,255,255,0.16);animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:calc(140ms + var(--i,0) * 40ms);transition:transform 140ms ease-out}
  .menue-link:active{transform:translateX(6px)}
  .menue-link[aria-current="page"] .menue-link-t{text-decoration:underline;text-decoration-color:var(--akzent);text-decoration-thickness:4px;text-underline-offset:9px;text-decoration-skip-ink:none}
- .menue-pfeil{flex:none;width:22px;height:22px;opacity:0.75;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat}
+ .menue-pfeil{flex:none;width:22px;height:22px;opacity:0.75;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");mask-position:center;mask-size:contain;mask-repeat:no-repeat}
  .menue-frage{align-items:center;gap:12px;min-height:56px;margin-top:8px;padding:0;border:0;background:none;color:#FFFFFF;font:inherit;font-size:18px;font-weight:600;text-align:left;cursor:pointer;animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:300ms;transition:transform 140ms ease-out}
  .menue-frage:active{transform:translateX(6px)}
- .menue-frage-i{flex:none;width:24px;height:24px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E") center/contain no-repeat}
+ .menue-frage-i{flex:none;width:24px;height:24px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E") center/contain no-repeat;mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'%3E%3Cpath d='M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z'/%3E%3C/svg%3E");mask-position:center;mask-size:contain;mask-repeat:no-repeat}
  .menue-unten{margin-top:auto;padding-top:32px;display:flex;flex-direction:column;gap:8px;animation:menueEintrag 380ms cubic-bezier(0.2,0.9,0.3,1) both;animation-delay:340ms}
  .menue-cta{display:flex;align-items:center;justify-content:center;min-height:60px;border-radius:999px;background:var(--akzent);color:var(--tinte);font-size:17px;font-weight:700;text-decoration:none;transition:transform 120ms ease-out}
  .menue-cta:active{transform:scale(0.97)}
@@ -1152,29 +1165,29 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 
 <!-- seo-noscript:end -->
 <!-- vorab:start -->
-<div id="vorab"><div class="sc-host" data-sc-name="Root"><header class="kopf" data-scroll="0" data-weg="0" data-menue="0">
+<div id="vorab"><div class="sc-host" data-sc-name="Root"><a class="sprunglink" href="#inhalt">Zum Inhalt springen</a><header class="kopf" data-scroll="0" data-weg="0" data-menue="0">
   <div id="thread" aria-hidden="true" style="height: 2px; width: 0%; background: var(--akzent); box-shadow: rgba(17, 19, 26, 0.45) 0px 1px 0px; transition: width 80ms linear;"></div>
   <div class="wrap navbar">
     <a href="/" class="kopf-logo" style="text-decoration: none; color: var(--tinte); display: flex; align-items: center; gap: 12px;">
       <span class="logo-normal">
-      <div class="sc-host" data-sc-name="logo"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(45, 76, 240); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 21px; color: rgb(246, 245, 241);">
-  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(45, 76, 240); transform: rotate(-19deg);"></span></span></span></div>
+      <span class="sc-host" data-sc-name="logo" style="display: block;"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(45, 76, 240); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 21px; color: rgb(246, 245, 241);">
+  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(45, 76, 240); transform: rotate(-19deg);"></span></span></span></span>
       <span style="display: block;">
-        <span class="logo-lg"><div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(17, 19, 26);">
+        <span class="logo-lg"><span class="sc-host" data-sc-name="logo" style="display: block;"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(17, 19, 26);">
   <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span>DERA</span>
-  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div></span>
-        <span class="logo-sm"><div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 23px; color: rgb(17, 19, 26);">
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></span></span>
+        <span class="logo-sm"><span class="sc-host" data-sc-name="logo" style="display: block;"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 23px; color: rgb(17, 19, 26);">
   <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span>DERA</span>
-  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div></span>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></span></span>
         <span class="tagline">Webseiten für Schweizer Betriebe</span>
       </span>
       </span>
-      <span class="logo-menue" aria-hidden="true">
-        <div class="sc-host" data-sc-name="logo"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgb(255, 255, 255); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 18px; color: rgb(45, 76, 240);">
-  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(255, 255, 255); transform: rotate(-19deg);"></span></span></span></div>
-        <div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 23px; color: rgb(255, 255, 255);">
+      <span class="logo-menue">
+        <span class="sc-host" data-sc-name="logo" style="display: block;"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgb(255, 255, 255); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 18px; color: rgb(45, 76, 240);">
+  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(255, 255, 255); transform: rotate(-19deg);"></span></span></span></span>
+        <span class="sc-host" data-sc-name="logo" style="display: block;"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 23px; color: rgb(255, 255, 255);">
   <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(45, 76, 240); transform: rotate(-19deg);"></span></span>DERA</span>
-  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></span>
       </span>
     </a>
     <nav class="navmid" aria-label="Hauptnavigation">
@@ -1201,14 +1214,14 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </button>
       </div>
     </div>
-  </div></header><main style="animation: auto ease 0s 1 normal none running none;"><div><section class="hero band-raster" aria-labelledby="hero-t" data-abschnitt="hero">
+  </div></header><main id="inhalt" style="animation: none;"><div><section class="hero band-raster" aria-labelledby="hero-t" data-abschnitt="hero">
   <div class="wrap hero-pad">
     <div class="inner hero-raster">
       <div class="hero-text">
         <p class="hero-gruss" style="display: none;"><span class="sc-interp"></span></p>
-        <p class="augenbraue hero-ort" style="animation: auto ease 0s 1 normal none running none;">Webdesign aus Berikon AG für Betriebe in der ganzen Schweiz</p>
-        <h1 id="hero-t" tabindex="-1" class="titel-1 hero-h1" style="animation: auto ease 0s 1 normal none running none;">Sie sehen Ihre neue Website, <span class="leuchtstift" style="animation-delay: 450ms;">bevor </span><span class="leuchtstift" style="animation-delay: 560ms;">Sie </span><span class="leuchtstift" style="animation-delay: 670ms;">bezahlen.</span></h1>
-        <p class="einleitung hero-lead" style="animation: auto ease 0s 1 normal none running none;">Für Handwerk, Gastro, Praxen und Läden. Sie sehen den fertigen Entwurf und entscheiden danach.</p>
+        <p class="augenbraue hero-ort" style="animation: none;">Webdesign aus Berikon AG für Betriebe in der ganzen Schweiz</p>
+        <h1 id="hero-t" tabindex="-1" class="titel-1 hero-h1" style="animation: none;">Sie sehen Ihre neue Website, <span class="leuchtstift" style="animation-delay: 450ms;">bevor </span><span class="leuchtstift" style="animation-delay: 560ms;">Sie </span><span class="leuchtstift" style="animation-delay: 670ms;">bezahlen.</span></h1>
+        <p class="einleitung hero-lead" style="animation: none;">Für Handwerk, Gastro, Praxen und Läden. Sie sehen den fertigen Entwurf und entscheiden danach.</p>
         <div class="hero-handy-chips">
           <p class="hero-frage-t" id="hero-frage-oben">Was sollen Besucher auf Ihrer neuen Website tun?</p>
           <div class="hero-chips" role="group" aria-labelledby="hero-frage-oben">
@@ -1224,25 +1237,25 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           </div>
           <p id="chip-hinweis-oben" class="rechner-sr">Ein Tipp startet den Projekt-Check mit dieser Antwort.</p>
         </div>
-        <div class="hero-aktion" style="animation: auto ease 0s 1 normal none running none;">
+        <div class="hero-aktion" style="animation: none;">
           <a href="/projekt-check/" class="btn btn-primaer" data-quelle="hero">Projekt-Check starten</a>
           <a href="/angebot/" class="btn btn-sekundaer">Preise ansehen</a>
         </div>
-        <dl class="fakten" style="animation: auto ease 0s 1 normal none running none;">
+        <dl class="fakten" style="animation: none;">
           <div><dt>ab <span class="sc-interp">CHF&nbsp;890</span></dt><dd>Fixpreis, einmalig</dd></div>
           <div><dt><span class="sc-interp">5 Arbeitstage</span></dt><dd>bis zum Entwurf</dd></div>
           <div><dt>CHF 0</dt><dd>wenn er nicht gefällt</dd></div>
         </dl>
       </div>
-      <figure class="werk" style="animation: auto ease 0s 1 normal none running none;">
+      <figure class="werk" style="animation: none;">
         <a class="werk-link" href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" aria-label="Musterprojekt Firstlicht Solartechnik ansehen">
           <div class="rahmen-browser">
-            <div class="rahmen-leiste" aria-hidden="true"><span class="rahmen-punkte"><i></i><i></i><i></i></span><span class="rahmen-adresse"><span>odera.ch/musterprojekte/firstlicht</span></span><span></span></div>
-            <picture><source type="image/avif" srcset="assets/img/musterprojekt-solar-desktop-1280.avif 1280w, assets/img/musterprojekt-solar-desktop-2560.avif 2560w" sizes="(min-width:1024px) 640px, 92vw"><img class="werk-bild" src="assets/img/musterprojekt-solar-desktop-1280.webp" srcset="assets/img/musterprojekt-solar-desktop-1280.webp 1280w, assets/img/musterprojekt-solar-desktop-2560.webp 2560w" sizes="(min-width:1024px) 640px, 92vw" width="1280" height="720" alt="Startseite des Musterprojekts Firstlicht Solartechnik am Computer" loading="lazy" decoding="async"></picture>
+            <div class="rahmen-leiste" aria-hidden="true"><span class="rahmen-punkte"><i></i><i></i><i></i></span><span class="rahmen-adresse"><span data-adresse="odera.ch/musterprojekte/firstlicht"></span></span><span></span></div>
+            <picture><source media="(max-width:767px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 1w" sizes="1px"><source type="image/avif" srcset="assets/img/musterprojekt-solar-desktop-1280.avif 1280w, assets/img/musterprojekt-solar-desktop-2560.avif 2560w" sizes="(min-width:1024px) 640px, 92vw"><img class="werk-bild" src="assets/img/musterprojekt-solar-desktop-1280.webp" srcset="assets/img/musterprojekt-solar-desktop-1280.webp 1280w, assets/img/musterprojekt-solar-desktop-2560.webp 2560w" sizes="(min-width:1024px) 640px, 92vw" width="1280" height="720" alt="Startseite des Musterprojekts Firstlicht Solartechnik am Computer" fetchpriority="high" decoding="async"></picture>
           </div>
-          <div class="rahmen-handy"><div class="rahmen-schirm"><span class="rahmen-insel" aria-hidden="true"></span><picture><source type="image/avif" srcset="assets/img/musterprojekt-solar-handy-390.avif 390w, assets/img/musterprojekt-solar-handy-780.avif 780w" sizes="(min-width:1024px) 160px, 240px"><img class="werk-bild" src="assets/img/musterprojekt-solar-handy-390.webp" srcset="assets/img/musterprojekt-solar-handy-390.webp 390w, assets/img/musterprojekt-solar-handy-780.webp 780w" sizes="(min-width:1024px) 160px, 240px" width="390" height="760" alt="Dieselbe Seite auf dem Handy" loading="lazy" decoding="async"></picture></div></div>
+          <div class="rahmen-handy"><div class="rahmen-schirm"><span class="rahmen-insel" aria-hidden="true"></span><picture><source type="image/avif" srcset="assets/img/musterprojekt-solar-handy-390.avif 390w, assets/img/musterprojekt-solar-handy-780.avif 780w" sizes="(min-width:1024px) 160px, 240px"><img class="werk-bild" src="assets/img/musterprojekt-solar-handy-390.webp" srcset="assets/img/musterprojekt-solar-handy-390.webp 390w, assets/img/musterprojekt-solar-handy-780.webp 780w" sizes="(min-width:1024px) 160px, 240px" width="390" height="760" alt="Startseite des Musterprojekts Firstlicht Solartechnik auf dem Handy" loading="lazy" decoding="async"></picture></div></div>
         </a>
-        <figcaption>Musterprojekt Firstlicht, ein erfundener Betrieb. <a href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht">Ansehen</a></figcaption>
+        <figcaption>Musterprojekt Firstlicht, ein erfundener Betrieb. <a href="/musterprojekte/firstlicht/" data-title="Firstlicht Solartechnik" data-muster="firstlicht" aria-label="Musterprojekt Firstlicht ansehen">Ansehen</a></figcaption>
       </figure>
     </div>
   </div></section><section class="band band-tinte zahlen-streifen" aria-label="Das Wichtigste in drei Zahlen">
@@ -1376,7 +1389,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   </div></div></section><section class="band band-tinte" aria-labelledby="person-t" data-abschnitt="ueber-mich">
   <div class="wrap"><div class="inner person2">
     <a class="portraet-link" href="https://www.linkedin.com/in/nico-bodmer/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn-Profil von Nico Bodmer, öffnet in neuem Tab">
-      <img class="portraet" src="assets/img/portrait-nico-bodmer.webp" alt="Nico Bodmer" width="320" height="320" loading="lazy" decoding="async">
+      <img class="portraet" src="assets/img/portrait-nico-bodmer.webp" alt="Porträt von Nico Bodmer" width="320" height="320" loading="lazy" decoding="async">
       <span class="li-abzeichen" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></span>
     </a>
     <div>
@@ -1462,11 +1475,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <div class="g-foot">
         <div>
           <div style="display: flex; align-items: center; gap: 12px; margin: 0px 0px 12px;">
-            <div class="sc-host" data-sc-name="logo"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(246, 245, 241); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 21px; color: rgb(17, 19, 26);">
-  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span></span></div>
-            <div class="sc-host" data-sc-name="logo"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(246, 245, 241);">
+            <span class="sc-host" data-sc-name="logo" style="display: block;"><span aria-hidden="true" style="position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(246, 245, 241); font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; line-height: 1; font-size: 21px; color: rgb(17, 19, 26);">
+  <span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.105em; background: rgb(246, 245, 241); transform: rotate(-19deg);"></span></span></span></span>
+            <span class="sc-host" data-sc-name="logo" style="display: block;"><span style="display: inline-flex; align-items: baseline; gap: 0.22em; font-family: &quot;Bricolage Grotesque&quot;, sans-serif; line-height: 1; white-space: nowrap; font-size: 28px; color: rgb(246, 245, 241);">
   <span style="font-weight: 800; letter-spacing: -0.015em;"><span style="position: relative; display: inline-block;">O<span style="position: absolute; left: -0.06em; top: 0.4em; width: 0.92em; height: 0.08em; background: rgb(17, 19, 26); transform: rotate(-19deg);"></span></span>DERA</span>
-  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></div>
+  <span style="font-weight: 500; letter-spacing: -0.02em;">Design</span></span></span>
           </div>
           <p style="font-size: 16px; line-height: 1.5; color: rgb(201, 206, 214); margin: 0px;">Webseiten für Schweizer Betriebe</p>
           <p class="fuss-ort">Aus Berikon AG für Betriebe im Freiamt, am Mutschellen, im Kanton Aargau und in der ganzen Schweiz.</p>
@@ -1511,7 +1524,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         </div>
       </div>
     </div>
-  </div></footer><button type="button" class="chat-btn" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten, Taste f" title="Fragen an den KI-Assistenten (Taste f)" data-bar="0" data-hell="0" style="display: inline-flex; animation: auto ease 0s 1 normal none running none;">
+  </div></footer><button type="button" class="chat-btn" aria-haspopup="dialog" aria-label="Fragen an den KI-Assistenten, Taste f" title="Fragen an den KI-Assistenten (Taste f)" data-bar="0" data-hell="0" style="display: inline-flex; animation: none;">
   <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"></path><path d="M8.5 9.5h7M8.5 12.5h4"></path></svg>
   <span class="chat-btn-l">Assistent fragen</span></button></div></div>
 <!-- vorab:end -->
