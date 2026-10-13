@@ -14,9 +14,9 @@ der Website ist das Google-Unternehmensprofil.
   seit 12. Oktober 2026 auch mit der Einblicke-Übersicht und allen Artikeln (`lastmod` = Änderungsdatum des Artikels aus
   `article:modified_time`, nie vor dem Veröffentlichungsdatum). Nicht drin: die Detailseiten der Musterprojekte, 404,
   `/start/`, Impressum und der Projekt-Check (seit 10. Oktober 2026).
-- **Neue Artikel:** Das Akquise-Tool führt `einblicke/sitemap.xml` bei jedem Artikel nach, `robots.txt` nennt beide Sitemaps.
-  Ein neuer Artikel ist damit sofort in einer Sitemap. In `sitemap.xml` und `llms.txt` erscheint er beim nächsten
-  `node tools/seo-build.mjs`.
+- **Neue Artikel:** Das Akquise-Tool schreibt beim Veröffentlichen und Entfernen im selben Commit `einblicke/sitemap.xml`
+  und den Teil Einblicke in `sitemap.xml` und `llms.txt`, mit denselben Zeilen wie `seo-build` (Quelle für beide:
+  `src/einblicke/index.json`). Ein neuer Artikel steht damit sofort überall, ohne `seo-build`.
 - `robots.txt` erlaubt alle Crawler und nennt die bekannten Such- und KI-Crawler (GPTBot, OAI-SearchBot, ClaudeBot,
   PerplexityBot, Google-Extended, Applebot-Extended und weitere) ausdrücklich. Liste: `KI_CRAWLER` in `tools/seo-build.mjs`.
 - `llms.txt` nach llmstxt.org (Kurzfassung, Preise, Links zu allen öffentlichen Seiten und Artikeln), erzeugt aus denselben
@@ -58,7 +58,8 @@ und auf Über mich. Name, Ort und E-Mail überall gleich: «ODERA Design», «Be
 | `/datenschutz/` | Datenschutzerklärung · ODERA Design (35) | Welche Daten beim Besuch von odera.ch, im Projekt-Check, im Chat und bei der Statistik mit Einwilligung bearbeitet werden. Keine Cookies. (137) |
 | `/agb/` | Allgemeine Geschäftsbedingungen · ODERA Design (46) | Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Betrieb und Hosting. (137) |
 
-Trenner im Titel einheitlich «·», auch in den Einblicken (`tools/einblicke-auffrischen.mjs`, lange Artikeltitel ohne Zusatz).
+Trenner im Titel einheitlich «·», auch in den Einblicken. Dort gilt: Zusatz « · ODERA Design» nur bis 65 Zeichen,
+sonst ohne; zu lange Artikeltitel bekommen einen Kurztitel für `title` und `og:title` (`titel_kurz`), die h1 bleibt.
 Jede Seite hat zusätzlich `twitter:title` und `twitter:description`.
 
 **Interne Links (seit 12. Oktober 2026):** Angebot verlinkt Musterprojekte und alle Branchenseiten, Musterprojekte verlinkt die
@@ -81,8 +82,8 @@ LinkedIn-Adressen `ODERA_LINKEDIN_URL` und `LINKEDIN_PERSON_URL`, Branchenseiten
 | übrige | WebPage, BreadcrumbList |
 
 Keine Bewertungen, keine Öffnungszeiten (kein Ladenlokal), FAQPage nur mit sichtbaren Fragen (alle Absätze der Antwort, Wortlaut
-wie sichtbar). Die Einblicke schreibt das Akquise-Tool. `tools/einblicke-auffrischen.mjs` gleicht ihre Daten an
-(`schemaAngleichen`), bis das Akquise-Tool sie selbst so schreibt.
+wie sichtbar). Die Einblicke schreibt das Akquise-Tool (`src/logik/einblicke.ts` im Repo `odera-akquise`) mit denselben `@id`
+für Person und Firma wie `tools/seo-build.mjs`.
 
 **Prüfung 12. Oktober 2026:** alle 19 Blöcke gültiges JSON und typgeprüft gegen schema.org mit `schema-dts` (validator.schema.org war aus der Arbeitsumgebung nicht erreichbar).
 

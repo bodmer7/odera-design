@@ -19,7 +19,7 @@
 // Nach jeder Änderung an Texten oder Seiten in index.html erneut ausführen und die Ergebnisse einchecken.
 // Am Schluss entsteht auch die Wissensbasis des Chat-Assistenten (tools/wissen-build.mjs).
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
 import { ROOT, QUELLE, leseSeiten, startServer, startChrome } from './lib/browser.mjs';
@@ -412,25 +412,21 @@ writeFileSync(STAND_DATEI, JSON.stringify(stand, null, 2) + '\n');
 const OHNE_SITEMAP = ['/projekt-check'];
 const indexierbar = Object.keys(PAGES).filter((p) => !PAGES[p].noindex && !OHNE_SITEMAP.includes(p));
 
-// Einblicke (statische Seiten aus dem Akquise-Tool): Titel, Beschreibung und Datum aus der jeweiligen Seite.
-// lastmod ist das Änderungsdatum des Artikels (dateModified, nie vor datePublished), nicht das Datum des letzten
-// Neuschreibens der Vorlage. Sonst gälten nach jeder Stiländerung alle Artikel als neu.
+// Einblicke (statische Seiten aus dem Akquise-Tool): Liste aus src/einblicke/index.json, gleiche Reihenfolge und gleiche
+// Zeilen wie im Akquise-Tool (src/logik/einblicke.ts: sortiere, lastmod, websiteSitemapMitEinblicken, llmsMitEinblicken).
+// Das Tool trägt einen neuen Artikel selbst in sitemap.xml und llms.txt ein; seo-build schreibt dasselbe.
+// lastmod ist das Änderungsdatum des Artikels, nie vor dem Veröffentlichungsdatum.
 function einblickeLesen() {
-  const attr = (html, re) => ((html.match(re) || [])[1] || '').replace(/&quot;/g, '"').replace(/&amp;/g, '&');
-  const ordner = existsSync(join(ROOT, 'einblicke')) ? readdirSync(join(ROOT, 'einblicke'), { withFileTypes: true })
-    .filter((d) => d.isDirectory() && existsSync(join(ROOT, 'einblicke', d.name, 'index.html'))).map((d) => d.name) : [];
-  return ordner.map((name) => {
-    const html = readFileSync(join(ROOT, 'einblicke', name, 'index.html'), 'utf8');
-    const ver = attr(html, /<meta property="article:published_time" content="([^"]+)"/);
-    const geaendert = attr(html, /<meta property="article:modified_time" content="([^"]+)"/);
-    return { url: `${SITE}/einblicke/${name}/`, titel: attr(html, /<h1[^>]*>([^<]+)<\/h1>/), desc: attr(html, /<p class="einleitung">([^<]+)<\/p>/) || attr(html, /<meta name="description" content="([^"]+)"/),
-      index: !/<meta name="robots" content="noindex/.test(html), datum: ver, lastmod: geaendert && geaendert > ver ? geaendert : ver };
-  }).filter((a) => a.index && a.datum).sort((a, b) => b.datum.localeCompare(a.datum));
+  const datei = join(ROOT, 'src', 'einblicke', 'index.json');
+  if (!existsSync(datei)) return [];
+  const liste = JSON.parse(readFileSync(datei, 'utf8')).artikel || [];
+  return [...liste].sort((a, b) => b.datum.localeCompare(a.datum) || b.geaendert.localeCompare(a.geaendert) || a.slug.localeCompare(b.slug))
+    .map((e) => ({ url: `${SITE}/einblicke/${e.slug}/`, titel: e.titel, desc: e.anriss.trim(), datum: e.datum,
+      lastmod: e.geaendert.slice(0, 10) > e.datum ? e.geaendert.slice(0, 10) : e.datum }));
 }
 const ARTIKEL = einblickeLesen();
-const uebersichtIndex = existsSync(join(ROOT, 'einblicke', 'index.html')) && !/<meta name="robots" content="noindex/.test(readFileSync(join(ROOT, 'einblicke', 'index.html'), 'utf8'));
 const einblickeUrls = [
-  ...(uebersichtIndex && ARTIKEL.length ? [{ loc: `${SITE}/einblicke/`, lastmod: ARTIKEL.map((a) => a.lastmod).sort().at(-1) }] : []),
+  ...(ARTIKEL.length ? [{ loc: `${SITE}/einblicke/`, lastmod: ARTIKEL.map((a) => a.lastmod).sort().at(-1) }] : []),
   ...ARTIKEL.map((a) => ({ loc: a.url, lastmod: a.lastmod }))];
 writeFileSync(join(ROOT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
@@ -477,7 +473,7 @@ ${Object.keys(BRANCHEN).filter((p) => PAGES[p] && !PAGES[p].noindex).map((p) => 
 ## Einblicke
 
 - [Einblicke](${SITE}/einblicke/): Blog mit Praxis-Tipps, Beobachtungen und Haltung rund um Websites für kleine Betriebe in der Schweiz.
-${ARTIKEL.map((a) => `- [${a.titel}](${a.url}): ${a.desc.trim()}`).join('\n')}
+${ARTIKEL.map((a) => `- [${a.titel}](${a.url}): ${a.desc}`).join('\n')}
 
 ## Über mich
 
