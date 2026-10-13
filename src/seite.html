@@ -2941,7 +2941,6 @@ class Component extends DCLogic {
   // mit Google Lighthouse im Profil Desktop, Median aus drei Läufen. Angezeigt wird der langsamste der gemessenen Seiten, aufgerundet.
   LADEZEIT = {
     doppelmeter: '0,5 s',
-    portfolio: '0,5 s',
     firstlicht: '0,4 s',
     notiz: 'Ladezeit: bis der grösste Inhalt sichtbar ist, gemessen mit Google Lighthouse im Profil Desktop, Median aus drei Läufen. Doppelmeter am 1. Oktober 2026 (langsamste der fünf Seiten), Firstlicht am 5. Oktober 2026 (langsamste der sechs Seiten).',
     // Messung Firstlicht mit Google Lighthouse im Profil Mobil, Median aus drei Läufen, alle sechs Seiten. Nur gemessene Werte eintragen.
@@ -3911,7 +3910,7 @@ class Component extends DCLogic {
     // Erklär-Schalter: Zustand nach jedem Klick im Muster übernehmen (z. B. «Ausblenden» im Panel)
     d.addEventListener('click', () => setTimeout(() => this.musterErklaerLesen(), 0), true);
     this.musterErklaerLesen();
-    // Verschachtelte Rahmen derselben Herkunft (Portfolio-Muster). Sie entstehen teils erst nach dem Laden.
+    // Verschachtelte Rahmen derselben Herkunft. Sie entstehen teils erst nach dem Laden.
     const innen = (i) => {
       if (i.__oderaInnen) return;
       i.__oderaInnen = true;
@@ -4627,7 +4626,6 @@ class Component extends DCLogic {
       allOffNote: 'Anderthalb Stunden. Mehr braucht es von Ihnen nicht.',
 
       mpBildDm: s.device === 'mobile' ? 'assets/img/muster-doppelmeter-handy.webp' : 'assets/img/muster-doppelmeter-desktop.webp',
-      mpBildPf: s.device === 'mobile' ? 'assets/img/muster-portfolio-handy.webp' : 'assets/img/muster-portfolio-desktop-16x9.webp',
       mpGeraet: s.device === 'mobile' ? 'Ansicht Handy' : 'Ansicht Computer',
       devAR: s.device === 'mobile' ? '9 / 16' : '16 / 9',
       devMax: s.device === 'mobile' ? '320px' : '640px',
@@ -4664,7 +4662,6 @@ class Component extends DCLogic {
       },
       musterLaedt: !!s.muster && !s.muster.geladen,
       ladezeitDm: this.LADEZEIT.doppelmeter,
-      ladezeitPf: this.LADEZEIT.portfolio,
       ladezeitFl: this.LADEZEIT.firstlicht,
       firstlichtMessung: this.LADEZEIT.firstlichtMessung,
       ladezeitNotiz: this.LADEZEIT.notiz,

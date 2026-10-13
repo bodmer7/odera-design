@@ -92,7 +92,6 @@ robots.txt, sitemap.xml     Erzeugt, für Suchmaschinen
 llms.txt                    Erzeugt, Kurzfassung für Sprachmodelle (llmstxt.org)
 .htaccess                   Einstellungen für den Apache-Webserver (Fehlerseite, Kompression, Zwischenspeicher)
 tools/seo-build.mjs         Erzeugt die Dateien oben
-tools/portfolio-sync.mjs    Holt das aktuelle Portfolio als Musterprojekt (muster/portfolio/)
 logo.dc.html                Komponente: Logo (Zeichen und Wortmarke)
 kapazitaet.dc.html          Komponente: Auslastungsanzeige
 musterprojekte/doppelmeter/ Musterprojekt Schreinerei Doppelmeter, fünf statische Seiten (siehe „Musterprojekt Doppelmeter“)
@@ -101,15 +100,12 @@ musterprojekte/firstlicht/  Musterprojekt Solarbetrieb Firstlicht, sechs erzeugt
 tools/firstlicht/           Vorlagen, Build, Tests und Prüfungen für Firstlicht (nicht veröffentlicht)
 einblicke/                  Blog (Übersicht, Artikel, feed.xml, sitemap.xml), geschrieben vom Akquise-Tool, nicht von Hand ändern
 src/einblicke-vorlage.html  Vorlage der Einblicke, erzeugt von tools/seo-build.mjs (nicht veröffentlicht)
-tools/einblicke-auffrischen.mjs  Setzt die bestehenden Einblicke in die aktuelle Vorlage und gleicht Kopf, Daten und Autorenzeile an
 src/einblicke/              Daten der Einblicke für neue Läufe (nicht veröffentlicht)
 assets/css/einblicke.css, assets/js/einblicke.js  Stil sowie Menü und Kopf der Einblicke (ohne React)
 package.json                Nur Entwicklungswerkzeuge für Firstlicht (nicht veröffentlicht)
 CLAUDE.md                   Kurzregeln für die Arbeit mit Claude
 muster/
   doppelmeter.html          Weiterleitung auf /musterprojekte/doppelmeter/ (alte Adresse)
-  portfolio.html            Rahmen für das Musterprojekt Portfolio
-  portfolio/                Kopie des echten Portfolios (erzeugt, siehe „Portfolio-Muster“)
 assets/
   js/support.js             Claude-Design-Laufzeit (unverändert aus dem Export)
   js/vendor/                React 18.3.1 und ReactDOM, Produktionsfassungen
@@ -120,7 +116,7 @@ assets/
 ```
 
 Jede Seite lädt ihre eigene Schrift-CSS (`assets/fonts/index.css`,
-`doppelmeter.css`, `portfolio.css`, `portfolio-muster.css`). Sie enthält
+`doppelmeter.css`). Sie enthält
 genau die Schnitte, die diese Seite darstellt, in den Zeichensätzen latin und
 latin-ext. Wenn neue Schriftschnitte dazukommen, muss die passende CSS-Datei
 ergänzt werden, sonst ersetzt der Browser den Schnitt durch den nächstliegenden.
@@ -183,28 +179,6 @@ Besucher. Einrichten, sobald die Domain online ist:
    die Domain liegt (bei Infomaniak im Manager unter „DNS-Zonen“).
 3. Unter „Sitemaps“ `sitemap.xml` einreichen.
 4. Unter „URL-Prüfung“ die Startseite prüfen und „Indexierung beantragen“.
-
-## Portfolio-Muster
-
-Das zweite Musterprojekt ist eine Kopie deines echten Portfolios
-(`github.com/bodmer7/nicobodmer`, live unter nico-bodmer.ch). Sie liegt in
-`muster/portfolio/`, der Rahmen `muster/portfolio.html` zeigt sie im Overlay.
-Die Kopie wird nicht von Hand bearbeitet. Nach jeder Änderung am Portfolio:
-
-```bash
-node tools/portfolio-sync.mjs
-node tools/seo-build.mjs
-```
-
-Danach die Änderungen einchecken. Das Skript braucht die GitHub-Anmeldung
-(`gh auth status`), weil das Portfolio-Repository privat ist. Gegenüber dem
-Original ändert es nur fünf Dinge, damit die Kopie zu den Zusagen dieser
-Website passt: Die Schriften kommen von diesem Server statt von Google Fonts,
-das Portfolio merkt sich Farbschema und Sprache nicht im Browser, die Kopie ist
-`noindex` und hat kein `canonical`, ein Kommentar nennt Quelle und Stand, und
-der Arbeitgeber wird nicht genannt (neutrale Umschreibung, kein `worksFor`).
-Findet das Skript eine der Stellen nicht mehr, weil sich das Portfolio
-verändert hat, bricht es mit einer Meldung ab.
 
 ## Musterprojekt Doppelmeter
 
@@ -269,8 +243,8 @@ Seiten **erzeugt**: Vorlagen in `tools/firstlicht/vorlagen/`, bauen mit
 
 Links mit `onClick="{{ openMuster }}"` öffnen ein Muster ab 768 px Breite im
 Overlay (iframe), darunter und mit gedrückter Taste direkt. Jeder Link trägt
-`data-title` (Titel in der Leiste) und `data-muster` (`doppelmeter`, `firstlicht`
-oder `portfolio`). Daraus ergibt sich die Leiste: Bei Doppelmeter und Firstlicht
+`data-title` (Titel in der Leiste) und `data-muster` (`doppelmeter` oder
+`firstlicht`). Daraus ergibt sich die Leiste: Bei Doppelmeter und Firstlicht
 steht dort der Hinweis «Beispielseite von ODERA Design. Der Betrieb ist frei
 erfunden.» und ein Link zum Projekt-Check, bei Firstlicht zusätzlich der Schalter
 «Erklärungen».
@@ -429,7 +403,6 @@ Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse
 | `CHAT_ENDPOINT` | leer | Adresse des Chat-Proxys (`chat-proxy/`). Leer heisst: Assistent ausgeblendet. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `SITE` | `https://odera.ch` | Adresse der Website in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `EMAIL` und feste Texte | `kontakt@odera.ch`, `odera.ch` | Setzen die Domain odera.ch voraus, auch die Mailtexte aus dem Projekt-Check. Das Postfach `kontakt@odera.ch` muss existieren, bevor die Seite online geht. |
-| Portfolio-Muster (`muster/portfolio/`) | Stand vom 21.09.2026 (Design v8) | Ändert sich das Portfolio, `node tools/portfolio-sync.mjs` ausführen. Siehe „Portfolio-Muster“. |
 | Datenschutz „2. Besuch dieser Website“ | GitHub Pages, USA | Stimmt nur, solange die Seite auf GitHub Pages liegt. Bei einem Umzug (z. B. zu Infomaniak) den Absatz anpassen und `STAND_RECHTSTEXTE` nachführen. Das Postfach (Abschnitt 7) liegt bei Infomaniak. |
 
 ## Veröffentlichung
