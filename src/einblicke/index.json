@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "ein-entwurf-in-5-arbeitstagen-schritt-fuer-schritt",
+      "titel": "Ein Entwurf in 5 Arbeitstagen, Schritt für Schritt",
+      "beschreibung": "Was in den 5 Arbeitstagen bis zum Entwurf passiert. Ich werde oft gefragt, wie ein Entwurf so schnell entstehen kann. Die Antwort: klare Schritte und…",
+      "anriss": "Was in den 5 Arbeitstagen bis zum Entwurf passiert. Ich werde oft gefragt, wie ein Entwurf so schnell entstehen kann. Die Antwort: klare Schritte und wenig Leerlauf.",
+      "datum": "2026-10-14",
+      "geaendert": "2026-10-14T09:12:49Z",
+      "rubrik": "Einblick und Beispiel",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: Ein Entwurf in 5 Arbeitstagen, Schritt für Schritt"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "kurz-pruefen-bevor-das-jahresende-kommt",
       "titel": "Kurz prüfen, bevor das Jahresende kommt",
       "beschreibung": "Der Herbst-Check für Ihre Website. Vor dem Jahresende wird es in vielen Betrieben hektisch. Jetzt ist noch Zeit, die Website kurz durchzugehen.",

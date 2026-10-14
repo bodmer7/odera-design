@@ -1,0 +1,84 @@
+{
+  "v": 1,
+  "slug": "ein-entwurf-in-5-arbeitstagen-schritt-fuer-schritt",
+  "titel": "Ein Entwurf in 5 Arbeitstagen, Schritt für Schritt",
+  "beschreibung": "Was in den 5 Arbeitstagen bis zum Entwurf passiert. Ich werde oft gefragt, wie ein Entwurf so schnell entstehen kann. Die Antwort: klare Schritte und…",
+  "anriss": "Was in den 5 Arbeitstagen bis zum Entwurf passiert. Ich werde oft gefragt, wie ein Entwurf so schnell entstehen kann. Die Antwort: klare Schritte und wenig Leerlauf.",
+  "datum": "2026-10-14",
+  "geaendert": "2026-10-14T09:12:49Z",
+  "saeule": "einblick",
+  "rubrik": "Einblick und Beispiel",
+  "thema_id": "ablauf",
+  "kurz": [
+    "Tag eins: Angaben lesen, Betrieb verstehen",
+    "Mitte der Woche: Aufbau, Texte, Gestaltung",
+    "Am Schluss: Prüfen auf Handy und Computer"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Was ich dabei beobachte",
+      "absaetze": [
+        "Zuerst lese ich Ihre Angaben und schaue mir Ihre heutige Seite und Ihr Google-Profil an. Dann lege ich Aufbau und Farben fest. Erst danach gestalte ich die Startseite.",
+        "Wer eine neue Website plant, fragt sich vor allem, wie viel Zeit und Aufwand auf ihn zukommt. Viele haben schon von Projekten gehört, die sich über Monate hinziehen, mit endlosen Abstimmungen und unklaren Zwischenständen.",
+        "Ein klarer Ablauf nimmt diese Sorge. Wenn jeder Schritt feststeht, weiss man, was als Nächstes passiert und wann man selbst gefragt ist. Das spart Zeit auf beiden Seiten.",
+        "Mir ist wichtig, dass Sie verstehen, was hinter einem Entwurf steckt. So können Sie besser beurteilen, ob ein Angebot zu Ihrem Betrieb passt."
+      ]
+    },
+    {
+      "titel": "Worauf es ankommt",
+      "absaetze": [
+        "Aus meiner Arbeit kenne ich vor allem diese Punkte. Sie gelten für fast jede Branche und lassen sich meistens ohne grossen Umbau verbessern."
+      ],
+      "punkte": [
+        {
+          "titel": "Tag eins: Angaben lesen, Betrieb verstehen",
+          "text": "Am Anfang stehen Ihre Angaben aus dem Formular, ein Blick auf Ihre heutige Website und Ihr Google-Profil. So entsteht ein Bild Ihres Betriebs, bevor ich mit der Gestaltung beginne."
+        },
+        {
+          "titel": "Mitte der Woche: Aufbau, Texte, Gestaltung",
+          "text": "Danach lege ich Aufbau, Texte und Farben fest und gestalte die Startseite. Sie ist das Herzstück des Entwurfs und zeigt, wohin die Reise geht."
+        },
+        {
+          "titel": "Am Schluss: Prüfen auf Handy und Computer",
+          "text": "Zum Schluss prüfe ich alles auf Handy und Computer. Erst dann erhalten Sie den Entwurf zur Ansicht."
+        }
+      ],
+      "nach": [
+        "Das gilt für einen Coiffeur genauso wie für eine Schreinerei. Die Branche ändert die Bilder und Texte, aber selten die Grundregeln."
+      ]
+    },
+    {
+      "titel": "Wie ich Websites anschaue",
+      "absaetze": [
+        "Bevor ich einem Betrieb einen Vorschlag mache, schaue ich seine Website auf dem Handy und am Computer an, mit einer festen Checkliste. Dazu gehören der Weg zum Kontakt, die Lesbarkeit, die Öffnungszeiten und eigene Bilder. Ich schreibe nur über Punkte, die ich selbst geprüft habe, und nenne dabei keine Firmennamen."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Wenn Sie eine neue Website planen, fragen Sie jeden Anbieter nach dem genauen Ablauf: Was passiert wann, und wann sind Sie gefragt? Eine klare Antwort darauf ist ein gutes Zeichen für die Zusammenarbeit.",
+        "Gerade bei kleinen Betrieben entscheidet der erste Eindruck auf dem Handy oft darüber, ob jemand anruft oder weiterklickt. Darum schaue ich zuerst dorthin.",
+        "Möchten Sie sehen, wie das für Ihren Betrieb aussehen könnte? Der Projekt-Check auf meiner Website dauert rund 6 Minuten."
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 6 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Ein Entwurf in 5 Arbeitstagen, Schritt für Schritt"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}
