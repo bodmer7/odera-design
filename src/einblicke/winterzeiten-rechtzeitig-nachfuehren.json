@@ -1,0 +1,84 @@
+{
+  "v": 1,
+  "slug": "winterzeiten-rechtzeitig-nachfuehren",
+  "titel": "Winterzeiten rechtzeitig nachführen",
+  "beschreibung": "Winterzeit: Stimmen Ihre Öffnungszeiten noch? Ende Oktober wird es früh dunkel. Viele Läden und Betriebe passen ihre Zeiten an, besonders am Abend.",
+  "anriss": "Winterzeit: Stimmen Ihre Öffnungszeiten noch? Ende Oktober wird es früh dunkel. Viele Läden und Betriebe passen ihre Zeiten an, besonders am Abend.",
+  "datum": "2026-10-19",
+  "geaendert": "2026-10-19T06:58:20Z",
+  "saeule": "praxis",
+  "rubrik": "Praxis-Tipp",
+  "thema_id": "okt-winterzeit",
+  "kurz": [
+    "Winterzeiten auf der Startseite",
+    "Google-Profil gleichzeitig ändern",
+    "Telefonansage anpassen"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Warum das wichtig ist",
+      "absaetze": [
+        "Ende Oktober wird es früh dunkel. Viele Läden und Betriebe passen ihre Zeiten an, besonders am Abend.",
+        "Wer das nur an der Tür ändert, erreicht die Kundschaft zu spät. Website und Google-Profil sollten gleichzeitig angepasst werden.",
+        "Besonders ärgerlich ist das für Kundinnen und Kunden, die extra vorbeikommen und dann vor verschlossener Tür stehen. Ein kurzer Satz auf der Website und im Google-Profil verhindert das und zeigt, dass Sie an Ihre Kundschaft denken.",
+        "Ich sehe diesen Punkt bei vielen kleinen Betrieben, ganz unabhängig von der Branche. Darum lohnt sich ein kurzer Blick, bevor Sie an grössere Änderungen denken."
+      ]
+    },
+    {
+      "titel": "So gehen Sie vor",
+      "absaetze": [
+        "Sie brauchen dafür in den meisten Fällen keine neue Website. Die folgenden Punkte lassen sich einzeln umsetzen. Beginnen Sie mit dem, der Ihrer Kundschaft heute am meisten fehlt."
+      ],
+      "punkte": [
+        {
+          "titel": "Winterzeiten auf der Startseite",
+          "text": "Tragen Sie die Winterzeiten auf der Startseite ein."
+        },
+        {
+          "titel": "Google-Profil gleichzeitig ändern",
+          "text": "Ändern Sie gleichzeitig das Google-Profil."
+        },
+        {
+          "titel": "Telefonansage anpassen",
+          "text": "Passen Sie die Telefonansage an."
+        }
+      ],
+      "nach": [
+        "Mehr braucht es oft nicht. Wenn Sie unsicher sind, wie das bei Ihrer Seite aussehen könnte, schauen Sie sich die Musterprojekte auf meiner Website an."
+      ]
+    },
+    {
+      "titel": "Kleine Schritte statt grosser Umbau",
+      "absaetze": [
+        "Viele Betriebe warten mit Verbesserungen, bis sie Zeit für eine ganz neue Website haben. Dieser Moment kommt selten. Wirksamer ist es, einen Punkt nach dem anderen anzugehen. Jede kleine Änderung hilft Ihrer Kundschaft sofort, und Sie sehen schnell, was sich lohnt. Erst wenn sich vieles auf einmal ändern muss, ist ein Neuanfang die bessere Wahl."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Prüfen Sie heute, ob sich Ihre Zeiten im Winter ändern, und passen Sie alle drei Stellen am selben Tag an.",
+        "Ein Tipp aus der Praxis: Notieren Sie sich solche Punkte gleich im Kalender. Wer seine Website einmal im Monat kurz anschaut, muss sie selten ganz neu machen.",
+        "Haben Sie im Winter andere Öffnungszeiten?"
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 6 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Winterzeiten rechtzeitig nachführen"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}

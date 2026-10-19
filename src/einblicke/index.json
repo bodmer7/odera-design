@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "winterzeiten-rechtzeitig-nachfuehren",
+      "titel": "Winterzeiten rechtzeitig nachführen",
+      "beschreibung": "Winterzeit: Stimmen Ihre Öffnungszeiten noch? Ende Oktober wird es früh dunkel. Viele Läden und Betriebe passen ihre Zeiten an, besonders am Abend.",
+      "anriss": "Winterzeit: Stimmen Ihre Öffnungszeiten noch? Ende Oktober wird es früh dunkel. Viele Läden und Betriebe passen ihre Zeiten an, besonders am Abend.",
+      "datum": "2026-10-19",
+      "geaendert": "2026-10-19T06:58:20Z",
+      "rubrik": "Praxis-Tipp",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: Winterzeiten rechtzeitig nachführen"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "ein-entwurf-in-5-arbeitstagen-schritt-fuer-schritt",
       "titel": "Ein Entwurf in 5 Arbeitstagen, Schritt für Schritt",
       "beschreibung": "Was in den 5 Arbeitstagen bis zum Entwurf passiert. Ich werde oft gefragt, wie ein Entwurf so schnell entstehen kann. Die Antwort: klare Schritte und…",
