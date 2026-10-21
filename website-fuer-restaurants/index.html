@@ -31,7 +31,7 @@
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://odera.ch/website-fuer-restaurants/#seite","url":"https://odera.ch/website-fuer-restaurants/","name":"Website für Restaurants und Cafés · ODERA Design","description":"Website für Ihr Restaurant oder Café: Karte, Öffnungszeiten und Reservation auf dem Handy. Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890.","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/website-fuer-restaurants/#brotkrumen"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/website-fuer-restaurants/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Website für Restaurants und Cafés","item":"https://odera.ch/website-fuer-restaurants/"}]},{"@type":"Service","@id":"https://odera.ch/website-fuer-restaurants/#leistung","name":"Website für Restaurants und Cafés","serviceType":"Website für Restaurants und Cafés","provider":{"@id":"https://odera.ch/#organisation"},"areaServed":[{"@type":"Place","name":"Freiamt"},{"@type":"Place","name":"Mutschellen"},{"@type":"AdministrativeArea","name":"Kanton Aargau"},{"@type":"Country","name":"Schweiz"}],"offers":{"@type":"Offer","price":"890","priceCurrency":"CHF","url":"https://odera.ch/angebot/"}},{"@type":"FAQPage","@id":"https://odera.ch/website-fuer-restaurants/#fragen","mainEntity":[{"@type":"Question","name":"Kann ich die Menükarte selbst ändern?","acceptedAnswer":{"@type":"Answer","text":"Im Paket Pro bearbeiten Sie Texte selbst, ohne Technikkenntnisse. In den anderen Paketen ändere ich sie für Sie, nach Aufwand zu CHF 120 pro Stunde."}},{"@type":"Question","name":"Brauche ich ein Reservationssystem?","acceptedAnswer":{"@type":"Answer","text":"Nicht unbedingt. Für viele Lokale reichen ein Knopf zum Anrufen und ein Formular. Eine Online-Buchung gibt es im Paket Pro."}},{"@type":"Question","name":"Gehört die Website danach mir?","acceptedAnswer":{"@type":"Answer","text":"Ja. Domain, Zugänge und Quellcode gehören Ihnen. Den Betrieb übernehmen Sie selbst oder ich, ab CHF 240 pro Jahr."}}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=2f7db3be99" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=bf8527c0a8" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -629,7 +629,7 @@ if(!m.hasAttribute('tabindex'))m.setAttribute('tabindex','-1');m.focus({preventS
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=2f7db3be99';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=bf8527c0a8';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -875,6 +875,7 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 [data-w="ja"] .vg-i{background-color:var(--primaer);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")}
 [data-w="teils"] .vg-i{background:linear-gradient(90deg,var(--linie-stark) 50%,transparent 50%);box-shadow:inset 0 0 0 2px var(--linie-stark)}
 [data-w="nein"] .vg-i{box-shadow:inset 0 0 0 2px var(--linie-stark);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 24 24' fill='none' stroke='%23565D6B' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M7 7l10 10M17 7L7 17'/%3E%3C/svg%3E")}
+.vg-l{display:none}
 .vg-legende{display:flex;flex-wrap:wrap;gap:8px 24px;margin:16px 0 0}
 .vg-legende>span{display:inline-flex;align-items:center;gap:8px}
 .vg-legende .vg-i{width:20px;height:20px;background-size:12px}
@@ -1123,12 +1124,6 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .start-schritte .phase-n{grid-row:1 / span 2;font-size:var(--fs-4);line-height:1.4}
  .start-schritte .titel-3{font-size:var(--fs-3);line-height:1.4}
  .start-schritte p{font-size:var(--fs-2);line-height:1.45}
- /* 7e Vergleich: Kriterien rund 50 %, schmale Symbolspalten, einzeilige Köpfe */
- .vergleich{padding:4px 12px}
- .vg-zeile{grid-template-columns:50% repeat(3,minmax(0,1fr));gap:4px;min-height:56px}
- .vg-kopf{min-height:44px;font-size:11px;white-space:nowrap}
- .vg-frage{font-size:var(--fs-2);line-height:1.35}
- .vg-zeile .vg-i{width:22px;height:22px;background-size:12px}
  /* 7f Paketrechner: kurze, einzeilige Beschriftung */
  .rl-lang{display:none}.rl-kurz{display:inline}
  .rechner-los{white-space:nowrap}
@@ -1206,13 +1201,39 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .hero-zahlen{padding:0;background:transparent;color:var(--tinte)}
  .hero-zahlen .zahlen-reihe{grid-template-columns:auto auto auto;justify-content:space-between;gap:0 8px;padding:20px 0 0;border-top:1px solid var(--linie)}
  .hero-zahlen .zahlen-reihe>div{align-items:center;gap:4px;text-align:center}
- .hero-zahlen .kennzahl{font-size:17px;color:var(--tinte)}
+ .hero-zahlen .kennzahl{font-size:clamp(15px,4.4vw,17px);color:var(--tinte)}
  .hero-zahlen dd{font-size:13px;line-height:1.35;color:var(--text-2)}
  .hero-weiter{display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin:16px auto 8px;border-radius:50%;color:var(--text-2)}
 }
 @media(max-width:767px) and (prefers-reduced-motion:no-preference){
  .hero-badge-punkt{animation:badgePuls 2.4s ease-in-out infinite}
  @keyframes badgePuls{0%,100%{box-shadow:0 0 0 0 var(--odera-blau-a45)}50%{box-shadow:0 0 0 5px var(--odera-blau-a00)}}
+}
+/* Übrige Startseite unter 768 px: gleicher Rhythmus (8er-Raster), Text ab 16 px, ein gefüllter Knopf pro Abschnitt */
+@media(max-width:767px){
+ .startseite{--fs-2:16px;--titel-abstand:24px}
+ .startseite :is(.lesetext,.einleitung,.mk-text p,.phasen-kompakt p,.frage p,.ki-gruss){line-height:1.55}
+ .startseite .titelblock .einleitung{margin-top:16px}
+ /* Weitere Knöpfe als Textlinks: Pakete Website und Pro, LinkedIn im Abschluss */
+ .startseite .pk-kurz .btn-sekundaer,#abschluss .abschluss-seite .li-knopf{min-height:44px;padding:0;border:0;border-radius:0;background:none;color:var(--primaer-dunkel);text-decoration:underline;text-underline-offset:3px;justify-content:flex-start}
+ #abschluss .abschluss-seite .li-knopf{color:#FFFFFF}
+ .startseite .branchen-zeile a,.startseite .ki-hinweis a,#abschluss .abschluss-seite p a{display:inline-block;padding:12px 0;margin:-12px 0}
+ .startseite .branchen-zeile{line-height:2.2}
+ /* Vergleich als kompakte Liste: Kriterium, darunter drei Status mit Symbol und Text */
+ .vergleich{padding:4px 16px}
+ .vg-kopf{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+ .vg-zeile{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 8px;min-height:0;padding:16px 0}
+ .vg-zeile:nth-child(2){padding-top:12px}
+ .vg-frage{grid-column:1 / -1;font-size:16px;font-weight:600;line-height:1.4}
+ .vg-zeile [role=cell]{display:flex;flex-direction:column;align-items:center;gap:4px;justify-self:stretch;text-align:center}
+ .vg-zeile .vg-i{width:24px;height:24px;background-size:13px}
+ .vg-l{display:block;font-size:13px;line-height:1.3;color:var(--text-2)}
+ .vg-zeile .vg-t{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;font-size:15px;font-weight:600;line-height:1.3;color:var(--tinte)}
+ .vg-zeile .vg-ich .vg-l,.vg-zeile .vg-ich .vg-t{color:var(--primaer-dunkel)}
+ /* Assistent: höchstens zwei Vorschläge sichtbar */
+ .ki-chips .ki-chip:nth-child(n+3){display:none}
+ /* Schwebender Knopf «Assistent fragen» auf der Startseite erst nach dem ersten Bildschirm */
+ html:has(.startseite) .chat-btn[data-bar="0"]{display:none!important}
 }
 </style>
 </head>
