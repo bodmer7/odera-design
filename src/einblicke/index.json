@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "google-verlinkt-wieder-mehr-websites",
+      "titel": "Google verlinkt wieder mehr Websites",
+      "beschreibung": "Google zeigt in den KI-Antworten der Suche wieder mehr Links zu Websites. Was das für kleine Betriebe heisst und worauf es jetzt ankommt.",
+      "anriss": "Google hat angekündigt, in den KI-Antworten der Suche mehr Links zu Websites zu zeigen, und zwar öfter weiter oben. Für kleine Betriebe ist das eine gute Nachricht, wenn die eigene Website bereit ist.",
+      "datum": "2026-10-21",
+      "geaendert": "2026-10-21T13:54:02Z",
+      "rubrik": "Aktuell",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: Google verlinkt wieder mehr Websites"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "winterzeiten-rechtzeitig-nachfuehren",
       "titel": "Winterzeiten rechtzeitig nachführen",
       "beschreibung": "Winterzeit: Stimmen Ihre Öffnungszeiten noch? Ende Oktober wird es früh dunkel. Viele Läden und Betriebe passen ihre Zeiten an, besonders am Abend.",

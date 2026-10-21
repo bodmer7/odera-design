@@ -1,0 +1,91 @@
+{
+  "v": 1,
+  "slug": "google-verlinkt-wieder-mehr-websites",
+  "titel": "Google verlinkt wieder mehr Websites",
+  "beschreibung": "Google zeigt in den KI-Antworten der Suche wieder mehr Links zu Websites. Was das für kleine Betriebe heisst und worauf es jetzt ankommt.",
+  "anriss": "Google hat angekündigt, in den KI-Antworten der Suche mehr Links zu Websites zu zeigen, und zwar öfter weiter oben. Für kleine Betriebe ist das eine gute Nachricht, wenn die eigene Website bereit ist.",
+  "datum": "2026-10-21",
+  "geaendert": "2026-10-21T13:54:02Z",
+  "saeule": "praxis",
+  "rubrik": "Aktuell",
+  "thema_id": "aktuell-2026-10-21",
+  "kurz": [
+    "Google zeigt in KI-Antworten mehr Links zu Websites",
+    "Ein Bereich für offizielle Websites ist im Test",
+    "Die eigene Website wird wieder wichtiger"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Was Google angekündigt hat",
+      "absaetze": [
+        "Am 15. Oktober 2026 hat Google Änderungen an den KI-Antworten der Suche vorgestellt, also an den KI-Übersichten und am KI-Modus. Die wichtigste für kleine Betriebe: Google zeigt in diesen Antworten deutlich mehr Links zu Websites und setzt sie öfter weiter oben.",
+        "Ausserdem testet Google einen eigenen Bereich ganz oben in der Antwort, der offizielle Websites hervorhebt und kurz erklärt, warum ein Link nützlich ist. Das ist erst ein Test. Für welche Länder er gilt und wann er kommt, sagt Google nicht.",
+        "Dazu kommen kleinere Neuerungen: Weiterführende Artikel am Ende einer Antwort erhalten ein Vorschaubild und lassen sich leichter anklicken."
+      ]
+    },
+    {
+      "titel": "Was das für Ihren Betrieb heisst",
+      "absaetze": [
+        "Seit es KI-Antworten gibt, hört man oft, dass niemand mehr auf Websites klickt. Google geht nun bewusst in die andere Richtung und verweist wieder öfter auf die Seiten, aus denen eine Antwort stammt.",
+        "Davon profitiert, wer eine eigene, klare Website hat. Ein Facebook-Profil oder ein Eintrag in einem Verzeichnis ist keine offizielle Website. Und eine Seite, auf der Leistungen, Ablauf oder Öffnungszeiten fehlen, bietet wenig, worauf eine Antwort verweisen kann."
+      ]
+    },
+    {
+      "titel": "Worauf es jetzt ankommt",
+      "absaetze": [
+        "Sie brauchen dafür keine Tricks. Es sind dieselben Grundlagen, die auch Ihrer Kundschaft helfen."
+      ],
+      "punkte": [
+        {
+          "titel": "Eigene Website als offizielle Adresse",
+          "text": "Ihre Website ist die eine Adresse, die Ihnen gehört und die Sie selbst pflegen. Verlinken Sie sie im Google-Profil, auf Facebook und in Verzeichnissen, damit klar ist, welche Seite die offizielle ist."
+        },
+        {
+          "titel": "Gleiche Angaben wie im Google-Profil",
+          "text": "Name, Adresse, Telefonnummer und Öffnungszeiten sollten überall gleich lauten. Widersprüchliche Angaben verunsichern Kundschaft und Suchmaschinen gleichermassen."
+        },
+        {
+          "titel": "Klare Antworten auf Kundenfragen",
+          "text": "Beantworten Sie die Fragen, die Ihre Kundschaft wirklich stellt: Was bieten Sie an, wie läuft ein Auftrag ab, wie erreicht man Sie. Kurz, konkret und als Text auf der Seite, nicht nur in einem PDF."
+        }
+      ],
+      "nach": [
+        "Was es nicht braucht: lange Texte, die nur für die KI geschrieben sind. Eine Seite, die für Menschen gut verständlich ist, ist auch für Suchmaschinen eine gute Quelle."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Öffnen Sie in der Google-Suche den KI-Modus und fragen Sie so, wie es Ihre Kundschaft tun würde, zum Beispiel «Schreinerei in der Nähe, die Küchen umbaut». Schauen Sie, ob Ihr Betrieb genannt wird, ob Ihre Website als Quelle erscheint und ob die Angaben stimmen.",
+        "Erscheint statt Ihrer Website nur ein Verzeichnis oder eine veraltete Angabe, wissen Sie, wo Sie ansetzen können."
+      ]
+    }
+  ],
+  "quellen": [
+    {
+      "titel": "AI Mode and AI Overviews updates to explore the web",
+      "herausgeber": "Google",
+      "datum": "2026-10-15",
+      "url": "https://blog.google/products-and-platforms/products/search/updates-ai-mode-overviews-explore-web/"
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 6 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Google verlinkt wieder mehr Websites"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}
