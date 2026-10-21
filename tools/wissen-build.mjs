@@ -174,7 +174,9 @@ console.log(`chat-proxy/src/wissen.js: Kern ${kernZeichen} Zeichen, dazu je nach
   const platz = { MIN: String(wert('CHECK_MINUTEN')), FRAGEN: String(fragen), TAGE: tage + ' Arbeitstagen', TAGE_WORT: (zahlwort[tage] || tage) + ' Arbeitstagen', PREIS_STD: chf(preise[1]) };
   const werte = (t) => String(t).replace(/\{([A-Z_]+)\}/g, (m, k) => { if (platz[k] === undefined) throw new Error('Platzhalter {' + k + '} in fester Chat-Antwort nicht auflösbar.'); return platz[k]; });
   const phasen = liste('PHASES').map((p) => Object.assign({}, p, { sie: werte(p.sie), ich: werte(p.ich), dauer: werte(p.dauer) }));
-  const nichtDrin = [...(quelle.match(/<p class="pr-h">Was nicht im Preis ist<\/p>\s*<ul class="pr-ul">([\s\S]*?)<\/ul>/) || ['', ''])[1].matchAll(/<li>([^<]+)<\/li>/g)].map((m) => m[1]);
+  const nichtDrin = [...(quelle.match(/<p class="pr-h">Was nicht im Preis ist<\/p>\s*<ul class="pr-ul">([\s\S]*?)<\/ul>/) || ['', ''])[1].matchAll(/<li>([^<]+)<\/li>/g)]
+    .map((m) => m[1].replace(/\{\{ stundensatzTxt \}\}/g, chf(wert('STUNDENSATZ_CHF')) + ' pro Stunde'));
+  if (nichtDrin.some((x) => /\{\{/.test(x))) throw new Error('Unaufgelöster Platzhalter in «Was nicht im Preis ist»: feste Chat-Antwort prüfen.');
   if (!/ohne Anzahlung/.test((phasen || [])[2] && phasen[2].sie)) throw new Error('Ablauf sagt nicht mehr «ohne Anzahlung»: feste Chat-Antwort prüfen.');
   if (!phasen || phasen.length !== 4 || nichtDrin.length < 5) throw new Error('Angaben für die festen Chat-Antworten nicht gefunden.');
   const vorlagen = {
@@ -184,7 +186,7 @@ console.log(`chat-proxy/src/wissen.js: Kern ${kernZeichen} Zeichen, dazu je nach
       `- **Standard** ${chf(preise[1])}: bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil`,
       `- **Pro** ${chf(preise[2])}: bis 10 Seiten, Online-Terminbuchung, zweite Sprache, Texte selbst bearbeiten`,
       '',
-      `Dazu optional: ein Logo für ${chf(wert('LOGO_MIT_WEBSITE_CHF'))} zusammen mit der Website, Texte von Nico für ${chf(wert('TEXT_PRO_SEITE_CHF'))} pro Seite. Den Betrieb danach übernehmen Sie selbst oder Nico ab ${chf(wert('HOSTING_AUSLAND_CHF'))} pro Jahr.`,
+      `Dazu optional: ein Logo für ${chf(wert('LOGO_MIT_WEBSITE_CHF'))} zusammen mit der Website, Texte von Nico für ${chf(wert('TEXT_PRO_SEITE_CHF'))} pro Seite. Das Hosting richtet Nico auf Ihren Namen ein, standardmässig kostenlos. Danach zahlen Sie nur die Domain, direkt beim Anbieter, ohne Abo.`,
       '',
       'Welches Paket zu Ihnen passt, zeigt der [Preis-Rechner](/angebot/#rechner).',
     ].join('\n'),

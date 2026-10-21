@@ -1,7 +1,7 @@
 # CLAUDE.md: Entscheidungen und offene Punkte für odera.ch
 
 Kurzfassung für die Arbeit an diesem Repo. Technische Details stehen im `README.md`,
-hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 13. Oktober 2026.
+hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 21. Oktober 2026.
 
 ## Feste Regeln
 
@@ -95,6 +95,22 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 13. Oktober 
   wie /ablauf/. `einblicke.css` lädt als letztes vor `</head>` und setzt keine Abschnittsabstände. LinkedIn-Link auf die
   Firmenseite aus `ODERA_LINKEDIN_URL` (Marke `einblicke:linkedin-firma` in der Vorlage), immer neuer Tab.
 
+### Hosting nach der Übergabe (seit 21. Oktober 2026, Branch `mobile-hero-hosting`)
+- Kein Betrieb durch ODERA mehr, kein Abo, kein Jahresvertrag. Das Hosting wird auf den Namen des Kunden eingerichtet,
+  standardmässig bei einem kostenlosen Anbieter, auf Wunsch bei einem Schweizer Hoster (Jahresgebühr direkt dort).
+  Änderungen nach der Übergabe zu `STUNDENSATZ_CHF` (120) pro Stunde mit Schätzung vorab.
+- Angebot: Abschnitt «Nach der Übergabe» unter dem alten Anker `#betrieb` (Abschnitts-ID `betrieb` bleibt). AGB
+  Paragrafen 5 bis 8 auf Nicos Auftrag umformuliert (Ausnahme von «nur ergänzen»), Stand `STAND_RECHTSTEXTE`.
+- Projekt-Check: Frage `HOSTING` «Wo soll Ihre Website laufen?» an derselben Stelle, weiterhin 18 Fragen.
+- Paket Pro (Texte selbst bearbeiten, Terminbuchung): Punkt 03 «Keine Updates nötig» gilt ausdrücklich nur für die
+  Website selbst, nicht für Dienste, die ein Pro-Zusatz nutzt.
+
+### Hero auf dem Handy (seit 21. Oktober 2026)
+- Unter 768 px: Badge mit Auslastung, Titel, Satz, ein Knopf, Tablet-Rahmen mit Handy, Vertrauenszeile, Kennzahlen,
+  Chevron. Frage mit Chips und «Preise ansehen» nur ausgeblendet. Kennzahlen stehen einmal im Markup (`.hero-zahlen`),
+  ab 768 px als dunkler Streifen wie vorher. Titel zweizeilig, Grösse über `cqi` aus der Textspalte.
+- Kopf unter 1024 px mit «Check starten» und hellgrauem Menüknopf, Logo bis 360 px leicht verkleinert (`zoom`).
+
 ### Musterprojekt Doppelmeter
 - Eigene statische Seite unter `/musterprojekte/doppelmeter/`, `noindex`, nicht in der Sitemap.
   `/muster/doppelmeter.html` leitet weiter. Schriften lokal, Fotos von Unsplash, Nachweise im Impressum.
@@ -106,7 +122,7 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 13. Oktober 
 - Eigenes blaues Vollbild-Menü, iOS-sichere Scroll-Sperre, Wisch nach unten schliesst,
   `theme-color` wird blau. Kopf 56 px, gleitet beim Runterscrollen weg.
 - Startseite: erster Bildschirm nur Titel, Satz, vier Antwort-Chips und Vertrauenszeile.
-- Pakete und Betriebsarten als wischbare Karten (Klasse `wisch`), Standard zuerst. Begründung: ein
+- Pakete als wischbare Karten (Klasse `wisch`), Standard zuerst. Begründung: ein
   statt zweieinhalb Bildschirme.
 - Projekt-Check: Weiter-Leiste über der Tastatur (`visualViewport`, `--tastatur`).
 - Chat unter 768 px als Blatt von unten.

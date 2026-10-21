@@ -3,14 +3,14 @@
 > ODERA Design ist die Geschäftsbezeichnung von Nico Bodmer aus Berikon AG (Einzelunternehmen). Er baut Websites für kleine Betriebe wie Handwerk, Gastronomie, Praxen und Läden im Freiamt, am Mutschellen, im Kanton Aargau und in der ganzen Schweiz. Preismodell: Fixpreis, einmalig und ohne Abo. Paket Website CHF 890, Standard CHF 1’900, Pro CHF 3’400. Der erste Entwurf entsteht in 5 Arbeitstagen, ist gratis und unverbindlich. Bezahlt wird erst nach Annahme des Entwurfs.
 
 - Logo als Zusatz: CHF 490, zusammen mit einer Website CHF 390.
-- Betrieb nach der Übergabe optional: CHF 240 pro Jahr (Server in der EU) oder CHF 480 pro Jahr (Server in der Schweiz).
+- Nach der Übergabe: Domain, Hosting-Zugang und Quellcode laufen auf den Namen der Kundin oder des Kunden. Kein Abo, kein Wartungsvertrag. Das Hosting richtet Nico standardmässig bei einem kostenlosen Anbieter ein, auf Wunsch bei einem Schweizer Hoster (Jahresgebühr direkt dort). Änderungen nach der Übergabe nach Aufwand zu CHF 120 pro Stunde, mit Schätzung vorab.
 - Höchstens zwei Projekte gleichzeitig, nebenberuflich. Keine Kundenstimmen, stattdessen feste Zusagen: Fixpreis, fester Termin, kein Lock-in.
 - Kontakt: kontakt@odera.ch. Anfragen am liebsten über den Projekt-Check: https://odera.ch/projekt-check/
 - Die Musterprojekte zeigen frei erfundene Betriebe, keine Kundenprojekte.
 
 ## Angebot und Ablauf
 
-- [Was kostet eine Website? Fixpreise](https://odera.ch/angebot/): Website, Standard oder Pro: drei Pakete zum Fixpreis ab CHF 890, einmalig und ohne Abo. Betrieb auf Wunsch ab CHF 240 pro Jahr.
+- [Was kostet eine Website? Fixpreise](https://odera.ch/angebot/): Website, Standard oder Pro: drei Pakete zum Fixpreis ab CHF 890, einmalig und ohne Abo. Hosting auf Ihren Namen eingerichtet.
 - [Website erstellen lassen: der Ablauf](https://odera.ch/ablauf/): Vier Phasen, 81 Minuten Ihrer Zeit, mit optionalen Schritten knapp 2 Stunden. Sie sehen den fertigen Entwurf, bevor Sie einen Franken bezahlen.
 - [Projekt-Check: Angebot in 6 Minuten](https://odera.ch/projekt-check/): Fragebogen mit 18 kurzen Fragen, rund 6 Minuten. Danach folgen ein Angebot zum Fixpreis und ein kostenloser Entwurf.
 
@@ -24,7 +24,7 @@
 
 - [Website für Handwerker ab CHF 890](https://odera.ch/website-fuer-handwerker/): Website für Ihren Handwerksbetrieb: Telefonnummer, Referenzbilder, Offerte-Knopf. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890.
 - [Website für Restaurants und Cafés](https://odera.ch/website-fuer-restaurants/): Website für Ihr Restaurant oder Café: Karte, Öffnungszeiten und Reservation auf dem Handy. Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890.
-- [Website für Praxen ab CHF 890](https://odera.ch/website-fuer-praxen/): Website für Ihre Praxis: Termine, Team und Anfahrt klar gezeigt, Daten auf Wunsch in der Schweiz. Entwurf in 5 Arbeitstagen, gratis. Ab CHF 890.
+- [Website für Praxen ab CHF 890](https://odera.ch/website-fuer-praxen/): Website für Ihre Praxis: Termine, Team und Anfahrt klar gezeigt, Server auf Wunsch in der Schweiz. Entwurf in 5 Arbeitstagen, gratis. Ab CHF 890.
 - [Website für Läden ab CHF 890](https://odera.ch/website-fuer-laeden/): Website für Ihren Laden: Sortiment, Öffnungszeiten und Anfahrt auf einen Blick. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890.
 
 ## Einblicke
@@ -45,4 +45,4 @@
 
 - [Impressum](https://odera.ch/impressum/): Verantwortliche Person, Kontakt, Rechtsform (Einzelunternehmen ohne Handelsregistereintrag, keine Mehrwertsteuerpflicht) und Bildnachweise.
 - [Datenschutzerklärung](https://odera.ch/datenschutz/): Welche Daten beim Besuch von odera.ch, im Projekt-Check, im Chat und bei der Statistik mit Einwilligung bearbeitet werden. Keine Cookies.
-- [Allgemeine Geschäftsbedingungen](https://odera.ch/agb/): Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Betrieb und Hosting.
+- [Allgemeine Geschäftsbedingungen](https://odera.ch/agb/): Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Hosting und Domain.

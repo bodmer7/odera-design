@@ -72,7 +72,7 @@ test('Wissen: Kern immer, weitere Teile nur mit Stichwort', () => {
   const titel = (s) => waehleTeile(s).map((t) => t.titel);
   assert.ok(titel('Was kostet eine Website?').includes('Angebot und Preise'));
   assert.ok(!titel('Was kostet eine Website?').includes('Allgemeine Geschäftsbedingungen'));
-  assert.ok(titel('Wie kann ich das Hosting kündigen?').includes('Allgemeine Geschäftsbedingungen'));
+  assert.ok(titel('Wie ist die Haftung nach der Übergabe geregelt?').includes('Allgemeine Geschäftsbedingungen'));
   assert.ok(titel('Werden meine Daten gespeichert?').includes('Datenschutzerklärung'));
   assert.ok(titel('Haben Sie Referenzen aus der Gastronomie?').includes('Musterprojekte'));
   assert.ok(titel('Wer ist Nico?').includes('Über mich und Kontakt'));

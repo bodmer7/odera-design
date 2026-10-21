@@ -43,21 +43,21 @@ const zahl = (name) => Number((quelle.match(new RegExp(' {2}' + name + ' = (\\d+
 const text = (name) => (quelle.match(new RegExp(' {2}' + name + " = '([^']+)';")) || [])[1];
 const FIRMA = {
   linkedinFirma: text('ODERA_LINKEDIN_URL'), linkedinPerson: text('LINKEDIN_PERSON_URL'),
-  betrieb: [zahl('HOSTING_AUSLAND_CHF'), zahl('HOSTING_SCHWEIZ_CHF')],
+  stundensatz: zahl('STUNDENSATZ_CHF'),
 };
-if (!FIRMA.linkedinFirma || !FIRMA.linkedinPerson || !FIRMA.betrieb[0] || !FIRMA.betrieb[1]) throw new Error('LinkedIn-Adressen oder Betriebspreise in src/seite.html nicht gefunden.');
+if (!FIRMA.linkedinFirma || !FIRMA.linkedinPerson || !FIRMA.stundensatz) throw new Error('LinkedIn-Adressen oder STUNDENSATZ_CHF in src/seite.html nicht gefunden.');
 const BRANCHEN = new Function('return ' + ((quelle.match(/ {2}BRANCHEN_SEITEN = (\{[\s\S]*?\n {2}\});/) || [])[1] || '{}'))();
 const ORG = SITE + '/#organisation', PERSON = SITE + '/ueber-mich/#person', WEBSITE = SITE + '/#website';
 // Pakete wie auf /angebot/ sichtbar (Karten «Was in jedem Paket steckt»)
 const PAKETE = [
-  ['Website', 'Eine Seite mit allen Abschnitten, Kontaktformular, für Handy, Tablet und Computer, eine Korrekturrunde'],
-  ['Standard', 'Bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil eingerichtet, zwei Korrekturrunden'],
-  ['Pro', 'Bis 10 Seiten, Online-Terminbuchung oder erweiterte Formulare, zweite Sprache, Texte selbst bearbeiten ohne Technikkenntnisse, drei Korrekturrunden'],
+  ['Website', 'Eine Seite mit allen Abschnitten, Kontaktformular, für Handy, Tablet und Computer, eine Korrekturrunde, Hosting auf Ihren Namen eingerichtet'],
+  ['Standard', 'Bis 5 Unterseiten, Bildergalerie, Google-Unternehmensprofil eingerichtet, zwei Korrekturrunden, Hosting auf Ihren Namen eingerichtet'],
+  ['Pro', 'Bis 10 Seiten, Online-Terminbuchung oder erweiterte Formulare, zweite Sprache, Texte selbst bearbeiten ohne Technikkenntnisse, drei Korrekturrunden, Hosting auf Ihren Namen eingerichtet'],
 ];
 const LOGO = [zahl('LOGO_ALLEIN_CHF'), zahl('LOGO_MIT_WEBSITE_CHF')];
 if (!LOGO[0] || !LOGO[1]) throw new Error('LOGO_ALLEIN_CHF oder LOGO_MIT_WEBSITE_CHF in src/seite.html nicht gefunden.');
 const chf = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '’');
-function angebotsKatalog(mitBetrieb) {
+function angebotsKatalog() {
   const liste = PAKETE.map(([n, d], i) => ({ '@type': 'Offer', '@id': SITE + '/angebot/#paket-' + n.toLowerCase(), name: 'Paket ' + n, description: d,
     price: String(PREISE[i]), priceCurrency: 'CHF', url: SITE + '/angebot/' }));
   liste.push(
@@ -65,11 +65,6 @@ function angebotsKatalog(mitBetrieb) {
       price: String(LOGO[0]), priceCurrency: 'CHF', url: SITE + '/angebot/' },
     { '@type': 'Offer', '@id': SITE + '/angebot/#logo-mit-website', name: 'Logo-Design zusammen mit einer Website', description: 'Wie oben, gebucht zusammen mit einem Website-Paket.',
       price: String(LOGO[1]), priceCurrency: 'CHF', url: SITE + '/angebot/' });
-  if (mitBetrieb) liste.push(
-    { '@type': 'Offer', name: 'Betrieb, Server in der EU', description: 'Hosting, SSL, tägliche Sicherungen, Erreichbarkeitsprüfung', price: String(FIRMA.betrieb[0]), priceCurrency: 'CHF',
-      priceSpecification: { '@type': 'UnitPriceSpecification', price: String(FIRMA.betrieb[0]), priceCurrency: 'CHF', unitText: 'Jahr' }, url: SITE + '/angebot/#betrieb' },
-    { '@type': 'Offer', name: 'Betrieb, Server in der Schweiz', description: 'Wie oben, Website und Formulardaten bleiben in der Schweiz', price: String(FIRMA.betrieb[1]), priceCurrency: 'CHF',
-      priceSpecification: { '@type': 'UnitPriceSpecification', price: String(FIRMA.betrieb[1]), priceCurrency: 'CHF', unitText: 'Jahr' }, url: SITE + '/angebot/#betrieb' });
   return { '@type': 'OfferCatalog', name: 'Websites zum Fixpreis', itemListElement: liste };
 }
 // Einzugsgebiet wie im Fuss jeder Seite: «im Freiamt, am Mutschellen, im Kanton Aargau und in der ganzen Schweiz»
@@ -102,14 +97,14 @@ function strukturDaten(pfad, p, teile) {
   if (pfad === '/') {
     graph.push(
       { '@type': 'WebSite', '@id': WEBSITE, url: SITE + '/', name: NAME, inLanguage: 'de-CH', publisher: { '@id': ORG } },
-      { ...ORGANISATION, hasOfferCatalog: angebotsKatalog(false) },
+      { ...ORGANISATION, hasOfferCatalog: angebotsKatalog() },
       { '@type': 'WebPage', '@id': url + '#seite', url, name: p.title, description: p.desc || undefined, inLanguage: 'de-CH', isPartOf: { '@id': WEBSITE }, about: { '@id': ORG } });
   } else {
     graph.push({ '@type': pfad === '/ueber-mich' ? 'ProfilePage' : 'WebPage', '@id': url + '#seite', url, name: p.title, description: p.desc || undefined, inLanguage: 'de-CH',
       isPartOf: { '@id': WEBSITE }, breadcrumb: { '@id': url + '#brotkrumen' }, mainEntity: pfad === '/ueber-mich' ? { '@id': PERSON } : undefined },
     brotkrumen(url, [[(BRANCHEN[pfad] && BRANCHEN[pfad].h1) || name, url]]));
     if (pfad === '/angebot') graph.push({ '@type': 'Service', '@id': url + '#leistung', name: 'Website erstellen zum Fixpreis', serviceType: 'Webdesign', provider: { '@id': ORG },
-      areaServed: GEBIET, hasOfferCatalog: angebotsKatalog(true) });
+      areaServed: GEBIET, hasOfferCatalog: angebotsKatalog() });
     if (pfad === '/ueber-mich') graph.push(PERSON_VOLL);
     // Beide Muster sind erfundene Betriebe. Das steht auch in den Daten, damit sie niemand für Kundenprojekte hält.
     if (pfad === '/musterprojekte') graph.push({ '@type': 'ItemList', '@id': url + '#muster', name: 'Musterprojekte von ODERA Design',
@@ -449,7 +444,7 @@ const LLMS = `# ${NAME}
 > ${NAME} ist die Geschäftsbezeichnung von Nico Bodmer aus Berikon AG (Einzelunternehmen). Er baut Websites für kleine Betriebe wie Handwerk, Gastronomie, Praxen und Läden im Freiamt, am Mutschellen, im Kanton Aargau und in der ganzen Schweiz. Preismodell: Fixpreis, einmalig und ohne Abo. Paket Website ${chf(PREISE[0])}, Standard ${chf(PREISE[1])}, Pro ${chf(PREISE[2])}. Der erste Entwurf entsteht in 5 Arbeitstagen, ist gratis und unverbindlich. Bezahlt wird erst nach Annahme des Entwurfs.
 
 - Logo als Zusatz: ${chf(LOGO[0])}, zusammen mit einer Website ${chf(LOGO[1])}.
-- Betrieb nach der Übergabe optional: ${chf(FIRMA.betrieb[0])} pro Jahr (Server in der EU) oder ${chf(FIRMA.betrieb[1])} pro Jahr (Server in der Schweiz).
+- Nach der Übergabe: Domain, Hosting-Zugang und Quellcode laufen auf den Namen der Kundin oder des Kunden. Kein Abo, kein Wartungsvertrag. Das Hosting richtet Nico standardmässig bei einem kostenlosen Anbieter ein, auf Wunsch bei einem Schweizer Hoster (Jahresgebühr direkt dort). Änderungen nach der Übergabe nach Aufwand zu ${chf(FIRMA.stundensatz)} pro Stunde, mit Schätzung vorab.
 - Höchstens zwei Projekte gleichzeitig, nebenberuflich. Keine Kundenstimmen, stattdessen feste Zusagen: Fixpreis, fester Termin, kein Lock-in.
 - Kontakt: ${EMAIL}. Anfragen am liebsten über den Projekt-Check: ${SITE}/projekt-check/
 - Die Musterprojekte zeigen frei erfundene Betriebe, keine Kundenprojekte.

@@ -127,7 +127,7 @@ export const ANFRAGE = {
   ],
   [
    "HOSTING",
-   "Betrieb danach",
+   "Hosting",
    "Technik und Zeitplan",
    100
   ],

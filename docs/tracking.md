@@ -85,7 +85,7 @@ Akquise-Tool, siehe unten):
 | --- | --- |
 | `/musterprojekte/` | `muster-kopf` (Kopf), `muster-doppelmeter` (Doppelmeter), `muster-firstlicht` (Firstlicht), `vorschau` (Vorschau-Werkzeug), `abschluss` |
 | `/ablauf/` | `ablauf-kopf` (Kopf mit Kennzahlen), `fahrplan` (vier Phasen), `aufwand` (Aufwand auf einen Blick), `danach` (Danach), `stolpersteine` (Drei Dinge, an denen Projekte scheitern), `abschluss` |
-| `/angebot/` | `angebot-kopf` (Kopf mit Preisen), `pakete` (Rechner und Pakete), `betrieb` (Betrieb), `preis-herleitung` (So kommt der Preis zustande), `nicht-im-preis` (Was nicht im Preis ist), `fragen` |
+| `/angebot/` | `angebot-kopf` (Kopf mit Preisen), `pakete` (Rechner und Pakete), `betrieb` (Nach der Übergabe, seit 21. Oktober 2026; die ID blieb), `preis-herleitung` (So kommt der Preis zustande), `nicht-im-preis` (Was nicht im Preis ist), `fragen` |
 | `/ueber-mich/` | `ueber-kopf` (Porträt), `werdegang`, `zusagen`, `technik` (Womit ich arbeite), `erreichbarkeit` (Kapazität und Erreichbarkeit), `abschluss` (Kontakt) |
 
 Neue Knöpfe: `ablauf-kopf-projekt-check`, `muster-abschluss-projekt-check`. Im Akquise-Repo in `config/abschnitte.json`

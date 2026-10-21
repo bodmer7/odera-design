@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const ROUTEN = ['/', '/angebot/', '/ablauf/', '/musterprojekte/', '/ueber-mich/', '/website-fuer-handwerker/', '/website-fuer-restaurants/',
   '/website-fuer-praxen/', '/website-fuer-laeden/', '/projekt-check/', '/datenschutz/', '/impressum/', '/agb/'];
-const text = (s) => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&shy;|­/g, '').replace(/\s+/g, ' ').trim();
+const text = (s) => s.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&shy;|­/g, '').replace(/\s+/g, ' ').trim();
 let fehler = 0;
 const aus = [];
 for (const r of ROUTEN) {

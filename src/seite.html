@@ -880,11 +880,17 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .pk-detail[open] summary::after{transform:rotate(-135deg);margin-top:4px}
 .pk-detail-raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:8px 0 24px}
 .pk-detail-raster ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:var(--fs-2);line-height:1.5;color:var(--text-lese)}
-.betrieb-karte{display:flex;flex-direction:column;gap:8px;padding:28px}
-.betrieb-preis{margin:8px 0 0;display:flex;align-items:baseline;gap:6px}
-.betrieb-liste{margin:16px 0 0;padding:16px 0 0;border-top:1px solid var(--auf-tinte-linie);list-style:none;display:flex;flex-direction:column;gap:10px}
-.betrieb-liste li{position:relative;padding-left:22px;font-size:var(--fs-2);line-height:1.5;color:var(--auf-tinte-2)}
-.betrieb-liste li::before{content:"";position:absolute;left:2px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--akzent-limette)}
+/* Nach der Übergabe: nummerierte Liste, grosse Ziffern als Kontur in ODERA-Blau */
+.uebergabe{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:64px;align-items:start}
+.uebergabe .titelblock{position:sticky;top:112px;margin:0}
+.uebergabe-liste{list-style:none;margin:0;padding:0;border-top:1px solid var(--auf-tinte-linie)}
+.uebergabe-liste li{display:grid;grid-template-columns:104px minmax(0,1fr);gap:24px;align-items:start;padding:32px 0;border-bottom:1px solid var(--auf-tinte-linie)}
+.uebergabe-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:72px;line-height:0.9;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;color:var(--odera-blau-200)}
+@supports (-webkit-text-stroke:1px black){.uebergabe-n{color:transparent;-webkit-text-stroke:1.5px var(--primaer)}}
+.uebergabe-liste .titel-3{color:var(--auf-tinte)}
+.uebergabe-liste p{margin:8px 0 0;max-width:60ch;font-size:var(--fs-3);line-height:1.6;color:var(--auf-tinte-2)}
+@media(max-width:1023px){.uebergabe{grid-template-columns:minmax(0,1fr);gap:0}.uebergabe .titelblock{position:static;margin:0 0 var(--titel-abstand)}}
+@media(max-width:767px){.uebergabe-liste li{grid-template-columns:56px minmax(0,1fr);gap:16px;padding:24px 0}.uebergabe-n{font-size:44px}.uebergabe-liste p{font-size:16px;line-height:1.55}}
 .band-tinte .klein{color:var(--auf-tinte-2)}
 .nicht-liste{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 32px;list-style:none;margin:0;padding:0}
 .nicht-liste li{display:flex;gap:10px;align-items:flex-start;font-size:var(--fs-3);line-height:1.45;color:var(--text-lese)}
@@ -1116,7 +1122,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  html.einblenden-an .einblenden{transition:none}
 }
 
-/* ===== Ruhiger Hero und Kopf, 21. Oktober 2026 (Branch mobile-hero-hosting). Ab 1024 px gilt nichts davon. ===== */
+/* ===== Ruhiger Hero und Kopf (21. Oktober 2026). Ab 1024 px gilt nichts davon. ===== */
 @media(max-width:1023px){
  /* Kopf: kompakter Knopf «Check starten» und runder, hellgrauer Menüknopf */
  .navbar>a:first-child{margin-right:0}
@@ -1210,7 +1216,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .ki-chips .ki-chip:nth-child(n+3){display:none}
  /* Schwebender Knopf «Assistent fragen» auf der Startseite erst nach dem ersten Bildschirm */
  html:has(.startseite) .chat-btn[data-bar="0"]{display:none!important}
+ /* Angebot, Preis-Rechner: lange Knöpfe brechen um, statt die Seite bei 360 px seitlich zu verbreitern */
+ .rechner{grid-template-columns:minmax(0,1fr)}
+ .rfn{max-width:100%}
 }
+@media(max-width:374px){.rechner-los{padding:0 12px;font-size:15px}}
 </style>
 </head>
 <body>
@@ -1385,7 +1395,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
     <div class="titelblock">
       <p class="augenbraue">Preise</p>
       <h2 id="pakete-t" class="titel-2">Drei Pakete, feste Preise</h2>
-      <p class="einleitung">Einmalig bezahlt, ohne Abo.</p>
+      <p class="einleitung">Einmalig bezahlt, ohne Abo. Hosting-Einrichtung inbegriffen.</p>
     </div>
     <div class="g-pkg pk-kurz wisch">
       <div class="card pk-start">
@@ -1548,6 +1558,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <li>Impressum und Datenschutzerklärung</li>
           <li>Für Handy, Tablet und Computer</li>
           <li>Eine Korrekturrunde</li>
+          <li>Hosting auf Ihren Namen eingerichtet</li>
           <li>Entwurf innert {{ entwurfTageD }}</li>
           <li>Online innert 10 Arbeitstagen nach Annahme des Entwurfs</li>
         </ul>
@@ -1564,6 +1575,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <li>Grundlagen für die Auffindbarkeit bei Google</li>
           <li>Ladezeit unter einer Sekunde</li>
           <li>Zwei Korrekturrunden</li>
+          <li>Hosting auf Ihren Namen eingerichtet</li>
           <li>Entwurf innert {{ entwurfTageD }}</li>
           <li>Online innert 15 Arbeitstagen nach Annahme des Entwurfs</li>
         </ul>
@@ -1578,6 +1590,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <li>Zweite Sprache</li>
           <li>Bereich für offene Stellen</li>
           <li>Drei Korrekturrunden</li>
+          <li>Hosting auf Ihren Namen eingerichtet</li>
           <li>Entwurf innert {{ entwurfTageD }}</li>
           <li>Online innert 25 Arbeitstagen nach Annahme des Entwurfs</li>
         </ul>
@@ -1604,7 +1617,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <li>Texterstellung: {{ texteChf }} pro Seite</li>
           <li>Fotograf auf Wunsch organisiert, Kosten nach Aufwand</li>
         </ul>
-        <p class="pr-s">Alle Paketpreise sind einmalig. Kein Abonnement, keine monatliche Gebühr. Hosting ist in keinem Paket enthalten, kann aber nach dem Livegang optional bei mir bezogen werden. Die Aufschaltung ist im Preis enthalten.</p>
+        <p class="pr-s">Alle Paketpreise sind einmalig. Kein Abonnement, keine monatliche Gebühr. Die Einrichtung des Hostings auf Ihren Namen und die Aufschaltung sind im Preis enthalten.</p>
       </div>
   <div class="pr-blk">
     <p class="pr-h">Was nicht im Preis ist</p>
@@ -1617,8 +1630,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <li>Werbeanzeigen</li>
       <li>Betreuung sozialer Netzwerke</li>
       <li>Rechtsberatung</li>
-      <li>Laufende Inhaltspflege nach der Übergabe</li>
-      <li>Hosting- und Domainkosten</li>
+      <li>Änderungen nach der Übergabe, zu {{ stundensatzTxt }}</li>
+      <li>Domain, direkt beim Anbieter bezahlt</li>
+      <li>Jahresgebühr eines Schweizer Hosters, falls gewünscht</li>
       <li>Übernahme von mehr als 20 bestehenden Seiten</li>
     </ul>
   </div>
@@ -1709,7 +1723,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p class="kennzahl pk-preis">{{ price1 }}</p>
           <p class="klein" style="margin:4px 0 16px">einmalig</p>
           <p class="lesetext" style="margin:0 0 20px">Eine Seite, die alles Wichtige zeigt.</p>
-          <ul class="pk-punkte"><li>Eine Seite mit allen Abschnitten</li><li>Kontaktformular</li><li>Für Handy, Tablet und Computer</li><li>Eine Korrekturrunde</li><li>Online innert 10 Arbeitstagen nach Annahme des Entwurfs</li></ul>
+          <ul class="pk-punkte"><li>Eine Seite mit allen Abschnitten</li><li>Kontaktformular</li><li>Für Handy, Tablet und Computer</li><li>Eine Korrekturrunde</li><li>Hosting auf Ihren Namen eingerichtet</li><li>Online innert 10 Arbeitstagen nach Annahme des Entwurfs</li></ul>
           <p class="aufwand"><span class="label">Ihr Aufwand</span>ein Formular und eine Rückmeldung.</p>
           <a class="btn btn-sekundaer" href="/projekt-check/?paket=website" data-quelle="paket-website" onClick="{{ onEinstieg }}">Mit Paket Website starten</a>
         </div>
@@ -1720,7 +1734,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p class="kennzahl pk-preis">{{ price2 }}</p>
           <p class="klein" style="margin:4px 0 16px">einmalig</p>
           <p class="lesetext" style="margin:0 0 20px">Die vollständige Website für Ihr Unternehmen.</p>
-          <ul class="pk-punkte"><li>Bis 5 Unterseiten</li><li>Bildergalerie</li><li>Google-Unternehmensprofil eingerichtet</li><li>Zwei Korrekturrunden</li><li>Online innert 15 Arbeitstagen nach Annahme des Entwurfs</li></ul>
+          <ul class="pk-punkte"><li>Bis 5 Unterseiten</li><li>Bildergalerie</li><li>Google-Unternehmensprofil eingerichtet</li><li>Zwei Korrekturrunden</li><li>Hosting auf Ihren Namen eingerichtet</li><li>Online innert 15 Arbeitstagen nach Annahme des Entwurfs</li></ul>
           <p class="aufwand"><span class="label">Ihr Aufwand</span>ein Formular, Ihre Bilder, zwei Rückmeldungen.</p>
           <a class="btn btn-primaer" href="/projekt-check/?paket=standard" data-quelle="paket-standard" onClick="{{ onEinstieg }}">Mit Paket Standard starten</a>
         </div>
@@ -1730,7 +1744,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p class="kennzahl pk-preis">{{ price3 }}</p>
           <p class="klein" style="margin:4px 0 16px">einmalig</p>
           <p class="lesetext" style="margin:0 0 20px">Wenn mehr dahintersteckt.</p>
-          <ul class="pk-punkte"><li>Bis 10 Seiten</li><li>Online-Terminbuchung oder erweiterte Formulare</li><li>Zweite Sprache</li><li>Texte selbst bearbeiten ohne Technikkenntnisse</li><li>Drei Korrekturrunden</li></ul>
+          <ul class="pk-punkte"><li>Bis 10 Seiten</li><li>Online-Terminbuchung oder erweiterte Formulare</li><li>Zweite Sprache</li><li>Texte selbst bearbeiten ohne Technikkenntnisse</li><li>Drei Korrekturrunden</li><li>Hosting auf Ihren Namen eingerichtet</li></ul>
           <p class="aufwand"><span class="label">Ihr Aufwand</span>ein Formular, Ihre Inhalte, drei Rückmeldungen.</p>
           <a class="btn btn-sekundaer" href="/projekt-check/?paket=pro" data-quelle="paket-pro" onClick="{{ onEinstieg }}">Mit Paket Pro starten</a>
         </div>
@@ -1740,9 +1754,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <details class="pk-detail">
         <summary>Alle Leistungen der drei Pakete</summary>
         <div class="pk-detail-raster">
-          <div><p class="pk-name">Website</p><ul><li>Eine Seite mit allen Abschnitten</li><li>Kontaktformular</li><li>Impressum und Datenschutzerklärung</li><li>Für Handy, Tablet und Computer</li><li>Eine Korrekturrunde</li><li>Entwurf innert {{ entwurfTageD }}</li><li>Online innert 10 Arbeitstagen nach Annahme des Entwurfs</li></ul></div>
-          <div><p class="pk-name">Standard</p><ul><li>Bis 5 Unterseiten</li><li>Leistungsseiten, Über uns, Kontakt</li><li>Kontaktformular</li><li>Bildergalerie</li><li>Google-Unternehmensprofil eingerichtet</li><li>Grundlagen für die Auffindbarkeit bei Google</li><li>Ladezeit unter einer Sekunde</li><li>Zwei Korrekturrunden</li><li>Entwurf innert {{ entwurfTageD }}</li><li>Online innert 15 Arbeitstagen nach Annahme des Entwurfs</li></ul></div>
-          <div><p class="pk-name">Pro</p><ul><li>Bis 10 Seiten</li><li>Online-Terminbuchung oder erweiterte Formulare</li><li>Texte selbst bearbeiten ohne Technikkenntnisse</li><li>Zweite Sprache</li><li>Bereich für offene Stellen</li><li>Drei Korrekturrunden</li><li>Bevorzugte Terminvergabe</li><li>Entwurf innert {{ entwurfTageD }}</li><li>Online innert 25 Arbeitstagen nach Annahme des Entwurfs</li></ul></div>
+          <div><p class="pk-name">Website</p><ul><li>Eine Seite mit allen Abschnitten</li><li>Kontaktformular</li><li>Impressum und Datenschutzerklärung</li><li>Für Handy, Tablet und Computer</li><li>Eine Korrekturrunde</li><li>Hosting auf Ihren Namen eingerichtet</li><li>Entwurf innert {{ entwurfTageD }}</li><li>Online innert 10 Arbeitstagen nach Annahme des Entwurfs</li></ul></div>
+          <div><p class="pk-name">Standard</p><ul><li>Bis 5 Unterseiten</li><li>Leistungsseiten, Über uns, Kontakt</li><li>Kontaktformular</li><li>Bildergalerie</li><li>Google-Unternehmensprofil eingerichtet</li><li>Grundlagen für die Auffindbarkeit bei Google</li><li>Ladezeit unter einer Sekunde</li><li>Zwei Korrekturrunden</li><li>Hosting auf Ihren Namen eingerichtet</li><li>Entwurf innert {{ entwurfTageD }}</li><li>Online innert 15 Arbeitstagen nach Annahme des Entwurfs</li></ul></div>
+          <div><p class="pk-name">Pro</p><ul><li>Bis 10 Seiten</li><li>Online-Terminbuchung oder erweiterte Formulare</li><li>Texte selbst bearbeiten ohne Technikkenntnisse</li><li>Zweite Sprache</li><li>Bereich für offene Stellen</li><li>Drei Korrekturrunden</li><li>Bevorzugte Terminvergabe</li><li>Hosting auf Ihren Namen eingerichtet</li><li>Entwurf innert {{ entwurfTageD }}</li><li>Online innert 25 Arbeitstagen nach Annahme des Entwurfs</li></ul></div>
         </div>
       </details>
 
@@ -1767,7 +1781,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p style="font-size:13px;line-height:1.7;color:var(--text-2);margin:0">Nicht enthalten: Markenrecherche, Markenanmeldung, Visitenkarten und weitere Drucksachen.</p>
         </div>
       </div>
-      <p class="lesetext" style="margin:40px auto 0;text-align:center">Alle Preise sind einmalig, ohne Abonnement. Hosting ist nicht enthalten und nach dem Livegang optional. Die Aufschaltung ist im Preis enthalten.</p>
+      <p class="lesetext" style="margin:40px auto 0;text-align:center">Alle Preise sind einmalig, ohne Abonnement. Die Einrichtung des Hostings auf Ihren Namen und die Aufschaltung sind im Preis enthalten.</p>
       <p class="branchen-zeile" style="margin:16px auto 0;text-align:center">So sieht das aus: <a href="/musterprojekte/">zwei Musterprojekte</a>. Websites für: <a href="/website-fuer-handwerker/">Handwerk</a> · <a href="/website-fuer-restaurants/">Gastronomie</a> · <a href="/website-fuer-praxen/">Praxen</a> · <a href="/website-fuer-laeden/">Läden</a></p>
       <details class="mdet" open="{{ true }}" style="max-width:860px;margin:48px auto 0;border-top:1px solid var(--linie)">
         <summary class="msum">Zusatzleistungen</summary>
@@ -1781,36 +1795,19 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
     </div>
   </div></section>
 
+  <!-- Anker #betrieb und Abschnitts-ID «betrieb» bleiben, damit bestehende Links und die Statistik weiter stimmen -->
   <section id="betrieb" class="band band-tinte" aria-labelledby="betrieb-t" data-abschnitt="betrieb">
-    <div class="wrap"><div class="inner">
+    <div class="wrap"><div class="inner uebergabe">
       <div class="titelblock">
-        <p class="augenbraue">Betrieb, optional nach dem Livegang</p>
-        <h2 id="betrieb-t" class="titel-2">Wer betreibt Ihre Website danach?</h2>
-        <p class="einleitung">Die Website gehört Ihnen. Sie betreiben sie selbst oder überlassen es mir, entschieden wird am Schluss.</p>
+        <p class="augenbraue">Nach der Übergabe</p>
+        <h2 id="betrieb-t" class="titel-2">Einmal bezahlt. Danach gehört alles Ihnen.</h2>
       </div>
-      <div class="raster-3 g-host wisch" tabindex="0" role="group" aria-label="Drei Betriebsarten">
-        <div class="karte karte-dunkel betrieb-karte">
-          <h3 class="titel-3">Sie hosten selbst</h3>
-          <p class="betrieb-preis"><span class="kennzahl">CHF 0</span></p>
-          <p class="klein">Serverstandort nach Ihrer Wahl</p>
-          <ul class="betrieb-liste"><li>Sie erhalten alle Dateien, den Quellcode und eine schriftliche Anleitung</li><li>Sie wählen Ihren Anbieter frei</li><li>Hosting und Domain zahlen Sie dort direkt, üblicherweise CHF 120 bis 200 pro Jahr</li><li>SSL, Backups und Erneuerungen liegen bei Ihnen</li></ul>
-        </div>
-        <div class="karte karte-dunkel betrieb-karte">
-          <h3 class="titel-3">Betrieb bei mir</h3>
-          <p class="betrieb-preis"><span class="kennzahl">{{ hostAuslandChf }}</span><span class="klein"> pro Jahr</span></p>
-          <p class="klein">Server in der EU</p>
-          <ul class="betrieb-liste"><li>Hosting, SSL und dessen Erneuerung</li><li>Tägliche Sicherungen</li><li>Erreichbarkeitsprüfung</li><li>Ich bin Ihre Ansprechperson bei Störungen</li><li>Antwort innert 2 Werktagen</li></ul>
-        </div>
-        <div class="karte karte-dunkel betrieb-karte">
-          <h3 class="titel-3">Betrieb bei mir, Schweiz</h3>
-          <p class="betrieb-preis"><span class="kennzahl">{{ hostSchweizChf }}</span><span class="klein"> pro Jahr</span></p>
-          <p class="klein">Server in der Schweiz</p>
-          <ul class="betrieb-liste"><li>Alles wie «Betrieb bei mir»</li><li>Ihre Website und alle Formulardaten bleiben in der Schweiz</li><li>Geeignet, wenn Sie mit vertraulichen Kundendaten arbeiten</li></ul>
-        </div>
-      </div>
-      <div class="pk-punkte-nav" aria-hidden="true"><i></i><i></i><i></i></div>
-      <p class="lesetext" style="margin:32px 0 8px">Die Einrichtung ist in beiden Betriebsvarianten im Projektpreis enthalten. Abgerechnet wird einmal jährlich im Voraus, kündbar mit 30 Tagen auf Monatsende.</p>
-      <p class="klein">Nicht enthalten: Textänderungen, neue Seiten, neue Bilder, Suchmaschinenoptimierung und Domainkosten. Änderungen nach Aufwand zu {{ stundensatzTxt }}.</p>
+      <ol class="uebergabe-liste">
+        <li><span class="uebergabe-n" aria-hidden="true">01</span><div><h3 class="titel-3">Alles auf Ihren Namen</h3><p>Domain, Hosting-Zugang und Quellcode laufen auf Ihren Namen. Sie erhalten alle Zugänge und eine schriftliche Anleitung. So bleiben Sie unabhängig, auch von mir.</p></div></li>
+        <li><span class="uebergabe-n" aria-hidden="true">02</span><div><h3 class="titel-3">Hosting eingerichtet, ohne Abo</h3><p>Ich richte Ihr Hosting ein, standardmässig bei einem kostenlosen Anbieter. Für die Website bezahlen Sie danach nur die Domain, direkt beim Anbieter. Möchten Sie Server in der Schweiz, richte ich das bei einem Schweizer Hoster ein. Dessen Jahresgebühr zahlen Sie direkt dort.</p></div></li>
+        <li><span class="uebergabe-n" aria-hidden="true">03</span><div><h3 class="titel-3">Keine Updates nötig</h3><p>Ihre Website besteht aus fertigen, statischen Dateien, ohne Plugins, die Sicherheitsupdates brauchen. Das SSL-Zertifikat erneuert der Hosting-Anbieter automatisch. Das gilt für die Website selbst: Nutzt ein Zusatz aus dem Paket Pro, etwa die Terminbuchung, einen eigenen Dienst, gelten dessen Bedingungen.</p></div></li>
+        <li><span class="uebergabe-n" aria-hidden="true">04</span><div><h3 class="titel-3">Änderungen nach Aufwand</h3><p>Brauchen Sie später eine Anpassung, kostet sie {{ stundensatzTxt }}. Vorher erhalten Sie eine Schätzung. Mängel aus der Übergabe behebe ich innert 30 Tagen kostenlos.</p></div></li>
+      </ol>
     </div></div>
   </section>
 
@@ -1856,7 +1853,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <p class="augenbraue">Klarheit</p>
         <h2 id="nicht-t" class="titel-2">Was nicht im Preis ist</h2>
       </div>
-      <ul class="nicht-liste"><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Fotografie und Bildbeschaffung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Logo, als Zusatz buchbar</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Firmenauftritt über das Logo hinaus</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Onlineshop und Zahlungsabwicklung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Laufende Suchmaschinenoptimierung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Werbeanzeigen</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Betreuung sozialer Netzwerke</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Rechtsberatung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Laufende Inhaltspflege nach der Übergabe</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Hosting- und Domainkosten</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Übernahme von mehr als 20 bestehenden Seiten</span></li></ul>
+      <ul class="nicht-liste"><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Fotografie und Bildbeschaffung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Logo, als Zusatz buchbar</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Firmenauftritt über das Logo hinaus</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Onlineshop und Zahlungsabwicklung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Laufende Suchmaschinenoptimierung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Werbeanzeigen</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Betreuung sozialer Netzwerke</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Rechtsberatung</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Änderungen nach der Übergabe, zu {{ stundensatzTxt }}</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Domain, direkt beim Anbieter bezahlt</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Jahresgebühr eines Schweizer Hosters, falls gewünscht</span></li><li><svg class="ic ic-20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span>Übernahme von mehr als 20 bestehenden Seiten</span></li></ul>
     </div></div>
   </section>
 
@@ -1969,8 +1966,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
         <div>
           <h2 id="ab-danach-t" class="titel-3">Danach</h2>
-          <p class="lesetext" style="margin:8px 0 12px">Nach der Übergabe betreiben Sie die Website selbst oder überlassen den Betrieb mir. Das entscheiden Sie nach dem Livegang.</p>
-          <a href="/angebot/#betrieb" class="einstieg">Preise für den Betrieb ansehen<span aria-hidden="true">→</span></a>
+          <p class="lesetext" style="margin:8px 0 12px">Die Website läuft auf Ihren Namen, ohne Abo und ohne Wartungsvertrag. Brauchen Sie später eine Änderung, kostet sie {{ stundensatzTxt }}, mit Schätzung vorab.</p>
+          <a href="/angebot/#betrieb" class="einstieg">Was nach der Übergabe gilt<span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div></div>
@@ -2163,8 +2160,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <div class="titelblock"><p class="augenbraue">Womit ich arbeite</p><h2 id="ue-technik-t" class="titel-2">Gängige Technik, keine Eigenbauten</h2></div>
       <ul class="technik">
         <li><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg><strong>Unter einer Sekunde</strong><span>React, Astro, Vite</span></li>
-        <li><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><strong>Sicher betrieben</strong><span>SSL, Backups, Überwachung</span></li>
-        <li><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><strong>Daten Ihrer Website in CH oder EU</strong><span>bei Betrieb durch mich, nach revDSG</span></li>
+        <li><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><strong>Ohne Wartungsvertrag</strong><span>statische Dateien, SSL automatisch</span></li>
+        <li><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><strong>Hosting auf Ihren Namen</strong><span>kostenlos oder bei einem Schweizer Hoster</span></li>
         <li><svg class="ic ic-32" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8"/></svg><strong>Kein WordPress</strong><span>keine Baukästen</span></li>
       </ul>
     </div></div>
@@ -2408,7 +2405,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <li><a href="#agb-2" style="font-size:16px">2. Ablauf des Projekts</a></li>
           <li><a href="#agb-3" style="font-size:16px">3. Mitwirkung der Kundin oder des Kunden</a></li>
           <li><a href="#agb-4" style="font-size:16px">4. Preise und Zahlung</a></li>
-          <li><a href="#agb-5" style="font-size:16px">5. Hosting und Domain während der Entwicklung</a></li>
+          <li><a href="#agb-5" style="font-size:16px">5. Hosting und Domain</a></li>
           <li><a href="#agb-6" style="font-size:16px">6. Übergabe</a></li>
           <li><a href="#agb-7" style="font-size:16px">7. Betrieb nach der Übergabe</a></li>
           <li><a href="#agb-8" style="font-size:16px">8. Backups</a></li>
@@ -2444,24 +2441,21 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Fixpreis gemäss Angebot. Es gibt keine Anzahlung. Der Fixpreis wird in einer einzigen Zahlung in Rechnung gestellt, sobald der Kunde den Entwurf für die Website oder das Logo angenommen hat. Zahlungsfrist 14 Tage ab Rechnungsdatum. Bei Verzug Mahnung und Verzugszins nach Gesetz. Zusatzleistungen ausserhalb des Angebots werden nach Aufwand zum Ansatz gemäss Angebot verrechnet.</p>
         </div>
         <div id="agb-5" style="margin-top:48px">
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">5. Hosting und Domain während der Entwicklung</h2>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Während der Entwicklung läuft die Seite auf einer Vorschauadresse bei einem von mir gewählten Anbieter. Dieses Hosting ist Teil der Entwicklung, kein eigenständiger Hostingvertrag, und endet mit der Übergabe. Die Domain wird nach Möglichkeit von Anfang an auf den Namen des Kunden registriert. Domain- und Hostingkosten trägt der Kunde und zahlt sie direkt beim jeweiligen Anbieter. Wird der Betrieb bei mir bezogen, gilt Paragraf 7.</p>
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">5. Hosting und Domain</h2>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Während der Entwicklung läuft die Seite auf einer Vorschauadresse bei einem von mir gewählten Anbieter. Dieses Hosting ist Teil der Entwicklung, kein eigenständiger Hostingvertrag, und endet mit der Übergabe. Die Domain läuft auf den Namen des Kunden, eine neue Domain wird von Anfang an auf seinen Namen registriert. Die Kosten für die Domain und für ein allfälliges kostenpflichtiges Hosting trägt der Kunde und zahlt sie direkt beim jeweiligen Anbieter.</p>
         </div>
         <div id="agb-6" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">6. Übergabe</h2>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Die Übergabe erfolgt nach schriftlicher Freigabe und vollständiger Zahlung. Übergeben werden sämtliche Dateien und der Quellcode der Website, die Zugangsdaten, eine schriftliche Betriebsanleitung sowie Unterstützung bei der Umstellung von Domain und Hosting auf den Kunden. Mit der Übergabe geht die Verantwortung für Betrieb, Aktualisierung und Inhalte auf den Kunden über. Wird der Betrieb bei mir bezogen, gilt für Hosting und Betrieb Paragraf 7. Vor vollständiger Zahlung erfolgt keine Übergabe von Dateien oder Zugangsdaten.</p>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Die Übergabe erfolgt nach schriftlicher Freigabe und vollständiger Zahlung. Ich richte das Hosting der Website auf den Namen des Kunden ein. Übergeben werden sämtliche Dateien und der Quellcode der Website, die Zugangsdaten und eine schriftliche Betriebsanleitung. Mit der Übergabe geht die Verantwortung für Betrieb, Aktualisierung und Inhalte auf den Kunden über. Vor vollständiger Zahlung erfolgt keine Übergabe von Dateien oder Zugangsdaten.</p>
         </div>
         <div id="agb-7" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">7. Betrieb nach der Übergabe</h2>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Der Betrieb der Website ist nicht Bestandteil des Projektpreises. Nach der Übergabe betreibt der Kunde die Website selbst oder beauftragt mich gesondert damit.</p>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Wird der Betrieb bei mir bezogen, gilt: {{ hostAuslandTxt }} bei Serverstandort in der EU, {{ hostSchweizTxt }} bei Serverstandort Schweiz. Enthalten sind Hosting, SSL und dessen Erneuerung, regelmässige Sicherungen, Erreichbarkeitsprüfung sowie meine Erreichbarkeit als Ansprechperson bei technischen Störungen mit einer Antwort innert zwei Werktagen.</p>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Nicht enthalten sind Inhaltsänderungen jeder Art, neue Seiten, neue Bilder, Suchmaschinenoptimierung sowie Domainkosten. Solche Arbeiten werden nach Aufwand zu {{ stundensatzTxt }} verrechnet.</p>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Die Vereinbarung über den Betrieb ist ein eigener Vertrag mit eigener Laufzeit von einem Jahr, wird einmal jährlich im Voraus in Rechnung gestellt und kann von beiden Seiten mit einer Frist von 30 Tagen auf Ende eines Kalendermonats gekündigt werden. Bei Kündigung übergebe ich dem Kunden sämtliche Dateien, den Quellcode und die Zugangsdaten und unterstütze ihn bei der Umstellung auf einen Anbieter seiner Wahl.</p>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Eine ununterbrochene Verfügbarkeit ist auch im Betrieb bei mir nicht geschuldet, da sie vom jeweiligen Rechenzentrum abhängt. Es gelten die Haftungsregeln nach Paragraf 10.</p>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Ich biete keinen laufenden Betrieb und keinen Wartungsvertrag an. Ab der Übergabe betreibt der Kunde die Website selbst.</p>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Änderungen nach der Übergabe führe ich auf Anfrage nach Aufwand zu {{ stundensatzTxt }} aus. Vorher erhält der Kunde eine Schätzung des Aufwands.</p>
         </div>
         <div id="agb-8" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">8. Backups</h2>
-          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Während der Entwicklung erstelle ich Sicherungskopien für meine eigene Arbeit. Ein Anspruch darauf besteht nicht. Nach der Übergabe liegt die Sicherung beim Kunden, ausser der Betrieb wird bei mir bezogen (Paragraf 7) oder es wurde ausdrücklich etwas anderes vereinbart. Sicherungen aus der Entwicklungsphase lösche ich 90 Tage nach der Übergabe.</p>
+          <p style="font-size:16px;line-height:1.7;margin:0 0 16px">Während der Entwicklung erstelle ich Sicherungskopien für meine eigene Arbeit. Ein Anspruch darauf besteht nicht. Nach der Übergabe liegt die Sicherung beim Kunden. Der übergebene Quellcode ist eine vollständige Sicherung der Website im Stand der Übergabe. Sicherungen aus der Entwicklungsphase lösche ich 90 Tage nach der Übergabe.</p>
         </div>
         <div id="agb-9" style="margin-top:48px">
           <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:26px;line-height:1.12;margin:0 0 16px">9. Gewährleistung</h2>
@@ -3040,7 +3034,7 @@ class Component extends DCLogic {
       ['FUNKTIONEN', 'Funktionen', 'Was die Seite können soll', 500], ['SEITENZAHL', 'Seitenzahl', 'Was die Seite können soll', 40],
       ['LOGO', 'Logo', 'Inhalte und Stil', 40], ['TEXTE', 'Texte', 'Inhalte und Stil', 40], ['FOTOS', 'Fotos', 'Inhalte und Stil', 40],
       ['STIL', 'Stil', 'Inhalte und Stil', 60], ['VORBILDER', 'Vorbilder', 'Inhalte und Stil', 500], ['FARBEN', 'Firmenfarben', 'Inhalte und Stil', 200],
-      ['DOMAIN', 'Domain', 'Technik und Zeitplan', 220], ['HOSTING', 'Betrieb danach', 'Technik und Zeitplan', 100], ['TERMIN', 'Online bis', 'Technik und Zeitplan', 60],
+      ['DOMAIN', 'Domain', 'Technik und Zeitplan', 220], ['HOSTING', 'Hosting', 'Technik und Zeitplan', 100], ['TERMIN', 'Online bis', 'Technik und Zeitplan', 60],
       ['KONTAKT_NAME', 'Name', 'Kontakt', 120], ['KONTAKT_MAIL', 'E-Mail', 'Kontakt', 200], ['KONTAKT_TEL', 'Telefon', 'Kontakt', 40],
       ['KONTAKTWEG', 'Kontakt am liebsten per', 'Kontakt', 20], ['REFERENZ', 'Referenz', 'Kontakt', 80], ['SONSTIGES', 'Sonstiges', 'Kontakt', 2000],
       ['PAKET', 'Paket', 'Empfehlung', 40], ['PREIS', 'Richtpreis', 'Empfehlung', 60], ['ZUSAETZE', 'Zusätze', 'Empfehlung', 400], ['HINWEIS', 'Hinweis', 'Empfehlung', 300], ['EINSTIEG', 'Einstieg', 'Empfehlung', 60],
@@ -3087,7 +3081,7 @@ class Component extends DCLogic {
   // Erklärung zum Referenzpreis im Ergebnis des Projekt-Checks. Liest auch tools/wissen-build.mjs.
   REFERENZ_SATZ = 'Ich suche zwei Betriebe, deren Website ich zeigen darf. Dafür bekommen Sie {betrag} Rabatt. Was ich brauche: Ihren Namen, Ihr Logo und zwei Sätze nach dem Livegang. Gilt für die nächsten zwei Projekte.';
   // Stand unter Impressum, Datenschutz und AGB. Nur ändern, wenn die Rechtstexte geändert werden.
-  STAND_RECHTSTEXTE = 'Oktober 2026';
+  STAND_RECHTSTEXTE = '21. Oktober 2026';
   ENTWURF_TAGE = 5;
   // Vorschläge im Chat mit fester Antwort (tools/wissen-build.mjs erzeugt die Antworten und prüft die Liste)
   CHAT_VORSCHLAEGE = ['Was kostet eine Website?', 'Wie läuft ein Projekt ab?', 'Was ist nicht inbegriffen?', 'Muss ich etwas anzahlen?'];
@@ -3104,7 +3098,7 @@ class Component extends DCLogic {
     // Einstieg aus Briefen und QR-Codes (?firma=...&branche=...), zeigt die Startseite
     '/start': { key: 'start', title: 'Willkommen · ODERA Design', noindex: true },
     '/angebot': { key: 'angebot', title: 'Was kostet eine Website? Fixpreise · ODERA Design',
-      desc: 'Website, Standard oder Pro: drei Pakete zum Fixpreis ab CHF 890, einmalig und ohne Abo. Betrieb auf Wunsch ab CHF 240 pro Jahr.' },
+      desc: 'Website, Standard oder Pro: drei Pakete zum Fixpreis ab CHF 890, einmalig und ohne Abo. Hosting auf Ihren Namen eingerichtet.' },
     '/ablauf': { key: 'ablauf', title: 'Website erstellen lassen: der Ablauf · ODERA Design',
       desc: 'Vier Phasen, 81 Minuten Ihrer Zeit, mit optionalen Schritten knapp 2 Stunden. Sie sehen den fertigen Entwurf, bevor Sie einen Franken bezahlen.' },
     '/musterprojekte': { key: 'muster', title: 'Webdesign Beispiele für Betriebe · ODERA Design',
@@ -3116,7 +3110,7 @@ class Component extends DCLogic {
     '/website-fuer-restaurants': { key: 'branche', title: 'Website für Restaurants und Cafés · ODERA Design',
       desc: 'Website für Ihr Restaurant oder Café: Karte, Öffnungszeiten und Reservation auf dem Handy. Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890.' },
     '/website-fuer-praxen': { key: 'branche', title: 'Website für Praxen ab CHF 890 · ODERA Design',
-      desc: 'Website für Ihre Praxis: Termine, Team und Anfahrt klar gezeigt, Daten auf Wunsch in der Schweiz. Entwurf in 5 Arbeitstagen, gratis. Ab CHF 890.' },
+      desc: 'Website für Ihre Praxis: Termine, Team und Anfahrt klar gezeigt, Server auf Wunsch in der Schweiz. Entwurf in 5 Arbeitstagen, gratis. Ab CHF 890.' },
     '/website-fuer-laeden': { key: 'branche', title: 'Website für Läden ab CHF 890 · ODERA Design',
       desc: 'Website für Ihren Laden: Sortiment, Öffnungszeiten und Anfahrt auf einen Blick. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890.' },
     // Projekt-Check: noindex (Entscheid Nico, 10. Oktober 2026), nicht in der Sitemap
@@ -3127,7 +3121,7 @@ class Component extends DCLogic {
     '/datenschutz': { key: 'datenschutz', title: 'Datenschutzerklärung · ODERA Design',
       desc: 'Welche Daten beim Besuch von odera.ch, im Projekt-Check, im Chat und bei der Statistik mit Einwilligung bearbeitet werden. Keine Cookies.' },
     '/agb': { key: 'agb', title: 'Allgemeine Geschäftsbedingungen · ODERA Design',
-      desc: 'Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Betrieb und Hosting.' }
+      desc: 'Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Hosting und Domain.' }
   };
 
 
@@ -3180,7 +3174,7 @@ class Component extends DCLogic {
   ];
 
   FAQ = [
-    ['Das ist mir zu teuer.', 'Standard kostet {PREIS_STD}, einmalig. Danach zahlen Sie nur noch Hosting und Domain bei Ihrem Anbieter, üblicherweise CHF 120 bis 200 pro Jahr. Und Sie sehen den Entwurf, bevor Sie sich entscheiden.'],
+    ['Das ist mir zu teuer.', 'Standard kostet {PREIS_STD}, einmalig. Danach bezahlen Sie nur noch die Domain, direkt beim Anbieter. Das Hosting ist eingerichtet und kostet standardmässig nichts. Und Sie sehen den Entwurf, bevor Sie sich entscheiden.'],
     ['Ich habe keine Zeit dafür.', 'Ein Formular von rund {MIN} Minuten und Ihre Rückmeldungen. Erforderlich sind {ERF_MIN} Minuten, mit optionalen Schritten knapp 2 Stunden, verteilt auf drei bis sechs Wochen, je nach Paket. Alles Übrige entscheiden Sie.'],
     ['Ich bin nicht technisch.', 'Sie brauchen nichts zu können. Ich gestalte, ich schalte auf, ich übergebe. Im Paket Pro können Sie Texte danach selbst bearbeiten, wenn Sie wollen.'],
     ['Sie sind allein: was, wenn Sie ausfallen?', 'Ich verwende gängige Technik ohne Abhängigkeiten. Domain, Zugänge und Quellcode gehören Ihnen ab dem ersten Tag. Jede andere Fachperson kann übernehmen, ohne von vorne zu beginnen.'],
@@ -3197,7 +3191,7 @@ class Component extends DCLogic {
     ['Ich setze um', 'Ihre Änderungen, im Preis enthalten.', 0, true],
     ['Zweite Rückmeldung', 'Nicht jeder braucht sie.', 15, false, 0, 'Passt alles nach der ersten Runde, geht es direkt weiter.'],
     ['Freigabe', 'Sie geben die fertige Seite schriftlich frei.', 5, true],
-    ['Aufschaltung und Übergabe', 'Ich stelle die Seite online und übergebe Ihnen Domain, Zugänge und Quellcode. Danach gehört alles Ihnen.', 30, true]
+    ['Aufschaltung und Übergabe', 'Ich stelle die Seite online und übergebe Ihnen Domain, Zugänge und Quellcode. Das Hosting ist auf Ihren Namen eingerichtet. Danach gehört alles Ihnen.', 30, true]
   ];
   // Stilrichtungen im Projekt-Check: Name und kleines Vorschaubild (CSS-Hintergrund)
   STILE = [
@@ -3227,8 +3221,8 @@ class Component extends DCLogic {
       dauer: 'je nach Paket, steht im Angebot', steps: [6, 7] },
     { t: 'Übergabe', wann: 'Abschluss', kosten: 'keine weiteren Kosten', frei: false, zuerst: 'sie',
       sie: 'Sie geben die fertige Seite schriftlich frei.',
-      ich: 'Ich schalte sie auf und übergebe Domain, Zugänge und Quellcode. Danach gehört alles Ihnen.',
-      kurz: 'Domain, Zugänge und Quellcode gehören Ihnen.',
+      ich: 'Ich schalte sie auf und übergebe Domain, Zugänge und Quellcode. Das Hosting ist auf Ihren Namen eingerichtet. Danach gehört alles Ihnen.',
+      kurz: 'Domain, Zugänge und Quellcode gehören Ihnen. Das Hosting ist auf Ihren Namen eingerichtet.',
       dauer: 'rund 35 Minuten Ihrer Zeit', steps: [8, 9] }
   ];
   // Woche, in der ein Schritt mit Aufwand für den Kunden liegt (Ablauf, «Ihr Aufwand auf einen Blick»). Index in STEPS.
@@ -3287,7 +3281,7 @@ class Component extends DCLogic {
       fragen: [
         ['Kann ich die Menükarte selbst ändern?', 'Im Paket Pro bearbeiten Sie Texte selbst, ohne Technikkenntnisse. In den anderen Paketen ändere ich sie für Sie, nach Aufwand zu {STUNDE} pro Stunde.'],
         ['Brauche ich ein Reservationssystem?', 'Nicht unbedingt. Für viele Lokale reichen ein Knopf zum Anrufen und ein Formular. Eine Online-Buchung gibt es im Paket Pro.'],
-        ['Gehört die Website danach mir?', 'Ja. Domain, Zugänge und Quellcode gehören Ihnen. Den Betrieb übernehmen Sie selbst oder ich, ab {BETRIEB} pro Jahr.'],
+        ['Gehört die Website danach mir?', 'Ja. Domain, Zugänge und Quellcode gehören Ihnen. Das Hosting richte ich auf Ihren Namen ein, ohne Abo.'],
       ],
     },
     '/website-fuer-praxen': {
@@ -3298,14 +3292,14 @@ class Component extends DCLogic {
         ['person', 'Team und Ausbildung', 'Fotos und kurze Angaben zu Ausbildung und Schwerpunkten schaffen Vertrauen, bevor jemand anruft.'],
         ['dokument', 'Behandlungen verständlich erklärt', 'Ihr Angebot in einfacher Sprache, ohne Fachjargon. So wissen Besucher, ob sie bei Ihnen richtig sind.'],
         ['karte', 'Anfahrt und Zugang', 'Adresse, Parkplätze, öffentlicher Verkehr und Zugang mit Rollstuhl auf einen Blick.'],
-        ['schloss', 'Daten in der Schweiz', 'Mit dem Betrieb bei mir auf Schweizer Servern bleiben Website und Formulardaten in der Schweiz.'],
+        ['schloss', 'Server in der Schweiz', 'Auf Wunsch richte ich Ihre Website bei einem Schweizer Hoster ein, auf Ihren Namen. Die Jahresgebühr zahlen Sie direkt dort.'],
       ],
       beispielTitel: 'Sehen Sie Ihre Praxis in zehn Sekunden',
       beispielText: 'Tippen Sie den Namen Ihrer Praxis ein. Das Vorschau-Werkzeug zeichnet sofort, wie der Anfang Ihrer Seite aussehen könnte.',
       preis: 'Für Praxen mit mehreren Angeboten passt meist Standard. Online-Terminbuchung und zweite Sprache gibt es im Paket Pro.',
       fragen: [
         ['Kann ich Online-Termine anbieten?', 'Ja, im Paket Pro: Online-Terminbuchung oder erweiterte Formulare, dazu bis 10 Seiten.'],
-        ['Wo liegen die Daten aus dem Kontaktformular?', 'Wählen Sie den Betrieb bei mir mit Schweizer Server ({BETRIEB_CH} pro Jahr), bleiben Website und Formulardaten in der Schweiz.'],
+        ['Kann meine Website in der Schweiz laufen?', 'Ja. Auf Wunsch richte ich das Hosting bei einem Schweizer Hoster ein, auf Ihren Namen. Dessen Jahresgebühr zahlen Sie direkt dort, ein Abo bei mir gibt es nicht.'],
         ['Wie lange dauert es bis zur fertigen Seite?', 'Den Entwurf sehen Sie innert {TAGE_WORT}. Online geht die Seite je nach Paket innert 10 bis 25 Arbeitstagen nach Annahme des Entwurfs.'],
       ],
     },
@@ -3332,13 +3326,11 @@ class Component extends DCLogic {
 
   TIMING = ['So schnell wie möglich', 'In einem Monat', 'In zwei bis drei Monaten', 'Kein festes Datum'];
 
-  // Hosting als optionales Zusatzangebot. Einzige Quelle für Beträge und Antworten.
-  HOSTING_AUSLAND_CHF = 240;
-  HOSTING_SCHWEIZ_CHF = 480;
+  // Hosting: Ich richte es auf den Namen des Kunden ein und übergebe es. Kein Betrieb durch mich, kein Abo.
+  // Antworten der Frage «Wo soll Ihre Website laufen?». Stundensatz für Änderungen nach der Übergabe (AGB Paragraf 7).
   STUNDENSATZ_CHF = 120;
-  HOSTING_SELBST = 'Ich selbst, CHF 0';
-  HOSTING_EGAL = 'ODERA, Server in der EU, CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr';
-  HOSTING_CH = 'ODERA, Server in der Schweiz, CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF) + ' pro Jahr';
+  HOSTING_EGAL = 'Egal, Hauptsache ohne laufende Kosten';
+  HOSTING_CH = 'In der Schweiz (Hosting direkt beim Schweizer Anbieter)';
   HOSTING_OFFEN = 'Weiss ich noch nicht';
 
   // Logo als Zusatz. Einzige Quelle für die Beträge.
@@ -3401,9 +3393,9 @@ class Component extends DCLogic {
     { key: 'DOMAIN', ab: 5, n: 'Domain', t: 'Haben Sie schon eine Domain?', typ: 'wahl',
       was: 'Die Domain ist die Adresse Ihrer Website, zum Beispiel ihrbetrieb.ch.',
       o: ['Ja', 'Nein', 'Weiss ich nicht'], extra: { 'Ja': ['domain', 'Welche?', 'ihrbetrieb.ch'] } },
-    { key: 'HOSTING', ab: 5, n: 'Betrieb', t: 'Wer soll die Website nach dem Livegang betreiben?', typ: 'wahl',
-      was: 'Die Website muss auf einem Server liegen, erreichbar bleiben und gesichert werden. Das können Sie selbst organisieren oder mir überlassen. Entscheiden müssen Sie erst nach dem Entwurf.',
-      o: [this.HOSTING_SELBST, this.HOSTING_EGAL, this.HOSTING_CH, this.HOSTING_OFFEN] },
+    { key: 'HOSTING', ab: 5, n: 'Hosting', t: 'Wo soll Ihre Website laufen?', typ: 'wahl',
+      was: 'Ich richte das Hosting auf Ihren Namen ein, standardmässig bei einem kostenlosen Anbieter. Möchten Sie Server in der Schweiz, zahlen Sie die Jahresgebühr direkt beim Schweizer Hoster. Ein Abo bei mir gibt es nicht.',
+      o: [this.HOSTING_EGAL, this.HOSTING_CH, this.HOSTING_OFFEN] },
     { key: 'TERMIN', ab: 5, n: 'Termin', t: 'Bis wann soll die Website online sein?', typ: 'wahl', o: this.TIMING },
     { key: 'REFERENZ', ab: 6, n: 'Referenz', t: 'Dürfte ich Ihre fertige Website später als Beispiel zeigen?', typ: 'wahl',
       help: 'Für die nächsten zwei Betriebe gibt es dafür einen Rabatt.',
@@ -4141,7 +4133,7 @@ class Component extends DCLogic {
   werte(t) {
     const w = { TAGE: this.ENTWURF_TAGE + ' Arbeitstagen', TAGE_WORT: (this.ZAHLWORT[this.ENTWURF_TAGE] || this.ENTWURF_TAGE) + ' Arbeitstagen',
       MIN: String(this.CHECK_MINUTEN), FRAGEN: String(this.fragenZahl()), PREIS_STD: 'CHF\u00a0' + this.fmt(this.PAKET_PREIS[1]), ERF_MIN: String(this.zeitSumme(true)),
-      TEXTE: 'CHF\u00a0' + this.TEXT_PRO_SEITE_CHF, STUNDE: 'CHF\u00a0' + this.STUNDENSATZ_CHF, BETRIEB: 'CHF\u00a0' + this.HOSTING_AUSLAND_CHF, BETRIEB_CH: 'CHF\u00a0' + this.HOSTING_SCHWEIZ_CHF };
+      TEXTE: 'CHF\u00a0' + this.TEXT_PRO_SEITE_CHF, STUNDE: 'CHF\u00a0' + this.STUNDENSATZ_CHF };
     return String(t).replace(/\{([A-Z_]+)\}/g, (m, k) => (w[k] !== undefined ? w[k] : m));
   }
   // Minuten aus den Ablaufschritten: erforderlich oder optional (ohne abgewählte)
@@ -4356,7 +4348,7 @@ class Component extends DCLogic {
 
   hostingWahl() {
     const h = this.state.ans.HOSTING;
-    return h === this.HOSTING_SELBST ? 'selbst' : h === this.HOSTING_EGAL ? 'egal' : h === this.HOSTING_CH ? 'schweiz' : '';
+    return h === this.HOSTING_EGAL ? 'egal' : h === this.HOSTING_CH ? 'schweiz' : '';
   }
 
   logoWunsch() { return this.state.ans.LOGO === this.LOGO_NEU; }
@@ -4368,8 +4360,6 @@ class Component extends DCLogic {
   }
   logoMitWebsiteChf() { return 'CHF ' + this.fmt(this.LOGO_MIT_WEBSITE_CHF); }
 
-  hostingAuslandTxt() { return 'CHF ' + this.fmt(this.HOSTING_AUSLAND_CHF) + ' pro Jahr'; }
-  hostingSchweizTxt() { return 'CHF ' + this.fmt(this.HOSTING_SCHWEIZ_CHF) + ' pro Jahr'; }
 
   // Paket-Empfehlung aus Funktionen und Seitenzahl (Paketinhalte wie auf der Angebotsseite):
   // Pro-Funktionen oder mehr als 5 Seiten: Pro. Standard-Funktionen oder bis 5 Seiten: Standard. Sonst Website.
@@ -4414,10 +4404,9 @@ class Component extends DCLogic {
     if (this.logoWunsch()) out.push(['Logo', this.logoMitWebsiteChf() + ' einmalig']);
     if (a.TEXTE === 'Ich brauche Hilfe') out.push(['Texte', 'CHF ' + this.TEXT_PRO_SEITE_CHF + ' pro Seite']);
     if (a.FOTOS === 'Keine' || a.FOTOS === 'Nur wenige') out.push(['Fotograf', 'auf Wunsch, nach Aufwand']);
-    if (hs === 'schweiz') out.push(['Betrieb pro Jahr', this.hostingSchweizTxt().replace(' pro Jahr', '') + ', Server in der Schweiz']);
-    else if (hs === 'egal') out.push(['Betrieb pro Jahr', this.hostingAuslandTxt().replace(' pro Jahr', '') + ', Server in der EU']);
-    else if (hs === 'selbst') out.push(['Betrieb pro Jahr', 'CHF 0, Sie hosten selbst']);
-    else out.push(['Betrieb pro Jahr', 'auf Wunsch ab ' + this.hostingAuslandTxt().replace(' pro Jahr', '')]);
+    // Hosting richte ich im Paket ein. Laufende Kosten nur bei einem Schweizer Hoster, direkt dort bezahlt.
+    if (hs === 'schweiz') out.push(['Hosting', 'Schweizer Hoster, Jahresgebühr direkt dort']);
+    else out.push(['Hosting', 'auf Ihren Namen eingerichtet, ohne Abo']);
     return out;
   }
 
@@ -4826,7 +4815,7 @@ class Component extends DCLogic {
       rechnerPreisZiel: 'CHF ' + this.fmt(this.paketAus(s.rechnerFn).price),
       rechnerPreisTxt: 'CHF ' + this.fmt(s.rechnerPreis || this.paketAus(s.rechnerFn).price),
       rechnerZeilen: [s.rechnerLogo ? ['Logo', this.logoMitWebsiteChf() + ' einmalig'] : null, s.rechnerTexte ? ['Texte', 'CHF ' + this.TEXT_PRO_SEITE_CHF + ' pro Seite'] : null,
-        ['Betrieb danach', 'optional, ab ' + this.hostingAuslandTxt()]].filter(Boolean).map((z) => ({ l: z[0], v: z[1] })),
+        ['Hosting', 'auf Ihren Namen eingerichtet, ohne Abo']].filter(Boolean).map((z) => ({ l: z[0], v: z[1] })),
       passtWebsite: s.rechnerAn && this.paketAus(s.rechnerFn).name === 'Website' ? '1' : '0',
       passtStandard: s.rechnerAn && this.paketAus(s.rechnerFn).name === 'Standard' ? '1' : '0',
       passtPro: s.rechnerAn && this.paketAus(s.rechnerFn).name === 'Pro' ? '1' : '0',
@@ -4947,8 +4936,6 @@ class Component extends DCLogic {
 
       recName: r.name, recPrice: r.price,
       logoAlleinChf: 'CHF\u00a0' + this.fmt(this.LOGO_ALLEIN_CHF), logoMitChf: 'CHF\u00a0' + this.fmt(this.LOGO_MIT_WEBSITE_CHF),
-      hostAuslandTxt: this.hostingAuslandTxt(), hostSchweizTxt: this.hostingSchweizTxt(),
-      hostAuslandChf: 'CHF\u00a0' + this.fmt(this.HOSTING_AUSLAND_CHF), hostSchweizChf: 'CHF\u00a0' + this.fmt(this.HOSTING_SCHWEIZ_CHF),
       stundensatzTxt: 'CHF\u00a0' + this.fmt(this.STUNDENSATZ_CHF) + '\u00a0pro\u00a0Stunde',
       consent: s.consent,
       onConsent: () => this.setState(st => ({ consent: !st.consent, ...(st.sendFehler === 'einwilligung' ? { senden: 'bereit', sendFehler: '' } : {}) })),

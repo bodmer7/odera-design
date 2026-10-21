@@ -45,18 +45,18 @@ und auf Über mich. Name, Ort und E-Mail überall gleich: «ODERA Design», «Be
 | Seite | Titel | Beschreibung |
 |---|---|---|
 | `/` | Website erstellen lassen ab CHF 890 · ODERA Design (50) | Neue Website für Ihren Betrieb: fertiger Entwurf in 5 Arbeitstagen, gratis und unverbindlich. Fixpreis ab CHF 890. Webdesign aus Berikon AG. (140) |
-| `/angebot/` | Was kostet eine Website? Fixpreise · ODERA Design (49) | Website, Standard oder Pro: drei Pakete zum Fixpreis ab CHF 890, einmalig und ohne Abo. Betrieb auf Wunsch ab CHF 240 pro Jahr. (127) |
+| `/angebot/` | Was kostet eine Website? Fixpreise · ODERA Design (49) | Website, Standard oder Pro: drei Pakete zum Fixpreis ab CHF 890, einmalig und ohne Abo. Hosting auf Ihren Namen eingerichtet. (125) |
 | `/ablauf/` | Website erstellen lassen: der Ablauf · ODERA Design (51) | Vier Phasen, 81 Minuten Ihrer Zeit, mit optionalen Schritten knapp 2 Stunden. Sie sehen den fertigen Entwurf, bevor Sie einen Franken bezahlen. (143) |
 | `/musterprojekte/` | Webdesign Beispiele für Betriebe · ODERA Design (47) | Zwei Beispiel-Websites für Handwerk und Solar. Sehen Sie, wie Ihre neue Seite aussehen könnte, und testen Sie Ihren Betrieb in zehn Sekunden. (141) |
 | `/ueber-mich/` | Nico Bodmer, Webdesigner aus Berikon · ODERA Design (51) | Sie reden mit dem, der die Seite baut: Nico Bodmer aus Berikon AG baut Websites für Betriebe im Aargau und in der ganzen Schweiz. (129) |
 | `/website-fuer-handwerker/` | Website für Handwerker ab CHF 890 · ODERA Design (48) | Website für Ihren Handwerksbetrieb: Telefonnummer, Referenzbilder, Offerte-Knopf. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890. (146) |
 | `/website-fuer-restaurants/` | Website für Restaurants und Cafés · ODERA Design (48) | Website für Ihr Restaurant oder Café: Karte, Öffnungszeiten und Reservation auf dem Handy. Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890. (146) |
-| `/website-fuer-praxen/` | Website für Praxen ab CHF 890 · ODERA Design (44) | Website für Ihre Praxis: Termine, Team und Anfahrt klar gezeigt, Daten auf Wunsch in der Schweiz. Entwurf in 5 Arbeitstagen, gratis. Ab CHF 890. (144) |
+| `/website-fuer-praxen/` | Website für Praxen ab CHF 890 · ODERA Design (44) | Website für Ihre Praxis: Termine, Team und Anfahrt klar gezeigt, Server auf Wunsch in der Schweiz. Entwurf in 5 Arbeitstagen, gratis. Ab CHF 890. (145) |
 | `/website-fuer-laeden/` | Website für Läden ab CHF 890 · ODERA Design (43) | Website für Ihren Laden: Sortiment, Öffnungszeiten und Anfahrt auf einen Blick. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890. (144) |
 | `/projekt-check/` | Projekt-Check: Angebot in 6 Minuten · ODERA Design (50) | 18 kurze Fragen, rund 6 Minuten. Danach erhalten Sie ein Angebot zum Fixpreis und einen kostenlosen Entwurf Ihrer neuen Website, ohne Risiko. (141) |
 | `/impressum/` | Impressum · ODERA Design (24) | (noindex) (0) |
 | `/datenschutz/` | Datenschutzerklärung · ODERA Design (35) | Welche Daten beim Besuch von odera.ch, im Projekt-Check, im Chat und bei der Statistik mit Einwilligung bearbeitet werden. Keine Cookies. (137) |
-| `/agb/` | Allgemeine Geschäftsbedingungen · ODERA Design (46) | Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Betrieb und Hosting. (137) |
+| `/agb/` | Allgemeine Geschäftsbedingungen · ODERA Design (46) | Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Hosting und Domain. (136) |
 
 Trenner im Titel einheitlich «·», auch in den Einblicken. Dort gilt: Zusatz « · ODERA Design» nur bis 65 Zeichen,
 sonst ohne; zu lange Artikeltitel bekommen einen Kurztitel für `title` und `og:title` (`titel_kurz`), die h1 bleibt.
@@ -68,13 +68,13 @@ Auftrag, siehe `docs/entscheidungen.md`).
 
 ## Strukturierte Daten (JSON-LD)
 
-Eine Quelle: `strukturDaten()` in `tools/seo-build.mjs`, Werte aus `src/seite.html` (Preise, Betriebspreise,
+Eine Quelle: `strukturDaten()` in `tools/seo-build.mjs`, Werte aus `src/seite.html` (Preise, Stundensatz,
 LinkedIn-Adressen `ODERA_LINKEDIN_URL` und `LINKEDIN_PERSON_URL`, Branchenseiten).
 
 | Seite | Typen |
 |---|---|
 | `/` | WebSite, ProfessionalService `#organisation` (Logo `odera-logo-512.png`, Adresse nur Ort Berikon, AG, CH, Einzugsgebiet Freiamt, Mutschellen, Kanton Aargau, Schweiz, `priceRange`, `sameAs` LinkedIn-Firma, `founder` Person mit `sameAs` LinkedIn-Profil, `contactPoint`, Pakete und Logo-Design), WebPage, FAQPage |
-| `/angebot/` | WebPage, BreadcrumbList, Service mit OfferCatalog (drei Pakete, Logo-Design CHF 490 und CHF 390 mit Website, zwei Betriebsarten), FAQPage |
+| `/angebot/` | WebPage, BreadcrumbList, Service mit OfferCatalog (drei Pakete, Logo-Design CHF 490 und CHF 390 mit Website), FAQPage |
 | `/ueber-mich/` | ProfilePage, BreadcrumbList, Person `#person` (`sameAs` LinkedIn-Profil, `hasCredential` Platform Developer EFZ und Technische Berufsmaturität, `affiliation` HWZ). Kein `worksFor`, kein Arbeitgeber. |
 | `/musterprojekte/` | WebPage, BreadcrumbList, ItemList der zwei Muster als CreativeWork mit «Der Betrieb ist frei erfunden.» |
 | Branchenseiten | WebPage, BreadcrumbList, Service mit `serviceType` und `areaServed`, FAQPage |
@@ -93,7 +93,7 @@ für Person und Firma wie `tools/seo-build.mjs`.
 
 ### `/` ✓
 
-- h1 Sie sehen Ihre neue Website, bevor Sie bezahlen.
+- h1 Website erstellen lassen Erst sehen, dann bezahlen
   - h2 So arbeiten meine Seiten
     - h3 Schreinerei Doppelmeter
     - h3 Firstlicht Solartechnik
@@ -113,10 +113,11 @@ für Person und Firma wie `tools/seo-build.mjs`.
 - h1 Was Ihre Website kostet.
   - h2 Was soll Ihre Seite können?
   - h2 Was in jedem Paket steckt
-  - h2 Wer betreibt Ihre Website danach?
-    - h3 Sie hosten selbst
-    - h3 Betrieb bei mir
-    - h3 Betrieb bei mir, Schweiz
+  - h2 Einmal bezahlt. Danach gehört alles Ihnen.
+    - h3 Alles auf Ihren Namen
+    - h3 Hosting eingerichtet, ohne Abo
+    - h3 Keine Updates nötig
+    - h3 Änderungen nach Aufwand
   - h2 Was nicht im Preis ist
   - h2 Was Sie sich jetzt vermutlich denken
 
@@ -203,7 +204,7 @@ für Person und Firma wie `tools/seo-build.mjs`.
     - h3 Team und Ausbildung
     - h3 Behandlungen verständlich erklärt
     - h3 Anfahrt und Zugang
-    - h3 Daten in der Schweiz
+    - h3 Server in der Schweiz
   - h2 Sehen Sie Ihre Praxis in zehn Sekunden
   - h2 In vier Schritten online
     - h3 Anfrage
@@ -272,7 +273,7 @@ für Person und Firma wie `tools/seo-build.mjs`.
   - h2 2. Ablauf des Projekts
   - h2 3. Mitwirkung der Kundin oder des Kunden
   - h2 4. Preise und Zahlung
-  - h2 5. Hosting und Domain während der Entwicklung
+  - h2 5. Hosting und Domain
   - h2 6. Übergabe
   - h2 7. Betrieb nach der Übergabe
   - h2 8. Backups
@@ -287,7 +288,6 @@ für Person und Firma wie `tools/seo-build.mjs`.
   - h2 17. Lizenzbilder
   - h2 18. Domain
   - h2 19. Änderungen
-
 
 ## Ausserhalb der Website
 
