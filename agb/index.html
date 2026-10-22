@@ -31,7 +31,7 @@
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://odera.ch/agb/#seite","url":"https://odera.ch/agb/","name":"Allgemeine Geschäftsbedingungen · ODERA Design","description":"Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Hosting und Domain.","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/agb/#brotkrumen"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/agb/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Allgemeine Geschäftsbedingungen","item":"https://odera.ch/agb/"}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=347d19ac2c" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=2cd18ab31c" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -629,7 +629,7 @@ if(!m.hasAttribute('tabindex'))m.setAttribute('tabindex','-1');m.focus({preventS
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=347d19ac2c';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=2cd18ab31c';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -909,8 +909,14 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .uebergabe .titelblock{position:sticky;top:112px;margin:0}
 .uebergabe-liste{list-style:none;margin:0;padding:0;border-top:1px solid var(--auf-tinte-linie)}
 .uebergabe-liste li{display:grid;grid-template-columns:104px minmax(0,1fr);gap:24px;align-items:start;padding:32px 0;border-bottom:1px solid var(--auf-tinte-linie)}
-.uebergabe-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:72px;line-height:0.9;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;color:var(--odera-blau-200)}
-@supports (-webkit-text-stroke:1px black){.uebergabe-n{color:transparent;-webkit-text-stroke:1.5px var(--primaer)}}
+/* Grün (Limette) als Signatur: zweiter Satz des Titels, Haken und Ziffern */
+.uebergabe-gruen{display:block;color:var(--akzent-limette)}
+.uebergabe-kurz{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.uebergabe-kurz li{position:relative;padding-left:32px;font-size:var(--fs-3);line-height:1.5;color:var(--auf-tinte)}
+.uebergabe-kurz li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;background:var(--akzent-limette)}
+.uebergabe-kurz li::after{content:"";position:absolute;left:7px;top:8px;width:8px;height:4px;border-left:2px solid var(--tinte);border-bottom:2px solid var(--tinte);transform:rotate(-45deg)}
+.uebergabe-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:72px;line-height:0.9;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;color:var(--akzent-limette)}
+@supports (-webkit-text-stroke:1px black){.uebergabe-n{color:transparent;-webkit-text-stroke:1.5px var(--akzent-limette)}}
 .uebergabe-liste .titel-3{color:var(--auf-tinte)}
 .uebergabe-liste p{margin:8px 0 0;max-width:60ch;font-size:var(--fs-3);line-height:1.6;color:var(--auf-tinte-2)}
 @media(max-width:1023px){.uebergabe{grid-template-columns:minmax(0,1fr);gap:0}.uebergabe .titelblock{position:static;margin:0 0 var(--titel-abstand)}}

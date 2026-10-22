@@ -885,8 +885,14 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .uebergabe .titelblock{position:sticky;top:112px;margin:0}
 .uebergabe-liste{list-style:none;margin:0;padding:0;border-top:1px solid var(--auf-tinte-linie)}
 .uebergabe-liste li{display:grid;grid-template-columns:104px minmax(0,1fr);gap:24px;align-items:start;padding:32px 0;border-bottom:1px solid var(--auf-tinte-linie)}
-.uebergabe-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:72px;line-height:0.9;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;color:var(--odera-blau-200)}
-@supports (-webkit-text-stroke:1px black){.uebergabe-n{color:transparent;-webkit-text-stroke:1.5px var(--primaer)}}
+/* Grün (Limette) als Signatur: zweiter Satz des Titels, Haken und Ziffern */
+.uebergabe-gruen{display:block;color:var(--akzent-limette)}
+.uebergabe-kurz{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.uebergabe-kurz li{position:relative;padding-left:32px;font-size:var(--fs-3);line-height:1.5;color:var(--auf-tinte)}
+.uebergabe-kurz li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;background:var(--akzent-limette)}
+.uebergabe-kurz li::after{content:"";position:absolute;left:7px;top:8px;width:8px;height:4px;border-left:2px solid var(--tinte);border-bottom:2px solid var(--tinte);transform:rotate(-45deg)}
+.uebergabe-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:72px;line-height:0.9;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;color:var(--akzent-limette)}
+@supports (-webkit-text-stroke:1px black){.uebergabe-n{color:transparent;-webkit-text-stroke:1.5px var(--akzent-limette)}}
 .uebergabe-liste .titel-3{color:var(--auf-tinte)}
 .uebergabe-liste p{margin:8px 0 0;max-width:60ch;font-size:var(--fs-3);line-height:1.6;color:var(--auf-tinte-2)}
 @media(max-width:1023px){.uebergabe{grid-template-columns:minmax(0,1fr);gap:0}.uebergabe .titelblock{position:static;margin:0 0 var(--titel-abstand)}}
@@ -1800,7 +1806,12 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
     <div class="wrap"><div class="inner uebergabe">
       <div class="titelblock">
         <p class="augenbraue">Nach der Übergabe</p>
-        <h2 id="betrieb-t" class="titel-2">Einmal bezahlt. Danach gehört alles Ihnen.</h2>
+        <h2 id="betrieb-t" class="titel-2">Einmal bezahlt. <span class="uebergabe-gruen">Danach gehört alles Ihnen.</span></h2>
+        <ul class="uebergabe-kurz">
+          <li>Kein Abo</li>
+          <li>Kein Wartungsvertrag</li>
+          <li>Alles läuft auf Ihren Namen</li>
+        </ul>
       </div>
       <ol class="uebergabe-liste">
         <li><span class="uebergabe-n" aria-hidden="true">01</span><div><h3 class="titel-3">Alles auf Ihren Namen</h3><p>Domain, Hosting-Zugang und Quellcode laufen auf Ihren Namen. Sie erhalten alle Zugänge und eine schriftliche Anleitung. So bleiben Sie unabhängig, auch von mir.</p></div></li>
