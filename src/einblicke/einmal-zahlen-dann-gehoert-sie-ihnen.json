@@ -1,0 +1,83 @@
+{
+  "v": 1,
+  "slug": "einmal-zahlen-dann-gehoert-sie-ihnen",
+  "titel": "Einmal zahlen, dann gehört sie Ihnen",
+  "beschreibung": "Warum ich keine Abonnements für Websites verkaufe. Viele Angebote für kleine Betriebe laufen über monatliche Gebühren. Über die Jahre kommt so viel…",
+  "anriss": "Warum ich keine Abonnements für Websites verkaufe. Viele Angebote für kleine Betriebe laufen über monatliche Gebühren. Über die Jahre kommt so viel zusammen, und am Ende gehört Ihnen trotzdem nichts.",
+  "datum": "2026-10-23",
+  "geaendert": "2026-10-23T11:40:56Z",
+  "saeule": "haltung",
+  "rubrik": "Persönlich und Haltung",
+  "thema_id": "kein-abo",
+  "kurz": [
+    "Einmaliger Preis",
+    "Betrieb freiwillig",
+    "Wechsel jederzeit möglich"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Warum mir das wichtig ist",
+      "absaetze": [
+        "Viele Angebote für kleine Betriebe laufen über monatliche Gebühren. Einzeln wirken die Beträge klein, über die Jahre kommt aber viel zusammen. Und wer kündigt, steht oft ohne Website da.",
+        "Ich arbeite anders: Sie zahlen die Website einmal. Danach gehört sie Ihnen, und Sie entscheiden selbst, wer sie betreibt.",
+        "Für mich gehört das zu einem fairen Umgang mit kleinen Betrieben. Sie tragen schon genug Risiko, da soll die Website nicht noch eines dazu sein."
+      ]
+    },
+    {
+      "titel": "Was das konkret heisst",
+      "absaetze": [
+        "Diese Grundsätze gelten für jedes Projekt, unabhängig von Paket und Branche. So wissen Sie schon vor dem ersten Gespräch, woran Sie sind."
+      ],
+      "punkte": [
+        {
+          "titel": "Einmaliger Preis",
+          "text": "Der Preis ist einmalig und fest. Sie wissen von Anfang an, was die Website kostet."
+        },
+        {
+          "titel": "Betrieb freiwillig",
+          "text": "Der Betrieb bei mir ist freiwillig. Sie können ihn dazunehmen oder die Website selbst betreiben."
+        },
+        {
+          "titel": "Wechsel jederzeit möglich",
+          "text": "Ein Wechsel ist jederzeit möglich, weil Sie alle Dateien und Zugänge erhalten."
+        }
+      ],
+      "nach": [
+        "Ich teile solche Gedanken hier, weil sie meine Entscheidungen erklären. Und weil ich überzeugt bin, dass kleine Betriebe einen ehrlichen Partner verdienen."
+      ]
+    },
+    {
+      "titel": "Was das für eine Zusammenarbeit heisst",
+      "absaetze": [
+        "Wenn Sie mit mir arbeiten, sehen Sie den Entwurf Ihrer neuen Website, bevor Sie etwas bezahlen. Der Preis steht vorher fest, und Sie entscheiden in Ruhe. Passt es nicht, ist das in Ordnung. Mir ist wichtig, dass Sie diese Regeln kennen, bevor wir überhaupt miteinander sprechen."
+      ]
+    },
+    {
+      "titel": "Was Sie daraus mitnehmen können",
+      "absaetze": [
+        "Rechnen Sie aus, wie viel Sie heute pro Jahr für Ihre Website zahlen, inklusive aller Gebühren. Vergleichen Sie diesen Betrag mit dem, was Sie dafür bekommen.",
+        "Ich lerne bei jedem Projekt dazu. Manche Regeln habe ich erst nach einigen Aufträgen so klar formuliert, wie sie heute auf meiner Website stehen.",
+        "Wie viel zahlen Sie heute jährlich für Ihre Website?"
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 6 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Einmal zahlen, dann gehört sie Ihnen"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}

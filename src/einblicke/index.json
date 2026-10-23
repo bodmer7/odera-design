@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "einmal-zahlen-dann-gehoert-sie-ihnen",
+      "titel": "Einmal zahlen, dann gehört sie Ihnen",
+      "beschreibung": "Warum ich keine Abonnements für Websites verkaufe. Viele Angebote für kleine Betriebe laufen über monatliche Gebühren. Über die Jahre kommt so viel…",
+      "anriss": "Warum ich keine Abonnements für Websites verkaufe. Viele Angebote für kleine Betriebe laufen über monatliche Gebühren. Über die Jahre kommt so viel zusammen, und am Ende gehört Ihnen trotzdem nichts.",
+      "datum": "2026-10-23",
+      "geaendert": "2026-10-23T11:40:56Z",
+      "rubrik": "Persönlich und Haltung",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: Einmal zahlen, dann gehört sie Ihnen"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "google-verlinkt-wieder-mehr-websites",
       "titel": "Google verlinkt wieder mehr Websites",
       "beschreibung": "Google zeigt in den KI-Antworten der Suche wieder mehr Links zu Websites. Was das für kleine Betriebe heisst und worauf es jetzt ankommt.",
