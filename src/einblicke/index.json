@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "telefonnummer-ganz-oben-zum-antippen",
+      "titel": "Telefonnummer ganz oben, zum Antippen",
+      "beschreibung": "Ihre Telefonnummer gehört ganz nach oben. Immer. Wer Ihre Website auf dem Handy öffnet, will meistens eines: Sie erreichen. Steht die Nummer erst ganz…",
+      "anriss": "Ihre Telefonnummer gehört ganz nach oben. Immer. Wer Ihre Website auf dem Handy öffnet, will meistens eines: Sie erreichen. Steht die Nummer erst ganz unten in der Fusszeile, scrollen viele gar nicht so weit.",
+      "datum": "2026-10-26",
+      "geaendert": "2026-10-26T07:56:23Z",
+      "rubrik": "Praxis-Tipp",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: Telefonnummer ganz oben, zum Antippen"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "einmal-zahlen-dann-gehoert-sie-ihnen",
       "titel": "Einmal zahlen, dann gehört sie Ihnen",
       "beschreibung": "Warum ich keine Abonnements für Websites verkaufe. Viele Angebote für kleine Betriebe laufen über monatliche Gebühren. Über die Jahre kommt so viel…",
