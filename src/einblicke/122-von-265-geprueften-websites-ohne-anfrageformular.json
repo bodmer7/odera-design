@@ -1,0 +1,85 @@
+{
+  "v": 1,
+  "slug": "122-von-265-geprueften-websites-ohne-anfrageformular",
+  "titel": "122 von 265 geprüften Websites ohne Anfrageformular",
+  "titel_kurz": "122 von 265 Websites ohne Anfrageformular",
+  "beschreibung": "265 Websites geprüft. Ein Punkt fällt auf. Für jede Website, die ich anschaue, gehe ich dieselbe Checkliste durch, mobil und am Computer. Hier die Summe…",
+  "anriss": "265 Websites geprüft. Ein Punkt fällt auf. Für jede Website, die ich anschaue, gehe ich dieselbe Checkliste durch, mobil und am Computer. Hier die Summe daraus, ohne Firmennamen.",
+  "datum": "2026-10-28",
+  "geaendert": "2026-10-28T07:42:48Z",
+  "saeule": "einblick",
+  "rubrik": "Einblick und Beispiel",
+  "thema_id": "daten-formular",
+  "kurz": [
+    "Ein kurzes Formular mit wenigen Feldern",
+    "Auf der Kontaktseite und auf der Startseite",
+    "Eine klare Bestätigung nach dem Absenden"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Was ich dabei beobachte",
+      "absaetze": [
+        "Von 265 Websites hatten 122 auf keiner geprüften Seite ein Formular für Anfragen. Selten steckt Absicht dahinter. Im Alltag bleibt die eigene Website oft liegen.",
+        "Nicht alle Kundinnen und Kunden rufen gerne an. Manche schreiben lieber am Abend, wenn der Betrieb geschlossen ist, oder möchten eine Frage in Ruhe formulieren. Fehlt ein Formular, bleibt nur die Mailadresse, und viele schieben die Anfrage dann auf.",
+        "Ein kurzes Formular senkt diese Hürde. Es zeigt, welche Angaben Sie brauchen, und Sie bekommen Anfragen, mit denen Sie gleich weiterarbeiten können.",
+        "Mir ist wichtig, dass Sie verstehen, was hinter einem Entwurf steckt. So können Sie besser beurteilen, ob ein Angebot zu Ihrem Betrieb passt."
+      ]
+    },
+    {
+      "titel": "Worauf es ankommt",
+      "absaetze": [
+        "Aus meiner Arbeit kenne ich vor allem diese Punkte. Sie gelten für fast jede Branche und lassen sich meistens ohne grossen Umbau verbessern."
+      ],
+      "punkte": [
+        {
+          "titel": "Ein kurzes Formular mit wenigen Feldern",
+          "text": "Halten Sie das Formular kurz: Name, Kontakt und ein Feld für die Nachricht reichen meistens. Jedes weitere Feld kostet Anfragen."
+        },
+        {
+          "titel": "Auf der Kontaktseite und auf der Startseite",
+          "text": "Platzieren Sie es dort, wo es gesucht wird: auf der Kontaktseite und gut erreichbar von der Startseite aus."
+        },
+        {
+          "titel": "Eine klare Bestätigung nach dem Absenden",
+          "text": "Zeigen Sie nach dem Absenden eine klare Bestätigung und sagen Sie, wann Sie sich melden. Das schafft Vertrauen."
+        }
+      ],
+      "nach": [
+        "Das gilt für einen Coiffeur genauso wie für eine Schreinerei. Die Branche ändert die Bilder und Texte, aber selten die Grundregeln."
+      ]
+    },
+    {
+      "titel": "Wie ich Websites anschaue",
+      "absaetze": [
+        "Bevor ich einem Betrieb einen Vorschlag mache, schaue ich seine Website auf dem Handy und am Computer an, mit einer festen Checkliste. Dazu gehören der Weg zum Kontakt, die Lesbarkeit, die Öffnungszeiten und eigene Bilder. Ich schreibe nur über Punkte, die ich selbst geprüft habe, und nenne dabei keine Firmennamen."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Füllen Sie Ihr eigenes Formular einmal aus, am besten auf dem Handy. Wie lange dauert es, und kommt die Nachricht bei Ihnen an? Wenn Sie kein Formular finden, wissen Sie, was fehlt.",
+        "Gerade bei kleinen Betrieben entscheidet der erste Eindruck auf dem Handy oft darüber, ob jemand anruft oder weiterklickt. Darum schaue ich zuerst dorthin.",
+        "Gehört Ihre Website zu dieser Zahl? Ein kurzer Blick genügt."
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 6 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: 122 von 265 geprüften Websites ohne Anfrageformular"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}

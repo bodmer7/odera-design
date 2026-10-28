@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "122-von-265-geprueften-websites-ohne-anfrageformular",
+      "titel": "122 von 265 geprüften Websites ohne Anfrageformular",
+      "beschreibung": "265 Websites geprüft. Ein Punkt fällt auf. Für jede Website, die ich anschaue, gehe ich dieselbe Checkliste durch, mobil und am Computer. Hier die Summe…",
+      "anriss": "265 Websites geprüft. Ein Punkt fällt auf. Für jede Website, die ich anschaue, gehe ich dieselbe Checkliste durch, mobil und am Computer. Hier die Summe daraus, ohne Firmennamen.",
+      "datum": "2026-10-28",
+      "geaendert": "2026-10-28T07:42:48Z",
+      "rubrik": "Einblick und Beispiel",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: 122 von 265 geprüften Websites ohne Anfrageformular"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "telefonnummer-ganz-oben-zum-antippen",
       "titel": "Telefonnummer ganz oben, zum Antippen",
       "beschreibung": "Ihre Telefonnummer gehört ganz nach oben. Immer. Wer Ihre Website auf dem Handy öffnet, will meistens eines: Sie erreichen. Steht die Nummer erst ganz…",
