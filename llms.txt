@@ -47,5 +47,5 @@
 ## Optional
 
 - [Impressum](https://odera.ch/impressum/): Verantwortliche Person, Kontakt, Rechtsform (Einzelunternehmen ohne Handelsregistereintrag, keine Mehrwertsteuerpflicht) und Bildnachweise.
-- [Datenschutzerklärung](https://odera.ch/datenschutz/): Welche Daten beim Besuch von odera.ch, im Projekt-Check, im Chat und bei der Statistik mit Einwilligung bearbeitet werden. Keine Cookies.
+- [Datenschutzerklärung](https://odera.ch/datenschutz/): Welche Daten auf odera.ch, im Projekt-Check, im Chat, bei der Statistik und bei meinen E-Mails an Betriebe bearbeitet werden. Keine Cookies.
 - [Allgemeine Geschäftsbedingungen](https://odera.ch/agb/): Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Hosting und Domain.
