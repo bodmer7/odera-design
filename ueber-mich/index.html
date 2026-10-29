@@ -31,7 +31,7 @@
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfilePage","@id":"https://odera.ch/ueber-mich/#seite","url":"https://odera.ch/ueber-mich/","name":"Nico Bodmer, Webdesigner aus Berikon · ODERA Design","description":"Sie reden mit dem, der die Seite baut: Nico Bodmer aus Berikon AG baut Websites für Betriebe im Aargau und in der ganzen Schweiz.","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/ueber-mich/#brotkrumen"},"mainEntity":{"@id":"https://odera.ch/ueber-mich/#person"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/ueber-mich/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Nico Bodmer, Webdesigner aus Berikon","item":"https://odera.ch/ueber-mich/"}]},{"@type":"Person","@id":"https://odera.ch/ueber-mich/#person","name":"Nico Bodmer","url":"https://odera.ch/ueber-mich/","sameAs":["https://www.linkedin.com/in/nico-bodmer/"],"jobTitle":"Webdesigner","image":"https://odera.ch/assets/img/portrait-nico-bodmer.webp","address":{"@type":"PostalAddress","postalCode":"8965","addressLocality":"Berikon","addressRegion":"AG","addressCountry":"CH"},"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"Platform Developer EFZ","credentialCategory":"Eidgenössisches Fähigkeitszeugnis (EFZ)","description":"Vierjährige Lehre, 2021 bis 2025"},{"@type":"EducationalOccupationalCredential","name":"Technische Berufsmaturität","credentialCategory":"Berufsmaturität","description":"2025"}],"affiliation":{"@type":"CollegeOrUniversity","name":"HWZ Hochschule für Wirtschaft Zürich","description":"Berufsbegleitendes Studium BSc Digital Business und AI, seit 2026"},"knowsAbout":["Webdesign","React","Astro","Vite"]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=45cd201de4" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=09f789901d" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -452,7 +452,7 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .f-ok{position:absolute;right:0;top:38px;align-items:center;justify-content:center;width:24px;height:24px;border-radius:999px;background:var(--akzent);color:var(--tinte);box-shadow:inset 0 0 0 1px var(--akzent-linie);animation-duration:1800ms;animation-fill-mode:both}
 @keyframes okHakenA{0%{opacity:0;transform:scale(0.6)}12%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0}}
 @keyframes okHakenB{0%{opacity:0;transform:scale(0.6)}12%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0}}
-.g-ans[data-fehler="1"] .acard,.g-stil[data-fehler="1"] .acard{border-color:var(--fehler)!important;box-shadow:inset 0 0 0 1px var(--fehler)}
+.g-ans[data-fehler="1"] .acard{border-color:var(--fehler)!important;box-shadow:inset 0 0 0 1px var(--fehler)}
 .f-zusammen{order:0;margin:0 0 24px;padding:14px 18px;border-radius:12px;background:var(--fehler-tint);border:1px solid var(--fehler);color:var(--tinte);font-size:16px}
 .f-zusammen p{margin:0 0 6px;font-weight:600}
 .f-zusammen ul{margin:0;padding-left:20px}
@@ -624,12 +624,12 @@ if(!m.hasAttribute('tabindex'))m.setAttribute('tabindex','-1');m.focus({preventS
 <script defer src="assets/js/vendor/react-18.3.1.production.min.js"></script>
 <script defer src="assets/js/vendor/react-dom-18.3.1.production.min.js"></script>
 <!-- Statistik nur nach Einwilligung (Banner), ohne Cookies: assets/js/statistik.js, docs/tracking.md. Bei Änderungen v= erhöhen (Zwischenspeicher 1 Woche). -->
-<script defer src="assets/js/statistik.js?v=5"></script>
+<script defer src="assets/js/statistik.js?v=6"></script>
 <script>
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=45cd201de4';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=09f789901d';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -1251,6 +1251,46 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .rfn{max-width:100%}
 }
 @media(max-width:374px){.rechner-los{padding:0 12px;font-size:15px}}
+
+/* ===== Projekt-Check mit sechs Fragen (29. Oktober 2026). Bei 390 × 664 px sind alle Antworten ohne Scrollen sichtbar,
+   ausser bei den Funktionen-Karten. Ab 768 px gilt nichts davon. ===== */
+.mf-angaben{display:none}
+@media(max-width:1023px){
+ .q-fortschritt[data-leer="1"]{display:none}
+ /* Durchgestrichener Normalpreis beim Referenzrabatt: auf der aufgehellten Ergebniskarte voll deckend (Kontrast AA) */
+ .eg-links .eg-preis s{opacity:1}
+}
+@media(max-width:767px){
+ /* Frage: Titel und Antworten zuerst, Erklärung und KI-Hinweis darunter */
+ .q-teil{margin:0 0 6px!important}
+ .qleft h2[tabindex]{margin:0 0 12px!important}
+ .qleft .q-wichtig{margin:0 0 12px}
+ .q-help,.q-ki{order:3}
+ .q-help{margin:16px 0 0!important}
+ .qleft .q-ki{margin:8px 0 0}
+ .q-mehrfach{margin:0 0 4px!important}
+ .qright{margin-top:8px;padding-bottom:0}
+ .g-ans{gap:8px;grid-auto-rows:auto!important}
+ .qright .acard{min-height:52px;padding:12px 16px;gap:12px}
+ .qright .acard-k{width:24px!important;height:24px!important}
+ /* Branchen zweispaltig, ohne Tastenkreis */
+ .g-ans[data-spalten="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .g-ans[data-spalten="2"] .acard{padding:10px 12px;line-height:1.3}
+ .g-ans[data-spalten="2"] .acard-k{display:none!important}
+ /* Senden-Ansicht: Zustimmung und Senden direkt unter dem Ergebnis, die Mail-Vorschau eingeklappt. Kurzversion wie bisher. */
+ .mf[data-kurz="0"]{display:flex;flex-direction:column}
+ .mf[data-kurz="0"] .mf-checks{order:1;padding-top:20px}
+ .mf[data-kurz="0"] .mf-haupt{order:2}
+ .mf[data-kurz="0"] .mf-fuss{order:3;padding-top:0;padding-bottom:16px}
+ .mf[data-kurz="0"] .mf-angaben{order:4;display:flex}
+ .mf[data-kurz="0"] .mf-vorschau{order:5}
+ .mf[data-kurz="0"][data-angaben="0"] .mf-vorschau,.mf[data-kurz="0"] .mf-leiste{display:none}
+ .mf[data-kurz="0"] .mf-text{border-bottom:0}
+ .mf-angaben{align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:52px;padding:0 16px;border:0;border-top:1px solid var(--linie);background:none;color:var(--tinte);font:inherit;font-size:16px;font-weight:600;text-align:left;cursor:pointer}
+ .mf-angaben::after{content:"";flex:none;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform 180ms ease}
+ .mf[data-angaben="1"] .mf-angaben::after{transform:translateY(2px) rotate(-135deg)}
+ .mf-angaben:focus-visible{outline:3px solid var(--primaer);outline-offset:-3px}
+}
 </style>
 </head>
 <body>
@@ -1402,7 +1442,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
   <section id="abschluss" class="band band-kobalt" data-flaeche="blau" aria-labelledby="ue-kontakt-t" data-abschnitt="abschluss">
     <div class="wrap"><div class="inner">
       <h2 id="ue-kontakt-t" class="titel-2" style="max-width: 22ch;">Schreiben Sie mir. Antwort meist am nächsten Abend.</h2>
-      <p class="einleitung">Am liebsten über den Projekt-Check. <span class="sc-interp">18 Fragen, rund 6 Minuten. Am Schluss senden Sie mit einem Klick.</span></p>
+      <p class="einleitung">Am liebsten über den Projekt-Check. <span class="sc-interp">6 Fragen, rund 2 Minuten. Am Schluss senden Sie mit einem Klick.</span></p>
       <div class="knopfreihe" style="margin-top: 32px;">
         <a href="/projekt-check/" class="btn btn-akzent" data-quelle="ueber">Projekt-Check starten</a>
         <a class="btn btn-sekundaer li-knopf" href="https://www.linkedin.com/company/odera-design" target="_blank" rel="noopener noreferrer" aria-label="ODERA auf LinkedIn folgen, öffnet in neuem Tab"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg> ODERA auf LinkedIn folgen</a>

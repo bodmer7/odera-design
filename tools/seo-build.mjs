@@ -22,7 +22,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
-import { ROOT, QUELLE, leseSeiten, startServer, startChrome } from './lib/browser.mjs';
+import { ROOT, QUELLE, leseSeiten, checkWerte, startServer, startChrome } from './lib/browser.mjs';
 
 // ---------- 1. Angaben aus der Quelle lesen ----------
 const quelle = readFileSync(QUELLE, 'utf8');
@@ -453,7 +453,7 @@ const LLMS = `# ${NAME}
 
 ${seite('/angebot')}
 ${seite('/ablauf')}
-${seite('/projekt-check', 'Fragebogen mit 18 kurzen Fragen, rund 6 Minuten. Danach folgen ein Angebot zum Fixpreis und ein kostenloser Entwurf.')}
+${seite('/projekt-check', `Fragebogen mit ${checkWerte(quelle).FRAGEN} kurzen Fragen, rund ${checkWerte(quelle).MIN} Minuten. Danach folgen ein Angebot zum Fixpreis und ein kostenloser Entwurf.`)}
 
 ## Musterprojekte
 

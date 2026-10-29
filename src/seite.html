@@ -428,7 +428,7 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .f-ok{position:absolute;right:0;top:38px;align-items:center;justify-content:center;width:24px;height:24px;border-radius:999px;background:var(--akzent);color:var(--tinte);box-shadow:inset 0 0 0 1px var(--akzent-linie);animation-duration:1800ms;animation-fill-mode:both}
 @keyframes okHakenA{0%{opacity:0;transform:scale(0.6)}12%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0}}
 @keyframes okHakenB{0%{opacity:0;transform:scale(0.6)}12%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0}}
-.g-ans[data-fehler="1"] .acard,.g-stil[data-fehler="1"] .acard{border-color:var(--fehler)!important;box-shadow:inset 0 0 0 1px var(--fehler)}
+.g-ans[data-fehler="1"] .acard{border-color:var(--fehler)!important;box-shadow:inset 0 0 0 1px var(--fehler)}
 .f-zusammen{order:0;margin:0 0 24px;padding:14px 18px;border-radius:12px;background:var(--fehler-tint);border:1px solid var(--fehler);color:var(--tinte);font-size:16px}
 .f-zusammen p{margin:0 0 6px;font-weight:600}
 .f-zusammen ul{margin:0;padding-left:20px}
@@ -600,7 +600,7 @@ if(!m.hasAttribute('tabindex'))m.setAttribute('tabindex','-1');m.focus({preventS
 <script defer src="assets/js/vendor/react-18.3.1.production.min.js"></script>
 <script defer src="assets/js/vendor/react-dom-18.3.1.production.min.js"></script>
 <!-- Statistik nur nach Einwilligung (Banner), ohne Cookies: assets/js/statistik.js, docs/tracking.md. Bei Änderungen v= erhöhen (Zwischenspeicher 1 Woche). -->
-<script defer src="assets/js/statistik.js?v=5"></script>
+<script defer src="assets/js/statistik.js?v=6"></script>
 <script>
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
@@ -1227,6 +1227,46 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .rfn{max-width:100%}
 }
 @media(max-width:374px){.rechner-los{padding:0 12px;font-size:15px}}
+
+/* ===== Projekt-Check mit sechs Fragen (29. Oktober 2026). Bei 390 × 664 px sind alle Antworten ohne Scrollen sichtbar,
+   ausser bei den Funktionen-Karten. Ab 768 px gilt nichts davon. ===== */
+.mf-angaben{display:none}
+@media(max-width:1023px){
+ .q-fortschritt[data-leer="1"]{display:none}
+ /* Durchgestrichener Normalpreis beim Referenzrabatt: auf der aufgehellten Ergebniskarte voll deckend (Kontrast AA) */
+ .eg-links .eg-preis s{opacity:1}
+}
+@media(max-width:767px){
+ /* Frage: Titel und Antworten zuerst, Erklärung und KI-Hinweis darunter */
+ .q-teil{margin:0 0 6px!important}
+ .qleft h2[tabindex]{margin:0 0 12px!important}
+ .qleft .q-wichtig{margin:0 0 12px}
+ .q-help,.q-ki{order:3}
+ .q-help{margin:16px 0 0!important}
+ .qleft .q-ki{margin:8px 0 0}
+ .q-mehrfach{margin:0 0 4px!important}
+ .qright{margin-top:8px;padding-bottom:0}
+ .g-ans{gap:8px;grid-auto-rows:auto!important}
+ .qright .acard{min-height:52px;padding:12px 16px;gap:12px}
+ .qright .acard-k{width:24px!important;height:24px!important}
+ /* Branchen zweispaltig, ohne Tastenkreis */
+ .g-ans[data-spalten="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .g-ans[data-spalten="2"] .acard{padding:10px 12px;line-height:1.3}
+ .g-ans[data-spalten="2"] .acard-k{display:none!important}
+ /* Senden-Ansicht: Zustimmung und Senden direkt unter dem Ergebnis, die Mail-Vorschau eingeklappt. Kurzversion wie bisher. */
+ .mf[data-kurz="0"]{display:flex;flex-direction:column}
+ .mf[data-kurz="0"] .mf-checks{order:1;padding-top:20px}
+ .mf[data-kurz="0"] .mf-haupt{order:2}
+ .mf[data-kurz="0"] .mf-fuss{order:3;padding-top:0;padding-bottom:16px}
+ .mf[data-kurz="0"] .mf-angaben{order:4;display:flex}
+ .mf[data-kurz="0"] .mf-vorschau{order:5}
+ .mf[data-kurz="0"][data-angaben="0"] .mf-vorschau,.mf[data-kurz="0"] .mf-leiste{display:none}
+ .mf[data-kurz="0"] .mf-text{border-bottom:0}
+ .mf-angaben{align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:52px;padding:0 16px;border:0;border-top:1px solid var(--linie);background:none;color:var(--tinte);font:inherit;font-size:16px;font-weight:600;text-align:left;cursor:pointer}
+ .mf-angaben::after{content:"";flex:none;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform 180ms ease}
+ .mf[data-angaben="1"] .mf-angaben::after{transform:translateY(2px) rotate(-135deg)}
+ .mf-angaben:focus-visible{outline:3px solid var(--primaer);outline-offset:-3px}
+}
 </style>
 </head>
 <body>
@@ -1899,7 +1939,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <dl class="zahlen-reihe">
         <div><dt class="kennzahl">{{ entwurfTageKurz }}</dt><dd>bis zum fertigen Entwurf</dd></div>
         <div><dt class="kennzahl">CHF 0</dt><dd>bis Sie den Entwurf annehmen</dd></div>
-        <div><dt class="kennzahl">81 Min.</dt><dd>Ihr Aufwand, optional knapp 2 Std.</dd></div>
+        <div><dt class="kennzahl">{{ erfMin }} Min.</dt><dd>Ihr Aufwand, optional knapp 2 Std.</dd></div>
       </dl>
       <a href="/projekt-check/" class="btn btn-akzent" data-quelle="ablauf-kopf" onClick="{{ onEinstieg }}">Projekt-Check starten</a>
     </div></div>
@@ -1948,7 +1988,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <div class="titelblock">
         <p class="augenbraue">Ihr Aufwand</p>
         <h2 id="ab-aufwand-t" class="titel-2">Ihr Aufwand auf einen Blick</h2>
-        <p class="einleitung">81 Minuten, mit optionalen Schritten knapp 2 Stunden, verteilt auf drei bis sechs Wochen, je nach Paket.</p>
+        <p class="einleitung">{{ erfMin }} Minuten, mit optionalen Schritten knapp 2 Stunden, verteilt auf drei bis sechs Wochen, je nach Paket.</p>
       </div>
       <div class="aufwand karte">
         <div class="aufwand-wochen">
@@ -2555,11 +2595,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       </div>
     </div>
     <div style="position:relative;z-index:1">
-      <div class="q-prog" role="progressbar" aria-valuenow="{{ qNum }}" aria-valuemin="1" aria-valuemax="{{ qTotal }}" aria-label="Fortschritt" style="height:2px;background:rgba(17,19,26,0.10)">
+      <div class="q-prog" role="progressbar" aria-valuenow="{{ qNum }}" aria-valuemin="1" aria-valuemax="{{ qTotal }}" aria-label="Fortschritt" data-frage="{{ qKey }}" style="height:2px;background:rgba(17,19,26,0.10)">
         <div style="height:2px;background:var(--akzent);box-shadow:0 1px 0 rgba(17,19,26,0.45);width:{{ progress }};transition:width 300ms ease-in-out"></div>
       </div>
       <div class="wrap" style="padding-top:16px;padding-bottom:120px">
-        <p class="mono q-fortschritt" style="text-align:right;font-size:13px;color:var(--text-2);margin:0 0 40px">{{ fortschritt }}</p>
+        <p class="mono q-fortschritt" data-leer="{{ fortschrittLeer }}" style="text-align:right;font-size:13px;color:var(--text-2);margin:0 0 40px;min-height:17px">{{ fortschritt }}</p>
         <div class="q-weiter" role="region" aria-label="Fortsetzen" style="display:{{ fortsetzenDisplay }}">
           <p>Sie haben den Projekt-Check in diesem Tab schon angefangen. Weiter, wo Sie aufgehört haben?</p>
           <button type="button" class="q-weiter-ja" data-own-enter="1" onClick="{{ onFortsetzen }}">Weiter</button>
@@ -2568,17 +2608,17 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <div class="qgrid">
           <div class="qleft">
             <p role="status" style="display:{{ editNoteDisplay }};font-size:16px;line-height:1.5;color:var(--tinte);background:var(--flaeche);border:1px solid var(--primaer);border-radius:12px;padding:12px 16px;margin:0 0 20px">{{ editNote }}</p>
-            <p class="mono" style="font-size:13px;letter-spacing:0.08em;color:var(--primaer);margin:0 0 8px">{{ partLabel }}</p>
+            <p class="mono q-teil" style="font-size:13px;letter-spacing:0.08em;color:var(--primaer);margin:0 0 8px">{{ partLabel }}</p>
             <p class="mono qnum" aria-hidden="true" data-n="{{ qNumPad }}"></p>
             <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px;text-wrap:pretty" data-vt="{{ vtAttr }}">{{ qTitle }}</h2>
             <p class="mono q-wichtig" style="display:{{ wichtigDisplay }}">Die wichtigste Frage für Ihren Entwurf</p>
-            <p style="font-size:16px;line-height:1.55;color:var(--text-2);margin:0 0 12px;display:{{ helpDisplay }}">{{ qHelp }}</p>
+            <p class="q-help" style="font-size:16px;line-height:1.55;color:var(--text-2);margin:0 0 12px;display:{{ helpDisplay }}">{{ qHelp }}</p>
             <details class="q-was" style="display:{{ wasDisplay }}"><summary>Was heisst das?</summary><p>{{ qWas }}</p></details>
             <button type="button" class="q-ki" data-own-enter="1" onClick="{{ openChat }}" aria-haspopup="dialog" style="display:{{ kiDisplay }}">Frage unklar? Den KI-Assistenten fragen</button>
             <div class="q-erst" style="display:{{ firstNoteDisplay }};border:1px solid var(--linie);border-radius:14px;background:var(--grund);padding:20px;margin:0 0 16px">
               <p style="font-size:16px;line-height:1.55;margin:0">Dieses Formular ist eine unverbindliche Projektanfrage. Sie kaufen hier nichts und gehen keine Verpflichtung ein. {{ hinweisErsterSchritt }} Mehr dazu in der <a href="/datenschutz/" target="_blank">Datenschutzerklärung</a>.</p>
             </div>
-            <p class="mono" style="font-size:13px;color:var(--text-2);margin:0 0 12px;display:{{ multiDisplay }}">Mehrfachauswahl möglich</p>
+            <p class="mono q-mehrfach" style="font-size:13px;color:var(--text-2);margin:0 0 12px;display:{{ multiDisplay }}">Mehrfachauswahl möglich</p>
             <div class="apills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:24px">
               <sc-for list="{{ answered }}" as="p" hint-placeholder-count="0">
                 <button type="button" class="mono apill" data-s="{{ p.step }}" onClick="{{ onJump }}" style="opacity:{{ p.op }}">{{ p.label }}</button>
@@ -2594,10 +2634,10 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               <ul><sc-for list="{{ zusammenListe }}" as="z" hint-placeholder-count="2"><li><button type="button" class="textknopf" data-own-enter="1" data-k="{{ z.k }}" onClick="{{ onZuFeld }}">{{ z.label }}</button></li></sc-for></ul>
             </div>
             <p class="mono q-optlabel" style="display:{{ optLabelDisplay }};order:{{ optOrder }};margin-top:{{ optTop }}">{{ optLabel }}<span class="f-tag" data-pflicht="0" style="display:{{ optTagDisplay }}">optional</span></p>
-            <div class="g-ans" data-fehler="{{ wahlFehlerAttr }}" style="display:{{ optDisplay }};grid-auto-rows:1fr;order:{{ optOrder }}">
+            <div class="g-ans" data-fehler="{{ wahlFehlerAttr }}" data-spalten="{{ spalten }}" style="display:{{ optDisplay }};grid-auto-rows:1fr;order:{{ optOrder }}">
               <sc-for list="{{ options }}" as="o" hint-placeholder-count="4">
                 <button type="button" class="acard" data-v="{{ o.v }}" onClick="{{ onPick }}" aria-pressed="{{ o.sel }}" style="border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }}">
-                  <span class="mono" style="flex:none;width:28px;height:28px;border-radius:{{ o.keyRadius }};border:2px solid {{ o.keyBd }};background:{{ o.keyBg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ o.keyFg }}">{{ o.key }}</span>
+                  <span class="mono acard-k" style="flex:none;width:28px;height:28px;border-radius:{{ o.keyRadius }};border:2px solid {{ o.keyBd }};background:{{ o.keyBg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ o.keyFg }}">{{ o.key }}</span>
                   <span style="flex:1">{{ o.label }}</span>
                 </button>
               </sc-for>
@@ -2613,15 +2653,6 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
                   <span class="kcard-t">{{ c.label }}</span>
                   <span class="kcard-d">{{ c.desc }}</span>
                   <span class="mono kcard-p">{{ c.tag }}</span>
-                </button>
-              </sc-for>
-            </div>
-
-            <div class="g-stil" data-fehler="{{ wahlFehlerAttr }}" style="display:{{ styleDisplay }};grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
-              <sc-for list="{{ styleCards }}" as="c" hint-placeholder-count="4">
-                <button type="button" class="acard" data-v="{{ c.v }}" onClick="{{ onPick }}" aria-pressed="{{ c.sel }}" style="flex-direction:column;align-items:stretch;gap:14px;min-height:160px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }}">
-                  <span aria-hidden="true" style="display:block;height:64px;border-radius:8px;border:1px solid var(--linie);background:{{ c.prev }}"></span>
-                  <span style="font-size:16px;font-weight:600;text-align:left">{{ c.label }}</span>
                 </button>
               </sc-for>
             </div>
@@ -2649,11 +2680,27 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
                   <p class="f-vorschlag" style="display:{{ f.vorschlagDisplay }}">Meinten Sie <button type="button" class="textknopf" data-own-enter="1" data-k="{{ f.k }}" data-v="{{ f.vorschlag }}" onClick="{{ onVorschlag }}">{{ f.vorschlag }}</button>?</p>
                 </div>
               </sc-for>
+              <sc-if value="{{ hasChips }}" hint-placeholder-val="{{ false }}">
+                <div class="q-chipgruppe" role="group" aria-labelledby="q-chips-l">
+                  <p class="f-label" id="q-chips-l"><span>{{ chipsLabel }}</span><span class="f-tag" data-pflicht="0">optional</span></p>
+                  <div class="q-chips">
+                    <sc-for list="{{ chips }}" as="c" hint-placeholder-count="4">
+                      <button type="button" class="q-chip" data-v="{{ c.v }}" aria-pressed="{{ c.sel }}" onClick="{{ onChip }}">{{ c.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
               <sc-if value="{{ hasArea }}" hint-placeholder-val="{{ false }}">
                 <div class="fline">
                   <label class="f-label" for="f-area"><span>{{ areaLabel }}</span><span class="f-tag" data-pflicht="0">optional</span></label>
                   <textarea id="f-area" rows="3" value="{{ areaValue }}" data-k="{{ areaKey }}" maxlength="{{ areaMax }}" onChange="{{ onField }}" placeholder="{{ areaPh }}"></textarea>
                   <span class="ulx" aria-hidden="true"></span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ hasHaken }}" hint-placeholder-val="{{ false }}">
+                <div class="q-haken">
+                  <label class="q-haken-l"><input type="checkbox" checked="{{ hakenAn }}" onChange="{{ onHaken }}" aria-describedby="q-haken-h"><span>{{ hakenLabel }}</span></label>
+                  <p class="q-haken-h" id="q-haken-h">{{ hakenHinweis }}</p>
                 </div>
               </sc-if>
             </div>
@@ -2733,7 +2780,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <button type="button" class="eg-review" onClick="{{ onReview }}" style="display:{{ egReviewDisplay }}">Antworten noch einmal durchsehen</button>
       </div>
       <div class="eg-rechts">
-    <section class="mf" aria-labelledby="mf-titel" style="animation:{{ mfAnim }}">
+    <section class="mf" aria-labelledby="mf-titel" data-kurz="{{ mfKurz }}" data-angaben="{{ angabenAttr }}" style="animation:{{ mfAnim }}">
+      <div class="mf-vorschau" id="mf-vorschau">
       <div class="mf-leiste">
         <span class="mf-punkte" aria-hidden="true"><i></i><i></i><i></i></span>
         <h3 id="mf-titel" class="mf-titel">Neue Anfrage</h3>
@@ -2756,6 +2804,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <sc-for list="{{ fensterZeilen }}" as="z" hint-placeholder-count="6">
           <p class="mf-z" data-art="{{ z.art }}"><span class="mf-zl">{{ z.l }}</span><span class="mf-zv">{{ z.v }}</span></p>
         </sc-for>
+      </div>
       </div>
       <div class="mf-fuss">
         <div class="mf-hp" aria-hidden="true"><label>Website<input type="text" tabindex="-1" autocomplete="off" value="{{ hpWert }}" onChange="{{ onHp }}"></label></div>
@@ -2783,6 +2832,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
           <span id="mf-tip" class="mf-sr">{{ sendenTip }}</span>
         </div>
         <p class="mf-sr" role="status" aria-live="polite">{{ sendStatus }}</p>
+        <button type="button" class="mf-angaben" aria-expanded="{{ angabenAria }}" aria-controls="mf-vorschau" onClick="{{ onAngaben }}">{{ angabenLabel }}</button>
     </section>
       </div>
     </div>
@@ -3048,17 +3098,16 @@ class Component extends DCLogic {
   // damit Formular und Worker dieselben Regeln haben. felder: [Schlüssel, Beschriftung, Abschnitt, Maximallänge]
   ANFRAGE = {
     gesamtMax: 20000,
-    abschnitte: ['Ihr Betrieb', 'Das Ziel der Website', 'Was die Seite können soll', 'Inhalte und Stil', 'Technik und Zeitplan', 'Kontakt', 'Empfehlung'],
+    abschnitte: ['Ihr Betrieb', 'Das Ziel der Website', 'Was die Seite können soll', 'Inhalte', 'Zeitplan', 'Kontakt', 'Empfehlung'],
     felder: [
       ['FIRMA', 'Betrieb', 'Ihr Betrieb', 120], ['ORT', 'Ort', 'Ihr Betrieb', 80], ['BRANCHE', 'Branche', 'Ihr Betrieb', 140],
-      ['ANGEBOT', 'Angebot', 'Ihr Betrieb', 300], ['REGION', 'Kunden aus', 'Ihr Betrieb', 60],
-      ['ZIEL', 'Besucher sollen', 'Das Ziel der Website', 60], ['KUNDEN', 'Typische Kunden', 'Das Ziel der Website', 40],
+      ['ANGEBOT', 'Angebot', 'Ihr Betrieb', 300],
+      ['ZIEL', 'Besucher sollen', 'Das Ziel der Website', 60],
       ['WEBSITE_HEUTE', 'Website heute', 'Das Ziel der Website', 10], ['WEBSITE_URL', 'Adresse heute', 'Das Ziel der Website', 300],
       ['WEBSITE_PROBLEME', 'Was stört', 'Das Ziel der Website', 400],
-      ['FUNKTIONEN', 'Funktionen', 'Was die Seite können soll', 500], ['SEITENZAHL', 'Seitenzahl', 'Was die Seite können soll', 40],
-      ['LOGO', 'Logo', 'Inhalte und Stil', 40], ['TEXTE', 'Texte', 'Inhalte und Stil', 40], ['FOTOS', 'Fotos', 'Inhalte und Stil', 40],
-      ['STIL', 'Stil', 'Inhalte und Stil', 60], ['VORBILDER', 'Vorbilder', 'Inhalte und Stil', 500], ['FARBEN', 'Firmenfarben', 'Inhalte und Stil', 200],
-      ['DOMAIN', 'Domain', 'Technik und Zeitplan', 220], ['HOSTING', 'Hosting', 'Technik und Zeitplan', 100], ['TERMIN', 'Online bis', 'Technik und Zeitplan', 60],
+      ['FUNKTIONEN', 'Funktionen', 'Was die Seite können soll', 500],
+      ['UNTERSTUETZUNG', 'Unterstützung bei', 'Inhalte', 60],
+      ['TERMIN', 'Online bis', 'Zeitplan', 60],
       ['KONTAKT_NAME', 'Name', 'Kontakt', 120], ['KONTAKT_MAIL', 'E-Mail', 'Kontakt', 200], ['KONTAKT_TEL', 'Telefon', 'Kontakt', 40],
       ['KONTAKTWEG', 'Kontakt am liebsten per', 'Kontakt', 20], ['REFERENZ', 'Referenz', 'Kontakt', 80], ['SONSTIGES', 'Sonstiges', 'Kontakt', 2000],
       ['PAKET', 'Paket', 'Empfehlung', 40], ['PREIS', 'Richtpreis', 'Empfehlung', 60], ['ZUSAETZE', 'Zusätze', 'Empfehlung', 400], ['HINWEIS', 'Hinweis', 'Empfehlung', 300], ['EINSTIEG', 'Einstieg', 'Empfehlung', 60],
@@ -3097,8 +3146,7 @@ class Component extends DCLogic {
       },
     },
     // Maximallängen der Eingabefelder im Formular
-    eingabeMax: { firma: 120, ort: 80, branche: 120, angebot: 300, url: 300, stoerung: 200, sprache: 60, vorbilder: 500, farben: 200,
-      domain: 200, name: 120, email: 200, tel: 40, sonstiges: 2000 },
+    eingabeMax: { firma: 120, ort: 80, branche: 120, angebot: 300, url: 300, stoerung: 200, sprache: 60, name: 120, email: 200, tel: 40, sonstiges: 2000 },
   };
   // Öffentliche Adresse der Website. Steht in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung tools/seo-build.mjs ausführen.
   SITE = 'https://odera.ch';
@@ -3109,13 +3157,14 @@ class Component extends DCLogic {
   ENTWURF_TAGE = 5;
   // Vorschläge im Chat mit fester Antwort (tools/wissen-build.mjs erzeugt die Antworten und prüft die Liste)
   CHAT_VORSCHLAEGE = ['Was kostet eine Website?', 'Wie läuft ein Projekt ab?', 'Was ist nicht inbegriffen?', 'Muss ich etwas anzahlen?'];
-  CHECK_MINUTEN = 6;
+  CHECK_MINUTEN = 2;
   KORREKTUR_CHF = 120;
   ZAHLWORT = ['null', 'ein', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf', 'zwölf'];
   PLAETZE_TOTAL = 2;
   PLAETZE_FREI = 1;
   PAGES = {
     // Titel höchstens 60 Zeichen, Beschreibung 120 bis 155 Zeichen (docs/seo.md). Trenner im Titel: «·».
+    // Platzhalter {MIN}, {FRAGEN}, {ERF_MIN} wie in werte(); tools/lib/browser.mjs (leseSeiten) löst sie für die erzeugten Seiten auf.
     '/': { key: 'start', title: 'Website erstellen lassen ab CHF 890 · ODERA Design',
       desc: 'Neue Website für Ihren Betrieb: fertiger Entwurf in 5 Arbeitstagen, gratis und unverbindlich. Fixpreis ab CHF 890. Webdesign aus Berikon AG.' },
     '/404': { key: 'nf', title: 'Seite nicht gefunden · ODERA Design', noindex: true },
@@ -3124,7 +3173,7 @@ class Component extends DCLogic {
     '/angebot': { key: 'angebot', title: 'Was kostet eine Website? Fixpreise · ODERA Design',
       desc: 'Website, Standard oder Pro: drei Pakete zum Fixpreis ab CHF 890, einmalig und ohne Abo. Hosting auf Ihren Namen eingerichtet.' },
     '/ablauf': { key: 'ablauf', title: 'Website erstellen lassen: der Ablauf · ODERA Design',
-      desc: 'Vier Phasen, 81 Minuten Ihrer Zeit, mit optionalen Schritten knapp 2 Stunden. Sie sehen den fertigen Entwurf, bevor Sie einen Franken bezahlen.' },
+      desc: 'Vier Phasen, {ERF_MIN} Minuten Ihrer Zeit, mit optionalen Schritten knapp 2 Stunden. Sie sehen den fertigen Entwurf, bevor Sie einen Franken bezahlen.' },
     '/musterprojekte': { key: 'muster', title: 'Webdesign Beispiele für Betriebe · ODERA Design',
       desc: 'Zwei Beispiel-Websites für Handwerk und Solar. Sehen Sie, wie Ihre neue Seite aussehen könnte, und testen Sie Ihren Betrieb in zehn Sekunden.' },
     '/ueber-mich': { key: 'ueber', title: 'Nico Bodmer, Webdesigner aus Berikon · ODERA Design',
@@ -3138,8 +3187,8 @@ class Component extends DCLogic {
     '/website-fuer-laeden': { key: 'branche', title: 'Website für Läden ab CHF 890 · ODERA Design',
       desc: 'Website für Ihren Laden: Sortiment, Öffnungszeiten und Anfahrt auf einen Blick. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890.' },
     // Projekt-Check: noindex (Entscheid Nico, 10. Oktober 2026), nicht in der Sitemap
-    '/projekt-check': { key: 'check', noindex: true, title: 'Projekt-Check: Angebot in 6 Minuten · ODERA Design',
-      desc: '18 kurze Fragen, rund 6 Minuten. Danach erhalten Sie ein Angebot zum Fixpreis und einen kostenlosen Entwurf Ihrer neuen Website, ohne Risiko.' },
+    '/projekt-check': { key: 'check', noindex: true, title: 'Projekt-Check: Angebot in {MIN} Minuten · ODERA Design',
+      desc: '{FRAGEN} kurze Fragen, rund {MIN} Minuten. Danach erhalten Sie ein Angebot zum Fixpreis und einen kostenlosen Entwurf Ihrer neuen Website, ohne Risiko.' },
     // Impressum bleibt noindex: Es nennt die Wohnadresse (Entscheid Nico, keine Strasse in Suchmaschinen)
     '/impressum': { key: 'impressum', title: 'Impressum · ODERA Design', noindex: true },
     '/datenschutz': { key: 'datenschutz', title: 'Datenschutzerklärung · ODERA Design',
@@ -3155,20 +3204,22 @@ class Component extends DCLogic {
   // Kurzversion: nur diese Fragen (Schlüssel aus Q)
   QUICK = ['ANGEBOT', 'FUNKTIONEN', 'MAIL'];
 
-  // Vorbelegung der Seitenzahl aus den Links der Angebotsseite (?paket=...)
-  PAKET = { website: 'Eine Seite reicht', standard: 'Bis 5 Seiten', pro: 'Bis 10 Seiten' };
+  // Pakete in der Reihenfolge der Preise (PAKET_PREIS) und ihr Umfang, wörtlich aus den Paketinhalten der Preisliste
+  PAKETE = ['Website', 'Standard', 'Pro'];
+  PAKET_UMFANG = ['Eine Seite mit allen Abschnitten', 'Bis 5 Unterseiten', 'Bis 10 Seiten'];
 
   // Einstiege in den Projekt-Check. Die Quelle steht nur in der E-Mail an mich (Kurzübersicht «Einstieg»),
-  // sie wird nirgends gespeichert. ans/txt: Vorbelegung, skip: Fragen, die dadurch schon beantwortet sind.
+  // sie wird nirgends gespeichert. ans/txt: Vorbelegung, skip: Fragen, die dadurch schon beantwortet sind,
+  // mindest: Mindestpaket (Paketkarten, Musterprojekte). Das Paket ergibt sich sonst nur aus den Funktionen.
   EINSTIEGE = {
     hero: { label: 'Startseite oben' },
     erstefrage: { label: 'Startseite, erste Frage' },
     rechner: { label: 'Preis-Rechner' },
-    'paket-website': { label: 'Paketkarte Website', ans: { SEITENZAHL: 'Eine Seite reicht' }, skip: ['SEITENZAHL'] },
-    'paket-standard': { label: 'Paketkarte Standard', ans: { SEITENZAHL: 'Bis 5 Seiten' }, skip: ['SEITENZAHL'] },
-    'paket-pro': { label: 'Paketkarte Pro', ans: { SEITENZAHL: 'Bis 10 Seiten' }, skip: ['SEITENZAHL'] },
-    doppelmeter: { label: 'Musterprojekt Doppelmeter', ans: { BRANCHE: 'Handwerk und Bau', SEITENZAHL: 'Bis 5 Seiten', ZIEL: 'Anrufen' }, skip: ['BRANCHE', 'SEITENZAHL', 'ZIEL'] },
-    firstlicht: { label: 'Musterprojekt Firstlicht', ans: { SEITENZAHL: 'Bis 10 Seiten' }, skip: ['SEITENZAHL'] },
+    'paket-website': { label: 'Paketkarte Website' },
+    'paket-standard': { label: 'Paketkarte Standard', mindest: 'Standard' },
+    'paket-pro': { label: 'Paketkarte Pro', mindest: 'Pro' },
+    doppelmeter: { label: 'Musterprojekt Doppelmeter', ans: { BRANCHE: 'Handwerk und Bau', ZIEL: 'Anrufen' }, skip: ['BRANCHE', 'ZIEL'], mindest: 'Standard' },
+    firstlicht: { label: 'Musterprojekt Firstlicht', mindest: 'Pro' },
     ablauf: { label: 'Ablauf, Schritt 1' },
     faq: { label: 'Häufige Fragen' },
     chat: { label: 'Chat-Assistent' },
@@ -3206,7 +3257,7 @@ class Component extends DCLogic {
   ];
 
   STEPS = [
-    ['Formular ausfüllen', '{FRAGEN} kurze Fragen zu Ihrem Betrieb, Ihrem Ziel und Ihrem Stil, fast alles per Klick. Daraus entsteht Ihre Anfrage an mich.', this.CHECK_MINUTEN, true],
+    ['Formular ausfüllen', '{FRAGEN} kurze Fragen zu Ihrem Betrieb und Ihrem Ziel, fast alles per Klick. Daraus entsteht Ihre Anfrage an mich.', this.CHECK_MINUTEN, true],
     ['Ich melde mich', 'Sie hören von mir, sobald ich die Mail gelesen habe.', 0, true],
     ['Kurzes Gespräch', 'Wenn etwas unklar ist, telefonieren wir kurz.', 20, false, 0, 'Ist alles klar, gestalte ich direkt los.'],
     ['Ich gestalte Ihren Entwurf', 'Eine fertige Seite mit Ihren Inhalten, innert {TAGE_WORT}. Kostenlos und unverbindlich.', 0, true],
@@ -3217,13 +3268,6 @@ class Component extends DCLogic {
     ['Freigabe', 'Sie geben die fertige Seite schriftlich frei.', 5, true],
     ['Aufschaltung und Übergabe', 'Ich stelle die Seite online und übergebe Ihnen Domain, Zugänge und Quellcode. Das Hosting ist auf Ihren Namen eingerichtet. Danach gehört alles Ihnen.', 30, true]
   ];
-  // Stilrichtungen im Projekt-Check: Name und kleines Vorschaubild (CSS-Hintergrund)
-  STILE = [
-    ['Klassisch und seriös', 'linear-gradient(#11131A,#11131A) 12px 14px/64px 6px no-repeat, linear-gradient(#5B6270,#5B6270) 12px 30px/104px 3px no-repeat, linear-gradient(#5B6270,#5B6270) 12px 40px/88px 3px no-repeat, #FFFFFF'],
-    ['Modern und klar', 'repeating-linear-gradient(90deg,#D7DAE3 0 1px,transparent 1px 16px) 0 0/100% 100% no-repeat, linear-gradient(#2D4CF0,#2D4CF0) 12px 16px/72px 6px no-repeat, #FFFFFF'],
-    ['Warm und persönlich', 'linear-gradient(#B4532A,#B4532A) 12px 12px/40px 40px no-repeat, linear-gradient(#11131A,#11131A) 62px 14px/56px 6px no-repeat, linear-gradient(#5B6270,#5B6270) 62px 30px/44px 3px no-repeat, var(--wash-3)']
-  ];
-
   // Die vier Phasen (Ablauf und Startseite, eine Komponente in zwei Varianten). Muss zu den AGB passen (Paragrafen 2 und 4).
   // Zeilen in chronologischer Reihenfolge: zuerst = wer zuerst handelt. steps: Indizes in STEPS (Details und Minuten).
   // sie, ich, dauer: liest auch tools/wissen-build.mjs (feste Chat-Antwort «Wie läuft ein Projekt ab?»).
@@ -3350,87 +3394,70 @@ class Component extends DCLogic {
 
   TIMING = ['So schnell wie möglich', 'In einem Monat', 'In zwei bis drei Monaten', 'Kein festes Datum'];
 
-  // Hosting: Ich richte es auf den Namen des Kunden ein und übergebe es. Kein Betrieb durch mich, kein Abo.
-  // Antworten der Frage «Wo soll Ihre Website laufen?». Stundensatz für Änderungen nach der Übergabe (AGB Paragraf 7).
+  // Stundensatz für Änderungen nach der Übergabe (AGB Paragraf 7). Das Hosting richte ich auf den Namen des Kunden ein, ohne Abo.
   STUNDENSATZ_CHF = 120;
-  HOSTING_EGAL = 'Egal, Hauptsache ohne laufende Kosten';
-  HOSTING_CH = 'In der Schweiz (Hosting direkt beim Schweizer Anbieter)';
-  HOSTING_OFFEN = 'Weiss ich noch nicht';
 
   // Logo als Zusatz. Einzige Quelle für die Beträge.
   LOGO_ALLEIN_CHF = 490;
   LOGO_MIT_WEBSITE_CHF = 390;
-  LOGO_NEU = 'Nein, ich brauche eins';
   // Texterstellung pro Seite (steht so auf der Angebotsseite)
   TEXT_PRO_SEITE_CHF = 150;
+  // Antwort, die das Häkchen «Als Beispiel zeigen» setzt (Referenzrabatt im Ergebnis)
+  REFERENZ_JA = 'Ja, gerne mit Name, Logo und zwei Sätzen';
 
-  // Projekt-Check: sechs Abschnitte. Jede Frage beeinflusst Paket und Preis, den Entwurf oder die Kontaktaufnahme.
-  ABSCHNITTE = ['Ihr Betrieb', 'Das Ziel der Website', 'Was die Seite können soll', 'Inhalte und Stil', 'Technik und Zeitplan', 'Kontakt'];
-
-  // Funktionen als Karten: Name, Erklärung, Paket (alle, Standard, Pro, shop), Symbol (SVG-Pfad, 24er Raster)
+  // Funktionen als Karten: Name, Erklärung, Paket (alle, Standard, Pro, shop), Symbol (SVG-Pfad, 24er Raster),
+  // Satzform für das Ergebnis («Bis 5 Unterseiten, dazu ein Kontaktformular und …»)
   FUNKTIONEN = [
-    ['Kontaktformular', 'Anfragen kommen direkt in Ihr Postfach.', 'alle', 'M3 6h18v12H3z M3 7l9 6 9-6'],
-    ['Eigene Unterseiten für Ihre Leistungen', 'Jede Leistung bekommt eine eigene Seite.', 'Standard', 'M6 3h9l3 3v15H6z M9 10h6 M9 14h6'],
-    ['Bildergalerie oder Referenzen', 'Zeigen Sie Ihre Arbeiten mit Bildern.', 'Standard', 'M3 5h18v14H3z M3 16l5-5 4 4 3-3 6 6'],
-    ['Google-Unternehmensprofil einrichten', 'Damit man Sie auf Google Maps findet.', 'Standard', 'M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z M12 7a3 3 0 1 0 0 6a3 3 0 1 0 0-6z'],
-    ['Online-Terminbuchung', 'Kunden buchen selbst einen freien Termin.', 'Pro', 'M4 6h16v14H4z M4 10h16 M8 3v5 M16 3v5'],
-    ['Texte später selbst ändern', 'Ohne Technikkenntnisse, direkt im Browser.', 'Pro', 'M4 20h4L19 9l-4-4L4 16z M14 6l4 4'],
-    ['Zweite Sprache', 'Die ganze Seite auch in einer anderen Sprache.', 'Pro', 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z M3 12h18 M12 3c3 3 3 15 0 18 M12 3c-3 3-3 15 0 18'],
-    ['Offene Stellen ausschreiben', 'Ein eigener Bereich für Stelleninserate.', 'Pro', 'M4 8h16v11H4z M9 8V5h6v3'],
-    ['Online verkaufen oder bezahlen', 'Produkte verkaufen und Zahlungen annehmen.', 'shop', 'M3 4h3l2 11h11l2-8H7 M9 20h.01 M18 20h.01']
+    ['Kontaktformular', 'Anfragen kommen direkt in Ihr Postfach.', 'alle', 'M3 6h18v12H3z M3 7l9 6 9-6', 'ein Kontaktformular'],
+    ['Eigene Unterseiten für Ihre Leistungen', 'Jede Leistung bekommt eine eigene Seite.', 'Standard', 'M6 3h9l3 3v15H6z M9 10h6 M9 14h6', 'eigene Unterseiten für Ihre Leistungen'],
+    ['Bildergalerie oder Referenzen', 'Zeigen Sie Ihre Arbeiten mit Bildern.', 'Standard', 'M3 5h18v14H3z M3 16l5-5 4 4 3-3 6 6', 'eine Bildergalerie oder Referenzen'],
+    ['Google-Unternehmensprofil einrichten', 'Damit man Sie auf Google Maps findet.', 'Standard', 'M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z M12 7a3 3 0 1 0 0 6a3 3 0 1 0 0-6z', 'ein eingerichtetes Google-Unternehmensprofil'],
+    ['Online-Terminbuchung', 'Kunden buchen selbst einen freien Termin.', 'Pro', 'M4 6h16v14H4z M4 10h16 M8 3v5 M16 3v5', 'eine Online-Terminbuchung'],
+    ['Texte später selbst ändern', 'Ohne Technikkenntnisse, direkt im Browser.', 'Pro', 'M4 20h4L19 9l-4-4L4 16z M14 6l4 4', 'selbst änderbare Texte'],
+    ['Zweite Sprache', 'Die ganze Seite auch in einer anderen Sprache.', 'Pro', 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z M3 12h18 M12 3c3 3 3 15 0 18 M12 3c-3 3-3 15 0 18', 'eine zweite Sprache'],
+    ['Offene Stellen ausschreiben', 'Ein eigener Bereich für Stelleninserate.', 'Pro', 'M4 8h16v11H4z M9 8V5h6v3', 'ein Bereich für offene Stellen'],
+    ['Online verkaufen oder bezahlen', 'Produkte verkaufen und Zahlungen annehmen.', 'shop', 'M3 4h3l2 11h11l2-8H7 M9 20h.01 M18 20h.01', 'ein Onlineshop']
   ];
 
+  // Projekt-Check: sechs Fragen, nur was es für den Entwurf und eine grobe Preisschätzung braucht. Alles andere klärt Nico nach dem Entwurf.
+  // Fragen immer über key ansprechen, nie über die Reihenfolge. wenn: Folgefrage, nur unter dieser Bedingung sichtbar.
+  // nurKurz: nur in der Kurzversion (QUICK). spalten: Antworten unter 768 px zweispaltig. chips, area, haken: Zusätze unter den Feldern.
   Q = [
-    { key: 'FIRMA', ab: 1, n: 'Betrieb', t: 'Wie heisst Ihr Betrieb?', typ: 'felder',
-      felder: [['firma', 'Name des Betriebs', 'Schreinerei Muster GmbH', true, 'text', 'organization'], ['ort', 'Ort', 'Wohlen AG', false, 'text', 'address-level2']] },
-    { key: 'BRANCHE', ab: 1, n: 'Branche', t: 'In welcher Branche sind Sie tätig?', typ: 'wahl',
-      o: ['Handwerk und Bau', 'Gastronomie und Hotellerie', 'Gesundheit und Therapie', 'Beratung und Treuhand', 'Beauty und Coiffeur', 'Laden und Handel', 'Andere'],
-      extra: { 'Andere': ['branche', 'Welche Branche?', 'Fahrschule'] } },
-    { key: 'ANGEBOT', ab: 1, n: 'Angebot', t: 'Was bieten Sie an, in einem Satz?', typ: 'felder',
-      felder: [['angebot', 'Ihr Angebot', 'Schreinerei für Küchen und Innenausbau in der Region Wohlen.', true]] },
-    { key: 'REGION', ab: 1, n: 'Kunden aus', t: 'Wo sind Ihre Kunden?', typ: 'wahl',
-      o: ['In meiner Gemeinde oder Region', 'Im ganzen Kanton', 'In der ganzen Schweiz', 'Auch im Ausland'] },
-    { key: 'ZIEL', ab: 2, n: 'Ziel', t: 'Was soll ein Besucher am Ende tun?', typ: 'wahl', hervor: true,
+    { key: 'ZIEL', n: 'Ziel', t: 'Was soll ein Besucher am Ende tun?', typ: 'wahl', hervor: true,
       help: 'Danach richte ich die ganze Seite aus, vom ersten Bildschirm bis zum letzten Knopf.',
       o: ['Anrufen', 'Eine Anfrage oder Offerte schicken', 'Einen Termin buchen', 'Vorbeikommen', 'Sich informieren und Vertrauen fassen'] },
-    { key: 'KUNDEN', ab: 2, n: 'Kunden', t: 'Wer sind Ihre typischen Kunden?', typ: 'wahl', o: ['Privatpersonen', 'Firmen', 'Beides'] },
-    { key: 'WEBSITE_HEUTE', ab: 2, n: 'Website heute', t: 'Haben Sie schon eine Website?', typ: 'wahl', o: ['Nein', 'Ja'],
+    { key: 'BRANCHE', n: 'Branche', t: 'In welcher Branche sind Sie tätig?', typ: 'wahl', spalten: 2,
+      o: ['Handwerk und Bau', 'Gastronomie und Hotellerie', 'Gesundheit und Therapie', 'Beratung und Treuhand', 'Beauty und Coiffeur', 'Laden und Handel', 'Andere'],
+      extra: { 'Andere': ['branche', 'Welche Branche?', 'Fahrschule'] } },
+    { key: 'WEBSITE_HEUTE', n: 'Website heute', t: 'Haben Sie schon eine Website?', typ: 'wahl', optional: true, o: ['Nein', 'Ja'],
       extra: { 'Ja': ['url', 'Adresse Ihrer Website', 'www.ihrbetrieb.ch'] } },
-    { key: 'WEBSITE_PROBLEME', ab: 2, n: 'Was stört', t: 'Was stört Sie an Ihrer heutigen Website?', typ: 'multi', optional: true,
+    { key: 'WEBSITE_PROBLEME', n: 'Was stört', t: 'Was stört Sie an Ihrer heutigen Website?', typ: 'multi', optional: true,
       wenn: (s) => s.ans.WEBSITE_HEUTE === 'Ja',
       o: ['Wirkt veraltet', 'Am Handy schlecht', 'Wird bei Google nicht gefunden', 'Bringt keine Anfragen', 'Ich kann sie nicht selbst ändern', 'Anderes'],
       extra: { 'Anderes': ['stoerung', 'Was noch?', 'Lädt sehr langsam'] } },
-    { key: 'FUNKTIONEN', ab: 3, n: 'Funktionen', t: 'Was soll die Seite können?', typ: 'karten', optional: true,
+    // Ersetzt die früheren Fragen nach Logo, Texten und Fotos. Der Preis-Rechner wählt Logo und Texte vor (unterstuetzung()).
+    { key: 'UNTERSTUETZUNG', n: 'Unterstützung', t: 'Wobei brauchen Sie Unterstützung?', typ: 'multi', optional: true,
+      wenn: (s) => s.ans.WEBSITE_HEUTE === 'Nein',
+      o: ['Logo', 'Texte', 'Fotos'],
+      hinweis: { 'Logo': 'Ein Logo ist als Zusatz buchbar: CHF ' + this.fmt(this.LOGO_MIT_WEBSITE_CHF) + ' zusammen mit der Website.',
+        'Texte': 'Texterstellung kostet CHF ' + this.TEXT_PRO_SEITE_CHF + ' pro Seite.', 'Fotos': 'Einen Fotografen kann ich organisieren, Kosten nach Aufwand.' } },
+    { key: 'FUNKTIONEN', n: 'Funktionen', t: 'Was soll die Seite können?', typ: 'karten', optional: true,
       help: 'Wählen Sie alles, was Sie brauchen. Das Kontaktformular ist immer dabei.',
       extra: { 'Zweite Sprache': ['sprache', 'Welche Sprache?', 'Französisch'] } },
-    { key: 'SEITENZAHL', ab: 3, n: 'Seitenzahl', t: 'Wie viele Seiten stellen Sie sich ungefähr vor?', typ: 'wahl',
-      was: 'Eine Seite ist ein eigener Bildschirm mit eigener Adresse, zum Beispiel «Leistungen», «Über uns» oder «Kontakt».',
-      o: ['Eine Seite reicht', 'Bis 5 Seiten', 'Bis 10 Seiten', 'Mehr als 10 Seiten', 'Weiss ich nicht'] },
-    { key: 'LOGO', ab: 4, n: 'Logo', t: 'Haben Sie ein Logo?', typ: 'wahl', o: ['Ja', this.LOGO_NEU, 'Unsicher'],
-      hinweis: { [this.LOGO_NEU]: 'Ein Logo ist als Zusatz buchbar: CHF ' + this.fmt(this.LOGO_MIT_WEBSITE_CHF) + ' zusammen mit der Website.' } },
-    { key: 'TEXTE', ab: 4, n: 'Texte', t: 'Wer schreibt die Texte?', typ: 'wahl', o: ['Ich habe Texte', 'Ich brauche Hilfe'],
-      hinweis: { 'Ich brauche Hilfe': 'Texterstellung kostet CHF ' + this.TEXT_PRO_SEITE_CHF + ' pro Seite.' } },
-    { key: 'FOTOS', ab: 4, n: 'Fotos', t: 'Haben Sie eigene Fotos?', typ: 'wahl', o: ['Ja, gute', 'Nur wenige', 'Keine'],
-      hinweis: { 'Nur wenige': 'Einen Fotografen kann ich organisieren, Kosten nach Aufwand.', 'Keine': 'Einen Fotografen kann ich organisieren, Kosten nach Aufwand.' } },
-    { key: 'STIL', ab: 4, n: 'Stil', t: 'Welcher Stil passt zu Ihnen?', typ: 'stil',
-      felder: [['vorbilder', 'Websites, die Ihnen gefallen', 'www.beispiel.ch, www.vorbild.ch', false], ['farben', 'Feste Firmenfarben', 'Dunkelgrün und Beige', false]] },
-    { key: 'DOMAIN', ab: 5, n: 'Domain', t: 'Haben Sie schon eine Domain?', typ: 'wahl',
-      was: 'Die Domain ist die Adresse Ihrer Website, zum Beispiel ihrbetrieb.ch.',
-      o: ['Ja', 'Nein', 'Weiss ich nicht'], extra: { 'Ja': ['domain', 'Welche?', 'ihrbetrieb.ch'] } },
-    { key: 'HOSTING', ab: 5, n: 'Hosting', t: 'Wo soll Ihre Website laufen?', typ: 'wahl',
-      was: 'Ich richte das Hosting auf Ihren Namen ein, standardmässig bei einem kostenlosen Anbieter. Möchten Sie Server in der Schweiz, zahlen Sie die Jahresgebühr direkt beim Schweizer Hoster. Ein Abo bei mir gibt es nicht.',
-      o: [this.HOSTING_EGAL, this.HOSTING_CH, this.HOSTING_OFFEN] },
-    { key: 'TERMIN', ab: 5, n: 'Termin', t: 'Bis wann soll die Website online sein?', typ: 'wahl', o: this.TIMING },
-    { key: 'REFERENZ', ab: 6, n: 'Referenz', t: 'Dürfte ich Ihre fertige Website später als Beispiel zeigen?', typ: 'wahl',
-      help: 'Für die nächsten zwei Betriebe gibt es dafür einen Rabatt.',
-      o: ['Ja, gerne mit Name, Logo und zwei Sätzen', 'Ja, aber ohne meinen Namen', 'Nein, lieber nicht', 'Entscheide ich später'] },
-    { key: 'KONTAKT', ab: 6, n: 'Kontakt', t: 'Wie erreiche ich Sie?', typ: 'felder',
+    { key: 'BETRIEB', n: 'Betrieb', t: 'Ihr Betrieb', typ: 'felder',
+      felder: [['firma', 'Name des Betriebs', 'Schreinerei Muster GmbH', true, 'text', 'organization'], ['ort', 'Ort', 'Wohlen AG', false, 'text', 'address-level2'],
+        ['angebot', 'Ihr Angebot in einem Satz', 'Schreinerei für Küchen und Innenausbau in der Region Wohlen.', true]] },
+    { key: 'KONTAKT', n: 'Kontakt', t: 'Wie erreiche ich Sie?', typ: 'felder',
       // Reihenfolge: Name, E-Mail, dann die Wahl, dann das Telefon, das von ihr abhängt (Pflicht bei «Telefon», ANFRAGE.pruefung.pflichtWenn)
       felder: [['name', 'Vorname und Name', 'Anna Muster', true, 'text', 'name'], ['email', 'E-Mail', 'anna@ihrbetrieb.ch', true, 'email', 'email']],
       felderNach: [['tel', 'Telefon', '079 123 45 67', false, 'tel', 'tel']],
-      area: ['sonstiges', 'Sonst noch etwas?', 'Zum Beispiel: Im Frühling eröffnen wir einen zweiten Standort.'],
+      chips: ['TERMIN', 'Bis wann soll die Website online sein?', this.TIMING],
+      area: ['sonstiges', 'Sonst noch etwas?', 'Zum Beispiel: Websites, die Ihnen gefallen, oder Ihre Firmenfarben.'],
+      haken: ['REFERENZ', 'Sie dürfen meine fertige Website als Beispiel zeigen, mit Name, Logo und zwei Sätzen.', 'Für die nächsten zwei Betriebe gibt es dafür einen Rabatt.', this.REFERENZ_JA],
       optLabel: 'Am liebsten erreichen Sie mich per', optOptional: true, o: ['E-Mail', 'Telefon'] },
-    { key: 'MAIL', ab: 6, n: 'E-Mail', t: 'Wohin darf ich Ihnen antworten?', typ: 'felder', nurKurz: true,
+    { key: 'ANGEBOT', n: 'Angebot', t: 'Was bieten Sie an, in einem Satz?', typ: 'felder', nurKurz: true,
+      felder: [['angebot', 'Ihr Angebot', 'Schreinerei für Küchen und Innenausbau in der Region Wohlen.', true]] },
+    { key: 'MAIL', n: 'E-Mail', t: 'Wohin darf ich Ihnen antworten?', typ: 'felder', nurKurz: true,
       felder: [['email', 'E-Mail', 'anna@ihrbetrieb.ch', true, 'email', 'email']] }
   ];
 
@@ -3444,9 +3471,9 @@ class Component extends DCLogic {
     step: 0, dir: 'fwd', ans: {}, txt: {}, timing: 1, mid: false, result: false, warn: false, quick: false,
     review: false, editing: false, editNote: '', reached: 0, phFill: 0,
     senden: 'bereit', sendFehler: '', gesendet: null, kopieWunsch: false, offline: false, hp: '', fensterWeg: false, vglOffen: false,
-    ueberspringen: [], quelle: '', fortsetzen: null, vtAktiv: false, brief: this.briefAusUrl(), rechnerFn: [], rechnerLogo: false, rechnerTexte: false, rechnerAn: false, rechnerPreis: 0,
+    ueberspringen: [], quelle: '', mindestPaket: '', rechnerZusatz: [], fortsetzen: null, vtAktiv: false, brief: this.briefAusUrl(), rechnerFn: [], rechnerLogo: false, rechnerTexte: false, rechnerAn: false, rechnerPreis: 0,
     beruehrt: {}, bearbeitet: {}, versucht: '', puls: 0, okPuls: {}, serverFehler: {}, mfFehler: {},
-    copied: false, toast: '', mailOpen: false, ring: 0, cmpGrow: false,
+    copied: false, toast: '', mailOpen: false, angabenOffen: false, ring: 0, cmpGrow: false,
     uLeft: '0px', uWidth: '0px', tick: 0, chatIntro: false
   };
 
@@ -3483,7 +3510,8 @@ class Component extends DCLogic {
           next.brief = b;
           next.txt = Object.assign({}, this.state.txt, b.firma ? { firma: b.firma } : {});
           next.ans = Object.assign({}, this.state.ans, b.branche ? { BRANCHE: b.branche } : {});
-          next.ueberspringen = Array.from(new Set((this.state.ueberspringen || []).concat(b.firma ? ['FIRMA'] : [], b.branche ? ['BRANCHE'] : [])));
+          // Die Firma steht nur vorausgefüllt im Bildschirm «Ihr Betrieb», der auch nach dem Angebot fragt
+          next.ueberspringen = Array.from(new Set((this.state.ueberspringen || []).concat(b.branche ? ['BRANCHE'] : [])));
           next.quelle = 'brief';
         }
         history.replaceState(null, '', '/');
@@ -3495,15 +3523,17 @@ class Component extends DCLogic {
       const quelleUrl = (query.split('&').map(p => p.split('=')).find(p => p[0] === 'quelle') || [])[1];
       if (known === '/projekt-check' && (quelleUrl === 'doppelmeter' || quelleUrl === 'firstlicht')) {
         const e = this.EINSTIEGE[quelleUrl];
-        next.ans = Object.assign({}, this.state.ans, e.ans);
-        next.ueberspringen = Array.from(new Set((this.state.ueberspringen || []).concat(e.skip)));
+        next.ans = Object.assign({}, this.state.ans, e.ans || {});
+        next.ueberspringen = Array.from(new Set((this.state.ueberspringen || []).concat(e.skip || [])));
+        next.mindestPaket = this.hoeheresPaket(this.state.mindestPaket, e.mindest);
         next.quelle = this.state.quelle || quelleUrl;
         history.replaceState(null, '', '/projekt-check/');
       }
-      if (known === '/projekt-check' && paket && this.PAKET[paket]) {
+      if (known === '/projekt-check' && paket && /^(website|standard|pro)$/.test(paket)) {
         const e = this.EINSTIEGE['paket-' + paket];
-        next.ans = Object.assign({}, this.state.ans, e.ans);
-        next.ueberspringen = Array.from(new Set((this.state.ueberspringen || []).concat(e.skip)));
+        next.ans = Object.assign({}, this.state.ans, e.ans || {});
+        next.ueberspringen = Array.from(new Set((this.state.ueberspringen || []).concat(e.skip || [])));
+        next.mindestPaket = this.hoeheresPaket(this.state.mindestPaket, e.mindest);
         next.quelle = this.state.quelle || 'paket-' + paket;
         next.step = 0;
       }
@@ -3513,7 +3543,7 @@ class Component extends DCLogic {
         if (alt && Object.keys(alt.ans || {}).length) next.fortsetzen = alt;
       }
       this.setState(next);
-      document.title = this.PAGES[next.path].title;
+      document.title = this.werte(this.PAGES[next.path].title);
       this.syncHead(next.path);
       window.scrollTo(0, 0);
       setTimeout(() => {
@@ -3958,7 +3988,9 @@ class Component extends DCLogic {
     const ans = Object.assign({}, s.ans, e.ans || {}, extra.ans || {});
     const txt = Object.assign({}, s.txt, e.txt || {}, extra.txt || {});
     const skip = Array.from(new Set([].concat(s.ueberspringen || [], e.skip || [], extra.skip || [])));
-    const next = { ans, txt, ueberspringen: skip, quelle: s.quelle || quelle, quick: false, result: false, review: false, editing: false, mid: false, step: 0, warn: false, fortsetzen: null };
+    const next = { ans, txt, ueberspringen: skip, quelle: s.quelle || quelle, mindestPaket: this.hoeheresPaket(s.mindestPaket, e.mindest),
+      quick: false, result: false, review: false, editing: false, mid: false, step: 0, warn: false, fortsetzen: null };
+    if (extra.rechnerZusatz) next.rechnerZusatz = extra.rechnerZusatz;
     const los = () => new Promise((fertig) => {
       this.setState(next, () => { this.go('/projekt-check/'); this.merken(); setTimeout(fertig, 40); });
     });
@@ -4048,7 +4080,8 @@ class Component extends DCLogic {
       const s = this.state;
       try {
         if (!Object.keys(s.ans).length && !Object.keys(s.txt).filter((k) => s.txt[k]).length) return;
-        sessionStorage.setItem('odera-check', JSON.stringify({ ans: s.ans, txt: s.txt, step: s.step, quick: s.quick, quelle: s.quelle, ueberspringen: s.ueberspringen || [], result: s.result }));
+        sessionStorage.setItem('odera-check', JSON.stringify({ ans: s.ans, txt: s.txt, step: s.step, quick: s.quick, quelle: s.quelle, ueberspringen: s.ueberspringen || [], result: s.result,
+          mindestPaket: s.mindestPaket || '', rechnerZusatz: s.rechnerZusatz || [] }));
       } catch (err) { /* Speicher nicht verfügbar: dann eben ohne */ }
     }, 0);
   }
@@ -4169,13 +4202,13 @@ class Component extends DCLogic {
   optsFor(q) {
     if (!q) return [];
     if (q.typ === 'karten') return this.FUNKTIONEN.filter((f) => f[2] !== 'alle').map((f) => f[0]);
-    if (q.typ === 'stil') return this.STILE.map((x) => x[0]);
     return q.o || [];
   }
 
   choose(v) {
     const q = this.frage();
     if (q.typ === 'karten' && (this.FUNKTIONEN.find((f) => f[0] === v) || [])[2] === 'alle') return; // immer dabei
+    clearTimeout(this.weiterTimer);
     const ans = Object.assign({}, this.state.ans);
     if (q.typ === 'multi' || q.typ === 'karten') {
       const cur = Array.isArray(ans[q.key]) ? ans[q.key].slice() : [];
@@ -4185,8 +4218,17 @@ class Component extends DCLogic {
     } else {
       ans[q.key] = v;
     }
+    // Einfachauswahl: nach kurzer Bestätigung automatisch weiter. Nicht beim Ändern und nicht, wenn die Antwort ein Zusatzfeld öffnet.
+    const zusatz = q.typ === 'wahl' && q.extra && q.extra[v] ? q.extra[v][0] : '';
+    const auto = q.typ === 'wahl' && !this.state.editing && !zusatz;
     this.setState({ ans: ans, warn: false }, () => {
       this.merken();
+      if (auto) {
+        const step = this.state.step;
+        this.weiterTimer = setTimeout(() => { if (this.state.step === step && !this.state.result && this.frage().key === q.key) this.next(); }, 250);
+        return;
+      }
+      if (zusatz) setTimeout(() => { const el = document.getElementById('f-' + zusatz); if (el) el.focus({ preventScroll: true }); }, 60);
       this.setState({ toast: 'Notiert.' });
       clearTimeout(this.toastTimer);
       this.toastTimer = setTimeout(() => this.setState({ toast: '' }), 900);
@@ -4270,7 +4312,7 @@ class Component extends DCLogic {
   zuFeld(k) {
     if (!k) return;
     setTimeout(() => {
-      const el = k === '_wahl' ? document.querySelector('.qright .g-ans .acard, .qright .g-stil .acard') : document.getElementById('f-' + k);
+      const el = k === '_wahl' ? this.sichtbar('.qright .g-ans .acard') : document.getElementById('f-' + k);
       if (el) { el.focus({ preventScroll: true }); el.scrollIntoView({ block: 'center', behavior: this.reduce ? 'auto' : 'smooth' }); }
     }, 60);
   }
@@ -4282,7 +4324,7 @@ class Component extends DCLogic {
       if (v) out.push({ step: st, label: f[st].n + ': ' + v });
     }
     const last = out.slice(-6);
-    return last.map((p, n) => ({ step: p.step, label: p.label.length > 46 ? p.label.slice(0, 44) + '…' : p.label, op: n === 0 && last.length === 6 ? 0.45 : 1 }));
+    return last.map((p, n) => ({ step: p.step, label: p.label.length > 46 ? p.label.slice(0, 44) + '…' : p.label, op: n === 0 && last.length === 6 ? 0.7 : 1 }));
   }
 
   // Antwort einer Frage als Text, mit Zusatzfeldern (zum Beispiel «Andere: Fahrschule»)
@@ -4295,8 +4337,10 @@ class Component extends DCLogic {
     if (Array.isArray(v)) v = v.join(', ');
     if (v) parts.push(String(v));
     if (q.extra) Object.keys(q.extra).forEach((o) => { const k = q.extra[o][0]; const gew = s.ans[q.key]; if (t[k] && (gew === o || (Array.isArray(gew) && gew.indexOf(o) >= 0))) parts.push(t[k]); });
-    if (q.felder) q.felder.forEach((f) => { if (t[f[0]]) parts.push(t[f[0]]); });
+    [].concat(q.felder || [], q.felderNach || []).forEach((f) => { if (t[f[0]]) parts.push(t[f[0]]); });
+    if (q.chips && s.ans[q.chips[0]]) parts.push('Online: ' + s.ans[q.chips[0]]);
     if (q.area && t[q.area[0]]) parts.push(this.oneLine(t[q.area[0]]));
+    if (q.haken && s.ans[q.haken[0]]) parts.push('Darf als Beispiel gezeigt werden');
     return parts.join(', ');
   }
 
@@ -4345,15 +4389,18 @@ class Component extends DCLogic {
   leaveEdit(target) {
     const q = this.frage();
     if (!this.complete(q)) { this.fehlerZeigen(q); return; }
-    // Wird eine Folgefrage neu sichtbar (bestehende Website), führt der Weg zuerst dorthin
-    if (q.key === 'WEBSITE_HEUTE' && this.state.ans.WEBSITE_HEUTE === 'Ja' && !this.state.ans.WEBSITE_PROBLEME) {
-      const st = this.fragen().findIndex((x) => x.key === 'WEBSITE_PROBLEME');
-      if (st >= 0) { this.setState({ step: st, editNote: 'Was stört Sie an Ihrer heutigen Website? Diese Frage ist freiwillig.', dir: 'fwd', warn: false, tick: this.state.tick + 1 }); this.focusHead(); return; }
+    // Wird eine Folgefrage neu sichtbar (mit oder ohne Website), führt der Weg zuerst dorthin
+    const folge = { Ja: 'WEBSITE_PROBLEME', Nein: 'UNTERSTUETZUNG' }[this.state.ans.WEBSITE_HEUTE];
+    if (q.key === 'WEBSITE_HEUTE' && folge && !this.state.ans[folge]) {
+      const st = this.fragen().findIndex((x) => x.key === folge);
+      const f = this.fragen()[st];
+      if (st >= 0) { this.setState({ step: st, editNote: f.t + ' Diese Frage ist freiwillig.', dir: 'fwd', warn: false, tick: this.state.tick + 1 }); this.focusHead(); return; }
     }
     if (target === 'review') this.showReview(); else this.showResult();
   }
 
   next = () => {
+    clearTimeout(this.weiterTimer);
     const step = this.state.step;
     const q = this.frage();
     if (!this.complete(q)) { this.fehlerZeigen(q); return; }
@@ -4365,17 +4412,21 @@ class Component extends DCLogic {
   };
 
   back = () => {
+    clearTimeout(this.weiterTimer);
     if (this.state.editing) { this.leaveEdit('review'); return; }
     if (this.state.result) { this.setState({ result: false, step: this.fragen().length - 1 }); return; }
     if (this.state.step > 0) this.setState({ step: this.state.step - 1, dir: 'back', warn: false, tick: this.state.tick + 1 });
   };
 
-  hostingWahl() {
-    const h = this.state.ans.HOSTING;
-    return h === this.HOSTING_EGAL ? 'egal' : h === this.HOSTING_CH ? 'schweiz' : '';
+  // Unterstützung bei Logo, Texten und Fotos: Antwort der Folgefrage (nur ohne Website). Erscheint die Frage nicht,
+  // gilt die Auswahl aus dem Preis-Rechner (Logo, Texte), damit sie im Ergebnis und in der Mail bleibt.
+  unterstuetzung(s = this.state) {
+    const q = this.Q.find((x) => x.key === 'UNTERSTUETZUNG');
+    const v = q.wenn(s) ? s.ans.UNTERSTUETZUNG : s.rechnerZusatz;
+    return Array.isArray(v) ? q.o.filter((o) => v.indexOf(o) >= 0) : [];
   }
-
-  logoWunsch() { return this.state.ans.LOGO === this.LOGO_NEU; }
+  // Das grössere von zwei Paketen (Name aus PAKETE oder leer)
+  hoeheresPaket(a, b) { return this.PAKETE[Math.max(this.PAKETE.indexOf(a || ''), this.PAKETE.indexOf(b || ''))] || ''; }
   // Branchenseiten verlinken die übrigen Branchen (gleiche Namen wie in der Fusszeile)
   brAndere(pfad) {
     const namen = { '/website-fuer-handwerker': 'Handwerk', '/website-fuer-restaurants': 'Gastronomie', '/website-fuer-praxen': 'Praxen', '/website-fuer-laeden': 'Läden' };
@@ -4385,52 +4436,41 @@ class Component extends DCLogic {
   logoMitWebsiteChf() { return 'CHF ' + this.fmt(this.LOGO_MIT_WEBSITE_CHF); }
 
 
-  // Paket-Empfehlung aus Funktionen und Seitenzahl (Paketinhalte wie auf der Angebotsseite):
-  // Pro-Funktionen oder mehr als 5 Seiten: Pro. Standard-Funktionen oder bis 5 Seiten: Standard. Sonst Website.
-  // Mehr als 10 Seiten oder Onlineshop: Hinweis «Individuell prüfen».
+  // Paket-Empfehlung nur aus den Funktionen (Paketinhalte wie auf der Angebotsseite), mindestens das Paket aus dem Einstieg
+  // (Paketkarte, Musterprojekt): Pro-Funktion: Pro. Standard-Funktion: Standard. Sonst Website. Onlineshop: Hinweis «Individuell prüfen».
   // Einzige Stelle der Paket-Logik. Nutzen der Projekt-Check (rec) und der Preis-Rechner auf der Angebotsseite.
-  paketAus(fn, seiten) {
+  paketAus(fn, mindest = '') {
     const paketVon = (n) => (this.FUNKTIONEN.find((f) => f[0] === n) || [])[2];
-    const pro = fn.some((n) => paketVon(n) === 'Pro') || seiten === 'Bis 10 Seiten' || seiten === 'Mehr als 10 Seiten';
-    const standard = fn.some((n) => paketVon(n) === 'Standard') || seiten === 'Bis 5 Seiten';
-    const i = pro ? 2 : standard ? 1 : 0;
-    return { name: ['Website', 'Standard', 'Pro'][i], price: this.PAKET_PREIS[i], shop: fn.some((n) => paketVon(n) === 'shop'), gross: seiten === 'Mehr als 10 Seiten' };
+    const i = Math.max(fn.some((n) => paketVon(n) === 'Pro') ? 2 : fn.some((n) => paketVon(n) === 'Standard') ? 1 : 0, this.PAKETE.indexOf(mindest));
+    return { i, name: this.PAKETE[i], price: this.PAKET_PREIS[i], shop: fn.some((n) => paketVon(n) === 'shop') };
   }
 
   rec() {
     const a = this.state.ans;
     const fn = Array.isArray(a.FUNKTIONEN) ? a.FUNKTIONEN : [];
-    const paketVon = (n) => (this.FUNKTIONEN.find((f) => f[0] === n) || [])[2];
-    const seiten = a.SEITENZAHL;
-    const { name, price, shop, gross } = this.paketAus(fn, seiten);
-    const hinweis = gross && shop ? 'Mehr als 10 Seiten und ein Onlineshop gehen über die Pakete hinaus. Ich prüfe Ihre Anfrage individuell. Einen Onlineshop biete ich nicht an.'
-      : gross ? 'Mehr als 10 Seiten gehen über das Paket Pro hinaus. Ich prüfe Ihre Anfrage individuell und nenne Ihnen einen festen Preis.'
-      : shop ? 'Einen Onlineshop biete ich nicht an. Ich prüfe Ihre Anfrage individuell und sage Ihnen ehrlich, was möglich ist.' : '';
+    const { i, name, price, shop } = this.paketAus(fn, this.state.mindestPaket);
+    const hinweis = shop ? 'Einen Onlineshop biete ich nicht an. Ich prüfe Ihre Anfrage individuell und sage Ihnen ehrlich, was möglich ist.' : '';
 
-    const seitenTxt = seiten === 'Eine Seite reicht' ? 'Eine Seite' : seiten === 'Bis 5 Seiten' ? 'Bis fünf Seiten' : seiten === 'Bis 10 Seiten' ? 'Bis zehn Seiten'
-      : seiten === 'Mehr als 10 Seiten' ? 'Mehr als zehn Seiten' : 'Umfang geschätzt aus den Funktionen';
-    const fnTxt = ['Kontaktformular'].concat(fn.filter((n) => paketVon(n) !== 'shop'));
-    const liste = fnTxt.length > 1 ? fnTxt.slice(0, -1).join(', ') + ' und ' + fnTxt[fnTxt.length - 1] : fnTxt[0];
-    const umfang = seitenTxt + ', dazu ' + liste + '.';
+    // Umfang aus den Paketinhalten der Preisliste, Funktionen in ihrer Satzform
+    const satz = this.FUNKTIONEN.filter((f) => f[2] === 'alle' || (f[2] !== 'shop' && fn.indexOf(f[0]) >= 0)).map((f) => f[4]);
+    const liste = satz.length > 1 ? satz.slice(0, -1).join(', ') + ' und ' + satz[satz.length - 1] : satz[0];
+    const umfang = this.PAKET_UMFANG[i] + ', dazu ' + liste + '.';
 
-    const refAns = a.REFERENZ;
-    const refFull = refAns === 'Ja, gerne mit Name, Logo und zwei Sätzen';
-    const refSlim = refAns === 'Ja, aber ohne meinen Namen';
+    const refFull = a.REFERENZ === this.REFERENZ_JA;
     const refMap = { Website: 590, Standard: 1290, Pro: 2400 };
     const refNum = refMap[name];
-    return { name: name, priceNum: refFull ? refNum : price, regularNum: price, price: (gross ? 'ab ' : '') + 'CHF ' + this.fmt(price), refFull: refFull, refSlim: refSlim,
+    return { name: name, priceNum: refFull ? refNum : price, regularNum: price, price: 'CHF ' + this.fmt(price), refFull: refFull,
       refPrice: 'CHF ' + this.fmt(refNum), refSaving: 'CHF ' + this.fmt(price - refNum), umfang: umfang, hinweis: hinweis, individuell: !!hinweis, reasons: [umfang] };
   }
 
   // Zusätze neben dem Paket, je eine Zeile: [Bezeichnung, Betrag]
   zusaetze() {
-    const a = this.state.ans, out = [], hs = this.hostingWahl();
-    if (this.logoWunsch()) out.push(['Logo', this.logoMitWebsiteChf() + ' einmalig']);
-    if (a.TEXTE === 'Ich brauche Hilfe') out.push(['Texte', 'CHF ' + this.TEXT_PRO_SEITE_CHF + ' pro Seite']);
-    if (a.FOTOS === 'Keine' || a.FOTOS === 'Nur wenige') out.push(['Fotograf', 'auf Wunsch, nach Aufwand']);
-    // Hosting richte ich im Paket ein. Laufende Kosten nur bei einem Schweizer Hoster, direkt dort bezahlt.
-    if (hs === 'schweiz') out.push(['Hosting', 'Schweizer Hoster, Jahresgebühr direkt dort']);
-    else out.push(['Hosting', 'auf Ihren Namen eingerichtet, ohne Abo']);
+    const u = this.unterstuetzung(), out = [];
+    if (u.indexOf('Logo') >= 0) out.push(['Logo', this.logoMitWebsiteChf() + ' einmalig']);
+    if (u.indexOf('Texte') >= 0) out.push(['Texte', 'CHF ' + this.TEXT_PRO_SEITE_CHF + ' pro Seite']);
+    if (u.indexOf('Fotos') >= 0) out.push(['Fotograf', 'auf Wunsch, nach Aufwand']);
+    // Hosting richte ich im Paket auf den Namen des Kunden ein
+    out.push(['Hosting', 'auf Ihren Namen eingerichtet, ohne Abo']);
     return out;
   }
 
@@ -4447,24 +4487,14 @@ class Component extends DCLogic {
     put('ORT', t.ort);
     put('BRANCHE', a.BRANCHE === 'Andere' ? mit('Andere', t.branche) : a.BRANCHE);
     put('ANGEBOT', t.angebot);
-    put('REGION', a.REGION);
     put('ZIEL', a.ZIEL);
-    put('KUNDEN', a.KUNDEN);
     put('WEBSITE_HEUTE', a.WEBSITE_HEUTE);
     put('WEBSITE_URL', a.WEBSITE_HEUTE === 'Ja' ? t.url : '');
     const probleme = a.WEBSITE_HEUTE === 'Ja' && Array.isArray(a.WEBSITE_PROBLEME) ? a.WEBSITE_PROBLEME.map((x) => x === 'Anderes' && t.stoerung ? 'Anderes: ' + t.stoerung : x) : [];
     put('WEBSITE_PROBLEME', probleme.join(', '));
     const fn = Array.isArray(a.FUNKTIONEN) ? a.FUNKTIONEN : [];
     put('FUNKTIONEN', ['Kontaktformular'].concat(fn.map((x) => x === 'Zweite Sprache' && t.sprache ? 'Zweite Sprache (' + t.sprache + ')' : x)).join(', '));
-    put('SEITENZAHL', a.SEITENZAHL);
-    put('LOGO', a.LOGO);
-    put('TEXTE', a.TEXTE);
-    put('FOTOS', a.FOTOS);
-    put('STIL', a.STIL);
-    put('VORBILDER', t.vorbilder);
-    put('FARBEN', t.farben);
-    put('DOMAIN', a.DOMAIN === 'Ja' ? mit('Ja', t.domain) : a.DOMAIN);
-    put('HOSTING', a.HOSTING);
+    put('UNTERSTUETZUNG', this.unterstuetzung().join(', '));
     put('TERMIN', a.TERMIN);
     put('KONTAKT_NAME', t.name);
     put('KONTAKT_MAIL', t.email);
@@ -4474,7 +4504,7 @@ class Component extends DCLogic {
     put('SONSTIGES', t.sonstiges);
     const r = this.rec();
     put('PAKET', r.name);
-    put('PREIS', (r.individuell && a.SEITENZAHL === 'Mehr als 10 Seiten' ? 'ab ' : '') + 'CHF ' + this.fmt(r.refFull ? r.priceNum : r.regularNum) + (r.refFull ? ' mit Referenzrabatt' : ''));
+    put('PREIS', 'CHF ' + this.fmt(r.refFull ? r.priceNum : r.regularNum) + (r.refFull ? ' mit Referenzrabatt' : ''));
     put('ZUSAETZE', this.zusaetze().map((z) => z[0] + ': ' + z[1]).join('; '));
     put('HINWEIS', r.hinweis);
     put('EINSTIEG', (this.EINSTIEGE[this.state.quelle] || {}).label || 'Direkt aufgerufen');
@@ -4515,14 +4545,14 @@ class Component extends DCLogic {
 
   // Hält Beschreibung, canonical, robots und Vorschau-Angaben beim Seitenwechsel aktuell.
   syncHead(path) {
-    const pg = this.PAGES[path];
+    const pg = this.PAGES[path], titel = this.werte(pg.title), desc = this.werte(pg.desc || '');
     const url = this.SITE + (path === '/' ? '/' : path + '/');
     const put = (sel, attr, val) => { const el = document.head.querySelector(sel); if (el) el.setAttribute(attr, val); };
     put('link[rel="canonical"]', 'href', url);
-    put('meta[name="description"]', 'content', pg.desc || '');
+    put('meta[name="description"]', 'content', desc);
     put('meta[name="robots"]', 'content', pg.noindex ? 'noindex,follow' : 'index,follow');
-    put('meta[property="og:title"]', 'content', pg.title);
-    put('meta[property="og:description"]', 'content', pg.desc || '');
+    put('meta[property="og:title"]', 'content', titel);
+    put('meta[property="og:description"]', 'content', desc);
     put('meta[property="og:url"]', 'content', url);
   }
 
@@ -4547,7 +4577,8 @@ class Component extends DCLogic {
     const isMulti = q.typ === 'multi' || q.typ === 'karten';
     const shopGewaehlt = q.typ === 'karten' && Array.isArray(picked) && picked.some((n) => (this.FUNKTIONEN.find((f) => f[0] === n) || [])[2] === 'shop');
     const hinweisOpt = shopGewaehlt ? 'Einen Onlineshop biete ich nicht an. Schicken Sie die Anfrage trotzdem ab, ich sage Ihnen ehrlich, was möglich ist.'
-      : q.hinweis && typeof picked === 'string' ? (q.hinweis[picked] || '') : '';
+      : q.hinweis && typeof picked === 'string' ? (q.hinweis[picked] || '')
+      : q.hinweis && Array.isArray(picked) ? opts.filter((o) => picked.indexOf(o) >= 0).map((o) => q.hinweis[o]).filter(Boolean).join(' ') : '';
     const r = this.rec();
     const allOff = this.STEPS.every((st, i) => st[3] || s.off[i]);
 
@@ -4578,8 +4609,11 @@ class Component extends DCLogic {
     const wahlFehler = fehlerSichtbar.find((e) => e.k === '_wahl');
     const offen = fehlerAlle.map((e) => e.k === '_wahl' ? 'eine Antwort' : e.label);
 
-    const remainMin = Math.max(1, Math.ceil((total - (s.step + 1)) * 20 / 60));
     const felderZuerst = q.typ === 'felder';
+    // Farbfleck im Hintergrund (nur Desktop): wandert mit dem Fortschritt
+    const drittel = Math.min(2, Math.floor(s.step / Math.max(1, total) * 3));
+    // «Sieht nach Paket … aus» ab der Frage nach den Funktionen (Reihenfolge in Q)
+    const abFunktionen = this.Q.indexOf(q) >= this.Q.findIndex((x) => x.key === 'FUNKTIONEN');
 
     return {
       mailKontakt: mailKontakt,
@@ -4611,6 +4645,8 @@ class Component extends DCLogic {
       chatBar: (s.barOn && !isCheck && !isLegal) ? '1' : '0',
       chatHell: s.chatHell ? '1' : '0',
       schrittEinsDauer: 'Schritt 1 dauert rund ' + this.CHECK_MINUTEN + ' Minuten.',
+      // Ihr Aufwand in Minuten (erforderliche Schritte in STEPS), Ablauf oben und «Ihr Aufwand auf einen Blick»
+      erfMin: String(this.zeitSumme(true)),
       chatAnim: (this.reduce || s.chatIntro) ? 'none' : 'chatIn 400ms ease-out 2500ms both',
       openChat: this.chatOeffnen,
       pageAnim: this.reduce ? 'none' : 'pageIn 220ms ease-out',
@@ -4792,7 +4828,8 @@ class Component extends DCLogic {
       inQuiz: isCheck && !s.result && !s.mid && !s.gesendet,
       fortsetzenDisplay: isCheck && s.fortsetzen && !s.result ? 'flex' : 'none',
       onFortsetzen: () => { const a = s.fortsetzen || {}; this.setState({ ans: Object.assign({}, a.ans, s.ans), txt: Object.assign({}, a.txt, s.txt), step: a.step || 0, quick: !!a.quick,
-        quelle: s.quelle || a.quelle || '', ueberspringen: Array.from(new Set((a.ueberspringen || []).concat(s.ueberspringen || []))), fortsetzen: null, result: !!a.result }, () => { if (a.result) this.showResult(); else this.focusHead(); }); },
+        quelle: s.quelle || a.quelle || '', ueberspringen: Array.from(new Set((a.ueberspringen || []).concat(s.ueberspringen || []))), fortsetzen: null, result: !!a.result,
+        mindestPaket: this.hoeheresPaket(s.mindestPaket, a.mindestPaket), rechnerZusatz: (s.rechnerZusatz || []).length ? s.rechnerZusatz : (a.rechnerZusatz || []) }, () => { if (a.result) this.showResult(); else this.focusHead(); }); },
       onNeuBeginnen: () => { this.vergessen(); this.setState({ fortsetzen: null }); this.focusHead(); },
       quickLinkDisplay: (s.quick || s.editing) ? 'none' : 'block',
       qNum: s.step + 1,
@@ -4847,9 +4884,10 @@ class Component extends DCLogic {
         if (e.metaKey || e.ctrlKey || e.shiftKey) return;
         e.preventDefault();
         const ans = { FUNKTIONEN: s.rechnerFn.slice() }, skip = ['FUNKTIONEN'];
-        if (s.rechnerLogo) { ans.LOGO = this.LOGO_NEU; skip.push('LOGO'); }
-        if (s.rechnerTexte) { ans.TEXTE = 'Ich brauche Hilfe'; skip.push('TEXTE'); }
-        this.checkStarten('rechner', { ans, skip }, e.currentTarget);
+        // Logo und Texte bleiben im Ergebnis und in der Mail. Erscheint die Frage nach Unterstützung, sind sie vorausgewählt.
+        const zusatz = [s.rechnerLogo ? 'Logo' : '', s.rechnerTexte ? 'Texte' : ''].filter(Boolean);
+        if (zusatz.length) ans.UNTERSTUETZUNG = Array.from(new Set((Array.isArray(s.ans.UNTERSTUETZUNG) ? s.ans.UNTERSTUETZUNG : []).concat(zusatz)));
+        this.checkStarten('rechner', { ans, skip, rechnerZusatz: zusatz }, e.currentTarget);
       },
       vtAttr: s.vtAktiv ? '1' : '0',
       kiDisplay: this.CHAT_ENDPOINT ? 'inline-flex' : 'none',
@@ -4858,13 +4896,16 @@ class Component extends DCLogic {
       firstNoteDisplay: (s.step === 0 && !s.quick) ? 'block' : 'none',
       multiDisplay: isMulti ? 'block' : 'none',
       optDisplay: opts.length ? 'grid' : 'none',
+      spalten: String(q.spalten || 1),
       progress: Math.round(((s.step + 1) / total) * 100) + '%',
       qTotal: total,
-      hint: (!s.quick && q.ab >= 4) ? 'Sieht nach Paket ' + r.name + ' aus' : '',
-      partLabel: s.quick ? 'KURZSCHÄTZUNG' : 'ABSCHNITT ' + q.ab + ' VON ' + this.ABSCHNITTE.length + ' · ' + this.ABSCHNITTE[q.ab - 1].toUpperCase(),
-      fortschritt: s.quick ? 'Frage ' + (s.step + 1) + ' von ' + total : 'Noch etwa ' + remainMin + (remainMin === 1 ? ' Minute' : ' Minuten'),
+      hint: (!s.quick && abFunktionen) ? 'Sieht nach Paket ' + r.name + ' aus' : '',
+      // Fortschritt: angezeigte Folgefragen zählen mit. Die Kurzversion bleibt wie bisher.
+      partLabel: s.quick ? 'KURZSCHÄTZUNG' : 'Frage ' + (s.step + 1) + ' von ' + total,
+      fortschritt: s.quick ? 'Frage ' + (s.step + 1) + ' von ' + total : '',
+      fortschrittLeer: s.quick ? '0' : '1',
+      qKey: q.key,
       fieldsDir: 'column',
-      styleDisplay: q.typ === 'stil' ? 'grid' : 'none',
       wichtigDisplay: q.hervor ? 'inline-block' : 'none',
       wasDisplay: q.was ? 'block' : 'none', qWas: q.was || '',
       optHinweis: hinweisOpt, optHinweisDisplay: hinweisOpt ? 'block' : 'none',
@@ -4877,12 +4918,11 @@ class Component extends DCLogic {
         return { v: f[0], label: f[0], desc: f[1], icoUrl: this.icoUrl(f[3]), sel: sel, fix: fix ? 'true' : 'false', an: sel ? '1' : '0',
           tag: fix ? 'In jedem Paket' : f[2] === 'shop' ? 'Nicht im Angebot' : 'Paket ' + f[2] };
       }),
-      styleCards: this.STILE.map(c => ({ v: c[0], label: c[0], prev: c[1], sel: picked === c[0], bg: picked === c[0] ? '#D6F24B' : 'rgba(255,255,255,0.7)', bd: picked === c[0] ? '#556300' : '#E2DFD8', fg: '#11131A' })),
       qAnim: this.reduce ? 'none' : (s.dir === 'back' ? 'qBack 260ms ease-out' : 'qFwd 260ms ease-out'),
       qNumPad: String(s.step + 1).padStart(2, '0'),
-      blobColor: q.ab <= 2 ? '#2D4CF0' : q.ab <= 4 ? '#4FA79B' : '#8A7BD8',
-      blobLeft: q.ab <= 2 ? '-180px' : q.ab <= 4 ? '30%' : '55%',
-      blobTop: q.ab <= 2 ? '10%' : q.ab <= 4 ? '-220px' : '25%',
+      blobColor: ['#2D4CF0', '#4FA79B', '#8A7BD8'][drittel],
+      blobLeft: ['-180px', '30%', '55%'][drittel],
+      blobTop: ['10%', '-220px', '25%'][drittel],
       answered: this.answeredPills(),
       onJump: (e) => this.jumpTo(Number(e.currentTarget.dataset.s)),
       onFieldKey: (e) => { if (e.key === 'Enter' && e.currentTarget.tagName === 'INPUT') { e.preventDefault(); this.next(); } },
@@ -4930,9 +4970,24 @@ class Component extends DCLogic {
         const k = e.currentTarget.dataset.k, v = e.currentTarget.dataset.v;
         this.setState({ txt: Object.assign({}, this.state.txt, { [k]: v }) }, () => { this.merken(); const el = document.getElementById('f-' + k); if (el) el.focus(); });
       },
-      fieldsTop: (opts.length || q.typ === 'stil' || q.typ === 'karten') && !felderZuerst ? '24px' : '0px',
+      fieldsTop: (opts.length || q.typ === 'karten') && !felderZuerst ? '24px' : '0px',
       optTop: felderZuerst && opts.length ? '28px' : '0px',
       hasArea: !!q.area,
+      // Chips (eine Antwort, abwählbar) und Häkchen unter den Feldern, zum Beispiel Termin und Referenz bei «Wie erreiche ich Sie?»
+      hasChips: !!q.chips, chipsLabel: q.chips ? q.chips[1] : '',
+      chips: q.chips ? q.chips[2].map((v) => ({ v, label: v, sel: s.ans[q.chips[0]] === v })) : [],
+      onChip: (e) => {
+        const v = e.currentTarget.dataset.v, k = q.chips[0], ans = Object.assign({}, this.state.ans);
+        if (ans[k] === v) delete ans[k]; else ans[k] = v;
+        this.setState({ ans }, () => this.merken());
+      },
+      hasHaken: !!q.haken, hakenLabel: q.haken ? q.haken[1] : '', hakenHinweis: q.haken ? q.haken[2] : '',
+      hakenAn: !!(q.haken && s.ans[q.haken[0]]),
+      onHaken: () => {
+        const k = q.haken[0], ans = Object.assign({}, this.state.ans);
+        if (ans[k]) delete ans[k]; else ans[k] = q.haken[3];
+        this.setState({ ans }, () => this.merken());
+      },
       areaLabel: q.area ? q.area[1] : '',
       areaKey: q.area ? q.area[0] : '',
       areaPh: q.area ? q.area[2] : '',
@@ -5003,13 +5058,17 @@ class Component extends DCLogic {
       fehlerKnopfDisplay: (s.sendFehler === 'einwilligung' || s.sendFehler === 'kontakt') ? 'none' : 'flex',
       fensterZeilen: isCheck && s.result ? this.fensterZeilen() : [],
       egLabel: s.quick ? 'KURZSCHÄTZUNG' : 'IHR ERGEBNIS',
+      // Unter 768 px: Mail-Vorschau eingeklappt hinter «Ihre Angaben ansehen» (style id="mobil"), die Kurzversion bleibt wie bisher
+      mfKurz: s.quick ? '1' : '0', angabenAttr: s.angabenOffen ? '1' : '0', angabenAria: s.angabenOffen ? 'true' : 'false',
+      angabenLabel: s.angabenOffen ? 'Ihre Angaben ausblenden' : 'Ihre Angaben ansehen',
+      onAngaben: () => this.setState((st) => ({ angabenOffen: !st.angabenOffen })),
       egPreis: r.refFull ? r.refPrice : r.price,
       egAltDisplay: r.refFull ? 'inline' : 'none',
       egSatz: r.umfang,
       egIndiv: r.hinweis, egIndivDisplay: r.hinweis ? 'block' : 'none',
       egZusaetze: this.zusaetze().map((z) => ({ l: z[0], v: z[1] })),
-      egRef: r.refFull ? this.REFERENZ_SATZ.replace('{betrag}', r.refSaving) : r.refSlim ? 'Auch ohne Namensnennung lässt sich etwas machen. Sprechen wir darüber.' : '',
-      egRefDisplay: (r.refFull || r.refSlim) ? 'block' : 'none',
+      egRef: r.refFull ? this.REFERENZ_SATZ.replace('{betrag}', r.refSaving) : '',
+      egRefDisplay: r.refFull ? 'block' : 'none',
       egLangDisplay: s.quick ? 'block' : 'none',
       egReviewDisplay: s.quick ? 'none' : 'inline-block',
       vglOffen: s.vglOffen ? '1' : '0', vglOffenAria: s.vglOffen ? 'true' : 'false',

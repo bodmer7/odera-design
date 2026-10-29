@@ -28,6 +28,16 @@ test('bereinigt Ereignisse und verwirft Unbekanntes', () => {
   assert.equal(bereinigen({ s, e: [] }), null);
 });
 
+test('Projekt-Check: Schritt mit Schlüssel der Frage, ohne Antworten', () => {
+  const z = bereinigen({ s, g: 'mobil', e: [
+    { t: 'projektcheck_step', p: '/projekt-check/', n: 2, z: 'BRANCHE' },
+    { t: 'projektcheck_step', p: '/projekt-check/', n: 3 },
+    { t: 'projektcheck_step', p: '/projekt-check/', n: 4, z: 'Anna Muster' },
+    { t: 'projektcheck_step', p: '/projekt-check/', n: 0, z: 'ZIEL' },
+  ] }, { jetzt });
+  assert.deepEqual(z.map((x) => [x.zahl, x.ziel]), [[2, 'BRANCHE'], [3, null], [4, null]]);
+});
+
 test('Herkunft, Pfad, Kampagne und Zürcher Tag', () => {
   assert.equal(quelle(''), '(direkt)');
   assert.equal(quelle('evil/path'), null);

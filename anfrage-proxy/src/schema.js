@@ -5,8 +5,8 @@ export const ANFRAGE = {
   "Ihr Betrieb",
   "Das Ziel der Website",
   "Was die Seite können soll",
-  "Inhalte und Stil",
-  "Technik und Zeitplan",
+  "Inhalte",
+  "Zeitplan",
   "Kontakt",
   "Empfehlung"
  ],
@@ -36,22 +36,10 @@ export const ANFRAGE = {
    300
   ],
   [
-   "REGION",
-   "Kunden aus",
-   "Ihr Betrieb",
-   60
-  ],
-  [
    "ZIEL",
    "Besucher sollen",
    "Das Ziel der Website",
    60
-  ],
-  [
-   "KUNDEN",
-   "Typische Kunden",
-   "Das Ziel der Website",
-   40
   ],
   [
    "WEBSITE_HEUTE",
@@ -78,63 +66,15 @@ export const ANFRAGE = {
    500
   ],
   [
-   "SEITENZAHL",
-   "Seitenzahl",
-   "Was die Seite können soll",
-   40
-  ],
-  [
-   "LOGO",
-   "Logo",
-   "Inhalte und Stil",
-   40
-  ],
-  [
-   "TEXTE",
-   "Texte",
-   "Inhalte und Stil",
-   40
-  ],
-  [
-   "FOTOS",
-   "Fotos",
-   "Inhalte und Stil",
-   40
-  ],
-  [
-   "STIL",
-   "Stil",
-   "Inhalte und Stil",
+   "UNTERSTUETZUNG",
+   "Unterstützung bei",
+   "Inhalte",
    60
-  ],
-  [
-   "VORBILDER",
-   "Vorbilder",
-   "Inhalte und Stil",
-   500
-  ],
-  [
-   "FARBEN",
-   "Firmenfarben",
-   "Inhalte und Stil",
-   200
-  ],
-  [
-   "DOMAIN",
-   "Domain",
-   "Technik und Zeitplan",
-   220
-  ],
-  [
-   "HOSTING",
-   "Hosting",
-   "Technik und Zeitplan",
-   100
   ],
   [
    "TERMIN",
    "Online bis",
-   "Technik und Zeitplan",
+   "Zeitplan",
    60
   ],
   [
@@ -298,9 +238,6 @@ export const ANFRAGE = {
   "url": 300,
   "stoerung": 200,
   "sprache": 60,
-  "vorbilder": 500,
-  "farben": 200,
-  "domain": 200,
   "name": 120,
   "email": 200,
   "tel": 40,

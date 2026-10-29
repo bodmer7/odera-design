@@ -4,7 +4,8 @@
 //   node tools/funktionstest.mjs [basis-url] [teil,teil,...]
 //
 // Basis: Standard http://127.0.0.1:8792 (Server aus .claude/launch.json oder `python3 -m http.server 8792`).
-// Teile: routen, navigation, check, kurz, chat, generator, einblicke, statistik (Standard: alle ausser statistik).
+// Teile: routen, navigation, check, weiter, folgefragen, einstiege, handy, kurz, chat, generator, muster, rechner, einblicke,
+// statistik (Standard: alle ausser statistik). «handy» prüft bei 390 × 664 px, dass alle Antworten ohne Scrollen sichtbar sind.
 // «einblicke» prüft die statischen Seiten unter /einblicke/ (Blog aus dem Akquise-Tool): Menüpunkt, Menü auf dem
 // Handy, Übersicht und, falls vorhanden, den neuesten Artikel mit Titelbild, JSON-LD und Projekt-Check.
 // Der Versand des Projekt-Checks wird abgefangen (kein E-Mail an Nico, kein Turnstile): geprüft wird, dass die
@@ -15,7 +16,7 @@ import { chromium, devices } from 'playwright';
 
 const args = process.argv.slice(2);
 const BASIS = (args.find((a) => /^https?:/.test(a)) || 'http://127.0.0.1:8792').replace(/\/$/, '');
-const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,kurz,chat,generator,muster,rechner,einblicke').split(',');
+const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,weiter,folgefragen,einstiege,handy,kurz,chat,generator,muster,rechner,einblicke').split(',');
 const ROUTEN = ['/', '/angebot/', '/ablauf/', '/musterprojekte/', '/ueber-mich/', '/projekt-check/', '/datenschutz/', '/impressum/', '/agb/',
   ...(process.env.ROUTEN_ZUSATZ ? process.env.ROUTEN_ZUSATZ.split(',') : [])];
 const BREITEN = [390, 834, 1440];
@@ -56,32 +57,64 @@ async function versandAbfangen(ctx) {
 
 const sichtbar = (page, sel) => page.locator(sel).filter({ visible: true });
 
-// Eine Frage des Projekt-Checks beantworten
-async function frageBeantworten(page, nr) {
-  const werte = { firma: 'Testbetrieb Muster', ort: 'Wohlen AG', angebot: 'Schreinerei für Küchen und Innenausbau in der Region.', name: 'Anna Test',
-    email: 'anna@example.ch', tel: '079 123 45 67', url: 'www.example.ch', domain: 'example.ch', branche: 'Fahrschule', sprache: 'Französisch',
-    stoerung: 'Lädt langsam', vorbilder: 'www.example.ch', farben: 'Blau' };
-  for (const sel of ['.g-ans .acard', '.g-stil .acard']) {
-    const k = sichtbar(page, sel);
-    if (await k.count()) { await k.nth(nr % (await k.count())).click(); await warte(150); }
-  }
-  const karten = sichtbar(page, '.g-karten .kcard[aria-disabled="false"]');
-  if (await karten.count()) { await karten.first().click(); await warte(100); }
+// Schlüssel und Nummer der aktuellen Frage aus dem Fortschrittsbalken, zum Beispiel «ZIEL:1»
+const frageJetzt = (page) => page.evaluate(() => { const p = [...document.querySelectorAll('.q-prog')].find((x) => x.getClientRects().length); return p ? p.dataset.frage + ':' + p.getAttribute('aria-valuenow') : ''; });
+const WERTE = { firma: 'Testbetrieb Muster', ort: 'Wohlen AG', angebot: 'Schreinerei für Küchen und Innenausbau in der Region.', name: 'Anna Test',
+  email: 'anna@example.ch', tel: '079 123 45 67', url: 'www.example.ch', branche: 'Fahrschule', sprache: 'Französisch', stoerung: 'Lädt langsam' };
+async function felderFuellen(page) {
   const felder = sichtbar(page, '.qright input[data-k]');
   for (let i = 0; i < await felder.count(); i++) {
     const f = felder.nth(i); const k = await f.getAttribute('data-k');
-    if (werte[k] && !(await f.inputValue())) await f.fill(werte[k]);
+    if (WERTE[k] && !(await f.inputValue())) await f.fill(WERTE[k]);
   }
+}
+
+// Eine Frage des Projekt-Checks beantworten. Gibt true zurück, wenn der Check nach einer Einfachauswahl selbst weitergeht.
+async function frageBeantworten(page, nr) {
+  const vorher = await frageJetzt(page);
+  const k = sichtbar(page, '.g-ans .acard');
+  if (await k.count()) {
+    await k.nth(nr % (await k.count())).click();
+    await warte(450);
+    if (await frageJetzt(page) !== vorher || await sichtbar(page, '.eg-paket').count()) return true;
+  }
+  const karten = sichtbar(page, '.g-karten .kcard[aria-disabled="false"]');
+  if (await karten.count()) { await karten.first().click(); await warte(100); }
+  await felderFuellen(page);
+  return false;
 }
 
 async function checkDurchspielen(page, maxSchritte = 30) {
   for (let i = 0; i < maxSchritte; i++) {
     if (await sichtbar(page, '.eg-paket').count()) return i;
-    await frageBeantworten(page, i);
-    await sichtbar(page, '.q-weiter-knopf').first().click();
-    await warte(350);
+    if (!(await frageBeantworten(page, i))) { await sichtbar(page, '.q-weiter-knopf').first().click(); await warte(350); }
   }
   return -1;
+}
+
+// Fragen nach Schlüssel beantworten: plan = { ZIEL: 'Anrufen', UNTERSTUETZUNG: ['Logo'], ... }. Ohne Plan die erste Antwort
+// (Pflicht) oder nichts (optional). Felder aus WERTE. pruefen(schluessel) läuft vor jeder Antwort. Gibt die Schlüssel der Fragen zurück.
+async function nachPlan(page, plan = {}, pruefen = null) {
+  const gesehen = [];
+  for (let i = 0; i < 14; i++) {
+    if (await sichtbar(page, '.eg-paket').count()) return gesehen;
+    const [key] = (await frageJetzt(page)).split(':');
+    gesehen.push(key);
+    if (pruefen) await pruefen(key);
+    const wahl = plan[key];
+    if (Array.isArray(wahl)) {
+      for (const w of wahl) { const z = sichtbar(page, '.qright .acard, .qright .kcard').filter({ hasText: w }).first(); if ((await z.getAttribute('aria-pressed')) !== 'true') await z.click(); await warte(80); }
+    } else if (wahl) await sichtbar(page, '.qright .acard').filter({ hasText: wahl }).first().click();
+    else if (['ZIEL', 'BRANCHE'].includes(key)) await sichtbar(page, '.g-ans .acard').first().click();
+    await warte(450);
+    if ((await frageJetzt(page)).split(':')[0] === key && !(await sichtbar(page, '.eg-paket').count())) {
+      await felderFuellen(page);
+      if (plan.TERMIN && key === 'KONTAKT') await sichtbar(page, '.q-chip').filter({ hasText: plan.TERMIN }).first().click();
+      if (plan.REFERENZ && key === 'KONTAKT') await sichtbar(page, '.q-haken-l input').first().check();
+      await sichtbar(page, '.q-weiter-knopf').first().click(); await warte(350);
+    }
+  }
+  return gesehen;
 }
 
 async function senden(page, gesendet, art) {
@@ -94,7 +127,10 @@ async function senden(page, gesendet, art) {
   for (let i = 0; i < 40 && !(await sichtbar(page, '.dk-titel').count()); i++) await warte(250);
   ok(gesendet.length === vorher + 1 && gesendet.at(-1).art === art, `Projekt-Check (${art}): Anfrage an den Worker gesendet, ${Object.keys(gesendet.at(-1)?.felder || {}).length} Felder`);
   ok(await sichtbar(page, '.dk-titel').count() > 0, `Projekt-Check (${art}): Dankesbildschirm erscheint`);
+  return (gesendet.at(-1) || {}).felder || {};
 }
+// Felder, die es seit dem Projekt-Check mit sechs Fragen nicht mehr gibt
+const ENTFERNT = ['REGION', 'KUNDEN', 'SEITENZAHL', 'LOGO', 'TEXTE', 'FOTOS', 'STIL', 'VORBILDER', 'FARBEN', 'DOMAIN', 'HOSTING'];
 
 try {
   if (TEILE.includes('routen')) {
@@ -145,11 +181,11 @@ try {
       await sichtbar(page, '.q-weiter-knopf').first().click();
       await warte(300);
       const fehlerZu = await page.evaluate(() => ({ fehler: [...document.querySelectorAll('.f-fehler[data-an="1"]')].filter((e) => e.getClientRects().length).map((e) => e.textContent.trim()),
-        fokus: document.activeElement && document.activeElement.getAttribute('data-k') }));
-      ok(fehlerZu.fehler.length > 0 && fehlerZu.fokus === 'firma', `${geraet}: Weiter ohne Pflichtfeld zeigt Fehler am Feld (${fehlerZu.fehler[0] || '-'}) und setzt den Fokus`);
-      // Tippfehler-Vorschlag bei der E-Mail kommt später, hier Zurück testen
-      await frageBeantworten(page, 0); await sichtbar(page, '.q-weiter-knopf').first().click(); await warte(300);
-      await frageBeantworten(page, 1); await sichtbar(page, '.q-weiter-knopf').first().click(); await warte(300);
+        fokus: !!(document.activeElement && document.activeElement.classList.contains('acard')) }));
+      ok(fehlerZu.fehler.length > 0 && fehlerZu.fokus, `${geraet}: Weiter ohne Antwort zeigt den Fehler an der Frage (${fehlerZu.fehler[0] || '-'}) und setzt den Fokus`);
+      // Zwei Einfachauswahlen gehen selbst weiter, dann Zurück
+      await frageBeantworten(page, 0);
+      await frageBeantworten(page, 1);
       const titelVor = await sichtbar(page, '.qleft h2').first().textContent();
       await page.locator('.q-leiste button', { hasText: 'Zurück' }).filter({ visible: true }).first().click(); await warte(300);
       const titelZurueck = await sichtbar(page, '.qleft h2').first().textContent();
@@ -159,16 +195,192 @@ try {
       if (schritte > 0) {
         // Antworten durchsehen, eine ändern, zurück zum Ergebnis
         await sichtbar(page, '.eg-review').first().click(); await warte(300);
-        ok(await sichtbar(page, '.rv-edit').count() >= 10, `${geraet}: Übersicht der Antworten (${await sichtbar(page, '.rv-edit').count()} Zeilen)`);
+        const zeilen = await sichtbar(page, '.rv-row .mono').allTextContents();
+        ok(zeilen.length >= 6 && zeilen.length <= 7 && /^01 · Ziel/.test(zeilen[0]) && /Kontakt$/.test(zeilen.at(-1)), `${geraet}: Übersicht der Antworten der Reihe nach (${zeilen.length} Zeilen: ${zeilen.map((z) => z.split(' · ')[1]).join(', ')})`);
         await sichtbar(page, '.rv-edit').nth(1).click(); await warte(300);
         ok(await sichtbar(page, '.editbar-btn').count() > 0, `${geraet}: «Ändern» öffnet die Frage mit Leiste «Zurück zum Ergebnis»`);
         await sichtbar(page, '.editbar-btn').first().click(); await warte(300);
         ok(await sichtbar(page, '.eg-paket').count() > 0, `${geraet}: «Zurück zum Ergebnis» führt zum Ergebnis`);
         const gemerkt = await page.evaluate(() => Object.keys(sessionStorage).length);
         ok(gemerkt > 0, `${geraet}: Antworten im sessionStorage gemerkt`);
-        await senden(page, gesendet, 'voll');
+        if (geraet === 'desktop') {
+          const v = await page.evaluate(() => ({ text: [...document.querySelectorAll('.mf-text')].some((x) => x.getClientRects().length), knopf: [...document.querySelectorAll('.mf-angaben')].some((x) => x.getClientRects().length) }));
+          ok(v.text && !v.knopf, 'desktop: Mail-Vorschau offen wie bisher, ohne Knopf «Ihre Angaben ansehen»');
+        }
+        const felder = await senden(page, gesendet, 'voll');
+        ok(!ENTFERNT.some((k) => k in felder) && ['FIRMA', 'BRANCHE', 'ANGEBOT', 'ZIEL', 'KONTAKT_NAME', 'KONTAKT_MAIL', 'PAKET', 'PREIS', 'EINSTIEG'].every((k) => felder[k]),
+          `${geraet}: gesendete Felder ohne entfernte Fragen (${Object.keys(felder).join(', ')})`);
       }
       ok(!probleme.length, `${geraet}: Projekt-Check ohne Konsolenfehler` + (probleme.length ? ': ' + probleme.join(' | ') : ''));
+      await ctx.close();
+    }
+  }
+
+  if (TEILE.includes('weiter')) {
+    // Automatisch weiter nach einer Einfachauswahl, Ausnahmen: Zusatzfeld («Andere», «Ja» mit Adresse) und «Ändern»
+    const ctx = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    const probleme = beobachten(page);
+    await page.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
+    await warte(600);
+    const fokus = () => page.evaluate(() => { const a = document.activeElement; return a ? (a.id || a.tagName) : ''; });
+    await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Anrufen' }).first().click();
+    await warte(100);
+    const sofort = await frageJetzt(page);
+    await warte(350);
+    ok(sofort === 'ZIEL:1' && await frageJetzt(page) === 'BRANCHE:2', `Weiter: nach der Antwort kurz stehen (${sofort}), dann selbst zur nächsten Frage (${await frageJetzt(page)})`);
+    ok(await fokus() === 'H2', `Weiter: Fokus auf der neuen Frage wie beim Knopf «Weiter» (${await fokus()})`);
+    await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Andere' }).first().click();
+    await warte(600);
+    ok(await frageJetzt(page) === 'BRANCHE:2' && await fokus() === 'f-branche', `Weiter: «Andere» bleibt stehen und setzt den Fokus ins Zusatzfeld (${await fokus()})`);
+    await page.fill('#f-branche', 'Fahrschule');
+    await sichtbar(page, '.q-weiter-knopf').first().click(); await warte(400);
+    await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Ja' }).first().click();
+    await warte(600);
+    ok(await frageJetzt(page) === 'WEBSITE_HEUTE:3' && await fokus() === 'f-url', `Weiter: «Ja» bleibt für die Adresse stehen (${await frageJetzt(page)}, Fokus ${await fokus()})`);
+    await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Nein' }).first().click();
+    await warte(600);
+    ok(await frageJetzt(page) === 'UNTERSTUETZUNG:4', `Weiter: «Nein» geht selbst weiter (${await frageJetzt(page)})`);
+    // Zurück innert 250 ms nach der Antwort: kein Sprung nach vorn
+    await page.locator('.q-leiste button', { hasText: 'Zurück' }).filter({ visible: true }).first().click(); await warte(300);
+    await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Nein' }).first().click();
+    await page.locator('.q-leiste button', { hasText: 'Zurück' }).filter({ visible: true }).first().click();
+    await warte(600);
+    ok(await frageJetzt(page) === 'BRANCHE:2', `Weiter: Zurück gleich nach der Antwort hebt das automatische Weiter auf (${await frageJetzt(page)})`);
+    await nachPlan(page, { WEBSITE_HEUTE: 'Nein' });
+    // Im Modus «Ändern» geht es nicht selbst weiter
+    await sichtbar(page, '.eg-review').first().click(); await warte(300);
+    await sichtbar(page, '.rv-edit').first().click(); await warte(300);
+    await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Vorbeikommen' }).first().click();
+    await warte(600);
+    ok(await frageJetzt(page) === 'ZIEL:1' && await sichtbar(page, '.editbar-btn').count() > 0, `Weiter: beim Ändern bleibt die Frage stehen (${await frageJetzt(page)})`);
+    ok(!probleme.length, 'Weiter ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
+    await ctx.close();
+  }
+
+  if (TEILE.includes('folgefragen')) {
+    // Mit Website: «Was stört», ohne Website: «Wobei brauchen Sie Unterstützung?» mit Kostenhinweisen; Fortschritt zählt die Folgefrage mit
+    for (const weg of ['Ja', 'Nein']) {
+      const ctx = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+      const page = await ctx.newPage();
+      const probleme = beobachten(page);
+      await page.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
+      await warte(600);
+      let label = '';
+      const plan = weg === 'Ja' ? { WEBSITE_HEUTE: 'Ja', WEBSITE_PROBLEME: ['Wirkt veraltet'], FUNKTIONEN: ['Online-Terminbuchung'] }
+        : { WEBSITE_HEUTE: 'Nein', UNTERSTUETZUNG: ['Logo', 'Fotos'], FUNKTIONEN: ['Eigene Unterseiten'], TERMIN: 'In einem Monat', REFERENZ: true };
+      const fragen = await nachPlan(page, plan, async (key) => {
+        if (key === 'WEBSITE_PROBLEME' || key === 'UNTERSTUETZUNG') label = await sichtbar(page, '.q-teil').first().textContent();
+      });
+      const folge = weg === 'Ja' ? 'WEBSITE_PROBLEME' : 'UNTERSTUETZUNG', andere = weg === 'Ja' ? 'UNTERSTUETZUNG' : 'WEBSITE_PROBLEME';
+      ok(fragen.includes(folge) && !fragen.includes(andere) && /Frage 4 von 7/.test(label), `Website «${weg}»: Folgefrage ${folge} erscheint (${label.trim()}), ${andere} nicht. Fragen: ${fragen.join(', ')}`);
+      const eg = await page.evaluate(() => ({ satz: (document.querySelector('.eg-satz') || {}).textContent, paket: (document.querySelector('.eg-paket') || {}).textContent,
+        zusatz: [...document.querySelectorAll('.eg-zusatz dt')].filter((x) => x.getClientRects().length).map((x) => x.textContent), ref: [...document.querySelectorAll('.eg-ref')].some((x) => x.getClientRects().length) }));
+      if (weg === 'Ja') {
+        ok(/Paket Pro/.test(eg.paket) && eg.satz === 'Bis 10 Seiten, dazu ein Kontaktformular und eine Online-Terminbuchung.' && eg.zusatz.join(',') === 'Hosting',
+          `Website «Ja»: ${eg.paket}, «${eg.satz}», Zusätze ${eg.zusatz.join(', ')}`);
+      } else {
+        ok(/Paket Standard/.test(eg.paket) && eg.satz === 'Bis 5 Unterseiten, dazu ein Kontaktformular und eigene Unterseiten für Ihre Leistungen.' && eg.zusatz.join(',') === 'Logo,Fotograf,Hosting' && eg.ref,
+          `Website «Nein»: ${eg.paket}, «${eg.satz}», Zusätze ${eg.zusatz.join(', ')}, Referenzrabatt ${eg.ref ? 'ja' : 'nein'}`);
+      }
+      ok(!probleme.length, `Website «${weg}» ohne Konsolenfehler` + (probleme.length ? ': ' + probleme.join(' | ') : ''));
+      await ctx.close();
+    }
+    // Kostenhinweise der Unterstützung und Text in der Mail
+    const ctx = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+    const gesendet = await versandAbfangen(ctx);
+    const page = await ctx.newPage();
+    await page.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
+    await warte(600);
+    let hinweis = '';
+    await nachPlan(page, { WEBSITE_HEUTE: 'Nein', UNTERSTUETZUNG: ['Logo', 'Texte', 'Fotos'], TERMIN: 'In einem Monat', REFERENZ: true }, async (key) => {
+      if (key === 'FUNKTIONEN') { await page.locator('.q-leiste button', { hasText: 'Zurück' }).filter({ visible: true }).first().click(); await warte(300);
+        hinweis = await page.evaluate(() => [...document.querySelectorAll('.q-hinweis')].filter((x) => x.getClientRects().length).map((x) => x.textContent).join(''));
+        await sichtbar(page, '.q-weiter-knopf').first().click(); await warte(300); }
+    });
+    ok(/CHF 390 zusammen mit der Website/.test(hinweis) && /CHF 150 pro Seite/.test(hinweis) && /Kosten nach Aufwand/.test(hinweis), `Unterstützung: Kostenhinweise für Logo, Texte und Fotos («${hinweis}»)`);
+    const felder = await senden(page, gesendet, 'voll');
+    ok(felder.UNTERSTUETZUNG === 'Logo, Texte, Fotos' && felder.TERMIN === 'In einem Monat' && felder.REFERENZ === 'Ja, gerne mit Name, Logo und zwei Sätzen' && /mit Referenzrabatt/.test(felder.PREIS)
+      && /Logo: CHF 390 einmalig; Texte: CHF 150 pro Seite; Fotograf: auf Wunsch, nach Aufwand; Hosting: auf Ihren Namen eingerichtet, ohne Abo/.test(felder.ZUSAETZE),
+      `Mail: Unterstützung «${felder.UNTERSTUETZUNG}», Termin, Referenz, Preis «${felder.PREIS}», Zusätze «${felder.ZUSAETZE}»`);
+    await ctx.close();
+  }
+
+  if (TEILE.includes('einstiege')) {
+    // Einstiege: Vorbelegung, übersprungene Fragen und Mindestpaket
+    const faelle = [
+      { name: 'Musterprojekt Doppelmeter', url: '/projekt-check/?quelle=doppelmeter', erste: 'WEBSITE_HEUTE', paket: 'Standard', felder: { BRANCHE: 'Handwerk und Bau', ZIEL: 'Anrufen', EINSTIEG: 'Musterprojekt Doppelmeter' } },
+      { name: 'Musterprojekt Firstlicht', url: '/projekt-check/?quelle=firstlicht', erste: 'ZIEL', paket: 'Pro', felder: { EINSTIEG: 'Musterprojekt Firstlicht' } },
+      { name: 'Paketkarte Pro (Link)', url: '/projekt-check/?paket=pro', erste: 'ZIEL', paket: 'Pro', felder: { EINSTIEG: 'Paketkarte Pro' } },
+      { name: 'Paketkarte Website', start: '/angebot/', klick: 'a[data-quelle="paket-website"]', erste: 'ZIEL', paket: 'Website', felder: { EINSTIEG: 'Paketkarte Website' } },
+      { name: 'Paketkarte Standard', start: '/angebot/', klick: 'a[data-quelle="paket-standard"]', erste: 'ZIEL', paket: 'Standard', felder: { EINSTIEG: 'Paketkarte Standard' } },
+      { name: 'Hero-Chip', start: '/', klick: '.hero-chip', erste: 'BRANCHE', paket: 'Website', felder: { ZIEL: 'Anrufen', EINSTIEG: 'Startseite, erste Frage' } },
+      { name: 'Branchenseite Handwerk', start: '/website-fuer-handwerker/', klick: 'a[data-quelle="branche-handwerk"]', erste: 'ZIEL', ohne: 'BRANCHE', paket: 'Website', felder: { BRANCHE: 'Handwerk und Bau' } },
+      { name: 'Brief-Link', start: '/start/?firma=Testbetrieb%20Muster&branche=handwerk', klick: 'a[data-quelle="hero"]', erste: 'ZIEL', ohne: 'BRANCHE', paket: 'Website', firma: 'Testbetrieb Muster', felder: { BRANCHE: 'Handwerk und Bau', FIRMA: 'Testbetrieb Muster', EINSTIEG: 'Brief oder QR-Code' } },
+    ];
+    for (const f of faelle) {
+      const ctx = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+      const gesendet = await versandAbfangen(ctx);
+      const page = await ctx.newPage();
+      const probleme = beobachten(page);
+      if (f.url) await page.goto(BASIS + f.url, { waitUntil: 'networkidle' });
+      else {
+        await page.goto(BASIS + f.start, { waitUntil: 'networkidle' }); await warte(500);
+        await page.locator(f.klick).filter({ visible: true }).first().click();
+      }
+      await warte(800);
+      const erste = (await frageJetzt(page)).split(':')[0];
+      let firma = '';
+      const fragen = await nachPlan(page, {}, async (key) => { if (key === 'BETRIEB') firma = await sichtbar(page, '#f-firma').first().inputValue(); });
+      const paket = (await sichtbar(page, '.eg-paket').first().textContent().catch(() => '')).trim();
+      const felder = await senden(page, gesendet, 'voll');
+      const passt = Object.entries(f.felder).every(([k, v]) => felder[k] === v);
+      ok(erste === f.erste && paket === 'Paket ' + f.paket && passt && (!f.ohne || !fragen.includes(f.ohne)) && (!f.firma || firma === f.firma),
+        `Einstieg ${f.name}: erste Frage ${erste}, ${paket}${f.firma ? ', Betrieb vorausgefüllt «' + firma + '»' : ''}, ${Object.keys(f.felder).map((k) => k + ' «' + (felder[k] || '') + '»').join(', ')}`);
+      ok(!probleme.length, `Einstieg ${f.name} ohne Konsolenfehler` + (probleme.length ? ': ' + probleme.join(' | ') : ''));
+      await ctx.close();
+    }
+  }
+
+  if (TEILE.includes('handy')) {
+    // 390 × 664 px: alle Antworten ohne Scrollen sichtbar (ausser Funktionen-Karten), Branchen zweispaltig, Senden direkt unter dem Ergebnis
+    for (const weg of ['Ja', 'Nein']) {
+      const ctx = await neuerKontext({ viewport: { width: 390, height: 664 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
+      const gesendet = await versandAbfangen(ctx);
+      const page = await ctx.newPage();
+      const probleme = beobachten(page);
+      await page.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
+      await warte(600);
+      const zuTief = [];
+      let spalten = 0;
+      await nachPlan(page, { WEBSITE_HEUTE: weg }, async (key) => {
+        await page.evaluate(() => window.scrollTo(0, 0)); await warte(100);
+        const m = await page.evaluate(() => {
+          const vis = (el) => el.getClientRects().length > 0;
+          const leiste = [...document.querySelectorAll('.q-leiste')].find(vis).getBoundingClientRect().top;
+          const karten = [...document.querySelectorAll('.qright .g-ans .acard')].filter(vis).map((b) => b.getBoundingClientRect());
+          return { aussen: karten.filter((r) => r.top < 0 || r.bottom > leiste).length, links: new Set(karten.map((r) => Math.round(r.left))).size };
+        });
+        if (key !== 'FUNKTIONEN' && m.aussen) zuTief.push(key + ' (' + m.aussen + ')');
+        if (key === 'BRANCHE') spalten = m.links;
+      });
+      ok(!zuTief.length && spalten === 2, `390 px, Website «${weg}»: alle Antworten ohne Scrollen sichtbar${zuTief.length ? ', NICHT bei ' + zuTief.join(', ') : ''}, Branchen in ${spalten} Spalten`);
+      // Ganz unten messen: Dort steht der klebende Senden-Knopf an seinem Platz im Ablauf
+      await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight)); await warte(200);
+      const lage = await page.evaluate(() => {
+        const vis = (el) => el && el.getClientRects().length > 0;
+        const y = (sel) => { const el = [...document.querySelectorAll(sel)].find(vis); return el ? el.getBoundingClientRect().top + scrollY : null; };
+        return { ergebnis: (() => { const el = [...document.querySelectorAll('.eg-links')].find(vis); const r = el.getBoundingClientRect(); return r.bottom + scrollY; })(),
+          zustimmung: y('.mf-check input'), senden: y('.mf-haupt'), knopf: y('.mf-angaben'), vorschau: [...document.querySelectorAll('.mf-text')].some(vis) };
+      });
+      ok(lage.zustimmung > lage.ergebnis && lage.zustimmung - lage.ergebnis < 80 && lage.senden > lage.zustimmung && lage.knopf > lage.senden && !lage.vorschau,
+        `390 px: Zustimmung (${Math.round(lage.zustimmung - lage.ergebnis)} px unter dem Ergebnis) und Senden vor «Ihre Angaben ansehen», Vorschau eingeklappt`);
+      await sichtbar(page, '.mf-angaben').first().click(); await warte(200);
+      ok(await sichtbar(page, '.mf-text').count() > 0 && (await sichtbar(page, '.mf-angaben').first().getAttribute('aria-expanded')) === 'true', '390 px: «Ihre Angaben ansehen» klappt die Vorschau auf');
+      const ueberlauf = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
+      ok(ueberlauf <= 0, `390 px: kein seitliches Scrollen (${ueberlauf} px)`);
+      await senden(page, gesendet, 'voll');
+      ok(!probleme.length, `390 px, Website «${weg}» ohne Konsolenfehler` + (probleme.length ? ': ' + probleme.join(' | ') : ''));
       await ctx.close();
     }
   }
@@ -180,9 +392,17 @@ try {
     const probleme = beobachten(page);
     await page.goto(BASIS + '/projekt-check/?kurz=1', { waitUntil: 'networkidle' });
     await warte(600);
-    const schritte = await checkDurchspielen(page, 8);
-    ok(schritte > 0 && schritte <= 4, `Kurzversion: Ergebnis nach ${schritte} Schritten`);
-    if (schritte > 0) await senden(page, gesendet, 'kurz');
+    const kopf = await page.evaluate(() => [...document.querySelectorAll('.q-teil, .q-fortschritt')].filter((x) => x.getClientRects().length).map((x) => x.textContent.trim()));
+    ok(kopf.join(' | ') === 'Frage 1 von 3 | KURZSCHÄTZUNG' || kopf.join(' | ') === 'KURZSCHÄTZUNG | Frage 1 von 3', `Kurzversion: Kopf wie bisher (${kopf.join(' | ')})`);
+    const fragenKurz = [];
+    for (let i = 0; i < 4 && !(await sichtbar(page, '.eg-paket').count()); i++) { fragenKurz.push((await frageJetzt(page)).split(':')[0]); await frageBeantworten(page, i); await sichtbar(page, '.q-weiter-knopf').first().click(); await warte(350); }
+    ok(fragenKurz.join(',') === 'ANGEBOT,FUNKTIONEN,MAIL' && await sichtbar(page, '.eg-paket').count() > 0, `Kurzversion: Angebot, Funktionen, E-Mail, dann Ergebnis (${fragenKurz.join(', ')})`);
+    if (await sichtbar(page, '.eg-paket').count()) {
+      const v = await page.evaluate(() => ({ text: [...document.querySelectorAll('.mf-kopf')].some((x) => x.getClientRects().length) }));
+      ok(v.text, 'Kurzversion: Mail-Fenster mit Eingabe der E-Mail-Adresse wie bisher');
+      const felder = await senden(page, gesendet, 'kurz');
+      ok(felder.ANGEBOT && felder.KONTAKT_MAIL && felder.FUNKTIONEN, `Kurzversion: Angebot, Funktionen und E-Mail gesendet (${Object.keys(felder).join(', ')})`);
+    }
     ok(!probleme.length, 'Kurzversion ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
     await ctx.close();
   }
@@ -261,6 +481,28 @@ try {
     ok(new URL(page.url()).pathname === '/projekt-check/', 'Rechner: «Mit dieser Auswahl» führt in den Projekt-Check');
     ok(!probleme.length, 'Rechner ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
     await ctx.close();
+    // Logo und Texte aus dem Rechner: im Ergebnis und in der Mail, auch ohne die Frage nach Unterstützung; erscheint sie, sind sie vorausgewählt
+    for (const weg of ['Ja', 'Nein']) {
+      const c2 = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+      const gesendet = await versandAbfangen(c2);
+      const p2 = await c2.newPage();
+      const prob2 = beobachten(p2);
+      await p2.goto(BASIS + '/angebot/', { waitUntil: 'networkidle' }); await warte(500);
+      await p2.locator('.rechner-fn .rfn', { hasText: 'Bildergalerie' }).filter({ visible: true }).first().click();
+      for (const t of ['Logo dazu', 'Texte von mir']) await p2.locator('.rechner-fn-z .rfn', { hasText: t }).filter({ visible: true }).first().click();
+      await p2.locator('.rechner-los').filter({ visible: true }).first().click(); await warte(800);
+      let vorgewaehlt = null;
+      const fragen = await nachPlan(p2, { WEBSITE_HEUTE: weg }, async (key) => {
+        if (key === 'UNTERSTUETZUNG') vorgewaehlt = await p2.evaluate(() => [...document.querySelectorAll('.qright .acard[aria-pressed="true"]')].filter((x) => x.getClientRects().length).map((x) => x.textContent.replace('✓', '').trim()));
+      });
+      const zusatz = await p2.evaluate(() => [...document.querySelectorAll('.eg-zusatz dt')].filter((x) => x.getClientRects().length).map((x) => x.textContent));
+      const felder = await senden(p2, gesendet, 'voll');
+      ok(!fragen.includes('FUNKTIONEN') && zusatz.join(',') === 'Logo,Texte,Hosting' && felder.UNTERSTUETZUNG === 'Logo, Texte' && felder.PAKET === 'Standard'
+        && (weg === 'Ja' ? !fragen.includes('UNTERSTUETZUNG') : (vorgewaehlt || []).join(',') === 'Logo,Texte'),
+        `Rechner mit Logo und Texten, Website «${weg}»: Funktionen übersprungen, ${weg === 'Ja' ? 'ohne Frage nach Unterstützung' : 'vorausgewählt: ' + (vorgewaehlt || []).join(', ')}, Zusätze ${zusatz.join(', ')}, Mail «${felder.UNTERSTUETZUNG}»`);
+      ok(!prob2.length, `Rechner, Website «${weg}» ohne Konsolenfehler` + (prob2.length ? ': ' + prob2.join(' | ') : ''));
+      await c2.close();
+    }
   }
 
   if (TEILE.includes('generator')) {
@@ -291,9 +533,14 @@ try {
     await page.fill('#gen-name', 'Testbetrieb Muster');
     await chips.first().click(); await warte(200);
     await sichtbar(page, '.gen-start').first().click(); await warte(800);
-    const check = await page.evaluate(() => ({ pfad: location.pathname, such: location.search, firma: (document.querySelector('input[data-k="firma"]') || {}).value || '' }));
-    ok(check.pfad === '/projekt-check/' && !check.such && /Testbetrieb Muster/.test(check.firma), `Übergabe an den Projekt-Check ohne URL-Parameter, Betrieb vorausgefüllt («${check.firma}»)`);
-    ok(!fremd.length, 'Vorschau-Werkzeug ohne Anfragen an fremde Server' + (fremd.length ? ': ' + fremd.join(', ') : ''));
+    const check = await page.evaluate(() => ({ pfad: location.pathname, such: location.search,
+      branche: [...document.querySelectorAll('.qright .acard[aria-pressed="true"]')].filter((x) => x.getClientRects().length).map((x) => x.textContent.trim()).join('') }));
+    // Der Name steht vorausgefüllt im Bildschirm «Ihr Betrieb». Fremde Anfragen nur bis hier zählen (das Ergebnis lädt Turnstile).
+    const fremdGenerator = fremd.slice();
+    let firma = '';
+    await nachPlan(page, {}, async (key) => { if (key === 'BETRIEB') firma = await sichtbar(page, '#f-firma').first().inputValue(); });
+    ok(check.pfad === '/projekt-check/' && !check.such && /Testbetrieb Muster/.test(firma), `Übergabe an den Projekt-Check ohne URL-Parameter, Betrieb vorausgefüllt («${firma}»)`);
+    ok(!fremdGenerator.length, 'Vorschau-Werkzeug ohne Anfragen an fremde Server' + (fremdGenerator.length ? ': ' + fremdGenerator.join(', ') : ''));
     ok(!probleme.length, 'Vorschau-Werkzeug ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
     await ctx.close();
   }
@@ -455,7 +702,7 @@ try {
       await warte(6000);
       const neu = gesendet.flatMap((g) => g.e || []).slice(vorher);
       ok(neu.some((e) => e.t === 'cta_click'), `${geraet}: Klick auf den Projekt-Check gemessen`);
-      ok(neu.some((e) => e.t === 'page_view' && e.p === '/projekt-check/') && neu.some((e) => e.t === 'projektcheck_start') && neu.some((e) => e.t === 'projektcheck_step' && e.n === 1), `${geraet}: Projekt-Check: Seitenaufruf, Start und Schritt 1`);
+      ok(neu.some((e) => e.t === 'page_view' && e.p === '/projekt-check/') && neu.some((e) => e.t === 'projektcheck_start') && neu.some((e) => e.t === 'projektcheck_step' && e.n === 1 && e.z === 'ZIEL'), `${geraet}: Projekt-Check: Seitenaufruf, Start und Schritt 1 mit Schlüssel ZIEL`);
       ok(!JSON.stringify(gesendet).match(/@|Testbetrieb/), `${geraet}: keine Eingaben in den gesendeten Daten`);
       // Widerruf (Fusszeile auf der Startseite; der Projekt-Check hat keine Fusszeile)
       await page.goto(BASIS + '/', { waitUntil: 'networkidle' }); await warte(800);

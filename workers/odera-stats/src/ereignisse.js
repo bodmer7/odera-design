@@ -84,6 +84,8 @@ export function bereinigen(sendung, { land = null, jetzt = new Date() } = {}) {
       case 'projektcheck_step':
         zeile.zahl = zahl(e.n, 1, 40);
         if (zeile.zahl === null) continue;
+        // Schlüssel der Frage (z. B. ZIEL, BRANCHE), damit sich Abbrüche pro Frage auswerten lassen. Nie eine Antwort.
+        zeile.ziel = typeof e.z === 'string' && /^[A-Z][A-Z_]{1,29}$/.test(e.z) ? e.z : null;
         break;
       case 'projektcheck_submit':
         zeile.ziel = e.z === 'ok' ? 'ok' : 'fehler';

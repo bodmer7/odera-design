@@ -34,7 +34,7 @@ Ein Ereignis: `{ t: Typ, p: Pfad, z: Ziel, n: Zahl, i: Zusatz }`.
 | `cta_click` | Knopf-ID | | Klick auf einen Link zum Projekt-Check |
 | `pricing_click` | `website`, `standard`, `pro` | | Klick auf einen Paket-Knopf (`data-quelle="paket-…"`) |
 | `projektcheck_start` | | | erste Frage des Projekt-Checks sichtbar |
-| `projektcheck_step` | | Fragenummer | Fortschrittsbalken `.q-prog[aria-valuenow]`, einmal pro Schritt und Sitzung |
+| `projektcheck_step` | Schlüssel der Frage (`ZIEL`, `BRANCHE`, `WEBSITE_HEUTE`, `WEBSITE_PROBLEME`, `UNTERSTUETZUNG`, `FUNKTIONEN`, `BETRIEB`, `KONTAKT`; Kurzversion `ANGEBOT`, `FUNKTIONEN`, `MAIL`) | Fragenummer | Fortschrittsbalken `.q-prog[aria-valuenow]` und `data-frage`, einmal pro Schritt und Frage in der Sitzung. Seit 29. Oktober 2026 (`statistik.js?v=6`), ältere Zeilen ohne Schlüssel. Nie Antworten. Die Nummern sind nicht fest einer Frage zugeordnet (Folgefragen, Einstiege überspringen Fragen), darum pro Frage über `ziel` auswerten. |
 | `projektcheck_submit` | `ok` oder `fehler` | | Ergebnis des Absendens (`assets/js/anfrage.js`) |
 | `generator_use` | Branche | | Branche gewählt, «Beispiel zeigen», erste Eingabe beim Namen |
 | `generator_cta` | Branche | | «So weitermachen: Projekt-Check starten» im Vorschau-Werkzeug |

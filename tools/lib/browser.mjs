@@ -13,11 +13,26 @@ export const ROOT = dirname(dirname(dirname(fileURLToPath(import.meta.url))));
 export const QUELLE = join(ROOT, 'src', 'seite.html');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// Tabelle PAGES aus der Quelle
+// Kennzahlen des Projekt-Checks, gleich gerechnet wie werte() in src/seite.html: Minuten (CHECK_MINUTEN), Zahl der Fragen
+// ohne Folgefragen und ohne Fragen nur für die Kurzversion (fragenZahl), erforderliche Minuten im Ablauf (zeitSumme(true))
+export function checkWerte(quelle) {
+  const min = Number((quelle.match(/ {2}CHECK_MINUTEN = (\d+);/) || [])[1]);
+  const fragen = ((quelle.match(/ {2}Q = \[([\s\S]*?)\n {2}\];/) || [])[1] || '').split(/\n {4}\{ key: '/).slice(1).filter((f) => !/nurKurz: true|wenn: /.test(f)).length;
+  const steps = new Function('return ' + ((quelle.match(/ {2}STEPS = (\[[\s\S]*?\n {2}\]);/) || [])[1] || '[]').replace(/this\.CHECK_MINUTEN/g, String(min)))();
+  const erf = steps.reduce((m, st) => m + (st[3] ? st[2] : 0), 0);
+  if (!min || !fragen || !erf) throw new Error('CHECK_MINUTEN, Q oder STEPS in src/seite.html nicht gefunden.');
+  return { MIN: String(min), FRAGEN: String(fragen), ERF_MIN: String(erf) };
+}
+
+// Tabelle PAGES aus der Quelle, Platzhalter in Titel und Beschreibung ({MIN}, {FRAGEN}, {ERF_MIN}) aufgelöst
 export function leseSeiten(quelle) {
   const pagesText = quelle.match(/ {2}PAGES = (\{[\s\S]*?\n {2}\});/);
   if (!pagesText) throw new Error('Tabelle PAGES in index.html nicht gefunden.');
-  return new Function('return ' + pagesText[1])();
+  const seiten = new Function('return ' + pagesText[1])();
+  const w = checkWerte(quelle);
+  const aufloesen = (t) => t.replace(/\{([A-Z_]+)\}/g, (m, k) => { if (w[k] === undefined) throw new Error('Platzhalter ' + m + ' in PAGES nicht auflösbar.'); return w[k]; });
+  for (const p of Object.values(seiten)) for (const k of ['title', 'desc']) if (p[k]) p[k] = aufloesen(p[k]);
+  return seiten;
 }
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml',

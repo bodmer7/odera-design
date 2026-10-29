@@ -359,9 +359,10 @@ ohne Tracking und ohne Cookies.
 | Quelle | Ort | Vorbelegt |
 |---|---|---|
 | `hero` | Startseite, erste Frage als Chips | Ziel |
-| `rechner` | Angebot, Preis-Rechner | Funktionen, auf Wunsch Logo und Texte |
-| `paket-website`, `paket-standard`, `paket-pro` | Angebot, Knopf auf der Paketkarte | Seitenzahl |
-| `doppelmeter` | Musterprojekte, «So etwas für meinen Betrieb» | Branche Handwerk, Ziel Anrufen, bis 5 Seiten |
+| `rechner` | Angebot, Preis-Rechner | Funktionen, auf Wunsch Logo und Texte (bleiben im Ergebnis und in der Mail; erscheint die Frage nach Unterstützung, sind sie vorausgewählt) |
+| `paket-website`, `paket-standard`, `paket-pro` | Angebot, Knopf auf der Paketkarte | Standard und Pro: Mindestpaket |
+| `doppelmeter` | Musterprojekte, «So etwas für meinen Betrieb» | Branche Handwerk, Ziel Anrufen, Mindestpaket Standard |
+| `firstlicht` | Musterprojekt Firstlicht, Beispiel-Leiste | Mindestpaket Pro |
 | `slider` | Startseite, unter dem Ladezeit-Vergleich | bestehende Website, «wirkt veraltet, lädt langsam» |
 | `ablauf` | Ablauf, bei Schritt 1 | nichts |
 | `faq` | Angebot, am Ende der häufigen Fragen | nichts |
@@ -371,7 +372,10 @@ ohne Tracking und ohne Cookies.
 | `brief` | Brief-Link `/start/?firma=...&branche=...` | Firma, Branche |
 
 Der Fortschritt bleibt im `sessionStorage` des Tabs (kein Cookie) und ist nach dem Senden gelöscht.
-Die Paket-Logik steht einmal in `paketAus()`; Projekt-Check und Preis-Rechner nutzen sie beide.
+Die Paket-Logik steht einmal in `paketAus()`; Projekt-Check und Preis-Rechner nutzen sie beide. Das Paket ergibt sich nur
+aus den Funktionen, mindestens aber aus dem Mindestpaket des Einstiegs (`mindest` in `EINSTIEGE`). Den Umfang im Ergebnis
+nennt `PAKET_UMFANG` wörtlich aus den Paketinhalten der Preisliste, die Funktionen stehen in ihrer Satzform (fünfte Spalte
+von `FUNKTIONEN`).
 
 ### Brief-Links und QR-Codes
 
@@ -396,9 +400,9 @@ Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse
 | `STAND_RECHTSTEXTE` | 21. Oktober 2026 | Bei jeder Änderung an Impressum, Datenschutz oder AGB auf das Datum der Änderung setzen. |
 | `PLAETZE_TOTAL`, `PLAETZE_FREI` | 2 und 1 | Auf den tatsächlichen Stand setzen. Einzige Quelle für alle Anzeigen der Auslastung: Badge im Hero (Handy), Menü, Abschluss der Startseite und Kapazität auf Über mich. |
 | `DURCHSCHNITT_SEKUNDEN` | 0 | Solange 0, bleibt die Vergleichsleiste der Ladezeitmessung ausgeblendet. Nur mit belegtem Wert eintragen und die Quelle in der Fussnote nennen. |
-| `STUNDENSATZ_CHF` | 120 | Ansatz für Änderungen nach der Übergabe. Erscheint auf der Angebotsseite («Nach der Übergabe», «Was nicht im Preis ist»), der Ablaufseite, in den AGB (Paragraf 7), auf den Branchenseiten und in `llms.txt`. Einen Betrieb durch ODERA gibt es seit 21. Oktober 2026 nicht mehr: Das Hosting wird auf den Namen des Kunden eingerichtet (Antworten der Frage `HOSTING`: `HOSTING_EGAL`, `HOSTING_CH`, `HOSTING_OFFEN`). Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
+| `STUNDENSATZ_CHF` | 120 | Ansatz für Änderungen nach der Übergabe. Erscheint auf der Angebotsseite («Nach der Übergabe», «Was nicht im Preis ist»), der Ablaufseite, in den AGB (Paragraf 7), auf den Branchenseiten und in `llms.txt`. Einen Betrieb durch ODERA gibt es seit 21. Oktober 2026 nicht mehr: Das Hosting wird auf den Namen des Kunden eingerichtet. Der Projekt-Check fragt seit 29. Oktober 2026 nicht mehr danach, das Ergebnis nennt «auf Ihren Namen eingerichtet, ohne Abo». Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `LOGO_ALLEIN_CHF`, `LOGO_MIT_WEBSITE_CHF` | 490 und 390 | Einzige Quelle für den Logo-Zusatz. Erscheint auf der Angebotsseite (Karte und Druckansicht), im Ergebnis des Projekt-Checks und im Mailtext (`LOGO_PREIS`). Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
-| Fragen des Projekt-Checks | 18 in sechs Abschnitten, rund 6 Minuten | Definition in `Q` (index.html), angesprochen über Schlüssel, nicht über die Reihenfolge. Folgefragen haben `wenn`, die E-Mail-Frage der Kurzversion `nurKurz`. Die Kurzversion steht in `QUICK`. Fragenzahl und Minuten auf der Seite rechnen sich aus `Q` und `CHECK_MINUTEN`; nur der Satz in `STEPS` nennt die Zahl fest, `tools/anfrage-schema.mjs` prüft ihn. Neue Antworten auch in `briefing()` und `ANFRAGE.felder` eintragen, dann `node tools/seo-build.mjs` und den Worker `anfrage-proxy` neu veröffentlichen. |
+| Fragen des Projekt-Checks | 6 Fragen ohne Abschnitte, rund 2 Minuten (seit 29. Oktober 2026, vorher 18) | Definition in `Q` (index.html), angesprochen über Schlüssel, nicht über die Reihenfolge: `ZIEL`, `BRANCHE`, `WEBSITE_HEUTE` mit den Folgefragen `WEBSITE_PROBLEME` (bei «Ja») und `UNTERSTUETZUNG` (bei «Nein», Logo, Texte, Fotos), `FUNKTIONEN`, `BETRIEB` (Name, Ort, Angebot) und `KONTAKT` (mit Termin-Chips und Häkchen für die Referenz). Folgefragen haben `wenn` und zählen im Fortschritt mit, Fragen nur für die Kurzversion `nurKurz`. Die Kurzversion steht in `QUICK`. Einfachauswahl geht nach 250 ms selbst weiter, ausser beim Ändern und wenn die Antwort ein Zusatzfeld öffnet. Fragenzahl und Minuten rechnen sich überall aus `Q` und `CHECK_MINUTEN`, auch Titel und Beschreibung in `PAGES` (Platzhalter `{FRAGEN}`, `{MIN}`, `{ERF_MIN}`, aufgelöst von `werte()` und `tools/lib/browser.mjs`). Neue Antworten auch in `briefing()` und `ANFRAGE.felder` eintragen, dann `node tools/seo-build.mjs` und den Worker `anfrage-proxy` neu veröffentlichen. |
 | `ANFRAGE_ENDPOINT`, `TURNSTILE_SITEKEY` | leer | Schalter für den Direktversand im Projekt-Check (`anfrage-proxy/`). Erst setzen, wenn die Domain in Resend verifiziert ist. Danach `STAND_RECHTSTEXTE` anpassen und `node tools/seo-build.mjs` ausführen. |
 | `CHAT_ENDPOINT` | leer | Adresse des Chat-Proxys (`chat-proxy/`). Leer heisst: Assistent ausgeblendet. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `SITE` | `https://odera.ch` | Adresse der Website in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |

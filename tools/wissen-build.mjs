@@ -92,7 +92,7 @@ function referenz() {
   const fmt = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
   const zeilen = ['Website', 'Standard', 'Pro'].map((n, i) => `${n}: ${fmt(preise[i])}, als Referenz ${fmt(map[n])}`);
   return absatz[1].replace('Dafür bekommen Sie {betrag} Rabatt.', 'Dafür bekommen Sie einen Rabatt, die Beträge stehen unten.') +
-    '\nDie Frage nach der Referenz steht im Projekt-Check. Der Referenzpreis gilt nur für die Website, nicht für Logo oder Betrieb.\n' + zeilen.join('\n');
+    '\nDas Häkchen für die Referenz steht im Projekt-Check bei den Kontaktangaben. Der Referenzpreis gilt nur für die Website, nicht für Logo oder Betrieb.\n' + zeilen.join('\n');
 }
 function projektCheck() {
   const hinweis = quelle.match(/<p [^>]*>(Dieses Formular ist eine unverbindliche Projektanfrage\.[^<]*)</);
@@ -110,7 +110,7 @@ function projektCheck() {
   const hinweisText = hinweis[1].replace('{{ hinweisErsterSchritt }}', direkt ? varianten[1] : varianten[2]);
   return [
     `Adresse: ${SITE}/projekt-check/`,
-    `Der Projekt-Check hat ${anzahl} Fragen in sechs Abschnitten und dauert rund ${minuten} Minuten, fast alles per Klick. Eine Kurzschätzung mit drei Fragen gibt es unter ${SITE}/projekt-check/?kurz=1.`,
+    `Der Projekt-Check hat ${anzahl} Fragen und dauert rund ${minuten} Minuten, fast alles per Klick. Eine Kurzschätzung mit drei Fragen gibt es unter ${SITE}/projekt-check/?kurz=1.`,
     direkt
       ? 'Am Schluss zeigt der Projekt-Check eine Paketempfehlung mit Richtpreis und die fertige Anfrage. Mit einem Klick auf «Senden» geht sie direkt an Nico. Auf Wunsch kommt eine Kopie an die eigene E-Mail-Adresse. Danach erscheint eine Referenznummer.'
       : 'Am Schluss zeigt der Projekt-Check eine Paketempfehlung mit Richtpreis und öffnet eine vorbereitete E-Mail, die man selbst absendet.',

@@ -200,7 +200,7 @@
     for (var i = 0; i < liste.length; i++) if (!beobachtet.has(liste[i])) { beobachtet.add(liste[i]); beobachter.observe(liste[i]); }
   }
 
-  // Projekt-Check: Schritt aus dem Fortschrittsbalken
+  // Projekt-Check: Schritt und Schlüssel der Frage (z. B. ZIEL) aus dem Fortschrittsbalken, nie die Antworten
   var schrittStart = false;
   function projektCheck() {
     if (!aktiv) return;
@@ -209,11 +209,14 @@
       if (!balken[i].offsetParent) continue;
       var n = parseInt(balken[i].getAttribute('aria-valuenow'), 10);
       if (!(n >= 1)) continue;
+      var frage = /^[A-Z][A-Z_]{1,29}$/.test(balken[i].getAttribute('data-frage') || '') ? balken[i].getAttribute('data-frage') : '';
       if (!schrittStart) { schrittStart = true; merke({ t: 'projektcheck_start' }); }
-      var bekannt = lesen('sessionStorage', 'odera-st-schritte') || '';
-      if ((',' + bekannt + ',').indexOf(',' + n + ',') < 0) {
-        schreiben('sessionStorage', 'odera-st-schritte', bekannt ? bekannt + ',' + n : String(n));
-        merke({ t: 'projektcheck_step', n: n });
+      // Einmal pro Schritt und Frage in dieser Sitzung (Folgefragen und Einstiege verschieben die Nummern)
+      var kennung = n + ':' + frage;
+      var bekannt = lesen('sessionStorage', 'odera-st-fragen') || '';
+      if ((',' + bekannt + ',').indexOf(',' + kennung + ',') < 0) {
+        schreiben('sessionStorage', 'odera-st-fragen', bekannt ? bekannt + ',' + kennung : kennung);
+        merke(frage ? { t: 'projektcheck_step', n: n, z: frage } : { t: 'projektcheck_step', n: n });
       }
     }
   }
@@ -362,7 +365,7 @@
   new MutationObserver(function () {
     if (!aktiv || anstoss) return;
     anstoss = setTimeout(function () { anstoss = null; abschnitteSuchen(); projektCheck(); }, 400);
-  }).observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ['aria-valuenow'] });
+  }).observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ['aria-valuenow', 'data-frage'] });
 
   document.addEventListener('click', klick, true);
   document.addEventListener('input', eingabe, true);

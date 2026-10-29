@@ -9,7 +9,7 @@ import { mailAnNico, mailKopie, maskiere } from '../src/mail.js';
 
 const VOLL = {
   FIRMA: 'Bäckerei Müller', ORT: 'Zürich', BRANCHE: 'Gastronomie und Hotellerie', ANGEBOT: 'Wir backen seit 1990.\nFrisch jeden Tag.',
-  ZIEL: 'Vorbeikommen', SEITENZAHL: 'Bis 5 Seiten', FUNKTIONEN: 'Kontaktformular, Bildergalerie oder Referenzen', TERMIN: 'In einem Monat',
+  ZIEL: 'Vorbeikommen', WEBSITE_HEUTE: 'Nein', UNTERSTUETZUNG: 'Logo, Texte', FUNKTIONEN: 'Kontaktformular, Bildergalerie oder Referenzen', TERMIN: 'In einem Monat',
   KONTAKT_NAME: 'Anna Muster', KONTAKT_MAIL: 'anna@beispiel.ch', KONTAKT_TEL: '079 000 00 00', KONTAKTWEG: 'Telefon',
   PAKET: 'Standard', PREIS: "CHF 1'900", ZUSAETZE: 'Logo: CHF 390 einmalig', EINSTIEG: 'Preis-Rechner',
 };
@@ -56,6 +56,25 @@ test('Erfolg: Mail an Nico mit Reply-To, Referenz, kein Versand der Kopie ohne W
   assert.match(m.text, /KURZÜBERSICHT\nFirma: Bäckerei Müller\nBranche: Gastronomie und Hotellerie\nBesucher sollen: Vorbeikommen\nPaket: Standard, CHF 1'900\nZusätze: Logo: CHF 390 einmalig\nOnline bis: In einem Monat/);
   assert.match(m.text, /Kontakt am liebsten per: Telefon/);
   assert.match(m.text, /Einstieg: Preis-Rechner/);
+});
+
+test('Mail mit sechs Fragen: Unterstützung lesbar, keine leeren Abschnitte, entfernte Felder verworfen', async () => {
+  const { env, mails } = umgebung();
+  const alt = { SEITENZAHL: 'Bis 5 Seiten', HOSTING: 'Weiss ich noch nicht', LOGO: 'Ja', STIL: 'Modern und klar', DOMAIN: 'Ja: x.ch', REGION: 'Im ganzen Kanton' };
+  const r = await post(env, koerper({ felder: { ...VOLL, ...alt, REFERENZ: 'Ja, gerne mit Name, Logo und zwei Sätzen' } }));
+  assert.equal(r.status, 200);
+  const t = mails[0].text;
+  assert.match(t, /\nINHALTE\nUnterstützung bei: Logo, Texte\n/);
+  assert.match(t, /\nZEITPLAN\nOnline bis: In einem Monat\n/);
+  assert.match(t, /Referenz: Ja, gerne mit Name, Logo und zwei Sätzen/);
+  for (const k of ['Seitenzahl', 'Hosting:', 'Stil', 'Domain', 'Kunden aus', 'TECHNIK', 'INHALTE UND STIL']) assert.doesNotMatch(t, new RegExp(k), k);
+  // Ohne Unterstützung und Termin fehlen diese Abschnitte ganz
+  const ohne = { ...VOLL }; delete ohne.UNTERSTUETZUNG; delete ohne.TERMIN;
+  const m = mailAnNico(pruefeAnfrage(koerper({ felder: ohne })).daten, 'ODR-TEST');
+  assert.doesNotMatch(m.text, /INHALTE|ZEITPLAN|Online bis/);
+  assert.doesNotMatch(m.html, /Inhalte<\/h2>|Zeitplan<\/h2>/);
+  assert.deepEqual(ANFRAGE.pflicht.voll, ['FIRMA', 'BRANCHE', 'ANGEBOT', 'ZIEL', 'KONTAKT_NAME', 'KONTAKT_MAIL']);
+  assert.deepEqual(ANFRAGE.mindestSek, { voll: 20, kurz: 6 });
 });
 
 test('Kopie an die Kundin: Absender anfrage@, Reply-To kontakt@', async () => {

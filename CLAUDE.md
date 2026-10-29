@@ -1,7 +1,7 @@
 # CLAUDE.md: Entscheidungen und offene Punkte für odera.ch
 
 Kurzfassung für die Arbeit an diesem Repo. Technische Details stehen im `README.md`,
-hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 21. Oktober 2026.
+hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 29. Oktober 2026.
 
 ## Feste Regeln
 
@@ -57,6 +57,20 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 21. Oktober 
 - Mindestdauer bis zum Senden: 20 s (voll), 6 s (Kurzversion). Schnellere Anfragen lehnt der Worker
   ab, auch in Tests.
 
+### Projekt-Check mit sechs Fragen (seit 29. Oktober 2026, Branch `projekt-check-kurz`)
+- Ein Gratis-Entwurf ist schnell gebaut. Gefragt wird darum nur, was es für den Entwurf und eine grobe Preisschätzung
+  braucht, alles andere klärt Nico nach dem Entwurf.
+- Fragen: Ziel, Branche, Website heute (Folgefrage «Was stört» oder «Wobei brauchen Sie Unterstützung?»), Funktionen,
+  «Ihr Betrieb» (Name, Ort, Angebot), Kontakt (mit Termin-Chips und Häkchen für die Referenz). Entfernt: Region, Kunden,
+  Seitenzahl, Stil, Vorbilder, Farben, Domain, Hosting, Logo, Texte, Fotos als eigene Fragen.
+- Paket nur aus den Funktionen plus Mindestpaket aus dem Einstieg (Paketkarten Standard und Pro, Doppelmeter, Firstlicht).
+- Einfachauswahl geht nach 250 ms selbst weiter (nicht beim Ändern, nicht bei Zusatzfeld). Fortschritt «Frage 2 von 6»,
+  Folgefragen zählen mit. Bei 390 × 664 px sind alle Antworten ohne Scrollen sichtbar (ausser Funktionen-Karten),
+  Test `node tools/funktionstest.mjs … handy`. Senden-Ansicht unter 768 px: Zustimmung und Senden direkt unter dem
+  Ergebnis, Mail-Vorschau hinter «Ihre Angaben ansehen».
+- Statistik: `projektcheck_step` trägt den Schlüssel der Frage in `ziel` (nie Antworten). Braucht den Worker `odera-stats`
+  in der neuen Fassung, sonst wird der Schlüssel verworfen.
+
 ### Statistik (Teil 11, live seit 8. Oktober 2026)
 - Eigener Worker `odera-stats` in `workers/odera-stats/`, D1 `odera-stats` in der EU (Jurisdiktion eu),
   Rohdaten nach 14 Monaten gelöscht. Referenz für Ereignisse, IDs und API: `docs/tracking.md`.
@@ -101,7 +115,8 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 21. Oktober 
   Änderungen nach der Übergabe zu `STUNDENSATZ_CHF` (120) pro Stunde mit Schätzung vorab.
 - Angebot: Abschnitt «Nach der Übergabe» unter dem alten Anker `#betrieb` (Abschnitts-ID `betrieb` bleibt). AGB
   Paragrafen 5 bis 8 auf Nicos Auftrag umformuliert (Ausnahme von «nur ergänzen»), Stand `STAND_RECHTSTEXTE`.
-- Projekt-Check: Frage `HOSTING` «Wo soll Ihre Website laufen?» an derselben Stelle, weiterhin 18 Fragen.
+- Projekt-Check: Die Frage `HOSTING` gibt es seit 29. Oktober 2026 nicht mehr (siehe «Projekt-Check mit sechs Fragen»).
+  Das Ergebnis nennt beim Hosting «auf Ihren Namen eingerichtet, ohne Abo».
 - Paket Pro (Texte selbst bearbeiten, Terminbuchung): Punkt 03 «Keine Updates nötig» gilt ausdrücklich nur für die
   Website selbst, nicht für Dienste, die ein Pro-Zusatz nutzt.
 
@@ -208,6 +223,10 @@ Beispielseiten erfundener Betriebe (Doppelmeter, Firstlicht). Für jedes Muster 
       nach anderen Tests läuft. Einzeln grün.
 - [x] **`README.md` nicht auf odera.ch:** am 12. Oktober 2026 geprüft, `/README.md`, `/CLAUDE.md` und
       `/docs/tracking.md` liefern 404 (`_config.yml`). Auf GitHub bleiben sie öffentlich.
+- [ ] **Trichter im Akquise-Tool** (Tab «Website»): zeigt weiterhin «Frage N» aus `funnel.steps`. Seit dem Projekt-Check mit
+      sechs Fragen (29. Oktober 2026) ist eine Nummer nicht mehr fest einer Frage zugeordnet (Folgefragen, Einstiege), und
+      Zeiträume über den Wechsel mischen alte und neue Nummern. Auswertung pro Frage über `ziel` in den Rohdaten; die Anzeige
+      pro Frage (Summary von odera-stats und Website-Tab) ist noch nicht gebaut.
 - [ ] **Alte lokale Branches** aufräumen (`fehler`, `mobil`, `generator`, `generator2` und ältere
       sind in `main` enthalten). Ausnahme: `chat-assistent` hat Commits, die nicht in `main` sind.
       Vor dem Löschen prüfen.

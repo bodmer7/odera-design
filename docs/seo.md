@@ -20,7 +20,7 @@ der Website ist das Google-Unternehmensprofil.
 - `robots.txt` erlaubt alle Crawler und nennt die bekannten Such- und KI-Crawler (GPTBot, OAI-SearchBot, ClaudeBot,
   PerplexityBot, Google-Extended, Applebot-Extended und weitere) ausdrücklich. Liste: `KI_CRAWLER` in `tools/seo-build.mjs`.
 - `llms.txt` nach llmstxt.org (Kurzfassung, Preise, Links zu allen öffentlichen Seiten und Artikeln), erzeugt aus denselben
-  Werten wie die Seiten (`PAKET_PREIS`, `LOGO_*`, `HOSTING_*`, `PAGES`, Einblicke).
+  Werten wie die Seiten (`PAKET_PREIS`, `LOGO_*`, `STUNDENSATZ_CHF`, `PAGES`, `CHECK_MINUTEN`, Einblicke).
 
 ## Begriffsplan
 
@@ -46,14 +46,14 @@ und auf Über mich. Name, Ort und E-Mail überall gleich: «ODERA Design», «Be
 |---|---|---|
 | `/` | Website erstellen lassen ab CHF 890 · ODERA Design (50) | Neue Website für Ihren Betrieb: fertiger Entwurf in 5 Arbeitstagen, gratis und unverbindlich. Fixpreis ab CHF 890. Webdesign aus Berikon AG. (140) |
 | `/angebot/` | Was kostet eine Website? Fixpreise · ODERA Design (49) | Website, Standard oder Pro: drei Pakete zum Fixpreis ab CHF 890, einmalig und ohne Abo. Hosting auf Ihren Namen eingerichtet. (125) |
-| `/ablauf/` | Website erstellen lassen: der Ablauf · ODERA Design (51) | Vier Phasen, 81 Minuten Ihrer Zeit, mit optionalen Schritten knapp 2 Stunden. Sie sehen den fertigen Entwurf, bevor Sie einen Franken bezahlen. (143) |
+| `/ablauf/` | Website erstellen lassen: der Ablauf · ODERA Design (51) | Vier Phasen, 77 Minuten Ihrer Zeit, mit optionalen Schritten knapp 2 Stunden. Sie sehen den fertigen Entwurf, bevor Sie einen Franken bezahlen. (143) |
 | `/musterprojekte/` | Webdesign Beispiele für Betriebe · ODERA Design (47) | Zwei Beispiel-Websites für Handwerk und Solar. Sehen Sie, wie Ihre neue Seite aussehen könnte, und testen Sie Ihren Betrieb in zehn Sekunden. (141) |
 | `/ueber-mich/` | Nico Bodmer, Webdesigner aus Berikon · ODERA Design (51) | Sie reden mit dem, der die Seite baut: Nico Bodmer aus Berikon AG baut Websites für Betriebe im Aargau und in der ganzen Schweiz. (129) |
 | `/website-fuer-handwerker/` | Website für Handwerker ab CHF 890 · ODERA Design (48) | Website für Ihren Handwerksbetrieb: Telefonnummer, Referenzbilder, Offerte-Knopf. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890. (146) |
 | `/website-fuer-restaurants/` | Website für Restaurants und Cafés · ODERA Design (48) | Website für Ihr Restaurant oder Café: Karte, Öffnungszeiten und Reservation auf dem Handy. Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890. (146) |
 | `/website-fuer-praxen/` | Website für Praxen ab CHF 890 · ODERA Design (44) | Website für Ihre Praxis: Termine, Team und Anfahrt klar gezeigt, Server auf Wunsch in der Schweiz. Entwurf in 5 Arbeitstagen, gratis. Ab CHF 890. (145) |
 | `/website-fuer-laeden/` | Website für Läden ab CHF 890 · ODERA Design (43) | Website für Ihren Laden: Sortiment, Öffnungszeiten und Anfahrt auf einen Blick. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890. (144) |
-| `/projekt-check/` | Projekt-Check: Angebot in 6 Minuten · ODERA Design (50) | 18 kurze Fragen, rund 6 Minuten. Danach erhalten Sie ein Angebot zum Fixpreis und einen kostenlosen Entwurf Ihrer neuen Website, ohne Risiko. (141) |
+| `/projekt-check/` | Projekt-Check: Angebot in 2 Minuten · ODERA Design (50) | 6 kurze Fragen, rund 2 Minuten. Danach erhalten Sie ein Angebot zum Fixpreis und einen kostenlosen Entwurf Ihrer neuen Website, ohne Risiko. (140) |
 | `/impressum/` | Impressum · ODERA Design (24) | (noindex) (0) |
 | `/datenschutz/` | Datenschutzerklärung · ODERA Design (35) | Welche Daten beim Besuch von odera.ch, im Projekt-Check, im Chat und bei der Statistik mit Einwilligung bearbeitet werden. Keine Cookies. (137) |
 | `/agb/` | Allgemeine Geschäftsbedingungen · ODERA Design (46) | Allgemeine Geschäftsbedingungen von ODERA Design für Websites zum Fixpreis: Entwurf, Zahlung nach Annahme, Übergabe, Hosting und Domain. (136) |
@@ -135,7 +135,7 @@ für Person und Firma wie `tools/seo-build.mjs`.
     - h3 Die Inhalte kommen nie.
     - h3 Es reden zu viele mit.
     - h3 Die Zugangsdaten sind weg.
-  - h2 Schritt 1 dauert rund 6 Minuten.
+  - h2 Schritt 1 dauert rund 2 Minuten.
 
 ### `/musterprojekte/` ✓
 
