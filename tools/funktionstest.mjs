@@ -436,8 +436,20 @@ try {
       await warte(600);
       const zuTief = [];
       let spalten = 0;
+      const kompakt = {};
       await nachPlan(page, { WEBSITE_HEUTE: weg }, async (key) => {
         await page.evaluate(() => window.scrollTo(0, 0)); await warte(100);
+        // Antwortraster immer volle Breite, Funktionen kompakt mit Paket-Hinweis in der Leiste, Kontaktweg als Chips
+        Object.assign(kompakt, await page.evaluate((key) => {
+          const vis = (el) => el.getClientRects().length > 0, v = (sel) => [...document.querySelectorAll(sel)].filter(vis);
+          const g = v('.qright .g-ans')[0], r = v('.qright')[0];
+          const out = {};
+          if (g && key !== 'KONTAKT') out['breite_' + key] = Math.round(r.getBoundingClientRect().width - g.getBoundingClientRect().width);
+          if (key === 'FUNKTIONEN') { out.hoehe = +(document.documentElement.scrollHeight / innerHeight).toFixed(2); out.leiste = v('.q-leiste-paket').map((e) => e.textContent).join('');
+            out.hilfeOben = v('.q-help')[0].getBoundingClientRect().bottom <= v('.g-karten')[0].getBoundingClientRect().top; }
+          if (key === 'KONTAKT') out.chips = v('.g-ans .acard').map((e) => Math.round(e.getBoundingClientRect().height));
+          return out;
+        }, key));
         const m = await page.evaluate(() => {
           const vis = (el) => el.getClientRects().length > 0;
           // Ohne Leiste (Frage 1 ohne Antwort) zählt der untere Bildschirmrand
@@ -449,6 +461,10 @@ try {
         if (key === 'BRANCHE') spalten = m.links;
       });
       ok(!zuTief.length && spalten === 2, `390 px, Website «${weg}»: alle Antworten ohne Scrollen sichtbar${zuTief.length ? ', NICHT bei ' + zuTief.join(', ') : ''}, Branchen in ${spalten} Spalten`);
+      const schmal = Object.keys(kompakt).filter((k) => /^breite_/.test(k) && kompakt[k] > 1);
+      ok(!schmal.length, `390 px, Website «${weg}»: Antwortraster überall volle Breite${schmal.length ? ', NICHT bei ' + schmal.join(', ') : ''}`);
+      ok(kompakt.hoehe <= 1.7 && /^Sieht nach Paket \w+ aus$/.test(kompakt.leiste) && kompakt.hilfeOben, `390 px: Funktionen ${kompakt.hoehe} Bildschirme hoch (vorher 2,4), «${kompakt.leiste}» in der Leiste, Hinweis über den Karten`);
+      ok(kompakt.chips && kompakt.chips.length === 2 && kompakt.chips.every((h) => h <= 48), `390 px: Kontaktweg als zwei kompakte Chips (${(kompakt.chips || []).join(', ')} px hoch)`);
       // Ganz unten messen: Dort steht der klebende Senden-Knopf an seinem Platz im Ablauf
       await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight)); await warte(200);
       const lage = await page.evaluate(() => {
