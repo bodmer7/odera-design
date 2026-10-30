@@ -134,6 +134,8 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 30. Oktober 
   eigene Sitemap `einblicke/sitemap.xml` (in `robots.txt`), RSS `einblicke/feed.xml`. Ohne Artikel ist die
   Übersicht `noindex`.
 - Am Ende jedes Artikels der Projekt-Check (`?quelle=einblicke`). Tests: `node tools/funktionstest.mjs … einblicke`.
+- Übersicht seit 30. Oktober 2026: zwei Reihen Beiträge, die dritte angeschnitten mit Verlauf, darunter «Mehr anzeigen». Nur in
+  `assets/js/einblicke.js` und `einblicke.css` (Generator unverändert, alle Karten bleiben im HTML, ohne JavaScript alles sichtbar).
 - Seit 13. Oktober 2026 schreibt der Generator (`src/logik/einblicke.ts` im Akquise-Repo) die SEO wie die übrigen
   Seiten: Titel-Trenner «·», Zusatz « · ODERA Design» nur bis 65 Zeichen, sonst ohne, zu lange Titel mit Kurztitel
   (`titel_kurz` in `src/einblicke/<pfad>.json`, die h1 bleibt), Twitter-Angaben, BlogPosting mit `@id` von Person

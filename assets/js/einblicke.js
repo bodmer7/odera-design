@@ -2,6 +2,71 @@
 // Gleiches Verhalten wie auf den übrigen Seiten (src/seite.html): Unterstrich unter dem aktiven Menüpunkt,
 // Lesefortschritt, Kopf gleitet unter 1024 px beim Runterscrollen weg, blaues Vollbild-Menü mit iOS-sicherer
 // Scroll-Sperre, Escape und Wisch nach unten schliessen. Kein Nachladen von Inhalten.
+
+// Übersicht: zuerst zwei Reihen Beiträge, die dritte angeschnitten mit Verlauf, darunter «Mehr anzeigen».
+// Alle Karten bleiben im HTML (Suchmaschinen, ohne JavaScript ist alles sichtbar). Nur auf der Übersicht (.eb-liste).
+(function () {
+  'use strict';
+  var liste = document.querySelector('.eb-liste');
+  if (!liste) return;
+  var karten = Array.prototype.slice.call(liste.querySelectorAll('.eb-karte'));
+  var mehr = null, offen = false, geplant = false;
+  if (!liste.id) liste.id = 'eb-liste';
+
+  function zuruecksetzen() {
+    liste.removeAttribute('data-gekuerzt');
+    liste.style.maxHeight = '';
+    karten.forEach(function (k) { k.removeAttribute('inert'); });
+    if (mehr) { mehr.parentNode.removeChild(mehr); mehr = null; }
+  }
+
+  function kuerzen() {
+    geplant = false;
+    if (offen) return;
+    liste.setAttribute('data-gekuerzt', '1');
+    liste.style.maxHeight = '';
+    // Reihen über die Lage der Karten: drei Spalten ab 1101 px, zwei ab 768 px, darunter eine
+    var reihen = [];
+    karten.forEach(function (k) { if (reihen.indexOf(k.offsetTop) < 0) reihen.push(k.offsetTop); });
+    reihen.sort(function (a, b) { return a - b; });
+    if (reihen.length < 3) { zuruecksetzen(); return; }
+    var hoehe = 0;
+    karten.forEach(function (k) {
+      if (k.offsetTop === reihen[2]) hoehe = Math.max(hoehe, k.offsetHeight);
+      // Ab der dritten Reihe nicht erreichbar, solange gekürzt (die dritte ist nur angeschnitten zu sehen)
+      if (k.offsetTop >= reihen[2]) k.setAttribute('inert', ''); else k.removeAttribute('inert');
+    });
+    liste.style.maxHeight = Math.round(reihen[2] + hoehe * 0.45) + 'px';
+    if (!mehr) {
+      mehr = document.createElement('div');
+      mehr.className = 'eb-mehr';
+      var knopf = document.createElement('button');
+      knopf.type = 'button';
+      knopf.className = 'btn btn-sekundaer';
+      knopf.textContent = 'Mehr anzeigen';
+      knopf.setAttribute('aria-expanded', 'false');
+      knopf.setAttribute('aria-controls', liste.id);
+      knopf.addEventListener('click', oeffnen);
+      mehr.appendChild(knopf);
+      liste.parentNode.insertBefore(mehr, liste.nextSibling);
+    }
+  }
+
+  function oeffnen() {
+    var erste = karten.filter(function (k) { return k.hasAttribute('inert'); })[0];
+    offen = true;
+    zuruecksetzen();
+    var link = erste && erste.querySelector('.karte-link');
+    if (link) link.focus({ preventScroll: true });
+  }
+
+  function spaeter() { if (!geplant && !offen) { geplant = true; window.requestAnimationFrame(kuerzen); } }
+  kuerzen();
+  window.addEventListener('resize', spaeter);
+  window.addEventListener('load', spaeter);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(spaeter);
+})();
+
 (function () {
   'use strict';
   var html = document.documentElement;

@@ -28,6 +28,13 @@
 .eb-weiter{font-weight:600;color:var(--primaer-dunkel)}
 .eb-weiter::after{content:'\00a0\2192'}
 .eb-leer{margin:0}
+/* Übersicht gekürzt (assets/js/einblicke.js): zwei Reihen, die dritte angeschnitten mit Verlauf, darunter «Mehr anzeigen».
+   Seitlich immer Innenabstand mit gleich grossem negativem Rand (Karten bleiben, wo sie sind), damit beim Kürzen die
+   Schatten nicht abgeschnitten werden und sich nichts verschiebt. Oben kein solcher Rand: Er fiele mit dem Band zusammen. */
+.eb-liste{position:relative;padding:0 16px;margin:0 -16px}
+.eb-liste[data-gekuerzt="1"]{overflow:hidden}
+.eb-liste[data-gekuerzt="1"]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:min(240px,70%);background:linear-gradient(to bottom,rgba(246,245,241,0),var(--bg-papier) 75%);pointer-events:none;z-index:2}
+.eb-mehr{display:flex;justify-content:center;margin:8px 0 0}
 
 /* Artikel: Text links, Titelbild rechts (mitlaufend) */
 .eb-raster{display:grid;grid-template-columns:minmax(0,720px) minmax(240px,340px);justify-content:space-between;gap:64px;align-items:start}

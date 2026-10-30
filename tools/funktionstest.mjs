@@ -836,6 +836,22 @@ try {
       `Einblicke: Menüpunkt führt zur Übersicht, «Einblicke» markiert (h1 «${ueb.h1[0]}»)`);
     ok(!ueb.react && ueb.canonical === 'https://odera.ch/einblicke/' && ueb.ueberlauf <= 0 && ueb.robots === (ueb.karten.length ? 'index,follow' : 'noindex,follow'),
       `Einblicke: statisch ohne React, canonical, ${ueb.karten.length} Artikel, robots ${ueb.robots}`);
+    // Übersicht gekürzt: zwei Reihen ganz, die dritte angeschnitten mit Verlauf, «Mehr anzeigen» zeigt alle (Desktop und Handy)
+    const gekuerzt = async (seite) => seite.evaluate(() => { const l = document.querySelector('.eb-liste'), r = l.getBoundingClientRect(), k = [...l.querySelectorAll('.eb-karte')];
+      return { an: l.dataset.gekuerzt === '1', ganz: k.filter((x) => x.getBoundingClientRect().bottom <= r.bottom + 1).length, halb: k.filter((x) => x.getBoundingClientRect().top < r.bottom && x.getBoundingClientRect().bottom > r.bottom + 1).length,
+        inert: k.filter((x) => x.inert).length, knopf: (document.querySelector('.eb-mehr button') || {}).textContent || '', alle: k.length,
+        ueberlauf: document.documentElement.scrollWidth - document.documentElement.clientWidth }; });
+    const pruefeMehr = async (seite, breite, spalten) => {
+      const g = await gekuerzt(seite);
+      if (g.alle <= spalten * 2) { ok(!g.an && !g.knopf, `Einblicke ${breite} px: höchstens zwei Reihen, nicht gekürzt`); return; }
+      ok(g.an && g.ganz === spalten * 2 && g.halb === Math.min(spalten, g.alle - spalten * 2) && g.knopf === 'Mehr anzeigen' && g.ueberlauf <= 0,
+        `Einblicke ${breite} px: ${g.ganz} Beiträge ganz, ${g.halb} angeschnitten, «${g.knopf}», ${g.inert} nicht erreichbar`);
+      await seite.locator('.eb-mehr button').click(); await warte(300);
+      const o = await gekuerzt(seite);
+      ok(!o.an && o.ganz === o.alle && o.inert === 0 && !o.knopf && /karte-link/.test(await seite.evaluate(() => document.activeElement.className)),
+        `Einblicke ${breite} px: nach «Mehr anzeigen» alle ${o.alle} Beiträge sichtbar, Fokus auf dem ersten neuen`);
+    };
+    await pruefeMehr(page, 1440, 3);
     if (ueb.karten.length) {
       await page.locator('.eb-karte a.karte-link').first().click();
       await page.waitForURL('**' + ueb.karten[0]);
@@ -873,6 +889,8 @@ try {
     const hprob = beobachten(h);
     await h.goto(BASIS + '/einblicke/', { waitUntil: 'networkidle' });
     await warte(500);
+    await pruefeMehr(h, 390, 1);
+    await h.evaluate(() => window.scrollTo(0, 0)); await warte(300);
     await h.locator('.kopf .burger-knopf').click();
     await warte(700);
     const offen = await h.evaluate(() => ({ menue: document.documentElement.dataset.menue, links: [...document.querySelectorAll('#menue .menue-link')].filter((a) => a.getClientRects().length).map((a) => a.textContent.trim()),
