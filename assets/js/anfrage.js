@@ -45,13 +45,18 @@ function tsNeu(c) {
 export async function senden(c) {
   const s = c.state;
   if (s.senden === 'laeuft' || s.gesendet || !c.direkt()) return;
-  if (!s.consent) { c.setState({ senden: 'fehler', sendFehler: 'einwilligung' }); return; }
+  if (!s.consent) { c.setState({ senden: 'fehler', sendFehler: 'einwilligung' }, () => c.zurZustimmung()); return; }
   if (navigator.onLine === false) { c.setState({ offline: true }); return; }
   const art = s.quick ? 'kurz' : 'voll';
   const felder = art === 'kurz' ? c.felderKurz() : c.felderVoll();
   const mail = felder.KONTAKT_MAIL || '';
   if (!c.kontaktPruefen()) return; // Fehler steht am Feld (Mail-Fenster oder Frage «Wie erreiche ich Sie?»)
   c.setState({ senden: 'laeuft', sendFehler: '' });
+  // Mindestzeit des Workers (ANFRAGE.mindestSek, ab dem ersten Start, auch über «Fortsetzen»): Restzeit still abwarten,
+  // der Knopf zeigt so lange «Sendet …». Die Prüfung im Worker bleibt.
+  const start = Math.min(c.startZeit || Date.now(), (c.gemerkt() || {}).startZeit || Infinity);
+  const rest = (c.ANFRAGE.mindestSek[art] || 0) * 1000 + 600 - (Date.now() - start);
+  if (rest > 0) await new Promise((r) => setTimeout(r, rest));
   if (!c.idem) c.idem = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2));
   const token = await tokenHolen(c);
   if (!token) { c.setState({ senden: 'fehler', sendFehler: 'pruefung' }); tsNeu(c); return; }
@@ -59,7 +64,7 @@ export async function senden(c) {
   try {
     const r = await fetch(c.ANFRAGE_ENDPOINT, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ art, felder, kopie: s.kopieWunsch, token, website: s.hp, dauerSek: Math.round((Date.now() - (c.startZeit || Date.now())) / 1000), idem: c.idem }),
+      body: JSON.stringify({ art, felder, kopie: s.kopieWunsch, token, website: s.hp, dauerSek: Math.round((Date.now() - start) / 1000), idem: c.idem }),
     });
     status = r.status;
     antwort = await r.json().catch(() => null);

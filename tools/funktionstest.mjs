@@ -4,7 +4,7 @@
 //   node tools/funktionstest.mjs [basis-url] [teil,teil,...]
 //
 // Basis: Standard http://127.0.0.1:8792 (Server aus .claude/launch.json oder `python3 -m http.server 8792`).
-// Teile: routen, navigation, check, weiter, verlauf, folgefragen, einstiege, handy, kurz, chat, generator, muster, rechner, einblicke,
+// Teile: routen, navigation, check, weiter, verlauf, senden, folgefragen, einstiege, handy, kurz, chat, generator, muster, rechner, einblicke,
 // statistik (Standard: alle ausser statistik). «handy» prüft bei 390 × 664 px, dass alle Antworten ohne Scrollen sichtbar sind.
 // «einblicke» prüft die statischen Seiten unter /einblicke/ (Blog aus dem Akquise-Tool): Menüpunkt, Menü auf dem
 // Handy, Übersicht und, falls vorhanden, den neuesten Artikel mit Titelbild, JSON-LD und Projekt-Check.
@@ -16,7 +16,7 @@ import { chromium, devices } from 'playwright';
 
 const args = process.argv.slice(2);
 const BASIS = (args.find((a) => /^https?:/.test(a)) || 'http://127.0.0.1:8792').replace(/\/$/, '');
-const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,weiter,verlauf,folgefragen,einstiege,handy,kurz,chat,generator,muster,rechner,einblicke').split(',');
+const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,weiter,verlauf,senden,folgefragen,einstiege,handy,kurz,chat,generator,muster,rechner,einblicke').split(',');
 const ROUTEN = ['/', '/angebot/', '/ablauf/', '/musterprojekte/', '/ueber-mich/', '/projekt-check/', '/datenschutz/', '/impressum/', '/agb/',
   ...(process.env.ROUTEN_ZUSATZ ? process.env.ROUTEN_ZUSATZ.split(',') : [])];
 const BREITEN = [390, 834, 1440];
@@ -117,12 +117,17 @@ async function nachPlan(page, plan = {}, pruefen = null) {
   return gesehen;
 }
 
+async function startZurueck(page, sek = 30) {
+  await page.evaluate((sek) => { try { const g = JSON.parse(sessionStorage.getItem('odera-check') || 'null'); if (g) { g.startZeit = Date.now() - sek * 1000; sessionStorage.setItem('odera-check', JSON.stringify(g)); } } catch (e) { /* ohne Speicher */ } }, sek);
+}
 async function senden(page, gesendet, art) {
   const mail = sichtbar(page, '#mf-email');
   if (await mail.count() && !(await mail.inputValue())) await mail.fill('anna@example.ch');
   const zustimmung = sichtbar(page, '.mf-check input[type=checkbox]').first();
   if (await zustimmung.count() && !(await zustimmung.isChecked())) await zustimmung.check();
   const vorher = gesendet.length;
+  // Vor dem Senden wartet die Seite die Mindestzeit des Workers ab (20 s, kurz 6 s, ab dem gemerkten Start). Im Test den Start zurückstellen.
+  await startZurueck(page);
   await sichtbar(page, '.mf-haupt').first().click();
   for (let i = 0; i < 40 && !(await sichtbar(page, '.dk-titel').count()); i++) await warte(250);
   ok(gesendet.length === vorher + 1 && gesendet.at(-1).art === art, `Projekt-Check (${art}): Anfrage an den Worker gesendet, ${Object.keys(gesendet.at(-1)?.felder || {}).length} Felder`);
@@ -371,6 +376,97 @@ try {
     }
   }
 
+  if (TEILE.includes('senden')) {
+    // Seitliches Scrollen: gegen clientWidth messen (innerWidth wächst in der Emulation mit), während des ganzen Checks mit Animationen
+    for (const breite of [320, 390, 768]) {
+      const ctx = await neuerKontext({ viewport: { width: breite, height: breite < 768 ? 640 : 1024 }, isMobile: true, hasTouch: true });
+      await ctx.addInitScript(() => { window.__ueber = { max: 0, wo: '' }; setInterval(() => { const d = document.documentElement, u = Math.max(d.scrollWidth, innerWidth) - d.clientWidth;
+        if (u > window.__ueber.max) window.__ueber = { max: u, wo: (([...document.querySelectorAll('.q-prog')].find((x) => x.getClientRects().length) || {}).dataset || {}).frage || 'Ergebnis' }; }, 16); });
+      const gesendet = await versandAbfangen(ctx);
+      const page = await ctx.newPage();
+      await page.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
+      await warte(600);
+      await nachPlan(page, { WEBSITE_HEUTE: 'Ja', WEBSITE_PROBLEME: ['Wirkt veraltet'], FUNKTIONEN: ['Online-Terminbuchung'] });
+      await warte(1200);
+      await sichtbar(page, '.eg-review').first().click(); await warte(500);
+      await sichtbar(page, '.rv-back').first().click(); await warte(1200);
+      await senden(page, gesendet, 'voll');
+      await warte(1200);
+      const u = await page.evaluate(() => window.__ueber);
+      ok(u.max <= 0, `${breite} px: kein seitliches Scrollen im ganzen Check, Ergebnis und Dank (höchstens ${u.max} px${u.max > 0 ? ' bei ' + u.wo : ''})`);
+      await ctx.close();
+    }
+
+    // Ergebnis und Senden bei 390 px: Reihenfolge, Knopftext, Zusage, Grund des Pakets, Fehler am Häkchen
+    const ctx = await neuerKontext({ viewport: { width: 390, height: 664 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
+    const gesendet = await versandAbfangen(ctx);
+    const page = await ctx.newPage();
+    const probleme = beobachten(page);
+    await page.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
+    await warte(600);
+    await nachPlan(page, { WEBSITE_HEUTE: 'Nein', FUNKTIONEN: ['Online-Terminbuchung'] });
+    await warte(400);
+    const lage = await page.evaluate(() => {
+      const v = (sel) => [...document.querySelectorAll(sel)].find((e) => e.getClientRects().length);
+      const knopf = v('.mf-haupt'); knopf.style.position = 'static';
+      const y = (el) => el ? Math.round(el.getBoundingClientRect().top + scrollY) : -1;
+      const r = { senden: y(knopf), zusatz: y(v('.eg-zusatz')), vgl: y(v('.eg-vgl-knopf')), durchsehen: y(v('.eg-review')), zustimmung: y(v('#mf-zustimmung')),
+        badge: Math.round(v('.eg-badge').getBoundingClientRect().height), label: knopf.textContent.trim(), zusage: (v('.mf-zusage') || {}).textContent, grund: (v('.eg-grund') || {}).textContent };
+      knopf.style.position = ''; return r; });
+    ok(lage.zusatz < lage.zustimmung && lage.zustimmung < lage.senden && lage.senden < lage.vgl && lage.vgl < lage.durchsehen && lage.senden < 700,
+      `390 px: Paket, Zusätze, Zustimmung, Senden (${lage.senden} px von oben), dann Vergleich und «Antworten noch einmal durchsehen»`);
+    ok(lage.badge <= 24, `390 px: «Richtwert, kein verbindliches Angebot» auf einer Zeile (${lage.badge} px hoch)`);
+    ok(lage.label === 'Anfrage senden' && lage.zusage === 'Innert fünf Arbeitstagen sehen Sie Ihre fertige Seite. Sie zahlen erst, wenn Ihnen der Entwurf gefällt.',
+      `Senden: Knopf «${lage.label}», darüber «${lage.zusage}»`);
+    ok(/^Paket Pro wegen: Online-Terminbuchung\s+Funktionen ändern$/.test((lage.grund || '').trim()), `Ergebnis: «${(lage.grund || '').trim().replace(/\s+/g, ' ')}»`);
+    // Ohne Häkchen: Knopf nicht gesperrt, Fehler am Häkchen mit Fokus, nichts gesendet
+    const vorher = gesendet.length;
+    const knopf = sichtbar(page, '.mf-haupt').first();
+    const gesperrt = await knopf.getAttribute('aria-disabled');
+    await knopf.click(); await warte(500);
+    const f = await page.evaluate(() => { const c = [...document.querySelectorAll('#mf-zustimmung')].find((e) => e.getClientRects().length);
+      const m = [...document.querySelectorAll('.mf-zustimmung-fehler')].find((e) => e.getClientRects().length);
+      return { inv: c.getAttribute('aria-invalid'), fokus: document.activeElement === c, text: m ? m.textContent.trim() : '', abstand: m ? Math.round(m.getBoundingClientRect().top - c.getBoundingClientRect().bottom) : -1,
+        box: [...document.querySelectorAll('.mf-fehler')].some((e) => e.getClientRects().length) }; });
+    ok(gesperrt === 'false' && f.inv === 'true' && f.fokus && /Häkchen/.test(f.text) && f.abstand < 40 && !f.box && gesendet.length === vorher,
+      `Senden ohne Häkchen: Knopf nicht gesperrt, Fehler direkt am Häkchen (${f.abstand} px darunter, aria-invalid ${f.inv}, Fokus ${f.fokus ? 'ja' : 'nein'}), nichts gesendet`);
+    await sichtbar(page, '#mf-zustimmung').first().check(); await warte(200);
+    ok(await sichtbar(page, '.mf-zustimmung-fehler').count() === 0, 'Senden: mit Häkchen ist der Fehler weg');
+    // «Funktionen ändern» öffnet die Funktionen im Modus «Ändern»
+    await sichtbar(page, '.eg-grund-knopf').first().click(); await warte(400);
+    ok((await frageJetzt(page)).startsWith('FUNKTIONEN') && await sichtbar(page, '.editbar-btn').count() > 0, `«Funktionen ändern» führt zu den Funktionen (${await frageJetzt(page)})`);
+    await sichtbar(page, '.editbar-btn').first().click(); await warte(400);
+    ok(!probleme.length, 'Ergebnis und Senden ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
+    await ctx.close();
+
+    // Kein Grund beim Paket aus einem Einstieg (Paketkarte Pro ohne Pro-Funktion)
+    const ctx2 = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+    const p2 = await ctx2.newPage();
+    await p2.goto(BASIS + '/projekt-check/?paket=pro', { waitUntil: 'networkidle' });
+    await warte(600);
+    await nachPlan(p2, { WEBSITE_HEUTE: 'Nein' });
+    ok(/Paket Pro/.test(await sichtbar(p2, '.eg-paket').first().textContent()) && await sichtbar(p2, '.eg-grund').count() === 0, 'Paket Pro aus dem Einstieg: kein «wegen» unter dem Preis');
+    await ctx2.close();
+
+    // Mindestzeit über «Fortsetzen»: Start bleibt der erste, die Seite wartet die Restzeit still ab und sendet dann
+    const ctx3 = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+    const g3 = await versandAbfangen(ctx3);
+    const p3 = await ctx3.newPage();
+    await p3.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
+    await warte(600);
+    await nachPlan(p3, { WEBSITE_HEUTE: 'Nein' });
+    await startZurueck(p3, 16);
+    await p3.reload({ waitUntil: 'networkidle' }); await warte(600);
+    await sichtbar(p3, '.q-weiter-ja').first().click(); await warte(600);
+    await sichtbar(p3, '#mf-zustimmung').first().check();
+    await sichtbar(p3, '.mf-haupt').first().click(); await warte(1000);
+    const zwischen = { anzahl: g3.length, knopf: (await sichtbar(p3, '.mf-haupt').first().textContent()).trim() };
+    for (let i = 0; i < 40 && !(await sichtbar(p3, '.dk-titel').count()); i++) await warte(250);
+    ok(zwischen.anzahl === 0 && /Sendet/.test(zwischen.knopf) && g3.length === 1 && g3[0].dauerSek >= 20 && await sichtbar(p3, '.dk-titel').count() > 0,
+      `Fortsetzen und gleich senden: erst «${zwischen.knopf}» ohne Anfrage, dann gesendet mit ${g3[0] ? g3[0].dauerSek : '-'} s seit dem ersten Start`);
+    await ctx3.close();
+  }
+
   if (TEILE.includes('folgefragen')) {
     // Mit Website: «Was stört», ohne Website: «Wobei brauchen Sie Unterstützung?» mit Kostenhinweisen; Fortschritt zählt die Folgefrage mit
     for (const weg of ['Ja', 'Nein']) {
@@ -509,7 +605,7 @@ try {
       const lage = await page.evaluate(() => {
         const vis = (el) => el && el.getClientRects().length > 0;
         const y = (sel) => { const el = [...document.querySelectorAll(sel)].find(vis); return el ? el.getBoundingClientRect().top + scrollY : null; };
-        return { ergebnis: (() => { const el = [...document.querySelectorAll('.eg-links')].find(vis); const r = el.getBoundingClientRect(); return r.bottom + scrollY; })(),
+        return { ergebnis: (() => { const el = [...document.querySelectorAll('.eg-oben, .eg-links')].find(vis); const r = el.getBoundingClientRect(); return r.bottom + scrollY; })(),
           zustimmung: y('.mf-check input'), senden: y('.mf-haupt'), knopf: y('.mf-angaben'), vorschau: [...document.querySelectorAll('.mf-text')].some(vis) };
       });
       ok(lage.zustimmung > lage.ergebnis && lage.zustimmung - lage.ergebnis < 80 && lage.senden > lage.zustimmung && lage.knopf > lage.senden && !lage.vorschau,

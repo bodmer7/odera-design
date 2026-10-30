@@ -102,7 +102,8 @@
 .mf-fehler-knopf{display:flex;flex-wrap:wrap;gap:8px}
 .mf-zweit{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--tinte);border-radius:999px;background:var(--weiss);color:var(--tinte);font:inherit;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer}
 .mf-hinweis{margin:0;font-size:13px;line-height:1.5;color:var(--grau)}.mf-hinweis a{color:var(--kobalt-deep)}
-.mf-unten{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:12px 24px 20px;background:var(--weiss);border-radius:0 0 16px 16px}
+.mf-unten{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 20px;padding:12px 24px 20px;background:var(--weiss);border-radius:0 0 16px 16px}
+.mf-unten .mf-zusage{flex-basis:100%;order:-1}
 .mf-checks{display:flex;flex-direction:column;gap:10px;min-width:0}
 .mf-check{display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.45;cursor:pointer}
 .mf-check input{flex:none;width:20px;height:20px;margin:1px 0 0;accent-color:var(--kobalt)}

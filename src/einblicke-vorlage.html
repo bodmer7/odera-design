@@ -445,6 +445,13 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 /* Ziffern in den Antwortkarten sind Tastenkürzel: nur mit Maus und Tastatur, sonst ein leerer Auswahlkreis */
 @media not all and (hover:hover) and (pointer:fine){.acard-k[data-ziffer="1"]{font-size:0!important}}
 .q-vorab{order:6;margin:10px 0 0;text-align:right;font-size:13px;line-height:1.45;color:var(--text-2)}
+/* Ergebnis: welche Funktion das Paket bestimmt; Senden: Zusage über dem Knopf, Fehler direkt am Häkchen */
+.eg-grund{margin:0 0 12px;font-size:16px;line-height:1.5;color:var(--weiss)}
+.eg-grund-knopf{min-height:44px;padding:0 2px;border:0;background:none;color:var(--weiss);font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.mf-zusage{margin:0;font-size:13px;line-height:1.5;color:var(--tinte)}
+.mf-zustimmung-fehler[data-an="0"]{display:none}
+.mf-checks .mf-zustimmung-fehler[data-an="1"]{margin:-4px 0 0 30px}
+.mf-check[data-fehler="1"] input{outline:2px solid var(--fehler);outline-offset:2px}
 /* «Überspringen» bei optionalen Auswahlfragen: Textknopf statt Hauptknopf */
 .q-weiter-knopf[data-art="text"]{padding:0 8px;background:none;color:var(--primaer-dunkel);text-decoration:underline;text-underline-offset:3px}
 @media(hover:hover){.q-weiter-knopf[data-art="text"]:hover{background:none;color:var(--tinte)}}
@@ -1297,6 +1304,36 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .mf-angaben::after{content:"";flex:none;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform 180ms ease}
  .mf[data-angaben="1"] .mf-angaben::after{transform:translateY(2px) rotate(-135deg)}
  .mf-angaben:focus-visible{outline:3px solid var(--primaer);outline-offset:-3px}
+ .mf[data-kurz="0"] .mf-zusage{order:2}
+ /* Ergebnis: Paket, Preis, Umfang, Zusätze, dann Zustimmung und Senden, erst danach Vergleich und «Antworten noch einmal durchsehen» */
+ .eg{display:flex!important;flex-direction:column}
+ .eg-links{display:contents}
+ .eg-oben,.eg-mehr{animation:inherit}
+ .eg-oben{order:1;padding:20px;border-radius:20px;background:rgba(255,255,255,0.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.22)}
+ .eg-oben .eg-zusatz div{padding:6px 0}
+ .eg-oben .eg-grund-knopf{min-height:0;padding:2px 0}
+ /* Senden steht direkt unter dem Ergebnis: nicht mehr unten anheften, sonst deckt der Knopf die Zustimmung zu */
+ .mf[data-kurz="0"] .mf-haupt{position:relative;bottom:auto}
+ .mf[data-kurz="0"] .mf-checks{padding-top:16px}
+ .eg-rechts{order:2}
+ .eg-mehr{order:3;padding:0 8px}
+ .eg-mehr .eg-vgl{margin-top:0}
+ /* «Richtwert, kein verbindliches Angebot» ohne Pille, damit sie nicht zweizeilig umbricht */
+ .eg-links .eg-badge{display:block;margin:0 0 16px;padding:0;border-radius:0;background:none;color:var(--weiss);text-wrap:balance}
+ /* Mail-Fenster senkrecht einblenden: waagrecht ragte es über den rechten Rand und verbreiterte die Seite */
+ .eg-wrap{overflow-x:clip}
+ @keyframes mfReinY{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+}
+@media(max-width:1023px){
+ .mf-zusage{padding:0 24px 12px}
+ /* Fehler direkt unter dem Text des Häkchens */
+ .mf-checks .mf-zustimmung-fehler[data-an="1"]{margin:-6px 0 0 32px}
+ /* Einflug der Fragen (qFwd, 24 px waagrecht) ragt sonst 4 px über den rechten Rand */
+ .q-wrap{overflow-x:clip}
+}
+@media(max-width:560px){
+ .eg-oben,.eg-mehr{margin:0 16px}
+ .mf-zusage{padding-left:16px;padding-right:16px}
 }
 </style>
 <link rel="stylesheet" href="assets/css/einblicke.css?v=f28ed20158">
