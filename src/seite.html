@@ -2609,8 +2609,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       </div>
     </div>
     <div style="position:relative;z-index:1">
-      <div class="q-prog" role="progressbar" aria-valuenow="{{ qNum }}" aria-valuemin="1" aria-valuemax="{{ qTotal }}" aria-label="Fortschritt" data-frage="{{ qKey }}" style="height:2px;background:rgba(17,19,26,0.10)">
-        <div style="height:2px;background:var(--akzent);box-shadow:0 1px 0 rgba(17,19,26,0.45);width:{{ progress }};transition:width 300ms ease-in-out"></div>
+      <div class="q-prog" role="progressbar" aria-valuenow="{{ qNum }}" aria-valuemin="1" aria-valuemax="{{ qTotal }}" aria-valuetext="{{ qWertText }}" aria-label="Fortschritt" data-frage="{{ qKey }}" style="height:2px;background:rgba(17,19,26,0.10)">
+        <div style="height:2px;background:var(--primaer);width:{{ progress }};transition:width 300ms ease-in-out"></div>
       </div>
       <div class="wrap q-wrap" data-leiste="{{ leisteArt }}" style="padding-top:16px;padding-bottom:120px">
         <p class="mono q-fortschritt" data-leer="{{ fortschrittLeer }}" style="text-align:right;font-size:13px;color:var(--text-2);margin:0 0 40px;min-height:17px">{{ fortschritt }}</p>
@@ -3993,6 +3993,15 @@ class Component extends DCLogic {
     const skip = s.editing ? [] : (s.ueberspringen || []);
     return this.Q.filter((q) => !q.nurKurz && (!q.wenn || q.wenn(s)) && skip.indexOf(q.key) < 0);
   }
+  // Fortschritt: Folgefragen behalten die Nummer ihrer Hauptfrage, die Gesamtzahl zählt nur Hauptfragen (ohne die durch
+  // Einstiege übersprungenen) und ändert sich während des Checks nie. { nr, total, folge, anteil } für Balken und Text.
+  fortschritt(s = this.state) {
+    const f = this.fragen(s), st = Math.min(s.step, f.length - 1);
+    const haupt = f.filter((q) => !q.wenn), total = Math.max(1, haupt.length);
+    const nr = Math.max(1, f.slice(0, st + 1).filter((q) => !q.wenn).length);
+    const folge = !!(f[st] && f[st].wenn);
+    return { nr, total, folge, anteil: (nr + (folge ? 0.5 : 0)) / total };
+  }
   // Alle Fragen inklusive der schon beantworteten (für die Übersicht)
   fragenAlle(s = this.state) { return this.fragen(Object.assign({}, s, { editing: true })); }
 
@@ -4641,10 +4650,11 @@ class Component extends DCLogic {
     const wahlFehler = fehlerSichtbar.find((e) => e.k === '_wahl');
     const offen = fehlerAlle.map((e) => e.k === '_wahl' ? 'eine Antwort' : e.label);
     const knopf = this.weiterNoetig(q);
+    const fs = this.fortschritt(), fsText = 'Frage ' + fs.nr + ' von ' + fs.total + (fs.folge ? ' · Zusatzfrage' : '');
 
     const felderZuerst = q.typ === 'felder';
     // Farbfleck im Hintergrund (nur Desktop): wandert mit dem Fortschritt
-    const drittel = Math.min(2, Math.floor(s.step / Math.max(1, total) * 3));
+    const drittel = Math.min(2, Math.floor((fs.nr - 1) / fs.total * 3));
     // «Sieht nach Paket … aus» ab der Frage nach den Funktionen (Reihenfolge in Q)
     const abFunktionen = this.Q.indexOf(q) >= this.Q.findIndex((x) => x.key === 'FUNKTIONEN');
 
@@ -4865,7 +4875,8 @@ class Component extends DCLogic {
         mindestPaket: this.hoeheresPaket(s.mindestPaket, a.mindestPaket), rechnerZusatz: (s.rechnerZusatz || []).length ? s.rechnerZusatz : (a.rechnerZusatz || []) }, () => { if (a.result) this.showResult(); else this.focusHead(); }); },
       onNeuBeginnen: () => { this.vergessen(); this.setState({ fortsetzen: null }); this.focusHead(); },
       quickLinkDisplay: (s.quick || s.editing) ? 'none' : 'block',
-      qNum: s.step + 1,
+      qNum: fs.nr,
+      qWertText: fsText,
       qTitle: q.t,
       chatVorschlaege: this.CHAT_VORSCHLAEGE,
       chatKarteDisplay: this.CHAT_ENDPOINT ? 'block' : 'none',
@@ -4930,12 +4941,12 @@ class Component extends DCLogic {
       multiDisplay: isMulti ? 'block' : 'none',
       optDisplay: opts.length ? 'grid' : 'none',
       spalten: String(q.spalten || 1),
-      progress: Math.round(((s.step + 1) / total) * 100) + '%',
-      qTotal: total,
+      progress: Math.round(fs.anteil * 1000) / 10 + '%',
+      qTotal: fs.total,
       hint: (!s.quick && abFunktionen) ? 'Sieht nach Paket ' + r.name + ' aus' : '',
-      // Fortschritt: angezeigte Folgefragen zählen mit. Die Kurzversion bleibt wie bisher.
-      partLabel: s.quick ? 'KURZSCHÄTZUNG' : 'Frage ' + (s.step + 1) + ' von ' + total,
-      fortschritt: s.quick ? 'Frage ' + (s.step + 1) + ' von ' + total : '',
+      // Fortschritt: Folgefragen tragen die Nummer ihrer Hauptfrage («Frage 3 von 6 · Zusatzfrage»). Die Kurzversion bleibt wie bisher.
+      partLabel: s.quick ? 'KURZSCHÄTZUNG' : fsText,
+      fortschritt: s.quick ? fsText : '',
       fortschrittLeer: s.quick ? '0' : '1',
       qKey: q.key,
       fieldsDir: 'column',
@@ -4954,7 +4965,7 @@ class Component extends DCLogic {
           tag: fix ? 'In jedem Paket' : f[2] === 'shop' ? 'Nicht im Angebot' : 'Paket ' + f[2] };
       }),
       qAnim: this.reduce ? 'none' : (s.dir === 'back' ? 'qBack 260ms ease-out' : 'qFwd 260ms ease-out'),
-      qNumPad: String(s.step + 1).padStart(2, '0'),
+      qNumPad: String(fs.nr).padStart(2, '0'),
       blobColor: ['#2D4CF0', '#4FA79B', '#8A7BD8'][drittel],
       blobLeft: ['-180px', '30%', '55%'][drittel],
       blobTop: ['10%', '-220px', '25%'][drittel],

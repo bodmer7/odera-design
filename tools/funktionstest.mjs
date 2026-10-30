@@ -254,7 +254,7 @@ try {
     await warte(100);
     const knopfNein = await knopf();
     await warte(500);
-    ok(await frageJetzt(page) === 'UNTERSTUETZUNG:4' && knopfNein === 'Weiter', `Weiter: «Nein» geht selbst weiter (${await frageJetzt(page)}), «Weiter» bleibt bis dahin stehen (${knopfNein})`);
+    ok(await frageJetzt(page) === 'UNTERSTUETZUNG:3' && knopfNein === 'Weiter', `Weiter: «Nein» geht selbst weiter (${await frageJetzt(page)}), «Weiter» bleibt bis dahin stehen (${knopfNein})`);
     ok(await knopf() === 'Überspringen', `Weiter: «Wobei brauchen Sie Unterstützung?» ohne Auswahl «Überspringen» (${await knopf()})`);
     await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Logo' }).first().click(); await warte(150);
     ok(await knopf() === 'Weiter', `Weiter: mit Auswahl «Weiter» (${await knopf()})`);
@@ -317,13 +317,22 @@ try {
       await page.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
       await warte(600);
       let label = '';
+      const stand = [];
       const plan = weg === 'Ja' ? { WEBSITE_HEUTE: 'Ja', WEBSITE_PROBLEME: ['Wirkt veraltet'], FUNKTIONEN: ['Online-Terminbuchung'] }
         : { WEBSITE_HEUTE: 'Nein', UNTERSTUETZUNG: ['Logo', 'Fotos'], FUNKTIONEN: ['Eigene Unterseiten'], TERMIN: 'In einem Monat', REFERENZ: true };
       const fragen = await nachPlan(page, plan, async (key) => {
-        if (key === 'WEBSITE_PROBLEME' || key === 'UNTERSTUETZUNG') label = await sichtbar(page, '.q-teil').first().textContent();
+        if (key === 'WEBSITE_PROBLEME' || key === 'UNTERSTUETZUNG') label = await sichtbar(page, '.q-teil').first().innerText();
+        stand.push(await page.evaluate(() => { const p = [...document.querySelectorAll('.q-prog')].find((x) => x.getClientRects().length);
+          return { now: Number(p.getAttribute('aria-valuenow')), max: p.getAttribute('aria-valuemax'), text: p.getAttribute('aria-valuetext'), breite: parseFloat(p.firstElementChild.style.width),
+            teil: [...document.querySelectorAll('.q-teil')].find((x) => x.getClientRects().length).firstChild.textContent.trim() }; }));
       });
       const folge = weg === 'Ja' ? 'WEBSITE_PROBLEME' : 'UNTERSTUETZUNG', andere = weg === 'Ja' ? 'UNTERSTUETZUNG' : 'WEBSITE_PROBLEME';
-      ok(fragen.includes(folge) && !fragen.includes(andere) && /Frage 4 von 7/.test(label), `Website «${weg}»: Folgefrage ${folge} erscheint (${label.trim()}), ${andere} nicht. Fragen: ${fragen.join(', ')}`);
+      ok(fragen.includes(folge) && !fragen.includes(andere) && /^Frage 3 von 6 · Zusatzfrage/.test(label.trim()), `Website «${weg}»: Folgefrage ${folge} erscheint (${label.trim().replace(/\s+/g, ' ')}), ${andere} nicht. Fragen: ${fragen.join(', ')}`);
+      // Gesamtzahl bleibt 6, der Balken läuft nie zurück, die Folgefrage steht zwischen 3 und 4, aria-valuetext wie der sichtbare Text
+      const iFolge = fragen.indexOf(folge);
+      ok(stand.every((x) => x.max === '6' && x.text === x.teil && Number.isInteger(x.now)) && stand.every((x, i) => !i || x.breite >= stand[i - 1].breite)
+        && stand[iFolge].now === 3 && stand[iFolge].breite > 50 && stand[iFolge].breite < 66.7,
+        `Website «${weg}»: Fortschritt ${stand.map((x) => x.now + '/' + x.max + ' ' + x.breite + '%').join(', ')}`);
       const eg = await page.evaluate(() => ({ satz: (document.querySelector('.eg-satz') || {}).textContent, paket: (document.querySelector('.eg-paket') || {}).textContent,
         zusatz: [...document.querySelectorAll('.eg-zusatz dt')].filter((x) => x.getClientRects().length).map((x) => x.textContent), ref: [...document.querySelectorAll('.eg-ref')].some((x) => x.getClientRects().length) }));
       if (weg === 'Ja') {
