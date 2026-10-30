@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "fragen-machen-den-entwurf-besser",
+      "titel": "Fragen machen den Entwurf besser",
+      "beschreibung": "Die beste Rückmeldung ist oft eine Frage. Wenn ein Betrieb auf meinen Entwurf mit einer Frage antwortet, freue ich mich. Eine Frage zeigt, dass sich…",
+      "anriss": "Die beste Rückmeldung ist oft eine Frage. Wenn ein Betrieb auf meinen Entwurf mit einer Frage antwortet, freue ich mich. Eine Frage zeigt, dass sich jemand wirklich damit beschäftigt.",
+      "datum": "2026-10-30",
+      "geaendert": "2026-10-30T13:42:11Z",
+      "rubrik": "Persönlich und Haltung",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: Fragen machen den Entwurf besser"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "122-von-265-geprueften-websites-ohne-anfrageformular",
       "titel": "122 von 265 geprüften Websites ohne Anfrageformular",
       "beschreibung": "265 Websites geprüft. Ein Punkt fällt auf. Für jede Website, die ich anschaue, gehe ich dieselbe Checkliste durch, mobil und am Computer. Hier die Summe…",

@@ -1,0 +1,83 @@
+{
+  "v": 1,
+  "slug": "fragen-machen-den-entwurf-besser",
+  "titel": "Fragen machen den Entwurf besser",
+  "beschreibung": "Die beste Rückmeldung ist oft eine Frage. Wenn ein Betrieb auf meinen Entwurf mit einer Frage antwortet, freue ich mich. Eine Frage zeigt, dass sich…",
+  "anriss": "Die beste Rückmeldung ist oft eine Frage. Wenn ein Betrieb auf meinen Entwurf mit einer Frage antwortet, freue ich mich. Eine Frage zeigt, dass sich jemand wirklich damit beschäftigt.",
+  "datum": "2026-10-30",
+  "geaendert": "2026-10-30T13:42:11Z",
+  "saeule": "haltung",
+  "rubrik": "Persönlich und Haltung",
+  "thema_id": "rueckfrage",
+  "kurz": [
+    "Jede Frage ist willkommen",
+    "Lieber einmal mehr nachfragen",
+    "Sie kennen Ihre Kundschaft besser als ich"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Warum mir das wichtig ist",
+      "absaetze": [
+        "Wenn ein Betrieb auf meinen Entwurf mit einer Frage antwortet, freue ich mich. Eine Frage zeigt, dass sich jemand wirklich mit dem Entwurf beschäftigt hat.",
+        "Oft entsteht genau daraus die wichtigste Verbesserung: ein Abschnitt, der fehlt, ein Wort, das die Kundschaft anders braucht, oder ein Bild, das besser passt. Sie kennen Ihre Kundschaft besser als ich.",
+        "Für mich gehört das zu einem fairen Umgang mit kleinen Betrieben. Sie tragen schon genug Risiko, da soll die Website nicht noch eines dazu sein."
+      ]
+    },
+    {
+      "titel": "Was das konkret heisst",
+      "absaetze": [
+        "Diese Grundsätze gelten für jedes Projekt, unabhängig von Paket und Branche. So wissen Sie schon vor dem ersten Gespräch, woran Sie sind."
+      ],
+      "punkte": [
+        {
+          "titel": "Jede Frage ist willkommen",
+          "text": "Jede Frage ist willkommen, auch wenn sie Ihnen klein vorkommt. Kleine Fragen führen oft zu grossen Verbesserungen."
+        },
+        {
+          "titel": "Lieber einmal mehr nachfragen",
+          "text": "Lieber einmal mehr nachfragen als mit einem unguten Gefühl zustimmen."
+        },
+        {
+          "titel": "Sie kennen Ihre Kundschaft besser als ich",
+          "text": "Ihr Wissen über die eigene Kundschaft ist der wertvollste Beitrag zum Entwurf."
+        }
+      ],
+      "nach": [
+        "Ich teile solche Gedanken hier, weil sie meine Entscheidungen erklären. Und weil ich überzeugt bin, dass kleine Betriebe einen ehrlichen Partner verdienen."
+      ]
+    },
+    {
+      "titel": "Was das für eine Zusammenarbeit heisst",
+      "absaetze": [
+        "Wenn Sie mit mir arbeiten, sehen Sie den Entwurf Ihrer neuen Website, bevor Sie etwas bezahlen. Der Preis steht vorher fest, und Sie entscheiden in Ruhe. Passt es nicht, ist das in Ordnung. Mir ist wichtig, dass Sie diese Regeln kennen, bevor wir überhaupt miteinander sprechen."
+      ]
+    },
+    {
+      "titel": "Was Sie daraus mitnehmen können",
+      "absaetze": [
+        "Schreiben Sie die drei Fragen auf, die Ihnen Kundinnen und Kunden am häufigsten stellen. Werden sie auf Ihrer Website beantwortet? Wenn nicht, sind das gute Inhalte für die nächste Überarbeitung.",
+        "Ich lerne bei jedem Projekt dazu. Manche Regeln habe ich erst nach einigen Aufträgen so klar formuliert, wie sie heute auf meiner Website stehen.",
+        "Welche Frage stellen Ihnen Ihre Kundinnen und Kunden am häufigsten?"
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 2 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Fragen machen den Entwurf besser"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}
