@@ -31,7 +31,7 @@
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://odera.ch/musterprojekte/#seite","url":"https://odera.ch/musterprojekte/","name":"Webdesign Beispiele für Betriebe · ODERA Design","description":"Zwei Beispiel-Websites für Handwerk und Solar. Sehen Sie, wie Ihre neue Seite aussehen könnte, und testen Sie Ihren Betrieb in zehn Sekunden.","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/musterprojekte/#brotkrumen"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/musterprojekte/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Webdesign Beispiele für Betriebe","item":"https://odera.ch/musterprojekte/"}]},{"@type":"ItemList","@id":"https://odera.ch/musterprojekte/#muster","name":"Musterprojekte von ODERA Design","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"CreativeWork","name":"Musterprojekt Schreinerei Doppelmeter","url":"https://odera.ch/musterprojekte/doppelmeter/","creator":{"@id":"https://odera.ch/#organisation"},"description":"Beispielseite von ODERA Design. Der Betrieb ist frei erfunden."}},{"@type":"ListItem","position":2,"item":{"@type":"CreativeWork","name":"Musterprojekt Firstlicht Solartechnik","url":"https://odera.ch/musterprojekte/firstlicht/","creator":{"@id":"https://odera.ch/#organisation"},"description":"Beispielseite von ODERA Design. Der Betrieb ist frei erfunden."}}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=a455723f97" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=5cdd32a5fc" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -41,12 +41,10 @@
 <style>
 html{scroll-behavior:smooth}
 :root{
- /* Design-Tokens. Einzige Stelle für Farben, Schrift-Skala und Abstände. */
  --grund:#F6F5F1;--flaeche:#FFFFFF;--tinte:#11131A;--text-2:#565D6B;--primaer:#2D4CF0;--primaer-dunkel:#1E34B8;--akzent:#D6F24B;--akzent-hover:#C8E53C;--akzent-tint:#F4FBD6;--akzent-tief:#556300;--akzent-linie:rgba(85,99,0,0.28);--info:#EEF1FD;--linie:#E2DFD8;--linie-stark:#A8B0BD;--linie-feld:#80879A;--fehler:#B42318;--fehler-tint:#FDEDEA;--auf-dunkel:#FFFFFF;
  --fs-klein:13px;--fs-text:16px;--fs-lead:20px;--fs-h3:26px;--fs-h2:clamp(30px,3.2vw,44px);--fs-h1:clamp(38px,4.4vw,60px);
  --a-1:8px;--a-2:16px;--a-3:24px;--a-4:40px;--a-5:64px;--a-6:112px;
  --dauer:240ms;--kurve:cubic-bezier(0.2,0,0,1);--radius:16px;--knopf-h:52px;
- /* alte Namen, verweisen auf die Tokens */
  --papier:var(--grund);--kobalt:var(--primaer);--kobalt-deep:var(--primaer-dunkel);--kobalt-mid:var(--primaer);--limette:var(--akzent);--limette-soft:var(--akzent-hover);--grau:var(--text-2);--grau-dunkel:var(--linie-stark);--weiss:var(--flaeche);--koralle:#FF5A3C;--tinte-tief:var(--tinte);
  --wash-1:var(--grund);--wash-2:var(--grund);--wash-3:var(--flaeche)}
 body{margin:0;background:var(--papier);color:var(--tinte);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -69,13 +67,11 @@ button,input,textarea{font-family:inherit}
 @media(hover:hover){.g3:hover{background:var(--primaer-dunkel)}}
 .g4{background:var(--akzent);transition:background var(--dauer) var(--kurve)}
 @media(hover:hover){.g4:hover{background:var(--akzent-hover)}}
-/* Knöpfe:primär (Blau), Akzent (Lime, nur die wichtigste Handlung), sekundär (Umriss). Gleiche Höhe, Radius, Schrift. */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:var(--knopf-h);padding:0 28px;border-radius:999px;border:1px solid transparent;font:inherit;font-size:16px;font-weight:600;line-height:1.2;text-decoration:none;text-align:center;cursor:pointer;transition:background var(--dauer) var(--kurve),border-color var(--dauer) var(--kurve),color var(--dauer) var(--kurve)}
 .btn-primaer{background:var(--primaer);color:var(--auf-dunkel)}@media(hover:hover){.btn-primaer:hover{background:var(--primaer-dunkel)}}
 .btn-akzent{background:var(--akzent);color:var(--tinte)}@media(hover:hover){.btn-akzent:hover{background:var(--akzent-hover)}}
 .btn-sekundaer{background:transparent;border-color:var(--tinte);color:var(--tinte)}@media(hover:hover){.btn-sekundaer:hover{background:var(--tinte);color:var(--auf-dunkel)}}
 [data-flaeche="blau"] .btn-sekundaer{border-color:var(--flaeche);color:var(--auf-dunkel)}@media(hover:hover){[data-flaeche="blau"] .btn-sekundaer:hover{background:var(--flaeche);color:var(--primaer)}}
-/* Schrift-Skala:sechs Stufen */
 .t-h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h1);line-height:1.05;letter-spacing:-0.03em;text-wrap:balance}
 .t-h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.025em;text-wrap:balance}
 .t-h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:var(--fs-h3);line-height:1.2;letter-spacing:-0.02em}
@@ -83,10 +79,8 @@ button,input,textarea{font-family:inherit}
 .t-text{font-size:var(--fs-text);line-height:1.65;max-width:65ch}
 .t-klein{font-size:var(--fs-klein);line-height:1.5;color:var(--text-2)}
 .label{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:var(--fs-klein);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-2)}
-/* Badges:zwei Varianten */
 .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:var(--fs-klein);letter-spacing:0.04em;line-height:1.3;background:var(--info);color:var(--primaer-dunkel)}
 .badge-akzent{background:var(--akzent);color:var(--tinte);box-shadow:inset 0 0 0 1px var(--akzent-linie)}
-/* Lime als Signatur:Leuchtstift, Kreise mit Häkchen, Punkte */
 .leuchtstift{padding:0 0.08em;margin:0 -0.04em;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' %76iewBox='0 0 200 40' %70reserveAspectRatio='none'%3E%3Cpath d='M2 14 C40 9 90 12 130 10 C160 9 185 11 198 12 L197 36 C150 38 110 35 70 37 C40 38 18 36 3 38 Z' fill='%23D6F24B'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:0 88%;background-size:100% 52%;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:leuchten 200ms linear both}
 @keyframes leuchten{from{background-size:0% 52%}to{background-size:100% 52%}}
 html.vorab-weg #dc-root .leuchtstift{animation:none}
@@ -95,12 +89,9 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .hinweis-akzent .lime-kreis svg{margin:0;color:var(--tinte)}
 .puls{animation:pulsLime 2.4s ease-in-out infinite}
 @keyframes pulsLime{0%,100%{box-shadow:0 0 0 0 rgba(214,242,75,0.7)}50%{box-shadow:0 0 0 6px rgba(214,242,75,0)}}
-/* Preise:nie umbrechen, gleich breite Ziffern */
 .preis{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;white-space:nowrap;font-variant-numeric:tabular-nums;font-size:clamp(32px,3.2vw,48px);line-height:1.05;letter-spacing:-0.01em}
-/* Hinweisbox (Versprechen, «Ihr Aufwand») */
 .hinweis{display:flex;gap:14px;align-items:flex-start;padding:18px 22px;border-radius:var(--radius);background:var(--info);color:var(--tinte);font-size:var(--fs-text);line-height:1.55}
 .hinweis svg{flex:none;margin-top:2px;color:var(--primaer)}
-/* Einblenden beim Scrollen:überall gleich */
 @keyframes einblenden{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.g3,.g4{animation:none;background-position:50% 50%}*{animation:none!important;transition:none!important}}
 .hdr-price,.hdr-flow{position:relative;overflow:hidden;display:flex;align-items:center}
@@ -110,7 +101,6 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 @media(max-width:430px){.hdr-price{min-height:32vh}.hdr-flow{min-height:0}.hdr-decor{display:none}}
 @keyframes heroPop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes scrollBob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
-/* Startseite */
 .hero{background:var(--grund)}
 .wrap.hero-pad{padding-top:72px;padding-bottom:88px}
 .nowrap{white-space:nowrap}
@@ -312,7 +302,6 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .chat-btn[data-hell="1"]:focus-visible{outline-color:var(--flaeche)}
 @keyframes chatIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media(max-width:560px){.chat-btn{display:none!important}}
-/* Tablet:Rand ist schmaler, Knopf kleiner und ganz aussen, damit er keine Inhalte überdeckt */
 @media(min-width:561px) and (max-width:1100px){.chat-btn{width:44px;height:44px;right:4px;bottom:16px}.chat-btn svg{width:22px;height:22px}}
 @media print{.chat-btn{display:none!important}}
 @media(min-width:1680px){.chat-btn{width:auto;gap:10px;padding:0 22px 0 18px}.chat-btn-l{position:static;width:auto;height:auto;overflow:visible;clip:auto;font-size:16px;font-weight:600}}
@@ -398,16 +387,13 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
  .mdet[open]>summary::after{content:"\2013"}
  .mhide{display:none}
 }
-/* Startseite: Hero mit Musterprojekt, nummerierte Abschnitte, Vergleich, Fragen */
 .hero-raster{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:var(--a-5);align-items:center}
 .hero-ort{margin:0 0 var(--a-3)}
 .hero-h1{margin:0 0 var(--a-3);max-width:14ch}
 .hero-lead{margin:0 0 var(--a-4);max-width:34ch}
-/* .einleitung{margin:16px 0 0} im Gestaltungssystem hob den Abstand zu den Knöpfen auf (0 px ab 768 px). Ausgewogen umbrechen. */
 .einleitung.hero-lead{margin-bottom:var(--a-4);text-wrap:balance}
 .hero-aktion{display:flex;flex-wrap:wrap;gap:12px}
 .werk{position:relative;margin:0;padding-bottom:var(--a-4)}
-/* Geräterahmen: Browserfenster und Handy für Musterprojekt-Aufnahmen (Startseite, Musterprojekte) */
 .werk-link{display:block;color:inherit;text-decoration:none;border-radius:14px}
 .werk-link:focus-visible{outline:3px solid var(--primaer);outline-offset:8px}
 .rahmen-browser{background:var(--flaeche);border:1px solid rgba(17,19,26,0.12);border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(17,19,26,0.06),0 24px 48px -28px rgba(17,19,26,0.30),0 56px 96px -56px rgba(17,19,26,0.28);transition:transform var(--dauer) var(--kurve),box-shadow var(--dauer) var(--kurve)}
@@ -421,7 +407,6 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .rahmen-handy{background:#0B0C10;border-radius:34px;padding:7px;box-shadow:0 0 0 1px rgba(17,19,26,0.4),0 2px 4px rgba(17,19,26,0.12),0 28px 56px -24px rgba(17,19,26,0.5);transition:transform var(--dauer) var(--kurve),box-shadow var(--dauer) var(--kurve)}
 .rahmen-schirm{position:relative;overflow:hidden;border-radius:27px;background:#0B0C10;padding-top:10%}
 .rahmen-insel{position:absolute;top:2.6%;left:50%;width:28%;height:0;padding-top:7%;border-radius:999px;background:#000;transform:translateX(-50%)}
-/* Auf dunklem Grund (Firstlicht-Abschnitt): heller Rand, damit sich der Rahmen abhebt */
 .rahmen-browser.rahmen--dunkel{background:#1B1E27;border-color:rgba(246,245,241,0.18);box-shadow:0 24px 48px -28px rgba(0,0,0,0.6)}
 .rahmen--dunkel .rahmen-leiste{background:#21242E;border-bottom-color:rgba(246,245,241,0.1)}
 .rahmen--dunkel .rahmen-punkte i{background:rgba(246,245,241,0.22)}
@@ -434,7 +419,6 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .werk .rahmen-handy{position:absolute;right:-16px;bottom:0;width:25%}
 .werk figcaption{margin-top:var(--a-2);max-width:70%;font-size:var(--fs-klein);line-height:1.5;color:var(--text-2)}
 .abschnitt-nr{margin:0 0 var(--a-2)}
-/* Formularfelder: Kennzeichnung, Fehler, Häkchen. Rot nur für Fehler, Lime nur für Bestätigung. */
 .f-label{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-2)}
 .f-tag{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-2);animation-duration:260ms;animation-timing-function:ease-out;animation-fill-mode:both}
 .f-tag::before{content:"·";margin:0 8px}
@@ -462,20 +446,16 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .q-weiter-knopf{min-height:56px;padding:0 32px;border:none;border-radius:999px;background:var(--primaer);color:var(--auf-dunkel);font:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:background var(--dauer) var(--kurve)}
 @media(hover:hover){.q-weiter-knopf:hover{background:var(--primaer-dunkel)}}
 .q-offen{margin:10px 0 0;min-height:18px;text-align:right;font-size:13px;color:var(--text-2)}
-/* Ziffern in den Antwortkarten sind Tastenkürzel: nur mit Maus und Tastatur, sonst ein leerer Auswahlkreis */
 @media not all and (hover:hover) and (pointer:fine){.acard-k[data-ziffer="1"]{font-size:0!important}}
 .q-vorab{order:6;margin:10px 0 0;text-align:right;font-size:13px;line-height:1.45;color:var(--text-2)}
-/* Ergebnis: welche Funktion das Paket bestimmt; Senden: Zusage über dem Knopf, Fehler direkt am Häkchen */
 .eg-grund{margin:0 0 12px;font-size:16px;line-height:1.5;color:var(--weiss)}
 .eg-grund-knopf{min-height:44px;padding:0 2px;border:0;background:none;color:var(--weiss);font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .mf-zusage{margin:0;font-size:13px;line-height:1.5;color:var(--tinte)}
 .mf-zustimmung-fehler[data-an="0"]{display:none}
 .mf-checks .mf-zustimmung-fehler[data-an="1"]{margin:-4px 0 0 30px}
 .mf-check[data-fehler="1"] input{outline:2px solid var(--fehler);outline-offset:2px}
-/* «Überspringen» bei optionalen Auswahlfragen: Textknopf statt Hauptknopf */
 .q-weiter-knopf[data-art="text"]{padding:0 8px;background:none;color:var(--primaer-dunkel);text-decoration:underline;text-underline-offset:3px}
 @media(hover:hover){.q-weiter-knopf[data-art="text"]:hover{background:none;color:var(--tinte)}}
-/* Gewählte Antwort zeigt bis zum automatischen Weiter ein Häkchen */
 @media(prefers-reduced-motion:no-preference){.acard[data-frisch="1"] .acard-k{animation:hakenPop 220ms cubic-bezier(0.2,0,0,1)}}
 @keyframes hakenPop{0%{transform:scale(0.6)}70%{transform:scale(1.12)}100%{transform:none}}
 .mf-eingabe[data-fehler="1"] input{border-color:var(--fehler);box-shadow:inset 0 0 0 1px var(--fehler)}
@@ -498,7 +478,6 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .ki-hinweis{margin:12px 0 0;font-size:var(--fs-klein);line-height:1.5;color:var(--text-2)}
 @media(max-width:1000px){.fragen-raster{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:560px){.ki-karte{padding:20px}}
-/* Projekt-Check auf dem Handy: Frage und Eingabe zuerst, Hinweise danach */
 @media(max-width:1023px){
  .qgrid{display:flex;flex-direction:column;gap:0}
  .qleft{display:contents}
@@ -566,9 +545,6 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
  .wrap{padding:0 48px}
  .g-hero{grid-template-columns:1fr}
 }
-/* Kopfzeile, gemessen am 8. Oktober 2026 mit fünf Menüpunkten (dazu «Einblicke»): Logo mit Unterzeile 253 px plus 32 px,
-   Navigation 534 px (mit 24 px Abstand 478 px), Button 226 px (kurz 165 px), dazu zweimal 40 px und 240 px Rand.
-   Wird es eng, zuerst die Abstände in der Navigation auf 24 px, dann der kurze Buttontext, zuletzt das Menü. */
 @media(max-width:1379px){
  .navmid{gap:24px}
 }
@@ -621,7 +597,6 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
  .pr-blk{page-break-inside:avoid;margin:0 0 14pt}
  .pr-ul{margin:0 0 4pt;padding-left:14pt;font-size:11pt;line-height:1.45}
 }
-/* Sprunglink: erst bei Tastaturfokus sichtbar */
 .sprunglink{position:fixed;left:16px;top:16px;z-index:200;padding:12px 18px;border-radius:8px;background:var(--tinte);color:#FFFFFF;font-weight:600;text-decoration:underline;text-underline-offset:3px;transform:translateY(-200%)}
 .sprunglink:focus{transform:none;outline:3px solid var(--akzent);outline-offset:2px}
 main[tabindex="-1"]:focus{outline:none}
@@ -647,7 +622,7 @@ if(!m.hasAttribute('tabindex'))m.setAttribute('tabindex','-1');m.focus({preventS
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=a455723f97';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=5cdd32a5fc';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -656,9 +631,6 @@ setTimeout(gemeldet,400);
 if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()});else start()})();
 </script>
 <style id="system">
-/* ===== Gestaltungssystem (Redesign Oktober 2026, docs/entscheidungen.md Teil 3) =====
-   Flächen: Papier, Papier tief, Tinte, Kobalt. Weiss nur für Karten, Felder und Gerätemockups.
-   Sieben Schriftgrössen, 8-px-Raster, zwei Schatten, drei Radien. */
 :root{
  --bg-papier:#F6F5F1;--bg-papier-tief:#ECE9E1;--bg-tinte:#11131A;--bg-tinte-hell:#1B1E28;--bg-kobalt:#2D4CF0;
  --akzent-limette:#D6F24B;--akzent-koralle:#FF5A3C;
@@ -668,28 +640,23 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
  --schatten-1:0 1px 2px rgba(17,19,26,0.06),0 10px 28px -16px rgba(17,19,26,0.22);
  --schatten-2:0 2px 4px rgba(17,19,26,0.08),0 28px 56px -24px rgba(17,19,26,0.34);
  --r-1:10px;--r-2:16px;--r-3:24px;
- /* Abstufungen des ODERA-Blaus (#2D4CF0). Hellere Stufen nie für Text, nur für Flächen und Schein. */
  --odera-blau-50:#F8F9FE;--odera-blau-100:#EEF1FD;--odera-blau-200:#DDE3FF;--odera-blau-500:#2D4CF0;--odera-blau-700:#1E34B8;
  --odera-blau-a03:rgba(45,76,240,0.03);--odera-blau-a10:rgba(45,76,240,0.10);--odera-blau-a45:rgba(45,76,240,0.45);--odera-blau-a00:rgba(45,76,240,0);
- /* bisherige Namen auf die neue Skala */
  --fs-klein:var(--fs-1);--fs-text:var(--fs-3);--fs-lead:var(--fs-4);--fs-h3:var(--fs-5);--fs-h2:var(--fs-6);--fs-h1:var(--fs-7);
  --a-6:var(--sektion-y)}
 @media(max-width:1023px){:root{--sektion-y:64px}}
 @media(max-width:767px){:root{--sektion-y:56px;--titel-abstand:28px}}
-/* Bänder: ein Abschnitt, eine Fläche */
 .band{position:relative;padding:var(--sektion-y) 0;color:var(--tinte)}
 .band-papier{background-color:var(--bg-papier)}
 .band-tief{background-color:var(--bg-papier-tief)}
 .band-tinte{background-color:var(--bg-tinte);color:var(--auf-tinte)}
 .band-kobalt{background-color:var(--bg-kobalt);color:#FFFFFF}
-/* feines Raster (höchstens 4 % Deckkraft), damit Flächen nicht steril wirken */
 .band-raster{background-image:radial-gradient(rgba(17,19,26,0.045) 1px,transparent 1.2px);background-size:24px 24px}
 .band-tinte.band-raster{background-image:radial-gradient(rgba(236,234,228,0.04) 1px,transparent 1.2px)}
 .band-tinte a:not(.btn){color:var(--akzent-limette)}
 .band-tinte :focus-visible,.band-kobalt :focus-visible{outline-color:var(--akzent-limette)}
 .band-tinte ::selection{background:var(--akzent-limette);color:var(--tinte)}
 .band .wrap{padding-top:0;padding-bottom:0}
-/* Titelblock */
 .augenbraue{margin:0 0 16px;font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:var(--fs-1);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-2)}
 .band-tinte .augenbraue{color:var(--akzent-limette)}
 .band-kobalt .augenbraue{color:#DDE3FF}
@@ -705,37 +672,29 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .band-tinte .lesetext{color:var(--auf-tinte-2)}
 .klein{font-size:var(--fs-1);line-height:1.5;color:var(--text-2)}
 .band-tinte .klein{color:var(--auf-tinte-2)}
-/* Zahlen, die verkaufen */
 .kennzahl{display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-6);line-height:1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
 .kennzahl-gross{font-size:var(--fs-7)}
 .band-tinte .kennzahl{color:var(--akzent-limette)}
-/* Karten mit Tiefe */
 .karte{position:relative;background:#FFFFFF;border-radius:var(--r-2);box-shadow:var(--schatten-1);color:var(--tinte)}
 .band-tinte .karte-dunkel{background:var(--bg-tinte-hell);box-shadow:none;border:1px solid var(--auf-tinte-linie);color:var(--auf-tinte)}
 .karte-heben{transition:transform var(--dauer) var(--kurve),box-shadow var(--dauer) var(--kurve)}
 @media(hover:hover){.karte-heben:hover{transform:translateY(-2px);box-shadow:var(--schatten-2)}}
-/* Ganze Karte antippbar: ein echter Link, dessen ::after die Karte abdeckt */
 .karte-link{color:inherit;text-decoration:none}
 .karte-link::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:1}
 .karte-link:focus-visible{outline:none}
 .karte:has(.karte-link:focus-visible){outline:3px solid var(--primaer);outline-offset:4px}
 .karte .ueber-link{position:relative;z-index:2}
-/* Linien-Icons (Inline-SVG, 1.75 px, runde Enden) */
 .ic{flex:none;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 .ic-20{width:20px;height:20px}.ic-32{width:32px;height:32px}
-/* Chips (ruhig, normale Schreibweise) */
 .chip{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:4px 12px;border-radius:999px;background:var(--bg-papier-tief);font-size:var(--fs-2);line-height:1.3;color:var(--tinte)}
 .band-tief .chip{background:#FFFFFF}
 .band-tinte .chip{background:rgba(236,234,228,0.08);color:var(--auf-tinte)}
-/* Einblenden beim Scrollen: nur mit JavaScript und ohne reduzierte Bewegung, einmal pro Element */
 @media(prefers-reduced-motion:no-preference){
  html.einblenden-an .einblenden:not(.ist-da){opacity:0;transform:translateY(12px)}
  html.einblenden-an .einblenden{transition:opacity 400ms ease-out,transform 400ms var(--kurve)}}
-/* Knöpfe auf dunklem Grund */
 .band-tinte .btn-sekundaer,.band-kobalt .btn-sekundaer{border-color:rgba(236,234,228,0.6);color:var(--auf-tinte)}
 @media(hover:hover){.band-tinte .btn-sekundaer:hover,.band-kobalt .btn-sekundaer:hover{background:var(--auf-tinte);color:var(--tinte)}}
 .knopfreihe{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
-/* Musterprojekte: zwei Projekte, je eine Bühne mit eigenem Umschalter Desktop/Handy */
 .mp2-hero{padding-top:calc(var(--sektion-y) + 8px)}
 .mp2-hero-raster{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:end}
 .mp2-sprung{display:flex;flex-direction:column;gap:12px}
@@ -771,13 +730,11 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 @media(hover:hover){.mp2-geraet:hover .rahmen-browser,.mp2-geraet:hover .rahmen-handy{transform:translateY(-2px)}}
 @media(max-width:1023px){.mp2-hero-raster,.mp2{grid-template-columns:minmax(0,1fr);gap:40px}.mp2-rev .mp2-text{order:0}}
 @media(max-width:767px){.mp2-schalter button{min-width:96px}.mp2-sprung a{min-height:64px}}
-/* Kennzahlen-Reihe (Hero Ablauf, Streifen Startseite) */
 .zahlen-reihe{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 48px;margin:48px 0 40px;padding:32px 0 0;border-top:1px solid var(--auf-tinte-linie)}
 .zahlen-reihe>div{display:flex;flex-direction:column;gap:8px;min-width:0}
 .zahlen-reihe dt{margin:0}.zahlen-reihe dd{margin:0;font-size:var(--fs-2);line-height:1.45;color:var(--auf-tinte-2)}
 .band-papier .zahlen-reihe,.band-tief .zahlen-reihe{border-top-color:var(--linie)}
 .band-papier .zahlen-reihe dd,.band-tief .zahlen-reihe dd{color:var(--text-lese)}
-/* Fahrplan: mitlaufende Phasen-Navigation links, Karten rechts */
 .fahrplan{display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px;align-items:start}
 .fahrplan-nav{position:sticky;top:112px;display:flex;flex-direction:column;gap:4px;padding-left:20px}
 .fahrplan-spur{position:absolute;left:0;top:8px;bottom:8px;width:2px;border-radius:2px;background:var(--linie)}
@@ -808,12 +765,10 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .phase-opt{padding:2px 8px;border-radius:999px;background:var(--bg-papier-tief);font-size:var(--fs-1);color:var(--text-2)}
 .phase-d-min{margin-left:auto;font-size:var(--fs-2);color:var(--text-2);font-variant-numeric:tabular-nums}
 .phase-d-text{font-size:var(--fs-2);line-height:1.55;color:var(--text-lese)}
-/* Kompakte Variante (Startseite) */
 .phasen-kompakt{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
 .phasen-kompakt li{display:flex;flex-direction:column;gap:12px;padding:24px}
 .phasen-kompakt .phase-n{font-size:var(--fs-5)}
 .phasen-kompakt p{margin:0;font-size:var(--fs-2);line-height:1.55;color:var(--text-lese)}
-/* Aufwand auf einen Blick */
 .aufwand{padding:32px}
 .aufwand-wochen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .aufwand-woche{min-width:0}
@@ -829,10 +784,8 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .schalter-spur::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(17,19,26,0.3);transition:transform var(--dauer) var(--kurve)}
 .schalter[aria-checked="true"] .schalter-spur{background:var(--primaer)}
 .schalter[aria-checked="true"] .schalter-spur::after{transform:translateX(20px)}
-/* Danach */
 .danach{display:flex;gap:24px;align-items:flex-start;max-width:760px;padding:32px}
 .danach>.ic{color:var(--primaer)}
-/* Drei Karten nebeneinander */
 .raster-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;list-style:none;margin:0;padding:0}
 .stein{padding:28px;display:flex;flex-direction:column;gap:12px}
 .stein .ic{color:var(--akzent-limette)}
@@ -847,19 +800,15 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
  .raster-3{grid-template-columns:minmax(0,1fr)}
  .aufwand-wochen{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:767px){.phase,.aufwand,.danach{padding:24px}.phasen-kompakt{grid-template-columns:minmax(0,1fr)}.danach{flex-direction:column;gap:12px}}
-/* Startseite */
 .hero.band-raster{background-color:var(--bg-papier)}
 .werk .werk-bild{display:block;width:100%;height:auto}
-/* Kennzahlen des Hero, nur einmal im Markup: ab 768 px dunkler Streifen unter dem Hero, darunter Zeile im Hero (style id="mobil") */
 .hero-zahlen{padding:40px 0}
 .hero-zahlen .zahlen-reihe{margin:0;padding:0;border:0}
 @media(min-width:768px) and (max-width:1023px){.hero-zahlen .zahlen-reihe{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}}
-/* Titel des Hero: zwei Zeilen, die zweite in ODERA-Blau. Die Grösse folgt der Textspalte, damit jede Zeile auf eine Zeile passt. */
 .hero-text{container-type:inline-size}
 .hero-h1{max-width:none;font-size:min(var(--fs-7),8.6cqi)}
 .hero-h1-z{display:block}
 .hero-h1-blau{color:var(--primaer)}
-/* Nur auf dem Handy sichtbar (style id="mobil") */
 .hero-badge,.hero-check-info,.werk-wimpel,.werk-pfeil,.hero-vertrauen,.hero-weiter{display:none}
 .raster-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .mk{display:flex;flex-direction:column;overflow:hidden}
@@ -881,7 +830,6 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .preise-fuss{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;margin:32px 0 0}
 .branchen-zeile{margin:0;font-size:var(--fs-2);color:var(--text-2)}
 .branchen-zeile a{color:var(--tinte)}
-/* Vergleich mit Symbolen */
 .vergleich{padding:8px 32px}
 .vg-zeile{display:grid;grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr));align-items:center;gap:16px;min-height:64px;border-bottom:1px solid var(--linie)}
 .vg-zeile:last-child{border-bottom:0}
@@ -897,7 +845,6 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .vg-legende{display:flex;flex-wrap:wrap;gap:8px 24px;margin:16px 0 0}
 .vg-legende>span{display:inline-flex;align-items:center;gap:8px}
 .vg-legende .vg-i{width:20px;height:20px;background-size:12px}
-/* Person mit LinkedIn */
 .person2{display:grid;grid-template-columns:280px minmax(0,1fr);gap:64px;align-items:center}
 .portraet-link{position:relative;display:block;width:280px;border-radius:50%;transition:transform var(--dauer) var(--kurve)}
 .portraet{display:block;width:280px;height:280px;border-radius:50%;object-fit:cover;object-position:50% 22%;background:var(--bg-tinte-hell)}
@@ -913,7 +860,6 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .li-knopf svg{flex:none}
 @media(max-width:1023px){.raster-2{grid-template-columns:minmax(0,1fr)}.person2{grid-template-columns:minmax(0,1fr);gap:32px}.vergleich{padding:8px 20px}}
 @media(max-width:767px){.portraet-link:not(.portraet-gross),.portraet-link:not(.portraet-gross) .portraet{width:200px;height:200px}.vg-zeile{grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:8px}.vg-kopf{font-size:var(--fs-1)}.vg-frage{font-size:var(--fs-2)}.mk-bild{margin:16px 16px 0}.mk-text{padding:24px 20px}}
-/* Angebot */
 .hdr-price.band-kobalt{padding:var(--sektion-y) 0}
 .pk-detail{margin:32px 0 0;border-top:1px solid var(--linie)}
 .pk-detail summary{display:flex;align-items:center;gap:10px;min-height:56px;cursor:pointer;font-size:var(--fs-3);font-weight:600;list-style:none}
@@ -922,12 +868,10 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .pk-detail[open] summary::after{transform:rotate(-135deg);margin-top:4px}
 .pk-detail-raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:8px 0 24px}
 .pk-detail-raster ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:var(--fs-2);line-height:1.5;color:var(--text-lese)}
-/* Nach der Übergabe: nummerierte Liste, grosse Ziffern als Kontur in ODERA-Blau */
 .uebergabe{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:64px;align-items:start}
 .uebergabe .titelblock{position:sticky;top:112px;margin:0}
 .uebergabe-liste{list-style:none;margin:0;padding:0;border-top:1px solid var(--auf-tinte-linie)}
 .uebergabe-liste li{display:grid;grid-template-columns:104px minmax(0,1fr);gap:24px;align-items:start;padding:32px 0;border-bottom:1px solid var(--auf-tinte-linie)}
-/* Grün (Limette) als Signatur: zweiter Satz des Titels, Haken und Ziffern */
 .uebergabe-gruen{display:block;color:var(--akzent-limette)}
 .uebergabe-kurz{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
 .uebergabe-kurz li{position:relative;padding-left:32px;font-size:var(--fs-3);line-height:1.5;color:var(--auf-tinte)}
@@ -951,7 +895,6 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .preis-herleitung summary::after{content:"";flex:none;width:10px;height:10px;margin-top:-5px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform var(--dauer) var(--kurve)}
 .preis-herleitung[open] summary::after{transform:rotate(-135deg);margin-top:5px}
 .preis-herleitung-inhalt{padding:0 32px 32px}
-/* Über mich */
 .ue-hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:center}
 .ue-bild{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
 .portraet-gross{width:100%;max-width:420px;border-radius:var(--r-3)}
@@ -981,7 +924,6 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .band-kobalt a:not(.btn){color:#FFFFFF}
 @media(max-width:1023px){.ue-hero,.ue-zeit{grid-template-columns:minmax(0,1fr);gap:40px}.zeitleiste2,.technik{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:767px){.zeitleiste2{grid-template-columns:minmax(0,1fr);padding-left:28px}.zeitleiste2::before{left:7px;right:auto;top:0;bottom:0;width:2px;height:auto}.zeitleiste2 li{padding-top:0}.zeitleiste2 li::before{left:-28px;top:3px}.technik{grid-template-columns:minmax(0,1fr)}.portraet-gross{max-width:320px}}
-/* Rechtstexte: Lesebreite 720 px, mitlaufendes Inhaltsverzeichnis links */
 .recht{display:grid;grid-template-columns:240px minmax(0,720px);column-gap:64px;align-items:start}
 .recht>*{grid-column:2}
 .recht>.recht-inhalt{grid-column:1;grid-row:1 / span 3;position:sticky;top:112px;max-height:calc(100vh - 140px);overflow:auto;margin:0;padding:0 0 0 16px;border-left:2px solid var(--linie)}
@@ -991,14 +933,12 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 .recht p,.recht li{color:var(--text-lese)}
 .recht [id^="ds-"],.recht [id^="im-"],.recht [id^="agb-"]{scroll-margin-top:112px}
 @media(max-width:1023px){.recht{grid-template-columns:minmax(0,1fr)}.recht>*,.recht>.recht-inhalt{grid-column:1;grid-row:auto;position:static;max-height:none;margin:0 0 40px;padding:20px;border:1px solid var(--linie);border-radius:var(--r-2)}.recht-inhalt a{padding:10px 0}}
-/* Fusszeile */
 .fuss-ort{max-width:34ch;margin:8px 0 0;font-size:var(--fs-2);line-height:1.5;color:var(--linie-stark)}
 .fuss-li{display:flex;flex-wrap:wrap;gap:8px 20px;margin:20px 0 0}
 .fuss-li a{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:var(--fs-2);color:var(--grund);text-decoration:none}
 @media(hover:hover){.fuss-li a:hover span{text-decoration:underline}}
 .fuss-branchen{margin:40px 0 0;font-size:var(--fs-2);color:var(--linie-stark)}
 .fuss-branchen a{display:inline-block;padding:8px 0;color:var(--grund)}
-/* Branchenseiten */
 .br-inhalte{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;list-style:none;margin:0;padding:0}
 @media(min-width:1024px){.br-inhalte{grid-template-columns:repeat(4,minmax(0,1fr))}.br-inhalte:has(>li:nth-child(5)){grid-template-columns:repeat(6,minmax(0,1fr))}.br-inhalte:has(>li:nth-child(5))>li{grid-column:span 2}.br-inhalte:has(>li:nth-child(5))>li:nth-child(n+4){grid-column:span 3}}
 .br-inhalte li{display:flex;flex-direction:column;gap:12px;padding:28px}
@@ -1015,7 +955,6 @@ if(!dom)document.addEventListener('DOMContentLoaded',function(){dom=true;start()
 @media(max-width:767px){.br-buehne{padding:12px}}
 </style>
 <style id="mobil">
-/* Handy und Tablet bis 1023 px. Die Ansicht ab 1024 px bleibt unverändert. */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 :root{color-scheme:light}
 a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
@@ -1027,7 +966,6 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  a,button,[role=button],input,select,textarea,label{touch-action:manipulation}
  h1,h2,h3{text-wrap:balance}
  p,li,dd{text-wrap:pretty}
- /* Kopf: schlank, durchscheinend, gleitet beim Runterscrollen weg */
  .kopf{padding-top:env(safe-area-inset-top);background:rgba(246,245,241,0.86);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);transition:transform 260ms cubic-bezier(0.2,0,0,1),background 200ms linear,border-color 200ms linear;will-change:transform}
  .kopf[data-weg="1"]{transform:translateY(-100%)}
  .kopf:focus-within{transform:none}
@@ -1040,7 +978,6 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .burger-knopf .bs:nth-child(1){top:14px}
  .burger-knopf .bs:nth-child(2){top:20px}
  .burger-knopf .bs:nth-child(3){top:26px}
- /* Menü offen: Kopf bleibt stehen und wird Teil des blauen Menüs */
  html[data-menue="1"] .kopf{position:fixed;left:0;right:0;top:0;z-index:62;transform:none;background:transparent;border-bottom-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
  #thread{position:absolute;left:0;bottom:-1px;z-index:1}
  .kopf{border-bottom-width:0!important;box-shadow:0 1px 0 transparent}
@@ -1078,12 +1015,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  @keyframes menueRein{from{transform:translateY(-100%)}to{transform:none}}
  @keyframes menueRaus{from{transform:none}to{transform:translateY(-100%)}}
  @keyframes menueEintrag{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
- /* Antippen statt Hover: dezentes Feedback */
  .btn,.hero-chip,.kcard,.acard,.mobbar-go,.mobbar-chat,.q-weiter-knopf,.einstieg,.wahl-mehr{transition:transform 120ms ease-out,background 200ms linear}
  .btn:active,.hero-chip:active,.kcard:active,.acard:active,.mobbar-go:active,.mobbar-chat:active,.q-weiter-knopf:active,.wahl-mehr:active{transform:scale(0.97)}
- /* Formularfelder: mindestens 16 px, damit Safari nicht hineinzoomt */
  :where(input:not([type=checkbox]):not([type=radio]),select,textarea){font-size:16px}
- /* Projekt-Check: Fortschritt oben fix, Weiter-Leiste über der Tastatur */
  .q-prog{position:sticky;top:0;z-index:30;height:3px!important}
  .q-prog>div{height:3px!important}
  .q-leiste{position:fixed;left:0;right:0;bottom:var(--tastatur,0px);z-index:40;padding:8px 20px calc(10px + env(safe-area-inset-bottom));background:rgba(246,245,241,0.98);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--linie);transition:bottom 120ms linear}
@@ -1105,7 +1039,6 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 @media(min-width:1024px){.q-leiste{display:contents}}
 @media(max-width:767px){
  :root{--fs-text:17px;--fs-lead:19px}
- /* Pakete: wischbare Karten, Standard zuerst */
  .wisch{display:flex!important;gap:12px!important;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:6px 20px 14px;scroll-padding:0 20px;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:stretch!important}
  .wisch::-webkit-scrollbar{display:none}
  .wisch>*{flex:0 0 85%;min-width:0;scroll-snap-align:start;margin:0!important;transform:none!important}
@@ -1114,11 +1047,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .pk-punkte-nav{display:flex;justify-content:center;gap:8px;margin:4px 0 0}
  .pk-punkte-nav i{width:8px;height:8px;border-radius:999px;background:var(--linie-stark);transition:width 200ms ease-out,background 200ms linear}
  .pk-punkte-nav:not([data-aktiv]) i:nth-child(1),.pk-punkte-nav[data-aktiv="0"] i:nth-child(1),.pk-punkte-nav[data-aktiv="1"] i:nth-child(2),.pk-punkte-nav[data-aktiv="2"] i:nth-child(3){width:22px;background:var(--tinte)}
- /* Einordnung: nur die eigene Antwort, Vergleich zum Aufklappen */
  .wahl:not([data-offen="1"]) [data-l="Baukasten"],.wahl:not([data-offen="1"]) [data-l="Agentur"]{display:none}
  .wahl-mehr{display:inline-flex;align-items:center;min-height:48px;margin:12px 0 0;padding:0 20px;border:1px solid var(--tinte);border-radius:999px;background:none;color:var(--tinte);font:inherit;font-size:16px;font-weight:600;cursor:pointer}
  .wahl-zeile{padding:16px 0}
- /* Untere Leiste über dem Home-Indikator, Abstand am Seitenende */
  .footpad{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
  footer .g-foot>div{gap:0!important}
  footer .g-foot a,footer .f-legal-row a{display:inline-flex;align-items:center;min-height:44px;min-width:44px}
@@ -1140,49 +1071,38 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 @media(max-width:1023px){.gen-platz{min-height:1250px}}
 @media(max-width:767px){.gen-platz{min-height:1550px}}
 
-/* ===== Handy-Korrekturen 10. Oktober 2026 (nur unter 768 px, Tablet und Desktop unverändert) ===== */
 .rl-kurz{display:none}
 @media(max-width:767px){
- /* 7c Startseite: drei Pakete untereinander statt Karussell, Standard zuerst, ohne Punkte */
  .pk-kurz.wisch{flex-direction:column;overflow:visible;margin:0;padding:0;scroll-snap-type:none;gap:16px!important}
  .pk-kurz.wisch>*{flex:0 0 auto}
  .pk-kurz+.pk-punkte-nav{display:none!important}
- /* 7d Startseite «So läuft es»: kompakte Liste statt Karten */
  .start-schritte{display:flex;flex-direction:column;gap:0}
  .start-schritte>li.karte{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:12px;row-gap:2px;padding:12px 0;border-radius:0;background:none;box-shadow:none;border-bottom:1px solid var(--linie)}
  .start-schritte>li.karte:last-child{border-bottom:0}
  .start-schritte .phase-n{grid-row:1 / span 2;font-size:var(--fs-4);line-height:1.4}
  .start-schritte .titel-3{font-size:var(--fs-3);line-height:1.4}
  .start-schritte p{font-size:var(--fs-2);line-height:1.45}
- /* 7f Paketrechner: kurze, einzeilige Beschriftung */
  .rl-lang{display:none}.rl-kurz{display:inline}
  .rechner-los{white-space:nowrap}
- /* 7g Über mich: Porträt höchstens rund 45 % der Bildschirmhöhe, Ausschnitt Gesicht und Oberkörper */
  .portraet-gross .portraet{aspect-ratio:auto;height:40vh;height:40svh;object-fit:cover;object-position:50% 22%}
  [data-abschnitt="ueber-kopf"]{padding-top:32px}
  .ue-hero{gap:24px}.ue-bild{gap:16px}
- /* 7h Tippflächen mindestens 44 px, Schrift und Optik unverändert */
  .mk .karte-link,.br-muster .karte-link{display:inline-block;padding:8px 0;margin:-8px 0}
  .werk figcaption a{display:inline-block;padding:14px 0;margin:-14px 0}
  .mp2-text .knopfreihe a:not(.btn){display:inline-flex;align-items:center;min-height:44px}
- /* 7i Inhalte sofort zeigen, ohne Einblenden */
  html.einblenden-an .einblenden:not(.ist-da){opacity:1;transform:none}
  html.einblenden-an .einblenden{transition:none}
 }
 
-/* ===== Ruhiger Hero und Kopf (21. Oktober 2026). Ab 1024 px gilt nichts davon. ===== */
 @media(max-width:1023px){
- /* Kopf: kompakter Knopf «Check starten» und runder, hellgrauer Menüknopf */
  .navbar>a:first-child{margin-right:0}
  .navbar>div:last-child{gap:8px!important}
  .navcta{display:inline-flex;height:44px;padding:0 16px;font-size:15px}
  .navcta-lg{display:none}.navcta-sm{display:inline}
  html[data-menue="1"] .navcta{display:none}
  .burger-knopf{background:var(--bg-papier-tief)!important;border-color:transparent!important}
- /* Schwebender Knopf «Assistent fragen»: über dem Home-Indikator */
  .chat-btn{bottom:calc(16px + env(safe-area-inset-bottom))}
 }
-/* Logo, Knopf und Menü in einer Zeile bis 360 px: Abstände knapper, Logo leicht verkleinert */
 @media(max-width:430px){
  .navbar{gap:8px!important}
  .kopf .logo-normal{gap:8px}
@@ -1192,7 +1112,6 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
 @media(max-width:380px){.kopf .logo-normal{zoom:0.82}}
 @media(max-width:365px){.kopf .logo-normal{zoom:0.76}}
 @media(max-width:767px){
- /* Hero: Badge, Titel, ein Satz, ein Knopf, Mockup, Vertrauenszeile, Kennzahlen. Frage mit Chips und «Preise ansehen» nur ausgeblendet. */
  .hero.band-raster{overflow:hidden;background-color:var(--flaeche);background-image:linear-gradient(180deg,var(--odera-blau-a03) 0%,var(--odera-blau-a00) 100%);background-size:auto}
  .wrap.hero-pad{padding-top:24px!important;padding-bottom:32px!important}
  .hero-raster{gap:32px}
@@ -1207,7 +1126,6 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .hero-aktion{width:100%}
  .hero-aktion .btn-primaer{flex:1 1 100%;min-height:56px}
  .hero-check-info{display:block;margin:10px 0 0;font-size:13px;line-height:1.4;color:var(--text-2)}
- /* Mockup: Tablet-Rahmen mit Handy davor, weicher Schein in ODERA-Blau */
  .werk{isolation:isolate;margin:8px 0 0;padding:0}
  .werk::before{content:"";position:absolute;z-index:-1;left:-12%;right:-12%;top:-14%;bottom:-8%;background:radial-gradient(closest-side,var(--odera-blau-a10),var(--odera-blau-a00));pointer-events:none}
  .werk-link{position:relative;padding:10px 0 22px}
@@ -1221,13 +1139,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .werk-wimpel::after{content:"";position:absolute;left:0;bottom:-6px;border-top:6px solid var(--odera-blau-700);border-left:6px solid transparent}
  .werk figcaption{max-width:none;margin:16px 0 0;text-align:center;font-size:14px}
  .werk-pfeil{display:inline}
- /* Vertrauenszeile */
  .hero-vertrauen{display:flex;align-items:center;justify-content:center;gap:12px}
  .hero-vertrauen img{flex:none;width:44px;height:44px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px #FFFFFF,var(--schatten-1)}
  .hero-vertrauen p{display:flex;flex-direction:column;gap:2px;margin:0;font-size:16px;line-height:1.35;color:var(--tinte)}
  .hero-vertrauen strong{font-weight:600}
  .hero-vertrauen span{font-size:13px;color:var(--text-2)}
- /* Kennzahlen: eine Zeile, drei Spalten */
  .hero-zahlen{padding:0;background:transparent;color:var(--tinte)}
  .hero-zahlen .zahlen-reihe{grid-template-columns:auto auto auto;justify-content:space-between;gap:0 8px;padding:20px 0 0;border-top:1px solid var(--linie)}
  .hero-zahlen .zahlen-reihe>div{align-items:center;gap:4px;text-align:center}
@@ -1235,16 +1151,13 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .hero-zahlen dd{font-size:13px;line-height:1.35;color:var(--text-2)}
  .hero-weiter{display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin:16px auto 8px;border-radius:50%;color:var(--text-2)}
 }
-/* Kennzahlen unter 430 px: drei Zeilen, Zahl links, Text rechts. In drei Spalten stiessen «ab CHF 890» und «5 Arbeitstage» bei 320 px fast aneinander. */
 @media(max-width:430px){
  .hero-zahlen .zahlen-reihe{grid-template-columns:auto auto;justify-content:center;align-items:baseline;gap:10px 16px}
  .hero-zahlen .zahlen-reihe>div{display:contents}
  .hero-zahlen .zahlen-reihe dt,.hero-zahlen .zahlen-reihe dd{text-align:left}
  .hero-zahlen dd{font-size:15px}
 }
-/* Startseite unter 768 px: Einleitungen ausgewogen umbrechen, kein einzelnes Wort allein in der letzten Zeile */
 @media(max-width:767px){.startseite .einleitung{text-wrap:balance}}
-/* Kopf bei 320 px: Logo, «Check starten» und Menü passten erst ab 360 px in eine Zeile (27 px seitliches Scrollen) */
 @media(max-width:359px){
  .kopf .logo-normal{zoom:0.62}
  .navbar,.navbar>div:last-child{gap:6px!important}
@@ -1254,17 +1167,14 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .hero-badge-punkt{animation:badgePuls 2.4s ease-in-out infinite}
  @keyframes badgePuls{0%,100%{box-shadow:0 0 0 0 var(--odera-blau-a45)}50%{box-shadow:0 0 0 5px var(--odera-blau-a00)}}
 }
-/* Übrige Startseite unter 768 px: gleicher Rhythmus (8er-Raster), Text ab 16 px, ein gefüllter Knopf pro Abschnitt */
 @media(max-width:767px){
  .startseite{--fs-2:16px;--titel-abstand:24px}
  .startseite :is(.lesetext,.einleitung,.mk-text p,.phasen-kompakt p,.frage p,.ki-gruss){line-height:1.55}
  .startseite .titelblock .einleitung{margin-top:16px}
- /* Weitere Knöpfe als Textlinks: Pakete Website und Pro, LinkedIn im Abschluss */
  .startseite .pk-kurz .btn-sekundaer,#abschluss .abschluss-seite .li-knopf{min-height:44px;padding:0;border:0;border-radius:0;background:none;color:var(--primaer-dunkel);text-decoration:underline;text-underline-offset:3px;justify-content:flex-start}
  #abschluss .abschluss-seite .li-knopf{color:#FFFFFF}
  .startseite .branchen-zeile a,.startseite .ki-hinweis a,#abschluss .abschluss-seite p a{display:inline-block;padding:12px 0;margin:-12px 0}
  .startseite .branchen-zeile{line-height:2.2}
- /* Vergleich als kompakte Liste: Kriterium, darunter drei Status mit Symbol und Text */
  .vergleich{padding:4px 16px}
  .vg-kopf{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
  .vg-zeile{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 8px;min-height:0;padding:16px 0}
@@ -1275,43 +1185,32 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .vg-l{display:block;font-size:13px;line-height:1.3;color:var(--text-2)}
  .vg-zeile .vg-t{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;font-size:15px;font-weight:600;line-height:1.3;color:var(--tinte)}
  .vg-zeile .vg-ich .vg-l,.vg-zeile .vg-ich .vg-t{color:var(--primaer-dunkel)}
- /* Assistent: höchstens zwei Vorschläge sichtbar */
  .ki-chips .ki-chip:nth-child(n+3){display:none}
- /* Schwebender Knopf «Assistent fragen» auf der Startseite erst nach dem ersten Bildschirm */
  html:has(.startseite) .chat-btn[data-bar="0"]{display:none!important}
- /* Angebot, Preis-Rechner: lange Knöpfe brechen um, statt die Seite bei 360 px seitlich zu verbreitern */
  .rechner{grid-template-columns:minmax(0,1fr)}
  .rfn{max-width:100%}
 }
 @media(max-width:374px){.rechner-los{padding:0 12px;font-size:15px}}
 
-/* ===== Projekt-Check mit sechs Fragen (29. Oktober 2026). Bei 390 × 664 px sind alle Antworten ohne Scrollen sichtbar,
-   ausser bei den Funktionen-Karten. Ab 768 px gilt nichts davon. ===== */
 .mf-angaben,.q-leiste-paket{display:none}
 @media(max-width:1023px){
  .q-fortschritt[data-leer="1"]{display:none}
- /* Durchgestrichener Normalpreis beim Referenzrabatt: auf der aufgehellten Ergebniskarte voll deckend (Kontrast AA) */
  .eg-links .eg-preis s{opacity:1}
- /* Weiter-Leiste: ohne Knopf nur «Zurück» kompakt unten links, auf Frage 1 ohne Antwort gar keine (weiterNoetig) */
  .q-leiste[data-art="leer"]{display:none}
  .q-leiste[data-art="zurueck"]{left:0;right:auto;padding:0 0 calc(12px + env(safe-area-inset-bottom)) 16px;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-top:0}
  html[data-tastatur="1"] .q-leiste[data-art="zurueck"]{padding-bottom:8px}
  .q-leiste[data-art="zurueck"] .row>button{min-height:44px!important;padding:0 18px!important;background:var(--grund)!important;box-shadow:0 6px 18px -6px rgba(17,19,26,0.25)}
  .q-leiste .q-weiter-knopf[data-art="text"]{flex:none;margin-left:auto}
  .q-leiste .q-vorab{margin:4px 0 0;text-align:center;font-size:13px}
- /* Antwortraster immer volle Breite, auch bei kurzen Antworten (Logo, Texte, Fotos) */
  .qright{align-self:stretch}
- /* Funktionen: «Sieht nach Paket … aus» in der Leiste, nicht doppelt unten */
  .q-leiste-paket[data-zeigen="1"]{display:block;margin:0 0 6px;text-align:center;font-size:13px;color:var(--tinte)}
  .q-status[data-leiste="1"]{display:none}
- /* Funktionen kompakt: Symbol, Titel und Paket in einer Zeile, Erklärung klein darunter (.qright, weil anfrage.css später lädt) */
  .qright .g-karten{gap:6px}
  .qright .kcard{grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:10px;row-gap:1px;align-items:center;min-height:0;padding:8px 12px;border-radius:14px}
  .qright .kcard-i{grid-row:1;grid-column:1;margin-top:0;width:22px;height:22px}
  .qright .kcard-t{grid-row:1;grid-column:2;font-size:15px;line-height:1.25}
  .qright .kcard-p{grid-row:1;grid-column:3;margin-top:0;white-space:nowrap;letter-spacing:0;font-family:'Inter',system-ui,sans-serif}
  .qright .kcard-d{grid-row:2;grid-column:2 / span 2;line-height:1.35}
- /* «Am liebsten erreichen Sie mich per»: zwei kompakte Chips */
  .g-ans[data-kompakt="1"]{display:flex!important;flex-wrap:wrap;gap:8px}
  .g-ans[data-kompakt="1"] .acard{width:auto;min-height:44px;padding:8px 14px;gap:0;border-radius:999px;line-height:1.3}
  .g-ans[data-kompakt="1"] .acard-k{display:none!important}
@@ -1321,14 +1220,12 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .q-wrap[data-leiste="leer"]{padding-bottom:40px!important}
 }
 @media(max-width:767px){
- /* Frage: Titel und Antworten zuerst, Erklärung und KI-Hinweis darunter */
  .q-teil{margin:0 0 6px!important}
  .qleft h2[tabindex]{margin:0 0 12px!important}
  .qleft .q-wichtig{margin:0 0 12px}
  .q-help,.q-ki{order:3}
  .q-help{margin:16px 0 0!important}
  .q-help[data-oben="1"]{order:1;margin:0 0 12px!important}
- /* Funktionen: «Wählen Sie alles» sagt schon, dass mehrere gehen; «Notiert.» braucht es bei Karten nicht */
  .qgrid[data-typ="karten"] .q-mehrfach,.qgrid[data-typ="karten"] .q-status:not([data-leiste]){display:none!important}
  .qleft .q-ki{margin:8px 0 0}
  .q-mehrfach{margin:0 0 4px!important}
@@ -1336,11 +1233,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .g-ans{gap:8px;grid-auto-rows:auto!important}
  .qright .acard{min-height:52px;padding:12px 16px;gap:12px}
  .qright .acard-k{width:24px!important;height:24px!important}
- /* Branchen zweispaltig, ohne Tastenkreis */
  .g-ans[data-spalten="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
  .g-ans[data-spalten="2"] .acard{padding:10px 12px;line-height:1.3}
  .g-ans[data-spalten="2"] .acard-k{display:none!important}
- /* Senden-Ansicht: Zustimmung und Senden direkt unter dem Ergebnis, die Mail-Vorschau eingeklappt. Kurzversion wie bisher. */
  .mf[data-kurz="0"]{display:flex;flex-direction:column}
  .mf[data-kurz="0"] .mf-checks{order:1;padding-top:20px}
  .mf[data-kurz="0"] .mf-haupt{order:2}
@@ -1354,30 +1249,24 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .mf[data-angaben="1"] .mf-angaben::after{transform:translateY(2px) rotate(-135deg)}
  .mf-angaben:focus-visible{outline:3px solid var(--primaer);outline-offset:-3px}
  .mf[data-kurz="0"] .mf-zusage{order:2}
- /* Ergebnis: Paket, Preis, Umfang, Zusätze, dann Zustimmung und Senden, erst danach Vergleich und «Antworten noch einmal durchsehen» */
  .eg{display:flex!important;flex-direction:column}
  .eg-links{display:contents}
  .eg-oben,.eg-mehr{animation:inherit}
  .eg-oben{order:1;padding:20px;border-radius:20px;background:rgba(255,255,255,0.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.22)}
  .eg-oben .eg-zusatz div{padding:6px 0}
  .eg-oben .eg-grund-knopf{min-height:0;padding:2px 0}
- /* Senden steht direkt unter dem Ergebnis: nicht mehr unten anheften, sonst deckt der Knopf die Zustimmung zu */
  .mf[data-kurz="0"] .mf-haupt{position:relative;bottom:auto}
  .mf[data-kurz="0"] .mf-checks{padding-top:16px}
  .eg-rechts{order:2}
  .eg-mehr{order:3;padding:0 8px}
  .eg-mehr .eg-vgl{margin-top:0}
- /* «Richtwert, kein verbindliches Angebot» ohne Pille, damit sie nicht zweizeilig umbricht */
  .eg-links .eg-badge{display:block;margin:0 0 16px;padding:0;border-radius:0;background:none;color:var(--weiss);text-wrap:balance}
- /* Mail-Fenster senkrecht einblenden: waagrecht ragte es über den rechten Rand und verbreiterte die Seite */
  .eg-wrap{overflow-x:clip}
  @keyframes mfReinY{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 }
 @media(max-width:1023px){
  .mf-zusage{padding:0 24px 12px}
- /* Fehler direkt unter dem Text des Häkchens */
  .mf-checks .mf-zustimmung-fehler[data-an="1"]{margin:-6px 0 0 32px}
- /* Einflug der Fragen (qFwd, 24 px waagrecht) ragt sonst 4 px über den rechten Rand */
  .q-wrap{overflow-x:clip}
 }
 @media(max-width:560px){

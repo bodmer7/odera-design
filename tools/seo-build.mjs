@@ -266,8 +266,14 @@ function noscriptBlock(pfad) {
 
 // Vorlage (<x-dc> und Komponenten-Skript) aus der Quelle. Sie kommt nicht in die Seiten, sondern nach assets/js/vorlage.js.
 const VORLAGE_RE = /<x-dc>[\s\S]*<\/x-dc>\s*<script type="text\/x-dc"[\s\S]*?<\/script>\n?/;
-const vorlageHtml = (quelle.match(VORLAGE_RE) || [])[0];
-if (!vorlageHtml) throw new Error('Vorlage <x-dc> mit Komponenten-Skript in src/seite.html nicht gefunden.');
+// Ganzzeilige Kommentare bleiben in der Quelle, in den erzeugten Dateien fallen sie weg (weniger Bytes vor dem ersten Zeichnen).
+// Nur ganze Zeilen: Kommentare hinter Code und Zeichenketten mit // oder /* bleiben unberührt.
+const ohneCssKommentare = (css) => css.replace(/^[ \t]*\/\*[\s\S]*?\*\/[ \t]*\r?\n/gm, '');
+const ohneStilKommentare = (html) => html.replace(/(<style[^>]*>)([\s\S]*?)(<\/style>)/g, (m, a, css, b) => a + ohneCssKommentare(css) + b);
+const ohneJsKommentare = (js) => js.split('\n').filter((z) => !/^\s*\/\//.test(z)).join('\n');
+const vorlageRoh = (quelle.match(VORLAGE_RE) || [])[0];
+if (!vorlageRoh) throw new Error('Vorlage <x-dc> mit Komponenten-Skript in src/seite.html nicht gefunden.');
+const vorlageHtml = ohneStilKommentare(vorlageRoh).replace(/(<script type="text\/x-dc"[^>]*>)([\s\S]*?)(<\/script>)/, (m, a, js, b) => a + ohneJsKommentare(js) + b);
 const vorlageJs = '// Erzeugt mit tools/seo-build.mjs aus src/seite.html. Nicht von Hand ändern.\n' +
   '// Setzt die Vorlage mit allen Seiten ins Dokument, bevor assets/js/support.js sie mit React aufbaut.\n' +
   'document.body.insertAdjacentHTML(\'beforeend\', ' + JSON.stringify(vorlageHtml.trim()).replace(/<\/(script)/gi, '<\\/$1') + ');\n';
@@ -287,6 +293,7 @@ function baueSeite(pfad, teile) {
   // Vorab gerenderte Fassung: sichtbar ab dem ersten Zeichnen, React ersetzt sie beim Aufbau (componentDidMount)
   tausche('<!-- vorab:start -->', '<!-- vorab:end -->', teile.vorab ? `<div id="vorab">${teile.vorab}</div>` : '');
   html = html.replace(/<html(\s[^>]*)?>/, '<html lang="de-CH">');
+  html = ohneStilKommentare(html);
   // Ohne Vorlage: keine Inhalte anderer Seiten, keine {{ }} im ausgelieferten HTML
   html = html.replace(VORLAGE_RE, '');
   if (!html.includes("VORLAGE=/*vorlage*/''")) throw new Error('Lader für die Vorlage in src/seite.html nicht gefunden.');
