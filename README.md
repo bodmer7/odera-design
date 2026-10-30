@@ -288,7 +288,8 @@ Die Ansicht ab 1024 px bleibt davon unberührt (geprüft mit Pixelvergleich bei 
 - **Wischbare Karten:** Elemente mit der Klasse `wisch` werden unter 768 px zu waagrechten Karten mit
   Einrasten; die Punkte darunter (`.pk-punkte-nav`) setzt ein Scroll-Handler direkt im DOM.
 - **Tastatur:** `visualViewport` liefert die Höhe der Bildschirmtastatur als `--tastatur` und setzt
-  `data-tastatur` auf `<html>`. Die Weiter-Leiste im Projekt-Check sitzt damit direkt über der Tastatur,
+  `data-tastatur` auf `<html>`. Die Weiter-Leiste im Projekt-Check sitzt damit direkt über der Tastatur
+  (ohne Knopf nur «Zurück» kompakt, auf Frage 1 ohne Antwort keine Leiste),
   die untere Startleiste wird ausgeblendet.
 - **Chat:** unter 768 px ein Blatt von unten mit Griff (`assets/js/chat.js`), Wisch nach unten schliesst.
 - **Hover** nur bei `@media (hover:hover)`, auf Touch gibt es `:active`-Zustände.
@@ -341,9 +342,13 @@ kontakt@odera.ch. Danach folgt ein Dankesbildschirm mit Referenz (zum Beispiel O
   Nummern mit 0 genau 10), «Telefon wird Pflicht, wenn der Kontaktweg Telefon ist», die Meldungen und
   die Adressen für den Tippfehler-Vorschlag. Formular und Worker prüfen damit gleich. Lehnt der Worker
   ein Feld ab, antwortet er mit `feld` und `meldung`, und das Formular zeigt die Meldung an diesem Feld.
-- Im Formular ist jedes Feld als «Pflichtfeld» oder «optional» gekennzeichnet. «Weiter» ist nie
-  gesperrt: Fehlt etwas, leuchtet das Feld rot auf, die Meldung steht darunter (mit Symbol, in einem
-  `aria-live`-Bereich), der Fokus springt ins erste Feld. Geprüft wird erst nach dem Verlassen eines
+- Im Formular ist jedes Feld als «Pflichtfeld» oder «optional» gekennzeichnet, optionale Auswahlfragen auch.
+  «Weiter» erscheint nur, wo es etwas tut (`weiterNoetig()`): nicht bei einer Einfachauswahl ohne Antwort
+  (sie geht nach rund 400 ms selbst weiter), wohl aber bei schon beantworteter Frage, Zusatzfeld, «Ändern»,
+  Mehrfachauswahl, Funktionen und Feldern. Optionale Fragen ohne Antwort: «Überspringen». Wo «Weiter» steht,
+  ist es nie gesperrt: Fehlt etwas, leuchtet das Feld rot auf, die Meldung steht darunter (mit Symbol, in einem
+  `aria-live`-Bereich), der Fokus springt ins erste Feld. Auch «Anfrage senden» ist nie gesperrt: ohne Häkchen
+  steht der Fehler direkt am Häkchen. Geprüft wird erst nach dem Verlassen eines
   bearbeiteten Feldes oder nach dem ersten Klick auf «Weiter». Farben: `--fehler`, `--fehler-tint`.
 - Fällt der Versand aus, bietet das Fenster «Nochmals versuchen», das eigene E-Mail-Programm und
   «Text kopieren» an.
@@ -402,7 +407,7 @@ Alle Werte stehen im Skript am Ende von `index.html`, in der Klasse
 | `DURCHSCHNITT_SEKUNDEN` | 0 | Solange 0, bleibt die Vergleichsleiste der Ladezeitmessung ausgeblendet. Nur mit belegtem Wert eintragen und die Quelle in der Fussnote nennen. |
 | `STUNDENSATZ_CHF` | 120 | Ansatz für Änderungen nach der Übergabe. Erscheint auf der Angebotsseite («Nach der Übergabe», «Was nicht im Preis ist»), der Ablaufseite, in den AGB (Paragraf 7), auf den Branchenseiten und in `llms.txt`. Einen Betrieb durch ODERA gibt es seit 21. Oktober 2026 nicht mehr: Das Hosting wird auf den Namen des Kunden eingerichtet. Der Projekt-Check fragt seit 29. Oktober 2026 nicht mehr danach, das Ergebnis nennt «auf Ihren Namen eingerichtet, ohne Abo». Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `LOGO_ALLEIN_CHF`, `LOGO_MIT_WEBSITE_CHF` | 490 und 390 | Einzige Quelle für den Logo-Zusatz. Erscheint auf der Angebotsseite (Karte und Druckansicht), im Ergebnis des Projekt-Checks und im Mailtext (`LOGO_PREIS`). Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
-| Fragen des Projekt-Checks | 6 Fragen ohne Abschnitte, rund 2 Minuten (seit 29. Oktober 2026, vorher 18) | Definition in `Q` (index.html), angesprochen über Schlüssel, nicht über die Reihenfolge: `ZIEL`, `BRANCHE`, `WEBSITE_HEUTE` mit den Folgefragen `WEBSITE_PROBLEME` (bei «Ja») und `UNTERSTUETZUNG` (bei «Nein», Logo, Texte, Fotos), `FUNKTIONEN`, `BETRIEB` (Name, Ort, Angebot) und `KONTAKT` (mit Termin-Chips und Häkchen für die Referenz). Folgefragen haben `wenn` und zählen im Fortschritt mit, Fragen nur für die Kurzversion `nurKurz`. Die Kurzversion steht in `QUICK`. Einfachauswahl geht nach 250 ms selbst weiter, ausser beim Ändern und wenn die Antwort ein Zusatzfeld öffnet. Fragenzahl und Minuten rechnen sich überall aus `Q` und `CHECK_MINUTEN`, auch Titel und Beschreibung in `PAGES` (Platzhalter `{FRAGEN}`, `{MIN}`, `{ERF_MIN}`, aufgelöst von `werte()` und `tools/lib/browser.mjs`). Neue Antworten auch in `briefing()` und `ANFRAGE.felder` eintragen, dann `node tools/seo-build.mjs` und den Worker `anfrage-proxy` neu veröffentlichen. |
+| Fragen des Projekt-Checks | 6 Fragen ohne Abschnitte, rund 2 Minuten (seit 29. Oktober 2026, vorher 18) | Definition in `Q` (index.html), angesprochen über Schlüssel, nicht über die Reihenfolge: `ZIEL`, `BRANCHE`, `WEBSITE_HEUTE` mit den Folgefragen `WEBSITE_PROBLEME` (bei «Ja») und `UNTERSTUETZUNG` (bei «Nein», Logo, Texte, Fotos), `FUNKTIONEN`, `BETRIEB` (Name, Ort, Angebot) und `KONTAKT` (mit Termin-Chips und Häkchen für die Referenz). Folgefragen haben `wenn` und behalten im Fortschritt die Nummer ihrer Hauptfrage («Frage 3 von 6 · Zusatzfrage», `fortschritt()`), die Gesamtzahl zählt nur Hauptfragen und ändert sich nie. Fragen nur für die Kurzversion `nurKurz`. Die Kurzversion steht in `QUICK`. Einfachauswahl geht nach 400 ms selbst weiter, ausser beim Ändern und wenn die Antwort ein Zusatzfeld öffnet. Pro Frage ein Verlaufseintrag auf derselben Adresse (`checkVor()`, `checkPop()`): Zurück im Browser geht eine Frage zurück. Fragenzahl und Minuten rechnen sich überall aus `Q` und `CHECK_MINUTEN`, auch Titel und Beschreibung in `PAGES` (Platzhalter `{FRAGEN}`, `{MIN}`, `{ERF_MIN}`, aufgelöst von `werte()` und `tools/lib/browser.mjs`). Neue Antworten auch in `briefing()` und `ANFRAGE.felder` eintragen, dann `node tools/seo-build.mjs` und den Worker `anfrage-proxy` neu veröffentlichen. |
 | `ANFRAGE_ENDPOINT`, `TURNSTILE_SITEKEY` | leer | Schalter für den Direktversand im Projekt-Check (`anfrage-proxy/`). Erst setzen, wenn die Domain in Resend verifiziert ist. Danach `STAND_RECHTSTEXTE` anpassen und `node tools/seo-build.mjs` ausführen. |
 | `CHAT_ENDPOINT` | leer | Adresse des Chat-Proxys (`chat-proxy/`). Leer heisst: Assistent ausgeblendet. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |
 | `SITE` | `https://odera.ch` | Adresse der Website in canonical, Sitemap und Vorschau-Angaben. Nach einer Änderung `node tools/seo-build.mjs` ausführen. |

@@ -1,7 +1,7 @@
 # CLAUDE.md: Entscheidungen und offene Punkte für odera.ch
 
 Kurzfassung für die Arbeit an diesem Repo. Technische Details stehen im `README.md`,
-hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 29. Oktober 2026.
+hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 30. Oktober 2026.
 
 ## Feste Regeln
 
@@ -49,13 +49,17 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 29. Oktober 
 ## Wichtige Entscheidungen
 
 ### Projekt-Check (Formular)
-- Jedes Feld ist als Pflichtfeld oder optional gekennzeichnet. «Weiter» ist nie gesperrt, darunter
-  steht «Noch offen: …». Fehler zeigen sich am Feld, mit Fokus auf dem ersten Fehler, ab zwei
-  Fehlern mit Zusammenfassung. Tippfehler-Vorschläge «Meinten Sie …?».
+- Jedes Feld ist als Pflichtfeld oder optional gekennzeichnet, optionale Auswahlfragen auch. «Weiter» steht nur, wo es
+  etwas tut (Regel unten), ist dann aber nie gesperrt, darunter «Noch offen: …». Fehler zeigen sich am Feld, mit Fokus
+  auf dem ersten Fehler, ab zwei Fehlern mit Zusammenfassung. Tippfehler-Vorschläge «Meinten Sie …?».
+- «Anfrage senden» ist nie gesperrt (aria-disabled nur bei «Sendet …» und offline). Ohne Häkchen bei AGB und
+  Datenschutz steht der Fehler direkt am Häkchen, mit Fokus dorthin.
 - Browser und Worker prüfen mit denselben Regeln (`anfrage-proxy/src/regeln.js`).
 - Fehlerfarbe `#B42318` (AA auf allen Flächen).
 - Mindestdauer bis zum Senden: 20 s (voll), 6 s (Kurzversion). Schnellere Anfragen lehnt der Worker
-  ab, auch in Tests.
+  ab, auch in Tests. Der Start (`startZeit`) wird im Tab gemerkt und beim «Fortsetzen» übernommen. Fehlt noch Zeit,
+  wartet die Seite sie vor dem Senden still ab («Sendet …»). Die Tests stellen den gemerkten Start dafür zurück
+  (`startZurueck()` in `tools/funktionstest.mjs`).
 
 ### Projekt-Check mit sechs Fragen (seit 29. Oktober 2026, Branch `projekt-check-kurz`)
 - Ein Gratis-Entwurf ist schnell gebaut. Gefragt wird darum nur, was es für den Entwurf und eine grobe Preisschätzung
@@ -64,12 +68,36 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 29. Oktober 
   «Ihr Betrieb» (Name, Ort, Angebot), Kontakt (mit Termin-Chips und Häkchen für die Referenz). Entfernt: Region, Kunden,
   Seitenzahl, Stil, Vorbilder, Farben, Domain, Hosting, Logo, Texte, Fotos als eigene Fragen.
 - Paket nur aus den Funktionen plus Mindestpaket aus dem Einstieg (Paketkarten Standard und Pro, Doppelmeter, Firstlicht).
-- Einfachauswahl geht nach 250 ms selbst weiter (nicht beim Ändern, nicht bei Zusatzfeld). Fortschritt «Frage 2 von 6»,
-  Folgefragen zählen mit. Bei 390 × 664 px sind alle Antworten ohne Scrollen sichtbar (ausser Funktionen-Karten),
+- Einfachauswahl geht nach 400 ms selbst weiter (nicht beim Ändern, nicht bei Zusatzfeld), seit 30. Oktober 2026 mit
+  Häkchen auf der gewählten Karte. Fortschritt siehe «Projekt-Check weiter». Bei 390 × 664 px sind alle Antworten ohne
+  Scrollen sichtbar (ausser Funktionen-Karten),
   Test `node tools/funktionstest.mjs … handy`. Senden-Ansicht unter 768 px: Zustimmung und Senden direkt unter dem
   Ergebnis, Mail-Vorschau hinter «Ihre Angaben ansehen».
 - Statistik: `projektcheck_step` trägt den Schlüssel der Frage in `ziel` (nie Antworten). Braucht den Worker `odera-stats`
   in der neuen Fassung, sonst wird der Schlüssel verworfen.
+
+### Projekt-Check weiter (seit 30. Oktober 2026, Branch `projekt-check-weiter`)
+- **Weiter-Regel** (`weiterNoetig()`): Einfachauswahl ohne Antwort ohne «Weiter» und ohne «Noch offen». «Weiter», wenn
+  die Frage beim Anzeigen schon beantwortet ist (Zurück, Antwort-Pillen, Einstieg), die Antwort ein Zusatzfeld öffnet,
+  beim Ändern, bei Mehrfachauswahl, Funktionen und Feldern. Optionale Fragen ohne Antwort: Textknopf «Überspringen».
+  Bis zum automatischen Weiter ändert sich die Leiste nicht (`autoLeiste`). Unter 1024 px ohne Knopf nur «Zurück»
+  kompakt, auf Frage 1 ohne Antwort keine Leiste. Enter wirkt auf Karten, Knöpfen, Links und Häkchen wie bei ihnen
+  üblich, als «Weiter» nur ohne Fokus auf einem bedienbaren Element.
+- **Fortschritt** (`fortschritt()`): Folgefragen behalten die Nummer ihrer Hauptfrage («Frage 3 von 6 · Zusatzfrage»),
+  der Balken steht dann zwischen 3 und 4. Die Gesamtzahl zählt nur Hauptfragen ohne die durch Einstiege übersprungenen und
+  ändert sich während des Checks nie. `aria-valuenow` ganzzahlig, `aria-valuetext` mit dem sichtbaren Text. Balken in Kobalt.
+- **Zurück im Browser**: pro Frage ein Verlaufseintrag auf derselben Adresse, im Zustand nur Schritt und Tiefe, keine
+  Antworten (`checkVor()`, `checkPop()`). Zurück geht eine Frage zurück, auf Frage 1 hinaus, im Ergebnis zur letzten Frage.
+  Knopf «Zurück» und Antwort-Pillen gehen über denselben Verlauf. Nach dem Senden `replaceState`: Zurück führt hinaus.
+  `statistik.js` zählt dabei keinen Seitenaufruf (gleicher Pfad). Test: `node tools/funktionstest.mjs … verlauf`.
+- **Seitliches Scrollen** immer gegen `document.documentElement.clientWidth` messen, nie gegen `innerWidth` (wächst in der
+  Handy-Emulation mit) und auch während Animationen (Test `senden` bei 320, 390 und 768 px). Unter 768 px blendet das
+  Mail-Fenster senkrecht ein, `.eg-wrap` und unter 1024 px der Fragenbereich haben `overflow-x: clip`.
+- Ergebnis unter 768 px: Paket, Preis, Umfang, Zusätze, dann Zustimmung und «Anfrage senden», danach Vergleich und
+  «Antworten noch einmal durchsehen». Unter dem Preis «Paket … wegen: …» mit «Funktionen ändern», nur wenn das Paket
+  aus den Funktionen kommt.
+- Weniger Ablenkung: Kurzversion-Link nur auf Frage 1 ohne Antwort, KI-Hinweis nur bei Auswahlfragen und Funktionen,
+  Platzhalter mit «z. B.», Ziffern in den Karten nur mit Maus (sonst Auswahlkreis, immer `aria-hidden`).
 
 ### Statistik (Teil 11, live seit 8. Oktober 2026)
 - Eigener Worker `odera-stats` in `workers/odera-stats/`, D1 `odera-stats` in der EU (Jurisdiktion eu),
@@ -122,9 +150,11 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 29. Oktober 
 
 ### Hero auf dem Handy (seit 21. Oktober 2026)
 - Unter 768 px: Badge mit Auslastung, Titel, Satz, ein Knopf, Tablet-Rahmen mit Handy, Vertrauenszeile, Kennzahlen,
-  Chevron. Frage mit Chips und «Preise ansehen» nur ausgeblendet. Kennzahlen stehen einmal im Markup (`.hero-zahlen`),
+  Chevron. Kennzahlen unter 430 px als drei Zeilen (Zahl links, Text rechts). Satz unter dem Titel mit `text-wrap: balance`,
+  Abstand zu den Knöpfen `var(--a-4)` (`.einleitung.hero-lead`, seit 30. Oktober 2026 wieder auch ab 768 px). Frage mit Chips und «Preise ansehen» nur ausgeblendet. Kennzahlen stehen einmal im Markup (`.hero-zahlen`),
   ab 768 px als dunkler Streifen wie vorher. Titel zweizeilig, Grösse über `cqi` aus der Textspalte.
-- Kopf unter 1024 px mit «Check starten» und hellgrauem Menüknopf, Logo bis 360 px leicht verkleinert (`zoom`).
+- Kopf unter 1024 px mit «Check starten» und hellgrauem Menüknopf, Logo bis 360 px leicht verkleinert (`zoom`), unter
+  360 px stärker (bei 320 px ragte die Zeile sonst 27 px über den Rand).
 
 ### Musterprojekt Doppelmeter
 - Eigene statische Seite unter `/musterprojekte/doppelmeter/`, `noindex`, nicht in der Sitemap.
@@ -227,6 +257,11 @@ Beispielseiten erfundener Betriebe (Doppelmeter, Firstlicht). Für jedes Muster 
       sechs Fragen (29. Oktober 2026) ist eine Nummer nicht mehr fest einer Frage zugeordnet (Folgefragen, Einstiege), und
       Zeiträume über den Wechsel mischen alte und neue Nummern. Auswertung pro Frage über `ziel` in den Rohdaten; die Anzeige
       pro Frage (Summary von odera-stats und Website-Tab) ist noch nicht gebaut.
+- [ ] **Projekt-Check Teil 7** (Auftrag vom 30. Oktober 2026), nur nach Nicos OK: Häkchen für die Referenz ins Ergebnis
+      unter den Preis verschieben; Knopfzeile auf «Was soll die Seite können?» und «Wie erreiche ich Sie?» auch auf dem
+      Desktop unten anheften.
+- [ ] **Funktionen auf dem Handy** sind bei 390 × 664 px rund 1,6 Bildschirme hoch (vorher 2,4, Ziel rund 1,5). Mehr ginge nur
+      mit kürzeren Titeln oder Etiketten.
 - [ ] **Alte lokale Branches** aufräumen (`fehler`, `mobil`, `generator`, `generator2` und ältere
       sind in `main` enthalten). Ausnahme: `chat-assistent` hat Commits, die nicht in `main` sind.
       Vor dem Löschen prüfen.
