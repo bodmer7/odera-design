@@ -91,6 +91,9 @@ export async function senden(c) {
       ueberspringen: [], quelle: '', mindestPaket: '', rechnerZusatz: [], angabenOffen: false, fortsetzen: null,
     });
     c.vergessen(); // gemerkter Fortschritt im Tab ist nach dem Senden weg
+    // Zurück im Browser führt nicht wieder ins Ergebnis, sondern aus dem Check hinaus (checkPop)
+    const h = history.state && history.state.check ? history.state : { tiefe: 0 };
+    history.replaceState({ check: true, gesendet: true, tiefe: h.tiefe }, '', location.pathname + location.search);
     c.focusHead();
   };
   c.setState({ fensterWeg: true });

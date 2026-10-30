@@ -3584,6 +3584,10 @@ class Component extends DCLogic {
         if (alt && Object.keys(alt.ans || {}).length) next.fortsetzen = alt;
       }
       this.setState(next);
+      // Projekt-Check: Verlaufseintrag mit Schrittnummer (nie Antworten), damit Zurück im Browser eine Frage zurückgeht
+      if (known === '/projekt-check' && !(history.state && history.state.check)) {
+        history.replaceState({ check: true, schritt: next.step !== undefined ? next.step : this.state.step, tiefe: 0 }, '', location.pathname + location.search + location.hash);
+      }
       document.title = this.werte(this.PAGES[next.path].title);
       this.syncHead(next.path);
       window.scrollTo(0, 0);
@@ -3600,7 +3604,12 @@ class Component extends DCLogic {
         if (marke) window.scrollTo(0, marke.getBoundingClientRect().top + window.pageYOffset - 104);
       }, 60);
     };
-    window.addEventListener('popstate', this.onRoute);
+    // Zurück und Vorwärts im Browser: innerhalb des Projekt-Checks Frage für Frage (checkPop), sonst Seitenwechsel
+    this.onPop = (e) => {
+      if (this.state.path === '/projekt-check' && this.pathOf(location.pathname) === '/projekt-check' && this.checkPop(e.state)) return;
+      this.onRoute();
+    };
+    window.addEventListener('popstate', this.onPop);
 
     // Interne Links wechseln die Seite ohne Neuladen. Echte href bleiben für Suchmaschinen, neue Tabs und Kopieren erhalten.
     this.onLinkClick = (e) => {
@@ -3800,12 +3809,12 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('popstate', this.onRoute);
     document.removeEventListener('click', this.onLinkClick);
     document.removeEventListener('visibilitychange', this.onVis);
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onResize);
     window.removeEventListener('keydown', this.onKey);
+    window.removeEventListener('popstate', this.onPop);
     window.removeEventListener('online', this.onNetz);
     window.removeEventListener('offline', this.onNetz);
     if (this.onMove) window.removeEventListener('mousemove', this.onMove);
@@ -4418,7 +4427,15 @@ class Component extends DCLogic {
     });
   }
 
-  jumpTo = (st) => { clearTimeout(this.weiterTimer); clearTimeout(this.toastTimer); this.setState({ step: st, dir: 'back', warn: false, autoLeiste: null, toast: '', tick: this.state.tick + 1 }); this.focusHead(); };
+  jumpTo = (st) => {
+    clearTimeout(this.weiterTimer); clearTimeout(this.toastTimer);
+    // Antwort-Pillen: zurück über den Verlauf, wenn er so weit reicht
+    const h = history.state, d = this.state.step - st;
+    if (d > 0 && h && h.check && h.schritt === this.state.step && h.tiefe >= d) { this.setState({ autoLeiste: null }); history.go(-d); return; }
+    this.setState({ step: st, dir: 'back', warn: false, autoLeiste: null, toast: '', tick: this.state.tick + 1 });
+    this.checkHier(st);
+    this.focusHead();
+  };
 
   focusFirstField() {
     setTimeout(() => {
@@ -4440,6 +4457,35 @@ class Component extends DCLogic {
     setTimeout(() => this.setState({ cmpGrow: true }), 60);
     this.focusHead();
     this.tsSicher();
+  }
+
+  // Verlauf im Projekt-Check: pro Frage ein Eintrag auf derselben Adresse. Im Zustand nur Schritt und Tiefe, keine Antworten.
+  // Es gilt schritt minus tiefe gleich für alle Einträge eines Durchgangs, darum führt history.back() genau eine Frage zurück.
+  checkVor(schritt) {
+    const h = history.state && history.state.check ? history.state : { tiefe: -1 };
+    history.pushState({ check: true, schritt, tiefe: h.tiefe + 1 }, '', location.pathname + location.search);
+  }
+  checkHier(schritt) {
+    const h = history.state && history.state.check ? history.state : { tiefe: 0 };
+    history.replaceState({ check: true, schritt, tiefe: h.tiefe }, '', location.pathname + location.search);
+  }
+  // Zurück oder Vorwärts im Browser innerhalb des Checks. true: erledigt, onRoute setzt nichts zurück.
+  checkPop(h) {
+    clearTimeout(this.weiterTimer);
+    const s = this.state;
+    if (!h || !h.check) return false;
+    // Nach dem Senden führt Zurück aus dem Check hinaus, nicht zurück ins Ergebnis oder in leere Fragen
+    if (s.gesendet || h.gesendet) { history.go(-(h.tiefe + 1)); return true; }
+    const f = this.fragen();
+    let ziel = h.schritt === 'ergebnis' ? f.length : Math.max(0, Math.min(Number(h.schritt) || 0, f.length - 1));
+    // Vorwärts nur bis zur ersten unvollständigen Frage
+    for (let i = 0; i < ziel; i++) if (!this.complete(f[i])) { ziel = i; break; }
+    if (ziel >= f.length) { if (!s.result || s.review) this.showResult(); return true; }
+    clearTimeout(this.toastTimer);
+    this.setState({ step: ziel, result: false, review: false, editing: false, editNote: '', mid: false, dir: ziel < s.step || s.result ? 'back' : 'fwd',
+      warn: false, autoLeiste: null, toast: '', tick: s.tick + 1 }, () => this.merken());
+    this.focusHead();
+    return true;
   }
 
   showReview() {
@@ -4472,9 +4518,10 @@ class Component extends DCLogic {
     const q = this.frage();
     if (!this.complete(q)) { this.fehlerZeigen(q); return; }
     if (this.state.editing) { this.leaveEdit('result'); return; }
-    if (step >= this.fragen().length - 1) { this.showResult(); this.merken(); return; }
+    if (step >= this.fragen().length - 1) { this.showResult(); this.merken(); this.checkVor('ergebnis'); return; }
     clearTimeout(this.toastTimer);
     this.setState({ step: step + 1, dir: 'fwd', warn: false, autoLeiste: null, toast: '', tick: this.state.tick + 1 });
+    this.checkVor(step + 1);
     this.merken();
     this.focusHead();
   };
@@ -4484,7 +4531,10 @@ class Component extends DCLogic {
     if (this.state.editing) { this.leaveEdit('review'); return; }
     if (this.state.result) { this.setState({ result: false, step: this.fragen().length - 1 }); return; }
     clearTimeout(this.toastTimer);
-    if (this.state.step > 0) this.setState({ step: this.state.step - 1, dir: 'back', warn: false, autoLeiste: null, toast: '', tick: this.state.tick + 1 });
+    // Knopf «Zurück» geht über den Verlauf, damit Knopf und Browser gleich zählen (checkPop setzt den Schritt)
+    const h = history.state, step = this.state.step;
+    if (step > 0 && h && h.check && h.tiefe > 0 && h.schritt === step) { this.setState({ autoLeiste: null }); history.back(); return; }
+    if (step > 0) { this.setState({ step: step - 1, dir: 'back', warn: false, autoLeiste: null, toast: '', tick: this.state.tick + 1 }); this.checkHier(step - 1); }
     else this.setState({ autoLeiste: null });
   };
 
@@ -4904,7 +4954,8 @@ class Component extends DCLogic {
       fortsetzenDisplay: isCheck && s.fortsetzen && !s.result ? 'flex' : 'none',
       onFortsetzen: () => { const a = s.fortsetzen || {}; this.setState({ ans: Object.assign({}, a.ans, s.ans), txt: Object.assign({}, a.txt, s.txt), step: a.step || 0, quick: !!a.quick,
         quelle: s.quelle || a.quelle || '', ueberspringen: Array.from(new Set((a.ueberspringen || []).concat(s.ueberspringen || []))), fortsetzen: null, result: !!a.result,
-        mindestPaket: this.hoeheresPaket(s.mindestPaket, a.mindestPaket), rechnerZusatz: (s.rechnerZusatz || []).length ? s.rechnerZusatz : (a.rechnerZusatz || []) }, () => { if (a.result) this.showResult(); else this.focusHead(); }); },
+        mindestPaket: this.hoeheresPaket(s.mindestPaket, a.mindestPaket), rechnerZusatz: (s.rechnerZusatz || []).length ? s.rechnerZusatz : (a.rechnerZusatz || []) }, () => {
+          this.checkHier(a.result ? 'ergebnis' : (a.step || 0)); if (a.result) this.showResult(); else this.focusHead(); }); },
       onNeuBeginnen: () => { this.vergessen(); this.setState({ fortsetzen: null }); this.focusHead(); },
       // «Ich will nur den Preis wissen» nur auf der ersten Frage, solange sie unbeantwortet ist, nie beim Ändern
       quickLinkDisplay: !s.quick && !s.editing && s.step === 0 && !s.ans[q.key] ? 'block' : 'none',
@@ -5119,7 +5170,7 @@ class Component extends DCLogic {
         if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done); else done();
       },
       onReview: () => this.showReview(),
-      quickToLong: () => this.setState({ quick: false, result: false, mid: false, step: 0, warn: false }),
+      quickToLong: () => { this.setState({ quick: false, result: false, mid: false, step: 0, warn: false }); this.checkHier(0); },
       // Projekt-Check direkt senden
       dsMail: !this.direkt(),
       dsDirekt: this.direkt(),

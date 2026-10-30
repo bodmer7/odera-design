@@ -4,7 +4,7 @@
 //   node tools/funktionstest.mjs [basis-url] [teil,teil,...]
 //
 // Basis: Standard http://127.0.0.1:8792 (Server aus .claude/launch.json oder `python3 -m http.server 8792`).
-// Teile: routen, navigation, check, weiter, folgefragen, einstiege, handy, kurz, chat, generator, muster, rechner, einblicke,
+// Teile: routen, navigation, check, weiter, verlauf, folgefragen, einstiege, handy, kurz, chat, generator, muster, rechner, einblicke,
 // statistik (Standard: alle ausser statistik). «handy» prüft bei 390 × 664 px, dass alle Antworten ohne Scrollen sichtbar sind.
 // «einblicke» prüft die statischen Seiten unter /einblicke/ (Blog aus dem Akquise-Tool): Menüpunkt, Menü auf dem
 // Handy, Übersicht und, falls vorhanden, den neuesten Artikel mit Titelbild, JSON-LD und Projekt-Check.
@@ -16,7 +16,7 @@ import { chromium, devices } from 'playwright';
 
 const args = process.argv.slice(2);
 const BASIS = (args.find((a) => /^https?:/.test(a)) || 'http://127.0.0.1:8792').replace(/\/$/, '');
-const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,weiter,folgefragen,einstiege,handy,kurz,chat,generator,muster,rechner,einblicke').split(',');
+const TEILE = (args.find((a) => !/^https?:/.test(a)) || 'routen,navigation,check,weiter,verlauf,folgefragen,einstiege,handy,kurz,chat,generator,muster,rechner,einblicke').split(',');
 const ROUTEN = ['/', '/angebot/', '/ablauf/', '/musterprojekte/', '/ueber-mich/', '/projekt-check/', '/datenschutz/', '/impressum/', '/agb/',
   ...(process.env.ROUTEN_ZUSATZ ? process.env.ROUTEN_ZUSATZ.split(',') : [])];
 const BREITEN = [390, 834, 1440];
@@ -330,6 +330,45 @@ try {
     const l3 = await leiste();
     ok(l1 === 'keine' && /^zurueck:/.test(l2) && parseInt(l2.split(':')[1], 10) < 200 && /^voll:390$/.test(l3), `Handy: Leiste auf Frage 1 ${l1}, auf Frage 2 ${l2} (kompakt), mit «Andere» ${l3}`);
     await ctx3.close();
+  }
+
+  if (TEILE.includes('verlauf')) {
+    // Zurück im Browser: innerhalb des Checks eine Frage zurück, auf Frage 1 hinaus. Nach dem Senden nicht zurück ins Ergebnis.
+    for (const breite of [1440, 390]) {
+      const ctx = await neuerKontext({ viewport: { width: breite, height: breite < 768 ? 664 : 900 }, reducedMotion: 'reduce', ...(breite < 768 ? { isMobile: true, hasTouch: true } : {}) });
+      const gesendet = await versandAbfangen(ctx);
+      const page = await ctx.newPage();
+      const probleme = beobachten(page);
+      await page.goto(BASIS + '/', { waitUntil: 'networkidle' });
+      await warte(400);
+      await page.evaluate(() => { const a = [...document.querySelectorAll('a[href="/projekt-check/"]')].find((x) => x.getClientRects().length); a.click(); });
+      await warte(700);
+      await sichtbar(page, '.g-ans .acard').first().click(); await warte(600);
+      await sichtbar(page, '.g-ans .acard').first().click(); await warte(600);
+      const vor = await frageJetzt(page);
+      await page.goBack(); await warte(400);
+      const z1 = await frageJetzt(page);
+      await page.goBack(); await warte(400);
+      const z2 = await frageJetzt(page), antwort = await sichtbar(page, '.g-ans .acard[aria-pressed="true"]').count();
+      ok(vor === 'WEBSITE_HEUTE:3' && z1 === 'BRANCHE:2' && z2 === 'ZIEL:1' && antwort === 1 && new URL(page.url()).pathname === '/projekt-check/',
+        `${breite} px: Zurück im Browser geht Frage für Frage zurück (${vor} → ${z1} → ${z2}), Antworten bleiben`);
+      await page.goForward(); await warte(400);
+      ok(await frageJetzt(page) === 'BRANCHE:2', `${breite} px: Vorwärts im Browser wieder zur nächsten Frage (${await frageJetzt(page)})`);
+      await sichtbar(page, '.q-leiste button').filter({ hasText: 'Zurück' }).first().click(); await warte(400);
+      await page.goBack(); await warte(600);
+      ok(new URL(page.url()).pathname === '/' && await sichtbar(page, '.q-prog').count() === 0, `${breite} px: Knopf «Zurück» und Browser zählen gleich, auf Frage 1 führt Zurück hinaus (${new URL(page.url()).pathname})`);
+      await page.goForward(); await warte(700);
+      await nachPlan(page, { WEBSITE_HEUTE: 'Nein' });
+      await page.goBack(); await warte(400);
+      ok(await frageJetzt(page) === 'KONTAKT:6', `${breite} px: Zurück im Ergebnis führt zur letzten Frage (${await frageJetzt(page)})`);
+      await page.goForward(); await warte(500);
+      ok(await sichtbar(page, '.eg-paket').count() > 0, `${breite} px: Vorwärts wieder zum Ergebnis`);
+      await senden(page, gesendet, 'voll');
+      await page.goBack(); await warte(800);
+      ok(new URL(page.url()).pathname === '/' && await sichtbar(page, '.eg-paket').count() === 0, `${breite} px: nach dem Senden führt Zurück aus dem Check hinaus, nicht ins Ergebnis (${new URL(page.url()).pathname})`);
+      ok(!probleme.length, `${breite} px: Verlauf ohne Konsolenfehler` + (probleme.length ? ': ' + probleme.join(' | ') : ''));
+      await ctx.close();
+    }
   }
 
   if (TEILE.includes('folgefragen')) {
@@ -803,6 +842,15 @@ try {
       const neu = gesendet.flatMap((g) => g.e || []).slice(vorher);
       ok(neu.some((e) => e.t === 'cta_click'), `${geraet}: Klick auf den Projekt-Check gemessen`);
       ok(neu.some((e) => e.t === 'page_view' && e.p === '/projekt-check/') && neu.some((e) => e.t === 'projektcheck_start') && neu.some((e) => e.t === 'projektcheck_step' && e.n === 1 && e.z === 'ZIEL'), `${geraet}: Projekt-Check: Seitenaufruf, Start und Schritt 1 mit Schlüssel ZIEL`);
+      // Verlaufseinträge pro Frage (gleiche Adresse) zählen keinen weiteren Seitenaufruf, Zurück im Browser auch nicht
+      const vorFragen = gesendet.length;
+      await sichtbar(page, '.g-ans .acard').first().click(); await warte(700);
+      await sichtbar(page, '.g-ans .acard').first().click(); await warte(700);
+      await page.goBack(); await warte(600);
+      await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange')));
+      await warte(6000);
+      const imCheck = gesendet.slice(vorFragen).flatMap((g) => g.e || []);
+      ok(!imCheck.some((e) => e.t === 'page_view') && imCheck.some((e) => e.t === 'projektcheck_step' && e.z === 'BRANCHE'), `${geraet}: Fragen und Zurück im Check zählen keinen Seitenaufruf (${imCheck.map((e) => e.t + (e.z ? ':' + e.z : '')).join(', ')})`);
       ok(!JSON.stringify(gesendet).match(/@|Testbetrieb/), `${geraet}: keine Eingaben in den gesendeten Daten`);
       // Widerruf (Fusszeile auf der Startseite; der Projekt-Check hat keine Fusszeile)
       await page.goto(BASIS + '/', { waitUntil: 'networkidle' }); await warte(800);
