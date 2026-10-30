@@ -436,6 +436,12 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .q-weiter-knopf{min-height:56px;padding:0 32px;border:none;border-radius:999px;background:var(--primaer);color:var(--auf-dunkel);font:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:background var(--dauer) var(--kurve)}
 @media(hover:hover){.q-weiter-knopf:hover{background:var(--primaer-dunkel)}}
 .q-offen{margin:10px 0 0;min-height:18px;text-align:right;font-size:13px;color:var(--text-2)}
+/* «Überspringen» bei optionalen Auswahlfragen: Textknopf statt Hauptknopf */
+.q-weiter-knopf[data-art="text"]{padding:0 8px;background:none;color:var(--primaer-dunkel);text-decoration:underline;text-underline-offset:3px}
+@media(hover:hover){.q-weiter-knopf[data-art="text"]:hover{background:none;color:var(--tinte)}}
+/* Gewählte Antwort zeigt bis zum automatischen Weiter ein Häkchen */
+@media(prefers-reduced-motion:no-preference){.acard[data-frisch="1"] .acard-k{animation:hakenPop 220ms cubic-bezier(0.2,0,0,1)}}
+@keyframes hakenPop{0%{transform:scale(0.6)}70%{transform:scale(1.12)}100%{transform:none}}
 .mf-eingabe[data-fehler="1"] input{border-color:var(--fehler);box-shadow:inset 0 0 0 1px var(--fehler)}
 .mf-feldfehler{flex-basis:100%}
 .ico{display:inline-block;flex:none;width:20px;height:20px;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
@@ -1235,6 +1241,14 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .q-fortschritt[data-leer="1"]{display:none}
  /* Durchgestrichener Normalpreis beim Referenzrabatt: auf der aufgehellten Ergebniskarte voll deckend (Kontrast AA) */
  .eg-links .eg-preis s{opacity:1}
+ /* Weiter-Leiste: ohne Knopf nur «Zurück» kompakt unten links, auf Frage 1 ohne Antwort gar keine (weiterNoetig) */
+ .q-leiste[data-art="leer"]{display:none}
+ .q-leiste[data-art="zurueck"]{left:0;right:auto;padding:0 0 calc(12px + env(safe-area-inset-bottom)) 16px;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-top:0}
+ html[data-tastatur="1"] .q-leiste[data-art="zurueck"]{padding-bottom:8px}
+ .q-leiste[data-art="zurueck"] .row>button{min-height:44px!important;padding:0 18px!important;background:var(--grund)!important;box-shadow:0 6px 18px -6px rgba(17,19,26,0.25)}
+ .q-leiste .q-weiter-knopf[data-art="text"]{flex:none;margin-left:auto}
+ .q-wrap[data-leiste="zurueck"]{padding-bottom:88px!important}
+ .q-wrap[data-leiste="leer"]{padding-bottom:40px!important}
 }
 @media(max-width:767px){
  /* Frage: Titel und Antworten zuerst, Erklärung und KI-Hinweis darunter */
@@ -2598,7 +2612,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <div class="q-prog" role="progressbar" aria-valuenow="{{ qNum }}" aria-valuemin="1" aria-valuemax="{{ qTotal }}" aria-label="Fortschritt" data-frage="{{ qKey }}" style="height:2px;background:rgba(17,19,26,0.10)">
         <div style="height:2px;background:var(--akzent);box-shadow:0 1px 0 rgba(17,19,26,0.45);width:{{ progress }};transition:width 300ms ease-in-out"></div>
       </div>
-      <div class="wrap" style="padding-top:16px;padding-bottom:120px">
+      <div class="wrap q-wrap" data-leiste="{{ leisteArt }}" style="padding-top:16px;padding-bottom:120px">
         <p class="mono q-fortschritt" data-leer="{{ fortschrittLeer }}" style="text-align:right;font-size:13px;color:var(--text-2);margin:0 0 40px;min-height:17px">{{ fortschritt }}</p>
         <div class="q-weiter" role="region" aria-label="Fortsetzen" style="display:{{ fortsetzenDisplay }}">
           <p>Sie haben den Projekt-Check in diesem Tab schon angefangen. Weiter, wo Sie aufgehört haben?</p>
@@ -2608,7 +2622,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <div class="qgrid">
           <div class="qleft">
             <p role="status" style="display:{{ editNoteDisplay }};font-size:16px;line-height:1.5;color:var(--tinte);background:var(--flaeche);border:1px solid var(--primaer);border-radius:12px;padding:12px 16px;margin:0 0 20px">{{ editNote }}</p>
-            <p class="mono q-teil" style="font-size:13px;letter-spacing:0.08em;color:var(--primaer);margin:0 0 8px">{{ partLabel }}</p>
+            <p class="mono q-teil" style="font-size:13px;letter-spacing:0.08em;color:var(--primaer);margin:0 0 8px">{{ partLabel }}<span class="f-tag" data-pflicht="0" style="display:{{ optFrageDisplay }}">optional</span></p>
             <p class="mono qnum" aria-hidden="true" data-n="{{ qNumPad }}"></p>
             <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px;text-wrap:pretty" data-vt="{{ vtAttr }}">{{ qTitle }}</h2>
             <p class="mono q-wichtig" style="display:{{ wichtigDisplay }}">Die wichtigste Frage für Ihren Entwurf</p>
@@ -2636,7 +2650,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <p class="mono q-optlabel" style="display:{{ optLabelDisplay }};order:{{ optOrder }};margin-top:{{ optTop }}">{{ optLabel }}<span class="f-tag" data-pflicht="0" style="display:{{ optTagDisplay }}">optional</span></p>
             <div class="g-ans" data-fehler="{{ wahlFehlerAttr }}" data-spalten="{{ spalten }}" style="display:{{ optDisplay }};grid-auto-rows:1fr;order:{{ optOrder }}">
               <sc-for list="{{ options }}" as="o" hint-placeholder-count="4">
-                <button type="button" class="acard" data-v="{{ o.v }}" onClick="{{ onPick }}" aria-pressed="{{ o.sel }}" style="border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }}">
+                <button type="button" class="acard" data-v="{{ o.v }}" data-frisch="{{ o.frisch }}" onClick="{{ onPick }}" aria-pressed="{{ o.sel }}" style="border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }}">
                   <span class="mono acard-k" style="flex:none;width:28px;height:28px;border-radius:{{ o.keyRadius }};border:2px solid {{ o.keyBd }};background:{{ o.keyBg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ o.keyFg }}">{{ o.key }}</span>
                   <span style="flex:1">{{ o.label }}</span>
                 </button>
@@ -2705,10 +2719,10 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               </sc-if>
             </div>
 
-            <div class="q-leiste">
+            <div class="q-leiste" data-art="{{ leisteArt }}">
             <div class="row" style="justify-content:space-between;margin-top:32px;gap:16px;order:6">
               <button type="button" onClick="{{ onBack }}" style="min-height:56px;padding:0 24px;background:none;border:1px solid var(--tinte);border-radius:999px;font-size:16px;font-weight:600;color:var(--tinte);cursor:pointer;visibility:{{ backVis }}">Zurück</button>
-              <button type="button" class="q-weiter-knopf" onClick="{{ onNext }}" aria-describedby="q-offen">{{ nextLabel }}</button>
+              <button type="button" class="q-weiter-knopf" data-art="{{ nextArt }}" onClick="{{ onNext }}" aria-describedby="q-offen" style="display:{{ nextDisplay }}">{{ nextLabel }}</button>
             </div>
             <p id="q-offen" class="mono q-offen" style="order:6">{{ offenText }}</p>
             </div>
@@ -3471,7 +3485,7 @@ class Component extends DCLogic {
     step: 0, dir: 'fwd', ans: {}, txt: {}, timing: 1, mid: false, result: false, warn: false, quick: false,
     review: false, editing: false, editNote: '', reached: 0, phFill: 0,
     senden: 'bereit', sendFehler: '', gesendet: null, kopieWunsch: false, offline: false, hp: '', fensterWeg: false, vglOffen: false,
-    ueberspringen: [], quelle: '', mindestPaket: '', rechnerZusatz: [], fortsetzen: null, vtAktiv: false, brief: this.briefAusUrl(), rechnerFn: [], rechnerLogo: false, rechnerTexte: false, rechnerAn: false, rechnerPreis: 0,
+    ueberspringen: [], quelle: '', mindestPaket: '', rechnerZusatz: [], fortsetzen: null, autoLeiste: null, vtAktiv: false, brief: this.briefAusUrl(), rechnerFn: [], rechnerLogo: false, rechnerTexte: false, rechnerAn: false, rechnerPreis: 0,
     beruehrt: {}, bearbeitet: {}, versucht: '', puls: 0, okPuls: {}, serverFehler: {}, mfFehler: {},
     copied: false, toast: '', mailOpen: false, angabenOffen: false, ring: 0, cmpGrow: false,
     uLeft: '0px', uWidth: '0px', tick: 0, chatIntro: false
@@ -3668,8 +3682,9 @@ class Component extends DCLogic {
         e.preventDefault(); this.anfrageSenden(); return;
       }
       if (this.state.path !== '/projekt-check' || this.state.result || (typing && e.target.type !== 'range')) return;
-      // Links und Schaltflächen im Prüfmodus reagieren selbst auf Enter.
-      if (e.key === 'Enter' && e.target.closest && e.target.closest('[data-own-enter]')) return;
+      // Enter auf Antwortkarten, Knöpfen, Links, Häkchen und «Was heisst das?» löst deren eigene Aktion aus.
+      // «Weiter» per Enter nur, wenn der Fokus auf keinem bedienbaren Element liegt.
+      if (e.key === 'Enter' && e.target.closest && e.target.closest('button, a[href], input, select, textarea, summary, label, [role="button"], [data-own-enter]')) return;
       const opts = this.optsFor(this.frage());
       if (/^[1-9]$/.test(e.key) && opts.length) {
         const o = opts[Number(e.key) - 1];
@@ -4205,6 +4220,20 @@ class Component extends DCLogic {
     return q.o || [];
   }
 
+  // Knopf unter der Frage: { art: 'weiter' | 'ueberspringen' | '', label }. Eine Einfachauswahl ohne Antwort braucht keinen
+  // Knopf, sie geht nach dem Antippen selbst weiter. «Weiter» erscheint, wenn die Frage beim Anzeigen schon beantwortet ist
+  // (Zurück, Antwort-Pillen, Einstieg) oder die Antwort ein Zusatzfeld öffnet, beim Ändern, bei Mehrfachauswahl und Feldern.
+  // Optionale Fragen ohne Antwort: «Überspringen». Während des automatischen Weiter gilt der Stand vor dem Antippen.
+  weiterNoetig(q, s = this.state) {
+    const label = s.editing ? 'Übernehmen und zurück zum Ergebnis' : s.step >= this.fragen(s).length - 1 ? 'Ergebnis ansehen' : 'Weiter';
+    if (!q || s.editing) return { art: 'weiter', label };
+    if (s.autoLeiste && s.autoLeiste.key === q.key && s.autoLeiste.step === s.step) return s.autoLeiste.knopf;
+    const a = s.ans[q.key];
+    if (q.typ === 'wahl' && !a) return q.optional ? { art: 'ueberspringen', label: 'Überspringen' } : { art: '', label };
+    if (q.typ === 'multi' && q.optional && !(Array.isArray(a) && a.length)) return { art: 'ueberspringen', label: 'Überspringen' };
+    return { art: 'weiter', label };
+  }
+
   choose(v) {
     const q = this.frage();
     if (q.typ === 'karten' && (this.FUNKTIONEN.find((f) => f[0] === v) || [])[2] === 'alle') return; // immer dabei
@@ -4221,11 +4250,13 @@ class Component extends DCLogic {
     // Einfachauswahl: nach kurzer Bestätigung automatisch weiter. Nicht beim Ändern und nicht, wenn die Antwort ein Zusatzfeld öffnet.
     const zusatz = q.typ === 'wahl' && q.extra && q.extra[v] ? q.extra[v][0] : '';
     const auto = q.typ === 'wahl' && !this.state.editing && !zusatz;
-    this.setState({ ans: ans, warn: false }, () => {
+    // Bis zum automatischen Weiter bleibt die Leiste, wie sie vor dem Antippen war: nichts blitzt auf
+    const autoLeiste = auto ? { key: q.key, step: this.state.step, v, knopf: this.weiterNoetig(q) } : null;
+    this.setState({ ans: ans, warn: false, autoLeiste }, () => {
       this.merken();
       if (auto) {
         const step = this.state.step;
-        this.weiterTimer = setTimeout(() => { if (this.state.step === step && !this.state.result && this.frage().key === q.key) this.next(); }, 250);
+        this.weiterTimer = setTimeout(() => { if (this.state.step === step && !this.state.result && this.frage().key === q.key) this.next(); }, 400);
         return;
       }
       if (zusatz) setTimeout(() => { const el = document.getElementById('f-' + zusatz); if (el) el.focus({ preventScroll: true }); }, 60);
@@ -4351,7 +4382,7 @@ class Component extends DCLogic {
     });
   }
 
-  jumpTo = (st) => { this.setState({ step: st, dir: 'back', warn: false, tick: this.state.tick + 1 }); this.focusHead(); };
+  jumpTo = (st) => { clearTimeout(this.weiterTimer); this.setState({ step: st, dir: 'back', warn: false, autoLeiste: null, tick: this.state.tick + 1 }); this.focusHead(); };
 
   focusFirstField() {
     setTimeout(() => {
@@ -4382,7 +4413,7 @@ class Component extends DCLogic {
   }
 
   editStep = (st) => {
-    this.setState({ result: false, review: false, mid: false, editing: true, editNote: '', step: st, dir: 'fwd', warn: false, tick: this.state.tick + 1 });
+    this.setState({ result: false, review: false, mid: false, editing: true, editNote: '', step: st, dir: 'fwd', warn: false, autoLeiste: null, tick: this.state.tick + 1 });
     this.focusHead();
   };
 
@@ -4406,7 +4437,7 @@ class Component extends DCLogic {
     if (!this.complete(q)) { this.fehlerZeigen(q); return; }
     if (this.state.editing) { this.leaveEdit('result'); return; }
     if (step >= this.fragen().length - 1) { this.showResult(); this.merken(); return; }
-    this.setState({ step: step + 1, dir: 'fwd', warn: false, tick: this.state.tick + 1 });
+    this.setState({ step: step + 1, dir: 'fwd', warn: false, autoLeiste: null, tick: this.state.tick + 1 });
     this.merken();
     this.focusHead();
   };
@@ -4415,7 +4446,8 @@ class Component extends DCLogic {
     clearTimeout(this.weiterTimer);
     if (this.state.editing) { this.leaveEdit('review'); return; }
     if (this.state.result) { this.setState({ result: false, step: this.fragen().length - 1 }); return; }
-    if (this.state.step > 0) this.setState({ step: this.state.step - 1, dir: 'back', warn: false, tick: this.state.tick + 1 });
+    if (this.state.step > 0) this.setState({ step: this.state.step - 1, dir: 'back', warn: false, autoLeiste: null, tick: this.state.tick + 1 });
+    else this.setState({ autoLeiste: null });
   };
 
   // Unterstützung bei Logo, Texten und Fotos: Antwort der Folgefrage (nur ohne Website). Erscheint die Frage nicht,
@@ -4608,6 +4640,7 @@ class Component extends DCLogic {
     const fields2 = defs.filter((f) => f.gruppe === 2).map(feldAnsicht);
     const wahlFehler = fehlerSichtbar.find((e) => e.k === '_wahl');
     const offen = fehlerAlle.map((e) => e.k === '_wahl' ? 'eine Antwort' : e.label);
+    const knopf = this.weiterNoetig(q);
 
     const felderZuerst = q.typ === 'felder';
     // Farbfleck im Hintergrund (nur Desktop): wandert mit dem Fortschritt
@@ -4907,6 +4940,8 @@ class Component extends DCLogic {
       qKey: q.key,
       fieldsDir: 'column',
       wichtigDisplay: q.hervor ? 'inline-block' : 'none',
+      // Optionale Auswahlfragen tragen «optional» wie die Felder. Die Funktionen nicht: Das Kontaktformular ist immer gewählt.
+      optFrageDisplay: q.optional && (q.typ === 'wahl' || q.typ === 'multi') && !s.quick ? 'inline' : 'none',
       wasDisplay: q.was ? 'block' : 'none', qWas: q.was || '',
       optHinweis: hinweisOpt, optHinweisDisplay: hinweisOpt ? 'block' : 'none',
       optLabel: q.optLabel || '', optLabelDisplay: q.optLabel ? 'block' : 'none',
@@ -4938,7 +4973,8 @@ class Component extends DCLogic {
         const sel = isMulti ? (Array.isArray(picked) && picked.indexOf(o) >= 0) : picked === o;
         return {
           v: o, label: o, sel: sel,
-          key: isMulti ? (sel ? '✓' : '') : String(i + 1),
+          key: sel ? '✓' : isMulti ? '' : String(i + 1),
+          frisch: !isMulti && sel && s.autoLeiste && s.autoLeiste.key === q.key && s.autoLeiste.v === o ? '1' : '0',
           keyRadius: isMulti ? '8px' : '999px',
           keyBd: sel ? '#11131A' : '#E2DFD8',
           keyFg: sel ? '#11131A' : '#5B6270',
@@ -4959,7 +4995,7 @@ class Component extends DCLogic {
       zusammenText: 'Bitte prüfen Sie ' + fehlerSichtbar.length + ' Angaben:',
       zusammenListe: fehlerSichtbar.map((e) => ({ k: e.k, label: e.k === '_wahl' ? 'Eine Antwort wählen' : e.label })),
       onZuFeld: (e) => this.zuFeld(e.currentTarget.dataset.k),
-      offenText: offen.length ? 'Noch offen: ' + offen.join(', ') : '',
+      offenText: knopf.art === 'weiter' && offen.length ? 'Noch offen: ' + offen.join(', ') : '',
       onFieldBlur: (e) => {
         const k = e.currentTarget.dataset.k;
         // Erst prüfen, wenn jemand im Feld etwas getan hat: leere, nur durchquerte Felder bleiben ruhig
@@ -5010,7 +5046,11 @@ class Component extends DCLogic {
       },
       backVis: (s.step > 0 && !s.editing) ? 'visible' : 'hidden',
       onBack: this.back, onNext: this.next,
-      nextLabel: s.editing ? 'Übernehmen und zurück zum Ergebnis' : s.step >= total - 1 ? 'Ergebnis ansehen' : 'Weiter',
+      nextLabel: knopf.label,
+      nextArt: knopf.art === 'ueberspringen' ? 'text' : 'primaer',
+      nextDisplay: knopf.art ? 'inline-block' : 'none',
+      // Leiste unter 1024 px: voll mit Knopf, nur «Zurück» (kompakt) oder gar keine
+      leisteArt: knopf.art ? 'voll' : (s.step > 0 && !s.editing ? 'zurueck' : 'leer'),
       toast: s.toast, toastOp: s.toast ? 1 : 0,
 
       recName: r.name, recPrice: r.price,

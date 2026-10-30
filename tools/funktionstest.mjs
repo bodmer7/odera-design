@@ -177,12 +177,13 @@ try {
       const probleme = beobachten(page);
       await page.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
       await warte(600);
-      // Weiter ist nie gesperrt: ohne Antwort erscheint der Fehler am Feld, Fokus im ersten Fehler
-      await sichtbar(page, '.q-weiter-knopf').first().click();
+      // Einfachauswahl ohne Antwort hat keinen Knopf «Weiter». Enter ohne Antwort zeigt den Fehler an der Frage, Fokus auf der ersten Karte
+      ok(await sichtbar(page, '.q-weiter-knopf').count() === 0, `${geraet}: Frage 1 ohne Antwort ohne Knopf «Weiter»`);
+      await page.locator('h2:visible').first().focus(); await page.keyboard.press('Enter');
       await warte(300);
       const fehlerZu = await page.evaluate(() => ({ fehler: [...document.querySelectorAll('.f-fehler[data-an="1"]')].filter((e) => e.getClientRects().length).map((e) => e.textContent.trim()),
         fokus: !!(document.activeElement && document.activeElement.classList.contains('acard')) }));
-      ok(fehlerZu.fehler.length > 0 && fehlerZu.fokus, `${geraet}: Weiter ohne Antwort zeigt den Fehler an der Frage (${fehlerZu.fehler[0] || '-'}) und setzt den Fokus`);
+      ok(fehlerZu.fehler.length > 0 && fehlerZu.fokus, `${geraet}: Enter ohne Antwort zeigt den Fehler an der Frage (${fehlerZu.fehler[0] || '-'}) und setzt den Fokus`);
       // Zwei Einfachauswahlen gehen selbst weiter, dann Zurück
       await frageBeantworten(page, 0);
       await frageBeantworten(page, 1);
@@ -217,35 +218,52 @@ try {
   }
 
   if (TEILE.includes('weiter')) {
-    // Automatisch weiter nach einer Einfachauswahl, Ausnahmen: Zusatzfeld («Andere», «Ja» mit Adresse) und «Ändern»
+    // «Weiter» nur, wo es etwas tut: Einfachauswahl geht nach rund 400 ms selbst weiter, ohne Knopf. Ausnahmen: schon beantwortet,
+    // Zusatzfeld («Andere», «Ja» mit Adresse), «Ändern». Optionale Fragen ohne Antwort: «Überspringen». Enter auf einer Karte wählt sie.
     const ctx = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
     const page = await ctx.newPage();
     const probleme = beobachten(page);
     await page.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
     await warte(600);
     const fokus = () => page.evaluate(() => { const a = document.activeElement; return a ? (a.id || a.tagName) : ''; });
+    const knopf = async () => { const k = sichtbar(page, '.q-weiter-knopf'); return (await k.count()) ? (await k.first().textContent()).trim() : ''; };
+    const offen = async () => (await sichtbar(page, '.q-offen').allTextContents()).join('').trim();
+    ok(await knopf() === '' && await offen() === '', `Weiter: auf Frage 1 vor der Antwort weder «Weiter» noch «Noch offen» (${await knopf()}${await offen()})`);
     await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Anrufen' }).first().click();
     await warte(100);
-    const sofort = await frageJetzt(page);
-    await warte(350);
+    const sofort = await frageJetzt(page), knopfSofort = await knopf();
+    const haken = await sichtbar(page, '.g-ans .acard[aria-pressed="true"] .acard-k').first().textContent();
+    await warte(500);
     ok(sofort === 'ZIEL:1' && await frageJetzt(page) === 'BRANCHE:2', `Weiter: nach der Antwort kurz stehen (${sofort}), dann selbst zur nächsten Frage (${await frageJetzt(page)})`);
+    ok(knopfSofort === '' && haken.trim() === '✓', `Weiter: in der Zeit bis zum Weiter kein Knopf (${knopfSofort || 'keiner'}), die gewählte Karte zeigt ein Häkchen (${haken})`);
     ok(await fokus() === 'H2', `Weiter: Fokus auf der neuen Frage wie beim Knopf «Weiter» (${await fokus()})`);
+    ok(await knopf() === '', `Weiter: auf Frage 2 vor der Antwort kein «Weiter» (${await knopf() || 'keiner'})`);
+    await sichtbar(page, '.q-leiste button').filter({ hasText: 'Zurück' }).first().click(); await warte(300);
+    ok(await frageJetzt(page) === 'ZIEL:1' && await knopf() === 'Weiter', `Weiter: zurück auf die beantwortete Frage 1 zeigt «Weiter» (${await knopf()})`);
+    await sichtbar(page, '.q-weiter-knopf').first().click(); await warte(300);
     await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Andere' }).first().click();
     await warte(600);
-    ok(await frageJetzt(page) === 'BRANCHE:2' && await fokus() === 'f-branche', `Weiter: «Andere» bleibt stehen und setzt den Fokus ins Zusatzfeld (${await fokus()})`);
+    ok(await frageJetzt(page) === 'BRANCHE:2' && await fokus() === 'f-branche' && await knopf() === 'Weiter', `Weiter: «Andere» bleibt stehen, Fokus im Zusatzfeld (${await fokus()}), «Weiter» sichtbar`);
     await page.fill('#f-branche', 'Fahrschule');
     await sichtbar(page, '.q-weiter-knopf').first().click(); await warte(400);
+    ok(await knopf() === 'Überspringen' && /optional/i.test(await sichtbar(page, '.q-teil').first().textContent()), `Weiter: «Haben Sie schon eine Website?» mit «Überspringen» und «optional» (${await knopf()})`);
     await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Ja' }).first().click();
     await warte(600);
-    ok(await frageJetzt(page) === 'WEBSITE_HEUTE:3' && await fokus() === 'f-url', `Weiter: «Ja» bleibt für die Adresse stehen (${await frageJetzt(page)}, Fokus ${await fokus()})`);
+    ok(await frageJetzt(page) === 'WEBSITE_HEUTE:3' && await fokus() === 'f-url' && await knopf() === 'Weiter', `Weiter: «Ja» bleibt für die Adresse stehen (${await frageJetzt(page)}, Fokus ${await fokus()}), «Weiter» sichtbar`);
     await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Nein' }).first().click();
-    await warte(600);
-    ok(await frageJetzt(page) === 'UNTERSTUETZUNG:4', `Weiter: «Nein» geht selbst weiter (${await frageJetzt(page)})`);
-    // Zurück innert 250 ms nach der Antwort: kein Sprung nach vorn
-    await page.locator('.q-leiste button', { hasText: 'Zurück' }).filter({ visible: true }).first().click(); await warte(300);
+    await warte(100);
+    const knopfNein = await knopf();
+    await warte(500);
+    ok(await frageJetzt(page) === 'UNTERSTUETZUNG:4' && knopfNein === 'Weiter', `Weiter: «Nein» geht selbst weiter (${await frageJetzt(page)}), «Weiter» bleibt bis dahin stehen (${knopfNein})`);
+    ok(await knopf() === 'Überspringen', `Weiter: «Wobei brauchen Sie Unterstützung?» ohne Auswahl «Überspringen» (${await knopf()})`);
+    await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Logo' }).first().click(); await warte(150);
+    ok(await knopf() === 'Weiter', `Weiter: mit Auswahl «Weiter» (${await knopf()})`);
+    await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Logo' }).first().click(); await warte(150);
+    // Zurück innert 400 ms nach der Antwort: kein Sprung nach vorn
+    await sichtbar(page, '.q-leiste button').filter({ hasText: 'Zurück' }).first().click(); await warte(300);
     await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Nein' }).first().click();
-    await page.locator('.q-leiste button', { hasText: 'Zurück' }).filter({ visible: true }).first().click();
-    await warte(600);
+    await sichtbar(page, '.q-leiste button').filter({ hasText: 'Zurück' }).first().click();
+    await warte(700);
     ok(await frageJetzt(page) === 'BRANCHE:2', `Weiter: Zurück gleich nach der Antwort hebt das automatische Weiter auf (${await frageJetzt(page)})`);
     await nachPlan(page, { WEBSITE_HEUTE: 'Nein' });
     // Im Modus «Ändern» geht es nicht selbst weiter
@@ -253,9 +271,41 @@ try {
     await sichtbar(page, '.rv-edit').first().click(); await warte(300);
     await sichtbar(page, '.g-ans .acard').filter({ hasText: 'Vorbeikommen' }).first().click();
     await warte(600);
-    ok(await frageJetzt(page) === 'ZIEL:1' && await sichtbar(page, '.editbar-btn').count() > 0, `Weiter: beim Ändern bleibt die Frage stehen (${await frageJetzt(page)})`);
+    ok(await frageJetzt(page) === 'ZIEL:1' && await sichtbar(page, '.editbar-btn').count() > 0 && /Übernehmen/.test(await knopf()), `Weiter: beim Ändern bleibt die Frage stehen (${await frageJetzt(page)}, ${await knopf()})`);
     ok(!probleme.length, 'Weiter ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
     await ctx.close();
+
+    // «Überspringen» auf Frage 3 führt ohne Zusatzfrage zu den Funktionen. Enter auf einer fokussierten Karte wählt sie und geht weiter.
+    const ctx2 = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+    const p2 = await ctx2.newPage();
+    const probleme2 = beobachten(p2);
+    await p2.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
+    await warte(600);
+    await sichtbar(p2, '.g-ans .acard').filter({ hasText: 'Anrufen' }).first().focus();
+    await p2.keyboard.press('Enter');
+    await warte(700);
+    ok(await frageJetzt(p2) === 'BRANCHE:2', `Tastatur: Enter auf der fokussierten Karte wählt sie und geht weiter (${await frageJetzt(p2)}), ohne Meldung «Bitte wählen»`);
+    await p2.keyboard.press('1'); await warte(700);
+    await sichtbar(p2, '.q-weiter-knopf').filter({ hasText: 'Überspringen' }).first().click(); await warte(400);
+    ok(await frageJetzt(p2) === 'FUNKTIONEN:4', `Weiter: «Überspringen» auf Frage 3 führt ohne Zusatzfrage zu den Funktionen (${await frageJetzt(p2)})`);
+    await p2.locator('h2:visible').first().focus(); await p2.keyboard.press('Enter'); await warte(400);
+    ok(await frageJetzt(p2) === 'BETRIEB:5', `Tastatur: Enter ohne Fokus auf einem Bedienelement wirkt wie «Weiter» (${await frageJetzt(p2)})`);
+    ok(!probleme2.length, 'Überspringen und Tastatur ohne Konsolenfehler' + (probleme2.length ? ': ' + probleme2.join(' | ') : ''));
+    await ctx2.close();
+
+    // Handy: Frage 1 ohne Antwort ohne Leiste, danach nur «Zurück» kompakt, mit Zusatzfeld die volle Leiste
+    const ctx3 = await neuerKontext({ viewport: { width: 390, height: 664 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
+    const p3 = await ctx3.newPage();
+    await p3.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
+    await warte(600);
+    const leiste = () => p3.evaluate(() => { const l = [...document.querySelectorAll('.q-leiste')].find((x) => x.getClientRects().length); if (!l) return 'keine'; const r = l.getBoundingClientRect(); return l.dataset.art + ':' + Math.round(r.width); });
+    const l1 = await leiste();
+    await sichtbar(p3, '.g-ans .acard').first().click(); await warte(700);
+    const l2 = await leiste();
+    await sichtbar(p3, '.g-ans .acard').filter({ hasText: 'Andere' }).first().click(); await warte(300);
+    const l3 = await leiste();
+    ok(l1 === 'keine' && /^zurueck:/.test(l2) && parseInt(l2.split(':')[1], 10) < 200 && /^voll:390$/.test(l3), `Handy: Leiste auf Frage 1 ${l1}, auf Frage 2 ${l2} (kompakt), mit «Andere» ${l3}`);
+    await ctx3.close();
   }
 
   if (TEILE.includes('folgefragen')) {
@@ -357,7 +407,8 @@ try {
         await page.evaluate(() => window.scrollTo(0, 0)); await warte(100);
         const m = await page.evaluate(() => {
           const vis = (el) => el.getClientRects().length > 0;
-          const leiste = [...document.querySelectorAll('.q-leiste')].find(vis).getBoundingClientRect().top;
+          // Ohne Leiste (Frage 1 ohne Antwort) zählt der untere Bildschirmrand
+          const l = [...document.querySelectorAll('.q-leiste')].find(vis), leiste = l ? l.getBoundingClientRect().top : innerHeight;
           const karten = [...document.querySelectorAll('.qright .g-ans .acard')].filter(vis).map((b) => b.getBoundingClientRect());
           return { aussen: karten.filter((r) => r.top < 0 || r.bottom > leiste).length, links: new Set(karten.map((r) => Math.round(r.left))).size };
         });
@@ -392,7 +443,7 @@ try {
     const probleme = beobachten(page);
     await page.goto(BASIS + '/projekt-check/?kurz=1', { waitUntil: 'networkidle' });
     await warte(600);
-    const kopf = await page.evaluate(() => [...document.querySelectorAll('.q-teil, .q-fortschritt')].filter((x) => x.getClientRects().length).map((x) => x.textContent.trim()));
+    const kopf = await page.evaluate(() => [...document.querySelectorAll('.q-teil, .q-fortschritt')].filter((x) => x.getClientRects().length).map((x) => x.innerText.trim()));
     ok(kopf.join(' | ') === 'Frage 1 von 3 | KURZSCHÄTZUNG' || kopf.join(' | ') === 'KURZSCHÄTZUNG | Frage 1 von 3', `Kurzversion: Kopf wie bisher (${kopf.join(' | ')})`);
     const fragenKurz = [];
     for (let i = 0; i < 4 && !(await sichtbar(page, '.eg-paket').count()); i++) { fragenKurz.push((await frageJetzt(page)).split(':')[0]); await frageBeantworten(page, i); await sichtbar(page, '.q-weiter-knopf').first().click(); await warte(350); }
@@ -603,7 +654,7 @@ try {
       await page.locator('#abschluss a.btn').click();
       await page.waitForURL('**/projekt-check/**');
       await warte(800);
-      ok(await page.locator('.q-weiter-knopf').filter({ visible: true }).count() > 0, 'Einblicke: Knopf führt in den Projekt-Check');
+      ok(await page.locator('.q-prog').filter({ visible: true }).count() > 0, 'Einblicke: Knopf führt in den Projekt-Check');
     }
     ok(!probleme.length, 'Einblicke (Desktop) ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
     await ctx.close();

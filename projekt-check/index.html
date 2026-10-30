@@ -31,7 +31,7 @@
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://odera.ch/projekt-check/#seite","url":"https://odera.ch/projekt-check/","name":"Projekt-Check: Angebot in 2 Minuten · ODERA Design","description":"6 kurze Fragen, rund 2 Minuten. Danach erhalten Sie ein Angebot zum Fixpreis und einen kostenlosen Entwurf Ihrer neuen Website, ohne Risiko.","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/projekt-check/#brotkrumen"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/projekt-check/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Projekt-Check: Angebot in 2 Minuten","item":"https://odera.ch/projekt-check/"}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=09f789901d" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=1a74aed532" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -460,6 +460,12 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .q-weiter-knopf{min-height:56px;padding:0 32px;border:none;border-radius:999px;background:var(--primaer);color:var(--auf-dunkel);font:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:background var(--dauer) var(--kurve)}
 @media(hover:hover){.q-weiter-knopf:hover{background:var(--primaer-dunkel)}}
 .q-offen{margin:10px 0 0;min-height:18px;text-align:right;font-size:13px;color:var(--text-2)}
+/* «Überspringen» bei optionalen Auswahlfragen: Textknopf statt Hauptknopf */
+.q-weiter-knopf[data-art="text"]{padding:0 8px;background:none;color:var(--primaer-dunkel);text-decoration:underline;text-underline-offset:3px}
+@media(hover:hover){.q-weiter-knopf[data-art="text"]:hover{background:none;color:var(--tinte)}}
+/* Gewählte Antwort zeigt bis zum automatischen Weiter ein Häkchen */
+@media(prefers-reduced-motion:no-preference){.acard[data-frisch="1"] .acard-k{animation:hakenPop 220ms cubic-bezier(0.2,0,0,1)}}
+@keyframes hakenPop{0%{transform:scale(0.6)}70%{transform:scale(1.12)}100%{transform:none}}
 .mf-eingabe[data-fehler="1"] input{border-color:var(--fehler);box-shadow:inset 0 0 0 1px var(--fehler)}
 .mf-feldfehler{flex-basis:100%}
 .ico{display:inline-block;flex:none;width:20px;height:20px;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
@@ -629,7 +635,7 @@ if(!m.hasAttribute('tabindex'))m.setAttribute('tabindex','-1');m.focus({preventS
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=09f789901d';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=1a74aed532';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -1259,6 +1265,14 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .q-fortschritt[data-leer="1"]{display:none}
  /* Durchgestrichener Normalpreis beim Referenzrabatt: auf der aufgehellten Ergebniskarte voll deckend (Kontrast AA) */
  .eg-links .eg-preis s{opacity:1}
+ /* Weiter-Leiste: ohne Knopf nur «Zurück» kompakt unten links, auf Frage 1 ohne Antwort gar keine (weiterNoetig) */
+ .q-leiste[data-art="leer"]{display:none}
+ .q-leiste[data-art="zurueck"]{left:0;right:auto;padding:0 0 calc(12px + env(safe-area-inset-bottom)) 16px;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-top:0}
+ html[data-tastatur="1"] .q-leiste[data-art="zurueck"]{padding-bottom:8px}
+ .q-leiste[data-art="zurueck"] .row>button{min-height:44px!important;padding:0 18px!important;background:var(--grund)!important;box-shadow:0 6px 18px -6px rgba(17,19,26,0.25)}
+ .q-leiste .q-weiter-knopf[data-art="text"]{flex:none;margin-left:auto}
+ .q-wrap[data-leiste="zurueck"]{padding-bottom:88px!important}
+ .q-wrap[data-leiste="leer"]{padding-bottom:40px!important}
 }
 @media(max-width:767px){
  /* Frage: Titel und Antworten zuerst, Erklärung und KI-Hinweis darunter */
@@ -1320,7 +1334,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
       <div class="q-prog" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="6" aria-label="Fortschritt" data-frage="ZIEL" style="height: 2px; background: rgba(17, 19, 26, 0.1);">
         <div style="height: 2px; background: var(--akzent); box-shadow: rgba(17, 19, 26, 0.45) 0px 1px 0px; width: 17%; transition: width 300ms ease-in-out;"></div>
       </div>
-      <div class="wrap" style="padding-top: 16px; padding-bottom: 120px;">
+      <div class="wrap q-wrap" data-leiste="leer" style="padding-top: 16px; padding-bottom: 120px;">
         <p class="mono q-fortschritt" data-leer="1" style="text-align: right; font-size: 13px; color: var(--text-2); margin: 0px 0px 40px; min-height: 17px;"><span class="sc-interp"></span></p>
         <div class="q-weiter" role="region" aria-label="Fortsetzen" style="display: none;">
           <p>Sie haben den Projekt-Check in diesem Tab schon angefangen. Weiter, wo Sie aufgehört haben?</p>
@@ -1330,7 +1344,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <div class="qgrid">
           <div class="qleft">
             <p role="status" style="display: none; font-size: 16px; line-height: 1.5; color: var(--tinte); background: var(--flaeche); border: 1px solid var(--primaer); border-radius: 12px; padding: 12px 16px; margin: 0px 0px 20px;"><span class="sc-interp"></span></p>
-            <p class="mono q-teil" style="font-size: 13px; letter-spacing: 0.08em; color: var(--primaer); margin: 0px 0px 8px;"><span class="sc-interp">Frage 1 von 6</span></p>
+            <p class="mono q-teil" style="font-size: 13px; letter-spacing: 0.08em; color: var(--primaer); margin: 0px 0px 8px;"><span class="sc-interp">Frage 1 von 6</span><span class="f-tag" data-pflicht="0" style="display: none;">optional</span></p>
             <p class="mono qnum" aria-hidden="true" data-n="01"></p>
             <h2 tabindex="-1" data-vt="0" style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; font-size: var(--fs-h2); line-height: 1.12; letter-spacing: -0.03em; margin: 0px 0px 16px; text-wrap: pretty;"><span class="sc-interp">Was soll ein Besucher am Ende tun?</span></h2>
             <p class="mono q-wichtig" style="display: inline-block;">Die wichtigste Frage für Ihren Entwurf</p>
@@ -1356,27 +1370,27 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <p class="mono q-optlabel" style="display: none; order: 1; margin-top: 0px;"><span class="sc-interp"></span><span class="f-tag" data-pflicht="0" style="display: none;">optional</span></p>
             <div class="g-ans" data-fehler="0" data-spalten="1" style="display: grid; grid-auto-rows: 1fr; order: 1;">
               
-                <button type="button" class="acard" data-v="Anrufen" aria-pressed="false" style="border: 1px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); color: rgb(17, 19, 26);">
+                <button type="button" class="acard" data-v="Anrufen" data-frisch="0" aria-pressed="false" style="border: 1px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); color: rgb(17, 19, 26);">
                   <span class="mono acard-k" style="flex: 0 0 auto; width: 28px; height: 28px; border-radius: 999px; border: 2px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgb(91, 98, 112);"><span class="sc-interp">1</span></span>
                   <span style="flex: 1 1 0%;"><span class="sc-interp">Anrufen</span></span>
                 </button>
               
-                <button type="button" class="acard" data-v="Eine Anfrage oder Offerte schicken" aria-pressed="false" style="border: 1px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); color: rgb(17, 19, 26);">
+                <button type="button" class="acard" data-v="Eine Anfrage oder Offerte schicken" data-frisch="0" aria-pressed="false" style="border: 1px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); color: rgb(17, 19, 26);">
                   <span class="mono acard-k" style="flex: 0 0 auto; width: 28px; height: 28px; border-radius: 999px; border: 2px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgb(91, 98, 112);"><span class="sc-interp">2</span></span>
                   <span style="flex: 1 1 0%;"><span class="sc-interp">Eine Anfrage oder Offerte schicken</span></span>
                 </button>
               
-                <button type="button" class="acard" data-v="Einen Termin buchen" aria-pressed="false" style="border: 1px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); color: rgb(17, 19, 26);">
+                <button type="button" class="acard" data-v="Einen Termin buchen" data-frisch="0" aria-pressed="false" style="border: 1px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); color: rgb(17, 19, 26);">
                   <span class="mono acard-k" style="flex: 0 0 auto; width: 28px; height: 28px; border-radius: 999px; border: 2px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgb(91, 98, 112);"><span class="sc-interp">3</span></span>
                   <span style="flex: 1 1 0%;"><span class="sc-interp">Einen Termin buchen</span></span>
                 </button>
               
-                <button type="button" class="acard" data-v="Vorbeikommen" aria-pressed="false" style="border: 1px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); color: rgb(17, 19, 26);">
+                <button type="button" class="acard" data-v="Vorbeikommen" data-frisch="0" aria-pressed="false" style="border: 1px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); color: rgb(17, 19, 26);">
                   <span class="mono acard-k" style="flex: 0 0 auto; width: 28px; height: 28px; border-radius: 999px; border: 2px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgb(91, 98, 112);"><span class="sc-interp">4</span></span>
                   <span style="flex: 1 1 0%;"><span class="sc-interp">Vorbeikommen</span></span>
                 </button>
               
-                <button type="button" class="acard" data-v="Sich informieren und Vertrauen fassen" aria-pressed="false" style="border: 1px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); color: rgb(17, 19, 26);">
+                <button type="button" class="acard" data-v="Sich informieren und Vertrauen fassen" data-frisch="0" aria-pressed="false" style="border: 1px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); color: rgb(17, 19, 26);">
                   <span class="mono acard-k" style="flex: 0 0 auto; width: 28px; height: 28px; border-radius: 999px; border: 2px solid rgb(226, 223, 216); background: rgba(255, 255, 255, 0.7); display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgb(91, 98, 112);"><span class="sc-interp">5</span></span>
                   <span style="flex: 1 1 0%;"><span class="sc-interp">Sich informieren und Vertrauen fassen</span></span>
                 </button>
@@ -1463,12 +1477,12 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               
             </div>
 
-            <div class="q-leiste">
+            <div class="q-leiste" data-art="leer">
             <div class="row" style="justify-content: space-between; margin-top: 32px; gap: 16px; order: 6;">
               <button type="button" style="min-height: 56px; padding: 0px 24px; background: none; border: 1px solid var(--tinte); border-radius: 999px; font-size: 16px; font-weight: 600; color: var(--tinte); cursor: pointer; visibility: hidden;">Zurück</button>
-              <button type="button" class="q-weiter-knopf" aria-describedby="q-offen"><span class="sc-interp">Weiter</span></button>
+              <button type="button" class="q-weiter-knopf" data-art="primaer" aria-describedby="q-offen" style="display: none;"><span class="sc-interp">Weiter</span></button>
             </div>
-            <p id="q-offen" class="mono q-offen" style="order: 6;"><span class="sc-interp">Noch offen: eine Antwort</span></p>
+            <p id="q-offen" class="mono q-offen" style="order: 6;"><span class="sc-interp"></span></p>
             </div>
             <p style="display: none; margin: 16px 0px 0px; text-align: right; order: 7;"><button type="button" data-own-enter="1" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; padding: 0px; min-height: 44px; color: var(--tinte); font-size: 16px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer;">Zurück zur Übersicht</button></p>
             <p style="display: block; font-size: 13px; line-height: 1.5; margin: 16px 0px 0px; order: 8;"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>

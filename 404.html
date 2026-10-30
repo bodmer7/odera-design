@@ -27,7 +27,7 @@
 <meta name="twitter:title" content="Seite nicht gefunden · ODERA Design">
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
-<link rel="preload" href="assets/js/vorlage.js?v=09f789901d" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=1a74aed532" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -456,6 +456,12 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .q-weiter-knopf{min-height:56px;padding:0 32px;border:none;border-radius:999px;background:var(--primaer);color:var(--auf-dunkel);font:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:background var(--dauer) var(--kurve)}
 @media(hover:hover){.q-weiter-knopf:hover{background:var(--primaer-dunkel)}}
 .q-offen{margin:10px 0 0;min-height:18px;text-align:right;font-size:13px;color:var(--text-2)}
+/* «Überspringen» bei optionalen Auswahlfragen: Textknopf statt Hauptknopf */
+.q-weiter-knopf[data-art="text"]{padding:0 8px;background:none;color:var(--primaer-dunkel);text-decoration:underline;text-underline-offset:3px}
+@media(hover:hover){.q-weiter-knopf[data-art="text"]:hover{background:none;color:var(--tinte)}}
+/* Gewählte Antwort zeigt bis zum automatischen Weiter ein Häkchen */
+@media(prefers-reduced-motion:no-preference){.acard[data-frisch="1"] .acard-k{animation:hakenPop 220ms cubic-bezier(0.2,0,0,1)}}
+@keyframes hakenPop{0%{transform:scale(0.6)}70%{transform:scale(1.12)}100%{transform:none}}
 .mf-eingabe[data-fehler="1"] input{border-color:var(--fehler);box-shadow:inset 0 0 0 1px var(--fehler)}
 .mf-feldfehler{flex-basis:100%}
 .ico{display:inline-block;flex:none;width:20px;height:20px;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
@@ -625,7 +631,7 @@ if(!m.hasAttribute('tabindex'))m.setAttribute('tabindex','-1');m.focus({preventS
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=09f789901d';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=1a74aed532';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -1255,6 +1261,14 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .q-fortschritt[data-leer="1"]{display:none}
  /* Durchgestrichener Normalpreis beim Referenzrabatt: auf der aufgehellten Ergebniskarte voll deckend (Kontrast AA) */
  .eg-links .eg-preis s{opacity:1}
+ /* Weiter-Leiste: ohne Knopf nur «Zurück» kompakt unten links, auf Frage 1 ohne Antwort gar keine (weiterNoetig) */
+ .q-leiste[data-art="leer"]{display:none}
+ .q-leiste[data-art="zurueck"]{left:0;right:auto;padding:0 0 calc(12px + env(safe-area-inset-bottom)) 16px;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-top:0}
+ html[data-tastatur="1"] .q-leiste[data-art="zurueck"]{padding-bottom:8px}
+ .q-leiste[data-art="zurueck"] .row>button{min-height:44px!important;padding:0 18px!important;background:var(--grund)!important;box-shadow:0 6px 18px -6px rgba(17,19,26,0.25)}
+ .q-leiste .q-weiter-knopf[data-art="text"]{flex:none;margin-left:auto}
+ .q-wrap[data-leiste="zurueck"]{padding-bottom:88px!important}
+ .q-wrap[data-leiste="leer"]{padding-bottom:40px!important}
 }
 @media(max-width:767px){
  /* Frage: Titel und Antworten zuerst, Erklärung und KI-Hinweis darunter */
