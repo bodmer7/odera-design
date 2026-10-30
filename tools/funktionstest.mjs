@@ -97,7 +97,11 @@ async function checkDurchspielen(page, maxSchritte = 30) {
 async function nachPlan(page, plan = {}, pruefen = null) {
   const gesehen = [];
   for (let i = 0; i < 14; i++) {
-    if (await sichtbar(page, '.eg-paket').count()) return gesehen;
+    if (await sichtbar(page, '.eg-paket').count()) {
+      // Das Häkchen für die Referenz steht im Ergebnis unter dem Preis
+      if (plan.REFERENZ) { await sichtbar(page, '#eg-referenz').first().check(); await warte(150); }
+      return gesehen;
+    }
     const [key] = (await frageJetzt(page)).split(':');
     gesehen.push(key);
     if (pruefen) await pruefen(key);
@@ -110,7 +114,6 @@ async function nachPlan(page, plan = {}, pruefen = null) {
     if ((await frageJetzt(page)).split(':')[0] === key && !(await sichtbar(page, '.eg-paket').count())) {
       await felderFuellen(page);
       if (plan.TERMIN && key === 'KONTAKT') await sichtbar(page, '.q-chip').filter({ hasText: plan.TERMIN }).first().click();
-      if (plan.REFERENZ && key === 'KONTAKT') await sichtbar(page, '.q-haken-l input').first().check();
       await sichtbar(page, '.q-weiter-knopf').first().click(); await warte(350);
     }
   }
@@ -413,7 +416,7 @@ try {
       const r = { senden: y(knopf), zusatz: y(v('.eg-zusatz')), vgl: y(v('.eg-vgl-knopf')), durchsehen: y(v('.eg-review')), zustimmung: y(v('#mf-zustimmung')),
         badge: Math.round(v('.eg-badge').getBoundingClientRect().height), label: knopf.textContent.trim(), zusage: (v('.mf-zusage') || {}).textContent, grund: (v('.eg-grund') || {}).textContent };
       knopf.style.position = ''; return r; });
-    ok(lage.zusatz < lage.zustimmung && lage.zustimmung < lage.senden && lage.senden < lage.vgl && lage.vgl < lage.durchsehen && lage.senden < 700,
+    ok(lage.zusatz < lage.zustimmung && lage.zustimmung < lage.senden && lage.senden < lage.vgl && lage.vgl < lage.durchsehen && lage.senden < 900, // seit Teil 7 mit dem Häkchen für die Referenz unter dem Preis
       `390 px: Paket, Zusätze, Zustimmung, Senden (${lage.senden} px von oben), dann Vergleich und «Antworten noch einmal durchsehen»`);
     ok(lage.badge <= 24, `390 px: «Richtwert, kein verbindliches Angebot» auf einer Zeile (${lage.badge} px hoch)`);
     ok(lage.label === 'Anfrage senden' && lage.zusage === 'Innert fünf Arbeitstagen sehen Sie Ihre fertige Seite. Sie zahlen erst, wenn Ihnen der Entwurf gefällt.',
@@ -444,8 +447,25 @@ try {
     const p2 = await ctx2.newPage();
     await p2.goto(BASIS + '/projekt-check/?paket=pro', { waitUntil: 'networkidle' });
     await warte(600);
-    await nachPlan(p2, { WEBSITE_HEUTE: 'Nein' });
+    // Desktop: auf Funktionen und Kontakt bleibt die Knopfzeile unten angeheftet; Kontakt ohne Häkchen für die Referenz
+    const angeheftet = {};
+    await nachPlan(p2, { WEBSITE_HEUTE: 'Nein' }, async (key) => {
+      if (key !== 'FUNKTIONEN' && key !== 'KONTAKT') return;
+      await p2.evaluate(() => window.scrollTo(0, 0)); await warte(150);
+      angeheftet[key] = await p2.evaluate(() => { const k = [...document.querySelectorAll('.q-weiter-knopf')].find((e) => e.getClientRects().length);
+        return { unten: Math.round(k.getBoundingClientRect().bottom), schirm: innerHeight, seite: document.documentElement.scrollHeight, haken: document.querySelectorAll('.q-haken, .qright input[type=checkbox]').length }; });
+    });
+    ok(['FUNKTIONEN', 'KONTAKT'].every((k) => angeheftet[k] && angeheftet[k].seite > angeheftet[k].schirm && angeheftet[k].unten <= angeheftet[k].schirm) && angeheftet.KONTAKT.haken === 0,
+      `1440 px: Knopfzeile auf Funktionen und Kontakt im Bild, obwohl die Seite länger ist (${Object.entries(angeheftet).map(([k, v]) => k + ' ' + v.unten + '/' + v.schirm + ' bei ' + v.seite + ' px').join(', ')}), Kontakt ohne Häkchen`);
     ok(/Paket Pro/.test(await sichtbar(p2, '.eg-paket').first().textContent()) && await sichtbar(p2, '.eg-grund').count() === 0, 'Paket Pro aus dem Einstieg: kein «wegen» unter dem Preis');
+    // Referenz im Ergebnis direkt unter dem Preis: angehakt wechselt der Preis sofort
+    const preis = async () => (await sichtbar(p2, '.eg-preis').first().innerText()).replace(/\s+/g, ' ').trim();
+    const vorPreis = await preis();
+    const lage2 = await p2.evaluate(() => { const v = (s) => [...document.querySelectorAll(s)].find((e) => e.getClientRects().length); return Math.round(v('.eg-haken').getBoundingClientRect().top - v('.eg-preis').getBoundingClientRect().bottom); });
+    await sichtbar(p2, '#eg-referenz').first().check(); await warte(200);
+    const nachPreis = await preis();
+    ok(vorPreis === 'CHF 3’400' && nachPreis === 'CHF 2’400 CHF 3’400' && lage2 >= 0 && lage2 < 24 && await sichtbar(p2, '.eg-ref').count() === 1,
+      `Ergebnis: Häkchen für die Referenz ${lage2} px unter dem Preis, Preis wechselt sofort (${vorPreis} → ${nachPreis})`);
     await ctx2.close();
 
     // Mindestzeit über «Fortsetzen»: Start bleibt der erste, die Seite wartet die Restzeit still ab und sendet dann
@@ -471,6 +491,7 @@ try {
     // Mit Website: «Was stört», ohne Website: «Wobei brauchen Sie Unterstützung?» mit Kostenhinweisen; Fortschritt zählt die Folgefrage mit
     for (const weg of ['Ja', 'Nein']) {
       const ctx = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+      await versandAbfangen(ctx); // Turnstile lädt im Ergebnis, lokal sonst mit Status 400
       const page = await ctx.newPage();
       const probleme = beobachten(page);
       await page.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });

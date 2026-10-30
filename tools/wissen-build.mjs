@@ -92,7 +92,7 @@ function referenz() {
   const fmt = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
   const zeilen = ['Website', 'Standard', 'Pro'].map((n, i) => `${n}: ${fmt(preise[i])}, als Referenz ${fmt(map[n])}`);
   return absatz[1].replace('Dafür bekommen Sie {betrag} Rabatt.', 'Dafür bekommen Sie einen Rabatt, die Beträge stehen unten.') +
-    '\nDas Häkchen für die Referenz steht im Projekt-Check bei den Kontaktangaben. Der Referenzpreis gilt nur für die Website, nicht für Logo oder Betrieb.\n' + zeilen.join('\n');
+    '\nDas Häkchen für die Referenz steht im Ergebnis des Projekt-Checks direkt unter dem Preis, der Preis wechselt beim Anhaken sofort. Der Referenzpreis gilt nur für die Website, nicht für Logo oder Betrieb.\n' + zeilen.join('\n');
 }
 function projektCheck() {
   const hinweis = quelle.match(/<p [^>]*>(Dieses Formular ist eine unverbindliche Projektanfrage\.[^<]*)</);

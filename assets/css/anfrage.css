@@ -67,10 +67,15 @@
 .q-chip[aria-pressed="true"]{background:var(--akzent);border-color:var(--akzent-tief)}
 .q-chip:focus-visible{outline:3px solid var(--kobalt);outline-offset:2px}
 @media(hover:hover){.q-chip:hover{border-color:var(--tinte)}}
-.q-haken{display:flex;flex-direction:column;gap:6px}
-.q-haken-l{display:flex;align-items:flex-start;gap:12px;font-size:16px;line-height:1.5;color:var(--tinte);cursor:pointer}
-.q-haken-l input{flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:var(--kobalt)}
-.q-haken-h{margin:0 0 0 34px;font-size:13px;line-height:1.5;color:var(--text-2)}
+/* Referenz im Ergebnis, direkt unter dem Preis */
+.eg-haken{margin:0 0 16px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.35)}
+.eg-haken-l{display:flex;align-items:flex-start;gap:12px;font-size:16px;line-height:1.5;color:var(--weiss);cursor:pointer}
+.eg-haken-l input{flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:var(--weiss)}
+.eg-haken-l input:focus-visible{outline:3px solid var(--weiss);outline-offset:2px}
+.eg-haken-h{margin:4px 0 0 34px;font-size:13px;line-height:1.5;color:var(--weiss)}
+/* Unter 1024 px liegt das Häkchen in der aufgehellten Ergebniskarte: ohne eigene Fläche, sonst reicht der Kontrast nicht (AA) */
+@media(max-width:1023px){.eg-haken{background:none}}
+@media(max-width:767px){.eg-haken{margin:0 0 12px;padding:10px 12px}.eg-haken-l{gap:10px;font-size:15px;line-height:1.4}.eg-haken-h{margin:2px 0 0 32px;line-height:1.4}}
 
 /* Mail-Fenster */
 .mf{background:var(--weiss);color:var(--tinte);border-radius:16px;box-shadow:0 2px 0 rgba(17,19,26,0.04),0 30px 80px rgba(9,14,60,0.45);transform-origin:50% 100%}

@@ -31,7 +31,7 @@
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://odera.ch/website-fuer-praxen/#seite","url":"https://odera.ch/website-fuer-praxen/","name":"Website für Praxen ab CHF 890 · ODERA Design","description":"Website für Ihre Praxis: Termine, Team und Anfahrt klar gezeigt, Server auf Wunsch in der Schweiz. Entwurf in 5 Arbeitstagen, gratis. Ab CHF 890.","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/website-fuer-praxen/#brotkrumen"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/website-fuer-praxen/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Website für Praxen","item":"https://odera.ch/website-fuer-praxen/"}]},{"@type":"Service","@id":"https://odera.ch/website-fuer-praxen/#leistung","name":"Website für Praxen","serviceType":"Website für Praxen","provider":{"@id":"https://odera.ch/#organisation"},"areaServed":[{"@type":"Place","name":"Freiamt"},{"@type":"Place","name":"Mutschellen"},{"@type":"AdministrativeArea","name":"Kanton Aargau"},{"@type":"Country","name":"Schweiz"}],"offers":{"@type":"Offer","price":"890","priceCurrency":"CHF","url":"https://odera.ch/angebot/"}},{"@type":"FAQPage","@id":"https://odera.ch/website-fuer-praxen/#fragen","mainEntity":[{"@type":"Question","name":"Kann ich Online-Termine anbieten?","acceptedAnswer":{"@type":"Answer","text":"Ja, im Paket Pro: Online-Terminbuchung oder erweiterte Formulare, dazu bis 10 Seiten."}},{"@type":"Question","name":"Kann meine Website in der Schweiz laufen?","acceptedAnswer":{"@type":"Answer","text":"Ja. Auf Wunsch richte ich das Hosting bei einem Schweizer Hoster ein, auf Ihren Namen. Dessen Jahresgebühr zahlen Sie direkt dort, ein Abo bei mir gibt es nicht."}},{"@type":"Question","name":"Wie lange dauert es bis zur fertigen Seite?","acceptedAnswer":{"@type":"Answer","text":"Den Entwurf sehen Sie innert fünf Arbeitstagen. Online geht die Seite je nach Paket innert 10 bis 25 Arbeitstagen nach Annahme des Entwurfs."}}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=5cdd32a5fc" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=196c2531ae" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -622,7 +622,7 @@ if(!m.hasAttribute('tabindex'))m.setAttribute('tabindex','-1');m.focus({preventS
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=5cdd32a5fc';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=196c2531ae';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -1036,7 +1036,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .menue-recht a{padding:0 4px;min-width:44px;justify-content:center}
  .link-44{display:inline-flex;align-items:center;min-height:44px}
 }
-@media(min-width:1024px){.q-leiste{display:contents}}
+@media(min-width:1024px){.q-leiste{display:contents}
+ .q-leiste[data-anheften="1"]{display:block;position:sticky;bottom:0;z-index:5;order:6;margin-top:24px;padding:16px 0 20px;background:rgba(246,245,241,0.96);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--linie)}
+ .q-leiste[data-anheften="1"] .row{margin-top:0!important}}
 @media(max-width:767px){
  :root{--fs-text:17px;--fs-lead:19px}
  .wisch{display:flex!important;gap:12px!important;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:6px 20px 14px;scroll-padding:0 20px;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:stretch!important}

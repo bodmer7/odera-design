@@ -1078,7 +1078,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .menue-recht a{padding:0 4px;min-width:44px;justify-content:center}
  .link-44{display:inline-flex;align-items:center;min-height:44px}
 }
-@media(min-width:1024px){.q-leiste{display:contents}}
+@media(min-width:1024px){.q-leiste{display:contents}
+ .q-leiste[data-anheften="1"]{display:block;position:sticky;bottom:0;z-index:5;order:6;margin-top:24px;padding:16px 0 20px;background:rgba(246,245,241,0.96);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--linie)}
+ .q-leiste[data-anheften="1"] .row{margin-top:0!important}}
 @media(max-width:767px){
  :root{--fs-text:17px;--fs-lead:19px}
  /* Pakete: wischbare Karten, Standard zuerst */
@@ -2790,15 +2792,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
                   <span class="ulx" aria-hidden="true"></span>
                 </div>
               </sc-if>
-              <sc-if value="{{ hasHaken }}" hint-placeholder-val="{{ false }}">
-                <div class="q-haken">
-                  <label class="q-haken-l"><input type="checkbox" checked="{{ hakenAn }}" onChange="{{ onHaken }}" aria-describedby="q-haken-h"><span>{{ hakenLabel }}</span></label>
-                  <p class="q-haken-h" id="q-haken-h">{{ hakenHinweis }}</p>
-                </div>
-              </sc-if>
             </div>
 
-            <div class="q-leiste" data-art="{{ leisteArt }}">
+            <div class="q-leiste" data-art="{{ leisteArt }}" data-anheften="{{ leisteAnheften }}">
             <p class="mono q-leiste-paket" aria-live="polite" data-zeigen="{{ hintInLeiste }}">{{ hint }}</p>
             <div class="row" style="justify-content:space-between;margin-top:32px;gap:16px;order:6">
               <button type="button" onClick="{{ onBack }}" style="min-height:56px;padding:0 24px;background:none;border:1px solid var(--tinte);border-radius:999px;font-size:16px;font-weight:600;color:var(--tinte);cursor:pointer;visibility:{{ backVis }}">Zurück</button>
@@ -2849,7 +2845,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <p class="mono eg-label">{{ egLabel }}</p>
         <h2 tabindex="-1" class="eg-paket">Paket {{ recName }}</h2>
         <p class="mono eg-badge">Richtwert, kein verbindliches Angebot</p>
-        <p class="mono eg-preis">{{ egPreis }}<s style="display:{{ egAltDisplay }}">{{ recPrice }}</s></p>
+        <p class="mono eg-preis" aria-live="polite">{{ egPreis }}<s style="display:{{ egAltDisplay }}">{{ recPrice }}</s></p>
+        <div class="eg-haken">
+          <label class="eg-haken-l"><input type="checkbox" id="eg-referenz" checked="{{ refAn }}" onChange="{{ onReferenz }}" aria-describedby="eg-haken-h"><span>{{ refHaken }}</span></label>
+          <p class="eg-haken-h" id="eg-haken-h">{{ refHakenHinweis }}</p>
+        </div>
         <p class="eg-grund" style="display:{{ egGrundDisplay }}">{{ egGrund }} <button type="button" class="eg-grund-knopf" data-own-enter="1" onClick="{{ onFunktionenAendern }}">Funktionen ändern</button></p>
         <p class="eg-satz">{{ egSatz }}</p>
         <p class="eg-indiv" style="display:{{ egIndivDisplay }}"><strong>Individuell prüfen.</strong> {{ egIndiv }}</p>
@@ -3506,6 +3506,7 @@ class Component extends DCLogic {
   TEXT_PRO_SEITE_CHF = 150;
   // Antwort, die das Häkchen «Als Beispiel zeigen» setzt (Referenzrabatt im Ergebnis)
   REFERENZ_JA = 'Ja, gerne mit Name, Logo und zwei Sätzen';
+  REFERENZ_HAKEN = ['Sie dürfen meine fertige Website als Beispiel zeigen, mit Name, Logo und zwei Sätzen.', 'Für die nächsten zwei Betriebe gibt es dafür einen Rabatt.'];
 
   // Funktionen als Karten: Name, Erklärung, Paket (alle, Standard, Pro, shop), Symbol (SVG-Pfad, 24er Raster),
   // Satzform für das Ergebnis («Bis 5 Unterseiten, dazu ein Kontaktformular und …»)
@@ -3523,7 +3524,8 @@ class Component extends DCLogic {
 
   // Projekt-Check: sechs Fragen, nur was es für den Entwurf und eine grobe Preisschätzung braucht. Alles andere klärt Nico nach dem Entwurf.
   // Fragen immer über key ansprechen, nie über die Reihenfolge. wenn: Folgefrage, nur unter dieser Bedingung sichtbar.
-  // nurKurz: nur in der Kurzversion (QUICK). spalten: Antworten unter 768 px zweispaltig. chips, area, haken: Zusätze unter den Feldern.
+  // nurKurz: nur in der Kurzversion (QUICK). spalten: Antworten unter 768 px zweispaltig. chips, area: Zusätze unter den Feldern.
+  // Das Häkchen für die Referenz steht seit 30. Oktober 2026 im Ergebnis unter dem Preis (REFERENZ_HAKEN).
   Q = [
     { key: 'ZIEL', n: 'Ziel', t: 'Was soll ein Besucher am Ende tun?', typ: 'wahl', hervor: true,
       help: 'Danach richte ich die ganze Seite aus, vom ersten Bildschirm bis zum letzten Knopf.',
@@ -3555,7 +3557,6 @@ class Component extends DCLogic {
       felderNach: [['tel', 'Telefon', 'z. B. 079 123 45 67', false, 'tel', 'tel']],
       chips: ['TERMIN', 'Bis wann soll die Website online sein?', this.TIMING],
       area: ['sonstiges', 'Sonst noch etwas?', 'Zum Beispiel: Websites, die Ihnen gefallen, oder Ihre Firmenfarben.'],
-      haken: ['REFERENZ', 'Sie dürfen meine fertige Website als Beispiel zeigen, mit Name, Logo und zwei Sätzen.', 'Für die nächsten zwei Betriebe gibt es dafür einen Rabatt.', this.REFERENZ_JA],
       optLabel: 'Am liebsten erreichen Sie mich per', optOptional: true, o: ['E-Mail', 'Telefon'] },
     { key: 'ANGEBOT', n: 'Angebot', t: 'Was bieten Sie an, in einem Satz?', typ: 'felder', nurKurz: true,
       felder: [['angebot', 'Ihr Angebot', 'z. B. Schreinerei für Küchen und Innenausbau in der Region Wohlen.', true]] },
@@ -4485,7 +4486,6 @@ class Component extends DCLogic {
     [].concat(q.felder || [], q.felderNach || []).forEach((f) => { if (t[f[0]]) parts.push(t[f[0]]); });
     if (q.chips && s.ans[q.chips[0]]) parts.push('Online: ' + s.ans[q.chips[0]]);
     if (q.area && t[q.area[0]]) parts.push(this.oneLine(t[q.area[0]]));
-    if (q.haken && s.ans[q.haken[0]]) parts.push('Darf als Beispiel gezeigt werden');
     return parts.join(', ');
   }
 
@@ -5196,11 +5196,11 @@ class Component extends DCLogic {
         if (ans[k] === v) delete ans[k]; else ans[k] = v;
         this.setState({ ans }, () => this.merken());
       },
-      hasHaken: !!q.haken, hakenLabel: q.haken ? q.haken[1] : '', hakenHinweis: q.haken ? q.haken[2] : '',
-      hakenAn: !!(q.haken && s.ans[q.haken[0]]),
-      onHaken: () => {
-        const k = q.haken[0], ans = Object.assign({}, this.state.ans);
-        if (ans[k]) delete ans[k]; else ans[k] = q.haken[3];
+      // Referenz im Ergebnis unter dem Preis: angehakt gilt REFERENZ_JA, der Preis wechselt sofort auf den Referenzpreis
+      refHaken: this.REFERENZ_HAKEN[0], refHakenHinweis: this.REFERENZ_HAKEN[1], refAn: s.ans.REFERENZ === this.REFERENZ_JA,
+      onReferenz: () => {
+        const ans = Object.assign({}, this.state.ans);
+        if (ans.REFERENZ === this.REFERENZ_JA) delete ans.REFERENZ; else ans.REFERENZ = this.REFERENZ_JA;
         this.setState({ ans }, () => this.merken());
       },
       areaLabel: q.area ? q.area[1] : '',
@@ -5231,6 +5231,8 @@ class Component extends DCLogic {
       nextDisplay: knopf.art ? 'inline-block' : 'none',
       // Leiste unter 1024 px: voll mit Knopf, nur «Zurück» (kompakt) oder gar keine
       leisteArt: knopf.art ? 'voll' : (s.step > 0 && !s.editing ? 'zurueck' : 'leer'),
+      // Desktop: auf den langen Fragen (Funktionen, Kontakt) bleibt die Knopfzeile unten angeheftet wie auf dem Handy
+      leisteAnheften: q.typ === 'karten' || q.key === 'KONTAKT' ? '1' : '0',
       toast: s.toast, toastOp: s.toast ? 1 : 0,
 
       recName: r.name, recPrice: r.price,

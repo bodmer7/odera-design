@@ -1004,7 +1004,9 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .menue-recht a{padding:0 4px;min-width:44px;justify-content:center}
  .link-44{display:inline-flex;align-items:center;min-height:44px}
 }
-@media(min-width:1024px){.q-leiste{display:contents}}
+@media(min-width:1024px){.q-leiste{display:contents}
+ .q-leiste[data-anheften="1"]{display:block;position:sticky;bottom:0;z-index:5;order:6;margin-top:24px;padding:16px 0 20px;background:rgba(246,245,241,0.96);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--linie)}
+ .q-leiste[data-anheften="1"] .row{margin-top:0!important}}
 @media(max-width:767px){
  :root{--fs-text:17px;--fs-lead:19px}
  .wisch{display:flex!important;gap:12px!important;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:6px 20px 14px;scroll-padding:0 20px;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:stretch!important}

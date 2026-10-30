@@ -65,7 +65,7 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 30. Oktober 
 - Ein Gratis-Entwurf ist schnell gebaut. Gefragt wird darum nur, was es für den Entwurf und eine grobe Preisschätzung
   braucht, alles andere klärt Nico nach dem Entwurf.
 - Fragen: Ziel, Branche, Website heute (Folgefrage «Was stört» oder «Wobei brauchen Sie Unterstützung?»), Funktionen,
-  «Ihr Betrieb» (Name, Ort, Angebot), Kontakt (mit Termin-Chips und Häkchen für die Referenz). Entfernt: Region, Kunden,
+  «Ihr Betrieb» (Name, Ort, Angebot), Kontakt (mit Termin-Chips). Das Häkchen für die Referenz steht im Ergebnis unter dem Preis (siehe unten). Entfernt: Region, Kunden,
   Seitenzahl, Stil, Vorbilder, Farben, Domain, Hosting, Logo, Texte, Fotos als eigene Fragen.
 - Paket nur aus den Funktionen plus Mindestpaket aus dem Einstieg (Paketkarten Standard und Pro, Doppelmeter, Firstlicht).
 - Einfachauswahl geht nach 400 ms selbst weiter (nicht beim Ändern, nicht bei Zusatzfeld), seit 30. Oktober 2026 mit
@@ -96,6 +96,12 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 30. Oktober 
 - Ergebnis unter 768 px: Paket, Preis, Umfang, Zusätze, dann Zustimmung und «Anfrage senden», danach Vergleich und
   «Antworten noch einmal durchsehen». Unter dem Preis «Paket … wegen: …» mit «Funktionen ändern», nur wenn das Paket
   aus den Funktionen kommt.
+- **Referenz im Ergebnis** (Teil 7, auf Nicos OK): Das Häkchen «Sie dürfen meine fertige Website als Beispiel zeigen …» steht
+  direkt unter dem Preis (`REFERENZ_HAKEN`, `#eg-referenz`), nicht mehr bei «Wie erreiche ich Sie?». Angehakt gilt
+  `REFERENZ_JA`, der Preis wechselt sofort (durchgestrichen mit Referenzpreis). Auf dem Handy rückt «Anfrage senden» dadurch
+  rund 130 px nach unten (bei 390 × 664 px etwa 800 statt 650 bis 710 px von oben).
+- **Knopfzeile auf dem Desktop** (Teil 7): Auf «Was soll die Seite können?» und «Wie erreiche ich Sie?» bleibt die Leiste mit
+  «Zurück» und «Weiter» ab 1024 px unten angeheftet (`data-anheften`), wie auf dem Handy.
 - Weniger Ablenkung: Kurzversion-Link nur auf Frage 1 ohne Antwort, KI-Hinweis nur bei Auswahlfragen und Funktionen,
   Platzhalter mit «z. B.», Ziffern in den Karten nur mit Maus (sonst Auswahlkreis, immer `aria-hidden`).
 
@@ -257,9 +263,6 @@ Beispielseiten erfundener Betriebe (Doppelmeter, Firstlicht). Für jedes Muster 
       sechs Fragen (29. Oktober 2026) ist eine Nummer nicht mehr fest einer Frage zugeordnet (Folgefragen, Einstiege), und
       Zeiträume über den Wechsel mischen alte und neue Nummern. Auswertung pro Frage über `ziel` in den Rohdaten; die Anzeige
       pro Frage (Summary von odera-stats und Website-Tab) ist noch nicht gebaut.
-- [ ] **Projekt-Check Teil 7** (Auftrag vom 30. Oktober 2026), nur nach Nicos OK: Häkchen für die Referenz ins Ergebnis
-      unter den Preis verschieben; Knopfzeile auf «Was soll die Seite können?» und «Wie erreiche ich Sie?» auch auf dem
-      Desktop unten anheften.
 - [ ] **Funktionen auf dem Handy** sind bei 390 × 664 px rund 1,6 Bildschirme hoch (vorher 2,4, Ziel rund 1,5). Mehr ginge nur
       mit kürzeren Titeln oder Etiketten.
 - [ ] **Alte lokale Branches** aufräumen (`fehler`, `mobil`, `generator`, `generator2` und ältere
