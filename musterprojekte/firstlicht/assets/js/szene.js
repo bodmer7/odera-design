@@ -124,7 +124,7 @@ export function szeneStarten(wurzel) {
       const e = p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2;
       zeit = ziel.von + (ziel.bis - ziel.von) * e;
       flussBis = jetzt + 2500;
-      if (p >= 1) ziel = null; // Startsequenz: keine Ansage, niemand hat etwas ausgelöst
+      if (p >= 1) laeuftSetzen(false); // Startsequenz fertig: Knopf wieder «abspielen», keine Ansage
       zeichnen();
     } else if (laeuft) {
       zeit += dt * 1.4; // 1.4 Stunden pro Sekunde, ganzer Tag in rund 12 s
@@ -145,12 +145,14 @@ export function szeneStarten(wurzel) {
     if (!rafId && sichtbar && !document.hidden) rafId = requestAnimationFrame(schleife);
   }
 
+  // Jeder Wechsel beendet auch die Startsequenz: Während sie läuft, zeigt der Knopf «anhalten», ein Klick hält sie an
   function laeuftSetzen(an) {
     laeuft = an;
+    ziel = null;
     play.setAttribute('aria-label', an ? 'Tagesverlauf anhalten' : 'Tagesverlauf abspielen');
     play.querySelector('use').setAttribute('href', an ? '#i-pause' : '#i-play');
     play.setAttribute('aria-pressed', String(an));
-    if (an) { ziel = null; if (zeit >= ZEIT_MAX - 0.01) zeit = ZEIT_MIN; anstossen(); }
+    if (an) { if (zeit >= ZEIT_MAX - 0.01) zeit = ZEIT_MIN; anstossen(); }
   }
 
   regler.addEventListener('input', () => {
@@ -185,8 +187,8 @@ export function szeneStarten(wurzel) {
   });
 
   // Nur arbeiten, wenn die Szene sichtbar ist
-  const io = new IntersectionObserver(([eintrag]) => {
-    sichtbar = eintrag.isIntersecting;
+  const io = new IntersectionObserver((eintraege) => {
+    sichtbar = eintraege[eintraege.length - 1].isIntersecting; // der letzte Eintrag ist der aktuelle Stand
     if (sichtbar) anstossen(); else if (rafId) { cancelAnimationFrame(rafId); rafId = 0; letzteZeit = 0; }
   });
   io.observe(wurzel);
@@ -199,6 +201,7 @@ export function szeneStarten(wurzel) {
   if (!ruhig.matches) {
     zeit = 5.5;
     zeichnen();
+    laeuftSetzen(true); // die Szene bewegt sich: Knopf zeigt «anhalten»
     ziel = { von: 5.5, bis: 14, start: performance.now() + 400, dauer: 5200 };
     anstossen();
   } else {

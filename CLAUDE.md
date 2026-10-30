@@ -231,6 +231,9 @@ Beispielseiten erfundener Betriebe (Doppelmeter, Firstlicht). Für jedes Muster 
 - Vor dem Commit: `npm run firstlicht:qa` (Build, Tests, Regelprüfung, Browser).
   In der Cloud `PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers` setzen.
 - Details, Annahmen-Pflege und Befehle: `musterprojekte/firstlicht/README.md`.
+- Tagesverlauf auf der Startseite (`assets/js/szene.js`, nicht erzeugt): Während der Startsequenz zeigt der Knopf «anhalten»,
+  ein Klick hält sie an (seit 30. Oktober 2026; vorher tat der erste Klick scheinbar nichts). `qa.mjs` prüft das mit Bewegung.
+  Lokal fehlen die Playwright-Browser: Die übrigen Browserprüfungen von `qa.mjs` werden dann übersprungen.
 
 ### Redesign Oktober 2026 (Auftrag in 13 Teilen)
 - Gestaltungssystem im Block `<style id="system">` (Tokens, Bänder, Karten, Icons). Weiss nie als Abschnittsfläche.

@@ -115,6 +115,34 @@ await browserPruefen('chromium', chromium);
 await browserPruefen('webkit', webkit);
 await browserPruefen('firefox', firefox);
 
+// Tagesverlauf mit Bewegung (die Prüfungen oben laufen mit reduzierter Bewegung): Während der Startsequenz zeigt der Knopf
+// «anhalten», ein Klick hält die Szene an, der nächste spielt ab. Nach der Startsequenz steht er wieder auf «abspielen».
+{
+  console.log('\nTagesverlauf');
+  // Playwright-Chromium, sonst das installierte Google Chrome
+  const browser = await chromium.launch().catch(() => chromium.launch({ channel: 'chrome' }));
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'no-preference' });
+  const p = await ctx.newPage();
+  await p.goto(BASIS + 'index.html', { waitUntil: 'load' });
+  const knopf = p.locator('[data-szene-play]'), zeit = async () => Number(await p.locator('#szene-zeit').inputValue());
+  await p.waitForTimeout(1500);
+  const vorher = await knopf.getAttribute('aria-label');
+  await knopf.click();
+  const t1 = await zeit(); await p.waitForTimeout(800); const t2 = await zeit();
+  const angehalten = await knopf.getAttribute('aria-label');
+  await knopf.click(); await p.waitForTimeout(800); const t3 = await zeit();
+  if (vorher !== 'Tagesverlauf anhalten' || t1 !== t2 || angehalten !== 'Tagesverlauf abspielen' || !(t3 > t2)) {
+    melden(`Tagesverlauf: Startsequenz «${vorher}», Klick hält an (${t1} → ${t2}, «${angehalten}»), Klick spielt ab (${t2} → ${t3})`);
+  } else console.log(`  ✓ Startsequenz zeigt «anhalten», Klick hält bei ${t2} Uhr an, nächster Klick spielt ab (${t3} Uhr)`);
+  await p.reload({ waitUntil: 'load' });
+  await p.waitForTimeout(6800);
+  const nachStart = await knopf.getAttribute('aria-label'), s1 = await zeit();
+  await knopf.click(); await p.waitForTimeout(800); const s2 = await zeit();
+  if (nachStart !== 'Tagesverlauf abspielen' || !(s2 > s1)) melden(`Tagesverlauf nach der Startsequenz: «${nachStart}», Klick ${s1} → ${s2}`);
+  else console.log(`  ✓ Nach der Startsequenz «abspielen», Klick spielt ab (${s1} → ${s2} Uhr)`);
+  await browser.close();
+}
+
 // html-validate
 const hv = new HtmlValidate({
   extends: ['html-validate:recommended'],
