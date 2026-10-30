@@ -464,7 +464,10 @@ try {
     const lage2 = await p2.evaluate(() => { const v = (s) => [...document.querySelectorAll(s)].find((e) => e.getClientRects().length); return Math.round(v('.eg-haken').getBoundingClientRect().top - v('.eg-preis').getBoundingClientRect().bottom); });
     await sichtbar(p2, '#eg-referenz').first().check(); await warte(200);
     const nachPreis = await preis();
-    ok(vorPreis === 'CHF 3’400' && nachPreis === 'CHF 2’400 CHF 3’400' && lage2 >= 0 && lage2 < 24 && await sichtbar(p2, '.eg-ref').count() === 1,
+    const marke = (await sichtbar(p2, '.eg-haken-marke').first().innerText()).trim(), hinweis = (await sichtbar(p2, '.eg-haken-h').first().innerText()).trim();
+    ok(/^CHF\s200 Rabatt$/.test(marke) && /CHF\s200 Rabatt\.$/.test(hinweis) && (await sichtbar(p2, '.eg-haken').first().getAttribute('data-an')) === '1',
+      `Ergebnis: Häkchen mit Marke «${marke}» und Hinweis «${hinweis}», angehakt hervorgehoben`);
+    ok(vorPreis === 'CHF 3’400' && nachPreis === 'CHF 3’200 CHF 3’400' && lage2 >= 0 && lage2 < 24 && await sichtbar(p2, '.eg-ref').count() === 1,
       `Ergebnis: Häkchen für die Referenz ${lage2} px unter dem Preis, Preis wechselt sofort (${vorPreis} → ${nachPreis})`);
     await ctx2.close();
 

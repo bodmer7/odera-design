@@ -96,6 +96,9 @@ hier steht nur, was festgelegt wurde und was noch offen ist. Stand: 30. Oktober 
 - Ergebnis unter 768 px: Paket, Preis, Umfang, Zusätze, dann Zustimmung und «Anfrage senden», danach Vergleich und
   «Antworten noch einmal durchsehen». Unter dem Preis «Paket … wegen: …» mit «Funktionen ändern», nur wenn das Paket
   aus den Funktionen kommt.
+- **Referenzrabatt CHF 200** (seit 30. Oktober 2026, Nicos Vorgabe): für jedes Paket gleich, Konstante `REFERENZ_RABATT_CHF`
+  (vorher je Paket fest 300, 610 und 1'000). Das Häkchen ist eine weisse Karte mit Limetten-Marke «CHF 200 Rabatt», angehakt
+  limettengrün.
 - **Referenz im Ergebnis** (Teil 7, auf Nicos OK): Das Häkchen «Sie dürfen meine fertige Website als Beispiel zeigen …» steht
   direkt unter dem Preis (`REFERENZ_HAKEN`, `#eg-referenz`), nicht mehr bei «Wie erreiche ich Sie?». Angehakt gilt
   `REFERENZ_JA`, der Preis wechselt sofort (durchgestrichen mit Referenzpreis). Auf dem Handy rückt «Anfrage senden» dadurch

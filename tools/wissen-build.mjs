@@ -84,14 +84,12 @@ function wert(name) {
 }
 function referenz() {
   const preise = wert('PAKET_PREIS');
-  const ref = quelle.match(/const refMap = (\{[^}]+\});/);
-  if (!ref) throw new Error('refMap in src/seite.html nicht gefunden.');
-  const map = new Function('return ' + ref[1])();
+  const rabatt = wert('REFERENZ_RABATT_CHF');
   const absatz = quelle.match(/REFERENZ_SATZ = '(Ich suche zwei Betriebe, deren Website ich zeigen darf\.[^']*)';/);
   if (!absatz) throw new Error('Text zum Referenzpreis nicht gefunden.');
   const fmt = (n) => 'CHF ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-  const zeilen = ['Website', 'Standard', 'Pro'].map((n, i) => `${n}: ${fmt(preise[i])}, als Referenz ${fmt(map[n])}`);
-  return absatz[1].replace('Dafür bekommen Sie {betrag} Rabatt.', 'Dafür bekommen Sie einen Rabatt, die Beträge stehen unten.') +
+  const zeilen = ['Website', 'Standard', 'Pro'].map((n, i) => `${n}: ${fmt(preise[i])}, als Referenz ${fmt(preise[i] - rabatt)}`);
+  return absatz[1].replace('{betrag}', fmt(rabatt)) +
     '\nDas Häkchen für die Referenz steht im Ergebnis des Projekt-Checks direkt unter dem Preis, der Preis wechselt beim Anhaken sofort. Der Referenzpreis gilt nur für die Website, nicht für Logo oder Betrieb.\n' + zeilen.join('\n');
 }
 function projektCheck() {

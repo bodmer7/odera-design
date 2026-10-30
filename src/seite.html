@@ -2846,7 +2846,8 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
         <h2 tabindex="-1" class="eg-paket">Paket {{ recName }}</h2>
         <p class="mono eg-badge">Richtwert, kein verbindliches Angebot</p>
         <p class="mono eg-preis" aria-live="polite">{{ egPreis }}<s style="display:{{ egAltDisplay }}">{{ recPrice }}</s></p>
-        <div class="eg-haken">
+        <div class="eg-haken" data-an="{{ refAnAttr }}">
+          <p class="mono eg-haken-marke" aria-hidden="true">{{ refMarke }}</p>
           <label class="eg-haken-l"><input type="checkbox" id="eg-referenz" checked="{{ refAn }}" onChange="{{ onReferenz }}" aria-describedby="eg-haken-h"><span>{{ refHaken }}</span></label>
           <p class="eg-haken-h" id="eg-haken-h">{{ refHakenHinweis }}</p>
         </div>
@@ -3502,11 +3503,14 @@ class Component extends DCLogic {
   // Logo als Zusatz. Einzige Quelle für die Beträge.
   LOGO_ALLEIN_CHF = 490;
   LOGO_MIT_WEBSITE_CHF = 390;
+  // Rabatt, wenn die fertige Website als Beispiel gezeigt werden darf (Referenz), für jedes Paket gleich.
+  // Erscheint im Ergebnis des Projekt-Checks ({RABATT}) und im Wissen des Chat-Assistenten. Nach einer Änderung seo-build und chat-proxy.
+  REFERENZ_RABATT_CHF = 200;
   // Texterstellung pro Seite (steht so auf der Angebotsseite)
   TEXT_PRO_SEITE_CHF = 150;
   // Antwort, die das Häkchen «Als Beispiel zeigen» setzt (Referenzrabatt im Ergebnis)
   REFERENZ_JA = 'Ja, gerne mit Name, Logo und zwei Sätzen';
-  REFERENZ_HAKEN = ['Sie dürfen meine fertige Website als Beispiel zeigen, mit Name, Logo und zwei Sätzen.', 'Für die nächsten zwei Betriebe gibt es dafür einen Rabatt.'];
+  REFERENZ_HAKEN = ['Sie dürfen meine fertige Website als Beispiel zeigen, mit Name, Logo und zwei Sätzen.', 'Für die nächsten zwei Betriebe gibt es dafür {RABATT} Rabatt.'];
 
   // Funktionen als Karten: Name, Erklärung, Paket (alle, Standard, Pro, shop), Symbol (SVG-Pfad, 24er Raster),
   // Satzform für das Ergebnis («Bis 5 Unterseiten, dazu ein Kontaktformular und …»)
@@ -4320,7 +4324,7 @@ class Component extends DCLogic {
   werte(t) {
     const w = { TAGE: this.ENTWURF_TAGE + ' Arbeitstagen', TAGE_WORT: (this.ZAHLWORT[this.ENTWURF_TAGE] || this.ENTWURF_TAGE) + ' Arbeitstagen',
       MIN: String(this.CHECK_MINUTEN), FRAGEN: String(this.fragenZahl()), PREIS_STD: 'CHF\u00a0' + this.fmt(this.PAKET_PREIS[1]), ERF_MIN: String(this.zeitSumme(true)),
-      TEXTE: 'CHF\u00a0' + this.TEXT_PRO_SEITE_CHF, STUNDE: 'CHF\u00a0' + this.STUNDENSATZ_CHF };
+      TEXTE: 'CHF\u00a0' + this.TEXT_PRO_SEITE_CHF, STUNDE: 'CHF\u00a0' + this.STUNDENSATZ_CHF, RABATT: 'CHF\u00a0' + this.fmt(this.REFERENZ_RABATT_CHF) };
     return String(t).replace(/\{([A-Z_]+)\}/g, (m, k) => (w[k] !== undefined ? w[k] : m));
   }
   // Minuten aus den Ablaufschritten: erforderlich oder optional (ohne abgewählte)
@@ -4646,8 +4650,7 @@ class Component extends DCLogic {
     const umfang = this.PAKET_UMFANG[i] + ', dazu ' + liste + '.';
 
     const refFull = a.REFERENZ === this.REFERENZ_JA;
-    const refMap = { Website: 590, Standard: 1290, Pro: 2400 };
-    const refNum = refMap[name];
+    const refNum = price - this.REFERENZ_RABATT_CHF;
     return { name: name, priceNum: refFull ? refNum : price, regularNum: price, price: 'CHF ' + this.fmt(price), refFull: refFull,
       refPrice: 'CHF ' + this.fmt(refNum), refSaving: 'CHF ' + this.fmt(price - refNum), umfang: umfang, hinweis: hinweis, individuell: !!hinweis, reasons: [umfang] };
   }
@@ -5197,7 +5200,8 @@ class Component extends DCLogic {
         this.setState({ ans }, () => this.merken());
       },
       // Referenz im Ergebnis unter dem Preis: angehakt gilt REFERENZ_JA, der Preis wechselt sofort auf den Referenzpreis
-      refHaken: this.REFERENZ_HAKEN[0], refHakenHinweis: this.REFERENZ_HAKEN[1], refAn: s.ans.REFERENZ === this.REFERENZ_JA,
+      refHaken: this.REFERENZ_HAKEN[0], refHakenHinweis: this.werte(this.REFERENZ_HAKEN[1]), refAn: s.ans.REFERENZ === this.REFERENZ_JA,
+      refAnAttr: s.ans.REFERENZ === this.REFERENZ_JA ? '1' : '0', refMarke: this.werte('{RABATT} Rabatt'),
       onReferenz: () => {
         const ans = Object.assign({}, this.state.ans);
         if (ans.REFERENZ === this.REFERENZ_JA) delete ans.REFERENZ; else ans.REFERENZ = this.REFERENZ_JA;

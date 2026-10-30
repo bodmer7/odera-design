@@ -28,7 +28,7 @@ export const TEILE = [
   "id": "referenz",
   "titel": "Referenzpreis",
   "immer": true,
-  "text": "Ich suche zwei Betriebe, deren Website ich zeigen darf. Dafür bekommen Sie einen Rabatt, die Beträge stehen unten. Was ich brauche: Ihren Namen, Ihr Logo und zwei Sätze nach dem Livegang. Gilt für die nächsten zwei Projekte.\nDas Häkchen für die Referenz steht im Ergebnis des Projekt-Checks direkt unter dem Preis, der Preis wechselt beim Anhaken sofort. Der Referenzpreis gilt nur für die Website, nicht für Logo oder Betrieb.\nWebsite: CHF 890, als Referenz CHF 590\nStandard: CHF 1'900, als Referenz CHF 1'290\nPro: CHF 3'400, als Referenz CHF 2'400"
+  "text": "Ich suche zwei Betriebe, deren Website ich zeigen darf. Dafür bekommen Sie CHF 200 Rabatt. Was ich brauche: Ihren Namen, Ihr Logo und zwei Sätze nach dem Livegang. Gilt für die nächsten zwei Projekte.\nDas Häkchen für die Referenz steht im Ergebnis des Projekt-Checks direkt unter dem Preis, der Preis wechselt beim Anhaken sofort. Der Referenzpreis gilt nur für die Website, nicht für Logo oder Betrieb.\nWebsite: CHF 890, als Referenz CHF 690\nStandard: CHF 1'900, als Referenz CHF 1'700\nPro: CHF 3'400, als Referenz CHF 3'200"
  },
  {
   "id": "erreichbarkeit",
