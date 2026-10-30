@@ -236,7 +236,7 @@ try {
     await warte(500);
     ok(sofort === 'ZIEL:1' && await frageJetzt(page) === 'BRANCHE:2', `Weiter: nach der Antwort kurz stehen (${sofort}), dann selbst zur nächsten Frage (${await frageJetzt(page)})`);
     ok(knopfSofort === '' && haken.trim() === '✓', `Weiter: in der Zeit bis zum Weiter kein Knopf (${knopfSofort || 'keiner'}), die gewählte Karte zeigt ein Häkchen (${haken})`);
-    ok(await fokus() === 'H2', `Weiter: Fokus auf der neuen Frage wie beim Knopf «Weiter» (${await fokus()})`);
+    ok(/^q-titel-branche$/.test(await fokus()), `Weiter: Fokus auf der neuen Frage wie beim Knopf «Weiter» (${await fokus()})`);
     ok(await knopf() === '', `Weiter: auf Frage 2 vor der Antwort kein «Weiter» (${await knopf() || 'keiner'})`);
     await sichtbar(page, '.q-leiste button').filter({ hasText: 'Zurück' }).first().click(); await warte(300);
     ok(await frageJetzt(page) === 'ZIEL:1' && await knopf() === 'Weiter', `Weiter: zurück auf die beantwortete Frage 1 zeigt «Weiter» (${await knopf()})`);
@@ -274,6 +274,30 @@ try {
     ok(await frageJetzt(page) === 'ZIEL:1' && await sichtbar(page, '.editbar-btn').count() > 0 && /Übernehmen/.test(await knopf()), `Weiter: beim Ändern bleibt die Frage stehen (${await frageJetzt(page)}, ${await knopf()})`);
     ok(!probleme.length, 'Weiter ohne Konsolenfehler' + (probleme.length ? ': ' + probleme.join(' | ') : ''));
     await ctx.close();
+
+    // Weniger Ablenkung: Kurzversion-Link nur auf Frage 1 ohne Antwort, KI-Hinweis nur bei Auswahlfragen, «Notiert.» nicht in der
+    // nächsten Frage, Platzhalter mit «z. B.», Antwortraster als Gruppe mit dem Fragetitel, Ziffern für Screenreader verborgen
+    const ctx4 = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+    const p4 = await ctx4.newPage();
+    await p4.goto(BASIS + '/projekt-check/', { waitUntil: 'networkidle' });
+    await warte(600);
+    const ansicht = () => p4.evaluate(() => { const v = (s) => [...document.querySelectorAll(s)].filter((e) => e.getClientRects().length);
+      const g = v('.g-ans')[0], name = g && document.getElementById(g.getAttribute('aria-labelledby'));
+      return { kurz: v('a[href="/projekt-check/?kurz=1"]').length, ki: v('.q-ki').length, notiert: v('.q-status').some((e) => e.textContent === 'Notiert.'),
+        gruppe: g ? g.getAttribute('role') + ':' + (name && name.getClientRects().length ? name.textContent : '') : '', ziffer: v('.acard-k').every((k) => k.getAttribute('aria-hidden') === 'true'),
+        ph: v('.qright input[placeholder]').map((e) => e.placeholder).filter(Boolean) }; });
+    const a1 = await ansicht();
+    ok(a1.kurz === 1 && a1.ki === 1 && a1.gruppe === 'group:Was soll ein Besucher am Ende tun?' && a1.ziffer, `Frage 1: Kurzversion-Link, KI-Hinweis, Gruppe «${a1.gruppe}», Ziffern aria-hidden`);
+    await sichtbar(p4, '.g-ans .acard').first().click(); await warte(600);
+    await sichtbar(p4, '.q-leiste button').filter({ hasText: 'Zurück' }).first().click(); await warte(300);
+    ok((await ansicht()).kurz === 0, 'Frage 1 beantwortet: kein Kurzversion-Link mehr');
+    await nachPlan(p4, { WEBSITE_HEUTE: 'Nein', UNTERSTUETZUNG: ['Logo'] }, async (key) => {
+      const a = await ansicht();
+      if (key === 'FUNKTIONEN') ok(!a.notiert && a.ki === 1, `Funktionen: «Notiert.» aus der Frage davor ist weg, KI-Hinweis da`);
+      if (key === 'BETRIEB' || key === 'KONTAKT') ok(a.ki === 0 && a.kurz === 0 && a.ph.length >= 2 && a.ph.every((t) => /^z\. B\. /.test(t)), `${key}: ohne KI-Hinweis, Platzhalter ${a.ph.join(' / ')}`);
+      if (key === 'KONTAKT') ok(await sichtbar(p4, '.q-vorab').count() === 1, 'Kontakt: «Noch wird nichts gesendet. Zuerst sehen Sie Ihr Ergebnis.» beim Knopf');
+    });
+    await ctx4.close();
 
     // «Überspringen» auf Frage 3 führt ohne Zusatzfrage zu den Funktionen. Enter auf einer fokussierten Karte wählt sie und geht weiter.
     const ctx2 = await neuerKontext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });

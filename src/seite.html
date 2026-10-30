@@ -436,6 +436,9 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .q-weiter-knopf{min-height:56px;padding:0 32px;border:none;border-radius:999px;background:var(--primaer);color:var(--auf-dunkel);font:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:background var(--dauer) var(--kurve)}
 @media(hover:hover){.q-weiter-knopf:hover{background:var(--primaer-dunkel)}}
 .q-offen{margin:10px 0 0;min-height:18px;text-align:right;font-size:13px;color:var(--text-2)}
+/* Ziffern in den Antwortkarten sind Tastenkürzel: nur mit Maus und Tastatur, sonst ein leerer Auswahlkreis */
+@media not all and (hover:hover) and (pointer:fine){.acard-k[data-ziffer="1"]{font-size:0!important}}
+.q-vorab{order:6;margin:10px 0 0;text-align:right;font-size:13px;line-height:1.45;color:var(--text-2)}
 /* «Überspringen» bei optionalen Auswahlfragen: Textknopf statt Hauptknopf */
 .q-weiter-knopf[data-art="text"]{padding:0 8px;background:none;color:var(--primaer-dunkel);text-decoration:underline;text-underline-offset:3px}
 @media(hover:hover){.q-weiter-knopf[data-art="text"]:hover{background:none;color:var(--tinte)}}
@@ -1247,6 +1250,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  html[data-tastatur="1"] .q-leiste[data-art="zurueck"]{padding-bottom:8px}
  .q-leiste[data-art="zurueck"] .row>button{min-height:44px!important;padding:0 18px!important;background:var(--grund)!important;box-shadow:0 6px 18px -6px rgba(17,19,26,0.25)}
  .q-leiste .q-weiter-knopf[data-art="text"]{flex:none;margin-left:auto}
+ .q-leiste .q-vorab{margin:4px 0 0;text-align:center;font-size:13px}
  .q-wrap[data-leiste="zurueck"]{padding-bottom:88px!important}
  .q-wrap[data-leiste="leer"]{padding-bottom:40px!important}
 }
@@ -2624,7 +2628,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
             <p role="status" style="display:{{ editNoteDisplay }};font-size:16px;line-height:1.5;color:var(--tinte);background:var(--flaeche);border:1px solid var(--primaer);border-radius:12px;padding:12px 16px;margin:0 0 20px">{{ editNote }}</p>
             <p class="mono q-teil" style="font-size:13px;letter-spacing:0.08em;color:var(--primaer);margin:0 0 8px">{{ partLabel }}<span class="f-tag" data-pflicht="0" style="display:{{ optFrageDisplay }}">optional</span></p>
             <p class="mono qnum" aria-hidden="true" data-n="{{ qNumPad }}"></p>
-            <h2 tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px;text-wrap:pretty" data-vt="{{ vtAttr }}">{{ qTitle }}</h2>
+            <h2 id="{{ qTitelId }}" tabindex="-1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px;text-wrap:pretty" data-vt="{{ vtAttr }}">{{ qTitle }}</h2>
             <p class="mono q-wichtig" style="display:{{ wichtigDisplay }}">Die wichtigste Frage für Ihren Entwurf</p>
             <p class="q-help" style="font-size:16px;line-height:1.55;color:var(--text-2);margin:0 0 12px;display:{{ helpDisplay }}">{{ qHelp }}</p>
             <details class="q-was" style="display:{{ wasDisplay }}"><summary>Was heisst das?</summary><p>{{ qWas }}</p></details>
@@ -2647,11 +2651,11 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               <p>{{ zusammenText }}</p>
               <ul><sc-for list="{{ zusammenListe }}" as="z" hint-placeholder-count="2"><li><button type="button" class="textknopf" data-own-enter="1" data-k="{{ z.k }}" onClick="{{ onZuFeld }}">{{ z.label }}</button></li></sc-for></ul>
             </div>
-            <p class="mono q-optlabel" style="display:{{ optLabelDisplay }};order:{{ optOrder }};margin-top:{{ optTop }}">{{ optLabel }}<span class="f-tag" data-pflicht="0" style="display:{{ optTagDisplay }}">optional</span></p>
-            <div class="g-ans" data-fehler="{{ wahlFehlerAttr }}" data-spalten="{{ spalten }}" style="display:{{ optDisplay }};grid-auto-rows:1fr;order:{{ optOrder }}">
+            <p class="mono q-optlabel" id="{{ qWahlId }}" style="display:{{ optLabelDisplay }};order:{{ optOrder }};margin-top:{{ optTop }}">{{ optLabel }}<span class="f-tag" data-pflicht="0" style="display:{{ optTagDisplay }}">optional</span></p>
+            <div class="g-ans" role="group" aria-labelledby="{{ qGruppeId }}" data-fehler="{{ wahlFehlerAttr }}" data-spalten="{{ spalten }}" style="display:{{ optDisplay }};grid-auto-rows:1fr;order:{{ optOrder }}">
               <sc-for list="{{ options }}" as="o" hint-placeholder-count="4">
                 <button type="button" class="acard" data-v="{{ o.v }}" data-frisch="{{ o.frisch }}" onClick="{{ onPick }}" aria-pressed="{{ o.sel }}" style="border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }}">
-                  <span class="mono acard-k" style="flex:none;width:28px;height:28px;border-radius:{{ o.keyRadius }};border:2px solid {{ o.keyBd }};background:{{ o.keyBg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ o.keyFg }}">{{ o.key }}</span>
+                  <span class="mono acard-k" aria-hidden="true" data-ziffer="{{ o.ziffer }}" style="flex:none;width:28px;height:28px;border-radius:{{ o.keyRadius }};border:2px solid {{ o.keyBd }};background:{{ o.keyBg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ o.keyFg }}">{{ o.key }}</span>
                   <span style="flex:1">{{ o.label }}</span>
                 </button>
               </sc-for>
@@ -2675,7 +2679,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               <sc-for list="{{ fields }}" as="f" hint-placeholder-count="2">
                 <div class="fline" data-fehler="{{ f.fehlerAttr }}" style="animation-name:{{ f.anim }}">
                   <label class="f-label" for="{{ f.id }}"><span>{{ f.label }}</span><span class="f-tag" data-pflicht="{{ f.pflichtAttr }}" style="animation-name:{{ f.tagAnim }}">{{ f.tag }}</span></label>
-                  <input id="{{ f.id }}" type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" autocomplete="{{ f.auto }}" enterkeyhint="{{ f.enter }}" required="{{ f.pflicht }}" aria-invalid="{{ f.ariaInv }}" aria-describedby="{{ f.fehlerId }}" onChange="{{ onField }}" onBlur="{{ onFieldBlur }}" onKeyDown="{{ onFieldKey }}">
+                  <input id="{{ f.id }}" type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" autocomplete="{{ f.auto }}" inputmode="{{ f.inputmode }}" autocapitalize="{{ f.autocap }}" autocorrect="{{ f.autocorrect }}" spellcheck="{{ f.spell }}" enterkeyhint="{{ f.enter }}" required="{{ f.pflicht }}" aria-invalid="{{ f.ariaInv }}" aria-describedby="{{ f.fehlerId }}" onChange="{{ onField }}" onBlur="{{ onFieldBlur }}" onKeyDown="{{ onFieldKey }}">
                   <span class="ulx" aria-hidden="true"></span>
                   <span class="f-ok" aria-hidden="true" style="display:{{ f.okDisplay }};animation-name:{{ f.okAnim }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
                   <p class="f-fehler" id="{{ f.fehlerId }}" data-an="{{ f.fehlerAttr }}" aria-live="polite"><span class="f-fehler-i" aria-hidden="true" style="display:{{ f.iconDisplay }}">!</span>{{ f.meldung }}</p>
@@ -2687,7 +2691,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               <sc-for list="{{ fields2 }}" as="f" hint-placeholder-count="1">
                 <div class="fline" data-fehler="{{ f.fehlerAttr }}" style="animation-name:{{ f.anim }}">
                   <label class="f-label" for="{{ f.id }}"><span>{{ f.label }}</span><span class="f-tag" data-pflicht="{{ f.pflichtAttr }}" style="animation-name:{{ f.tagAnim }}">{{ f.tag }}</span></label>
-                  <input id="{{ f.id }}" type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" autocomplete="{{ f.auto }}" enterkeyhint="{{ f.enter }}" required="{{ f.pflicht }}" aria-invalid="{{ f.ariaInv }}" aria-describedby="{{ f.fehlerId }}" onChange="{{ onField }}" onBlur="{{ onFieldBlur }}" onKeyDown="{{ onFieldKey }}">
+                  <input id="{{ f.id }}" type="{{ f.type }}" value="{{ f.value }}" data-k="{{ f.k }}" maxlength="{{ f.max }}" placeholder="{{ f.ph }}" autocomplete="{{ f.auto }}" inputmode="{{ f.inputmode }}" autocapitalize="{{ f.autocap }}" autocorrect="{{ f.autocorrect }}" spellcheck="{{ f.spell }}" enterkeyhint="{{ f.enter }}" required="{{ f.pflicht }}" aria-invalid="{{ f.ariaInv }}" aria-describedby="{{ f.fehlerId }}" onChange="{{ onField }}" onBlur="{{ onFieldBlur }}" onKeyDown="{{ onFieldKey }}">
                   <span class="ulx" aria-hidden="true"></span>
                   <span class="f-ok" aria-hidden="true" style="display:{{ f.okDisplay }};animation-name:{{ f.okAnim }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
                   <p class="f-fehler" id="{{ f.fehlerId }}" data-an="{{ f.fehlerAttr }}" aria-live="polite"><span class="f-fehler-i" aria-hidden="true" style="display:{{ f.iconDisplay }}">!</span>{{ f.meldung }}</p>
@@ -2725,6 +2729,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
               <button type="button" class="q-weiter-knopf" data-art="{{ nextArt }}" onClick="{{ onNext }}" aria-describedby="q-offen" style="display:{{ nextDisplay }}">{{ nextLabel }}</button>
             </div>
             <p id="q-offen" class="mono q-offen" style="order:6">{{ offenText }}</p>
+            <p class="q-vorab" style="display:{{ vorabDisplay }}">Noch wird nichts gesendet. Zuerst sehen Sie Ihr Ergebnis.</p>
             </div>
             <p style="display:{{ editDisplay }};margin:16px 0 0;text-align:right;order:7"><button type="button" data-own-enter="1" onClick="{{ onEditToReview }}" style="background:none;border:none;padding:0;min-height:44px;color:var(--tinte);font-size:16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer">Zurück zur Übersicht</button></p>
             <p style="display:{{ quickLinkDisplay }};font-size:13px;line-height:1.5;margin:16px 0 0;order:8"><a href="/projekt-check/?kurz=1">Ich will nur den Preis wissen, drei Fragen</a></p>
@@ -3442,13 +3447,13 @@ class Component extends DCLogic {
       o: ['Anrufen', 'Eine Anfrage oder Offerte schicken', 'Einen Termin buchen', 'Vorbeikommen', 'Sich informieren und Vertrauen fassen'] },
     { key: 'BRANCHE', n: 'Branche', t: 'In welcher Branche sind Sie tätig?', typ: 'wahl', spalten: 2,
       o: ['Handwerk und Bau', 'Gastronomie und Hotellerie', 'Gesundheit und Therapie', 'Beratung und Treuhand', 'Beauty und Coiffeur', 'Laden und Handel', 'Andere'],
-      extra: { 'Andere': ['branche', 'Welche Branche?', 'Fahrschule'] } },
+      extra: { 'Andere': ['branche', 'Welche Branche?', 'z. B. Fahrschule'] } },
     { key: 'WEBSITE_HEUTE', n: 'Website heute', t: 'Haben Sie schon eine Website?', typ: 'wahl', optional: true, o: ['Nein', 'Ja'],
-      extra: { 'Ja': ['url', 'Adresse Ihrer Website', 'www.ihrbetrieb.ch'] } },
+      extra: { 'Ja': ['url', 'Adresse Ihrer Website', 'z. B. www.ihrbetrieb.ch'] } },
     { key: 'WEBSITE_PROBLEME', n: 'Was stört', t: 'Was stört Sie an Ihrer heutigen Website?', typ: 'multi', optional: true,
       wenn: (s) => s.ans.WEBSITE_HEUTE === 'Ja',
       o: ['Wirkt veraltet', 'Am Handy schlecht', 'Wird bei Google nicht gefunden', 'Bringt keine Anfragen', 'Ich kann sie nicht selbst ändern', 'Anderes'],
-      extra: { 'Anderes': ['stoerung', 'Was noch?', 'Lädt sehr langsam'] } },
+      extra: { 'Anderes': ['stoerung', 'Was noch?', 'z. B. Lädt sehr langsam'] } },
     // Ersetzt die früheren Fragen nach Logo, Texten und Fotos. Der Preis-Rechner wählt Logo und Texte vor (unterstuetzung()).
     { key: 'UNTERSTUETZUNG', n: 'Unterstützung', t: 'Wobei brauchen Sie Unterstützung?', typ: 'multi', optional: true,
       wenn: (s) => s.ans.WEBSITE_HEUTE === 'Nein',
@@ -3457,22 +3462,22 @@ class Component extends DCLogic {
         'Texte': 'Texterstellung kostet CHF ' + this.TEXT_PRO_SEITE_CHF + ' pro Seite.', 'Fotos': 'Einen Fotografen kann ich organisieren, Kosten nach Aufwand.' } },
     { key: 'FUNKTIONEN', n: 'Funktionen', t: 'Was soll die Seite können?', typ: 'karten', optional: true,
       help: 'Wählen Sie alles, was Sie brauchen. Das Kontaktformular ist immer dabei.',
-      extra: { 'Zweite Sprache': ['sprache', 'Welche Sprache?', 'Französisch'] } },
+      extra: { 'Zweite Sprache': ['sprache', 'Welche Sprache?', 'z. B. Französisch'] } },
     { key: 'BETRIEB', n: 'Betrieb', t: 'Ihr Betrieb', typ: 'felder',
-      felder: [['firma', 'Name des Betriebs', 'Schreinerei Muster GmbH', true, 'text', 'organization'], ['ort', 'Ort', 'Wohlen AG', false, 'text', 'address-level2'],
-        ['angebot', 'Ihr Angebot in einem Satz', 'Schreinerei für Küchen und Innenausbau in der Region Wohlen.', true]] },
+      felder: [['firma', 'Name des Betriebs', 'z. B. Schreinerei Muster GmbH', true, 'text', 'organization'], ['ort', 'Ort', 'z. B. Wohlen AG', false, 'text', 'address-level2'],
+        ['angebot', 'Ihr Angebot in einem Satz', 'z. B. Schreinerei für Küchen und Innenausbau in der Region Wohlen.', true]] },
     { key: 'KONTAKT', n: 'Kontakt', t: 'Wie erreiche ich Sie?', typ: 'felder',
       // Reihenfolge: Name, E-Mail, dann die Wahl, dann das Telefon, das von ihr abhängt (Pflicht bei «Telefon», ANFRAGE.pruefung.pflichtWenn)
-      felder: [['name', 'Vorname und Name', 'Anna Muster', true, 'text', 'name'], ['email', 'E-Mail', 'anna@ihrbetrieb.ch', true, 'email', 'email']],
-      felderNach: [['tel', 'Telefon', '079 123 45 67', false, 'tel', 'tel']],
+      felder: [['name', 'Vorname und Name', 'z. B. Anna Muster', true, 'text', 'name'], ['email', 'E-Mail', 'z. B. anna@ihrbetrieb.ch', true, 'email', 'email']],
+      felderNach: [['tel', 'Telefon', 'z. B. 079 123 45 67', false, 'tel', 'tel']],
       chips: ['TERMIN', 'Bis wann soll die Website online sein?', this.TIMING],
       area: ['sonstiges', 'Sonst noch etwas?', 'Zum Beispiel: Websites, die Ihnen gefallen, oder Ihre Firmenfarben.'],
       haken: ['REFERENZ', 'Sie dürfen meine fertige Website als Beispiel zeigen, mit Name, Logo und zwei Sätzen.', 'Für die nächsten zwei Betriebe gibt es dafür einen Rabatt.', this.REFERENZ_JA],
       optLabel: 'Am liebsten erreichen Sie mich per', optOptional: true, o: ['E-Mail', 'Telefon'] },
     { key: 'ANGEBOT', n: 'Angebot', t: 'Was bieten Sie an, in einem Satz?', typ: 'felder', nurKurz: true,
-      felder: [['angebot', 'Ihr Angebot', 'Schreinerei für Küchen und Innenausbau in der Region Wohlen.', true]] },
+      felder: [['angebot', 'Ihr Angebot', 'z. B. Schreinerei für Küchen und Innenausbau in der Region Wohlen.', true]] },
     { key: 'MAIL', n: 'E-Mail', t: 'Wohin darf ich Ihnen antworten?', typ: 'felder', nurKurz: true,
-      felder: [['email', 'E-Mail', 'anna@ihrbetrieb.ch', true, 'email', 'email']] }
+      felder: [['email', 'E-Mail', 'z. B. anna@ihrbetrieb.ch', true, 'email', 'email']] }
   ];
 
   state = {
@@ -4391,7 +4396,7 @@ class Component extends DCLogic {
     });
   }
 
-  jumpTo = (st) => { clearTimeout(this.weiterTimer); this.setState({ step: st, dir: 'back', warn: false, autoLeiste: null, tick: this.state.tick + 1 }); this.focusHead(); };
+  jumpTo = (st) => { clearTimeout(this.weiterTimer); clearTimeout(this.toastTimer); this.setState({ step: st, dir: 'back', warn: false, autoLeiste: null, toast: '', tick: this.state.tick + 1 }); this.focusHead(); };
 
   focusFirstField() {
     setTimeout(() => {
@@ -4422,7 +4427,7 @@ class Component extends DCLogic {
   }
 
   editStep = (st) => {
-    this.setState({ result: false, review: false, mid: false, editing: true, editNote: '', step: st, dir: 'fwd', warn: false, autoLeiste: null, tick: this.state.tick + 1 });
+    this.setState({ result: false, review: false, mid: false, editing: true, editNote: '', step: st, dir: 'fwd', warn: false, autoLeiste: null, toast: '', tick: this.state.tick + 1 });
     this.focusHead();
   };
 
@@ -4446,7 +4451,8 @@ class Component extends DCLogic {
     if (!this.complete(q)) { this.fehlerZeigen(q); return; }
     if (this.state.editing) { this.leaveEdit('result'); return; }
     if (step >= this.fragen().length - 1) { this.showResult(); this.merken(); return; }
-    this.setState({ step: step + 1, dir: 'fwd', warn: false, autoLeiste: null, tick: this.state.tick + 1 });
+    clearTimeout(this.toastTimer);
+    this.setState({ step: step + 1, dir: 'fwd', warn: false, autoLeiste: null, toast: '', tick: this.state.tick + 1 });
     this.merken();
     this.focusHead();
   };
@@ -4455,7 +4461,8 @@ class Component extends DCLogic {
     clearTimeout(this.weiterTimer);
     if (this.state.editing) { this.leaveEdit('review'); return; }
     if (this.state.result) { this.setState({ result: false, step: this.fragen().length - 1 }); return; }
-    if (this.state.step > 0) this.setState({ step: this.state.step - 1, dir: 'back', warn: false, autoLeiste: null, tick: this.state.tick + 1 });
+    clearTimeout(this.toastTimer);
+    if (this.state.step > 0) this.setState({ step: this.state.step - 1, dir: 'back', warn: false, autoLeiste: null, toast: '', tick: this.state.tick + 1 });
     else this.setState({ autoLeiste: null });
   };
 
@@ -4637,6 +4644,9 @@ class Component extends DCLogic {
       const ok = !!s.okPuls[f.k] && !e && !r.vorschlag;
       return { k: f.k, id: 'f-' + f.k, fehlerId: 'f-' + f.k + '-fehler', label: f.label, ph: f.ph, type: f.typ, auto: f.auto, value: s.txt[f.k] || '', max: eMax[f.k] || 200,
         enter: s.step >= total - 1 ? 'send' : 'next',
+        // Adresse der Website: URL-Tastatur, nichts gross schreiben, keine Korrektur
+        inputmode: f.k === 'url' ? 'url' : undefined, autocap: f.k === 'url' ? 'none' : undefined,
+        autocorrect: f.k === 'url' ? 'off' : undefined, spell: f.k === 'url' ? 'false' : undefined,
         pflicht: f.pflicht, pflichtAttr: f.pflicht ? '1' : '0', tag: f.pflicht ? 'Pflichtfeld' : 'optional',
         tagAnim: f.pflicht ? 'tagRein' : 'tagRein2',
         fehlerAttr: e ? '1' : '0', ariaInv: e ? 'true' : 'false', meldung: e ? e.meldung : '', iconDisplay: e ? 'inline-flex' : 'none',
@@ -4874,10 +4884,14 @@ class Component extends DCLogic {
         quelle: s.quelle || a.quelle || '', ueberspringen: Array.from(new Set((a.ueberspringen || []).concat(s.ueberspringen || []))), fortsetzen: null, result: !!a.result,
         mindestPaket: this.hoeheresPaket(s.mindestPaket, a.mindestPaket), rechnerZusatz: (s.rechnerZusatz || []).length ? s.rechnerZusatz : (a.rechnerZusatz || []) }, () => { if (a.result) this.showResult(); else this.focusHead(); }); },
       onNeuBeginnen: () => { this.vergessen(); this.setState({ fortsetzen: null }); this.focusHead(); },
-      quickLinkDisplay: (s.quick || s.editing) ? 'none' : 'block',
+      // «Ich will nur den Preis wissen» nur auf der ersten Frage, solange sie unbeantwortet ist, nie beim Ändern
+      quickLinkDisplay: !s.quick && !s.editing && s.step === 0 && !s.ans[q.key] ? 'block' : 'none',
       qNum: fs.nr,
       qWertText: fsText,
       qTitle: q.t,
+      qTitelId: 'q-titel-' + q.key.toLowerCase(),
+      // Antwortraster als Gruppe: Name ist der Fragetitel, bei «Am liebsten erreichen Sie mich per» diese Zeile
+      qWahlId: 'q-wahl-' + q.key.toLowerCase(), qGruppeId: (q.optLabel ? 'q-wahl-' : 'q-titel-') + q.key.toLowerCase(),
       chatVorschlaege: this.CHAT_VORSCHLAEGE,
       chatKarteDisplay: this.CHAT_ENDPOINT ? 'block' : 'none',
       onChatVorlage: this.chatVorlage,
@@ -4934,7 +4948,7 @@ class Component extends DCLogic {
         this.checkStarten('rechner', { ans, skip, rechnerZusatz: zusatz }, e.currentTarget);
       },
       vtAttr: s.vtAktiv ? '1' : '0',
-      kiDisplay: this.CHAT_ENDPOINT ? 'inline-flex' : 'none',
+      kiDisplay: this.CHAT_ENDPOINT && (q.typ === 'wahl' || q.typ === 'multi' || q.typ === 'karten') ? 'inline-flex' : 'none',
       qHelp: q.help || '',
       helpDisplay: q.help ? 'block' : 'none',
       firstNoteDisplay: (s.step === 0 && !s.quick) ? 'block' : 'none',
@@ -4985,6 +4999,7 @@ class Component extends DCLogic {
         return {
           v: o, label: o, sel: sel,
           key: sel ? '✓' : isMulti ? '' : String(i + 1),
+          ziffer: !isMulti && !sel ? '1' : '0',
           frisch: !isMulti && sel && s.autoLeiste && s.autoLeiste.key === q.key && s.autoLeiste.v === o ? '1' : '0',
           keyRadius: isMulti ? '8px' : '999px',
           keyBd: sel ? '#11131A' : '#E2DFD8',
@@ -5058,6 +5073,7 @@ class Component extends DCLogic {
       backVis: (s.step > 0 && !s.editing) ? 'visible' : 'hidden',
       onBack: this.back, onNext: this.next,
       nextLabel: knopf.label,
+      vorabDisplay: knopf.label === 'Ergebnis ansehen' ? 'block' : 'none',
       nextArt: knopf.art === 'ueberspringen' ? 'text' : 'primaer',
       nextDisplay: knopf.art ? 'inline-block' : 'none',
       // Leiste unter 1024 px: voll mit Knopf, nur «Zurück» (kompakt) oder gar keine

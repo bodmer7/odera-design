@@ -31,7 +31,7 @@
 <meta name="twitter:image" content="https://odera.ch/assets/img/vorschau-odera.jpg">
 <style>x-dc{display:none!important}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://odera.ch/website-fuer-handwerker/#seite","url":"https://odera.ch/website-fuer-handwerker/","name":"Website für Handwerker ab CHF 890 · ODERA Design","description":"Website für Ihren Handwerksbetrieb: Telefonnummer, Referenzbilder, Offerte-Knopf. Fertiger Entwurf in 5 Arbeitstagen, gratis. Fixpreis ab CHF 890.","inLanguage":"de-CH","isPartOf":{"@id":"https://odera.ch/#website"},"breadcrumb":{"@id":"https://odera.ch/website-fuer-handwerker/#brotkrumen"}},{"@type":"BreadcrumbList","@id":"https://odera.ch/website-fuer-handwerker/#brotkrumen","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://odera.ch/"},{"@type":"ListItem","position":2,"name":"Website für Handwerksbetriebe","item":"https://odera.ch/website-fuer-handwerker/"}]},{"@type":"Service","@id":"https://odera.ch/website-fuer-handwerker/#leistung","name":"Website für Handwerksbetriebe","serviceType":"Website für Handwerksbetriebe","provider":{"@id":"https://odera.ch/#organisation"},"areaServed":[{"@type":"Place","name":"Freiamt"},{"@type":"Place","name":"Mutschellen"},{"@type":"AdministrativeArea","name":"Kanton Aargau"},{"@type":"Country","name":"Schweiz"}],"offers":{"@type":"Offer","price":"890","priceCurrency":"CHF","url":"https://odera.ch/angebot/"}},{"@type":"FAQPage","@id":"https://odera.ch/website-fuer-handwerker/#fragen","mainEntity":[{"@type":"Question","name":"Ich habe kaum Fotos meiner Arbeiten. Geht das trotzdem?","acceptedAnswer":{"@type":"Answer","text":"Ja. Für den Entwurf reichen wenige Bilder. Einen Fotografen kann ich organisieren, die Kosten richten sich nach dem Aufwand."}},{"@type":"Question","name":"Muss ich die Texte selbst schreiben?","acceptedAnswer":{"@type":"Answer","text":"Nein. Vorhandene Texte bereite ich im Paket auf. Texte von Grund auf schreibe ich für CHF 150 pro Seite."}},{"@type":"Question","name":"Werde ich damit bei Google gefunden?","acceptedAnswer":{"@type":"Answer","text":"Im Paket Standard richte ich Ihr Google-Unternehmensprofil ein und lege die Grundlagen für die Auffindbarkeit. Einen bestimmten Platz in den Suchergebnissen kann niemand versprechen."}}]}]}</script>
-<link rel="preload" href="assets/js/vorlage.js?v=d756a22ac5" as="script" fetchpriority="low">
+<link rel="preload" href="assets/js/vorlage.js?v=401b946b81" as="script" fetchpriority="low">
 <!-- seo:end -->
 <link rel="preload" href="assets/fonts/bricolage-grotesque-700-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-400-500-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -460,6 +460,9 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .q-weiter-knopf{min-height:56px;padding:0 32px;border:none;border-radius:999px;background:var(--primaer);color:var(--auf-dunkel);font:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:background var(--dauer) var(--kurve)}
 @media(hover:hover){.q-weiter-knopf:hover{background:var(--primaer-dunkel)}}
 .q-offen{margin:10px 0 0;min-height:18px;text-align:right;font-size:13px;color:var(--text-2)}
+/* Ziffern in den Antwortkarten sind Tastenkürzel: nur mit Maus und Tastatur, sonst ein leerer Auswahlkreis */
+@media not all and (hover:hover) and (pointer:fine){.acard-k[data-ziffer="1"]{font-size:0!important}}
+.q-vorab{order:6;margin:10px 0 0;text-align:right;font-size:13px;line-height:1.45;color:var(--text-2)}
 /* «Überspringen» bei optionalen Auswahlfragen: Textknopf statt Hauptknopf */
 .q-weiter-knopf[data-art="text"]{padding:0 8px;background:none;color:var(--primaer-dunkel);text-decoration:underline;text-underline-offset:3px}
 @media(hover:hover){.q-weiter-knopf[data-art="text"]:hover{background:none;color:var(--tinte)}}
@@ -635,7 +638,7 @@ if(!m.hasAttribute('tabindex'))m.setAttribute('tabindex','-1');m.focus({preventS
 // Laufzeit erst starten, wenn das Dokument eingelesen ist (sonst lädt support.js React von einem fremden Server)
 // und der vorab gerenderte Inhalt als grösster Inhalt (LCP) gemeldet wurde, spätestens nach 400 ms.
 // Die ausgelieferten Seiten enthalten die Vorlage nicht: assets/js/vorlage.js setzt sie vorher ein (tools/seo-build.mjs).
-(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=d756a22ac5';
+(function(){var dom=document.readyState!=='loading',lcp=false,los=false,VORLAGE='assets/js/vorlage.js?v=401b946b81';
 var laden=function(src,fertig){var s=document.createElement('script');s.src=src;if(fertig)s.onload=fertig;document.head.appendChild(s)};
 var start=function(){if(los||!dom||!lcp)return;los=true;var rt=function(){laden('assets/js/support.js')};if(VORLAGE&&!document.querySelector('x-dc'))laden(VORLAGE,rt);else rt()};
 var gemeldet=function(){if(lcp)return;lcp=true;setTimeout(start,0)};
@@ -1271,6 +1274,7 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  html[data-tastatur="1"] .q-leiste[data-art="zurueck"]{padding-bottom:8px}
  .q-leiste[data-art="zurueck"] .row>button{min-height:44px!important;padding:0 18px!important;background:var(--grund)!important;box-shadow:0 6px 18px -6px rgba(17,19,26,0.25)}
  .q-leiste .q-weiter-knopf[data-art="text"]{flex:none;margin-left:auto}
+ .q-leiste .q-vorab{margin:4px 0 0;text-align:center;font-size:13px}
  .q-wrap[data-leiste="zurueck"]{padding-bottom:88px!important}
  .q-wrap[data-leiste="leer"]{padding-bottom:40px!important}
 }
