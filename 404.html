@@ -399,6 +399,8 @@ html.vorab-weg #dc-root .leuchtstift{animation:none}
 .hero-ort{margin:0 0 var(--a-3)}
 .hero-h1{margin:0 0 var(--a-3);max-width:14ch}
 .hero-lead{margin:0 0 var(--a-4);max-width:34ch}
+/* .einleitung{margin:16px 0 0} im Gestaltungssystem hob den Abstand zu den Knöpfen auf (0 px ab 768 px). Ausgewogen umbrechen. */
+.einleitung.hero-lead{margin-bottom:var(--a-4);text-wrap:balance}
 .hero-aktion{display:flex;flex-wrap:wrap;gap:12px}
 .werk{position:relative;margin:0;padding-bottom:var(--a-4)}
 /* Geräterahmen: Browserfenster und Handy für Musterprojekt-Aufnahmen (Startseite, Musterprojekte) */
@@ -1228,6 +1230,21 @@ a,button,[role=button],label,summary{-webkit-tap-highlight-color:transparent}
  .hero-zahlen .kennzahl{font-size:clamp(15px,4.4vw,17px);color:var(--tinte)}
  .hero-zahlen dd{font-size:13px;line-height:1.35;color:var(--text-2)}
  .hero-weiter{display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin:16px auto 8px;border-radius:50%;color:var(--text-2)}
+}
+/* Kennzahlen unter 430 px: drei Zeilen, Zahl links, Text rechts. In drei Spalten stiessen «ab CHF 890» und «5 Arbeitstage» bei 320 px fast aneinander. */
+@media(max-width:430px){
+ .hero-zahlen .zahlen-reihe{grid-template-columns:auto auto;justify-content:center;align-items:baseline;gap:10px 16px}
+ .hero-zahlen .zahlen-reihe>div{display:contents}
+ .hero-zahlen .zahlen-reihe dt,.hero-zahlen .zahlen-reihe dd{text-align:left}
+ .hero-zahlen dd{font-size:15px}
+}
+/* Startseite unter 768 px: Einleitungen ausgewogen umbrechen, kein einzelnes Wort allein in der letzten Zeile */
+@media(max-width:767px){.startseite .einleitung{text-wrap:balance}}
+/* Kopf bei 320 px: Logo, «Check starten» und Menü passten erst ab 360 px in eine Zeile (27 px seitliches Scrollen) */
+@media(max-width:359px){
+ .kopf .logo-normal{zoom:0.62}
+ .navbar,.navbar>div:last-child{gap:6px!important}
+ .navcta{padding:0 10px}
 }
 @media(max-width:767px) and (prefers-reduced-motion:no-preference){
  .hero-badge-punkt{animation:badgePuls 2.4s ease-in-out infinite}
