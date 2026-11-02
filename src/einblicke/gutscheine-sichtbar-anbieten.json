@@ -1,0 +1,84 @@
+{
+  "v": 1,
+  "slug": "gutscheine-sichtbar-anbieten",
+  "titel": "Gutscheine sichtbar anbieten",
+  "beschreibung": "Gutscheine und Weihnachten: Machen Sie es Ihrer Kundschaft leicht. Im November suchen viele nach Geschenken aus der Region. Gutscheine von Coiffeur…",
+  "anriss": "Gutscheine und Weihnachten: Machen Sie es Ihrer Kundschaft leicht. Im November suchen viele nach Geschenken aus der Region. Gutscheine von Coiffeur, Restaurant oder Fachgeschäft sind beliebt.",
+  "datum": "2026-11-02",
+  "geaendert": "2026-11-02T08:27:04Z",
+  "saeule": "praxis",
+  "rubrik": "Praxis-Tipp",
+  "thema_id": "nov-weihnachten",
+  "kurz": [
+    "Gutscheine auf der Startseite erwähnen",
+    "Klar sagen, wie man sie bekommt",
+    "Hinweis auch im Google-Profil"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Warum das wichtig ist",
+      "absaetze": [
+        "Viele Betriebe bieten sie an, erwähnen es aber nirgends auf der Website. Ein kurzer Abschnitt mit dem Weg zum Gutschein genügt.",
+        "Im November suchen viele nach Geschenken aus der Region. Gutscheine von Coiffeur, Restaurant oder Fachgeschäft sind beliebt, weil sie persönlich sind und den lokalen Betrieb unterstützen.",
+        "Viele Betriebe bieten Gutscheine an, erwähnen es aber nirgends auf der Website. So entgehen ihnen Verkäufe, gerade bei Menschen, die kurzfristig ein Geschenk suchen.",
+        "Bei meinen Entwürfen für kleine Betriebe gehört das zu den ersten Punkten, die ich anschaue. Der Aufwand ist klein, die Wirkung auf dem Handy oft gross."
+      ]
+    },
+    {
+      "titel": "So gehen Sie vor",
+      "absaetze": [
+        "Sie brauchen dafür in den meisten Fällen keine neue Website. Die folgenden Punkte lassen sich einzeln umsetzen. Beginnen Sie mit dem, der Ihrer Kundschaft heute am meisten fehlt."
+      ],
+      "punkte": [
+        {
+          "titel": "Gutscheine auf der Startseite erwähnen",
+          "text": "Erwähnen Sie Gutscheine auf der Startseite, in der Zeit vor Weihnachten gut sichtbar."
+        },
+        {
+          "titel": "Klar sagen, wie man sie bekommt",
+          "text": "Sagen Sie klar, wie man sie bekommt: im Geschäft, per Telefon oder per Mail."
+        },
+        {
+          "titel": "Hinweis auch im Google-Profil",
+          "text": "Ergänzen Sie den Hinweis auch im Google-Profil."
+        }
+      ],
+      "nach": [
+        "Kleine Schritte wie diese bringen oft mehr als ein kompletter Neustart. Ich empfehle, mit dem Punkt zu beginnen, der Ihre Kundschaft heute am meisten stört."
+      ]
+    },
+    {
+      "titel": "Kleine Schritte statt grosser Umbau",
+      "absaetze": [
+        "Viele Betriebe warten mit Verbesserungen, bis sie Zeit für eine ganz neue Website haben. Dieser Moment kommt selten. Wirksamer ist es, einen Punkt nach dem anderen anzugehen. Jede kleine Änderung hilft Ihrer Kundschaft sofort, und Sie sehen schnell, was sich lohnt. Erst wenn sich vieles auf einmal ändern muss, ist ein Neuanfang die bessere Wahl."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Überlegen Sie, ob Gutscheine zu Ihrem Betrieb passen. Wenn ja, schreiben Sie heute einen kurzen Abschnitt dazu und stellen ihn auf die Startseite.",
+        "Ein Tipp aus der Praxis: Notieren Sie sich solche Punkte gleich im Kalender. Wer seine Website einmal im Monat kurz anschaut, muss sie selten ganz neu machen.",
+        "Bieten Sie Gutscheine an? Steht das auf Ihrer Website?"
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 2 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Gutscheine sichtbar anbieten"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}
