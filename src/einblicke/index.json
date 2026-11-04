@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "fuer-einen-entwurf-reichen-6-fragen",
+      "titel": "Für einen Entwurf reichen 6 Fragen",
+      "beschreibung": "Warum mein Projekt-Check nur noch 6 Fragen hat. Mein Projekt-Check hatte 18 Fragen. Für den ersten Entwurf brauchte ich viele davon gar nicht.",
+      "anriss": "Warum mein Projekt-Check nur noch 6 Fragen hat. Mein Projekt-Check hatte 18 Fragen. Für den ersten Entwurf brauchte ich viele davon gar nicht.",
+      "datum": "2026-11-04",
+      "geaendert": "2026-11-04T12:00:11Z",
+      "rubrik": "Einblick und Beispiel",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: Für einen Entwurf reichen 6 Fragen"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "gutscheine-sichtbar-anbieten",
       "titel": "Gutscheine sichtbar anbieten",
       "beschreibung": "Gutscheine und Weihnachten: Machen Sie es Ihrer Kundschaft leicht. Im November suchen viele nach Geschenken aus der Region. Gutscheine von Coiffeur…",

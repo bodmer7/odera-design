@@ -1,0 +1,84 @@
+{
+  "v": 1,
+  "slug": "fuer-einen-entwurf-reichen-6-fragen",
+  "titel": "Für einen Entwurf reichen 6 Fragen",
+  "beschreibung": "Warum mein Projekt-Check nur noch 6 Fragen hat. Mein Projekt-Check hatte 18 Fragen. Für den ersten Entwurf brauchte ich viele davon gar nicht.",
+  "anriss": "Warum mein Projekt-Check nur noch 6 Fragen hat. Mein Projekt-Check hatte 18 Fragen. Für den ersten Entwurf brauchte ich viele davon gar nicht.",
+  "datum": "2026-11-04",
+  "geaendert": "2026-11-04T12:00:11Z",
+  "saeule": "einblick",
+  "rubrik": "Einblick und Beispiel",
+  "thema_id": "projekt-check",
+  "kurz": [
+    "Rund 2 Minuten, ohne Vorbereitung",
+    "Nichts ist verbindlich",
+    "Danach folgt der Entwurf, nicht ein Verkaufsgespräch"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Was ich dabei beobachte",
+      "absaetze": [
+        "Heute frage ich nur, was ich für den Entwurf und eine grobe Preisschätzung brauche. Alles andere klären wir, wenn Sie den Entwurf gesehen haben.",
+        "Ein Formular mit vielen Fragen wirkt abschreckend. Mein Projekt-Check hatte 18 Fragen, heute sind es 6. Übrig geblieben sind die, die ich für einen ersten Entwurf und eine grobe Preisschätzung brauche.",
+        "Ein Entwurf ist schnell gebaut. Alles Weitere klären wir, wenn Sie ihn gesehen haben. Dann reden wir über etwas Konkretes statt über Annahmen.",
+        "Ich arbeite für jeden Betrieb nach denselben Grundsätzen, passe sie aber an Branche und Kundschaft an. Das hier ist einer davon."
+      ]
+    },
+    {
+      "titel": "Worauf es ankommt",
+      "absaetze": [
+        "Aus meiner Arbeit kenne ich vor allem diese Punkte. Sie gelten für fast jede Branche und lassen sich meistens ohne grossen Umbau verbessern."
+      ],
+      "punkte": [
+        {
+          "titel": "Rund 2 Minuten, ohne Vorbereitung",
+          "text": "Der Check dauert rund 2 Minuten und braucht keine Vorbereitung. Sie beantworten die Fragen, so gut es gerade geht."
+        },
+        {
+          "titel": "Nichts ist verbindlich",
+          "text": "Nichts davon ist verbindlich. Sie können jederzeit aufhören, und es entsteht keine Verpflichtung."
+        },
+        {
+          "titel": "Danach folgt der Entwurf, nicht ein Verkaufsgespräch",
+          "text": "Am Ende steht ein Entwurf und kein Verkaufsgespräch. Sie sehen zuerst, was ich vorschlage, und entscheiden danach."
+        }
+      ],
+      "nach": [
+        "Ich schreibe hier regelmässig über solche Beobachtungen aus meiner Arbeit. Wenn Sie ein Thema interessiert, das ich noch nicht behandelt habe, schreiben Sie mir gerne."
+      ]
+    },
+    {
+      "titel": "Wie ich Websites anschaue",
+      "absaetze": [
+        "Bevor ich einem Betrieb einen Vorschlag mache, schaue ich seine Website auf dem Handy und am Computer an, mit einer festen Checkliste. Dazu gehören der Weg zum Kontakt, die Lesbarkeit, die Öffnungszeiten und eigene Bilder. Ich schreibe nur über Punkte, die ich selbst geprüft habe, und nenne dabei keine Firmennamen."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Überlegen Sie sich vor dem Check kurz, was Ihre Website vor allem leisten soll: mehr Anrufe, mehr Anfragen, weniger Rückfragen? Diese eine Antwort hilft mehr als jede technische Angabe.",
+        "Gerade bei kleinen Betrieben entscheidet der erste Eindruck auf dem Handy oft darüber, ob jemand anruft oder weiterklickt. Darum schaue ich zuerst dorthin.",
+        "Was ist Ihnen bei einem Formular wichtiger: kurz oder genau?"
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 2 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Für einen Entwurf reichen 6 Fragen"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}
