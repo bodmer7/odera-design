@@ -1,0 +1,83 @@
+{
+  "v": 1,
+  "slug": "oeffnungszeiten-gehoeren-auf-die-startseite",
+  "titel": "Öffnungszeiten gehören auf die Startseite",
+  "beschreibung": "Öffnungszeiten auf der Startseite sparen Ihnen Anrufe. Die häufigste Frage an kleine Betriebe ist simpel: Haben Sie heute offen? Wer die Antwort auf der…",
+  "anriss": "Öffnungszeiten auf der Startseite sparen Ihnen Anrufe. Die häufigste Frage an kleine Betriebe ist simpel: Haben Sie heute offen? Wer die Antwort auf der Website nicht findet, ruft an oder geht gleich zur Konkurrenz.",
+  "datum": "2026-11-09",
+  "geaendert": "2026-11-09T15:00:55Z",
+  "saeule": "praxis",
+  "rubrik": "Praxis-Tipp",
+  "thema_id": "oeffnungszeiten",
+  "kurz": [
+    "Zeiten als Text auf der Startseite, nicht als Bild",
+    "Ausnahmen wie Feiertage gut sichtbar darüber",
+    "Dieselben Zeiten auch im Google-Profil"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Warum das wichtig ist",
+      "absaetze": [
+        "Öffnungszeiten gehören zu den Angaben, die am häufigsten gesucht werden. Wer vor dem Besuch kurz nachschaut, will in Sekunden wissen, ob sich der Weg lohnt. Findet er die Zeiten nicht, ruft er an, und Sie verlieren Zeit im Tagesgeschäft.",
+        "Oft liegen die Angaben zwar irgendwo auf der Website, aber als Bild, in einem PDF oder tief auf einer Unterseite. Auf dem Handy ist das mühsam, und Suchmaschinen können solche Angaben schlecht lesen.",
+        "Ich prüfe das bei jeder Website, bevor ich einen Entwurf beginne. Es ist selten ein grosser Umbau, aber für Ihre Kundinnen und Kunden macht es einen spürbaren Unterschied."
+      ]
+    },
+    {
+      "titel": "So gehen Sie vor",
+      "absaetze": [
+        "Sie brauchen dafür in den meisten Fällen keine neue Website. Die folgenden Punkte lassen sich einzeln umsetzen. Beginnen Sie mit dem, der Ihrer Kundschaft heute am meisten fehlt."
+      ],
+      "punkte": [
+        {
+          "titel": "Zeiten als Text auf der Startseite, nicht als Bild",
+          "text": "Schreiben Sie die Zeiten als normalen Text auf die Startseite, idealerweise in den oberen Bereich. So sind sie auf jedem Gerät lesbar und auch für Google verständlich."
+        },
+        {
+          "titel": "Ausnahmen wie Feiertage gut sichtbar darüber",
+          "text": "Feiertage, Betriebsferien oder kurzfristige Änderungen sollten gut sichtbar darüber stehen. Ein kurzer Hinweis genügt, solange er nicht zwischen anderen Texten untergeht."
+        },
+        {
+          "titel": "Dieselben Zeiten auch im Google-Profil",
+          "text": "Achten Sie darauf, dass die Zeiten auf der Website und im Google-Profil übereinstimmen. Widersprüche verunsichern und führen zu unnötigen Rückfragen."
+        }
+      ],
+      "nach": [
+        "Das lässt sich meistens an einem Nachmittag umsetzen, auch ohne neue Website. Und falls doch einmal mehr nötig ist, finden Sie meine Pakete offen auf meiner Website."
+      ]
+    },
+    {
+      "titel": "Kleine Schritte statt grosser Umbau",
+      "absaetze": [
+        "Viele Betriebe warten mit Verbesserungen, bis sie Zeit für eine ganz neue Website haben. Dieser Moment kommt selten. Wirksamer ist es, einen Punkt nach dem anderen anzugehen. Jede kleine Änderung hilft Ihrer Kundschaft sofort, und Sie sehen schnell, was sich lohnt. Erst wenn sich vieles auf einmal ändern muss, ist ein Neuanfang die bessere Wahl."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Suchen Sie auf Ihrer eigenen Website nach den Öffnungszeiten, und zwar auf dem Handy. Wie lange dauert es, bis Sie sie finden? Alles, was länger als ein paar Sekunden braucht, lohnt eine kleine Anpassung.",
+        "Ein Tipp aus der Praxis: Notieren Sie sich solche Punkte gleich im Kalender. Wer seine Website einmal im Monat kurz anschaut, muss sie selten ganz neu machen.",
+        "Wie oft fragt man Sie am Telefon nach Ihren Öffnungszeiten?"
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 2 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Öffnungszeiten gehören auf die Startseite"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}

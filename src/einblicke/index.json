@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "oeffnungszeiten-gehoeren-auf-die-startseite",
+      "titel": "Öffnungszeiten gehören auf die Startseite",
+      "beschreibung": "Öffnungszeiten auf der Startseite sparen Ihnen Anrufe. Die häufigste Frage an kleine Betriebe ist simpel: Haben Sie heute offen? Wer die Antwort auf der…",
+      "anriss": "Öffnungszeiten auf der Startseite sparen Ihnen Anrufe. Die häufigste Frage an kleine Betriebe ist simpel: Haben Sie heute offen? Wer die Antwort auf der Website nicht findet, ruft an oder geht gleich zur Konkurrenz.",
+      "datum": "2026-11-09",
+      "geaendert": "2026-11-09T15:00:55Z",
+      "rubrik": "Praxis-Tipp",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: Öffnungszeiten gehören auf die Startseite"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "fuer-einen-entwurf-reichen-6-fragen",
       "titel": "Für einen Entwurf reichen 6 Fragen",
       "beschreibung": "Warum mein Projekt-Check nur noch 6 Fragen hat. Mein Projekt-Check hatte 18 Fragen. Für den ersten Entwurf brauchte ich viele davon gar nicht.",
