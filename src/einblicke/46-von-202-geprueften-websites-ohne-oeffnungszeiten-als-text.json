@@ -1,0 +1,85 @@
+{
+  "v": 1,
+  "slug": "46-von-202-geprueften-websites-ohne-oeffnungszeiten-als-text",
+  "titel": "46 von 202 geprüften Websites ohne Öffnungszeiten als Text",
+  "titel_kurz": "46 von 202 Websites ohne Öffnungszeiten als Text",
+  "beschreibung": "Was 202 Website-Prüfungen zeigen. Meine Prüfungen folgen einer festen Liste von Punkten. Ausgewertet habe ich sie hier gesamthaft und ohne Firmennamen.",
+  "anriss": "Was 202 Website-Prüfungen zeigen. Meine Prüfungen folgen einer festen Liste von Punkten. Ausgewertet habe ich sie hier gesamthaft und ohne Firmennamen.",
+  "datum": "2026-11-11",
+  "geaendert": "2026-11-11T07:39:12Z",
+  "saeule": "einblick",
+  "rubrik": "Einblick und Beispiel",
+  "thema_id": "daten-oeffnungszeiten",
+  "kurz": [
+    "Öffnungszeiten auf der Startseite",
+    "Als Text, nicht als Bild",
+    "Feiertage gut sichtbar darüber"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Was ich dabei beobachte",
+      "absaetze": [
+        "Von 202 Websites hatten 46 nirgends Öffnungszeiten als Text. Das zeigt vor allem, wie schnell solche Details untergehen, wenn das Tagesgeschäft läuft.",
+        "Wann ist offen? Diese Frage stellen sich Kundinnen und Kunden besonders oft, und meistens kurz bevor sie losgehen oder anrufen. Finden sie die Antwort nicht, rufen sie an oder gehen gleich zur Konkurrenz.",
+        "Öffnungszeiten als Text sind auf dem Handy gut lesbar und werden auch von Suchmaschinen erkannt. Als Bild oder in einem PDF versteckt, helfen sie viel weniger.",
+        "Ich zeige solche Einblicke, weil eine gute Website kein Geheimnis ist. Die meisten Verbesserungen sind klein und nachvollziehbar, wenn man sie einmal gesehen hat."
+      ]
+    },
+    {
+      "titel": "Worauf es ankommt",
+      "absaetze": [
+        "Aus meiner Arbeit kenne ich vor allem diese Punkte. Sie gelten für fast jede Branche und lassen sich meistens ohne grossen Umbau verbessern."
+      ],
+      "punkte": [
+        {
+          "titel": "Öffnungszeiten auf der Startseite",
+          "text": "Stellen Sie die Öffnungszeiten auf die Startseite, nicht nur auf eine Unterseite."
+        },
+        {
+          "titel": "Als Text, nicht als Bild",
+          "text": "Schreiben Sie sie als normalen Text. So lassen sie sich auf jedem Gerät lesen und von Google erfassen."
+        },
+        {
+          "titel": "Feiertage gut sichtbar darüber",
+          "text": "Setzen Sie Hinweise zu Feiertagen und Ferien gut sichtbar darüber und entfernen Sie sie danach wieder."
+        }
+      ],
+      "nach": [
+        "Am Schluss zählt für mich nur eine Frage: Hilft die Seite Ihrer Kundschaft, Sie schnell zu erreichen? Alles andere ist Nebensache."
+      ]
+    },
+    {
+      "titel": "Wie ich Websites anschaue",
+      "absaetze": [
+        "Bevor ich einem Betrieb einen Vorschlag mache, schaue ich seine Website auf dem Handy und am Computer an, mit einer festen Checkliste. Dazu gehören der Weg zum Kontakt, die Lesbarkeit, die Öffnungszeiten und eigene Bilder. Ich schreibe nur über Punkte, die ich selbst geprüft habe, und nenne dabei keine Firmennamen."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Suchen Sie auf dem Handy nach Ihrem Betrieb und öffnen Sie die Website. Finden Sie die Öffnungszeiten in wenigen Sekunden? Stimmen sie mit dem Google-Profil überein?",
+        "Gerade bei kleinen Betrieben entscheidet der erste Eindruck auf dem Handy oft darüber, ob jemand anruft oder weiterklickt. Darum schaue ich zuerst dorthin.",
+        "Würde Ihre Website diesen Punkt bestehen?"
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 2 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: 46 von 202 geprüften Websites ohne Öffnungszeiten als Text"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}

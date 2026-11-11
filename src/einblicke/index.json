@@ -2,6 +2,27 @@
   "v": 1,
   "artikel": [
     {
+      "slug": "46-von-202-geprueften-websites-ohne-oeffnungszeiten-als-text",
+      "titel": "46 von 202 geprüften Websites ohne Öffnungszeiten als Text",
+      "beschreibung": "Was 202 Website-Prüfungen zeigen. Meine Prüfungen folgen einer festen Liste von Punkten. Ausgewertet habe ich sie hier gesamthaft und ohne Firmennamen.",
+      "anriss": "Was 202 Website-Prüfungen zeigen. Meine Prüfungen folgen einer festen Liste von Punkten. Ausgewertet habe ich sie hier gesamthaft und ohne Firmennamen.",
+      "datum": "2026-11-11",
+      "geaendert": "2026-11-11T07:39:12Z",
+      "rubrik": "Einblick und Beispiel",
+      "bild": {
+        "datei": "titelbild.webp",
+        "typ": "image/webp",
+        "breite": 1080,
+        "hoehe": 1350,
+        "alt": "Bildkarte von ODERA Design mit der Aussage: 46 von 202 geprüften Websites ohne Öffnungszeiten als Text"
+      },
+      "vorschau": {
+        "datei": "vorschau.jpg",
+        "breite": 1200,
+        "hoehe": 630
+      }
+    },
+    {
       "slug": "oeffnungszeiten-gehoeren-auf-die-startseite",
       "titel": "Öffnungszeiten gehören auf die Startseite",
       "beschreibung": "Öffnungszeiten auf der Startseite sparen Ihnen Anrufe. Die häufigste Frage an kleine Betriebe ist simpel: Haben Sie heute offen? Wer die Antwort auf der…",
