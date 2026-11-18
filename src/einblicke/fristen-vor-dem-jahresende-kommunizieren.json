@@ -1,0 +1,84 @@
+{
+  "v": 1,
+  "slug": "fristen-vor-dem-jahresende-kommunizieren",
+  "titel": "Fristen vor dem Jahresende kommunizieren",
+  "beschreibung": "Termine vor dem Jahresende: Sagen Sie, bis wann es noch geht. Im November fragen viele, ob ein Auftrag noch vor Weihnachten möglich ist. Die Antwort…",
+  "anriss": "Termine vor dem Jahresende: Sagen Sie, bis wann es noch geht. Im November fragen viele, ob ein Auftrag noch vor Weihnachten möglich ist. Die Antwort kostet Sie jedes Mal einen Anruf.",
+  "datum": "2026-11-18",
+  "geaendert": "2026-11-18T10:22:03Z",
+  "saeule": "praxis",
+  "rubrik": "Praxis-Tipp",
+  "thema_id": "nov-jahresende-termine",
+  "kurz": [
+    "Frist klar nennen",
+    "Gut sichtbar auf der Startseite",
+    "Im Dezember wieder entfernen"
+  ],
+  "abschnitte": [
+    {
+      "titel": "Warum das wichtig ist",
+      "absaetze": [
+        "Ein kurzer Hinweis auf der Website beantwortet die Frage, bevor sie gestellt wird: bis wann Anfragen noch vor dem Jahresende erledigt werden.",
+        "Im November fragen viele, ob ein Auftrag noch vor Weihnachten möglich ist. Die Antwort kostet Sie jedes Mal einen Anruf oder eine Mail.",
+        "Ein kurzer Hinweis auf der Website beantwortet die Frage, bevor sie gestellt wird, und hilft Ihnen, die letzten Wochen des Jahres gut zu planen.",
+        "Ich sehe diesen Punkt bei vielen kleinen Betrieben, ganz unabhängig von der Branche. Darum lohnt sich ein kurzer Blick, bevor Sie an grössere Änderungen denken."
+      ]
+    },
+    {
+      "titel": "So gehen Sie vor",
+      "absaetze": [
+        "Sie brauchen dafür in den meisten Fällen keine neue Website. Die folgenden Punkte lassen sich einzeln umsetzen. Beginnen Sie mit dem, der Ihrer Kundschaft heute am meisten fehlt."
+      ],
+      "punkte": [
+        {
+          "titel": "Frist klar nennen",
+          "text": "Nennen Sie die Frist klar, bis wann Anfragen noch vor dem Jahresende erledigt werden."
+        },
+        {
+          "titel": "Gut sichtbar auf der Startseite",
+          "text": "Stellen Sie den Hinweis gut sichtbar auf die Startseite."
+        },
+        {
+          "titel": "Im Dezember wieder entfernen",
+          "text": "Entfernen Sie ihn im Dezember wieder."
+        }
+      ],
+      "nach": [
+        "Mehr braucht es oft nicht. Wenn Sie unsicher sind, wie das bei Ihrer Seite aussehen könnte, schauen Sie sich die Musterprojekte auf meiner Website an."
+      ]
+    },
+    {
+      "titel": "Kleine Schritte statt grosser Umbau",
+      "absaetze": [
+        "Viele Betriebe warten mit Verbesserungen, bis sie Zeit für eine ganz neue Website haben. Dieser Moment kommt selten. Wirksamer ist es, einen Punkt nach dem anderen anzugehen. Jede kleine Änderung hilft Ihrer Kundschaft sofort, und Sie sehen schnell, was sich lohnt. Erst wenn sich vieles auf einmal ändern muss, ist ein Neuanfang die bessere Wahl."
+      ]
+    },
+    {
+      "titel": "So prüfen Sie es selbst",
+      "absaetze": [
+        "Legen Sie heute fest, bis wann Sie dieses Jahr noch Aufträge annehmen, und schreiben Sie es auf Ihre Website.",
+        "Ein Tipp aus der Praxis: Notieren Sie sich solche Punkte gleich im Kalender. Wer seine Website einmal im Monat kurz anschaut, muss sie selten ganz neu machen.",
+        "Bis wann nehmen Sie dieses Jahr noch Aufträge an?"
+      ]
+    }
+  ],
+  "autor": "Nico Bodmer baut mit ODERA Design Webseiten für kleine Betriebe in der ganzen Schweiz, zum Fixpreis und mit einem kostenlosen Entwurf vorab. In der Reihe Einblicke schreibt er über das, was er bei seiner Arbeit an Websites beobachtet. Die Beiträge erscheinen zuerst auf der LinkedIn-Seite von ODERA Design.",
+  "abschluss": {
+    "titel": "Wie steht es um Ihre Website?",
+    "text": "Im Projekt-Check beschreiben Sie in rund 2 Minuten Ihren Betrieb und was Ihre Website leisten soll. Danach erhalten Sie von mir einen kostenlosen Entwurf. Sie entscheiden erst, wenn Sie ihn gesehen haben, und zahlen nur, wenn er Ihnen gefällt.",
+    "knopf": "Projekt-Check starten",
+    "link": "/projekt-check/?quelle=einblicke"
+  },
+  "bild": {
+    "datei": "titelbild.webp",
+    "typ": "image/webp",
+    "breite": 1080,
+    "hoehe": 1350,
+    "alt": "Bildkarte von ODERA Design mit der Aussage: Fristen vor dem Jahresende kommunizieren"
+  },
+  "vorschau": {
+    "datei": "vorschau.jpg",
+    "breite": 1200,
+    "hoehe": 630
+  }
+}
